@@ -1,0 +1,20 @@
+Package: bcdc
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "First",
+             family = "Last",
+             role = c("aut", "cre"),
+             email = "first.last@example.com"),
+      person(given = "Province of British Columbia",
+             role = "cph"))
+Description: What the package does (one paragraph).
+License: Apache License (== 2.0) | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
