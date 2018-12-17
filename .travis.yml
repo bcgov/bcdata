@@ -1,5 +1,38 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
-language: R
-sudo: false
+language: r
 cache: packages
+sudo: required
+repos:
+  CRAN: https://cloud.r-project.org
+
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntugis/ppa'
+    packages:
+      - libudunits2-dev
+      - libproj-dev
+      - libgeos-dev
+      - libgdal-dev
+
+matrix:
+  include:
+    - os: linux
+      r: devel
+
+    - os: linux
+      r: release
+
+    - os: osx
+      r: devel
+
+    - os: osx
+      r: release
+
+  allow_failures:
+    - os: osx
+      r: devel
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
