@@ -17,7 +17,8 @@ See the License for the specific language governing permissions and limitations 
 
 # bcdc
 
-Description of package
+An R package for searching & retrieving data from the [B.C. Data
+Catalogue](https://catalogue.data.gov.bc.ca)
 
 ### Features
 
@@ -25,15 +26,9 @@ Description of package
 
 ### Usage
 
-#### Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-## basic example code
-```
-
 ### Project Status
+
+This project is under active development.
 
 ### Getting Help or Reporting an Issue
 
