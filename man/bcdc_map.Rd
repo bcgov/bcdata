@@ -11,6 +11,9 @@ bcdc_map(id, epsg = 3005, query = NULL)
 
 \item{epsg}{the epsg code for the coordinate reference system. Default \code{3005}
 (B.C. Albers). See https://epsgi.io.}
+
+\item{query}{A valid \href{https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html}{CQL or ECQL query}
+to filter the results. Default \code{NULL} (return all objects)}
 }
 \value{
 an \code{sf} map object

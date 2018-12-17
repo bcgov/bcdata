@@ -17,6 +17,8 @@
 #' @param id the name of the record
 #' @param epsg the epsg code for the coordinate reference system. Default `3005`
 #'        (B.C. Albers). See https://epsgi.io.
+#' @param query A valid [`CQL` or `ECQL` query](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
+#'        to filter the results. Default `NULL` (return all objects)
 #'
 #' @return an `sf` map object
 #' @export
@@ -44,5 +46,5 @@ construct_url <- function(obj, epsg, query) {
   } else {
     query <- ""
   }
-  URLencode(glue::glue(baseurl, obj = obj, epsg = epsg, query = query))
+  utils::URLencode(glue::glue(baseurl, obj = obj, epsg = epsg, query = query))
 }
