@@ -17,8 +17,8 @@ See the License for the specific language governing permissions and limitations 
 
 # bcdc
 
-An R package for searching & retrieving data from the [B.C. Data
-Catalogue](https://catalogue.data.gov.bc.ca)
+An R package 📦 for searching & retrieving data from the [B.C. Data
+Catalogue](https://catalogue.data.gov.bc.ca).
 
 ### Features
 
