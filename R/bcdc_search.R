@@ -178,10 +178,13 @@ print.bcdc_record <- function(x) {
 
 print.bcdc_recordlist <- function(x) {
   cat("List of B.C. Data Catalogue Records\n")
-  cat("\nNumber:", length(x), ". Showing the top 10.")
+  len <- length(x)
+  n_print <- min(10, len)
+  cat("\nNumber of records:", len)
+  if (n_print < len) cat(" (Showing the top 10.)")
   cat("\nTitles:\n")
   x <- purrr::set_names(x, NULL)
-  cat(paste(purrr::imap(x[1:10], ~ {
+  cat(paste(purrr::imap(x[1:n_print], ~ {
     paste0(.y, ": ", .x[["title"]])
   }), collapse = "\n"), "\n")
   cat("\nAccess a single record by indexing the record list by its number")
