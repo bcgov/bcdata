@@ -1,4 +1,4 @@
-Package: bcdc
+Package: bcdata
 Title: Search and Retrieve Data from the BC Data Catalogue
 Version: 0.0.0.9000
 Authors@R: 

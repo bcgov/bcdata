@@ -2,13 +2,13 @@
 % Please edit documentation in R/bcdc_search.R
 \name{bcdc_list}
 \alias{bcdc_list}
-\title{Return a full list of the names of B.C. Data Catalogue packages}
+\title{Return a full list of the names of B.C. Data Catalogue records}
 \usage{
 bcdc_list()
 }
 \value{
-A character vector of the names of B.C. Data Catalogue packages
+A character vector of the names of B.C. Data Catalogue records
 }
 \description{
-Return a full list of the names of B.C. Data Catalogue packages
+Return a full list of the names of B.C. Data Catalogue records
 }
