@@ -27,4 +27,6 @@ See \code{bcdc_get_record(id)$resources})
 \examples{
 
 bcdc_get_geodata("bc-airports", crs = 3857)
+bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
+bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
 }
