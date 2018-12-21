@@ -31,30 +31,35 @@
 #' @examples
 #'
 #' bcdc_get_geodata("bc-airports", crs = 3857)
+#' bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
+#' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
 
 bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
 
-  obj <- bcdc_get_record(id)
+  obj = bcdc_get_record(id)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
     stop("No wms/wfs resource available for this dataset.")
   }
 
-  cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
-
-  r <- cli$get(query = list(
+  ## Parameters for the API call
+  query_list = list(
     SERVICE = "WFS",
     VERSION = "2.0.0",
     REQUEST = "GetFeature",
     outputFormat = "json",
     typeName = obj$layer_name,
-    SRSNAME=paste0("EPSG:",crs)
-  ))
+    SRSNAME=paste0("EPSG:",crs),
+    CQL_FILTER = query
+  )
 
+  ## Drop any NULLS from the list
+  query_list = Filter(Negate(is.null), query_list)
+
+  ## GET and parse data to sf object
+  cli = bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+  r = cli$get(query = query_list)
   r$raise_for_status()
-
-
-  txt <- r$parse("UTF-8")
-
+  txt = r$parse("UTF-8")
   sf::read_sf(txt, stringsAsFactors = FALSE, quiet = TRUE, ...)
 
 }
