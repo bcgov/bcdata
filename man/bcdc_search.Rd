@@ -30,7 +30,7 @@ Default \code{2} (Open Government Licence - British Columbia)}
 \item{n}{number of results to return. Default \code{100}}
 }
 \value{
-A list containing the package records that match the search
+A list containing the records that match the search
 }
 \description{
 Title

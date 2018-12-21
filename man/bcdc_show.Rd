@@ -2,18 +2,18 @@
 % Please edit documentation in R/bcdc_search.R
 \name{bcdc_show}
 \alias{bcdc_show}
-\title{Show the record for a single B.C. Data Catalogue package}
+\title{Show a single B.C. Data Catalogue record}
 \usage{
 bcdc_show(id)
 }
 \arguments{
-\item{id}{the id (name) of the package.}
+\item{id}{the id (name) of the record.}
 }
 \value{
-A list containing the metadata for the package
+A list containing the metadata for the record
 }
 \description{
-Show the record for a single B.C. Data Catalogue package
+Show a single B.C. Data Catalogue record
 }
 \examples{
 bcdc_show("bc-airports")
