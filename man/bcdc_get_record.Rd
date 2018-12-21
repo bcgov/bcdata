@@ -7,7 +7,8 @@
 bcdc_get_record(id)
 }
 \arguments{
-\item{id}{the id (name) of the record.}
+\item{id}{the human-readable name, permalink id, or
+url of the record.}
 }
 \value{
 A list containing the metadata for the record
@@ -16,5 +17,8 @@ A list containing the metadata for the record
 Show a single B.C. Data Catalogue record
 }
 \examples{
+bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
 bcdc_get_record("bc-airports")
+bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 }

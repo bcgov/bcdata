@@ -126,14 +126,20 @@ bcdc_search <- function(..., license_id=2,
 
 #' Show a single B.C. Data Catalogue record
 #'
-#' @param id the id (name) of the record.
+#' @param id the human-readable name, permalink id, or
+#' url of the record.
 #'
 #' @return A list containing the metadata for the record
 #' @export
 #'
 #' @examples
+#' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
 #' bcdc_get_record("bc-airports")
+#' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 bcdc_get_record <- function(id) {
+  if (grepl("^http", id)) id <- basename(id)
+
   res <- httr::GET(paste0(base_url(), "action/package_show"),
                    query = list(id = id))
   httr::stop_for_status(res)
