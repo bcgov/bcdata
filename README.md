@@ -15,9 +15,9 @@ See the License for the specific language governing permissions and limitations 
 
 <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)[![Travis
 build
-status](https://travis-ci.org/bcgov/bcdc.svg?branch=master)](https://travis-ci.org/bcgov/bcdc)
+status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
 
-# bcdc
+# bcdata
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
 Catalogue](https://catalogue.data.gov.bc.ca).
@@ -35,7 +35,7 @@ This project is under active development.
 ### Getting Help or Reporting an Issue
 
 To report bugs/issues/feature requests, please file an
-[issue](https://github.com/bcgov/bcdc/issues/).
+[issue](https://github.com/bcgov/bcdata/issues/).
 
 ### How to Contribute
 
