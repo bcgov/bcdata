@@ -17,7 +17,7 @@ See the License for the specific language governing permissions and limitations 
 build
 status](https://travis-ci.org/bcgov/bcdc.svg?branch=master)](https://travis-ci.org/bcgov/bcdc)
 
-# bcdc
+# bcdata
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
 Catalogue](https://catalogue.data.gov.bc.ca).
