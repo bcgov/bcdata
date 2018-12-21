@@ -14,9 +14,10 @@ base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
 
 compact <- function(l) Filter(Negate(is.null), l)
 
-
-
-
+slug_from_url <- function(x) {
+  if (grepl("^(http|www)", x)) x <- basename(x)
+  x
+}
 
 bcdc_http_client <- function(url = NULL) {
 

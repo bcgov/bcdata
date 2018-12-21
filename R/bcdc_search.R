@@ -137,7 +137,7 @@ bcdc_search <- function(..., license_id = NULL,
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 bcdc_get_record <- function(id) {
-  if (grepl("^http", id)) id <- basename(id)
+  id <- slug_from_url(id)
 
   res <- httr::GET(paste0(base_url(), "action/package_show"),
                    query = list(id = id))
