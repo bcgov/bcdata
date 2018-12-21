@@ -13,3 +13,14 @@
 base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
 
 compact <- function(l) Filter(Negate(is.null), l)
+
+
+
+
+
+bcdc_http_client <- function(url = NULL) {
+
+  crul::HttpClient$new(url = url,
+                       headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
+
+}
