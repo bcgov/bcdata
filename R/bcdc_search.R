@@ -164,7 +164,7 @@ as.bcdc_recordlist <- function(x) {
 }
 
 print.bcdc_record <- function(x) {
-  cat("B.C. Data Catalogue Record:", x$title, "\n")
+  cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
   cat("\nName:", x$name, "(ID:", x$id, ")")
   cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
   cat("\nSector:", x$sector)
@@ -176,6 +176,7 @@ print.bcdc_record <- function(x) {
     r <- x$resources[[i]]
     cat("  ", i, ": ", r$name, "\n", sep = "")
     cat("    description:", r$description, "\n")
+    cat("    id:", r$id, "\n")
     cat("    format:", r$format, "\n")
     cat("    access:", r$resource_storage_access_method, "\n")
     cat("    access_url:", r$url, "\n")
