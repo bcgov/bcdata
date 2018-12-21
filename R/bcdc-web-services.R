@@ -53,7 +53,7 @@ bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
   )
 
   ## Drop any NULLS from the list
-  query_list = Filter(Negate(is.null), query_list)
+  query_list = compact(query_list)
 
   ## GET and parse data to sf object
   cli = bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
