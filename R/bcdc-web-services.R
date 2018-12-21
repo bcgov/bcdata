@@ -26,10 +26,10 @@
 #' bcdc_wfs("WHSE_WATER_MANAGEMENT.WRIS_DAMS_PUBLIC_SVW")
 #' bcdc_wfs("WHSE_ENVIRONMENTAL_MONITORING.ENVCAN_HYDROMETRIC_STN_SP")
 
-bcdc_wfs <- function(feature_name = NULL, ...) {
+bcdc_get_geodata <- function(feature_name = NULL, ...) {
 
   cli <- crul::HttpClient$new(url = "https://openmaps.gov.bc.ca/geo/pub/wfs",
-                              headers = list(`User-Agent` = "https://github.com/bcgov/bcdc"))
+                              headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
 
   r <- cli$get(query = list(
     SERVICE = "WFS",
@@ -55,7 +55,6 @@ bcdc_wfs <- function(feature_name = NULL, ...) {
 #' @param feature_name Name of the feature
 #' @param bbox a string of bounding box coordinates
 #'
-#' @export
 #'
 #' @examples
 #' ## So far only works with this layer
