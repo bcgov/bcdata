@@ -14,37 +14,49 @@
 
 #' Get data from the BC Web Feature Service
 #'
-#' Pulls features off the web
+#' Pulls features off the web. The data must be available as a wms/wfs service.
+#' See `bcdc_get_record(id)$resources`)
 #'
-#' @param feature_name Name of the feature
+#' @param id the name of the record
+#' @param crs the epsg code for the coordinate reference system. Default `3005`
+#'        (B.C. Albers). See https://epsgi.io.
+#' @param query A valid [`CQL` or `ECQL` query](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
+#'        to filter the results. Default `NULL` (return all objects)
 #' @param ... passed to \code{sf::read_sf}
+#'
+#' @return an `sf` object
 #'
 #' @export
 #'
 #' @examples
 #'
-#' bcdc_wfs("WHSE_WATER_MANAGEMENT.WRIS_DAMS_PUBLIC_SVW")
-#' bcdc_wfs("WHSE_ENVIRONMENTAL_MONITORING.ENVCAN_HYDROMETRIC_STN_SP")
+#' bcdc_get_geodata("bc-airports", crs = 3857)
 
-bcdc_get_geodata <- function(feature_name = NULL, ...) {
+bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
 
-  cli <- crul::HttpClient$new(url = "https://openmaps.gov.bc.ca/geo/pub/wfs",
-                              headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
+  obj <- bcdc_get_record(id)
+  if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
+    stop("No wms/wfs resource available for this dataset.")
+  }
+
+  cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
   r <- cli$get(query = list(
     SERVICE = "WFS",
     VERSION = "2.0.0",
     REQUEST = "GetFeature",
     outputFormat = "json",
-    typeName = feature_name,
-    SRSNAME="EPSG:3005"
+    typeName = obj$layer_name,
+    SRSNAME=paste0("EPSG:",crs)
   ))
+
+  r$raise_for_status()
 
 
   txt <- r$parse("UTF-8")
 
-  raw_sf <- sf::read_sf(txt, stringsAsFactors = FALSE, quiet = TRUE, ...)
-  sf::st_transform(raw_sf, 3005)
+  sf::read_sf(txt, stringsAsFactors = FALSE, quiet = TRUE, ...)
+
 }
 
 

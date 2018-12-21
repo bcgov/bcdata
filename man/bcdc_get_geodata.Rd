@@ -4,18 +4,27 @@
 \alias{bcdc_get_geodata}
 \title{Get data from the BC Web Feature Service}
 \usage{
-bcdc_get_geodata(feature_name = NULL, ...)
+bcdc_get_geodata(id = NULL, query = NULL, crs = 3005, ...)
 }
 \arguments{
-\item{feature_name}{Name of the feature}
+\item{id}{the name of the record}
+
+\item{query}{A valid \href{https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html}{CQL or ECQL query}
+to filter the results. Default \code{NULL} (return all objects)}
+
+\item{crs}{the epsg code for the coordinate reference system. Default \code{3005}
+(B.C. Albers). See https://epsgi.io.}
 
 \item{...}{passed to \code{sf::read_sf}}
 }
+\value{
+an \code{sf} object
+}
 \description{
-Pulls features off the web
+Pulls features off the web. The data must be available as a wms/wfs service.
+See \code{bcdc_get_record(id)$resources})
 }
 \examples{
 
-bcdc_wfs("WHSE_WATER_MANAGEMENT.WRIS_DAMS_PUBLIC_SVW")
-bcdc_wfs("WHSE_ENVIRONMENTAL_MONITORING.ENVCAN_HYDROMETRIC_STN_SP")
+bcdc_get_geodata("bc-airports", crs = 3857)
 }
