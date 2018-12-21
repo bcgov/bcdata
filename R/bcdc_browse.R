@@ -28,8 +28,8 @@
 bcdc_browse <- function(url = "https://catalogue.data.gov.bc.ca", browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
 
-  utils::browseURL(url = url, browser = getOption("browser"),
-            encodeIfNeeded = FALSE)
+  utils::browseURL(url = url, browser = browser,
+            encodeIfNeeded = encodeIfNeeded)
   }
 
 
