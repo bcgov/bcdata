@@ -69,9 +69,11 @@ bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' ## So far only works with this layer
 #' bbox_coords = "1069159.051186301,1050414.7675306,1074045.5446851396,1054614.0978811644"
 #' bcdc_wms("WHSE_FOREST_VEGETATION.VEG_COMP_LYR_R1_POLY", bbox = bbox_coords)
+#' }
 
 ## TODO: Figure out a better method of determining the bounding box
 
