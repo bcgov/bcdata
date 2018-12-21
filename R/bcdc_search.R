@@ -132,8 +132,8 @@ bcdc_search <- function(..., license_id=2,
 #' @export
 #'
 #' @examples
-#' bcdc_show("bc-airports")
-bcdc_show <- function(id) {
+#' bcdc_get_record("bc-airports")
+bcdc_get_record <- function(id) {
   res <- httr::GET(paste0(base_url(), "action/package_show"),
                    query = list(id = id))
   httr::stop_for_status(res)

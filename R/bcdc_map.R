@@ -26,7 +26,7 @@
 #' @examples
 #' bcdc_map("bc-airports")
 bcdc_map <- function(id, epsg = 3005, query = NULL) {
-  obj <- bcdc_show(id)
+  obj <- bcdc_get_record(id)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
     stop("No wms resource available for this dataset.")
   }

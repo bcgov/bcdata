@@ -6,7 +6,7 @@ bcdc_facets("license_id")
 
 bcdc_list()
 
-bcdc_show("freshwater-atlas-named-point-features")
+bcdc_get_record("freshwater-atlas-named-point-features")
 
 bar <- bcdc_map("bc-airports")
 
