@@ -4,15 +4,14 @@
 \alias{bcdc_search}
 \title{Title}
 \usage{
-bcdc_search(..., license_id = 2, download_audience = "Public",
+bcdc_search(..., license_id = NULL, download_audience = "Public",
   type = NULL, res_format = NULL, sector = NULL,
   organization = NULL, n = 100)
 }
 \arguments{
 \item{...}{search terms}
 
-\item{license_id}{the type of license (see \code{bcdc_facets("license_id")}).
-Default \code{2} (Open Government Licence - British Columbia)}
+\item{license_id}{the type of license (see \code{bcdc_facets("license_id")}).}
 
 \item{download_audience}{download audience
 (see \code{bcdc_facets("download_audience")}). Default \code{"Public"}}

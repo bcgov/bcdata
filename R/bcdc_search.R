@@ -58,7 +58,6 @@ bcdc_list <- function() {
 #'
 #' @param ... search terms
 #' @param license_id the type of license (see `bcdc_facets("license_id")`).
-#'        Default `2` (Open Government Licence - British Columbia)
 #' @param download_audience download audience
 #'        (see `bcdc_facets("download_audience")`). Default `"Public"`
 #' @param type type of resource (see `bcdc_facets("type")`)
@@ -75,8 +74,8 @@ bcdc_list <- function() {
 #' @examples
 #' bcdc_search("forest")
 #' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
-bcdc_search <- function(..., license_id=2,
-                        download_audience="Public",
+bcdc_search <- function(..., license_id = NULL,
+                        download_audience = "Public",
                         type = NULL,
                         res_format=NULL,
                         sector = NULL,
