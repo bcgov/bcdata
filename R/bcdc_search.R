@@ -58,7 +58,6 @@ bcdc_list <- function() {
 #'
 #' @param ... search terms
 #' @param license_id the type of license (see `bcdc_facets("license_id")`).
-#'        Default `2` (Open Government Licence - British Columbia)
 #' @param download_audience download audience
 #'        (see `bcdc_facets("download_audience")`). Default `"Public"`
 #' @param type type of resource (see `bcdc_facets("type")`)
@@ -75,8 +74,8 @@ bcdc_list <- function() {
 #' @examples
 #' bcdc_search("forest")
 #' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
-bcdc_search <- function(..., license_id=2,
-                        download_audience="Public",
+bcdc_search <- function(..., license_id = NULL,
+                        download_audience = "Public",
                         type = NULL,
                         res_format=NULL,
                         sector = NULL,
@@ -164,7 +163,7 @@ as.bcdc_recordlist <- function(x) {
 }
 
 print.bcdc_record <- function(x) {
-  cat("B.C. Data Catalogue Record:", x$title, "\n")
+  cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
   cat("\nName:", x$name, "(ID:", x$id, ")")
   cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
   cat("\nSector:", x$sector)
@@ -176,6 +175,7 @@ print.bcdc_record <- function(x) {
     r <- x$resources[[i]]
     cat("  ", i, ": ", r$name, "\n", sep = "")
     cat("    description:", r$description, "\n")
+    cat("    id:", r$id, "\n")
     cat("    format:", r$format, "\n")
     cat("    access:", r$resource_storage_access_method, "\n")
     cat("    access_url:", r$url, "\n")
