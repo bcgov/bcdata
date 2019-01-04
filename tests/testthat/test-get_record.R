@@ -13,3 +13,13 @@ test_that("bcdc_get_record works with slug and full url", {
   expect_equal(ret1$title, "BC Airports")
   lapply(list(ret2, ret3, ret4), expect_equal, ret1)
 })
+
+test_that("bcdc_search_facets works", {
+  skip_if_not(curl::has_internet())
+  ret_names <- c("count", "display_name", "name")
+  lapply(c("license_id", "download_audience", "type", "res_format",
+           "sector", "organization"),
+         function(x) expect_named(bcdc_search_facets(x))
+  )
+  expect_error(bcdc_search_facets("foo"), "'arg should be one of")
+})
