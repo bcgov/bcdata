@@ -18,8 +18,8 @@
 #' @export
 #'
 #' @examples
-#' bcdc_facets("type")
-bcdc_facets <- function(facet = c("license_id", "download_audience",
+#' bcdc_search_facets("type")
+bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
   facet <- match.arg(facet)
@@ -54,18 +54,18 @@ bcdc_list <- function() {
   ret
 }
 
-#' Title
+#' Search the B.C. Data Catalogue
 #'
 #' @param ... search terms
-#' @param license_id the type of license (see `bcdc_facets("license_id")`).
+#' @param license_id the type of license (see `bcdc_search_facets("license_id")`).
 #' @param download_audience download audience
-#'        (see `bcdc_facets("download_audience")`). Default `"Public"`
-#' @param type type of resource (see `bcdc_facets("type")`)
-#' @param res_format format of resource (see `bcdc_facets("res_format")`)
+#'        (see `bcdc_search_facets("download_audience")`). Default `"Public"`
+#' @param type type of resource (see `bcdc_search_facets("type")`)
+#' @param res_format format of resource (see `bcdc_search_facets("res_format")`)
 #' @param sector sector of government from which the data comes
-#'        (see `bcdc_facets("sector")`)
+#'        (see `bcdc_search_facets("sector")`)
 #' @param organization government organization that manages the data
-#'        (see `bcdc_facets("organization")`)
+#'        (see `bcdc_search_facets("organization")`)
 #' @param n number of results to return. Default `100`
 #'
 #' @return A list containing the records that match the search
@@ -93,7 +93,7 @@ bcdc_search <- function(..., license_id = NULL,
                 ))
 
   lapply(names(facets), function(x) {
-    facet_vals <- bcdc_facets(x)
+    facet_vals <- bcdc_search_facets(x)
     if (!facets[x] %in% facet_vals$name) {
       stop(facets[x], " is not a valid value for ", x,
            call. = FALSE)
