@@ -12,7 +12,9 @@
 
 #' Get the valid values for a facet (that you can use in [bcdc_search()])
 #'
-#' @param facet the facet for which to retrieve valid values
+#' @param facet the facet(s) for which to retrieve valid values. Can be one or
+#' more of:
+#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization"`
 #'
 #' @return a data frame of values for the selected facet
 #' @export
@@ -22,8 +24,9 @@
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
-  facet <- match.arg(facet)
-  query <- glue::glue("[\"{facet}\"]", facet = facet)
+  facet <- match.arg(facet, several.ok = TRUE)
+  query <- paste0("\"", facet, "\"", collapse = ",")
+  query <- paste0("[", query, "]")
 
   cli <- bcdc_http_client(paste0(base_url(),
                                  "action/package_search"))
@@ -36,7 +39,13 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
   facet_list <- res$result$search_facets
 
-  facet_list[[facet]]$items
+  facet_dfs <- lapply(facet_list, function(x) {
+    x$items$facet <- x$title
+    x$items[, c("facet", setdiff(names(x$items), "facet"))]
+    }
+  )
+
+  dplyr::bind_rows(facet_dfs)
 
 }
 
