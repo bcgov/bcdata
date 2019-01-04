@@ -50,10 +50,16 @@ bcdc_list <- function() {
   offset <- 0
   limit <- 1000
   while (l_new_ret) {
-    res <- httr::GET(paste0(base_url(), "action/package_list"),
-                     query = list(offset = offset, limit = limit))
-    httr::stop_for_status(res)
-    new_ret <- unlist(httr::content(res)$result)
+
+    cli <- bcdc_http_client(paste0(base_url(), "action/package_list"))
+
+    r <- cli$get(query = list(offset = offset, limit = limit))
+    r$raise_for_status()
+
+    res <- jsonlite::fromJSON(r$parse("UTF-8"))
+    stopifnot(res$success)
+
+    new_ret <- unlist(res$result)
     ret <- c(ret, new_ret)
     l_new_ret <- length(new_ret)
     offset <- offset + limit

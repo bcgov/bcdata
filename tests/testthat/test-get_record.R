@@ -23,3 +23,10 @@ test_that("bcdc_search_facets works", {
   )
   expect_error(bcdc_search_facets("foo"), "'arg' should be one of")
 })
+
+test_that("bcdc_list works", {
+  skip_if_not(curl::has_internet())
+  ret <- bcdc_list()
+  expect_is(ret, "character")
+  expect_gt(length(ret), 1000)
+})
