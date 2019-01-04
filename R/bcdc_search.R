@@ -28,7 +28,7 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
   cli <- bcdc_http_client(paste0(base_url(),
                                  "action/package_search"))
 
-  r <- cli$get(query = list(facet.field = query))
+  r <- cli$get(query = list(facet.field = query, rows = 0))
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
