@@ -23,14 +23,21 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
   facet <- match.arg(facet)
-  query <- glue::glue("facet.field=[\"{facet}\"]", facet = facet)
+  query <- glue::glue("[\"{facet}\"]", facet = facet)
 
-  res <- httr::GET(paste0(base_url(), "action/package_search"), query = query)
-  httr::stop_for_status(res)
-  facet_list <- httr::content(res)
-  purrr::map_df(facet_list$result$search_facets[[facet]]$items,
-                as.data.frame,
-                stringsAsFactors = FALSE)
+  cli <- bcdc_http_client(paste0(base_url(),
+                                 "action/package_search"))
+
+  r <- cli$get(query = list(facet.field = query))
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  stopifnot(res$success)
+
+  facet_list <- res$result$search_facets
+
+  facet_list[[facet]]$items
+
 }
 
 #' Return a full list of the names of B.C. Data Catalogue records
@@ -139,10 +146,17 @@ bcdc_search <- function(..., license_id = NULL,
 bcdc_get_record <- function(id) {
   id <- slug_from_url(id)
 
-  res <- httr::GET(paste0(base_url(), "action/package_show"),
-                   query = list(id = id))
-  httr::stop_for_status(res)
-  ret <- httr::content(res)$result
+  cli <- bcdc_http_client(paste0(base_url(),
+                                 "action/package_show"))
+
+  r <- cli$get(query = list(id = id))
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  stopifnot(res$success)
+
+  ret <- res$result
+
   as.bcdc_record(ret)
 }
 

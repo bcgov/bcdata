@@ -21,5 +21,5 @@ test_that("bcdc_search_facets works", {
            "sector", "organization"),
          function(x) expect_named(bcdc_search_facets(x))
   )
-  expect_error(bcdc_search_facets("foo"), "'arg should be one of")
+  expect_error(bcdc_search_facets("foo"), "'arg' should be one of")
 })
