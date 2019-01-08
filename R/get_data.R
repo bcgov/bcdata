@@ -19,21 +19,25 @@
 #' @export
 #'
 #' @examples
-#' bcdc_get_data("https://catalogue.data.gov.bc.ca/dataset/british-columbia-greenhouse-gas-emissions/resource/11b1da01-fabc-406c-8b13-91e87f126dec")
+#' bcdc_get_data(paste0("https://catalogue.data.gov.bc.ca/dataset/",
+#'                      "british-columbia-greenhouse-gas-emissions/resource/",
+#'                      "11b1da01-fabc-406c-8b13-91e87f126dec"))
 #' bcdc_get_data("11b1da01-fabc-406c-8b13-91e87f126dec")
 bcdc_get_data <- function(x) {
   UseMethod("bcdc_get_data")
 }
 
+#' @export
 bcdc_get_data.bcdc_record <- function(x) {
   stop("not working yet!")
   # record can be either a url/slug or a bcdata_record
   if (!interactive())
     stop("Calling bcdc_get_data on a bcdc_record object is only meant for interactive use")
-  x <- menu("pick one")
+  x <- utils::menu("pick one")
   bcdc_get_data(x)
 }
 
+#' @export
 bcdc_get_data.character <- function(x) {
   x <- slug_from_url(x)
   cli <- bcdc_http_client(paste0(base_url(),
@@ -50,7 +54,7 @@ bcdc_get_data.character <- function(x) {
 
   tmp <- tempfile(fileext = paste0(".", ext))
   on.exit(unlink(tmp))
-  download.file(file_url, tmp)
+  utils::download.file(file_url, tmp)
 
   read_fun <- switch(ext,
                      "csv" = readr::read_csv)
