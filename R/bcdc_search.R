@@ -123,23 +123,28 @@ bcdc_search <- function(..., license_id = NULL,
   })
 
   query <- paste0(
-    "q=", terms, ifelse(nzchar(terms), "+", ""),
-    paste(names(facets), facets, sep = ":", collapse = "+"),
-    "&rows=", n)
+    terms, ifelse(nzchar(terms), "+", ""),
+    paste(names(facets), facets, sep = ":", collapse = "+"))
 
-  query <- gsub("\\s", "%20", query)
+  query <- gsub("\\s+", "%20", query)
 
-  res <- httr::GET(paste0(base_url(), "action/package_search"),
-                   query = query)
+  cli <- bcdc_http_client(paste0(base_url(), "action/package_search"))
 
-  httr::stop_for_status(res)
-  cont <- httr::content(res)
+  # Use I(query) to treat query as is, so that things like + and :
+  # aren't encoded as %2B, %3A etc
+  r <- cli$get(query = list(q = I(query), rows = n))
+  r$raise_for_status
 
-  n_found <- cont$result$count
+  res <- jsonlite::fromJSON(r$parse("UTF-8"), simplifyVector = FALSE)
+  stopifnot(res$success)
+
+  cont <- res$result
+
+  n_found <- cont$count
   message("Found ", n_found, " matches. Returning the first ", n,
           ".\nTo see them all, rerun the search and set the 'n' argument to ",
           n_found, ".")
-  ret <- cont$result$results
+  ret <- cont$results
   names(ret) <- vapply(ret, `[[`, "name", FUN.VALUE = character(1))
   ret <- lapply(ret, as.bcdc_record)
   as.bcdc_recordlist(ret)

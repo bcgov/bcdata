@@ -30,3 +30,10 @@ test_that("bcdc_list works", {
   expect_is(ret, "character")
   expect_gt(length(ret), 1000)
 })
+
+test_that("bcdc_search works", {
+  expect_is(bcdc_search("forest"), "bcdc_recordlist")
+  expect_is(bcdc_search("regional district",
+                        type = "Geographic", res_format = "fgdb"),
+            "bcdc_recordlist")
+})
