@@ -172,7 +172,7 @@ bcdc_get_record <- function(id) {
   r <- cli$get(query = list(id = id))
   r$raise_for_status()
 
-  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  res <- jsonlite::fromJSON(r$parse("UTF-8"), simplifyVector = FALSE)
   stopifnot(res$success)
 
   ret <- res$result
