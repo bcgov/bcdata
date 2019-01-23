@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc_search.R
 \name{bcdc_search}
 \alias{bcdc_search}
-\title{Title}
+\title{Search the B.C. Data Catalogue}
 \usage{
 bcdc_search(..., license_id = NULL, download_audience = "Public",
   type = NULL, res_format = NULL, sector = NULL,
@@ -11,20 +11,20 @@ bcdc_search(..., license_id = NULL, download_audience = "Public",
 \arguments{
 \item{...}{search terms}
 
-\item{license_id}{the type of license (see \code{bcdc_facets("license_id")}).}
+\item{license_id}{the type of license (see \code{bcdc_search_facets("license_id")}).}
 
 \item{download_audience}{download audience
-(see \code{bcdc_facets("download_audience")}). Default \code{"Public"}}
+(see \code{bcdc_search_facets("download_audience")}). Default \code{"Public"}}
 
-\item{type}{type of resource (see \code{bcdc_facets("type")})}
+\item{type}{type of resource (see \code{bcdc_search_facets("type")})}
 
-\item{res_format}{format of resource (see \code{bcdc_facets("res_format")})}
+\item{res_format}{format of resource (see \code{bcdc_search_facets("res_format")})}
 
 \item{sector}{sector of government from which the data comes
-(see \code{bcdc_facets("sector")})}
+(see \code{bcdc_search_facets("sector")})}
 
 \item{organization}{government organization that manages the data
-(see \code{bcdc_facets("organization")})}
+(see \code{bcdc_search_facets("organization")})}
 
 \item{n}{number of results to return. Default \code{100}}
 }
@@ -32,7 +32,7 @@ bcdc_search(..., license_id = NULL, download_audience = "Public",
 A list containing the records that match the search
 }
 \description{
-Title
+Search the B.C. Data Catalogue
 }
 \examples{
 bcdc_search("forest")

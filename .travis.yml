@@ -4,6 +4,9 @@ sudo: required
 repos:
   CRAN: https://cloud.r-project.org
 
+r_packages:
+  - devtools
+
 addons:
   apt:
     sources:
@@ -14,23 +17,20 @@ addons:
       - libgeos-dev
       - libgdal-dev
 
+r:
+  - oldrel
+  - release
+  - devel
+
+os:
+  - linux
+  - osx
+
 matrix:
-  include:
-    - os: linux
-      r: devel
-
-    - os: linux
-      r: release
-
-    - os: osx
-      r: devel
-
-    - os: osx
-      r: release
-
+  fast_finish: true
   allow_failures:
-    - os: osx
-      r: devel
+    - r: devel
+      os: osx
 
 notifications:
   email:

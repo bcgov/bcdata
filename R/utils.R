@@ -31,6 +31,10 @@ bcdc_number_wfs_records <- function(query_list, client){
 
 }
 
+slug_from_url <- function(x) {
+  if (grepl("^(http|www)", x)) x <- basename(x)
+  x
+}
 
 bcdc_http_client <- function(url = NULL) {
 

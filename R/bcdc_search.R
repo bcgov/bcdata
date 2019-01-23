@@ -12,25 +12,41 @@
 
 #' Get the valid values for a facet (that you can use in [bcdc_search()])
 #'
-#' @param facet the facet for which to retrieve valid values
+#' @param facet the facet(s) for which to retrieve valid values. Can be one or
+#' more of:
+#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization"`
 #'
 #' @return a data frame of values for the selected facet
 #' @export
 #'
 #' @examples
-#' bcdc_facets("type")
-bcdc_facets <- function(facet = c("license_id", "download_audience",
+#' bcdc_search_facets("type")
+bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
-  facet <- match.arg(facet)
-  query <- glue::glue("facet.field=[\"{facet}\"]", facet = facet)
+  facet <- match.arg(facet, several.ok = TRUE)
+  query <- paste0("\"", facet, "\"", collapse = ",")
+  query <- paste0("[", query, "]")
 
-  res <- httr::GET(paste0(base_url(), "action/package_search"), query = query)
-  httr::stop_for_status(res)
-  facet_list <- httr::content(res)
-  purrr::map_df(facet_list$result$search_facets[[facet]]$items,
-                as.data.frame,
-                stringsAsFactors = FALSE)
+  cli <- bcdc_http_client(paste0(base_url(),
+                                 "action/package_search"))
+
+  r <- cli$get(query = list(facet.field = query, rows = 0))
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  stopifnot(res$success)
+
+  facet_list <- res$result$search_facets
+
+  facet_dfs <- lapply(facet_list, function(x) {
+    x$items$facet <- x$title
+    x$items[, c("facet", setdiff(names(x$items), "facet"))]
+    }
+  )
+
+  dplyr::bind_rows(facet_dfs)
+
 }
 
 #' Return a full list of the names of B.C. Data Catalogue records
@@ -43,10 +59,16 @@ bcdc_list <- function() {
   offset <- 0
   limit <- 1000
   while (l_new_ret) {
-    res <- httr::GET(paste0(base_url(), "action/package_list"),
-                     query = list(offset = offset, limit = limit))
-    httr::stop_for_status(res)
-    new_ret <- unlist(httr::content(res)$result)
+
+    cli <- bcdc_http_client(paste0(base_url(), "action/package_list"))
+
+    r <- cli$get(query = list(offset = offset, limit = limit))
+    r$raise_for_status()
+
+    res <- jsonlite::fromJSON(r$parse("UTF-8"))
+    stopifnot(res$success)
+
+    new_ret <- unlist(res$result)
     ret <- c(ret, new_ret)
     l_new_ret <- length(new_ret)
     offset <- offset + limit
@@ -54,18 +76,18 @@ bcdc_list <- function() {
   ret
 }
 
-#' Title
+#' Search the B.C. Data Catalogue
 #'
 #' @param ... search terms
-#' @param license_id the type of license (see `bcdc_facets("license_id")`).
+#' @param license_id the type of license (see `bcdc_search_facets("license_id")`).
 #' @param download_audience download audience
-#'        (see `bcdc_facets("download_audience")`). Default `"Public"`
-#' @param type type of resource (see `bcdc_facets("type")`)
-#' @param res_format format of resource (see `bcdc_facets("res_format")`)
+#'        (see `bcdc_search_facets("download_audience")`). Default `"Public"`
+#' @param type type of resource (see `bcdc_search_facets("type")`)
+#' @param res_format format of resource (see `bcdc_search_facets("res_format")`)
 #' @param sector sector of government from which the data comes
-#'        (see `bcdc_facets("sector")`)
+#'        (see `bcdc_search_facets("sector")`)
 #' @param organization government organization that manages the data
-#'        (see `bcdc_facets("organization")`)
+#'        (see `bcdc_search_facets("organization")`)
 #' @param n number of results to return. Default `100`
 #'
 #' @return A list containing the records that match the search
@@ -93,7 +115,7 @@ bcdc_search <- function(..., license_id = NULL,
                 ))
 
   lapply(names(facets), function(x) {
-    facet_vals <- bcdc_facets(x)
+    facet_vals <- bcdc_search_facets(x)
     if (!facets[x] %in% facet_vals$name) {
       stop(facets[x], " is not a valid value for ", x,
            call. = FALSE)
@@ -101,23 +123,28 @@ bcdc_search <- function(..., license_id = NULL,
   })
 
   query <- paste0(
-    "q=", terms, ifelse(nzchar(terms), "+", ""),
-    paste(names(facets), facets, sep = ":", collapse = "+"),
-    "&rows=", n)
+    terms, ifelse(nzchar(terms), "+", ""),
+    paste(names(facets), facets, sep = ":", collapse = "+"))
 
-  query <- gsub("\\s", "%20", query)
+  query <- gsub("\\s+", "%20", query)
 
-  res <- httr::GET(paste0(base_url(), "action/package_search"),
-                   query = query)
+  cli <- bcdc_http_client(paste0(base_url(), "action/package_search"))
 
-  httr::stop_for_status(res)
-  cont <- httr::content(res)
+  # Use I(query) to treat query as is, so that things like + and :
+  # aren't encoded as %2B, %3A etc
+  r <- cli$get(query = list(q = I(query), rows = n))
+  r$raise_for_status
 
-  n_found <- cont$result$count
+  res <- jsonlite::fromJSON(r$parse("UTF-8"), simplifyVector = FALSE)
+  stopifnot(res$success)
+
+  cont <- res$result
+
+  n_found <- cont$count
   message("Found ", n_found, " matches. Returning the first ", n,
           ".\nTo see them all, rerun the search and set the 'n' argument to ",
           n_found, ".")
-  ret <- cont$result$results
+  ret <- cont$results
   names(ret) <- vapply(ret, `[[`, "name", FUN.VALUE = character(1))
   ret <- lapply(ret, as.bcdc_record)
   as.bcdc_recordlist(ret)
@@ -137,12 +164,19 @@ bcdc_search <- function(..., license_id = NULL,
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 bcdc_get_record <- function(id) {
-  if (grepl("^http", id)) id <- basename(id)
+  id <- slug_from_url(id)
 
-  res <- httr::GET(paste0(base_url(), "action/package_show"),
-                   query = list(id = id))
-  httr::stop_for_status(res)
-  ret <- httr::content(res)$result
+  cli <- bcdc_http_client(paste0(base_url(),
+                                 "action/package_show"))
+
+  r <- cli$get(query = list(id = id))
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"), simplifyVector = FALSE)
+  stopifnot(res$success)
+
+  ret <- res$result
+
   as.bcdc_record(ret)
 }
 
