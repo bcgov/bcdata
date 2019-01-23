@@ -35,6 +35,7 @@
 #' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
 
 bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
+  #browser()
 
   obj = bcdc_get_record(id)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
@@ -57,6 +58,9 @@ bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
 
   ## GET and parse data to sf object
   cli = bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+
+  #bcdc_number_wfs_records(query_list, cli)
+
   r = cli$get(query = query_list)
   r$raise_for_status()
   txt = r$parse("UTF-8")

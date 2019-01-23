@@ -15,7 +15,21 @@ base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
 compact <- function(l) Filter(Negate(is.null), l)
 
 
+bcdc_number_wfs_records <- function(query_list, client){
+    browser()
 
+    query_list <- c(query_list, resultType="hits")
+
+    res_max <- client$get(query = query_list)
+    txt_max <- res_max$parse("UTF-8")
+
+    ## resultType is only returned as XML. Will parse instead on importing an
+    ## XML package
+    ## regex to extract the number
+    first_pass <- gsub(".*numberMatched", "", txt_max)
+    as.numeric(sub("^\\D*(\\d+).*$", "\\1", first_pass))
+
+}
 
 
 bcdc_http_client <- function(url = NULL) {
