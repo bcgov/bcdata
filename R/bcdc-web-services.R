@@ -11,37 +11,8 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 
-
-#' Get data from the BC Web Feature Service
-#'
-#' Pulls features off the web. The data must be available as a wms/wfs service.
-#' See `bcdc_get_record(id)$resources`). If the record is greater than 10000 rows,
-#' the response will be paginated. If you are querying layers of this size, expect
-#' that the request will take quite a while.
-#'
-#' @param id the name of the record
-#' @param crs the epsg code for the coordinate reference system. Default `3005`
-#'        (B.C. Albers). See https://epsgi.io.
-#' @param query A valid [`CQL` or `ECQL` query](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
-#'        to filter the results. Default `NULL` (return all objects)
-#' @param ... passed to \code{sf::read_sf}
-#'
-#' @return an `sf` object
-#'
-#' @export
-#'
-#' @examples
-#'
-#' bcdc_get_geodata("bc-airports", crs = 3857)
-#' bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
-#' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
-#'
-#' ## A very large layer
-#' \dontrun{
-#' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
-#' }
-
-bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
+## Memoised function
+bcdc_get_geodata_ <- function(id = NULL, query = NULL, crs = 3005, ...) {
 
   obj = bcdc_get_record(id)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
@@ -114,15 +85,37 @@ bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
 
   }
 
-
-
-
-
-
-
-
-
 }
+
+#' Get data from the BC Web Feature Service
+#'
+#' Pulls features off the web. The data must be available as a wms/wfs service.
+#' See `bcdc_get_record(id)$resources`). If the record is greater than 10000 rows,
+#' the response will be paginated. If you are querying layers of this size, expect
+#' that the request will take quite a while.
+#'
+#' @param id the name of the record
+#' @param crs the epsg code for the coordinate reference system. Default `3005`
+#'        (B.C. Albers). See https://epsgi.io.
+#' @param query A valid [`CQL` or `ECQL` query](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
+#'        to filter the results. Default `NULL` (return all objects)
+#' @param ... passed to \code{sf::read_sf}
+#'
+#' @return an `sf` object
+#'
+#' @export
+#'
+#' @examples
+#'
+#' bcdc_get_geodata("bc-airports", crs = 3857)
+#' bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
+#' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
+#'
+#' ## A very large layer
+#' \dontrun{
+#' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#' }
+bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
 
 
 #' Get map from the BC Web Mapping Service
