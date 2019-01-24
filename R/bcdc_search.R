@@ -141,9 +141,11 @@ bcdc_search <- function(..., license_id = NULL,
   cont <- res$result
 
   n_found <- cont$count
-  message("Found ", n_found, " matches. Returning the first ", n,
-          ".\nTo see them all, rerun the search and set the 'n' argument to ",
-          n_found, ".")
+  if(n_found > 100){
+    message("Found ", n_found, " matches. Returning the first ", n,
+            ".\nTo see them all, rerun the search and set the 'n' argument to ",
+            n_found, ".")
+  }
   ret <- cont$results
   names(ret) <- vapply(ret, `[[`, "name", FUN.VALUE = character(1))
   ret <- lapply(ret, as.bcdc_record)
