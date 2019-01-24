@@ -1,7 +1,7 @@
 context("test-get_record")
 
 test_that("bcdc_get_record works with slug and full url", {
-  skip_if_not(curl::has_internet())
+  skip_if_net_down()
   expect_is(ret1 <- bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports"),
            "bcdc_record")
   expect_is(ret2 <- bcdc_get_record("bc-airports"),
@@ -15,7 +15,7 @@ test_that("bcdc_get_record works with slug and full url", {
 })
 
 test_that("bcdc_search_facets works", {
-  skip_if_not(curl::has_internet())
+  skip_if_net_down()
   ret_names <- c("facet", "count", "display_name", "name")
   lapply(c("license_id", "download_audience", "type", "res_format",
            "sector", "organization"),
@@ -25,13 +25,14 @@ test_that("bcdc_search_facets works", {
 })
 
 test_that("bcdc_list works", {
-  skip_if_not(curl::has_internet())
+  skip_if_net_down()
   ret <- bcdc_list()
   expect_is(ret, "character")
   expect_gt(length(ret), 1000)
 })
 
 test_that("bcdc_search works", {
+  skip_if_net_down()
   expect_is(bcdc_search("forest"), "bcdc_recordlist")
   expect_is(bcdc_search("regional district",
                         type = "Geographic", res_format = "fgdb"),
