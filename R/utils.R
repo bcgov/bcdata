@@ -31,6 +31,10 @@ bcdc_number_wfs_records <- function(query_list, client){
 
 }
 
+bcdc_read_sf <- function(x, ...){
+  sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)
+}
+
 slug_from_url <- function(x) {
   if (grepl("^(http|www)", x)) x <- basename(x)
   x

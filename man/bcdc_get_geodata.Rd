@@ -22,11 +22,18 @@ an \code{sf} object
 }
 \description{
 Pulls features off the web. The data must be available as a wms/wfs service.
-See \code{bcdc_get_record(id)$resources})
+See \code{bcdc_get_record(id)$resources}). If the record is greater than 10000 rows,
+the response will be paginated. If you are querying layers of this size, expect
+that the request will take quite a while.
 }
 \examples{
 
 bcdc_get_geodata("bc-airports", crs = 3857)
 bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
 bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
+
+## A very large layer
+\dontrun{
+bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+}
 }

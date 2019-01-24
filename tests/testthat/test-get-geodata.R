@@ -14,6 +14,7 @@ test_that("bcdc_get_geodata accept CQL strings to refine data call",{
   expect_equal(nrow(one_well), 1)
 })
 
-test_that("bcdc_get_geodata fails with records over 10000 rows",{
-  expect_error(bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit"))
+test_that("bcdc_get_geodata succeeds with a records over 10000 rows",{
+  skip("Skipping the BEC test, though available for testing")
+  expect_silent(bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit"))
 })

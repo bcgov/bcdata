@@ -15,7 +15,9 @@
 #' Get data from the BC Web Feature Service
 #'
 #' Pulls features off the web. The data must be available as a wms/wfs service.
-#' See `bcdc_get_record(id)$resources`)
+#' See `bcdc_get_record(id)$resources`). If the record is greater than 10000 rows,
+#' the response will be paginated. If you are querying layers of this size, expect
+#' that the request will take quite a while.
 #'
 #' @param id the name of the record
 #' @param crs the epsg code for the coordinate reference system. Default `3005`
@@ -33,9 +35,13 @@
 #' bcdc_get_geodata("bc-airports", crs = 3857)
 #' bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
 #' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
+#'
+#' ## A very large layer
+#' \dontrun{
+#' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#' }
 
 bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
-
 
   obj = bcdc_get_record(id)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
@@ -59,32 +65,62 @@ bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
   ## GET and parse data to sf object
   cli = bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  #browser()
+
 
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
+  if(number_of_records < 10000){
+
+    r = cli$get(query = query_list)
+    r$raise_for_status()
+    txt = r$parse("UTF-8")
+
+    return(bcdc_read_sf(txt))
+
+  }
+
   if(number_of_records >= 10000) {
-    stop("This record contains more records than is currnetly accessible through the bcdata package",
-        call. = FALSE)
+    message("This record request pagination to complete the request.")
+    sorting_col <- obj[["details"]][["column_name"]][1]
+
+    query_list <- c(query_list, sortby = sorting_col)
+
+    # Create pagination client
+    cc <- crul::Paginator$new(client = cli,
+                              by = "query_params",
+                              limit_param = "count",
+                              offset_param = "startIndex",
+                              limit = number_of_records,
+                              limit_chunk = 3000)
+
+    message("Retrieving data")
+    cc$get(query = query_list)
+
+
+    if(any(cc$status_code() >= 300)){
+      ## TODO: This error message could be more informative
+      stop("The BC data catalogue experienced issues with this request",
+           call. = FALSE)
+    }
+
+    ## Parse the Paginated response
+    message("Parsing data")
+    txt = cc$parse("UTF-8")
+
+    sf_responses <- lapply(txt, bcdc_read_sf)
+
+    return(do.call(rbind, sf_responses))
+
+
   }
 
 
-  ## Create pagination client
-  # cc <- crul::Paginator$new(client = cli,
-  #                           by = "query_params",
-  #                           limit_param = "count",
-  #                           offset_param = "startIndex",
-  #                           limit = number_of_records,
-  #                           limit_chunk = 200)
 
 
-  #r = cc$get(query = query_list)
 
 
-  r = cli$get(query = query_list)
-  r$raise_for_status()
-  txt = r$parse("UTF-8")
-  sf::read_sf(txt, stringsAsFactors = FALSE, quiet = TRUE, ...)
+
+
 
 }
 
