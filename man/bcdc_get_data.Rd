@@ -17,8 +17,10 @@ an object of a type relevant to the resource (usually a tibble or an sf object)
 downlaod and read a dataset from a Data Catalogue resource
 }
 \examples{
+\dontrun{
 bcdc_get_data(paste0("https://catalogue.data.gov.bc.ca/dataset/",
                      "british-columbia-greenhouse-gas-emissions/resource/",
                      "11b1da01-fabc-406c-8b13-91e87f126dec"))
 bcdc_get_data("11b1da01-fabc-406c-8b13-91e87f126dec")
+}
 }
