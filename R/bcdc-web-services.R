@@ -35,7 +35,7 @@
 #' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
 
 bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
-  #browser()
+
 
   obj = bcdc_get_record(id)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
@@ -59,7 +59,27 @@ bcdc_get_geodata <- function(id = NULL, query = NULL, crs = 3005, ...) {
   ## GET and parse data to sf object
   cli = bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  #bcdc_number_wfs_records(query_list, cli)
+  #browser()
+
+  number_of_records <- bcdc_number_wfs_records(query_list, cli)
+
+  if(number_of_records >= 10000) {
+    stop("This record contains more records than is currnetly accessible through the bcdata package",
+        call. = FALSE)
+  }
+
+
+  ## Create pagination client
+  # cc <- crul::Paginator$new(client = cli,
+  #                           by = "query_params",
+  #                           limit_param = "count",
+  #                           offset_param = "startIndex",
+  #                           limit = number_of_records,
+  #                           limit_chunk = 200)
+
+
+  #r = cc$get(query = query_list)
+
 
   r = cli$get(query = query_list)
   r$raise_for_status()

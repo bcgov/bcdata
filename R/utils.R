@@ -16,7 +16,7 @@ compact <- function(l) Filter(Negate(is.null), l)
 
 
 bcdc_number_wfs_records <- function(query_list, client){
-    browser()
+    #browser()
 
     query_list <- c(query_list, resultType="hits")
 
