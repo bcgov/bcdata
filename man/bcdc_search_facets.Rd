@@ -19,5 +19,7 @@ a data frame of values for the selected facet
 Get the valid values for a facet (that you can use in \code{\link[=bcdc_search]{bcdc_search()}})
 }
 \examples{
+\dontrun{
 bcdc_search_facets("type")
+}
 }

@@ -24,7 +24,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' bcdc_browse()
+#' }
 bcdc_browse <- function(url = "https://catalogue.data.gov.bc.ca", browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
 

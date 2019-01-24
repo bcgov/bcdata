@@ -20,7 +20,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' bcdc_search_facets("type")
+#' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
@@ -98,8 +100,10 @@ bcdc_list <- function() {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' bcdc_search("forest")
 #' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+#' }
 bcdc_search <- function(..., license_id = NULL,
                         download_audience = "Public",
                         type = NULL,
@@ -167,10 +171,12 @@ bcdc_search <- function(..., license_id = NULL,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
 #' bcdc_get_record("bc-airports")
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' }
 bcdc_get_record <- function(id) {
 
   if(!has_internet()) stop("No access to internet", call. = FALSE)

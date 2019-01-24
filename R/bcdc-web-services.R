@@ -16,7 +16,8 @@ bcdc_get_geodata_ <- function(id = NULL, query = NULL, crs = 3005, ...) {
 
   obj = bcdc_get_record(id)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
-    stop("No wms/wfs resource available for this dataset.")
+    stop(paste0("No wms/wfs resource available for this dataset. Try using bcdc_get_data('",id,"')."),
+         call. = FALSE)
   }
 
   ## Parameters for the API call

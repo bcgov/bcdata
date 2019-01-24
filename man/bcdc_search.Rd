@@ -35,6 +35,8 @@ A list containing the records that match the search
 Search the B.C. Data Catalogue
 }
 \examples{
+\dontrun{
 bcdc_search("forest")
 bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+}
 }

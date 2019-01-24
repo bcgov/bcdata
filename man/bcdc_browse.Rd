@@ -34,7 +34,9 @@ This is a wrapper around utils::browseURL with the URL for the B.C. Data Catalog
 the default
 }
 \examples{
+\dontrun{
 bcdc_browse()
+}
 }
 \seealso{
 \code{\link[utils]{browseURL}}
