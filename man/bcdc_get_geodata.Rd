@@ -36,4 +36,5 @@ bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
 \dontrun{
 bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 }
+
 }

@@ -116,6 +116,7 @@ bcdc_get_geodata_ <- function(id = NULL, query = NULL, crs = 3005, ...) {
 #' \dontrun{
 #' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 #' }
+#'
 bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
 
 
