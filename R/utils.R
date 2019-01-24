@@ -46,3 +46,11 @@ bcdc_http_client <- function(url = NULL) {
                        headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
 
 }
+
+## Check if there is internet
+## h/t to https://github.com/ropensci/handlr/blob/pluralize/tests/testthat/helper-handlr.R
+has_internet <- function() {
+  z <- try(suppressWarnings(readLines('https://www.google.com', n = 1)),
+           silent = TRUE)
+  !inherits(z, "try-error")
+}

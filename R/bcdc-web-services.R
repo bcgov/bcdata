@@ -136,6 +136,7 @@ bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
 ## TODO: Figure out a better method of determining the bounding box
 
 bcdc_wms <- function(feature_name = NULL, bbox = NULL) {
+  if(!has_internet()) stop("No access to internet", call. = FALSE)
 
   cli <- crul::HttpClient$new(url = "http://openmaps.gov.bc.ca/geo/pub/wms",
                               headers = list(`User-Agent` = "https://github.com/bcgov/bcdc"))

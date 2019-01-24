@@ -24,6 +24,8 @@
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
+  if(!has_internet()) stop("No access to internet", call. = FALSE)
+
   facet <- match.arg(facet, several.ok = TRUE)
   query <- paste0("\"", facet, "\"", collapse = ",")
   query <- paste0("[", query, "]")
@@ -54,6 +56,8 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 #' @return A character vector of the names of B.C. Data Catalogue records
 #' @export
 bcdc_list <- function() {
+  if(!has_internet()) stop("No access to internet", call. = FALSE)
+
   l_new_ret <- 1
   ret <- character()
   offset <- 0
@@ -103,6 +107,8 @@ bcdc_search <- function(..., license_id = NULL,
                         sector = NULL,
                         organization = NULL,
                         n = 100) {
+
+  if(!has_internet()) stop("No access to internet", call. = FALSE)
 
   # TODO: allow terms to be passed as a vector, and allow use of | for OR
   terms <- paste0(compact(list(...)), collapse = "+")
@@ -166,6 +172,9 @@ bcdc_search <- function(..., license_id = NULL,
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 bcdc_get_record <- function(id) {
+
+  if(!has_internet()) stop("No access to internet", call. = FALSE)
+
   id <- slug_from_url(id)
 
   cli <- bcdc_http_client(paste0(base_url(),

@@ -31,6 +31,8 @@ bcdc_get_data <- function(x) {
 
 #' @export
 bcdc_get_data.bcdc_record <- function(x) {
+  if(!has_internet()) stop("No access to internet", call. = FALSE)
+
   stop("not working yet!")
   # record can be either a url/slug or a bcdata_record
   if (!interactive())
