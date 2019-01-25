@@ -1,0 +1,92 @@
+---
+title: "Getting Started with data"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# WORK IN PROGRESS
+
+## Getting Started
+First you need to loadthe package. We will also load the sf package to better enable our spatial data work:
+```{r}
+library(bcdata)
+library(sf)
+```
+
+
+## Find your data set
+There are several ways that you might arrive at the data set you want. The simplest way is to make use of the web-based BC Data Catalogue. The package provides a convenience function that allows you to quickly open a broswer to the BC Data Catalogue:
+```{r,eval=FALSE}
+bcdc_browse()
+```
+If you would like to further refine your search you can supply a string:
+```{r}
+bcdc_browse("cities")
+```
+
+
+## Geospatial Data
+The BC Data Catalogue provides many dataset with spatial information via a web feature service (wfs). Practically speaking, this means that we can import this spatial data into R as an sf object very easily using the `bcdc_get_geodata` function. 
+
+
+### School in British Columbia
+If we were interested in creating a quick map of most cities with a BC outline. First we would like to find the boundaries of BC layer. If I search for the "Province of British Columbia":
+
+```{r}
+bcdc_search("Province of British Columbia")
+```
+I can look and see that this entry:
+
+> Province of British Columbia - Legally Defined Administrative Areas of BC
+ ID: a7e32e45-63ae-4f5a-9275-9402b6deebdc
+ 
+might be what I want. To look deeper into this record we can pass the ID to `bcdc_get_record`:
+```{r}
+bcdc_get_record("a7e32e45-63ae-4f5a-9275-9402b6deebdc")
+```
+
+This provides us considerable information on the data record including the fact that this record has wms capabilities and the name of the record. This is good news as we are easily ability to import this into R and create an sf object using the record name as:
+```{r}
+bc_bound <- bcdc_get_geodata("province-of-british-columbia-legally-defined-administrative-areas-of-bc")
+```
+And we use a simple plot to check if this indeed the layer we would like:
+
+```{r}
+plot(st_geometry(bc_bound))
+```
+
+With a BC outline, we can now try to extract information about cities in BC. We follow a similar workflow of `bcdc_search` -> `bcdc_get_record` -> `bcdc_get_geodata`:
+
+```{r}
+bcdc_search("cities")
+```
+This entry looks promising:
+> BC Major Cities Points 1:2,000,000  (Digital Baseline Mapping)
+ ID: b678c432-c5c1-4341-88db-0d6befa0c7f8
+
+```{r}
+bcdc_get_record("b678c432-c5c1-4341-88db-0d6befa0c7f8")
+```
+This again reveals wms capabilities so we can input that name:
+```{r}
+cities <- bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping")
+```
+
+Now we can combine our two layers into a quick map:
+```{r}
+plot(st_geometry(bc_bound))
+plot(st_geometry(cities), add = TRUE, col = cities$POP_2000, pch = 19)
+```
+
