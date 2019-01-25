@@ -56,12 +56,20 @@ bcdc_get_data.character <- function(x) {
   file_url <- res$result$url
   ext <- tools::file_ext(file_url)
 
+  if(!all(ext %in% c("csv","kml","txt"))){
+    stop(paste0("The ", ext, " extension is not currently supported by bcdata.
+        Try manually importing into R from this link: \n", file_url),
+        call. = FALSE)
+  }
+
   tmp <- tempfile(fileext = paste0(".", ext))
   on.exit(unlink(tmp))
   utils::download.file(file_url, tmp)
 
   read_fun <- switch(ext,
-                     "csv" = readr::read_csv)
+                     "csv" = readr::read_csv,
+                     "kml" = bcdc_read_sf,
+                     "txt" = readr::read_tsv)
 
   read_fun(tmp)
 
