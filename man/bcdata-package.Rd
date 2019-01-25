@@ -6,7 +6,9 @@
 \alias{bcdata-package}
 \title{bcdata: Search and Retrieve Data from the BC Data Catalogue}
 \description{
-What the package does (one paragraph).
+Search and retrieve data from the BC data catalogue (<https://catalogue.data.gov.bc.ca/>)
+    directly from R. Spatial and non-spatial are retrieved differently depending 
+    on the characteristics of the data object.
 }
 \author{
 \strong{Maintainer}: Andy Teucher \email{andy.teucher@gov.bc.ca}

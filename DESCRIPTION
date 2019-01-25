@@ -16,7 +16,9 @@ Authors@R:
              email = "stephanie.hazlitt@gov.bc.ca"),
       person(given = "Province of British Columbia",
              role = "cph"))
-Description: What the package does (one paragraph).
+Description: Search and retrieve data from the BC data catalogue (<https://catalogue.data.gov.bc.ca/>)
+    directly from R. Spatial and non-spatial data are retrieved differently depending 
+    on the characteristics of the data object. 
 License: Apache License (== 2.0) | file LICENSE
 Imports:
     crul,
