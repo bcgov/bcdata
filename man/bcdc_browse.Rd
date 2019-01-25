@@ -4,11 +4,12 @@
 \alias{bcdc_browse}
 \title{Load the B.C. Data Catalogue URL into an HTML browser}
 \usage{
-bcdc_browse(url = "https://catalogue.data.gov.bc.ca",
-  browser = getOption("browser"), encodeIfNeeded = FALSE)
+bcdc_browse(query = NULL, browser = getOption("browser"),
+  encodeIfNeeded = FALSE)
 }
 \arguments{
-\item{url}{a non-empty character string giving the URL to be loaded. Default \code{https://catalogue.data.gov.bc.ca}.}
+\item{query}{A string to search in the bcdata catalogue. Default (NULL) opens
+a browser to \code{https://catalogue.data.gov.bc.ca}.}
 
 \item{browser}{a non-empty character string giving the name of the
     program to be used as the HTML browser.  It should be in the PATH,
@@ -27,7 +28,8 @@ bcdc_browse(url = "https://catalogue.data.gov.bc.ca",
     Fortunately, most URLs do not need encoding.}
 }
 \value{
-A browser is opened with the B.C. Data Catalogue URL loaded: nothing is returned to the R interpreter
+A browser is opened with the B.C. Data Catalogue URL loaded if the
+session is interactive. The URL used is returned as a character string.
 }
 \description{
 This is a wrapper around utils::browseURL with the URL for the B.C. Data Catalogue as
@@ -36,6 +38,7 @@ the default
 \examples{
 \dontrun{
 bcdc_browse()
+bcdc_browse("fish")
 }
 }
 \seealso{

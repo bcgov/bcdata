@@ -16,24 +16,38 @@
 #' the default
 #'
 #' @inheritParams utils::browseURL
-#' @param url a non-empty character string giving the URL to be loaded. Default \code{https://catalogue.data.gov.bc.ca}.
+#' @param query A string to search in the bcdata catalogue. Default (NULL) opens
+#'        a browser to \code{https://catalogue.data.gov.bc.ca}.
 #'
 #' @seealso \code{\link[utils]{browseURL}}
-#' @return A browser is opened with the B.C. Data Catalogue URL loaded: nothing is returned to the R interpreter
+#' @return A browser is opened with the B.C. Data Catalogue URL loaded if the
+#'         session is interactive. The URL used is returned as a character string.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' bcdc_browse()
+#' bcdc_browse("fish")
 #' }
-bcdc_browse <- function(url = "https://catalogue.data.gov.bc.ca", browser = getOption("browser"),
+bcdc_browse <- function(query = NULL, browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
 
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
-  utils::browseURL(url = url, browser = browser,
-            encodeIfNeeded = encodeIfNeeded)
+  if(is.null(query))  url <- "https://catalogue.data.gov.bc.ca"
+
+  if(!is.null(query)){
+    url <- paste0("https://catalogue.data.gov.bc.ca/dataset?q=", query)
+  }
+
+  ## Facilitates testing
+  if(interactive()){
+    utils::browseURL(url = url, browser = browser,
+                     encodeIfNeeded = encodeIfNeeded)
+  }
+
+  invisible(url)
   }
 
 
