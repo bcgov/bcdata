@@ -202,18 +202,21 @@ format_record <- function(pkg) {
   pkg
 }
 
+
 as.bcdc_record <- function(x) {
   x <- format_record(x)
   class(x) <- "bcdc_record"
   x
 }
 
+
 as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"
   x
 }
 
-print.bcdc_record <- function(x) {
+#' @export
+print.bcdc_record <- function(x, ...) {
   cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
   cat("\nName:", x$name, "(ID:", x$id, ")")
   cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
@@ -233,7 +236,8 @@ print.bcdc_record <- function(x) {
   }
 }
 
-print.bcdc_recordlist <- function(x) {
+#' @export
+print.bcdc_recordlist <- function(x, ...) {
   cat("List of B.C. Data Catalogue Records\n")
   len <- length(x)
   n_print <- min(10, len)
