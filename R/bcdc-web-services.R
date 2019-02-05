@@ -12,9 +12,9 @@
 
 
 ## Memoised function
-bcdc_get_geodata_ <- function(id = NULL, query = NULL, crs = 3005, ...) {
+bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
 
-  obj = bcdc_get_record(id)
+  obj = bcdc_get_record(x)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
     stop("No wms/wfs resource available for this dataset.",
          call. = FALSE)
@@ -91,12 +91,12 @@ bcdc_get_geodata_ <- function(id = NULL, query = NULL, crs = 3005, ...) {
 #' Get data from the BC Web Feature Service
 #'
 #' Pulls features off the web. The data must be available as a wms/wfs service.
-#' See `bcdc_get_record(id)$resources`). If the record is greater than 10000 rows,
+#' See `bcdc_get_record(x)$resources`). If the record is greater than 10000 rows,
 #' the response will be paginated. If you are querying layers of this size, expect
 #' that the request will take quite a while.
 #'
-#' @param id the name of the record
-#' @param crs the epsg code for the coordinate reference system. Default `3005`
+#' @inheritParams bcdc_get_data
+#' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
 #'        (B.C. Albers). See https://epsgi.io.
 #' @param query A valid [`CQL` or `ECQL` query](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
 #'        to filter the results. Default `NULL` (return all objects)

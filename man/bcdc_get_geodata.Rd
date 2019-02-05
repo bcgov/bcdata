@@ -4,15 +4,16 @@
 \alias{bcdc_get_geodata}
 \title{Get data from the BC Web Feature Service}
 \usage{
-bcdc_get_geodata(id = NULL, query = NULL, crs = 3005, ...)
+bcdc_get_geodata(x = NULL, query = NULL, crs = 3005, ...)
 }
 \arguments{
-\item{id}{the name of the record}
+\item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
+or a character string denoting the id of a resource (or the url).}
 
 \item{query}{A valid \href{https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html}{CQL or ECQL query}
 to filter the results. Default \code{NULL} (return all objects)}
 
-\item{crs}{the epsg code for the coordinate reference system. Default \code{3005}
+\item{crs}{the epsg code for the coordinate reference system. Defaults to \code{3005}
 (B.C. Albers). See https://epsgi.io.}
 
 \item{...}{passed to \code{sf::read_sf}}
@@ -22,7 +23,7 @@ an \code{sf} object
 }
 \description{
 Pulls features off the web. The data must be available as a wms/wfs service.
-See \code{bcdc_get_record(id)$resources}). If the record is greater than 10000 rows,
+See \code{bcdc_get_record(x)$resources}). If the record is greater than 10000 rows,
 the response will be paginated. If you are querying layers of this size, expect
 that the request will take quite a while.
 }
