@@ -41,7 +41,7 @@ bcdc_browse("cities")
 The BC Data Catalogue provides many dataset with spatial information via a web feature service (wfs). Practically speaking, this means that we can import this spatial data into R as an sf object very easily using the `bcdc_get_geodata` function. 
 
 
-### School in British Columbia
+### Schools in British Columbia
 If we were interested in creating a quick map of most cities with a BC outline. First we would like to find the boundaries of BC layer. If I search for the "Province of British Columbia":
 
 ```{r}
@@ -89,4 +89,17 @@ Now we can combine our two layers into a quick map:
 plot(st_geometry(bc_bound))
 plot(st_geometry(cities), add = TRUE, col = cities$POP_2000, pch = 19)
 ```
+
+We can also make use of some further functionality offered by wfs in the form of SQL-like strings supplied to the query parameter in `bcdc_get_geodata`. The advantage of using this approach is that focusses your query to the wfs meaning you only get exactly the data you ask for. For example, say we only wanted those cities classified as 'VILLAGE', we can add a small bit of SQL-like code:
+```{r}
+bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", query = "LONG_TYPE='VILLAGE'")
+```
+Note that because 'VILLAGE' is a character, it needs to be enclosed in single quotes with the entire SQL statement enclosed in double quotes. If we wanted to chose multiple values of `LONG_TYPE` we can make use of the `IN` operator:
+
+```{r}
+bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", query = "LONG_TYPE IN ('CITY','VILLAGE')")
+```
+
+
+
 
