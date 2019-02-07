@@ -255,7 +255,7 @@ cat(paste(purrr::imap(x[1:n_print], ~ {
     purrr::pluck(.x, "title"),
     " (",
     paste0(
-      unique(map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "format")),
+      unique(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "format")),
       collapse = ","
     ),
     ")",
