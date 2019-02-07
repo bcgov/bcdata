@@ -120,6 +120,39 @@ bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
 bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
 
 
+#' Create CQL filter strings from sf objects
+#'
+#' Convenience wrapper to convert sf objects and geometric operations into CQL
+#' filter strings which can then be supplied to the query argument in
+#' \code{bcdc_get_geodata}. The sf object is automatically converted in a
+#' bounding box to reduce the complexity of the wfs call. Subsequent in-memory
+#' filtering may be need to achieve exact results.
+#'
+#' @param x object of class sf, sfc or sfg
+#' @param geometry_predicates Geometry predicates that allow for spatial filtering.
+#' bcbdc_cql_string accepts the following geometric predicates: EQUALS,
+#' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS, RELATE,
+#' DWITHIN, BEYOND.
+#'
+#' @examples
+#' airports <- bcdc_get_geodata("bc-airports")
+#' bcdc_cql_string(airports, "DWITHIN")
+#'
+#' @export
+bcdc_cql_string <- function(x, geometry_predicates){
+
+  if(!any(class(x) == "sf")) stop(paste(deparse(substitute(x)), "is not a valid sf object"), call. = FALSE)
+
+  match.arg(geometry_predicates, c("EQUALS","DISJOINT","INTERSECTS",
+                               "TOUCHES", "CROSSES", "WITHIN",
+                               "CONTAINS","OVERLAPS", "RELATE",
+                               "DWITHIN", "BEYOND"))
+  x = sf::st_bbox(x)
+  x = sf::st_as_sfc(x)
+  x = sf::st_as_text(x)
+  paste0(geometry_predicates, "(GEOMETRY, ", x,")")
+}
+
 #' Get map from the BC Web Mapping Service
 #'
 #' Pulls map off the web
