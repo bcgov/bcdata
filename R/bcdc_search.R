@@ -229,7 +229,11 @@ print.bcdc_record <- function(x, ...) {
     r <- x$resources[[i]]
     cat("  ", i, ": ", r$name, "\n", sep = "")
     #cat("    description:", r$description, "\n")
-    cat("    id:", r$id, "\n")
+    if(r$format == "wms"){
+      cat("    id:", r$package_id, "\n")
+    } else {
+      cat("    id:", r$id, "\n")
+    }
     cat("    format:", r$format, "\n")
     cat("    access:", r$resource_storage_access_method, "\n")
     #cat("    access_url:", r$url, "\n")
