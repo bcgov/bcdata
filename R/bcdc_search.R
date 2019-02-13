@@ -223,7 +223,8 @@ print.bcdc_record <- function(x, ...) {
   cat("\nSector:", x$sector)
   cat("\nLicence:", x$license_title)
   cat("\nType:", x$type, "\n")
-  #cat("\nDescription:\n    ", x$notes, "\n")
+  cat("\nDescription:\n")
+  cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
   cat("\nResources: (", length(x$resources), ")\n")
   for (i in seq_along(x$resources)) {
     r <- x$resources[[i]]
