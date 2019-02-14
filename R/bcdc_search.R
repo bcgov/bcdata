@@ -223,16 +223,21 @@ print.bcdc_record <- function(x, ...) {
   cat("\nSector:", x$sector)
   cat("\nLicence:", x$license_title)
   cat("\nType:", x$type, "\n")
-  cat("\nDescription:\n    ", x$notes, "\n")
+  cat("\nDescription:\n")
+  cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
   cat("\nResources: (", length(x$resources), ")\n")
   for (i in seq_along(x$resources)) {
     r <- x$resources[[i]]
     cat("  ", i, ": ", r$name, "\n", sep = "")
     cat("    description:", r$description, "\n")
-    cat("    id:", r$id, "\n")
+    # if(r$format == "wms"){
+    #   cat("    id:", r$package_id, "\n")
+    # } else {
+    #   cat("    id:", r$id, "\n")
+    # }
     cat("    format:", r$format, "\n")
     cat("    access:", r$resource_storage_access_method, "\n")
-    cat("    access_url:", r$url, "\n")
+    #cat("    access_url:", r$url, "\n")
   }
 }
 
@@ -245,10 +250,20 @@ print.bcdc_recordlist <- function(x, ...) {
   if (n_print < len) cat(" (Showing the top 10)")
   cat("\nTitles:\n")
   x <- purrr::set_names(x, NULL)
-  cat(paste(purrr::imap(x[1:n_print], ~ {
-    paste0(.y, ": ", .x[["title"]], "\n ID: ",
-           .x[["id"]])
-  }), collapse = "\n"), "\n")
+cat(paste(purrr::imap(x[1:n_print], ~ {
+  paste0(
+    .y, ": ",
+    purrr::pluck(.x, "title"),
+    " (",
+    paste0(
+      unique(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "format")),
+      collapse = ","
+    ),
+    ")",
+    "\n ID: ", purrr::pluck(.x, "id"),
+    "\n NAME: ", purrr::pluck(.x, "name")
+  )
+}), collapse = "\n"), "\n")
   cat("\nAccess a single record by calling bcdc_get_record(ID)
 with the ID from the desired record.")
 }
