@@ -12,13 +12,15 @@
 
 
 ## Memoised function
-bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
+bcdc_get_geodata_ <- function(x = NULL, ..., crs = 3005) {
 
   obj = bcdc_get_record(x)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
     stop("No wms/wfs resource available for this dataset.",
          call. = FALSE)
   }
+
+  query = cql_translate(...)
 
   ## Parameters for the API call
   query_list = list(
@@ -96,11 +98,11 @@ bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
 #' that the request will take quite a while.
 #'
 #' @inheritParams bcdc_get_data
+#' @param ... Logical predicates with which to filter the results. Multiple
+#' conditions are combined with `&`. Only rows where the condition evalueates to
+#' `TRUE` are kept.
 #' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
 #'        (B.C. Albers). See https://epsgi.io.
-#' @param query A valid [`CQL` or `ECQL` query](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
-#'        to filter the results. Default `NULL` (return all objects)
-#' @param ... passed to \code{sf::read_sf}
 #'
 #' @return an `sf` object
 #'
@@ -109,8 +111,8 @@ bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
 #' @examples
 #'
 #' bcdc_get_geodata("bc-airports", crs = 3857)
-#' bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
-#' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
+#' bcdc_get_geodata("bc-airports", PHYSICAL_ADDRESS == 'Victoria, BC', crs = 3857)
+#' bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
 #'
 #' ## A very large layer
 #' \dontrun{
