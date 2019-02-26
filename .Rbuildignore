@@ -5,3 +5,4 @@
 ^README\.Rmd$
 ^bcdata\.Rproj$
 ^\.Rproj\.user$
+^inst/sticker$
