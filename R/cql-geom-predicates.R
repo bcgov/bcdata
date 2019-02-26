@@ -54,7 +54,7 @@ cql_geom_predicate_list <- function() {
 #' CQL Geometry Predicates
 #'
 #' Functions to construct a CQL expression to be used
-#' to filter results from [bcdc_get_geo_data]
+#' to filter results from [bcdc_get_geodata()]
 #'
 #' @param geom an sf object
 #' @name cql_geom_predicates

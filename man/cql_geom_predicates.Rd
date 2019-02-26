@@ -45,5 +45,5 @@ a CQL expression using the bounding box of the geom
 }
 \description{
 Functions to construct a CQL expression to be used
-to filter results from \link{bcdc_get_geo_data}
+to filter results from \code{\link[=bcdc_get_geodata]{bcdc_get_geodata()}}
 }
