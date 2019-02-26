@@ -76,6 +76,9 @@ cql_dummy_con <- structure(
 )
 
 # Custom sql_translator using cql variants defined above
+#' @keywords internal
+#' @importFrom dplyr sql_translate_env
+#' @export
 sql_translate_env.DummyCQL <- function(con) {
   dbplyr::sql_variant(
     cql_scalar,
@@ -85,6 +88,9 @@ sql_translate_env.DummyCQL <- function(con) {
 }
 
 # Make sure that identities (LHS of relations) are escaped with double quotes
+#' @keywords internal
+#' @importFrom dplyr sql_escape_ident
+#' @export
 sql_escape_ident.DummyCQL <- function(con, x) {
   dbplyr::sql_quote(x, "\"")
 }
