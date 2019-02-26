@@ -7,10 +7,10 @@ test_that("bcdc_get_geodata returns an sf object for a valid id", {
   expect_equal(attr(bc_airports, "sf_column"), "geometry")
 })
 
-test_that("bcdc_get_geodata accept CQL strings to refine data call",{
+test_that("bcdc_get_geodata accepts R expressions to refine data call",{
   skip_if_net_down()
   one_well <- bcdc_get_geodata("ground-water-wells",
-                               query = "OBSERVATION_WELL_NUMBER=108")
+                               OBSERVATION_WELL_NUMBER == 108)
   expect_is(one_well, "sf")
   expect_equal(attr(one_well, "sf_column"), "geometry")
   expect_equal(nrow(one_well), 1)
