@@ -37,7 +37,7 @@ bcdc_cql_string <- function(x, geometry_predicates){
   x = sf::st_bbox(x)
   x = sf::st_as_sfc(x)
   x = sf::st_as_text(x)
-  paste0(geometry_predicates, "(GEOMETRY, ", x,")")
+  CQL(paste0(geometry_predicates, "(GEOMETRY, ", x,")"))
 }
 
 ## Geometry Predicates
@@ -64,65 +64,65 @@ NULL
 #' @rdname cql_geom_predicates
 #' @export
 EQUALS <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "EQUALS"))
+  bcdc_cql_string(geom, "EQUALS")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 DISJOINT <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "DISJOINT"))
+  bcdc_cql_string(geom, "DISJOINT")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 INTERSECTS <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "INTERSECTS"))
+  bcdc_cql_string(geom, "INTERSECTS")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 TOUCHES <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "TOUCHES"))
+  bcdc_cql_string(geom, "TOUCHES")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 CROSSES <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "CROSSES"))
+  bcdc_cql_string(geom, "CROSSES")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 WITHIN <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "WITHIN"))
+  bcdc_cql_string(geom, "WITHIN")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 CONTAINS <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "CONTAINS"))
+  bcdc_cql_string(geom, "CONTAINS")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 OVERLAPS <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "OVERLAPS"))
+  bcdc_cql_string(geom, "OVERLAPS")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 RELATE <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "RELATE"))
+  bcdc_cql_string(geom, "RELATE")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 DWITHIN <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "DWITHIN"))
+  bcdc_cql_string(geom, "DWITHIN")
 }
 
 #' @rdname cql_geom_predicates
 #' @export
 BEYOND <- function(geom) {
-  dbplyr::sql(bcdc_cql_string(geom, "BEYOND"))
+  bcdc_cql_string(geom, "BEYOND")
 }

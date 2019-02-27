@@ -21,7 +21,10 @@
 #' @inheritParams bcdc_get_data
 #' @param ... Logical predicates with which to filter the results. Multiple
 #' conditions are combined with `&`. Only rows where the condition evalueates to
-#' `TRUE` are kept.
+#' `TRUE` are kept. Accepts normal R expressions as well as any of the special
+#' [CQL geometry functions][cql_geom_predicates] such as `WITHIN()` or `INTERSECTS()`.
+#' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
+#' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
 #'        (B.C. Albers). See https://epsgi.io.
 #'
@@ -34,6 +37,7 @@
 #' bcdc_get_geodata("bc-airports", crs = 3857)
 #' bcdc_get_geodata("bc-airports", PHYSICAL_ADDRESS == 'Victoria, BC', crs = 3857)
 #' bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
+#' bcdc_get_geodata("bc-airports", CQL("LATITUDE > 50"))
 #'
 #' ## A very large layer
 #' \dontrun{

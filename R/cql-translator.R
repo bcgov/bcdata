@@ -15,7 +15,8 @@ cql_translate <- function(...) {
   # when there are spatial predicates (e.g., DWITHIN, INTERSECTS, TOUCHES)
   # evaluate those parts of the expression so they are expanded
   dots <- expand_spatial_predicates(...)
-  sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con)
+  dots <- expand_cql(dots)
+  sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
   build_where(sql_where)
 }
 
@@ -117,5 +118,30 @@ expand_spatial_predicates <- function(...) {
   dots[spatial_predicates] <- lapply(dots[spatial_predicates],
                                      rlang::eval_tidy)
   dots
+}
+
+expand_cql <- function(dots) {
+  cql_calls <- grepl("^CQL\\((\"|')", dots)
+  dots[cql_calls] <- lapply(dots[cql_calls], rlang::eval_tidy)
+  dots
+}
+
+#' CQL escaping
+#'
+#' Write a CQL expression to escape its inputs, and return a CQL/SQL object.
+#' Used when writing filter expressions in [bcdc_get_geodata()].
+#'
+#' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
+#'
+#' @param ... Character vectors that will be comined into a single CQL statement.
+#'
+#' @return An object of class `c("CQL", "SQL")`
+#' @export
+#'
+#' @examples
+#' CQL("FOO > 12 & NAME LIKE 'A&'")
+CQL <- function(...) {
+    sql <- dbplyr::sql(...)
+    structure(sql, class = c("CQL", class(sql)))
 }
 
