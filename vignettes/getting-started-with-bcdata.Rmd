@@ -93,14 +93,29 @@ plot(st_geometry(cities), add = TRUE, col = cities$POP_2000, pch = 19)
 We can also make use of some further functionality offered by wfs by specifying conditions in `bcdc_get_geodata` in a similar way that would in `dplyr::filter()`. The advantage of using this approach is that focusses your query to the wfs meaning you only get exactly the data you ask for. For example, say we only wanted those cities classified as 'VILLAGE', we can add
 `LONG_TYPE == 'VILLAGE'`. This gets translated in the background to a `SQL`-like statement and passed to the wfs service:
 ```{r}
-bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", LONG_TYPE == 'VILLAGE')
+bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", 
+                 LONG_TYPE == 'VILLAGE')
 ```
-Note that because 'VILLAGE' is a character, it needs to be enclosed in single quotes. If we wanted to chose multiple values of `LONG_TYPE` we can again write it as we normally would in R using the `%in%` operator:
+Note that because 'VILLAGE' is a character, it needs to be enclosed in quotes. If we wanted to chose multiple values of `LONG_TYPE` we can again write it as we normally would in R using the `%in%` operator:
 
 ```{r}
-bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", LONG_TYPE %in% c('CITY','VILLAGE'))
+bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", 
+                 LONG_TYPE %in% c('CITY','VILLAGE'))
 ```
 
+If you are a SQL/CQL user you might be more comfortable writing CQL queries 
+directly rather than writing R expressions. You can do so by wrapping your query
+as a character vector in the `CQL()` function:
 
+```{r}
+bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", 
+                 CQL("POP_2000 BETWEEN 10000 AND 20000"))
+```
 
+Note that this same result can be achieved using the `between()` function:
+
+```{r}
+bcdc_get_geodata("bc-major-cities-points-1-2-000-000-digital-baseline-mapping", 
+                 between("POP_2000", 10000, 20000))
+```
 

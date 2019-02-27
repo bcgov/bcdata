@@ -35,6 +35,9 @@ cql_scalar <- dbplyr::sql_translator(
   .parent = dbplyr::base_scalar,
   tolower = dbplyr::sql_prefix("strToLowerCase", 1),
   toupper = dbplyr::sql_prefix("strToUpperCase", 1),
+  between = function(x, left, right) {
+    CQL(paste0(x, " BETWEEN ", left, " AND ", right))
+  },
   DWITHIN = function(x) DWITHIN(x),
   EQUALS = function(x) EQUALS(x),
   DISJOINT = function(x) DISJOINT(x),
