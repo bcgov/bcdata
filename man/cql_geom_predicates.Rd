@@ -11,6 +11,7 @@
 \alias{CONTAINS}
 \alias{OVERLAPS}
 \alias{RELATE}
+\alias{BBOX}
 \alias{DWITHIN}
 \alias{BEYOND}
 \title{CQL Geometry Predicates}
@@ -31,19 +32,39 @@ CONTAINS(geom)
 
 OVERLAPS(geom)
 
-RELATE(geom)
+RELATE(geom, pattern)
 
-DWITHIN(geom)
+BBOX(coords, crs = NULL)
 
-BEYOND(geom)
+DWITHIN(geom, distance, units)
+
+BEYOND(geom, distance, units)
 }
 \arguments{
-\item{geom}{an sf object}
+\item{geom}{an sf/sfc/sfg object}
+
+\item{pattern}{spatial relationship specified by a DE-9IM matrix pattern.
+A DE-9IM pattern is a string of length 9 specified using the characters
+\code{*TF012}. Example: \code{'1*T***T**'}}
+
+\item{coords}{the coordinates of the bounding box.}
+
+\item{crs}{(Optional) A string containing an SRS code
+(For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)}
+
+\item{distance}{numeric value for distance tolerance}
+
+\item{units}{units that distance is specified in. One of
+\code{"feet"}, \code{"meters"}, \code{"statute miles"}, \code{"nautical miles"}, \code{"kilometers"}}
 }
 \value{
 a CQL expression using the bounding box of the geom
 }
 \description{
 Functions to construct a CQL expression to be used
-to filter results from \code{\link[=bcdc_get_geodata]{bcdc_get_geodata()}}
+to filter results from \code{\link[=bcdc_get_geodata]{bcdc_get_geodata()}}.
+See \href{https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate}{the geoserver CQL documentation for details}.
+The sf object is automatically converted in a
+bounding box to reduce the complexity of the wfs call. Subsequent in-memory
+filtering may be need to achieve exact results.
 }

@@ -13,31 +13,58 @@
 #' Create CQL filter strings from sf objects
 #'
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
-#' filter strings which can then be supplied to the query argument in
+#' filter strings which can then be supplied to the `...` argument in
 #' \code{bcdc_get_geodata}. The sf object is automatically converted in a
 #' bounding box to reduce the complexity of the wfs call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
+#'
+#' There are wrapper functions for
+#' [each of the geometry predicates][cql_geom_predicates], which you may find
+#' more convenient than calling this function directly.
 #'
 #' @param x object of class sf, sfc or sfg
 #' @param geometry_predicates Geometry predicates that allow for spatial filtering.
 #' bcbdc_cql_string accepts the following geometric predicates: EQUALS,
 #' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS, RELATE,
-#' DWITHIN, BEYOND.
+#' DWITHIN, BEYOND, BBOX.
+#' @inheritParams RELATE
+#' @inheritParams BBOX
+#' @inheritParams DWITHIN
+#'
+#' @seealso sql_geom_predicates
 #'
 #' @examples
 #' airports <- bcdc_get_geodata("bc-airports")
 #' bcdc_cql_string(airports, "DWITHIN")
 #'
 #' @export
-bcdc_cql_string <- function(x, geometry_predicates){
-
-  if (!any(class(x) == "sf")) stop(paste(deparse(substitute(x)), "is not a valid sf object"), call. = FALSE)
+bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
+                            distance = NULL, units = NULL,
+                            coords = NULL, crs = NULL){
 
   match.arg(geometry_predicates, cql_geom_predicate_list())
-  x = sf::st_bbox(x)
-  x = sf::st_as_sfc(x)
-  x = sf::st_as_text(x)
-  CQL(paste0(geometry_predicates, "(GEOMETRY, ", x,")"))
+
+  # Only covert x to bbox if not using BBOX CQL function
+  # because it doesn't take a geom
+  if (!geometry_predicates == "BBOX") {
+    x <- sf_to_text_bbox(x)
+  }
+
+  cql_args <-
+    if (geometry_predicates == "BBOX") {
+      paste0(
+        paste0(coords, collapse = ","),
+        if (!is.null(crs)) paste0(", '", crs, "'"),
+      )
+    } else if (geometry_predicates %in% c("DWITHIN", "BEYOND")) {
+      paste0(x, ", ", distance, ", '", units, "'")
+    } else if (geometry_predicates == "RELATE") {
+      paste0(x, ", '", pattern, "'")
+    } else {
+      x
+    }
+
+  CQL(paste0(geometry_predicates,"(GEOMETRY, ", cql_args, ")"))
 }
 
 ## Geometry Predicates
@@ -46,7 +73,18 @@ cql_geom_predicate_list <- function() {
   c("EQUALS","DISJOINT","INTERSECTS",
     "TOUCHES", "CROSSES", "WITHIN",
     "CONTAINS","OVERLAPS", "RELATE",
-    "DWITHIN", "BEYOND")
+    "DWITHIN", "BEYOND", "BBOX")
+}
+
+sf_to_text_bbox <- function(x) {
+  if (!inherits(x, c("sf", "sfc", "sfg"))) {
+    stop(paste(deparse(substitute(x)), "is not a valid sf object"),
+         call. = FALSE)
+  }
+
+  x = sf::st_bbox(x)
+  x = sf::st_as_sfc(x)
+  sf::st_as_text(x)
 }
 
 # Separate functions for all CQL geometry predicates
@@ -54,9 +92,13 @@ cql_geom_predicate_list <- function() {
 #' CQL Geometry Predicates
 #'
 #' Functions to construct a CQL expression to be used
-#' to filter results from [bcdc_get_geodata()]
+#' to filter results from [bcdc_get_geodata()].
+#' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
+#' The sf object is automatically converted in a
+#' bounding box to reduce the complexity of the wfs call. Subsequent in-memory
+#' filtering may be need to achieve exact results.
 #'
-#' @param geom an sf object
+#' @param geom an sf/sfc/sfg object
 #' @name cql_geom_predicates
 #' @return a CQL expression using the bounding box of the geom
 NULL
@@ -110,19 +152,54 @@ OVERLAPS <- function(geom) {
 }
 
 #' @rdname cql_geom_predicates
+#' @param pattern spatial relationship specified by a DE-9IM matrix pattern.
+#' A DE-9IM pattern is a string of length 9 specified using the characters
+#' `*TF012`. Example: `'1*T***T**'`
 #' @export
-RELATE <- function(geom) {
-  bcdc_cql_string(geom, "RELATE")
+RELATE <- function(geom, pattern) {
+  if (!is.character(pattern) || !grepl("^[*TF012]{9}$", pattern)) {
+    stop("pattern must be a 9-character string using the characters '*TF012'",
+         call. = FALSE)
+  }
+  bcdc_cql_string(geom, "RELATE", pattern = pattern)
 }
 
 #' @rdname cql_geom_predicates
+#' @param coords the coordinates of the bounding box.
+#' @param crs (Optional) A string containing an SRS code
+#' (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)
 #' @export
-DWITHIN <- function(geom) {
-  bcdc_cql_string(geom, "DWITHIN")
+BBOX <- function(coords, crs = NULL){
+  if (!is.numeric(coords) || length(coords) != 4L) {
+    stop("'coords' must be a length 4 numeric vector", call. = FALSE)
+  }
+  bcdc_cql_string(x = NULL, "BBOX", coords = coords, crs = crs)
 }
 
 #' @rdname cql_geom_predicates
+#' @param distance numeric value for distance tolerance
+#' @param units units that distance is specified in. One of
+#' `"feet"`, `"meters"`, `"statute miles"`, `"nautical miles"`, `"kilometers"`
 #' @export
-BEYOND <- function(geom) {
-  bcdc_cql_string(geom, "BEYOND")
+DWITHIN <- function(geom, distance, units) {
+  units <- match.arg(units, allowed_units())
+  if (!is.numeric(distance)) {
+    stop("'distance' must be numeric", call. = FALSE)
+  }
+  bcdc_cql_string(geom, "DWITHIN", distance = distance, units = units)
+}
+
+#' @rdname cql_geom_predicates
+#' @inheritParams DWITHIN
+#' @export
+BEYOND <- function(geom, distance, units) {
+  units <- match.arg(units, allowed_units())
+  if (!is.numeric(distance)) {
+    stop("'distance' must be numeric", call. = FALSE)
+  }
+  bcdc_cql_string(geom, "BEYOND", distance = distance, units = units)
+}
+
+allowed_units <- function() {
+  c("feet", "meters", "statute miles", "nautical miles", "kilometers")
 }

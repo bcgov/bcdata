@@ -4,7 +4,8 @@
 \alias{bcdc_cql_string}
 \title{Create CQL filter strings from sf objects}
 \usage{
-bcdc_cql_string(x, geometry_predicates)
+bcdc_cql_string(x, geometry_predicates, pattern = NULL,
+  distance = NULL, units = NULL, coords = NULL, crs = NULL)
 }
 \arguments{
 \item{x}{object of class sf, sfc or sfg}
@@ -12,17 +13,39 @@ bcdc_cql_string(x, geometry_predicates)
 \item{geometry_predicates}{Geometry predicates that allow for spatial filtering.
 bcbdc_cql_string accepts the following geometric predicates: EQUALS,
 DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS, RELATE,
-DWITHIN, BEYOND.}
+DWITHIN, BEYOND, BBOX.}
+
+\item{pattern}{spatial relationship specified by a DE-9IM matrix pattern.
+A DE-9IM pattern is a string of length 9 specified using the characters
+\code{*TF012}. Example: \code{'1*T***T**'}}
+
+\item{distance}{numeric value for distance tolerance}
+
+\item{units}{units that distance is specified in. One of
+\code{"feet"}, \code{"meters"}, \code{"statute miles"}, \code{"nautical miles"}, \code{"kilometers"}}
+
+\item{coords}{the coordinates of the bounding box.}
+
+\item{crs}{(Optional) A string containing an SRS code
+(For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)}
 }
 \description{
 Convenience wrapper to convert sf objects and geometric operations into CQL
-filter strings which can then be supplied to the query argument in
+filter strings which can then be supplied to the \code{...} argument in
 \code{bcdc_get_geodata}. The sf object is automatically converted in a
 bounding box to reduce the complexity of the wfs call. Subsequent in-memory
 filtering may be need to achieve exact results.
+}
+\details{
+There are wrapper functions for
+\link[=cql_geom_predicates]{each of the geometry predicates}, which you may find
+more convenient than calling this function directly.
 }
 \examples{
 airports <- bcdc_get_geodata("bc-airports")
 bcdc_cql_string(airports, "DWITHIN")
 
+}
+\seealso{
+sql_geom_predicates
 }
