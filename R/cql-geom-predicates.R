@@ -157,7 +157,9 @@ OVERLAPS <- function(geom) {
 #' `*TF012`. Example: `'1*T***T**'`
 #' @export
 RELATE <- function(geom, pattern) {
-  if (!is.character(pattern) || !grepl("^[*TF012]{9}$", pattern)) {
+  if (!is.character(pattern) ||
+      !grepl("^[*TF012]{9}$", pattern) ||
+      length(pattern) != 1L) {
     stop("pattern must be a 9-character string using the characters '*TF012'",
          call. = FALSE)
   }
@@ -173,6 +175,10 @@ BBOX <- function(coords, crs = NULL){
   if (!is.numeric(coords) || length(coords) != 4L) {
     stop("'coords' must be a length 4 numeric vector", call. = FALSE)
   }
+  if (!is.null(crs) && !is.character(crs) && !length(crs) == 1L) {
+    stop("crs must be a character string denoting the CRS (e.g., 'EPSG:4326'",
+         call. = FALSE)
+  }
   bcdc_cql_string(x = NULL, "BBOX", coords = coords, crs = crs)
 }
 
@@ -181,25 +187,23 @@ BBOX <- function(coords, crs = NULL){
 #' @param units units that distance is specified in. One of
 #' `"feet"`, `"meters"`, `"statute miles"`, `"nautical miles"`, `"kilometers"`
 #' @export
-DWITHIN <- function(geom, distance, units) {
-  units <- match.arg(units, allowed_units())
+DWITHIN <- function(geom, distance,
+                    units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {
   if (!is.numeric(distance)) {
     stop("'distance' must be numeric", call. = FALSE)
   }
+  units <- match.arg(units)
   bcdc_cql_string(geom, "DWITHIN", distance = distance, units = units)
 }
 
 #' @rdname cql_geom_predicates
 #' @inheritParams DWITHIN
 #' @export
-BEYOND <- function(geom, distance, units) {
-  units <- match.arg(units, allowed_units())
+BEYOND <- function(geom, distance,
+                   units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {
   if (!is.numeric(distance)) {
     stop("'distance' must be numeric", call. = FALSE)
   }
+  units <- match.arg(units)
   bcdc_cql_string(geom, "BEYOND", distance = distance, units = units)
-}
-
-allowed_units <- function() {
-  c("feet", "meters", "statute miles", "nautical miles", "kilometers")
 }
