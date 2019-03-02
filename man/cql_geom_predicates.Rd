@@ -36,9 +36,11 @@ RELATE(geom, pattern)
 
 BBOX(coords, crs = NULL)
 
-DWITHIN(geom, distance, units)
+DWITHIN(geom, distance, units = c("meters", "feet", "statute miles",
+  "nautical miles", "kilometers"))
 
-BEYOND(geom, distance, units)
+BEYOND(geom, distance, units = c("meters", "feet", "statute miles",
+  "nautical miles", "kilometers"))
 }
 \arguments{
 \item{geom}{an sf/sfc/sfg object}

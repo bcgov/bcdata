@@ -53,8 +53,8 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
   cql_args <-
     if (geometry_predicates == "BBOX") {
       paste0(
-        paste0(coords, collapse = ","),
-        if (!is.null(crs)) paste0(", '", crs, "'"),
+        paste0(coords, collapse = ", "),
+        if (!is.null(crs)) paste0(", '", crs, "'")
       )
     } else if (geometry_predicates %in% c("DWITHIN", "BEYOND")) {
       paste0(x, ", ", distance, ", '", units, "'")
