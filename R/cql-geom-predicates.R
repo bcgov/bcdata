@@ -158,8 +158,8 @@ OVERLAPS <- function(geom) {
 #' @export
 RELATE <- function(geom, pattern) {
   if (!is.character(pattern) ||
-      !grepl("^[*TF012]{9}$", pattern) ||
-      length(pattern) != 1L) {
+      length(pattern) != 1L ||
+      !grepl("^[*TF012]{9}$", pattern)) {
     stop("pattern must be a 9-character string using the characters '*TF012'",
          call. = FALSE)
   }
