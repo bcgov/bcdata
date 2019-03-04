@@ -59,8 +59,8 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
     SERVICE = "WFS",
     VERSION = "2.0.0",
     REQUEST = "GetFeature",
-    outputFormat = "json",
-    typeName = obj$layer_name,
+    outputFormat = "application/json",
+    typeNames = obj$layer_name,
     SRSNAME=paste0("EPSG:",crs),
     CQL_FILTER = query
   )
