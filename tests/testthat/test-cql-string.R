@@ -1,17 +1,16 @@
 context("Testing ability to create CQL strings")
 suppressPackageStartupMessages(library(sf, quietly = TRUE))
 
+the_geom <- st_sf(st_sfc(st_point(c(1,1))))
+
 test_that("bcdc_cql_string fails when an invalid arguments are given",{
-  airports <- bcdc_get_geodata("bc-airports")
-  expect_error(bcdc_cql_string(airports, "FOO"))
+  expect_error(bcdc_cql_string(the_geom, "FOO"))
   expect_error(bcdc_cql_string(quakes, "DWITHIN"))
 })
 
 test_that("CQL function works", {
   expect_is(CQL("SELECT * FROM foo;"), c("CQL", "SQL"))
 })
-
-the_geom <- st_sf(st_sfc(st_point(c(1,1))))
 
 test_that("All cql geom predicate functions work", {
   single_arg_functions <- c("EQUALS","DISJOINT","INTERSECTS",
