@@ -26,8 +26,7 @@ bcdc_number_wfs_records <- function(query_list, client){
     ## resultType is only returned as XML. Will parse instead on importing an
     ## XML package
     ## regex to extract the number
-    first_pass <- gsub(".*numberMatched", "", txt_max)
-    as.numeric(sub("^\\D*(\\d+).*$", "\\1", first_pass))
+    as.numeric(sub(".*numberMatched=\"([0-9]{1,20})\".*", "\\1", txt_max))
 
 }
 
