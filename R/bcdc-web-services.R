@@ -11,8 +11,40 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 
-## Memoised function
-bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
+#' Get data from the BC Web Feature Service
+#'
+#' Pulls features off the web. The data must be available as a wms/wfs service.
+#' See `bcdc_get_record(x)$resources`). If the record is greater than 10000 rows,
+#' the response will be paginated. If you are querying layers of this size, expect
+#' that the request will take quite a while.
+#'
+#' @inheritParams bcdc_get_data
+#' @param ... Logical predicates with which to filter the results. Multiple
+#' conditions are combined with `&`. Only rows where the condition evalueates to
+#' `TRUE` are kept. Accepts normal R expressions as well as any of the special
+#' [CQL geometry functions][cql_geom_predicates] such as `WITHIN()` or `INTERSECTS()`.
+#' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
+#' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
+#' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
+#'        (B.C. Albers). See https://epsgi.io.
+#'
+#' @return an `sf` object
+#'
+#' @export
+#'
+#' @examples
+#'
+#' bcdc_get_geodata("bc-airports", crs = 3857)
+#' bcdc_get_geodata("bc-airports", PHYSICAL_ADDRESS == 'Victoria, BC', crs = 3857)
+#' bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
+#' bcdc_get_geodata("bc-airports", CQL("LATITUDE > 50"))
+#'
+#' ## A very large layer
+#' \dontrun{
+#' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#' }
+#'
+bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
 
   obj = bcdc_get_record(x)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
@@ -20,13 +52,15 @@ bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
          call. = FALSE)
   }
 
+  query = cql_translate(...)
+
   ## Parameters for the API call
   query_list = list(
     SERVICE = "WFS",
     VERSION = "2.0.0",
     REQUEST = "GetFeature",
-    outputFormat = "json",
-    typeName = obj$layer_name,
+    outputFormat = "application/json",
+    typeNames = obj$layer_name,
     SRSNAME=paste0("EPSG:",crs),
     CQL_FILTER = query
   )
@@ -88,37 +122,7 @@ bcdc_get_geodata_ <- function(x = NULL, query = NULL, crs = 3005, ...) {
 
 }
 
-#' Get data from the BC Web Feature Service
-#'
-#' Pulls features off the web. The data must be available as a wms/wfs service.
-#' See `bcdc_get_record(x)$resources`). If the record is greater than 10000 rows,
-#' the response will be paginated. If you are querying layers of this size, expect
-#' that the request will take quite a while.
-#'
-#' @inheritParams bcdc_get_data
-#' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
-#'        (B.C. Albers). See https://epsgi.io.
-#' @param query A valid [`CQL` or `ECQL` query](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html)
-#'        to filter the results. Default `NULL` (return all objects)
-#' @param ... passed to \code{sf::read_sf}
-#'
-#' @return an `sf` object
-#'
-#' @export
-#'
-#' @examples
-#'
-#' bcdc_get_geodata("bc-airports", crs = 3857)
-#' bcdc_get_geodata("bc-airports", crs = 3857, query = "PHYSICAL_ADDRESS='Victoria, BC'")
-#' bcdc_get_geodata("ground-water-wells", query = "OBSERVATION_WELL_NUMBER=108")
-#'
-#' ## A very large layer
-#' \dontrun{
-#' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
-#' }
-#'
-bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
-
+# bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
 
 #' Get map from the BC Web Mapping Service
 #'
