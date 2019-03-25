@@ -97,7 +97,8 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
                               limit_param = "count",
                               offset_param = "startIndex",
                               limit = number_of_records,
-                              limit_chunk = 3000)
+                              limit_chunk = 3000,
+                              progress = TRUE)
 
     message("Retrieving data")
     cc$get(query = query_list)
