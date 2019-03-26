@@ -42,6 +42,9 @@ test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom
   ## View metadata to see that geom is SHAPE
   ##bcdc_browse("fire-perimeters-historical")
 
+  crd <- bcdc_get_geodata("regional-districts-legally-defined-administrative-areas-of-bc",
+                          ADMIN_AREA_NAME == "Cariboo Regional District")
+
   ret1 <- bcdc_get_geodata("fire-perimeters-historical",
                                 FIRE_YEAR == 2000,
                                 FIRE_CAUSE == "Person",
