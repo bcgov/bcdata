@@ -16,17 +16,35 @@ compact <- function(l) Filter(Negate(is.null), l)
 
 
 bcdc_number_wfs_records <- function(query_list, client){
-    #browser()
+  query_list = compact(query_list)
 
-    query_list <- c(query_list, resultType="hits")
+  query_list <- c(query_list, resultType="hits")
 
-    res_max <- client$get(query = query_list)
-    txt_max <- res_max$parse("UTF-8")
+  res_max <- client$get(query = query_list)
+  txt_max <- res_max$parse("UTF-8")
 
-    ## resultType is only returned as XML. Will parse instead on importing an
-    ## XML package
-    ## regex to extract the number
-    as.numeric(sub(".*numberMatched=\"([0-9]{1,20})\".*", "\\1", txt_max))
+
+  ## resultType is only returned as XML.
+  ## regex to extract the number
+  as.numeric(sub(".*numberMatched=\"([0-9]{1,20})\".*", "\\1", txt_max))
+
+}
+
+check_geom_col_names <- function(query_list, cli){
+  query_list = compact(query_list)
+  original_query <- query_list
+
+  ## Change REQUEST so that it returns only col names
+  query_list$REQUEST = "DescribeFeatureType"
+
+  r = cli$get(query = query_list)
+  txt = r$parse("UTF-8")
+
+  if(grepl("SHAPE", txt) && !is.null(original_query$CQL_FILTER)){
+    original_query$CQL_FILTER = gsub("GEOMETRY", "SHAPE", original_query$CQL_FILTER)
+  }
+
+  return(original_query)
 
 }
 

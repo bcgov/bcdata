@@ -36,3 +36,15 @@ test_that("bcdc_get_geodata works with slug and full url", {
   expect_true(all(unlist(lapply(list(ret1, ret2, ret3, ret4), nrow))))
   expect_true(all(unlist(lapply(list(ret1, ret2, ret3, ret4), ncol))))
 })
+
+
+test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom",{
+  ## View metadata to see that geom is SHAPE
+  ##bcdc_browse("fire-perimeters-historical")
+
+  ret1 <- bcdc_get_geodata("fire-perimeters-historical",
+                                FIRE_YEAR == 2000,
+                                FIRE_CAUSE == "Person",
+                                INTERSECTS(crd))
+  expect_is(ret1, "sf")
+})
