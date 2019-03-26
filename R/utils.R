@@ -16,8 +16,6 @@ compact <- function(l) Filter(Negate(is.null), l)
 
 
 bcdc_number_wfs_records <- function(query_list, client){
-  query_list = compact(query_list)
-
   query_list <- c(query_list, resultType="hits")
 
   res_max <- client$get(query = query_list)
@@ -31,7 +29,6 @@ bcdc_number_wfs_records <- function(query_list, client){
 }
 
 check_geom_col_names <- function(query_list, cli){
-  query_list = compact(query_list)
   original_query <- query_list
 
   ## Change REQUEST so that it returns only col names
