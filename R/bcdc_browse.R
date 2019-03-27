@@ -16,8 +16,10 @@
 #' the default
 #'
 #' @inheritParams utils::browseURL
-#' @param query A string to search in the bcdata catalogue. Default (NULL) opens
-#'        a browser to \code{https://catalogue.data.gov.bc.ca}.
+#' @param query Default (NULL) opens a browser to \code{https://catalogue.data.gov.bc.ca}.
+#'        This argument will also accept a B.C. Data Catalogue record id or name to take you
+#'        directly to that page. If the provide id or name doesn't lead to a valid webpage,
+#'        bcdc_browse will search the data catalogue for that string.
 #'
 #' @seealso \code{\link[utils]{browseURL}}
 #' @return A browser is opened with the B.C. Data Catalogue URL loaded if the
@@ -27,18 +29,34 @@
 #'
 #' @examples
 #' \dontrun{
+#' ## Just take me to the B.C. data
 #' bcdc_browse()
+#'
+#' ## Take me to the B.C. airports
+#' bcdc_browse("bc-airports")
+#'
+#' ## Take me to the catalogue search results for 'fish'
 #' bcdc_browse("fish")
+#'
 #' }
 bcdc_browse <- function(query = NULL, browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
-
   if(!has_internet()) stop("No access to internet", call. = FALSE)
+
 
   if(is.null(query))  url <- "https://catalogue.data.gov.bc.ca"
 
   if(!is.null(query)){
-    url <- paste0("https://catalogue.data.gov.bc.ca/dataset?q=", query)
+
+    ## Check if the record is valid, if not return a query
+    url <- paste0("https://catalogue.data.gov.bc.ca/dataset/", query)
+    cli <- crul::HttpClient$new(url = url,
+                         headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
+    res <- cli$get()
+
+    if(res$status_code == 404){
+      url <- paste0("https://catalogue.data.gov.bc.ca/dataset?q=", query)
+    }
   }
 
   ## Facilitates testing
