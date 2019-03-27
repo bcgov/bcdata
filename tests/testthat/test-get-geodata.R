@@ -46,8 +46,8 @@ test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom
                           ADMIN_AREA_NAME == "Cariboo Regional District")
 
   ret1 <- bcdc_get_geodata("fire-perimeters-historical",
-                                FIRE_YEAR == 2000,
-                                FIRE_CAUSE == "Person",
-                                INTERSECTS(crd))
+                           FIRE_YEAR == 2000,
+                           FIRE_CAUSE == "Person",
+                           INTERSECTS(crd))
   expect_is(ret1, "sf")
 })
