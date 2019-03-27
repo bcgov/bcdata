@@ -117,9 +117,14 @@ expand_spatial_predicates <- function(...) {
   dots <- rlang::exprs(...)
   # Find the expressions that are cql spatial funcions and evaluate them
   # so the geometry is expanded and inserted into the CQL function call.
+  # eval_tidy needs the env to be 3 levels deep so that it can find the object
+  # that is being used in the spatial predicate function:
+  #  - expand_spatial_predicates is called by cql_translate
+  #  - cql_translate is called by bcdc_get_geodata
   spatial_predicates <- grepl(spatial_funs_regex(first = TRUE), dots)
   dots[spatial_predicates] <- lapply(dots[spatial_predicates],
-                                     rlang::eval_tidy)
+                                     rlang::eval_tidy,
+                                     env = rlang::caller_env(n = 3))
   dots
 }
 
