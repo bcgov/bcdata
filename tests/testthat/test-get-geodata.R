@@ -51,3 +51,15 @@ test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom
                            INTERSECTS(crd))
   expect_is(ret1, "sf")
 })
+
+test_that("bcdc_get_geodata returns an object with bcdc_promise class on record under 10000",{
+  airports <- bcdc_get_geodata("bc-airports")
+  expect_is(airports, "bcdc_promise")
+})
+
+
+test_that("bcdc_get_geodata returns an object with bcdc_promise class on record over 10000",{
+  skip("Skipping because it is so large")
+  bc_eml <- bcdc_get_geodata("bc-environmental-monitoring-locations", PERMIT_RELATIONSHIP == "DISCHARGE")
+  expect_is(bc_eml, "bcdc_promise")
+})

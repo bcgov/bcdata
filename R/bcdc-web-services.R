@@ -88,7 +88,7 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
     cc$raise_for_status()
     txt <- cc$parse("UTF-8")
 
-    return(bcdc_read_sf(txt))
+    sf_responses <- bcdc_read_sf(txt)
   }
 
   if (number_of_records >= 10000) {
@@ -110,27 +110,27 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
     message("Retrieving data")
     cc$get(query = query_list)
 
-
     if (any(cc$status_code() >= 300)) {
       ## TODO: This error message could be more informative
       stop("The BC data catalogue experienced issues with this request",
         call. = FALSE
       )
+
+      ## Parse the Paginated response
+      message("Parsing data")
+      txt <- cc$parse("UTF-8")
+
+      sf_responses <- lapply(txt, bcdc_read_sf)
+
+      sf_responses <- do.call(rbind, sf_responses)
     }
 
-    ## Parse the Paginated response
-    message("Parsing data")
-    txt <- cc$parse("UTF-8")
-
-    sf_responses <- lapply(txt, bcdc_read_sf)
-
-    bound_sf_responses <- do.call(rbind, sf_responses)
-
-    attr(bound_sf_responses, 'sql_string') <- query_list$CQL_FILTER
-
-    return(bound_sf_responses)
 
   }
+
+  attr(sf_responses, 'sql_string') <- query_list$CQL_FILTER
+  as.bcdc_promise(sf_responses)
+
 }
 
 # bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
