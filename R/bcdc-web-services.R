@@ -39,6 +39,12 @@
 #' bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
 #' bcdc_get_geodata("bc-airports", CQL("LATITUDE > 50"))
 #'
+#' ## A moderately large layer
+#' \dontrun{
+#' bcdc_get_geodata("bc-environmental-monitoring-locations")
+#' bcdc_get_geodata("bc-environmental-monitoring-locations", PERMIT_RELATIONSHIP == "DISCHARGE")
+#' }
+#'
 #' ## A very large layer
 #' \dontrun{
 #' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
@@ -78,9 +84,9 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
   if (number_of_records < 10000) {
-    r <- cli$get(query = query_list)
-    r$raise_for_status()
-    txt <- r$parse("UTF-8")
+    cc <- cli$get(query = query_list)
+    cc$raise_for_status()
+    txt <- cc$parse("UTF-8")
 
     return(bcdc_read_sf(txt))
   }
@@ -118,7 +124,12 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
 
     sf_responses <- lapply(txt, bcdc_read_sf)
 
-    return(do.call(rbind, sf_responses))
+    bound_sf_responses <- do.call(rbind, sf_responses)
+
+    attr(bound_sf_responses, 'sql_string') <- query_list$CQL_FILTER
+
+    return(bound_sf_responses)
+
   }
 }
 
