@@ -45,48 +45,48 @@
 #' }
 #'
 bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
-
-  obj = bcdc_get_record(x)
+  obj <- bcdc_get_record(x)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
     stop("No wms/wfs resource available for this dataset.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 
-  query = cql_translate(...)
+  query <- cql_translate(...)
 
   ## Parameters for the API call
-  query_list = list(
+  query_list <- list(
     SERVICE = "WFS",
     VERSION = "2.0.0",
     REQUEST = "GetFeature",
     outputFormat = "application/json",
     typeNames = obj$layer_name,
-    SRSNAME=paste0("EPSG:",crs),
+    SRSNAME = paste0("EPSG:", crs),
     CQL_FILTER = query
   )
 
   ## Drop any NULLS from the list
-  query_list = compact(query_list)
+  query_list <- compact(query_list)
 
   ## GET and parse data to sf object
-  cli = bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+  cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
+  ## Change CQL query on the fly if geom is SHAPE
+  query_list <- check_geom_col_names(query_list, cli)
 
-
+  ## Determine total number of records for pagination purposes
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
-  if(number_of_records < 10000){
-
-    r = cli$get(query = query_list)
+  if (number_of_records < 10000) {
+    r <- cli$get(query = query_list)
     r$raise_for_status()
-    txt = r$parse("UTF-8")
+    txt <- r$parse("UTF-8")
 
     return(bcdc_read_sf(txt))
-
   }
 
-  if(number_of_records >= 10000) {
-    message("This record request pagination to complete the request.")
+  if (number_of_records >= 10000) {
+    message("This record requires pagination to complete the request.")
     sorting_col <- obj[["details"]][["column_name"]][1]
 
     query_list <- c(query_list, sortby = sorting_col)
@@ -100,27 +100,26 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
                               limit_chunk = 3000,
                               progress = TRUE)
 
+
     message("Retrieving data")
     cc$get(query = query_list)
 
 
-    if(any(cc$status_code() >= 300)){
+    if (any(cc$status_code() >= 300)) {
       ## TODO: This error message could be more informative
       stop("The BC data catalogue experienced issues with this request",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
 
     ## Parse the Paginated response
     message("Parsing data")
-    txt = cc$parse("UTF-8")
+    txt <- cc$parse("UTF-8")
 
     sf_responses <- lapply(txt, bcdc_read_sf)
 
     return(do.call(rbind, sf_responses))
-
-
   }
-
 }
 
 # bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)

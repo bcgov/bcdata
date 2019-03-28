@@ -8,8 +8,10 @@ bcdc_browse(query = NULL, browser = getOption("browser"),
   encodeIfNeeded = FALSE)
 }
 \arguments{
-\item{query}{A string to search in the bcdata catalogue. Default (NULL) opens
-a browser to \code{https://catalogue.data.gov.bc.ca}.}
+\item{query}{Default (NULL) opens a browser to \code{https://catalogue.data.gov.bc.ca}.
+This argument will also accept a B.C. Data Catalogue record id or name to take you
+directly to that page. If the provide id or name doesn't lead to a valid webpage,
+bcdc_browse will search the data catalogue for that string.}
 
 \item{browser}{a non-empty character string giving the name of the
     program to be used as the HTML browser.  It should be in the PATH,
@@ -37,8 +39,15 @@ the default
 }
 \examples{
 \dontrun{
+## Just take me to the B.C. data
 bcdc_browse()
+
+## Take me to the B.C. airports
+bcdc_browse("bc-airports")
+
+## Take me to the catalogue search results for 'fish'
 bcdc_browse("fish")
+
 }
 }
 \seealso{
