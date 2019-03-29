@@ -2,6 +2,7 @@
 
 S3method(bcdc_get_data,bcdc_record)
 S3method(bcdc_get_data,character)
+S3method(print,bcdc_promise)
 S3method(print,bcdc_record)
 S3method(print,bcdc_recordlist)
 S3method(sql_escape_ident,DummyCQL)

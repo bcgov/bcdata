@@ -83,46 +83,48 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
   ## Determine total number of records for pagination purposes
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
-  if (number_of_records < 10000) {
-    cc <- cli$get(query = query_list)
-    cc$raise_for_status()
-  }
+  # if (number_of_records < 10000) {
+  #   cc <- cli$get(query = query_list)
+  #   cc$raise_for_status()
+  # }
+  #
+  # if (number_of_records >= 10000) {
+  #   message("This record requires pagination to complete the request.")
+  #   sorting_col <- obj[["details"]][["column_name"]][1]
+  #
+  #   query_list <- c(query_list, sortby = sorting_col)
+  #
+  #   # Create pagination client
+  #   cc <- crul::Paginator$new(
+  #     client = cli,
+  #     by = "query_params",
+  #     limit_param = "count",
+  #     offset_param = "startIndex",
+  #     limit = number_of_records,
+  #     limit_chunk = 5000,
+  #     progress = TRUE
+  #   )
+  #
+  #
+  #   message("Retrieving data")
+  #   cc$get(query = query_list)
+  #
+  #   if (any(cc$status_code() >= 300)) {
+  #     ## TODO: This error message could be more informative
+  #     stop("The BC data catalogue experienced issues with this request",
+  #       call. = FALSE
+  #     )
+  #   }
+  # }
+  #
+  # txt <- cc$parse("UTF-8")
+  #
+  # sf_responses <- bcdc_read_sf(txt)
+#
+#   attr(sf_responses, "sql_string") <- query_list$CQL_FILTER
+#   as.bcdc_promise(sf_responses)
 
-  if (number_of_records >= 10000) {
-    message("This record requires pagination to complete the request.")
-    sorting_col <- obj[["details"]][["column_name"]][1]
-
-    query_list <- c(query_list, sortby = sorting_col)
-
-    # Create pagination client
-    cc <- crul::Paginator$new(
-      client = cli,
-      by = "query_params",
-      limit_param = "count",
-      offset_param = "startIndex",
-      limit = number_of_records,
-      limit_chunk = 5000,
-      progress = TRUE
-    )
-
-
-    message("Retrieving data")
-    cc$get(query = query_list)
-
-    if (any(cc$status_code() >= 300)) {
-      ## TODO: This error message could be more informative
-      stop("The BC data catalogue experienced issues with this request",
-        call. = FALSE
-      )
-    }
-  }
-
-  txt <- cc$parse("UTF-8")
-
-  sf_responses <- bcdc_read_sf(txt)
-
-  attr(sf_responses, "sql_string") <- query_list$CQL_FILTER
-  as.bcdc_promise(sf_responses)
+  as.bcdc_promise(list(query_list = query_list, number_of_records))
 }
 
 # bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)

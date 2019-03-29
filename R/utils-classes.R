@@ -16,5 +16,19 @@ as.bcdc_promise <- function(x) {
   x
 }
 
+#' @export
+print.bcdc_promise <- function(x) {
 
+  query_list <- c(x$query_list, COUNT = 10)
+  cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
+  ## Change CQL query on the fly if geom is SHAPE
+  query_list <- check_geom_col_names(query_list, cli)
+
+  cc <- cli$get(query = query_list)
+  cc$raise_for_status()
+
+  txt <- cc$parse("UTF-8")
+
+  print(bcdc_read_sf(txt))
+}

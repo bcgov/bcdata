@@ -55,7 +55,9 @@ check_geom_col_names <- function(query_list, cli){
 bcdc_read_sf <- function(x, ...){
 
   if(length(x) == 1){
-    sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)
+
+    return(sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...))
+
   } else{
     ## Parse the Paginated response
     message("Parsing data")
