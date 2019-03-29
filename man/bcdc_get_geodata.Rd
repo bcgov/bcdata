@@ -36,6 +36,12 @@ bcdc_get_geodata("bc-airports", PHYSICAL_ADDRESS == 'Victoria, BC', crs = 3857)
 bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
 bcdc_get_geodata("bc-airports", CQL("LATITUDE > 50"))
 
+## A moderately large layer
+\dontrun{
+bcdc_get_geodata("bc-environmental-monitoring-locations")
+bcdc_get_geodata("bc-environmental-monitoring-locations", PERMIT_RELATIONSHIP == "DISCHARGE")
+}
+
 ## A very large layer
 \dontrun{
 bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
