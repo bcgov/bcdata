@@ -86,9 +86,6 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
   if (number_of_records < 10000) {
     cc <- cli$get(query = query_list)
     cc$raise_for_status()
-    txt <- cc$parse("UTF-8")
-
-    sf_responses <- bcdc_read_sf(txt)
   }
 
   if (number_of_records >= 10000) {
@@ -98,13 +95,15 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
     query_list <- c(query_list, sortby = sorting_col)
 
     # Create pagination client
-    cc <- crul::Paginator$new(client = cli,
-                              by = "query_params",
-                              limit_param = "count",
-                              offset_param = "startIndex",
-                              limit = number_of_records,
-                              limit_chunk = 3000,
-                              progress = TRUE)
+    cc <- crul::Paginator$new(
+      client = cli,
+      by = "query_params",
+      limit_param = "count",
+      offset_param = "startIndex",
+      limit = number_of_records,
+      limit_chunk = 5000,
+      progress = TRUE
+    )
 
 
     message("Retrieving data")
@@ -115,22 +114,15 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
       stop("The BC data catalogue experienced issues with this request",
         call. = FALSE
       )
-
-      ## Parse the Paginated response
-      message("Parsing data")
-      txt <- cc$parse("UTF-8")
-
-      sf_responses <- lapply(txt, bcdc_read_sf)
-
-      sf_responses <- do.call(rbind, sf_responses)
     }
-
-
   }
 
-  attr(sf_responses, 'sql_string') <- query_list$CQL_FILTER
-  as.bcdc_promise(sf_responses)
+  txt <- cc$parse("UTF-8")
 
+  sf_responses <- bcdc_read_sf(txt)
+
+  attr(sf_responses, "sql_string") <- query_list$CQL_FILTER
+  as.bcdc_promise(sf_responses)
 }
 
 # bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)

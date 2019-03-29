@@ -53,7 +53,19 @@ check_geom_col_names <- function(query_list, cli){
 }
 
 bcdc_read_sf <- function(x, ...){
-  sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)
+
+  if(length(x) == 1){
+    sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)
+  } else{
+    ## Parse the Paginated response
+    message("Parsing data")
+    sf_responses <- lapply(x, function(x) {sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)})
+
+    do.call(rbind, sf_responses)
+  }
+
+
+
 }
 
 slug_from_url <- function(x) {

@@ -15,3 +15,6 @@ as.bcdc_promise <- function(x) {
   class(x) <- c("bcdc_promise", setdiff(class(x), "bcdc_promise"))
   x
 }
+
+
+
