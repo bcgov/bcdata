@@ -34,8 +34,10 @@
 #' @seealso sql_geom_predicates
 #'
 #' @examples
-#' airports <- bcdc_get_geodata("bc-airports")
+#' \dontrun{
+#' airports <- bcdc_get_geodata("bc-airports") %>% collect()
 #' bcdc_cql_string(airports, "DWITHIN")
+#' }
 #'
 #' @export
 bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,

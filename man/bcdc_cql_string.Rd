@@ -42,8 +42,10 @@ There are wrapper functions for
 more convenient than calling this function directly.
 }
 \examples{
-airports <- bcdc_get_geodata("bc-airports")
+\dontrun{
+airports <- bcdc_get_geodata("bc-airports") \%>\% collect()
 bcdc_cql_string(airports, "DWITHIN")
+}
 
 }
 \seealso{
