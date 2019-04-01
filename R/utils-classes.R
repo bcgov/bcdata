@@ -18,7 +18,7 @@ as.bcdc_promise <- function(res) {
 }
 
 #' @export
-print.bcdc_promise <- function(x) {
+print.bcdc_promise <- function(x, ...) {
 
   query_list <- c(x$query_list, COUNT = 10)
   cli <- x$cli
@@ -33,12 +33,18 @@ print.bcdc_promise <- function(x) {
 
 
 #' Force collection of WFS request from BC Data Catalogue
-#' @importFrom dplyr collect
+#'
+#' Retrieve an sf object from data catalogue.
+#'
+#' @param x object of class bcdc_promise
+#' @inheritParams collect
+#' @describeIn collect collect.bcdc_promise
 #' @export
-collect.bcdc_promise <- function(.data){
+#'
+collect.bcdc_promise <- function(x, ...){
 
-  query_list <- .data$query_list
-  cli <- .data$cli
+  query_list <- x$query_list
+  cli <- x$cli
 
   ## Determine total number of records for pagination purposes
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
@@ -48,7 +54,7 @@ collect.bcdc_promise <- function(.data){
     status_failed <- cc$status_code >= 300
   } else {
     message("This record requires pagination to complete the request.")
-    sorting_col <- .data$obj[["details"]][["column_name"]][1]
+    sorting_col <- x$obj[["details"]][["column_name"]][1]
 
     query_list <- c(query_list, sortby = sorting_col)
 
