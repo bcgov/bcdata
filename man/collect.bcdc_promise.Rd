@@ -2,10 +2,10 @@
 % Please edit documentation in R/utils-classes.R
 \name{collect.bcdc_promise}
 \alias{collect.bcdc_promise}
-\title{Force the collection of a WFS query}
+\title{Force collection of WFS request from BC Data Catalogue}
 \usage{
-collect.bcdc_promise(.data)
+\method{collect}{bcdc_promise}(.data)
 }
 \description{
-Force the collection of a WFS query
+Force collection of WFS request from BC Data Catalogue
 }
