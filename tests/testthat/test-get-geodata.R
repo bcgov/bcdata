@@ -41,7 +41,7 @@ test_that("bcdc_get_geodata works with slug and full url", {
 test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom",{
   ## View metadata to see that geom is SHAPE
   ##bcdc_browse("fire-perimeters-historical")
-
+  skip_if_net_down()
   crd <- bcdc_get_geodata("regional-districts-legally-defined-administrative-areas-of-bc",
                           ADMIN_AREA_NAME == "Cariboo Regional District")
 
@@ -53,6 +53,7 @@ test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom
 })
 
 test_that("bcdc_get_geodata returns an object with bcdc_promise class on record under 10000",{
+  skip_if_net_down()
   airports <- bcdc_get_geodata("bc-airports")
   expect_is(airports, "bcdc_promise")
 })
