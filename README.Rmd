@@ -35,6 +35,22 @@ library(bcdata)
 
 An R package 📦 for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
 
+### Installation
+You can install `bcdata` directly from this GitHub repository. To do so, you will need the [remotes](https://cran.r-project.org/package=remotes) package:
+
+```{r, eval=FALSE}
+install.packages("remotes")
+```
+
+Next, install and load the `bcdata` package using `remotes::install_github()`:
+
+```{r, eval=FALSE}
+remotes::install_github("bcgov/bcdata")
+library(bcdata)
+```
+
+
+
 ### Functions
 
 - `bcdc_browse()` - Open the catalogue in your default browser
@@ -119,24 +135,19 @@ Resources: ( 4 )
     access_url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW_loader.kml 
 
 ```
+To have a quick look at data, you can simply print the object:
 ```{r}
-bcdc_get_geodata("bc-airports", crs = 3857)
+airports <- bcdc_get_geodata("bc-airports", crs = 3857)
+airports
 ```
-
-
-### Installation
-You can install `bcdata` directly from this GitHub repository. To do so, you will need the [remotes](https://cran.r-project.org/package=remotes) package:
-
-```{r, eval=FALSE}
-install.packages("remotes")
+If you need all the data, you need to retrieve the data using the `collect` function:
+```{r}
+airports %>% 
+  collect()
 ```
+This has the advantage of fine tuning your query without issuing a large request to the data catalogue. When you are finally ready to bring all the data you want into memory then you can use the `collect` function. This approach mimics that developed for `dbplyr`. You can read more about that [here](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html) 
 
-Next, install and load the `bcdata` package using `remotes::install_github()`:
 
-```{r, eval=FALSE}
-remotes::install_github("bcgov/bcdata")
-library(bcdata)
-```
 
 
 ### Project Status
