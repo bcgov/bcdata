@@ -28,27 +28,25 @@ bcdc_number_wfs_records <- function(query_list, client){
 
 }
 
-check_geom_col_names <- function(query_list, cli){
-  original_query <- query_list
+check_geom_col_names <- function(record, query_list){
 
-  ## Change REQUEST so that it returns only col names
-  query_list$REQUEST = "DescribeFeatureType"
+  cols_df <- record$details
 
-  r = cli$get(query = query_list)
-  txt = r$parse("UTF-8")
-
-  # Converty from JSON and extract the data.frame of the feature properties
-  cols <- jsonlite::fromJSON(txt, simplifyVector = TRUE)
-  cols_df <- cols$featureTypes$properties[[1]]
-  # Find the gml geometry field and get the name of the field
-  geom_col <- cols_df[grepl("^gml:(multi)?(point|linestring|polygon|geometry)$",
-                            tolower(cols_df$type)), "name"]
-
-  if (geom_col != "GEOMETRY" && !is.null(original_query$CQL_FILTER)) {
-    original_query$CQL_FILTER = gsub("GEOMETRY", geom_col, original_query$CQL_FILTER)
+  # Catch when no details df:
+  if (!any(dim(cols_df))) {
+    warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
+            call. = FALSE)
+    return(query_list)
   }
 
-  return(original_query)
+  # Find the geometry field and get the name of the field
+  geom_col <- cols_df[cols_df$data_type == "SDO_GEOMETRY", "column_name"]
+
+  if (geom_col != "GEOMETRY" && !is.null(query_list$CQL_FILTER)) {
+    query_list$CQL_FILTER = gsub("GEOMETRY", geom_col, query_list$CQL_FILTER)
+  }
+
+  query_list
 
 }
 
