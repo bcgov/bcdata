@@ -11,35 +11,34 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 ## Add "bcdc_promise" class
-as.bcdc_promise <- function(x, cli) {
-  structure(x,
-            cli = cli,
-            class = c("bcdc_promise", setdiff(class(x), "bcdc_promise"))
+as.bcdc_promise <- function(res) {
+  structure(res,
+            class = c("bcdc_promise", setdiff(class(res), "bcdc_promise"))
   )
 }
 
 #' @export
 print.bcdc_promise <- function(x) {
 
-  query_list <- c(x, COUNT = 10)
-  cli <- attributes(x)$cli
-
+  query_list <- c(x$query_list, COUNT = 10)
+  cli <- x$cli
   cc <- cli$get(query = query_list)
   cc$raise_for_status()
 
   txt <- cc$parse("UTF-8")
-
   print(bcdc_read_sf(txt))
 }
 
 
-#' Force the collection of a WFS query
-#'
+
+
+#' Force collection of WFS request from BC Data Catalogue
+#' @importFrom dplyr collect
 #' @export
 collect.bcdc_promise <- function(.data){
 
-  query_list <- .data
-  cli <- attributes(.data)$cli
+  query_list <- .data$query_list
+  cli <- .data$cli
 
   ## Determine total number of records for pagination purposes
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
@@ -49,7 +48,7 @@ collect.bcdc_promise <- function(.data){
     status_failed <- cc$status_code >= 300
   } else {
     message("This record requires pagination to complete the request.")
-    sorting_col <- obj[["details"]][["column_name"]][1]
+    sorting_col <- .data$obj[["details"]][["column_name"]][1]
 
     query_list <- c(query_list, sortby = sorting_col)
 

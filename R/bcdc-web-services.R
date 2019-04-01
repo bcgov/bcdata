@@ -82,7 +82,7 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
 
 
 
-  as.bcdc_promise(query_list, cli = cli)
+  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = obj))
 
 }
 
