@@ -4,18 +4,11 @@
 \alias{bcdc_get_geodata}
 \title{Get data from the BC Web Feature Service}
 \usage{
-bcdc_get_geodata(x = NULL, ..., crs = 3005)
+bcdc_get_geodata(x = NULL, crs = 3005)
 }
 \arguments{
 \item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).}
-
-\item{...}{Logical predicates with which to filter the results. Multiple
-conditions are combined with \code{&}. Only rows where the condition evalueates to
-\code{TRUE} are kept. Accepts normal R expressions as well as any of the special
-\link[=cql_geom_predicates]{CQL geometry functions} such as \code{WITHIN()} or \code{INTERSECTS()}.
-If you know \code{CQL} and want to write a \code{CQL} query directly, write it enclosed
-in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("ID = '42'")}}
 
 \item{crs}{the epsg code for the coordinate reference system. Defaults to \code{3005}
 (B.C. Albers). See https://epsgi.io.}

@@ -19,12 +19,6 @@
 #' that the request will take quite a while.
 #'
 #' @inheritParams bcdc_get_data
-#' @param ... Logical predicates with which to filter the results. Multiple
-#' conditions are combined with `&`. Only rows where the condition evalueates to
-#' `TRUE` are kept. Accepts normal R expressions as well as any of the special
-#' [CQL geometry functions][cql_geom_predicates] such as `WITHIN()` or `INTERSECTS()`.
-#' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
-#' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
 #'        (B.C. Albers). See https://epsgi.io.
 #'
@@ -50,15 +44,13 @@
 #' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 #' }
 #'
-bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
+bcdc_get_geodata <- function(x = NULL, crs = 3005) {
   obj <- bcdc_get_record(x)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
     stop("No wms/wfs resource available for this dataset.",
       call. = FALSE
     )
   }
-
-  query <- cql_translate(...)
 
   ## Parameters for the API call
   query_list <- list(
@@ -67,8 +59,7 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
     REQUEST = "GetFeature",
     outputFormat = "application/json",
     typeNames = obj$layer_name,
-    SRSNAME = paste0("EPSG:", crs),
-    CQL_FILTER = query
+    SRSNAME = paste0("EPSG:", crs)
   )
 
   ## Drop any NULLS from the list
