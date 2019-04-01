@@ -11,9 +11,11 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 ## Add "bcdc_promise" class
-as.bcdc_promise <- function(x) {
-  class(x) <- c("bcdc_promise", setdiff(class(x), "bcdc_promise"))
-  x
+as.bcdc_promise <- function(x, sql_string) {
+  structure(x,
+            sql_string = sql_string,
+            class = c("bcdc_promise", setdiff(class(x), "bcdc_promise"))
+  )
 }
 
 #' @export

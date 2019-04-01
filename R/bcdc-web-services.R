@@ -85,10 +85,8 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
 
   # if (number_of_records < 10000) {
   #   cc <- cli$get(query = query_list)
-  #   cc$raise_for_status()
-  # }
-  #
-  # if (number_of_records >= 10000) {
+  #   status_failed <- cc$status_code >= 300
+  # } else {
   #   message("This record requires pagination to complete the request.")
   #   sorting_col <- obj[["details"]][["column_name"]][1]
   #
@@ -109,22 +107,22 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
   #   message("Retrieving data")
   #   cc$get(query = query_list)
   #
-  #   if (any(cc$status_code() >= 300)) {
-  #     ## TODO: This error message could be more informative
-  #     stop("The BC data catalogue experienced issues with this request",
-  #       call. = FALSE
-  #     )
-  #   }
+  #   status_failed <- any(cc$status_code() >= 300)
+  # }
+  #
+  # if (status_failed) {
+  #   ## TODO: This error message could be more informative
+  #   stop("The BC data catalogue experienced issues with this request",
+  #        call. = FALSE
+  #   )
   # }
   #
   # txt <- cc$parse("UTF-8")
   #
   # sf_responses <- bcdc_read_sf(txt)
-#
-#   attr(sf_responses, "sql_string") <- query_list$CQL_FILTER
-#   as.bcdc_promise(sf_responses)
 
-  as.bcdc_promise(list(query_list = query_list, number_of_records))
+  as.bcdc_promise(sf_responses, sql_string = query_list$CQL_FILTER)
+
 }
 
 # bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
