@@ -77,51 +77,12 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  ## Change CQL query on the fly if geom is SHAPE
+  ## Change CQL query on the fly if geom is not GEOMETRY
   query_list <- check_geom_col_names(query_list, cli)
 
-  ## Determine total number of records for pagination purposes
-  number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
-  # if (number_of_records < 10000) {
-  #   cc <- cli$get(query = query_list)
-  #   status_failed <- cc$status_code >= 300
-  # } else {
-  #   message("This record requires pagination to complete the request.")
-  #   sorting_col <- obj[["details"]][["column_name"]][1]
-  #
-  #   query_list <- c(query_list, sortby = sorting_col)
-  #
-  #   # Create pagination client
-  #   cc <- crul::Paginator$new(
-  #     client = cli,
-  #     by = "query_params",
-  #     limit_param = "count",
-  #     offset_param = "startIndex",
-  #     limit = number_of_records,
-  #     limit_chunk = 5000,
-  #     progress = TRUE
-  #   )
-  #
-  #
-  #   message("Retrieving data")
-  #   cc$get(query = query_list)
-  #
-  #   status_failed <- any(cc$status_code() >= 300)
-  # }
-  #
-  # if (status_failed) {
-  #   ## TODO: This error message could be more informative
-  #   stop("The BC data catalogue experienced issues with this request",
-  #        call. = FALSE
-  #   )
-  # }
-  #
-  # txt <- cc$parse("UTF-8")
-  #
-  # sf_responses <- bcdc_read_sf(txt)
 
-  as.bcdc_promise(sf_responses, sql_string = query_list$CQL_FILTER)
+  as.bcdc_promise(query_list, cli = cli)
 
 }
 

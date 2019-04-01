@@ -11,9 +11,9 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 ## Add "bcdc_promise" class
-as.bcdc_promise <- function(x, sql_string) {
+as.bcdc_promise <- function(x, cli) {
   structure(x,
-            sql_string = sql_string,
+            cli = cli,
             class = c("bcdc_promise", setdiff(class(x), "bcdc_promise"))
   )
 }
@@ -21,11 +21,8 @@ as.bcdc_promise <- function(x, sql_string) {
 #' @export
 print.bcdc_promise <- function(x) {
 
-  query_list <- c(x$query_list, COUNT = 10)
-  cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
-
-  ## Change CQL query on the fly if geom is SHAPE
-  query_list <- check_geom_col_names(query_list, cli)
+  query_list <- c(x, COUNT = 10)
+  cli <- attributes(x)$cli
 
   cc <- cli$get(query = query_list)
   cc$raise_for_status()
@@ -33,4 +30,55 @@ print.bcdc_promise <- function(x) {
   txt <- cc$parse("UTF-8")
 
   print(bcdc_read_sf(txt))
+}
+
+
+#' Force the collection of a WFS query
+#'
+#' @export
+collect.bcdc_promise <- function(.data){
+
+  query_list <- .data
+  cli <- attributes(.data)$cli
+
+  ## Determine total number of records for pagination purposes
+  number_of_records <- bcdc_number_wfs_records(query_list, cli)
+
+  if (number_of_records < 10000) {
+    cc <- cli$get(query = query_list)
+    status_failed <- cc$status_code >= 300
+  } else {
+    message("This record requires pagination to complete the request.")
+    sorting_col <- obj[["details"]][["column_name"]][1]
+
+    query_list <- c(query_list, sortby = sorting_col)
+
+    # Create pagination client
+    cc <- crul::Paginator$new(
+      client = cli,
+      by = "query_params",
+      limit_param = "count",
+      offset_param = "startIndex",
+      limit = number_of_records,
+      limit_chunk = 5000,
+      progress = TRUE
+    )
+
+
+    message("Retrieving data")
+    cc$get(query = query_list)
+
+    status_failed <- any(cc$status_code() >= 300)
+  }
+
+  if (status_failed) {
+    ## TODO: This error message could be more informative
+    stop("The BC data catalogue experienced issues with this request",
+         call. = FALSE
+    )
+  }
+
+  txt <- cc$parse("UTF-8")
+
+  bcdc_read_sf(txt)
 }
