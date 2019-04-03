@@ -52,6 +52,7 @@ test_that("bcdc_get_geodata returns an object with bcdc_promise class on record 
 })
 
 test_that("bcdc_get_geodata returns an object with bcdc_promise class on record over 10000",{
-  bc_eml <- bcdc_get_geodata("bc-environmental-monitoring-locations", PERMIT_RELATIONSHIP == "DISCHARGE")
+  bc_eml <- bcdc_get_geodata("bc-environmental-monitoring-locations") %>%
+    filter(PERMIT_RELATIONSHIP == "DISCHARGE")
   expect_is(bc_eml, "bcdc_promise")
 })
