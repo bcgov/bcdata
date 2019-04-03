@@ -24,19 +24,21 @@ that the request will take quite a while.
 }
 \examples{
 
+\dontrun{
 bcdc_get_geodata("bc-airports", crs = 3857)
-bcdc_get_geodata("bc-airports", PHYSICAL_ADDRESS == 'Victoria, BC', crs = 3857)
-bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
-bcdc_get_geodata("bc-airports", CQL("LATITUDE > 50"))
+bcdc_get_geodata("bc-airports", crs = 3857) \%>\%
+  filter(PHYSICAL_ADDRESS == 'Victoria, BC') \%>\%
+  collect()
+bcdc_get_geodata("ground-water-wells") \%>\%
+  filter(OBSERVATION_WELL_NUMBER == 108)
 
 ## A moderately large layer
-\dontrun{
 bcdc_get_geodata("bc-environmental-monitoring-locations")
-bcdc_get_geodata("bc-environmental-monitoring-locations", PERMIT_RELATIONSHIP == "DISCHARGE")
-}
+bcdc_get_geodata("bc-environmental-monitoring-locations") \%>\%
+  filter(PERMIT_RELATIONSHIP == "DISCHARGE")
+
 
 ## A very large layer
-\dontrun{
 bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 }
 
