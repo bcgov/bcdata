@@ -103,3 +103,22 @@ collect.bcdc_promise <- function(x, ...){
 
   bcdc_read_sf(txt)
 }
+
+
+#' Show SQL used for WFS request from BC Data Catalogue
+#'
+#' Display WFS query SQL
+#'
+#' @param x object of class bcdc_promise
+#' @inheritParams show_query
+#' @describeIn show_query show_query.bcdc_promise
+#' @export
+#'
+#' @examples
+#' bcdc_get_geodata("bc-environmental-monitoring-locations") %>%
+#'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
+#'   show_query()
+show_query.bcdc_promise <- function(x, ...){
+  cat(paste0("<SQL> ", x$query_list$CQL_FILTER))
+}
+
