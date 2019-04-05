@@ -19,3 +19,12 @@ in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("I
 \description{
 filter methods
 }
+\examples{
+  crd <- bcdc_get_geodata("regional-districts-legally-defined-administrative-areas-of-bc") \%>\%
+    filter(ADMIN_AREA_NAME == "Cariboo Regional District") \%>\%
+    collect()
+
+ret1 <- bcdc_get_geodata("fire-perimeters-historical") \%>\%
+  filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
+  collect()
+}

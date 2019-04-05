@@ -39,12 +39,59 @@ print.bcdc_promise <- function(x, ...) {
 #' [CQL geometry functions][cql_geom_predicates] such as `WITHIN()` or `INTERSECTS()`.
 #' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
 #' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
+#'
+#' @examples
+#'   crd <- bcdc_get_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+#'     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
+#'     collect()
+#'
+#' ret1 <- bcdc_get_geodata("fire-perimeters-historical") %>%
+#'   filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
+#'   collect()
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
 
   .data$query_list$CQL_FILTER <- cql_translate(...)
 
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
+}
+
+#' select columns from wfs call
+#'
+#' Similar to a `dplyr::select` call, this allows you to select which columns you want the wfs to return.
+#' A key difference between `dplyr::select` and `bcdata::select` is the presence of "sticky" columns that are
+#' returned regardless of what columns are selected. If any of these "sticky" columns are selected
+#' only "sticky" columns are returns. `bcdc_describe_feature` is one way to tell if columns are stick in advance
+#' of issuing the wfs call.
+#'
+#' @param .data passed from bcdc_get_geodata
+#' @param ... One or more unquoted expressions separated by commas. See details.
+#'
+#' @examples
+#' \dontrun{
+#' feature_spec <- bcdc_describe_feature("bc-airports")
+#' ## Columns that can selected:
+#' feature_spec[feature_spec$nillable == TRUE,]
+#'
+#' ## Select columns
+#' bcdc_get_geodata("bc-airports") %>%
+#'   select(DESCRIPTION, PHYSICAL_ADDRESS)
+#'
+#' ## Select "sticky" columns
+#' bcdc_get_geodata("bc-airports") %>%
+#'   select(LOCALITY)
+#' }
+#'
+select.bcdc_promise <- function(.data, ...){
+  dots <- rlang::exprs(...)
+
+  ## Always add back in the geom
+  cols_to_select <- paste(geom_col_name(.data$obj), paste0(dots, collapse = ","), sep = ",")
+
+  query_list <- c(.data$query_list, propertyName = cols_to_select)
+
+  as.bcdc_promise(list(query_list = query_list, cli = .data$cli, obj = .data$obj))
+
 }
 
 
@@ -126,7 +173,5 @@ show_query.bcdc_promise <- function(x, ...){
 }
 
 
-# select.bcdc_promise <- function(.data, ...){
-#
-# }
+
 
