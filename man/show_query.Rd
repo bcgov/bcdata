@@ -20,4 +20,9 @@ See \code{dplyr::\link[dplyr]{show_query}} for details.
 \item \code{bcdc_promise}: show_query.bcdc_promise
 }}
 
+\examples{
+bcdc_get_geodata("bc-environmental-monitoring-locations") \%>\%
+  filter(PERMIT_RELATIONSHIP == "DISCHARGE") \%>\%
+  show_query()
+}
 \keyword{internal}
