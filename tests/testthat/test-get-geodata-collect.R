@@ -39,10 +39,10 @@ test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom
     collect()
 
   ## Not working with filter methods
-  # ret1 <- bcdc_get_geodata("fire-perimeters-historical") %>%
-  #   filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
-  #   collect()
-  # expect_is(ret1, "sf")
+  ret1 <- bcdc_get_geodata("fire-perimeters-historical") %>%
+    filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
+    collect()
+  expect_is(ret1, "sf")
 })
 
 

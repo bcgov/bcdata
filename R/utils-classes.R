@@ -101,7 +101,10 @@ collect.bcdc_promise <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  bcdc_read_sf(txt)
+  sf_ret <- bcdc_read_sf(txt)
+  attr(sf_ret, "geom_col") <- geom_col_name(x$obj)
+
+  sf_ret
 }
 
 
@@ -112,8 +115,8 @@ collect.bcdc_promise <- function(x, ...){
 #' @param x object of class bcdc_promise
 #' @inheritParams show_query
 #' @describeIn show_query show_query.bcdc_promise
-#' @export
 #'
+#' @export
 #' @examples
 #' bcdc_get_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
@@ -121,4 +124,9 @@ collect.bcdc_promise <- function(x, ...){
 show_query.bcdc_promise <- function(x, ...){
   cat(paste0("<SQL> ", x$query_list$CQL_FILTER))
 }
+
+
+# select.bcdc_promise <- function(.data, ...){
+#
+# }
 

@@ -87,3 +87,12 @@ has_internet <- function() {
            silent = TRUE)
   !inherits(z, "try-error")
 }
+
+
+# Need the actual name of the geometry column
+geom_col_name <- function(x){
+  cols_df <- x$details
+
+  # Find the geometry field and get the name of the field
+  cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
+}

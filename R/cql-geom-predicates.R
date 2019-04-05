@@ -44,6 +44,9 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
                             distance = NULL, units = NULL,
                             coords = NULL, crs = NULL){
 
+  geom_col <- attr(x, "geom_col")
+  if(is.null(geom_col)) geom_col <- "GEOMETRY"
+
   match.arg(geometry_predicates, cql_geom_predicate_list())
 
   # Only covert x to bbox if not using BBOX CQL function
@@ -66,7 +69,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
       x
     }
 
-  CQL(paste0(geometry_predicates,"(GEOMETRY, ", cql_args, ")"))
+  CQL(paste0(geometry_predicates,"(", geom_col, ", ", cql_args, ")"))
 }
 
 ## Geometry Predicates
