@@ -151,10 +151,8 @@ collect.bcdc_promise <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  sf_ret <- bcdc_read_sf(txt)
-  attr(sf_ret, "geom_col") <- geom_col_name(x$obj)
+  bcdc_read_sf(txt)
 
-  sf_ret
 }
 
 

@@ -45,7 +45,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
                             coords = NULL, crs = NULL){
 
   if(inherits(x, "bcdc_promise")) {
-    stop("To use spatial operators, you need to use collect() to retrieve the object used to filer",
+    stop("To use spatial operators, you need to use collect() to retrieve the object used to filter",
          call. = FALSE)
   }
 
