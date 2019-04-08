@@ -155,7 +155,7 @@ collect.bcdc_promise <- function(x, ...){
 }
 
 
-#' Show SQL used for WFS request from BC Data Catalogue
+#' Show SQL and URL used for WFS request from BC Data Catalogue
 #'
 #' Display WFS query SQL
 #'
@@ -169,7 +169,22 @@ collect.bcdc_promise <- function(x, ...){
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
 #'   show_query()
 show_query.bcdc_promise <- function(x, ...){
-  cat(paste0("<SQL> ", x$query_list$CQL_FILTER))
+
+  query_list <- x$query_list
+
+  query_list$CQL_FILTER <- NULL
+
+  ## Drop any NULLS from the list
+  query_list <- compact(query_list)
+
+  url_params <- paste0(names(query_list),"=", query_list, collapse = "&\n")
+  url_params <- gsub(":", "%3A", url_params)
+  url_params <- gsub("/", "%2F", url_params)
+
+  url_query <- paste0("<url> \n", x$cli$url,"?\n", url_params, "\n")
+
+  cat(url_query)
+  cat(paste0("<SQL> \n", x$query_list$CQL_FILTER))
 }
 
 

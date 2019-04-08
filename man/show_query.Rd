@@ -3,7 +3,7 @@
 \name{show_query.bcdc_promise}
 \alias{show_query.bcdc_promise}
 \alias{show_query}
-\title{Show SQL used for WFS request from BC Data Catalogue}
+\title{Show SQL and URL used for WFS request from BC Data Catalogue}
 \usage{
 \method{show_query}{bcdc_promise}(x, ...)
 }
