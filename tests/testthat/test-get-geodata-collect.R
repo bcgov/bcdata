@@ -38,7 +38,7 @@ test_that("bcdc_get_geodata works with spatial data that have SHAPE for the geom
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
 
-  ## Not working with filter methods
+
   ret1 <- bcdc_get_geodata("fire-perimeters-historical") %>%
     filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
     collect()

@@ -21,3 +21,25 @@ test_that("bcdc_get_geodata accepts R expressions to refine data call",{
   expect_equal(attr(one_well, "sf_column"), "geometry")
   expect_equal(nrow(one_well), 1)
 })
+
+
+
+test_that("spatial operators work with SHAPE/GEOMETRY combinations",{
+  skip_if_net_down()
+
+  ## LOCAL "SHAPE"
+  crd <- bcdc_get_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
+    collect()
+
+  ## REMOTE "GEOMETRY"
+  em_program <- bcdc_get_geodata("employment-program-of-british-columbia-regional-boundaries") %>%
+    filter(INTERSECTS(crd)) %>%
+    collect()
+  expect_is(em_program, "sf")
+  expect_equal(attr(em_program, "sf_column"), "geometry")
+
+  ## Add each permutation of this
+
+
+})
