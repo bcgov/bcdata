@@ -21,14 +21,13 @@ bcdc_number_wfs_records <- function(query_list, client){
   res_max <- client$get(query = query_list)
   txt_max <- res_max$parse("UTF-8")
 
-
   ## resultType is only returned as XML.
   ## regex to extract the number
   as.numeric(sub(".*numberMatched=\"([0-9]{1,20})\".*", "\\1", txt_max))
 
 }
 
-check_geom_col_names <- function(record, query_list){
+specify_geom_name <- function(record, query_list){
 
   cols_df <- record$details
 
@@ -40,13 +39,14 @@ check_geom_col_names <- function(record, query_list){
   }
 
   # Find the geometry field and get the name of the field
-  geom_col <- cols_df[cols_df$data_type == "SDO_GEOMETRY", "column_name"]
+  geom_col <- cols_df$column_name[cols_df$data_type == "SDO_GEOMETRY"]
 
-  if (geom_col != "GEOMETRY" && !is.null(query_list$CQL_FILTER)) {
-    query_list$CQL_FILTER = gsub("GEOMETRY", geom_col, query_list$CQL_FILTER)
-  }
 
-  query_list
+  glue::glue(query_list$CQL_FILTER, geom_name = geom_col)
+  # if (geom_col != "GEOMETRY" && !is.null(query_list$CQL_FILTER)) {
+  #   query_list$CQL_FILTER = gsub("GEOMETRY", geom_col, query_list$CQL_FILTER)
+  # }
+
 
 }
 

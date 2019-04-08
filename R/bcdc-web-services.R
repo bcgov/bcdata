@@ -71,9 +71,6 @@ bcdc_get_geodata <- function(x = NULL, crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  ## Change CQL query on the fly if geom is not GEOMETRY
-  query_list <- check_geom_col_names(obj, query_list)
-
   as.bcdc_promise(list(query_list = query_list, cli = cli, obj = obj))
 
 }

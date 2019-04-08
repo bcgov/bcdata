@@ -53,6 +53,9 @@ filter.bcdc_promise <- function(.data, ...) {
 
   .data$query_list$CQL_FILTER <- cql_translate(...)
 
+  ## Change CQL query on the fly if geom is not GEOMETRY
+  .data$query_list$CQL_FILTER <- specify_geom_name(.data$obj, .data$query_list)
+
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
 }
 

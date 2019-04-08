@@ -44,6 +44,11 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
                             distance = NULL, units = NULL,
                             coords = NULL, crs = NULL){
 
+  if(inherits(x, "bcdc_promise")) {
+    stop("To use spatial operators, you need to use collect() to retrieve the object used to filer",
+         call. = FALSE)
+  }
+
   geom_col <- attr(x, "geom_col")
   if(is.null(geom_col)) geom_col <- "GEOMETRY"
 
@@ -69,7 +74,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
       x
     }
 
-  CQL(paste0(geometry_predicates,"(", geom_col, ", ", cql_args, ")"))
+  CQL(paste0(geometry_predicates,"({geom_name}, ", cql_args, ")"))
 }
 
 ## Geometry Predicates
