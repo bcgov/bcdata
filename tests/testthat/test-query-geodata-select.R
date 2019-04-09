@@ -3,7 +3,7 @@ context("testing ability of select methods to narrow a wfs query")
 test_that("select doesn't remove the geometry column",{
   skip_if_net_down()
 
-  gw_wells <- bcdc_get_geodata("ground-water-wells") %>%
+  gw_wells <- bcdc_query_geodata("ground-water-wells") %>%
     filter(OBSERVATION_WELL_NUMBER == 108) %>%
     select(SOURCE_ACCURACY) %>%
     collect()
@@ -12,7 +12,7 @@ test_that("select doesn't remove the geometry column",{
 
 test_that("select works when selecting a column that isn't sticky",{
   skip_if_net_down()
-  one_well <- bcdc_get_geodata("ground-water-wells") %>%
+  one_well <- bcdc_query_geodata("ground-water-wells") %>%
     filter(OBSERVATION_WELL_NUMBER == 108) %>%
     select(FCODE) %>%
     collect()
@@ -30,7 +30,7 @@ test_that("select reduces the number of columns when a sticky ",{
     feature_spec[feature_spec$nillable != TRUE,]$col_name,
     "geometry")
 
-  sub_cols <- bcdc_get_geodata("ground-water-wells") %>%
+  sub_cols <- bcdc_query_geodata("ground-water-wells") %>%
     filter(OBSERVATION_WELL_NUMBER == 108) %>%
     select(WELL_ID) %>%
     collect()
