@@ -27,6 +27,8 @@ Imports:
     dplyr (>= 0.7),
     glue,
     jsonlite (>= 1.6),
+    leaflet,
+    leaflet.extras,
     memoise (>= 1.1.0),
     purrr (>= 0.2),
     readr (>= 1.3),

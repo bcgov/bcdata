@@ -79,44 +79,41 @@ bcdc_get_geodata <- function(x = NULL, crs = 3005) {
 
 #' Get map from the BC Web Mapping Service
 #'
-#' Pulls map off the web
 #'
-#' @param feature_name Name of the feature
-#' @param bbox a string of bounding box coordinates
-#'
+#' @inheritParams bcdc_get_data
 #'
 #' @examples
 #' \dontrun{
-#' ## So far only works with this layer
-#' bbox_coords = "1069159.051186301,1050414.7675306,1074045.5446851396,1054614.0978811644"
-#' bcdc_wms("WHSE_FOREST_VEGETATION.VEG_COMP_LYR_R1_POLY", bbox = bbox_coords)
+#' bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
+#' bcdc_preview("points-of-well-diversion-applications")
 #' }
-
-## TODO: Figure out a better method of determining the bounding box
-
-bcdc_wms <- function(feature_name = NULL, bbox = NULL) {
+#' @export
+bcdc_preview <- function(x = NULL) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
-  cli <- crul::HttpClient$new(url = "http://openmaps.gov.bc.ca/geo/pub/wms",
-                              headers = list(`User-Agent` = "https://github.com/bcgov/bcdc"))
+  obj <- bcdc_get_record(x)
 
-  r <- cli$get(query = list(
-    SERVICE = "WMS",
-    VERSION = "1.1.1",
-    REQUEST = "GetMap",
-    FORMAT = "application/openlayers",
-    TRANSPARENT="true",
-    STYLES=1748,
-    LAYERS = feature_name,
-    SRS="EPSG:3005",
-    WIDTH = "512",
-    HEIGHT = "440",
-    BBOX = bbox
-  ))
+  wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
 
-  ##TODO:: Viewer should be able to accept this somehow much mapview
-  # Possible solution: write html to a local temp file then access that
-  utils::browseURL(r$url)
+  wms_options <- leaflet::WMSTileOptions(format = "image/png",
+                          transparent = TRUE,
+                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
+
+  wms_legend <- glue::glue("{wms_url}?request=GetLegendGraphic&
+             format=image%2Fpng&
+             width=20&
+             height=20&
+             layer=pub%3A{obj$layer_name}")
+
+
+  leaflet::leaflet() %>%
+    leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
+                     options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
+    leaflet::addWMSTiles(wms_url,
+                layers=glue::glue("pub:{obj$layer_name}"),
+                options = wms_options) %>%
+    leaflet.extras::addWMSLegend(uri = wms_legend) %>%
+    leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
 
 }
 
