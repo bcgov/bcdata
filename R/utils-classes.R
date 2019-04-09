@@ -41,11 +41,11 @@ print.bcdc_promise <- function(x, ...) {
 #' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #'
 #' @examples
-#'   crd <- bcdc_get_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+#'   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
 #'     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
 #'     collect()
 #'
-#' ret1 <- bcdc_get_geodata("fire-perimeters-historical") %>%
+#' ret1 <- bcdc_query_geodata("fire-perimeters-historical") %>%
 #'   filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
 #'   collect()
 #' @export
@@ -77,11 +77,11 @@ filter.bcdc_promise <- function(.data, ...) {
 #' feature_spec[feature_spec$nillable == TRUE,]
 #'
 #' ## Select columns
-#' bcdc_get_geodata("bc-airports") %>%
+#' bcdc_query_geodata("bc-airports") %>%
 #'   select(DESCRIPTION, PHYSICAL_ADDRESS)
 #'
 #' ## Select "sticky" columns
-#' bcdc_get_geodata("bc-airports") %>%
+#' bcdc_query_geodata("bc-airports") %>%
 #'   select(LOCALITY)
 #' }
 #'
@@ -166,7 +166,7 @@ collect.bcdc_promise <- function(x, ...){
 #'
 #' @export
 #' @examples
-#' bcdc_get_geodata("bc-environmental-monitoring-locations") %>%
+#' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
 #'   show_query()
 show_query.bcdc_promise <- function(x, ...){

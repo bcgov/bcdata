@@ -21,7 +21,7 @@ See \code{dplyr::\link[dplyr]{show_query}} for details.
 }}
 
 \examples{
-bcdc_get_geodata("bc-environmental-monitoring-locations") \%>\%
+bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
   filter(PERMIT_RELATIONSHIP == "DISCHARGE") \%>\%
   show_query()
 }
