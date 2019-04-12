@@ -20,13 +20,28 @@ as.bcdc_promise <- function(res) {
 #' @export
 print.bcdc_promise <- function(x, ...) {
 
-  query_list <- c(x$query_list, COUNT = 10)
-  cli <- x$cli
-  cc <- cli$get(query = query_list)
-  cc$raise_for_status()
+  id <- x[["obj"]][["id"]]
 
-  txt <- cc$parse("UTF-8")
-  print(bcdc_read_sf(txt))
+  feature_spec <- bcdc_describe_feature(id)
+
+  if(!is.null(x[["query_list"]][["propertyName"]])){
+    selectables <- unlist(strsplit(x[["query_list"]][["propertyName"]],","))
+    feature_spec <- feature_spec[feature_spec$selectable == FALSE | feature_spec$col_name %in% selectables,]
+    geom_row <- dplyr::tibble(col_name = "geometry",
+                              selectable = TRUE,
+                              remote_col_type = "gml:GeometryPropertyType",
+                              local_col_type = wfs_to_r_col_type("gml:GeometryPropertyType"))
+    feature_spec <- dplyr::bind_rows(feature_spec, geom_row)
+  }
+
+  number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
+
+  cat(glue::glue("# A BC Data Catalogue Record: {number_of_records} records\n\n"))
+  print(feature_spec, n = Inf)
+
+
+
+
 }
 
 
@@ -85,6 +100,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #'   select(LOCALITY)
 #' }
 #'
+#'@export
 select.bcdc_promise <- function(.data, ...){
   dots <- rlang::exprs(...)
 

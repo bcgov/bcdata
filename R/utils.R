@@ -96,3 +96,15 @@ geom_col_name <- function(x){
   # Find the geometry field and get the name of the field
   cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
 }
+
+wfs_to_r_col_type <- function(col){
+
+  dplyr::case_when(
+    col == "xsd:string" ~ "character",
+    col == "xsd:date" ~ "date",
+    col == "xsd:decimal" ~ "numeric",
+    col == "xsd:hexBinary" ~ "numeric",
+    col == "gml:GeometryPropertyType" ~ "geom",
+    TRUE ~ as.character(col)
+  )
+}

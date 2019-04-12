@@ -52,11 +52,31 @@ bcdc_describe_feature <- function(x = NULL){
   xml_res <-  purrr::map(xml_res, xml2::xml_attrs)
   xml_df <- purrr::map_df(xml_res, ~as.list(.))
 
+  ## This is an ugly way of doing this
+  ## Manually add id and turn into a row
+  id_row <- dplyr::tibble(name = "id",
+                          nillable = FALSE,
+                          type = "xsd:string")
+
+  ## Extracting geometry column and turn into a row
+  geom_row <- xml_df[xml_df$type == "gml:GeometryPropertyType",]
+  ## Because the object will always be imported into R as "geometry" we change the name here
+  geom_row$name <- "geometry"
+
+  ## Remove the geom row
+  xml_df <- xml_df[!xml_df$type == "gml:GeometryPropertyType",]
+
+  ## Add geom col to last position
+  xml_df <- dplyr::bind_rows(xml_df, geom_row)
+
+  ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
 
-  xml_df <- xml_df[order(-xml_df$nillable),c("name", "nillable","type")]
-
-  colnames(xml_df) <- c("col_name", "nillable", "col_type")
+  xml_df <- xml_df[,c("name", "nillable","type")]
+  ## Add the id_row back into the front
+  xml_df <- dplyr::bind_rows(id_row, xml_df)
+  colnames(xml_df) <- c("col_name", "selectable", "remote_col_type")
+  xml_df$local_col_type <- wfs_to_r_col_type(xml_df$remote_col_type)
 
   xml_df
 }
