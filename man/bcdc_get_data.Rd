@@ -4,11 +4,17 @@
 \alias{bcdc_get_data}
 \title{downlaod and read a dataset from a Data Catalogue resource}
 \usage{
-bcdc_get_data(x)
+bcdc_get_data(x, format = NULL, ...)
 }
 \arguments{
 \item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).}
+
+\item{format}{Defaults to NULL which will first check to see if the record is a wms/wfs record.
+If so an sf object is returned. Otherwise a format needs to be specified. \code{bcdc_get_record} can
+be used to identify which formats are available.}
+
+\item{...}{arguments passed to other functions.}
 }
 \value{
 an object of a type relevant to the resource (usually a tibble or an sf object)

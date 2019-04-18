@@ -14,6 +14,10 @@
 #'
 #' @param x either a `bcdc_record` object (from the result of `bcdc_get_record()`)
 #' or a character string denoting the id of a resource (or the url).
+#' @param format Defaults to NULL which will first check to see if the record is a wms/wfs record.
+#' If so an sf object is returned. Otherwise a format needs to be specified. `bcdc_get_record` can
+#' be used to identify which formats are available.
+#' @param ... arguments passed to other functions.
 #'
 #' @return an object of a type relevant to the resource (usually a tibble or an sf object)
 #' @export
@@ -25,7 +29,7 @@
 #'                      "11b1da01-fabc-406c-8b13-91e87f126dec"))
 #' bcdc_get_data("11b1da01-fabc-406c-8b13-91e87f126dec")
 #' }
-bcdc_get_data <- function(x) {
+bcdc_get_data <- function(x, format = NULL, ...) {
   UseMethod("bcdc_get_data")
 }
 
@@ -42,35 +46,47 @@ bcdc_get_data.bcdc_record <- function(x) {
 }
 
 #' @export
-bcdc_get_data.character <- function(x) {
+bcdc_get_data.character <- function(x, format = NULL, ...) {
   x <- slug_from_url(x)
-  cli <- bcdc_http_client(paste0(base_url(),
-                                 "action/resource_show"))
 
-  r <- cli$get(query = list(id = x))
+
+  if(is.null(format)){
+    query <- bcdc_query_geodata(x = x, ...)
+
+    return(collect(query))
+
+  }
+
+  record <- bcdc_get_record(x)
+
+  record_formats <- purrr::map_chr(seq_along(record$resources),
+                                   ~record$resources[[.x]][["format"]])
+
+  url <- record[["resources"]][[which(record_formats == format)]][["url"]]
+
+  cli <- bcdc_http_client(url)
+
+  r <- cli$get()
   r$raise_for_status()
 
-  res <- jsonlite::fromJSON(r$parse("UTF-8"))
-  stopifnot(res$success)
 
-  file_url <- res$result$url
-  ext <- tools::file_ext(file_url)
-
-  if(!all(ext %in% c("csv","kml","txt"))){
+  if(!all(format %in% c("csv","kml","txt"))){
     stop(paste0("The ", ext, " extension is not currently supported by bcdata.
         Try manually importing into R from this link: \n", file_url),
         call. = FALSE)
   }
 
-  tmp <- tempfile(fileext = paste0(".", ext))
+  tmp <- tempfile(fileext = paste0(".", format))
   on.exit(unlink(tmp))
-  utils::download.file(file_url, tmp)
+  utils::download.file(url, tmp, quiet = FALSE)
 
-  read_fun <- switch(ext,
-                     "csv" = readr::read_csv,
-                     "kml" = bcdc_read_sf,
-                     "txt" = readr::read_tsv)
+  read_fun <- function(x, type) {
+    switch(type,
+           "csv" = readr::read_csv(x, ...),
+           "kml" = bcdc_read_sf(x, ...),
+           "txt" = readr::read_tsv(x, ...))
+  }
 
-  read_fun(tmp)
+  read_fun(x = tmp, type = format)
 
 }
