@@ -215,20 +215,16 @@ print.bcdc_record <- function(x, ...) {
   cat("\nType:", x$type, "\n")
   cat("\nDescription:\n")
   cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
-  cat("\nResources: (", length(x$resources), ")\n")
-  for (i in seq_along(x$resources)) {
-    r <- x$resources[[i]]
-    cat("  ", i, ": ", r$name, "\n", sep = "")
-    cat("    description:", r$description, "\n")
-    # if(r$format == "wms"){
-    #   cat("    id:", r$package_id, "\n")
-    # } else {
-    #   cat("    id:", r$id, "\n")
-    # }
-    cat("    format:", r$format, "\n")
-    cat("    access:", r$resource_storage_access_method, "\n")
-    #cat("    access_url:", r$url, "\n")
+
+  ind <- seq_along(x$resources)
+  record_formats <- purrr::map_chr(ind, ~x$resources[[.x]][["format"]])
+
+  if("wms" %in% record_formats){
+    ind <- which(record_formats != "kml")
   }
+
+  cat("\nResources: (", length(ind), ")\n")
+  purrr::walk(ind, record_print_helper, record = x)
 }
 
 #' @export
