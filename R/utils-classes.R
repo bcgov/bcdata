@@ -205,5 +205,57 @@ show_query.bcdc_promise <- function(x, ...){
 }
 
 
+#' @export
+print.bcdc_record <- function(x, ...) {
+  cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
+  cat("\nName:", x$name, "(ID:", x$id, ")")
+  cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
+  cat("\nSector:", x$sector)
+  cat("\nLicence:", x$license_title)
+  cat("\nType:", x$type, "\n")
+  cat("\nDescription:\n")
+  cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
+  cat("\nResources: (", length(x$resources), ")\n")
+  for (i in seq_along(x$resources)) {
+    r <- x$resources[[i]]
+    cat("  ", i, ": ", r$name, "\n", sep = "")
+    cat("    description:", r$description, "\n")
+    # if(r$format == "wms"){
+    #   cat("    id:", r$package_id, "\n")
+    # } else {
+    #   cat("    id:", r$id, "\n")
+    # }
+    cat("    format:", r$format, "\n")
+    cat("    access:", r$resource_storage_access_method, "\n")
+    #cat("    access_url:", r$url, "\n")
+  }
+}
+
+#' @export
+print.bcdc_recordlist <- function(x, ...) {
+  cat("List of B.C. Data Catalogue Records\n")
+  len <- length(x)
+  n_print <- min(10, len)
+  cat("\nNumber of records:", len)
+  if (n_print < len) cat(" (Showing the top 10)")
+  cat("\nTitles:\n")
+  x <- purrr::set_names(x, NULL)
+cat(paste(purrr::imap(x[1:n_print], ~ {
+  paste0(
+    .y, ": ",
+    purrr::pluck(.x, "title"),
+    " (",
+    paste0(
+      unique(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "format")),
+      collapse = ","
+    ),
+    ")",
+    "\n ID: ", purrr::pluck(.x, "id"),
+    "\n NAME: ", purrr::pluck(.x, "name")
+  )
+}), collapse = "\n"), "\n")
+  cat("\nAccess a single record by calling bcdc_get_record(ID)
+with the ID from the desired record.")
+}
 
 
