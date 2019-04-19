@@ -24,9 +24,10 @@ downlaod and read a dataset from a Data Catalogue resource
 }
 \examples{
 \dontrun{
-bcdc_get_data(paste0("https://catalogue.data.gov.bc.ca/dataset/",
-                     "british-columbia-greenhouse-gas-emissions/resource/",
-                     "11b1da01-fabc-406c-8b13-91e87f126dec"))
-bcdc_get_data("11b1da01-fabc-406c-8b13-91e87f126dec")
+bcdc_get_data("bc-airports")
+bcdc_get_data("bc-winery-locations", format = "csv")
+bcdc_get_data("local-government-population-and-household-projections-2018-2027",
+format = "xlsx", sheet = "Population", skip = 1)
+
 }
 }
