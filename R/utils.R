@@ -111,7 +111,7 @@ wfs_to_r_col_type <- function(col){
 
 record_print_helper <- function(.x, record){
   r <- record$resources[[.x]]
-  cat("  ", .x, ": ", r$name, "\n", sep = "")
+  cat("  ", r$name, "\n", sep = "")
   #cat("    description:", r$description, "\n")
   cat("    format:", r$format, "\n")
   cat("    resource:", r$id, "\n")
