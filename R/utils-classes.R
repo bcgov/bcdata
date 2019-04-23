@@ -216,15 +216,14 @@ print.bcdc_record <- function(x, ...) {
   cat("\nDescription:\n")
   cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
-  ind <- seq_along(x$resources)
-  record_formats <- purrr::map_chr(ind, ~x$resources[[.x]][["format"]])
+  record_formats <- purrr::map_chr(x$resources, ~ purrr::pluck(.x, "format"))
 
-  if("wms" %in% record_formats){
-    ind <- which(record_formats != "kml")
+  if ("wms" %in% record_formats) {
+    x$resources[record_formats == "kml"] <- NULL
   }
 
-  cat("\nResources: (", length(ind), ")\n")
-  purrr::walk(ind, record_print_helper, record = x)
+  cat("\nResources: (", length(x$resources), ")\n")
+  purrr::walk(x$resources, record_print_helper)
 }
 
 #' @export
