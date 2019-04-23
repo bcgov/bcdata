@@ -11,12 +11,8 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 
-#' Get data from the BC Web Feature Service
+#' Get data from the BC Web Feature Service (DEPRECATED)
 #'
-#' Pulls features off the web. The data must be available as a wms/wfs service.
-#' See `bcdc_get_record(x)$resources`). If the record is greater than 10000 rows,
-#' the response will be paginated. If you are querying layers of this size, expect
-#' that the request will take quite a while.
 #'
 #' @inheritParams bcdc_get_data
 #' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
@@ -26,29 +22,20 @@
 #'
 #' @export
 #'
-#' @examples
-#'
-#' \dontrun{
-#' bcdc_get_geodata("bc-airports", crs = 3857)
-#' bcdc_get_geodata("bc-environmental-monitoring-locations")
-#'
-#'
-#' ## A very large layer
-#' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
-#' }
-#'
 bcdc_get_geodata <- function(x = NULL, crs = 3005) {
-
-  query <- bcdc_query_geodata(x = x, crs = crs)
-
-  collect(query)
+  message("bcdc_get_geodata is deprecated in favour of bcdc_get_data")
+  message("You can use the same argument to pull spatial data from the BC Data Catalogue:")
+  message(glue::glue("    bcdc_get_data('{x}')"))
 
 }
 
 #' Query data from the BC Web Feature Service
 #'
 #' Queries features from the BC Web Feature Service. The data must be available as
-#' a wms/wfs service. See `bcdc_get_record(x)$resources`).
+#' a wms/wfs service. See `bcdc_get_record(x)$resources`). Pulls features off the web. The data must be available as a wms/wfs service.
+#' See `bcdc_get_record(x)$resources`). If the record is greater than 10000 rows,
+#' the response will be paginated. If you are querying layers of this size, expect
+#' that the request will take quite a while.
 #'
 #' @inheritParams bcdc_get_data
 #' @param crs the epsg code for the coordinate reference system. Defaults to `3005`

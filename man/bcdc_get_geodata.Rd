@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_get_geodata}
 \alias{bcdc_get_geodata}
-\title{Get data from the BC Web Feature Service}
+\title{Get data from the BC Web Feature Service (DEPRECATED)}
 \usage{
 bcdc_get_geodata(x = NULL, crs = 3005)
 }
@@ -17,20 +17,5 @@ or a character string denoting the id of a resource (or the url).}
 an \code{sf} object
 }
 \description{
-Pulls features off the web. The data must be available as a wms/wfs service.
-See \code{bcdc_get_record(x)$resources}). If the record is greater than 10000 rows,
-the response will be paginated. If you are querying layers of this size, expect
-that the request will take quite a while.
-}
-\examples{
-
-\dontrun{
-bcdc_get_geodata("bc-airports", crs = 3857)
-bcdc_get_geodata("bc-environmental-monitoring-locations")
-
-
-## A very large layer
-bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
-}
-
+Get data from the BC Web Feature Service (DEPRECATED)
 }

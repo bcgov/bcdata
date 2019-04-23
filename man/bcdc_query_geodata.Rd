@@ -18,7 +18,10 @@ an \code{sf} object
 }
 \description{
 Queries features from the BC Web Feature Service. The data must be available as
-a wms/wfs service. See \code{bcdc_get_record(x)$resources}).
+a wms/wfs service. See \code{bcdc_get_record(x)$resources}). Pulls features off the web. The data must be available as a wms/wfs service.
+See \code{bcdc_get_record(x)$resources}). If the record is greater than 10000 rows,
+the response will be paginated. If you are querying layers of this size, expect
+that the request will take quite a while.
 }
 \examples{
 
