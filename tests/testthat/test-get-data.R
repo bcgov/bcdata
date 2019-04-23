@@ -1,4 +1,4 @@
-context("testing ability of bcdc_get_data to retrieve an sf object")
+context("testing ability of bcdc_get_data to retrieve an valid object")
 
 test_that("bcdc_get_data collects an sf object for a valid id", {
   skip_if_net_down()
@@ -21,6 +21,22 @@ test_that("bcdc_get_data works with slug and full url using collect", {
   ## Must be a better way to test if these objects are equal
   expect_true(all(unlist(lapply(list(ret1, ret2, ret3, ret4), nrow))))
   expect_true(all(unlist(lapply(list(ret1, ret2, ret3, ret4), ncol))))
+})
+
+
+test_that("bcdc_get_data works with an xlsx file",{
+  name <- "criminal-code-traffic-offences"
+  expect_is(bcdc_get_data(name, format = "xlsx"), "tbl")
+})
+
+test_that("bcdc_get_data works with an xlsx file using read_excel argument",{
+  name <- "local-government-population-and-household-projections-2018-2027"
+  expect_is(bcdc_get_data(name, format = "xlsx", sheet = "Population", skip = 1), "tbl")
+})
+
+test_that("bcdc_get_data works with an xls when specifying a specific resource",{
+  name <- 'bc-grizzly-bear-habitat-classification-and-rating'
+  expect_is(bcdc_get_data(name, format = 'xls', resource = '7b09f82f-e7d0-44bf-9310-b94039b323a8'), "tbl")
 })
 
 
