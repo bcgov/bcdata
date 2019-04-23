@@ -114,5 +114,6 @@ record_print_helper <- function(.x, record){
   cat("  ", .x, ": ", r$name, "\n", sep = "")
   #cat("    description:", r$description, "\n")
   cat("    format:", r$format, "\n")
+  cat("    resource:", r$id, "\n")
   cat("    access:", r$resource_storage_access_method, "\n")
 }
