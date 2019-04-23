@@ -18,6 +18,8 @@
 #' @param format Defaults to NULL which will first check to see if the record is a wms/wfs record.
 #' If so an sf object is returned. Otherwise a format needs to be specified. `bcdc_get_record` can
 #' be used to identify which formats are available.
+#' @param resource option argument used when there are multiple data files of the same format
+#' within the same record. See examples.
 #' @param ... arguments passed to other functions. For spatial (wms/wfs) data these are passed to
 #' `bcdc_query_geodata()`. Non spatial data is passed to a function to handle the import based
 #' on the file extension.
@@ -33,12 +35,12 @@
 #' format = "xlsx", sheet = "Population", skip = 1)
 #'
 #' }
-bcdc_get_data <- function(x, format = NULL, ...) {
+bcdc_get_data <- function(x, format = NULL, resource = NULL,...) {
   UseMethod("bcdc_get_data")
 }
 
 #' @export
-bcdc_get_data.bcdc_record <- function(x, format = NULL, ...) {
+bcdc_get_data.bcdc_record <- function(x, format = NULL, resource = NULL, ...) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
   stop("not working yet!")
@@ -50,7 +52,7 @@ bcdc_get_data.bcdc_record <- function(x, format = NULL, ...) {
 }
 
 #' @export
-bcdc_get_data.character <- function(x, format = NULL, ...) {
+bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
   x <- slug_from_url(x)
 
   if(is.null(format)){
@@ -58,9 +60,8 @@ bcdc_get_data.character <- function(x, format = NULL, ...) {
     return(collect(query))
   }
 
-  if(!all(format %in% c("csv","kml","txt","xlsx"))){
-    stop(paste0("The ", format, " extension is not currently supported by bcdata.
-                Try manually importing into R from this link: \n", file_url),
+  if(!all(format %in% c("csv","kml","txt","xlsx", "xls"))){
+    stop(paste0("The ", format, " extension is not currently supported by bcdata"),
          call. = FALSE)
   }
 
@@ -68,7 +69,52 @@ bcdc_get_data.character <- function(x, format = NULL, ...) {
   record_formats <- purrr::map_chr(seq_along(record$resources),
                                    ~record$resources[[.x]][["format"]])
 
-  file_url <- record[["resources"]][[which(record_formats == format)]][["url"]]
+  resource_ids <- purrr::map_chr(seq_along(record$resources),
+                                 ~record$resources[[.x]][["id"]])
+
+  ## Specifying id
+  if(length(record_formats[record_formats %in% format]) > 1 && !is.null(resource)){
+    file_url <- record[["resources"]][[which(resource_ids == resource)]][["url"]]
+  }
+
+  ## Using menu to figure out resource
+  if(length(record_formats[record_formats %in% format]) > 1 && is.null(resource) && interactive()){
+
+    cat(glue::glue(
+      "The record you are trying to access appears to have more than one resource with a '{format}' extension."
+    ))
+    cat("\n Resources: \n")
+    purrr::walk(which(record_formats == format), record_print_helper, record = record)
+
+    cat("--------\n")
+    cat("Please choose one option:")
+    choices <- purrr::map_chr(which(record_formats == format), ~record[["resources"]][[.x]][["name"]])
+    id_choices <- purrr::map_chr(which(record_formats == format), ~record[["resources"]][[.x]][["id"]])
+    choice_input <- utils::menu(choices)
+
+    if(choice_input == 0) stop("No resource selected", call. = FALSE)
+
+    file_url <- record[["resources"]][[which(resource_ids == id_choices[choice_input])]][["url"]]
+
+    cat("To directly access this record in the future please use this command:\n")
+    cat(glue::glue("bcdc_get_data('{x}', format = '{format}', resource = '{id_choices[choice_input]}')"))
+
+  }
+
+  ## Bonk if not using interactively
+  if(length(record_formats[record_formats %in% format]) > 1  && is.null(resource) && !interactive()){
+    stop("The record you are trying to access appears to have more than one resource
+            with a glue::glue{format} extension.", call. = TRUE)
+
+  }
+
+  ## Go through if there aren't multiple resources
+  if(length(record_formats[record_formats %in% format]) == 1 && is.null(resource)){
+    file_url <- record[["resources"]][[which(record_formats == format)]][["url"]]
+  }
+
+
+
 
   ## Do we need this?
   cli <- bcdc_http_client(file_url)
@@ -85,7 +131,8 @@ bcdc_get_data.character <- function(x, format = NULL, ...) {
            "csv" = readr::read_csv(x, ...),
            "kml" = bcdc_read_sf(x, ...),
            "txt" = readr::read_tsv(x, ...),
-           "xlsx" = readxl::read_excel(x, ...))
+           "xlsx" = readxl::read_excel(x, ...),
+           "xls" = readxl::read_excel(x, ...))
   }
 
   read_fun(x = tmp, type = format)
