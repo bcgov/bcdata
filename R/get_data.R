@@ -97,7 +97,7 @@ bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
     file_url <- record[["resources"]][[which(resource_ids == id_choices[choice_input])]][["url"]]
 
     cat("To directly access this record in the future please use this command:\n")
-    cat(glue::glue("bcdc_get_data('{x}', format = '{format}', resource = '{id_choices[choice_input]}')"))
+    cat(glue::glue("bcdc_get_data('{x}', format = '{format}', resource = '{id_choices[choice_input]}')"),"\n")
 
   }
 
