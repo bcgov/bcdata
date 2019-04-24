@@ -66,51 +66,58 @@ bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
   }
 
   record <- bcdc_get_record(x)
-  record_formats <- purrr::map_chr(seq_along(record$resources),
-                                   ~record$resources[[.x]][["format"]])
 
-  resource_ids <- purrr::map_chr(seq_along(record$resources),
-                                 ~record$resources[[.x]][["id"]])
+  resource_df <- dplyr::tibble(
+      name = purrr::map_chr(record$resources, "name"),
+      url = purrr::map_chr(record$resources, "url"),
+      id = purrr::map_chr(record$resources, "id"),
+      format = purrr::map_chr(record$resources, "format"),
+      ext = tools::file_ext(url)
+    )
+
+
 
   ## Specifying id
-  if(length(record_formats[record_formats %in% format]) > 1 && !is.null(resource)){
-    file_url <- record[["resources"]][[which(resource_ids == resource)]][["url"]]
+  if(length(resource_df$ext[resource_df$ext %in% format]) > 1 && !is.null(resource)){
+    file_url <- resource_df$url[resource_df$id == resource]
   }
 
   ## Using menu to figure out resource
-  if(length(record_formats[record_formats %in% format]) > 1 && is.null(resource) && interactive()){
+  if(length(resource_df$ext[resource_df$ext %in% format]) > 1 && is.null(resource) && interactive()){
 
     cat(glue::glue(
       "The record you are trying to access appears to have more than one resource with a '{format}' extension."
     ))
     cat("\n Resources: \n")
-    purrr::walk(which(record_formats == format), record_print_helper, record = record)
+
+    purrr::walk(record$resources[which(resource_df$ext == format)], record_print_helper)
 
     cat("--------\n")
     cat("Please choose one option:")
-    choices <- purrr::map_chr(which(record_formats == format), ~record[["resources"]][[.x]][["name"]])
-    id_choices <- purrr::map_chr(which(record_formats == format), ~record[["resources"]][[.x]][["id"]])
+    choices <- resource_df$name[resource_df$ext %in% format]
     choice_input <- utils::menu(choices)
 
     if(choice_input == 0) stop("No resource selected", call. = FALSE)
 
-    file_url <- record[["resources"]][[which(resource_ids == id_choices[choice_input])]][["url"]]
+    name_choice <- choices[choice_input]
+    file_url <- resource_df$url[resource_df$name == name_choice]
+    id_choice <- resource_df$id[resource_df$name == name_choice]
 
     cat("To directly access this record in the future please use this command:\n")
-    cat(glue::glue("bcdc_get_data('{x}', format = '{format}', resource = '{id_choices[choice_input]}')"),"\n")
+    cat(glue::glue("bcdc_get_data('{x}', format = '{format}', resource = '{id_choice}')"),"\n")
 
   }
 
   ## Bonk if not using interactively
-  if(length(record_formats[record_formats %in% format]) > 1  && is.null(resource) && !interactive()){
+  if(length(resource_df$ext[resource_df$ext %in% format]) > 1  && is.null(resource) && !interactive()){
     stop("The record you are trying to access appears to have more than one resource
-            with a glue::glue{format} extension.", call. = TRUE)
+         with a glue::glue{format} extension.", call. = TRUE)
 
   }
 
   ## Go through if there aren't multiple resources
-  if(length(record_formats[record_formats %in% format]) == 1 && is.null(resource)){
-    file_url <- record[["resources"]][[which(record_formats == format)]][["url"]]
+  if(length(resource_df$ext[resource_df$ext %in% format]) == 1 && is.null(resource)){
+    file_url <- resource_df$url[resource_df$ext == format]
   }
 
 
@@ -138,3 +145,4 @@ bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
   read_fun(x = tmp, type = format)
 
 }
+
