@@ -80,12 +80,12 @@ print.bcdc_recordlist <- function(x, ...) {
       purrr::pluck(.x, "title"),
       " (",
       paste0(
-        unique(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "format")),
+        file_ext_with_other(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "url")),
         collapse = ","
       ),
       ")",
       "\n ID: ", purrr::pluck(.x, "id"),
-      "\n NAME: ", purrr::pluck(.x, "name")
+      "\n Name: ", purrr::pluck(.x, "name")
     )
   }), collapse = "\n"), "\n")
   cat("\nAccess a single record by calling bcdc_get_record(ID)

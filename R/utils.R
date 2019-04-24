@@ -116,3 +116,9 @@ record_print_helper <- function(r){
   cat("    resource:", r$id, "\n")
   cat("    access:", r$resource_storage_access_method, "\n")
 }
+
+file_ext_with_other <- function(x){
+  x <- tools::file_ext(x)
+  x <- ifelse(nchar(x) == 0, "other", x)
+  unique(x)
+}
