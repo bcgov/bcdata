@@ -216,7 +216,7 @@ print.bcdc_record <- function(x, ...) {
   cat("\nDescription:\n")
   cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
-  record_formats <- purrr::map_chr(x$resources, ~ purrr::pluck(.x, "format"))
+  record_formats <- tools::file_ext(purrr::map_chr(x$resources, ~ purrr::pluck(.x, "url")))
 
   if ("wms" %in% record_formats) {
     x$resources[record_formats == "kml"] <- NULL
