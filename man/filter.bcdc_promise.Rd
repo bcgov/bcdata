@@ -17,9 +17,11 @@ If you know \code{CQL} and want to write a \code{CQL} query directly, write it e
 in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("ID = '42'")}}
 }
 \description{
-filter methods
+Filter a query from wfs using dplyr methods. This filtering is accomplished lazily so that the
+full sf object is not read into memory until \code{collect()} has been called.
 }
 \examples{
+\dontrun{
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") \%>\%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") \%>\%
     collect()
@@ -27,4 +29,5 @@ filter methods
 ret1 <- bcdc_query_geodata("fire-perimeters-historical") \%>\%
   filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
   collect()
+  }
 }

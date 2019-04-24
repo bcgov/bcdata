@@ -17,6 +17,9 @@ as.bcdc_promise <- function(res) {
   )
 }
 
+
+# print methods -----------------------------------------------------------
+
 #' @export
 print.bcdc_promise <- function(x, ...) {
 
@@ -39,13 +42,66 @@ print.bcdc_promise <- function(x, ...) {
   cat(glue::glue("# A BC Data Catalogue Record: {number_of_records} records\n\n"))
   print(feature_spec, n = Inf)
 
+}
 
+#' @export
+print.bcdc_record <- function(x, ...) {
+  cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
+  cat("\nName:", x$name, "(ID:", x$id, ")")
+  cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
+  cat("\nSector:", x$sector)
+  cat("\nLicence:", x$license_title)
+  cat("\nType:", x$type, "\n")
+  cat("\nDescription:\n")
+  cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
+  record_formats <- tools::file_ext(purrr::map_chr(x$resources, ~ purrr::pluck(.x, "url")))
 
+  if ("wms" %in% record_formats) {
+    x$resources[record_formats == "kml"] <- NULL
+  }
+
+  cat("\nResources: (", length(x$resources), ")\n")
+  purrr::walk(x$resources, record_print_helper)
+}
+
+#' @export
+print.bcdc_recordlist <- function(x, ...) {
+  cat("List of B.C. Data Catalogue Records\n")
+  len <- length(x)
+  n_print <- min(10, len)
+  cat("\nNumber of records:", len)
+  if (n_print < len) cat(" (Showing the top 10)")
+  cat("\nTitles:\n")
+  x <- purrr::set_names(x, NULL)
+  cat(paste(purrr::imap(x[1:n_print], ~ {
+    paste0(
+      .y, ": ",
+      purrr::pluck(.x, "title"),
+      " (",
+      paste0(
+        unique(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "format")),
+        collapse = ","
+      ),
+      ")",
+      "\n ID: ", purrr::pluck(.x, "id"),
+      "\n NAME: ", purrr::pluck(.x, "name")
+    )
+  }), collapse = "\n"), "\n")
+  cat("\nAccess a single record by calling bcdc_get_record(ID)
+      with the ID from the desired record.")
 }
 
 
+
+# dplyr methods -----------------------------------------------------------
+
+
 #' filter methods
+#'
+#' Filter a query from wfs using dplyr methods. This filtering is accomplished lazily so that the
+#' full sf object is not read into memory until `collect()` has been called.
+#'
 #'
 #' @param .data passed from bcdc_get_geodata
 #' @param ... Logical predicates with which to filter the results. Multiple
@@ -56,6 +112,7 @@ print.bcdc_promise <- function(x, ...) {
 #' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #'
 #' @examples
+#' \dontrun{
 #'   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
 #'     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
 #'     collect()
@@ -63,6 +120,7 @@ print.bcdc_promise <- function(x, ...) {
 #' ret1 <- bcdc_query_geodata("fire-perimeters-historical") %>%
 #'   filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
 #'   collect()
+#'   }
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
 
@@ -116,12 +174,19 @@ select.bcdc_promise <- function(.data, ...){
 
 #' Force collection of WFS request from BC Data Catalogue
 #'
-#' Retrieve an sf object from data catalogue.
+#' After tuning a query, `collect()` is used to actually bring the data into memory.
+#' This will retrieve an sf object into R.
 #'
 #' @param x object of class bcdc_promise
 #' @inheritParams collect
 #' @describeIn collect collect.bcdc_promise
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' bcdc_query_geodata("bc-airports") %>%
+#'   collect()
+#' }
 #'
 collect.bcdc_promise <- function(x, ...){
 
@@ -203,54 +268,4 @@ show_query.bcdc_promise <- function(x, ...){
   cat(url_query)
   cat(paste0("<SQL> \n", x$query_list$CQL_FILTER))
 }
-
-
-#' @export
-print.bcdc_record <- function(x, ...) {
-  cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
-  cat("\nName:", x$name, "(ID:", x$id, ")")
-  cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
-  cat("\nSector:", x$sector)
-  cat("\nLicence:", x$license_title)
-  cat("\nType:", x$type, "\n")
-  cat("\nDescription:\n")
-  cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
-
-  record_formats <- tools::file_ext(purrr::map_chr(x$resources, ~ purrr::pluck(.x, "url")))
-
-  if ("wms" %in% record_formats) {
-    x$resources[record_formats == "kml"] <- NULL
-  }
-
-  cat("\nResources: (", length(x$resources), ")\n")
-  purrr::walk(x$resources, record_print_helper)
-}
-
-#' @export
-print.bcdc_recordlist <- function(x, ...) {
-  cat("List of B.C. Data Catalogue Records\n")
-  len <- length(x)
-  n_print <- min(10, len)
-  cat("\nNumber of records:", len)
-  if (n_print < len) cat(" (Showing the top 10)")
-  cat("\nTitles:\n")
-  x <- purrr::set_names(x, NULL)
-cat(paste(purrr::imap(x[1:n_print], ~ {
-  paste0(
-    .y, ": ",
-    purrr::pluck(.x, "title"),
-    " (",
-    paste0(
-      unique(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "format")),
-      collapse = ","
-    ),
-    ")",
-    "\n ID: ", purrr::pluck(.x, "id"),
-    "\n NAME: ", purrr::pluck(.x, "name")
-  )
-}), collapse = "\n"), "\n")
-  cat("\nAccess a single record by calling bcdc_get_record(ID)
-with the ID from the desired record.")
-}
-
 

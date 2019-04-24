@@ -11,7 +11,8 @@
 \item{x}{object of class bcdc_promise}
 }
 \description{
-Retrieve an sf object from data catalogue.
+After tuning a query, \code{collect()} is used to actually bring the data into memory.
+This will retrieve an sf object into R.
 
 See \code{dplyr::\link[dplyr]{collect}} for details.
 }
@@ -20,4 +21,11 @@ See \code{dplyr::\link[dplyr]{collect}} for details.
 \item \code{bcdc_promise}: collect.bcdc_promise
 }}
 
+\examples{
+\dontrun{
+bcdc_query_geodata("bc-airports") \%>\%
+  collect()
+}
+
+}
 \keyword{internal}
