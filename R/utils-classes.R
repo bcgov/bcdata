@@ -39,7 +39,9 @@ print.bcdc_promise <- function(x, ...) {
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
 
-  cat(glue::glue("# A BC Data Catalogue Record: {number_of_records} records\n\n"))
+  cat(glue::glue("# A BC Data Catalogue Record: {number_of_records} records",
+                 "and {nrow(feature_spec)} columns\n\n", .sep = " "))
+  cat("# Columns:\n")
   print(feature_spec, n = Inf)
 
 }
