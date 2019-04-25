@@ -22,10 +22,13 @@ cql_translate <- function(...) {
 
 # Builds a complete WHERE clause from multiple WHERE statements
 # Modified from dbplyr:::sql_clause_where
-build_where <- function(where) {
+build_where <- function(where, con = cql_dummy_con) {
   if (length(where) > 0L) {
-    where_paren <- dbplyr::escape(where, parens = TRUE)
-    dbplyr::build_sql(dbplyr::sql_vector(where_paren, collapse = " AND "))
+    where_paren <- dbplyr::escape(where, parens = TRUE, con = con)
+    dbplyr::build_sql(
+      dbplyr::sql_vector(where_paren, collapse = " AND ", con = con),
+      con = con
+    )
   }
 }
 
@@ -97,6 +100,14 @@ sql_translate_env.DummyCQL <- function(con) {
 #' @export
 sql_escape_ident.DummyCQL <- function(con, x) {
   dbplyr::sql_quote(x, "\"")
+}
+
+# Make sure that strings (RHS of relations) are escaped with single quotes
+#' @keywords internal
+#' @importFrom dplyr sql_escape_string
+#' @export
+sql_escape_string.DummyCQL <- function(con, x) {
+  dbplyr::sql_quote(x, "'")
 }
 
 # Regex for looking for spatial functions, optionally only at the beginning
