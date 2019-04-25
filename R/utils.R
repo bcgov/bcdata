@@ -135,3 +135,19 @@ formats_from_resource <- function(x){
     TRUE ~ tools::file_ext(x$url)
   )
 }
+
+resource_function_generator <- function(r){
+
+  fr <- formats_from_resource(r)
+
+  if(r[["resource_storage_location"]] == "BCGW Data Store"){
+    cat("    bcdc_get_data(x = '", r$package_id, "')\n", sep = "")
+  }
+
+  if(any(r %in% formats_supported())){
+    cat("    code: bcdc_get_data(x = '", r$package_id, "',
+        format = '", fr, "', resource = '",r$id,"')\n", sep = "")
+  } else{
+    cat("    code: No direct methods currently available in bcdata\n")
+  }
+}

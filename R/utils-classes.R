@@ -71,7 +71,7 @@ record_print_helper <- function(r){
   cat("    format:", formats_from_resource(r), "\n")
   cat("    resource:", r$id, "\n")
   cat("    access:", r$resource_storage_access_method, "\n")
-
+  resource_function_generator(r)
 }
 
 #' @export
