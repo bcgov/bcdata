@@ -55,14 +55,22 @@ print.bcdc_record <- function(x, ...) {
   cat("\nDescription:\n")
   cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
-  record_formats <- tools::file_ext(purrr::map_chr(x$resources, ~ purrr::pluck(.x, "url")))
+  record_formats <- formats_from_record(x)
 
   if ("wms" %in% record_formats) {
-    x$resources[record_formats == "kml"] <- NULL
+    x$resources <- x$resources[record_formats == "wms"]
   }
 
   cat("\nResources: (", length(x$resources), ")\n")
   purrr::walk(x$resources, record_print_helper)
+}
+
+record_print_helper <- function(r){
+  cat("  ", r$name, "\n", sep = "")
+  #cat("    description:", r$description, "\n")
+  cat("    format:", formats_from_resource(r), "\n")
+  cat("    resource:", r$id, "\n")
+  cat("    access:", r$resource_storage_access_method, "\n")
 }
 
 #' @export
@@ -76,13 +84,9 @@ print.bcdc_recordlist <- function(x, ...) {
   x <- purrr::set_names(x, NULL)
   cat(paste(purrr::imap(x[1:n_print], ~ {
     paste0(
-      .y, ": ",
-      purrr::pluck(.x, "title"),
+      .y, ": ",purrr::pluck(.x, "title"),
       " (",
-      paste0(
-        file_ext_with_other(purrr::map_chr(purrr::pluck(.x, "resources"), purrr::pluck, "url")),
-        collapse = ","
-      ),
+      paste0(unique(formats_from_record(.x)), collapse = ", "),
       ")",
       "\n ID: ", purrr::pluck(.x, "id"),
       "\n Name: ", purrr::pluck(.x, "name")

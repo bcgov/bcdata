@@ -60,7 +60,7 @@ bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
     return(collect(query))
   }
 
-  if(!all(format %in% c("csv","kml","txt","xlsx", "xls"))){
+  if(!all(format %in% formats_supported())){
     stop(paste0("The ", format, " extension is not currently supported by bcdata"),
          call. = FALSE)
   }
@@ -74,8 +74,6 @@ bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
       format = purrr::map_chr(record$resources, "format"),
       ext = tools::file_ext(url)
     )
-
-
 
   ## Specifying id
   if(length(resource_df$ext[resource_df$ext %in% format]) > 1 && !is.null(resource)){

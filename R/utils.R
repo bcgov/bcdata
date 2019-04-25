@@ -73,6 +73,10 @@ slug_from_url <- function(x) {
   x
 }
 
+formats_supported <- function(){
+  c("csv","kml","txt","xlsx", "xls")
+}
+
 bcdc_http_client <- function(url = NULL) {
 
   crul::HttpClient$new(url = url,
@@ -109,16 +113,25 @@ wfs_to_r_col_type <- function(col){
   )
 }
 
-record_print_helper <- function(r){
-  cat("  ", r$name, "\n", sep = "")
-  #cat("    description:", r$description, "\n")
-  cat("    format:", r$format, "\n")
-  cat("    resource:", r$id, "\n")
-  cat("    access:", r$resource_storage_access_method, "\n")
+
+##from a record
+formats_from_record <- function(x){
+
+  resource_df <- dplyr::tibble(
+      name = purrr::map_chr(x$resources, "name"),
+      url = tools::file_ext(purrr::map_chr(x$resources, "url")),
+      format = purrr::map_chr(x$resources, "format")
+    )
+  x <- formats_from_resource(resource_df)
+
+  x[x != ""]
 }
 
-file_ext_with_other <- function(x){
-  x <- tools::file_ext(x)
-  x <- ifelse(nchar(x) == 0, "other", x)
-  unique(x)
+formats_from_resource <- function(x){
+  dplyr::case_when(
+    x$format == "wms" ~ "wms",
+    nchar(x$url) == 0 ~ "other",
+    x$url == "zip" ~ paste0(x$format, "(zipped)"),
+    TRUE ~ tools::file_ext(x$url)
+  )
 }
