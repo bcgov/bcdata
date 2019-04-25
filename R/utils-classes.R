@@ -58,7 +58,7 @@ print.bcdc_record <- function(x, ...) {
   record_formats <- formats_from_record(x)
 
   if ("wms" %in% record_formats) {
-    x$resources <- x$resources[record_formats == "wms"]
+    x$resources <- x$resources[record_formats != "wms"]
   }
 
   cat("\nResources: (", length(x$resources), ")\n")
@@ -71,6 +71,7 @@ record_print_helper <- function(r){
   cat("    format:", formats_from_resource(r), "\n")
   cat("    resource:", r$id, "\n")
   cat("    access:", r$resource_storage_access_method, "\n")
+
 }
 
 #' @export
