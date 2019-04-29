@@ -12,13 +12,17 @@
 
 # Function to translate R code to CQL
 cql_translate <- function(dots) {
-  # when there are spatial predicates (e.g., DWITHIN, INTERSECTS, TOUCHES)
-  # evaluate those parts of the expression so they are expanded
+  ## dots should be a list of quosures coming from filter
+  ## run partial_eval on them to evaluate named objects
+  ## e.g., if x is defined in the global env and passed as on object to
+  ## filter, need to evaluate x.
   dots <- lapply(dots, function(x) {
     rlang::new_quosure(
       dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
                 rlang::get_env(x))
   })
+  # when there are spatial predicates (e.g., DWITHIN, INTERSECTS, TOUCHES)
+  # evaluate those parts of the expression so they are expanded.
   dots <- expand_spatial_predicates(dots)
   dots <- expand_cql(dots)
   sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
