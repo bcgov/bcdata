@@ -11,10 +11,15 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 # Function to translate R code to CQL
-cql_translate <- function(...) {
+cql_translate <- function(dots) {
   # when there are spatial predicates (e.g., DWITHIN, INTERSECTS, TOUCHES)
   # evaluate those parts of the expression so they are expanded
-  dots <- expand_spatial_predicates(...)
+  dots <- lapply(dots, function(x) {
+    rlang::new_quosure(
+      dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
+                rlang::get_env(x))
+  })
+  dots <- expand_spatial_predicates(dots)
   dots <- expand_cql(dots)
   sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
   build_where(sql_where)
@@ -120,12 +125,11 @@ spatial_funs_regex <- function(first = FALSE) {
   funs
 }
 
-expand_spatial_predicates <- function(...) {
+expand_spatial_predicates <- function(dots) {
   # This works with expressions separated by commas
   # E.g., expand_spatial_predicates(foo == "bar", DWITHIN(bc_bound()))
   # But need to figure out a way to break it out if separated by & or |:
   # expand_spatial_predicates(foo == "bar" | DWITHIN(bc_bound()))
-  dots <- rlang::exprs(...)
   # Find the expressions that are cql spatial funcions and evaluate them
   # so the geometry is expanded and inserted into the CQL function call.
   # eval_tidy needs the env to be 3 levels deep so that it can find the object
