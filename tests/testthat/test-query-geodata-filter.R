@@ -43,3 +43,57 @@ test_that("operators work with different remote geom col names",{
   expect_equal(attr(crd_fires, "sf_column"), "geometry")
 
 })
+
+test_that("Different combinations of predicates work", {
+  the_bbox <- st_sfc(st_polygon(
+    list(structure(c(1670288.515, 1719022.009,
+                     1719022.009, 1670288.515, 1670288.515, 667643.77, 667643.77,
+                     745981.738, 745981.738, 667643.77), .Dim = c(5L, 2L)))),
+    crs = 3005)
+
+  # with raw CQL
+  expect_equal(as.character(cql_translate(CQL('"POP_2000" < 2000'))),
+               "(\"POP_2000\" < 2000)")
+
+  # just with spatial predicate
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox))),
+               "(WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8))))")
+
+  # spatial predicate combined with regular comparison using comma
+  and_statement <- "((WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8)))) AND (\"POP_2000\" < 2000))"
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < 2000L)),
+               and_statement)
+
+  # spatial predicate combined with regular comparison as a named object using comma
+  pop <- 2000L
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < pop)),
+               and_statement)
+
+  and_with_logical <- "(WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8))) AND \"POP_2000\" < 2000)"
+  # spatial predicate combined with regular comparison as a named object using
+  # explicit &
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox) & POP_2000 < pop)),
+               and_with_logical)
+
+  # spatial predicate combined with regular comparison as a named object using
+  # explicit |
+  or_statement <- "(WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8))) OR \"POP_2000\" < 2000)"
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox) | POP_2000 < pop)),
+               or_statement)
+
+  # spatial predicate combined with CQL using comma
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox),
+                                          CQL("\"POP_2000\" < 2000"))),
+               and_statement)
+
+  skip("Combining CQL with & and | not working yet")
+  # spatial predicate combined with CQL using explicit &
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox) &
+                                            CQL("\"POP_2000\" < 2000"))),
+               and_statement)
+
+  # spatial predicate combined with CQL using explicit &
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox) |
+                                            CQL("\"POP_2000\" < 2000"))),
+               or_statement)
+})
