@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_data.R
 \name{bcdc_get_data}
 \alias{bcdc_get_data}
-\title{Download and read a dataset from a Data Catalogue resource}
+\title{Download and read a dataset from a B.C. Data Catalogue resource}
 \usage{
 bcdc_get_data(x, format = NULL, resource = NULL, ...)
 }
@@ -10,14 +10,14 @@ bcdc_get_data(x, format = NULL, resource = NULL, ...)
 \item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).}
 
-\item{format}{Defaults to NULL which will first check to see if the record is a wms/wfs record.
+\item{format}{Defaults to NULL which will first check to see if the record is a WMS/WFS record.
 If so an sf object is returned. Otherwise a format needs to be specified. \code{bcdc_get_record} can
 be used to identify which formats are available.}
 
 \item{resource}{option argument used when there are multiple data files of the same format
 within the same record. See examples.}
 
-\item{...}{arguments passed to other functions. For spatial (wms/wfs) data these are passed to
+\item{...}{arguments passed to other functions. For spatial (WMS/WFS) data these are passed to
 \code{bcdc_query_geodata()}. Non spatial data is passed to a function to handle the import based
 on the file extension.}
 }
@@ -25,7 +25,7 @@ on the file extension.}
 an object of a type relevant to the resource (usually a tibble or an sf object)
 }
 \description{
-Download and read a dataset from a Data Catalogue resource
+Download and read a dataset from a B.C. Data Catalogue resource
 }
 \examples{
 \dontrun{

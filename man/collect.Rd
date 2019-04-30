@@ -3,7 +3,7 @@
 \name{collect.bcdc_promise}
 \alias{collect.bcdc_promise}
 \alias{collect}
-\title{Force collection of WFS request from BC Data Catalogue}
+\title{Force collection of WFS request from B.C. Data Catalogue}
 \usage{
 \method{collect}{bcdc_promise}(x, ...)
 }

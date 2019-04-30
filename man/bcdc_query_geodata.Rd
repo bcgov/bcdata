@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_query_geodata}
 \alias{bcdc_query_geodata}
-\title{Query data from the BC Web Feature Service}
+\title{Query data from the B.C. Web Feature Service}
 \usage{
 bcdc_query_geodata(x = NULL, crs = 3005)
 }
@@ -17,8 +17,8 @@ or a character string denoting the id of a resource (or the url).}
 an \code{sf} object
 }
 \description{
-Queries features from the BC Web Feature Service. The data must be available as
-a wms/wfs service. See \code{bcdc_get_record(x)$resources}). Pulls features off the web. The data must be available as a wms/wfs service.
+Queries features from the B.C. Web Feature Service. The data must be available as
+a WMS/WFS service. See \code{bcdc_get_record(x)$resources}). Pulls features off the web. The data must be available as a WMS/WFS service.
 See \code{bcdc_get_record(x)$resources}). If the record is greater than 10000 rows,
 the response will be paginated. If you are querying layers of this size, expect
 that the request will take quite a while.

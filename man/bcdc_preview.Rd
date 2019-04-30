@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_preview}
 \alias{bcdc_preview}
-\title{Get map from the BC Web Mapping Service}
+\title{Get map from the B.C. Web Mapping Service}
 \usage{
 bcdc_preview(x = NULL)
 }
@@ -11,7 +11,7 @@ bcdc_preview(x = NULL)
 or a character string denoting the id of a resource (or the url).}
 }
 \description{
-Get map from the BC Web Mapping Service
+Get map from the B.C. Web Mapping Service
 }
 \examples{
 \dontrun{

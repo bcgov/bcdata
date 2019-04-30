@@ -12,7 +12,7 @@ or a character string denoting the id of a resource (or the url).}
 }
 \description{
 Describe the columns from a WFS feature. The column name, whether a column can be
-separated from the record in WFS (nillable) and the tpye of column are returned.
+separated from the record in WFS (nillable) and the type of column are returned.
 This can be a helpful tool to examine a layer before issuing a query with \code{bcdc_get_geodata}
 }
 \examples{

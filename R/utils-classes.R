@@ -39,7 +39,7 @@ print.bcdc_promise <- function(x, ...) {
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
 
-  cat(glue::glue("# A BC Data Catalogue Record: {number_of_records} records",
+  cat(glue::glue("# A B.C. Data Catalogue Record: {number_of_records} records",
                  "and {nrow(feature_spec)} columns\n\n", .sep = " "))
   cat("# Columns:\n")
   print(feature_spec, n = Inf)
@@ -106,13 +106,13 @@ print.bcdc_recordlist <- function(x, ...) {
 
 #' filter methods
 #'
-#' Filter a query from wfs using dplyr methods. This filtering is accomplished lazily so that the
+#' Filter a query from WFS using dplyr methods. This filtering is accomplished lazily so that the
 #' full sf object is not read into memory until `collect()` has been called.
 #'
 #'
 #' @param .data passed from bcdc_get_geodata
 #' @param ... Logical predicates with which to filter the results. Multiple
-#' conditions are combined with `&`. Only rows where the condition evalueates to
+#' conditions are combined with `&`. Only rows where the condition evaluates to
 #' `TRUE` are kept. Accepts normal R expressions as well as any of the special
 #' [CQL geometry functions][cql_geom_predicates] such as `WITHIN()` or `INTERSECTS()`.
 #' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
@@ -139,13 +139,13 @@ filter.bcdc_promise <- function(.data, ...) {
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
 }
 
-#' select columns from wfs call
+#' Select columns from WFS call
 #'
-#' Similar to a `dplyr::select` call, this allows you to select which columns you want the wfs to return.
+#' Similar to a `dplyr::select` call, this allows you to select which columns you want the WFS to return.
 #' A key difference between `dplyr::select` and `bcdata::select` is the presence of "sticky" columns that are
 #' returned regardless of what columns are selected. If any of these "sticky" columns are selected
-#' only "sticky" columns are returns. `bcdc_describe_feature` is one way to tell if columns are stick in advance
-#' of issuing the wfs call.
+#' only "sticky" columns are return. `bcdc_describe_feature` is one way to tell if columns are sticky in advance
+#' of issuing the WFS call.
 #'
 #' @param .data passed from bcdc_get_geodata
 #' @param ... One or more unquoted expressions separated by commas. See details.
@@ -179,7 +179,7 @@ select.bcdc_promise <- function(.data, ...){
 }
 
 
-#' Force collection of WFS request from BC Data Catalogue
+#' Force collection of WFS request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
 #' This will retrieve an sf object into R.
@@ -244,7 +244,7 @@ collect.bcdc_promise <- function(x, ...){
 }
 
 
-#' Show SQL and URL used for WFS request from BC Data Catalogue
+#' Show SQL and URL used for WFS request from B.C. Data Catalogue
 #'
 #' Display WFS query SQL
 #'

@@ -13,7 +13,7 @@
 #' Describe a WFS feature
 #'
 #' Describe the columns from a WFS feature. The column name, whether a column can be
-#' separated from the record in WFS (nillable) and the tpye of column are returned.
+#' separated from the record in WFS (nillable) and the type of column are returned.
 #' This can be a helpful tool to examine a layer before issuing a query with `bcdc_get_geodata`
 #'
 #' @inheritParams bcdc_get_geodata
@@ -25,7 +25,7 @@
 bcdc_describe_feature <- function(x = NULL){
   obj <- bcdc_get_record(x)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
-    stop("No wms/wfs resource available for this dataset.",
+    stop("No WMS/WFS resource available for this dataset.",
          call. = FALSE
     )
   }

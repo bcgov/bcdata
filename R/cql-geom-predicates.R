@@ -15,7 +15,7 @@
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
 #' filter strings which can then be supplied to the `...` argument in
 #' \code{bcdc_get_geodata}. The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the wfs call. Subsequent in-memory
+#' bounding box to reduce the complexity of the WFS call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
 #'
 #' There are wrapper functions for
@@ -54,7 +54,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
 
   match.arg(geometry_predicates, cql_geom_predicate_list())
 
-  # Only covert x to bbox if not using BBOX CQL function
+  # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
   if (!geometry_predicates == "BBOX") {
     x <- sf_to_text_bbox(x)
@@ -105,8 +105,8 @@ sf_to_text_bbox <- function(x) {
 #' to filter results from [bcdc_get_geodata()].
 #' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
 #' The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the wfs call. Subsequent in-memory
-#' filtering may be need to achieve exact results.
+#' bounding box to reduce the complexity of the WFS call. Subsequent in-memory
+#' filtering may be needed to achieve exact results.
 #'
 #' @param geom an sf/sfc/sfg object
 #' @name cql_geom_predicates

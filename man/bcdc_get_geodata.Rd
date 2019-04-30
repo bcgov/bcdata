@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_get_geodata}
 \alias{bcdc_get_geodata}
-\title{Get data from the BC Web Feature Service (DEPRECATED)}
+\title{Get data from the B.C. Web Feature Service (DEPRECATED)}
 \usage{
 bcdc_get_geodata(x = NULL, crs = 3005)
 }
@@ -17,5 +17,5 @@ or a character string denoting the id of a resource (or the url).}
 an \code{sf} object
 }
 \description{
-Get data from the BC Web Feature Service (DEPRECATED)
+Get data from the B.C. Web Feature Service (DEPRECATED)
 }

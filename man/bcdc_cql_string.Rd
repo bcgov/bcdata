@@ -33,7 +33,7 @@ A DE-9IM pattern is a string of length 9 specified using the characters
 Convenience wrapper to convert sf objects and geometric operations into CQL
 filter strings which can then be supplied to the \code{...} argument in
 \code{bcdc_get_geodata}. The sf object is automatically converted in a
-bounding box to reduce the complexity of the wfs call. Subsequent in-memory
+bounding box to reduce the complexity of the WFS call. Subsequent in-memory
 filtering may be need to achieve exact results.
 }
 \details{

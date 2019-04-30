@@ -10,17 +10,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Download and read a dataset from a Data Catalogue resource
+#' Download and read a dataset from a B.C. Data Catalogue resource
 #'
 #'
 #' @param x either a `bcdc_record` object (from the result of `bcdc_get_record()`)
 #' or a character string denoting the id of a resource (or the url).
-#' @param format Defaults to NULL which will first check to see if the record is a wms/wfs record.
+#' @param format Defaults to NULL which will first check to see if the record is a WMS/WFS record.
 #' If so an sf object is returned. Otherwise a format needs to be specified. `bcdc_get_record` can
 #' be used to identify which formats are available.
 #' @param resource option argument used when there are multiple data files of the same format
 #' within the same record. See examples.
-#' @param ... arguments passed to other functions. For spatial (wms/wfs) data these are passed to
+#' @param ... arguments passed to other functions. For spatial (WMS/WFS) data these are passed to
 #' `bcdc_query_geodata()`. Non spatial data is passed to a function to handle the import based
 #' on the file extension.
 #'
