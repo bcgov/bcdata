@@ -17,14 +17,15 @@ cql_translate <- function(...) {
   ## in which they were defined.
   ## e.g., if x is defined in the global env and passed as on object to
   ## filter, need to evaluate x in the global env.
+  ## This also evaluates any functions defined in cql_scalar so that the spatial
+  ## predicates and CQL() expressions are evaluated into valid CQL code
+  ## so they can be combined with the rest of the query
   dots <- rlang::quos(...)
   dots <- lapply(dots, function(x) {
     rlang::new_quosure(
       dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
                 rlang::get_env(x))
   })
-  # Find the explicit CQL statements and evaluate them
-  dots <- expand_cql(dots)
   sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
   build_where(sql_where)
 }
@@ -61,7 +62,8 @@ cql_scalar <- dbplyr::sql_translator(
   OVERLAPS = function(x) OVERLAPS(x),
   RELATE = function(x) RELATE(x),
   DWITHIN = function(x) DWITHIN(x),
-  BEYOND = function(x) BEYOND(x)
+  BEYOND = function(x) BEYOND(x),
+  CQL = function(x) CQL(x)
 )
 
 # No aggregation functions available in CQL
@@ -127,16 +129,6 @@ spatial_funs_regex <- function(first = FALSE) {
     return(paste0("^(", funs, ")"))
   }
   funs
-}
-
-expand_cql <- function(dots) {
-  lapply(dots, function(x) {
-    if (rlang::call_name(rlang::get_expr(x)) == "CQL") {
-      rlang::eval_tidy(x)
-    } else {
-      x
-    }
-  })
 }
 
 #' CQL escaping
