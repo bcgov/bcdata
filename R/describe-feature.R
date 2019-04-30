@@ -58,9 +58,13 @@ bcdc_describe_feature <- function(x = NULL){
                           nillable = FALSE,
                           type = "xsd:string")
 
-  ## Identify geometry column
+  ## Identify geometry column and move to last
   geom_type <- intersect(xml_df$type, gml_types())
   xml_df[xml_df$type == geom_type, "name"] <- "geometry"
+  xml_df <- dplyr::bind_rows(
+    xml_df[xml_df$name != "geometry", ],
+    xml_df[xml_df$name == "geometry", ]
+  )
 
   ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
