@@ -12,19 +12,18 @@
 
 # Function to translate R code to CQL
 cql_translate <- function(...) {
-  ## dots should be a list of quosures coming from filter
-  ## run partial_eval on them to evaluate named objects
+  ## convert dots to list of quosures
+  ## run partial_eval on them to evaluate named objects in the environment
+  ## in which they were defined.
   ## e.g., if x is defined in the global env and passed as on object to
-  ## filter, need to evaluate x.
+  ## filter, need to evaluate x in the global env.
   dots <- rlang::quos(...)
   dots <- lapply(dots, function(x) {
     rlang::new_quosure(
       dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
                 rlang::get_env(x))
   })
-  # when there are spatial predicates (e.g., DWITHIN, INTERSECTS, TOUCHES)
-  # evaluate those parts of the expression so they are expanded.
-  dots <- expand_spatial_predicates(dots)
+  # Find the explicit CQL statements and evaluate them
   dots <- expand_cql(dots)
   sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
   build_where(sql_where)
@@ -130,26 +129,14 @@ spatial_funs_regex <- function(first = FALSE) {
   funs
 }
 
-expand_spatial_predicates <- function(dots) {
-  # Find the expressions that are cql spatial funcions and evaluate them
-  # so the geometry is expanded and inserted into the CQL function call.
-  # eval_tidy needs the env to be 3 levels deep so that it can find the object
-  # that is being used in the spatial predicate function:
-  #  - expand_spatial_predicates is called by cql_translate
-  #  - cql_translate is called by bcdc_get_geodata
-  spatial_predicates <- grepl(spatial_funs_regex(first = TRUE), dots)
-  dots[spatial_predicates] <- lapply(
-    dots[spatial_predicates],
-    function(x) {
-      rlang::eval_tidy(x, env = rlang::get_env(x))
-    })
-  dots
-}
-
 expand_cql <- function(dots) {
-  cql_calls <- grepl("^CQL\\((\"|')", dots)
-  dots[cql_calls] <- lapply(dots[cql_calls], rlang::eval_tidy)
-  dots
+  lapply(dots, function(x) {
+    if (rlang::call_name(rlang::get_expr(x)) == "CQL") {
+      rlang::eval_tidy(x)
+    } else {
+      x
+    }
+  })
 }
 
 #' CQL escaping
