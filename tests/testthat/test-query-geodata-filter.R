@@ -1,4 +1,5 @@
 context("testing ability of filter methods to narrow a wfs query")
+library(sf, quietly = TRUE)
 
 test_that("bcdc_query_geodata accepts R expressions to refine data call",{
   skip_if_net_down()
@@ -86,11 +87,10 @@ test_that("Different combinations of predicates work", {
                                           CQL("\"POP_2000\" < 2000"))),
                and_statement)
 
-  skip("Combining CQL with & and | not working yet")
   # spatial predicate combined with CQL using explicit &
   expect_equal(as.character(cql_translate(WITHIN(the_bbox) &
                                             CQL("\"POP_2000\" < 2000"))),
-               and_statement)
+               and_with_logical)
 
   # spatial predicate combined with CQL using explicit &
   expect_equal(as.character(cql_translate(WITHIN(the_bbox) |
