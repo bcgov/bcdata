@@ -131,8 +131,7 @@ print.bcdc_recordlist <- function(x, ...) {
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
 
-  dots <- rlang::quos(...)
-  .data$query_list$CQL_FILTER <- cql_translate(dots)
+  .data$query_list$CQL_FILTER <- cql_translate(...)
 
   ## Change CQL query on the fly if geom is not GEOMETRY
   .data$query_list$CQL_FILTER <- specify_geom_name(.data$obj, .data$query_list)

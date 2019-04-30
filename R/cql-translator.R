@@ -11,11 +11,12 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 # Function to translate R code to CQL
-cql_translate <- function(dots) {
+cql_translate <- function(...) {
   ## dots should be a list of quosures coming from filter
   ## run partial_eval on them to evaluate named objects
   ## e.g., if x is defined in the global env and passed as on object to
   ## filter, need to evaluate x.
+  dots <- rlang::quos(...)
   dots <- lapply(dots, function(x) {
     rlang::new_quosure(
       dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
@@ -130,10 +131,6 @@ spatial_funs_regex <- function(first = FALSE) {
 }
 
 expand_spatial_predicates <- function(dots) {
-  # This works with expressions separated by commas
-  # E.g., expand_spatial_predicates(foo == "bar", DWITHIN(bc_bound()))
-  # But need to figure out a way to break it out if separated by & or |:
-  # expand_spatial_predicates(foo == "bar" | DWITHIN(bc_bound()))
   # Find the expressions that are cql spatial funcions and evaluate them
   # so the geometry is expanded and inserted into the CQL function call.
   # eval_tidy needs the env to be 3 levels deep so that it can find the object
@@ -141,9 +138,11 @@ expand_spatial_predicates <- function(dots) {
   #  - expand_spatial_predicates is called by cql_translate
   #  - cql_translate is called by bcdc_get_geodata
   spatial_predicates <- grepl(spatial_funs_regex(first = TRUE), dots)
-  dots[spatial_predicates] <- lapply(dots[spatial_predicates],
-                                     rlang::eval_tidy,
-                                     env = rlang::caller_env(n = 3))
+  dots[spatial_predicates] <- lapply(
+    dots[spatial_predicates],
+    function(x) {
+      rlang::eval_tidy(x, env = rlang::get_env(x))
+    })
   dots
 }
 
