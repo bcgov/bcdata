@@ -2,7 +2,7 @@
 foo <- bcdc_search("forest", res_format = "wms")
 
 bcdc_search_facets("type")
-bcdc_search_facets("licence_id")
+bcdc_search_facets("license_id")
 
 bcdc_list()
 

@@ -4,14 +4,14 @@
 \alias{bcdc_search}
 \title{Search the B.C. Data Catalogue}
 \usage{
-bcdc_search(..., licence_id = NULL, download_audience = "Public",
+bcdc_search(..., license_id = NULL, download_audience = "Public",
   type = NULL, res_format = NULL, sector = NULL,
   organization = NULL, n = 100)
 }
 \arguments{
 \item{...}{search terms}
 
-\item{licence_id}{the type of license (see \code{bcdc_search_facets("licence_id")}).}
+\item{license_id}{the type of license (see \code{bcdc_search_facets("license_id")}).}
 
 \item{download_audience}{download audience
 (see \code{bcdc_search_facets("download_audience")}). Default \code{"Public"}}
