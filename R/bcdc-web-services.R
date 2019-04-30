@@ -23,7 +23,7 @@
 #' @export
 #'
 bcdc_get_geodata <- function(x = NULL, crs = 3005) {
-  message("bcdc_get_geodata is deprecated in favour of bcdc_get_data")
+  message("bcdc_get_geodata is defunct in favour of bcdc_get_data")
   message("You can use the same argument to pull spatial data from the BC Data Catalogue:")
   message(glue::glue("    bcdc_get_data('{x}')"))
 
