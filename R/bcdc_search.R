@@ -14,7 +14,7 @@
 #'
 #' @param facet the facet(s) for which to retrieve valid values. Can be one or
 #' more of:
-#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization"`
+#'  `"licence_id", "download_audience", "type", "res_format", "sector", "organization"`
 #'
 #' @return a data frame of values for the selected facet
 #' @export
@@ -23,7 +23,7 @@
 #' \dontrun{
 #' bcdc_search_facets("type")
 #' }
-bcdc_search_facets <- function(facet = c("license_id", "download_audience",
+bcdc_search_facets <- function(facet = c("licence_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
@@ -85,7 +85,7 @@ bcdc_list <- function() {
 #' Search the B.C. Data Catalogue
 #'
 #' @param ... search terms
-#' @param license_id the type of license (see `bcdc_search_facets("license_id")`).
+#' @param licence_id the type of license (see `bcdc_search_facets("licence_id")`).
 #' @param download_audience download audience
 #'        (see `bcdc_search_facets("download_audience")`). Default `"Public"`
 #' @param type type of resource (see `bcdc_search_facets("type")`)
@@ -104,7 +104,7 @@ bcdc_list <- function() {
 #' bcdc_search("forest")
 #' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
 #' }
-bcdc_search <- function(..., license_id = NULL,
+bcdc_search <- function(..., licence_id = NULL,
                         download_audience = "Public",
                         type = NULL,
                         res_format=NULL,
@@ -116,7 +116,7 @@ bcdc_search <- function(..., license_id = NULL,
 
   # TODO: allow terms to be passed as a vector, and allow use of | for OR
   terms <- paste0(compact(list(...)), collapse = "+")
-  facets <- compact(list(license_id = license_id,
+  facets <- compact(list(licence_id = licence_id,
                 download_audience = download_audience,
                 type = type,
                 res_format = res_format,
