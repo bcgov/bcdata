@@ -2,20 +2,13 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_get_geodata}
 \alias{bcdc_get_geodata}
-\title{Get data from the BC Web Feature Service}
+\title{Get data from the B.C. Web Feature Service (DEPRECATED)}
 \usage{
-bcdc_get_geodata(x = NULL, ..., crs = 3005)
+bcdc_get_geodata(x = NULL, crs = 3005)
 }
 \arguments{
 \item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).}
-
-\item{...}{Logical predicates with which to filter the results. Multiple
-conditions are combined with \code{&}. Only rows where the condition evalueates to
-\code{TRUE} are kept. Accepts normal R expressions as well as any of the special
-\link[=cql_geom_predicates]{CQL geometry functions} such as \code{WITHIN()} or \code{INTERSECTS()}.
-If you know \code{CQL} and want to write a \code{CQL} query directly, write it enclosed
-in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("ID = '42'")}}
 
 \item{crs}{the epsg code for the coordinate reference system. Defaults to \code{3005}
 (B.C. Albers). See https://epsgi.io.}
@@ -24,27 +17,5 @@ in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("I
 an \code{sf} object
 }
 \description{
-Pulls features off the web. The data must be available as a wms/wfs service.
-See \code{bcdc_get_record(x)$resources}). If the record is greater than 10000 rows,
-the response will be paginated. If you are querying layers of this size, expect
-that the request will take quite a while.
-}
-\examples{
-
-bcdc_get_geodata("bc-airports", crs = 3857)
-bcdc_get_geodata("bc-airports", PHYSICAL_ADDRESS == 'Victoria, BC', crs = 3857)
-bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
-bcdc_get_geodata("bc-airports", CQL("LATITUDE > 50"))
-
-## A moderately large layer
-\dontrun{
-bcdc_get_geodata("bc-environmental-monitoring-locations")
-bcdc_get_geodata("bc-environmental-monitoring-locations", PERMIT_RELATIONSHIP == "DISCHARGE")
-}
-
-## A very large layer
-\dontrun{
-bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
-}
-
+Get data from the B.C. Web Feature Service (DEPRECATED)
 }

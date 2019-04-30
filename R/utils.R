@@ -21,41 +21,41 @@ bcdc_number_wfs_records <- function(query_list, client){
   res_max <- client$get(query = query_list)
   txt_max <- res_max$parse("UTF-8")
 
-
   ## resultType is only returned as XML.
   ## regex to extract the number
   as.numeric(sub(".*numberMatched=\"([0-9]{1,20})\".*", "\\1", txt_max))
 
 }
 
-check_geom_col_names <- function(query_list, cli){
-  original_query <- query_list
+specify_geom_name <- function(record, query_list){
 
-  ## Change REQUEST so that it returns only col names
-  query_list$REQUEST = "DescribeFeatureType"
+  cols_df <- record$details
 
-  r = cli$get(query = query_list)
-  txt = r$parse("UTF-8")
-
-  # Converty from JSON and extract the data.frame of the feature properties
-  cols <- jsonlite::fromJSON(txt, simplifyVector = TRUE)
-  cols_df <- cols$featureTypes$properties[[1]]
-  # Find the gml geometry field and get the name of the field
-  geom_col <- cols_df[grepl("^gml:(multi)?(point|linestring|polygon|geometry)$",
-                            tolower(cols_df$type)), "name"]
-
-  if (geom_col != "GEOMETRY" && !is.null(original_query$CQL_FILTER)) {
-    original_query$CQL_FILTER = gsub("GEOMETRY", geom_col, original_query$CQL_FILTER)
+  # Catch when no details df:
+  if (!any(dim(cols_df))) {
+    warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
+            call. = FALSE)
+    return(query_list)
   }
 
-  return(original_query)
+  # Find the geometry field and get the name of the field
+  geom_col <- cols_df$column_name[cols_df$data_type == "SDO_GEOMETRY"]
+
+
+  glue::glue(query_list$CQL_FILTER, geom_name = geom_col)
+  # if (geom_col != "GEOMETRY" && !is.null(query_list$CQL_FILTER)) {
+  #   query_list$CQL_FILTER = gsub("GEOMETRY", geom_col, query_list$CQL_FILTER)
+  # }
+
 
 }
 
 bcdc_read_sf <- function(x, ...){
 
   if(length(x) == 1){
-    sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)
+
+    return(sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...))
+
   } else{
     ## Parse the Paginated response
     message("Parsing data")
@@ -73,6 +73,10 @@ slug_from_url <- function(x) {
   x
 }
 
+formats_supported <- function(){
+  c("csv","kml","txt","xlsx", "xls")
+}
+
 bcdc_http_client <- function(url = NULL) {
 
   crul::HttpClient$new(url = url,
@@ -86,4 +90,77 @@ has_internet <- function() {
   z <- try(suppressWarnings(readLines('https://www.google.com', n = 1)),
            silent = TRUE)
   !inherits(z, "try-error")
+}
+
+
+# Need the actual name of the geometry column
+geom_col_name <- function(x){
+  cols_df <- x$details
+
+  # Find the geometry field and get the name of the field
+  cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
+}
+
+wfs_to_r_col_type <- function(col){
+
+  dplyr::case_when(
+    col == "xsd:string" ~ "character",
+    col == "xsd:date" ~ "date",
+    col == "xsd:decimal" ~ "numeric",
+    col == "xsd:hexBinary" ~ "numeric",
+    grepl("^gml:", col) ~ "sfc geometry",
+    TRUE ~ as.character(col)
+  )
+}
+
+
+##from a record
+formats_from_record <- function(x){
+
+  resource_df <- dplyr::tibble(
+      name = purrr::map_chr(x$resources, "name"),
+      url = tools::file_ext(purrr::map_chr(x$resources, "url")),
+      format = purrr::map_chr(x$resources, "format")
+    )
+  x <- formats_from_resource(resource_df)
+
+  x[x != ""]
+}
+
+formats_from_resource <- function(x){
+  dplyr::case_when(
+    x$format == "wms" ~ "wms",
+    nchar(x$url) == 0 ~ "other",
+    x$url == "zip" ~ paste0(x$format, "(zipped)"),
+    TRUE ~ tools::file_ext(x$url)
+  )
+}
+
+resource_function_generator <- function(r){
+
+  fr <- formats_from_resource(r)
+
+  if(r[["resource_storage_location"]] == "BCGW Data Store"){
+    cat("    bcdc_get_data(x = '", r$package_id, "')\n", sep = "")
+  }
+
+  if(any(r %in% formats_supported())){
+    cat("    code: bcdc_get_data(x = '", r$package_id, "',
+        format = '", fr, "', resource = '",r$id,"')\n", sep = "")
+  } else{
+    cat("    code: No direct methods currently available in bcdata\n")
+  }
+}
+
+gml_types <- function(x) {
+  c(
+    "gml:PointPropertyType",
+    "gml:CurvePropertyType",
+    "gml:SurfacePropertyType",
+    "gml:GeometryPropertyType",
+    "gml:MultiPointPropertyType",
+    "gml:MultiCurvePropertyType",
+    "gml:MultiSurfacePropertyType",
+    "gml:MultiGeometryPropertyType"
+  )
 }

@@ -39,10 +39,3 @@ test_that("bcdc_search works", {
             "bcdc_recordlist")
 })
 
-
-test_that("an entry with kml record returns an sf object",{
-  skip_if_net_down()
-  kml_record <- bcdc_get_data("ab606497-d1b3-4414-ac1c-377c64681452")
-  expect_is(kml_record, "sf")
-  expect_equal(attr(kml_record, "sf_column"), "geometry")
-})

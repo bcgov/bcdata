@@ -61,6 +61,8 @@ This provides us considerable information on the data record including the fact 
 ```{r}
 bc_bound <- bcdc_get_geodata("province-of-british-columbia-legally-defined-administrative-areas-of-bc")
 ```
+
+
 And we use a simple plot to check if this indeed the layer we would like:
 
 ```{r}

@@ -6,3 +6,5 @@
 ^bcdata\.Rproj$
 ^\.Rproj\.user$
 ^inst/sticker$
+
+getting-started-with-bcdata.Rmd

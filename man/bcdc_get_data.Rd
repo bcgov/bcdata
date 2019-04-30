@@ -2,25 +2,37 @@
 % Please edit documentation in R/get_data.R
 \name{bcdc_get_data}
 \alias{bcdc_get_data}
-\title{downlaod and read a dataset from a Data Catalogue resource}
+\title{Download and read a dataset from a B.C. Data Catalogue resource}
 \usage{
-bcdc_get_data(x)
+bcdc_get_data(x, format = NULL, resource = NULL, ...)
 }
 \arguments{
 \item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).}
+
+\item{format}{Defaults to NULL which will first check to see if the record is a WMS/WFS record.
+If so an sf object is returned. Otherwise a format needs to be specified. \code{bcdc_get_record} can
+be used to identify which formats are available.}
+
+\item{resource}{option argument used when there are multiple data files of the same format
+within the same record. See examples.}
+
+\item{...}{arguments passed to other functions. For spatial (WMS/WFS) data these are passed to
+\code{bcdc_query_geodata()}. Non spatial data is passed to a function to handle the import based
+on the file extension.}
 }
 \value{
 an object of a type relevant to the resource (usually a tibble or an sf object)
 }
 \description{
-downlaod and read a dataset from a Data Catalogue resource
+Download and read a dataset from a B.C. Data Catalogue resource
 }
 \examples{
 \dontrun{
-bcdc_get_data(paste0("https://catalogue.data.gov.bc.ca/dataset/",
-                     "british-columbia-greenhouse-gas-emissions/resource/",
-                     "11b1da01-fabc-406c-8b13-91e87f126dec"))
-bcdc_get_data("11b1da01-fabc-406c-8b13-91e87f126dec")
+bcdc_get_data("bc-airports")
+bcdc_get_data("bc-winery-locations", format = "csv")
+bcdc_get_data("local-government-population-and-household-projections-2018-2027",
+format = "xlsx", sheet = "Population", skip = 1)
+
 }
 }

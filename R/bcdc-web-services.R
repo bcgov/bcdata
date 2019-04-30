@@ -11,20 +11,33 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 
-#' Get data from the BC Web Feature Service
+#' Get data from the B.C. Web Feature Service (DEPRECATED)
 #'
-#' Pulls features off the web. The data must be available as a wms/wfs service.
+#'
+#' @inheritParams bcdc_get_data
+#' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
+#'        (B.C. Albers). See https://epsgi.io.
+#'
+#' @return an `sf` object
+#'
+#' @export
+#'
+bcdc_get_geodata <- function(x = NULL, crs = 3005) {
+  message("bcdc_get_geodata is defunct in favour of bcdc_get_data")
+  message("You can use the same argument to pull spatial data from the B.C. Data Catalogue:")
+  message(glue::glue("    bcdc_get_data('{x}')"))
+
+}
+
+#' Query data from the B.C. Web Feature Service
+#'
+#' Queries features from the B.C. Web Feature Service. The data must be available as
+#' a WMS/WFS service. See `bcdc_get_record(x)$resources`). Pulls features off the web. The data must be available as a WMS/WFS service.
 #' See `bcdc_get_record(x)$resources`). If the record is greater than 10000 rows,
 #' the response will be paginated. If you are querying layers of this size, expect
 #' that the request will take quite a while.
 #'
 #' @inheritParams bcdc_get_data
-#' @param ... Logical predicates with which to filter the results. Multiple
-#' conditions are combined with `&`. Only rows where the condition evalueates to
-#' `TRUE` are kept. Accepts normal R expressions as well as any of the special
-#' [CQL geometry functions][cql_geom_predicates] such as `WITHIN()` or `INTERSECTS()`.
-#' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
-#' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
 #'        (B.C. Albers). See https://epsgi.io.
 #'
@@ -34,31 +47,32 @@
 #'
 #' @examples
 #'
-#' bcdc_get_geodata("bc-airports", crs = 3857)
-#' bcdc_get_geodata("bc-airports", PHYSICAL_ADDRESS == 'Victoria, BC', crs = 3857)
-#' bcdc_get_geodata("ground-water-wells", OBSERVATION_WELL_NUMBER == 108)
-#' bcdc_get_geodata("bc-airports", CQL("LATITUDE > 50"))
+#' \dontrun{
+#' bcdc_query_geodata("bc-airports", crs = 3857)
+#' bcdc_query_geodata("bc-airports", crs = 3857) %>%
+#'   filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
+#'   collect()
+#' bcdc_query_geodata("ground-water-wells") %>%
+#'   filter(OBSERVATION_WELL_NUMBER == 108)
 #'
 #' ## A moderately large layer
-#' \dontrun{
-#' bcdc_get_geodata("bc-environmental-monitoring-locations")
-#' bcdc_get_geodata("bc-environmental-monitoring-locations", PERMIT_RELATIONSHIP == "DISCHARGE")
-#' }
+
+#' bcdc_query_geodata("bc-environmental-monitoring-locations")
+#' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
+#'   filter(PERMIT_RELATIONSHIP == "DISCHARGE")
+#'
 #'
 #' ## A very large layer
-#' \dontrun{
-#' bcdc_get_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 #' }
 #'
-bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
+bcdc_query_geodata <- function(x = NULL, crs = 3005) {
   obj <- bcdc_get_record(x)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
-    stop("No wms/wfs resource available for this dataset.",
-      call. = FALSE
+    stop("No WMS/WFS resource available for this dataset.",
+         call. = FALSE
     )
   }
-
-  query <- cql_translate(...)
 
   ## Parameters for the API call
   query_list <- list(
@@ -67,8 +81,7 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
     REQUEST = "GetFeature",
     outputFormat = "application/json",
     typeNames = obj$layer_name,
-    SRSNAME = paste0("EPSG:", crs),
-    CQL_FILTER = query
+    SRSNAME = paste0("EPSG:", crs)
   )
 
   ## Drop any NULLS from the list
@@ -77,95 +90,47 @@ bcdc_get_geodata <- function(x = NULL, ..., crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  ## Change CQL query on the fly if geom is SHAPE
-  query_list <- check_geom_col_names(query_list, cli)
+  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = obj))
 
-  ## Determine total number of records for pagination purposes
-  number_of_records <- bcdc_number_wfs_records(query_list, cli)
-
-  if (number_of_records < 10000) {
-    cc <- cli$get(query = query_list)
-    status_failed <- cc$status_code >= 300
-  } else {
-    message("This record requires pagination to complete the request.")
-    sorting_col <- obj[["details"]][["column_name"]][1]
-
-    query_list <- c(query_list, sortby = sorting_col)
-
-    # Create pagination client
-    cc <- crul::Paginator$new(
-      client = cli,
-      by = "query_params",
-      limit_param = "count",
-      offset_param = "startIndex",
-      limit = number_of_records,
-      limit_chunk = 5000,
-      progress = TRUE
-    )
-
-
-    message("Retrieving data")
-    cc$get(query = query_list)
-
-    status_failed <- any(cc$status_code() >= 300)
-  }
-
-  if (status_failed) {
-    ## TODO: This error message could be more informative
-    stop("The BC data catalogue experienced issues with this request",
-         call. = FALSE
-    )
-  }
-
-  txt <- cc$parse("UTF-8")
-
-  sf_responses <- bcdc_read_sf(txt)
-
-  as.bcdc_promise(sf_responses, sql_string = query_list$CQL_FILTER)
 }
 
-# bcdc_get_geodata <- memoise::memoise(bcdc_get_geodata_)
-
-#' Get map from the BC Web Mapping Service
+#' Get map from the B.C. Web Mapping Service
 #'
-#' Pulls map off the web
 #'
-#' @param feature_name Name of the feature
-#' @param bbox a string of bounding box coordinates
-#'
+#' @inheritParams bcdc_get_data
 #'
 #' @examples
 #' \dontrun{
-#' ## So far only works with this layer
-#' bbox_coords = "1069159.051186301,1050414.7675306,1074045.5446851396,1054614.0978811644"
-#' bcdc_wms("WHSE_FOREST_VEGETATION.VEG_COMP_LYR_R1_POLY", bbox = bbox_coords)
+#' bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
+#' bcdc_preview("points-of-well-diversion-applications")
 #' }
-
-## TODO: Figure out a better method of determining the bounding box
-
-bcdc_wms <- function(feature_name = NULL, bbox = NULL) {
+#' @export
+bcdc_preview <- function(x = NULL) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
-  cli <- crul::HttpClient$new(url = "http://openmaps.gov.bc.ca/geo/pub/wms",
-                              headers = list(`User-Agent` = "https://github.com/bcgov/bcdc"))
+  obj <- bcdc_get_record(x)
 
-  r <- cli$get(query = list(
-    SERVICE = "WMS",
-    VERSION = "1.1.1",
-    REQUEST = "GetMap",
-    FORMAT = "application/openlayers",
-    TRANSPARENT="true",
-    STYLES=1748,
-    LAYERS = feature_name,
-    SRS="EPSG:3005",
-    WIDTH = "512",
-    HEIGHT = "440",
-    BBOX = bbox
-  ))
+  wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
 
-  ##TODO:: Viewer should be able to accept this somehow much mapview
-  # Possible solution: write html to a local temp file then access that
-  utils::browseURL(r$url)
+  wms_options <- leaflet::WMSTileOptions(format = "image/png",
+                          transparent = TRUE,
+                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
+
+  wms_legend <- glue::glue("{wms_url}?request=GetLegendGraphic&
+             format=image%2Fpng&
+             width=20&
+             height=20&
+             layer=pub%3A{obj$layer_name}")
+
+
+  leaflet::leaflet() %>%
+    leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
+                     options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
+    leaflet::addWMSTiles(wms_url,
+                layers=glue::glue("pub:{obj$layer_name}"),
+                options = wms_options) %>%
+    leaflet.extras::addWMSLegend(uri = wms_legend) %>%
+    leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
 
 }
 

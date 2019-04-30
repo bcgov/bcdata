@@ -15,7 +15,7 @@
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
 #' filter strings which can then be supplied to the `...` argument in
 #' \code{bcdc_get_geodata}. The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the wfs call. Subsequent in-memory
+#' bounding box to reduce the complexity of the WFS call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
 #'
 #' There are wrapper functions for
@@ -34,17 +34,27 @@
 #' @seealso sql_geom_predicates
 #'
 #' @examples
-#' airports <- bcdc_get_geodata("bc-airports")
+#' \dontrun{
+#' airports <- bcdc_get_geodata("bc-airports") %>% collect()
 #' bcdc_cql_string(airports, "DWITHIN")
+#' }
 #'
 #' @export
 bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
                             distance = NULL, units = NULL,
                             coords = NULL, crs = NULL){
 
+  if(inherits(x, "bcdc_promise")) {
+    stop("To use spatial operators, you need to use collect() to retrieve the object used to filter",
+         call. = FALSE)
+  }
+
+  geom_col <- attr(x, "geom_col")
+  if(is.null(geom_col)) geom_col <- "GEOMETRY"
+
   match.arg(geometry_predicates, cql_geom_predicate_list())
 
-  # Only covert x to bbox if not using BBOX CQL function
+  # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
   if (!geometry_predicates == "BBOX") {
     x <- sf_to_text_bbox(x)
@@ -64,7 +74,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
       x
     }
 
-  CQL(paste0(geometry_predicates,"(GEOMETRY, ", cql_args, ")"))
+  CQL(paste0(geometry_predicates,"({geom_name}, ", cql_args, ")"))
 }
 
 ## Geometry Predicates
@@ -95,8 +105,8 @@ sf_to_text_bbox <- function(x) {
 #' to filter results from [bcdc_get_geodata()].
 #' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
 #' The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the wfs call. Subsequent in-memory
-#' filtering may be need to achieve exact results.
+#' bounding box to reduce the complexity of the WFS call. Subsequent in-memory
+#' filtering may be needed to achieve exact results.
 #'
 #' @param geom an sf/sfc/sfg object
 #' @name cql_geom_predicates
