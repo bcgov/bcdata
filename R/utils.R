@@ -108,7 +108,7 @@ wfs_to_r_col_type <- function(col){
     col == "xsd:date" ~ "date",
     col == "xsd:decimal" ~ "numeric",
     col == "xsd:hexBinary" ~ "numeric",
-    col == "gml:GeometryPropertyType" ~ "geom",
+    grepl("^gml:", col) ~ "sfc geometry",
     TRUE ~ as.character(col)
   )
 }
@@ -150,4 +150,17 @@ resource_function_generator <- function(r){
   } else{
     cat("    code: No direct methods currently available in bcdata\n")
   }
+}
+
+gml_types <- function(x) {
+  c(
+    "gml:PointPropertyType",
+    "gml:CurvePropertyType",
+    "gml:SurfacePropertyType",
+    "gml:GeometryPropertyType",
+    "gml:MultiPointPropertyType",
+    "gml:MultiCurvePropertyType",
+    "gml:MultiSurfacePropertyType",
+    "gml:MultiGeometryPropertyType"
+  )
 }

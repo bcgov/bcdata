@@ -49,7 +49,7 @@ bcdc_describe_feature <- function(x = NULL){
   xml_res <- xml2::read_xml(cc$parse("UTF-8"))
   xml_res <- xml2::xml_find_all(xml_res, "//xsd:sequence")
   xml_res <- xml2::xml_find_all(xml_res, ".//xsd:element")
-  xml_res <-  purrr::map(xml_res, xml2::xml_attrs)
+  xml_res <- purrr::map(xml_res, xml2::xml_attrs)
   xml_df <- purrr::map_df(xml_res, ~as.list(.))
 
   ## This is an ugly way of doing this
@@ -58,16 +58,9 @@ bcdc_describe_feature <- function(x = NULL){
                           nillable = FALSE,
                           type = "xsd:string")
 
-  ## Extracting geometry column and turn into a row
-  geom_row <- xml_df[xml_df$type == "gml:GeometryPropertyType",]
-  ## Because the object will always be imported into R as "geometry" we change the name here
-  geom_row$name <- "geometry"
-
-  ## Remove the geom row
-  xml_df <- xml_df[!xml_df$type == "gml:GeometryPropertyType",]
-
-  ## Add geom col to last position
-  xml_df <- dplyr::bind_rows(xml_df, geom_row)
+  ## Identify geometry column
+  geom_type <- intersect(xml_df$type, gml_types())
+  xml_df[xml_df$type == geom_type, "name"] <- "geometry"
 
   ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
