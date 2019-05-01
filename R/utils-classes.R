@@ -59,9 +59,12 @@ print.bcdc_record <- function(x, ...) {
 
   resources <- x$resources
   ## Assumption: any BCGW Data Store object is wfs/wms enabled
-  if (any(resource_locations(x) %in% "BCGW Data Store")) {
-    wms_resource <- which(formats_from_record(x, trim = FALSE) == "wms")
-    resources <- resources[wms_resource]
+  if (any(resource_locations(x) %in% "bcgwdatastore")) {
+
+    formats <- formats_from_record(x, trim = FALSE)
+    locations <- resource_locations(x)
+    ind <- (formats == "wms" & locations == "bcgwdatastore") | locations != "bcgwdatastore"
+    resources <- resources[ind]
   }
 
   cat("\nResources: (", length(resources), ")\n")
@@ -72,6 +75,7 @@ record_print_helper <- function(r){
   cat("  ", r$name, "\n", sep = "")
   #cat("    description:", r$description, "\n")
   cat("    format:", formats_from_resource(r), "\n")
+  if(r$format != "wms") cat("    url:", r$url, "\n")
   cat("    resource:", r$id, "\n")
   cat("    access:", r$resource_storage_access_method, "\n")
   resource_function_generator(r)

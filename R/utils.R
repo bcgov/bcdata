@@ -103,7 +103,9 @@ geom_col_name <- function(x){
 
 ## Currently used to identify is record is wfs/wms enabled
 resource_locations <- function(x){
-  purrr::map_chr(seq_along(x$resources), ~x[["resources"]][[.x]][["resource_storage_location"]])
+  x <- purrr::map_chr(seq_along(x$resources), ~x[["resources"]][[.x]][["resource_storage_location"]])
+  ## to rectify inconsistent "BCGW DataStore" and "BCGW Data Store"
+  tolower(gsub("\\s", "", x))
 }
 
 wfs_to_r_col_type <- function(col){
@@ -136,8 +138,10 @@ formats_from_record <- function(x, trim = TRUE){
 
 formats_from_resource <- function(x){
   dplyr::case_when(
+    x$format == x$url ~ x$format,
     x$format == "wms" ~ "wms",
-    nchar(x$url) == 0 ~ "other",
+    nchar(x$url) == 0 ~ x$format,
+    nchar(tools::file_ext(x$url)) == 0 ~ x$format,
     x$url == "zip" ~ paste0(x$format, "(zipped)"),
     TRUE ~ tools::file_ext(x$url)
   )
