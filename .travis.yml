@@ -17,6 +17,9 @@ addons:
       - libgeos-dev
       - libgdal-dev
 
+before_install:
+  - if [[ "$OSTYPE" != "linux-gnu" ]]; then sudo tlmgr install inconsolata titling; fi
+
 r:
   - oldrel
   - release
