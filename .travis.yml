@@ -18,6 +18,7 @@ addons:
       - libgdal-dev
 
 before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr update --self; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr install inconsolata titling; fi
 
 r:
