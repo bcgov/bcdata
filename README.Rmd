@@ -20,7 +20,7 @@ See the License for the specific language governing permissions and limitations 
 
 
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -58,7 +58,7 @@ library(bcdata)
 - `bcdc_search_facet()` - List catalogue facet search options
 - `bcdc_get_record()` - Print a catalogue record
 - `bcdc_get_data()` - Get catalogue data
-- `bcdc_query_geodata()` - Get catalogue geospatial data (data must be available as a [WMS/WFS service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E))
+- `bcdc_query_geodata()` - Get & query catalogue geospatial data (data must be available as a [WMS/WFS service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E))
 
 ### Usage
 
@@ -73,7 +73,7 @@ bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 ### bcdc_get_data
 To have a quick look at spatial data, you can simply print the object:
 ```{r}
-airports <- bcdc_get_geodata("bc-airports", crs = 3857)
+airports <- bcdc_query_geodata("bc-airports", crs = 3857)
 airports
 ```
 If you need all the data, you need to retrieve the data using the `collect` function:
