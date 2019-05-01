@@ -13,6 +13,7 @@
 # Function to translate R code to CQL
 cql_translate <- function(...) {
   ## convert dots to list of quosures
+  dots <- rlang::quos(...)
   ## run partial_eval on them to evaluate named objects in the environment
   ## in which they were defined.
   ## e.g., if x is defined in the global env and passed as on object to
@@ -20,7 +21,6 @@ cql_translate <- function(...) {
   ## This also evaluates any functions defined in cql_scalar so that the spatial
   ## predicates and CQL() expressions are evaluated into valid CQL code
   ## so they can be combined with the rest of the query
-  dots <- rlang::quos(...)
   dots <- lapply(dots, function(x) {
     rlang::new_quosure(
       dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
@@ -30,7 +30,7 @@ cql_translate <- function(...) {
   build_where(sql_where)
 }
 
-# Builds a complete WHERE clause from multiple WHERE statements
+# Builds a complete WHERE clause from a vector of WHERE statements
 # Modified from dbplyr:::sql_clause_where
 build_where <- function(where, con = cql_dummy_con) {
   if (length(where) > 0L) {
@@ -119,16 +119,6 @@ sql_escape_ident.DummyCQL <- function(con, x) {
 #' @export
 sql_escape_string.DummyCQL <- function(con, x) {
   dbplyr::sql_quote(x, "'")
-}
-
-# Regex for looking for spatial functions, optionally only at the beginning
-# of a string
-spatial_funs_regex <- function(first = FALSE) {
-  funs <- paste(cql_geom_predicate_list(), collapse = "|")
-  if (first) {
-    return(paste0("^(", funs, ")"))
-  }
-  funs
 }
 
 #' CQL escaping
