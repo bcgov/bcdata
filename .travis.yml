@@ -18,7 +18,7 @@ addons:
       - libgdal-dev
 
 before_install:
-  - if [[ "$OSTYPE" != "linux-gnu" ]]; then sudo tlmgr install inconsolata titling; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo tlmgr install inconsolata titling; fi
 
 r:
   - oldrel
