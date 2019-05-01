@@ -39,6 +39,14 @@ test_that("bcdc_get_data works with an xls when specifying a specific resource",
   expect_is(bcdc_get_data(name, format = 'xls', resource = '7b09f82f-e7d0-44bf-9310-b94039b323a8'), "tbl")
 })
 
+test_that("bcdc_get_data will import auxiliary data files from a wms/wfs record",{
+  expect_is(bcdc_get_data(x = 'bc-airports',
+                format = 'xlsx', resource = 'fcccba36-b528-4731-8978-940b3cc04f69'), "tbl")
+
+  expect_is(bcdc_get_data(x = 'fa542137-a976-49a6-856d-f1201adb2243',
+                          format = 'csv', resource = 'dc1098a7-a4b8-49a3-adee-9badd4429279'), "tbl")
+})
+
 
 
 
