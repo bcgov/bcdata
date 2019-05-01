@@ -68,7 +68,8 @@ bcdc_get_geodata <- function(x = NULL, crs = 3005) {
 #'
 bcdc_query_geodata <- function(x = NULL, crs = 3005) {
   obj <- bcdc_get_record(x)
-  if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
+
+  if (!any(resource_locations(obj) %in% "BCGW Data Store")) {
     stop("No WMS/WFS resource available for this dataset.",
          call. = FALSE
     )

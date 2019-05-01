@@ -57,14 +57,15 @@ print.bcdc_record <- function(x, ...) {
   cat("\nDescription:\n")
   cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
-  record_formats <- formats_from_record(x)
-
-  if ("wms" %in% record_formats) {
-    x$resources <- x$resources[record_formats != "wms"]
+  resources <- x$resources
+  ## Assumption: any BCGW Data Store object is wfs/wms enabled
+  if (any(resource_locations(x) %in% "BCGW Data Store")) {
+    wms_resource <- which(formats_from_record(x, trim = FALSE) == "wms")
+    resources <- resources[wms_resource]
   }
 
-  cat("\nResources: (", length(x$resources), ")\n")
-  purrr::walk(x$resources, record_print_helper)
+  cat("\nResources: (", length(resources), ")\n")
+  purrr::walk(resources, record_print_helper)
 }
 
 record_print_helper <- function(r){

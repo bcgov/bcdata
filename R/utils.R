@@ -101,6 +101,11 @@ geom_col_name <- function(x){
   cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
 }
 
+## Currently used to identify is record is wfs/wms enabled
+resource_locations <- function(x){
+  purrr::map_chr(seq_along(x$resources), ~x[["resources"]][[.x]][["resource_storage_location"]])
+}
+
 wfs_to_r_col_type <- function(col){
 
   dplyr::case_when(
@@ -115,7 +120,7 @@ wfs_to_r_col_type <- function(col){
 
 
 ##from a record
-formats_from_record <- function(x){
+formats_from_record <- function(x, trim = TRUE){
 
   resource_df <- dplyr::tibble(
       name = purrr::map_chr(x$resources, "name"),
@@ -124,7 +129,9 @@ formats_from_record <- function(x){
     )
   x <- formats_from_resource(resource_df)
 
-  x[x != ""]
+  if(trim) return(x[x != ""])
+
+  x
 }
 
 formats_from_resource <- function(x){
