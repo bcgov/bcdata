@@ -8,7 +8,14 @@ bcdc_get_record(id)
 }
 \arguments{
 \item{id}{the human-readable name, permalink id, or
-url of the record.}
+url of the record.
+
+It is advised to use the permament id for a record rather than the
+human-readable name to guard against future name changes of the record.
+If you use the human-readble name a warning will be issued once per
+session. You can silence these warnings altogether by setting an option:
+\code{options("silence_named_get_record_warning" = TRUE)} - which you can put
+in your .Rprofile file so the option persists across sessions.}
 }
 \value{
 A list containing the metadata for the record

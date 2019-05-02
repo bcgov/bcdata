@@ -8,7 +8,14 @@ bcdc_get_data(x, format = NULL, resource = NULL, ...)
 }
 \arguments{
 \item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the id of a resource (or the url).}
+or a character string denoting the id of a resource (or the url).
+
+It is advised to use the permament id for a record rather than the
+human-readable name to guard against future name changes of the record.
+If you use the human-readble name a warning will be issued once per
+session. You can silence these warnings altogether by setting an option:
+\code{options("silence_named_get_data_warning" = TRUE)} - which you can set
+in your .Rprofile file so the option persists across sessions.}
 
 \item{format}{Defaults to NULL which will first check to see if the record is a WMS/WFS record.
 If so an sf object is returned. Otherwise a format needs to be specified. \code{bcdc_get_record} can
