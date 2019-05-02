@@ -167,6 +167,13 @@ bcdc_search <- function(..., license_id = NULL,
 #' @param id the human-readable name, permalink id, or
 #' url of the record.
 #'
+#' It is advised to use the permament id for a record rather than the
+#' human-readable name to guard against future name changes of the record.
+#' If you use the human-readble name a warning will be issued once per
+#' session. You can silence these warnings altogether by setting an option:
+#' `options("silence_named_get_record_warning" = TRUE)` - which you can put
+#' in your .Rprofile file so the option persists across sessions.
+#'
 #' @return A list containing the metadata for the record
 #' @export
 #'
@@ -193,6 +200,14 @@ bcdc_get_record <- function(id) {
   stopifnot(res$success)
 
   ret <- res$result
+
+  if (ret$id != id) {
+    get_record_warn_once(
+      "It is advised to use the permanent id ('", ret$id, "') ",
+      "rather than the name of the record ('", id,
+      "') to guard against future name changes"
+    )
+  }
 
   as.bcdc_record(ret)
 }
