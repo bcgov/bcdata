@@ -76,12 +76,12 @@ bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
     )
 
   ## Specifying id
-  if(length(resource_df$ext[resource_df$ext %in% format]) > 1 && !is.null(resource)){
+  if(length(resource_df$ext[resource_df$ext %in% format]) >= 1 && !is.null(resource)){
     file_url <- resource_df$url[resource_df$id == resource]
   }
 
   ## Using menu to figure out resource
-  if(length(resource_df$ext[resource_df$ext %in% format]) > 1 && is.null(resource) && interactive()){
+  if(length(resource_df$ext[resource_df$ext %in% format]) >= 1 && is.null(resource) && interactive()){
 
     cat(glue::glue(
       "The record you are trying to access appears to have more than one resource with a '{format}' extension."
@@ -113,7 +113,11 @@ bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
 
   }
 
-  ## Go through if there aren't multiple resources
+  ## Go straight through if there aren't multiple resources but the extension is specified
+  if(length(resource_df$ext[resource_df$ext %in% format]) == 1 && is.null(resource)){
+    file_url <- resource_df$url[resource_df$ext == format]
+  }
+
   if(length(resource_df$ext[resource_df$ext %in% format]) == 1 && is.null(resource)){
     file_url <- resource_df$url[resource_df$ext == format]
   }

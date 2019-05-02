@@ -101,6 +101,13 @@ geom_col_name <- function(x){
   cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
 }
 
+## Currently used to identify is record is wfs/wms enabled
+resource_locations <- function(x){
+  x <- purrr::map_chr(seq_along(x$resources), ~x[["resources"]][[.x]][["resource_storage_location"]])
+  ## to rectify inconsistent "BCGW DataStore" and "BCGW Data Store"
+  tolower(gsub("\\s", "", x))
+}
+
 wfs_to_r_col_type <- function(col){
 
   dplyr::case_when(
@@ -115,7 +122,7 @@ wfs_to_r_col_type <- function(col){
 
 
 ##from a record
-formats_from_record <- function(x){
+formats_from_record <- function(x, trim = TRUE){
 
   resource_df <- dplyr::tibble(
       name = purrr::map_chr(x$resources, "name"),
@@ -124,13 +131,17 @@ formats_from_record <- function(x){
     )
   x <- formats_from_resource(resource_df)
 
-  x[x != ""]
+  if(trim) return(x[x != ""])
+
+  x
 }
 
 formats_from_resource <- function(x){
   dplyr::case_when(
+    x$format == x$url ~ x$format,
     x$format == "wms" ~ "wms",
-    nchar(x$url) == 0 ~ "other",
+    nchar(x$url) == 0 ~ x$format,
+    nchar(tools::file_ext(x$url)) == 0 ~ x$format,
     x$url == "zip" ~ paste0(x$format, "(zipped)"),
     TRUE ~ tools::file_ext(x$url)
   )
@@ -141,12 +152,12 @@ resource_function_generator <- function(r){
   fr <- formats_from_resource(r)
 
   if(r[["resource_storage_location"]] == "BCGW Data Store"){
-    cat("    bcdc_get_data(x = '", r$package_id, "')\n", sep = "")
+    return(cat("    code: bcdc_get_data(x = '", r$package_id, "')\n", sep = ""))
   }
 
   if(any(r %in% formats_supported())){
-    cat("    code: bcdc_get_data(x = '", r$package_id, "',
-        format = '", fr, "', resource = '",r$id,"')\n", sep = "")
+    return(cat("    code: bcdc_get_data(x = '", r$package_id, "',
+        format = '", fr, "', resource = '",r$id,"')\n", sep = ""))
   } else{
     cat("    code: No direct methods currently available in bcdata\n")
   }
