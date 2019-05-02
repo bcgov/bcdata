@@ -33,6 +33,8 @@ matrix:
       os: osx
     - r: release
       os: osx
+    - r: oldrel
+      os: osx
 
 notifications:
   email:
