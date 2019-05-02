@@ -175,3 +175,13 @@ gml_types <- function(x) {
     "gml:MultiGeometryPropertyType"
   )
 }
+
+get_record_warn_once <- function(...) {
+  silence <- isTRUE(getOption("silence_named_get_record_warning"))
+  warned <- bcdata_env$named_get_record_warned
+  if (!silence && !warned) {
+    warning(..., call. = FALSE)
+    assign("named_get_record_warned", TRUE, envir = bcdata_env)
+  }
+}
+
