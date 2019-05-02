@@ -175,3 +175,11 @@ gml_types <- function(x) {
     "gml:MultiGeometryPropertyType"
   )
 }
+
+warn_once <- function(msg) {
+  if (!get("warned", envir = bcdata_env)) {
+    warning(msg)
+    assign("warned", TRUE, envir = bcdata_env)
+  }
+}
+
