@@ -18,6 +18,10 @@ compact <- function(l) Filter(Negate(is.null), l)
 bcdc_number_wfs_records <- function(query_list, client){
   query_list <- c(query_list, resultType = "hits")
 
+  if(!is.null(query_list$propertyName)){
+    query_list$propertyName <- NULL
+  }
+
   res_max <- client$get(query = query_list)
   txt_max <- res_max$parse("UTF-8")
 
