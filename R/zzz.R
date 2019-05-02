@@ -13,5 +13,5 @@
 bcdata_env <- new.env(parent = emptyenv())
 
 .onLoad <- function(...) {
- assign("warned", FALSE, envir = bcdata_env)
+ assign("named_get_record_warned", FALSE, envir = bcdata_env)
 }

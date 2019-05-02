@@ -176,10 +176,12 @@ gml_types <- function(x) {
   )
 }
 
-warn_once <- function(msg) {
-  if (!get("warned", envir = bcdata_env)) {
-    warning(msg)
-    assign("warned", TRUE, envir = bcdata_env)
+get_record_warn_once <- function(...) {
+  silence <- isTRUE(getOption("silence_named_get_record_warning"))
+  warned <- bcdata_env$named_get_record_warned
+  if (!silence && !warned) {
+    warning(..., call. = FALSE)
+    assign("named_get_record_warned", TRUE, envir = bcdata_env)
   }
 }
 

@@ -14,3 +14,10 @@ test_that("check_geom_col_names works", {
   new_query <- specify_geom_name(ap, query_list)
   expect_equal(new_query, "DWITHIN(SHAPE, foobar)")
 })
+
+test_that("get_record_warn_once warns once and only once", {
+  options("silence_named_get_record_warning" = FALSE)
+  expect_warning(get_record_warn_once("Hi"))
+  expect_silent(get_record_warn_once("Hi"))
+  options("silence_named_get_record_warning" = TRUE)
+})
