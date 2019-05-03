@@ -10,7 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Download and read a dataset from a B.C. Data Catalogue record
+#' Download and read a resource from a B.C. Data Catalogue record
 #'
 #' @param record either a `bcdc_record` object (from the result of `bcdc_get_record()`)
 #' or a character string denoting the id of a resource (or the url).
@@ -31,7 +31,7 @@
 #' `bcdc_query_geodata()`. Non spatial data is passed to a function to handle the import based
 #' on the file extension.
 #'
-#' @return an object of a type relevant to the record resource (usually a tibble or an sf object)
+#' @return an object of a type relevant to the resource (usually a tibble or an sf object)
 #' @export
 #'
 #' @examples

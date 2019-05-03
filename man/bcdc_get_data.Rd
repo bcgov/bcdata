@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_data.R
 \name{bcdc_get_data}
 \alias{bcdc_get_data}
-\title{Download and read a dataset from a B.C. Data Catalogue record}
+\title{Download and read a resource from a B.C. Data Catalogue record}
 \usage{
 bcdc_get_data(record, format = NULL, resource = NULL, ...)
 }
@@ -29,10 +29,10 @@ within the same record. See examples.}
 on the file extension.}
 }
 \value{
-an object of a type relevant to the record resource (usually a tibble or an sf object)
+an object of a type relevant to the resource (usually a tibble or an sf object)
 }
 \description{
-Download and read a dataset from a B.C. Data Catalogue record
+Download and read a resource from a B.C. Data Catalogue record
 }
 \examples{
 \dontrun{
