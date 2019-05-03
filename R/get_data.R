@@ -10,9 +10,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Download and read a dataset from a B.C. Data Catalogue resource
+#' Download and read a dataset from a B.C. Data Catalogue record
 #'
-#' @param x either a `bcdc_record` object (from the result of `bcdc_get_record()`)
+#' @param record either a `bcdc_record` object (from the result of `bcdc_get_record()`)
 #' or a character string denoting the id of a resource (or the url).
 #'
 #' It is advised to use the permament id for a record rather than the
@@ -31,7 +31,7 @@
 #' `bcdc_query_geodata()`. Non spatial data is passed to a function to handle the import based
 #' on the file extension.
 #'
-#' @return an object of a type relevant to the resource (usually a tibble or an sf object)
+#' @return an object of a type relevant to the record resource (usually a tibble or an sf object)
 #' @export
 #'
 #' @examples
@@ -42,12 +42,12 @@
 #' format = "xlsx", sheet = "Population", skip = 1)
 #'
 #' }
-bcdc_get_data <- function(x, format = NULL, resource = NULL,...) {
+bcdc_get_data <- function(record, format = NULL, resource = NULL,...) {
   UseMethod("bcdc_get_data")
 }
 
 #' @export
-bcdc_get_data.bcdc_record <- function(x, format = NULL, resource = NULL, ...) {
+bcdc_get_data.bcdc_record <- function(record, format = NULL, resource = NULL, ...) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
   stop("not working yet!")
@@ -55,15 +55,15 @@ bcdc_get_data.bcdc_record <- function(x, format = NULL, resource = NULL, ...) {
   if (!interactive())
     stop("Calling bcdc_get_data on a bcdc_record object is only meant for interactive use")
   x <- utils::menu("pick one")
-  bcdc_get_data(x)
+  bcdc_get_data(record)
 }
 
 #' @export
-bcdc_get_data.character <- function(x, format = NULL, resource = NULL, ...) {
-  x <- slug_from_url(x)
+bcdc_get_data.character <- function(record, format = NULL, resource = NULL, ...) {
+  x <- slug_from_url(record)
 
   if(is.null(format)){
-    query <- bcdc_query_geodata(x = x, ...)
+    query <- bcdc_query_geodata(record = record, ...)
     return(collect(query))
   }
 
