@@ -110,3 +110,14 @@ test_that("subsetting works locally", {
   expect_equal(as.character(cql_translate(foo == y$id[2])),
                "(\"foo\" = 'b')")
 })
+
+test_that("large vectors supplied to filter fail with an error",{
+
+  pori <- bcdc_query_geodata("freshwater-atlas-stream-network") %>%
+    filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
+    collect()
+
+  expect_error(bcdc_query_geodata("freshwater-atlas-stream-network") %>%
+    filter(WATERSHED_KEY %in% pori$WATERSHED_KEY[1:510]))
+
+})
