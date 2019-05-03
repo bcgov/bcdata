@@ -4,10 +4,10 @@
 \alias{bcdc_query_geodata}
 \title{Query data from the B.C. Web Feature Service}
 \usage{
-bcdc_query_geodata(x = NULL, crs = 3005)
+bcdc_query_geodata(record = NULL, crs = 3005)
 }
 \arguments{
-\item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).
 
 It is advised to use the permament id for a record rather than the
@@ -25,8 +25,8 @@ an \code{sf} object
 }
 \description{
 Queries features from the B.C. Web Feature Service. The data must be available as
-a WMS/WFS service. See \code{bcdc_get_record(x)$resources}). Pulls features off the web. The data must be available as a WMS/WFS service.
-See \code{bcdc_get_record(x)$resources}). If the record is greater than 10000 rows,
+a WMS/WFS service. See \code{bcdc_get_record(record)$resources}). Pulls features off the web.
+See \code{bcdc_get_record(record)$resources}). If the record is greater than 10000 rows,
 the response will be paginated. If you are querying layers of this size, expect
 that the request will take quite a while.
 }
