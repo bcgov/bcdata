@@ -97,3 +97,16 @@ test_that("Different combinations of predicates work", {
                                             CQL("\"POP_2000\" < 2000"))),
                or_statement)
 })
+
+test_that("subsetting works locally", {
+  x <- c("a", "b")
+  y <- data.frame(id = x, stringsAsFactors = FALSE)
+  expect_equal(as.character(cql_translate(foo == x[1])),
+               "(\"foo\" = 'a')")
+  expect_equal(as.character(cql_translate(foo %in% y$id)),
+               "(\"foo\" IN ('a', 'b'))")
+  expect_equal(as.character(cql_translate(foo %in% y[["id"]])),
+               "(\"foo\" IN ('a', 'b'))")
+  expect_equal(as.character(cql_translate(foo == y$id[2])),
+               "(\"foo\" = 'b')")
+})

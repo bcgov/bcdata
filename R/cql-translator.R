@@ -51,6 +51,12 @@ cql_scalar <- dbplyr::sql_translator(
   between = function(x, left, right) {
     CQL(paste0(x, " BETWEEN ", left, " AND ", right))
   },
+  # Override dbplyr::base_scalar subsetting functions which convert to SQL
+  # operations intended for the backend database, but we want them to operate
+  # locally
+  `[` = `[`,
+  `[[` = `[[`,
+  `$` = `$`,
   DWITHIN = function(x) DWITHIN(x),
   EQUALS = function(x) EQUALS(x),
   DISJOINT = function(x) DISJOINT(x),
