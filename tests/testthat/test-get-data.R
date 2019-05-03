@@ -48,6 +48,18 @@ test_that("bcdc_get_data will import auxiliary data files from a wms/wfs record"
 })
 
 
+test_that("bcdc_get_data can returns a resource that is part of a wms record but is not the wms part",{
+  expect_is(bcdc_get_data("bc-airports", resource = "fcccba36-b528-4731-8978-940b3cc04f69"), "tbl")
+})
+
+test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
+  expect_is(bcdc_get_data("bc-airports", resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"), "sf")
+})
+
+test_that("a non-wms record with only one resource returns that resource when it is not specified",{
+  expect_is(bcdc_get_data("cooperative-housing-units-2019-"), "tbl")
+})
+
 
 
 

@@ -4,7 +4,7 @@
 \alias{bcdc_get_data}
 \title{Download and read a resource from a B.C. Data Catalogue record}
 \usage{
-bcdc_get_data(record, format = NULL, resource = NULL, ...)
+bcdc_get_data(record, resource = NULL, ...)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
@@ -16,10 +16,6 @@ If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
 \code{options("silence_named_get_data_warning" = TRUE)} - which you can set
 in your .Rprofile file so the option persists across sessions.}
-
-\item{format}{Defaults to NULL which will first check to see if the record is a WMS/WFS record.
-If so an sf object is returned. Otherwise a format needs to be specified. \code{bcdc_get_record} can
-be used to identify which formats are available.}
 
 \item{resource}{option argument used when there are multiple data files of the same format
 within the same record. See examples.}

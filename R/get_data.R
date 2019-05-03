@@ -22,9 +22,6 @@
 #' `options("silence_named_get_data_warning" = TRUE)` - which you can set
 #' in your .Rprofile file so the option persists across sessions.
 #'
-#' @param format Defaults to NULL which will first check to see if the record is a WMS/WFS record.
-#' If so an sf object is returned. Otherwise a format needs to be specified. `bcdc_get_record` can
-#' be used to identify which formats are available.
 #' @param resource option argument used when there are multiple data files of the same format
 #' within the same record. See examples.
 #' @param ... arguments passed to other functions. For spatial (WMS/WFS) data these are passed to
@@ -42,12 +39,12 @@
 #' format = "xlsx", sheet = "Population", skip = 1)
 #'
 #' }
-bcdc_get_data <- function(record, format = NULL, resource = NULL,...) {
+bcdc_get_data <- function(record, resource = NULL,...) {
   UseMethod("bcdc_get_data")
 }
 
 #' @export
-bcdc_get_data.bcdc_record <- function(record, format = NULL, resource = NULL, ...) {
+bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
   stop("not working yet!")
@@ -59,47 +56,88 @@ bcdc_get_data.bcdc_record <- function(record, format = NULL, resource = NULL, ..
 }
 
 #' @export
-bcdc_get_data.character <- function(record, format = NULL, resource = NULL, ...) {
+bcdc_get_data.character <- function(record, resource = NULL, ...) {
   x <- slug_from_url(record)
-
-  if(is.null(format)){
-    query <- bcdc_query_geodata(record = record, ...)
-    return(collect(query))
-  }
-
-  if(!all(format %in% formats_supported())){
-    stop(paste0("The ", format, " extension is not currently supported by bcdata"),
-         call. = FALSE)
-  }
 
   record <- bcdc_get_record(x)
 
   resource_df <- dplyr::tibble(
-      name = purrr::map_chr(record$resources, "name"),
-      url = purrr::map_chr(record$resources, "url"),
-      id = purrr::map_chr(record$resources, "id"),
-      format = purrr::map_chr(record$resources, "format"),
-      ext = tools::file_ext(url)
-    )
+    name = purrr::map_chr(record$resources, "name"),
+    url = purrr::map_chr(record$resources, "url"),
+    id = purrr::map_chr(record$resources, "id"),
+    format = purrr::map_chr(record$resources, "format"),
+    ext = tools::file_ext(url),
+    location = tolower(
+      gsub("\\s", "", purrr::map_chr(record$resources, "resource_storage_location"))
+      )
+  )
 
-  ## Specifying id
-  if(length(resource_df$ext[resource_df$ext %in% format]) >= 1 && !is.null(resource)){
-    file_url <- resource_df$url[resource_df$id == resource]
+  if(resource_df$id[resource_df$format == "wms"] == resource){
+      query <- bcdc_query_geodata(record = x, ...)
+      return(collect(query))
   }
 
-  ## Using menu to figure out resource
-  if(length(resource_df$ext[resource_df$ext %in% format]) >= 1 && is.null(resource) && interactive()){
+  # if(any(format == "wms")) {
+  #   query <- bcdc_query_geodata(record = record, ...)
+  #   return(collect(query))
+  # }
+  #
+  # if(!all(format %in% formats_supported())){
+  #   stop(paste0("The ", format, " extension is not currently supported by bcdata"),
+  #        call. = FALSE)
+  # }
 
-    cat(glue::glue(
-      "The record you are trying to access appears to have more than one resource with a '{format}' extension."
-    ))
+
+  ## A wms record with at least one non BCGW resource (test bc-airports)
+  wms_non_bcgw_res <- any(resource_df$format %in% "wms") && any(unique(resource_df$location) != "bcgwdatastore")
+
+  if(wms_non_bcgw_res && is.null(resource) && interactive()){
+    cat("The record you are trying to access appears to have more than one resource.")
     cat("\n Resources: \n")
 
-    purrr::walk(record$resources[which(resource_df$ext == format)], record_print_helper)
+    ind <- (resource_df$format == "wms" & resource_df$location == "bcgwdatastore") | resource_df$location != "bcgwdatastore"
+
+    purrr::walk(record$resources[ind], record_print_helper)
 
     cat("--------\n")
     cat("Please choose one option:")
-    choices <- resource_df$name[resource_df$ext %in% format]
+    choices <- resource_df$name[ind]
+    choice_input <- utils::menu(choices)
+
+    if(choice_input == 0) stop("No resource selected", call. = FALSE)
+
+    name_choice <- choices[choice_input]
+
+    if(name_choice == "WMS getCapabilities request"){
+      ## todo
+      # cat("To directly access this record in the future please use this command:\n")
+      # cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
+        query <- bcdc_query_geodata(record = x, ...)
+        return(collect(query))
+    } else{
+      file_url <- resource_df$url[resource_df$name == name_choice]
+      id_choice <- resource_df$id[resource_df$name == name_choice]
+
+      cat("To directly access this record in the future please use this command:\n")
+      cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
+    }
+
+  }
+
+  ## Not wms and with multiple supported resources (test grizzly)
+  no_wms_supp_res <- any(resource_df$format != "wms") && nrow(resource_df[resource_df$format %in% formats_supported(),]) > 1
+
+  ## Using menu to figure out resource
+  if(no_wms_supp_res && !any(resource_df$format != "wms") && is.null(resource) && interactive()){
+
+    cat("The record you are trying to access appears to have more than one resource.")
+    cat("\n Resources: \n")
+
+    purrr::walk(record$resources[which(resource_df$ext %in% formats_supported())], record_print_helper)
+
+    cat("--------\n")
+    cat("Please choose one option:")
+    choices <- resource_df$name[resource_df$ext %in% formats_supported()]
     choice_input <- utils::menu(choices)
 
     if(choice_input == 0) stop("No resource selected", call. = FALSE)
@@ -109,24 +147,24 @@ bcdc_get_data.character <- function(record, format = NULL, resource = NULL, ...)
     id_choice <- resource_df$id[resource_df$name == name_choice]
 
     cat("To directly access this record in the future please use this command:\n")
-    cat(glue::glue("bcdc_get_data('{x}', format = '{format}', resource = '{id_choice}')"),"\n")
+    cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
 
   }
 
   ## Bonk if not using interactively
-  if(length(resource_df$ext[resource_df$ext %in% format]) > 1  && is.null(resource) && !interactive()){
-    stop("The record you are trying to access appears to have more than one resource
-         with a glue::glue{format} extension.", call. = TRUE)
-
+  if(is.null(resource) && !interactive()){
+    stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
   }
 
-  ## Go straight through if there aren't multiple resources but the extension is specified
-  if(length(resource_df$ext[resource_df$ext %in% format]) == 1 && is.null(resource)){
-    file_url <- resource_df$url[resource_df$ext == format]
+  ## If there is only one record and a resource hasn't be supplied
+  if(nrow(resource_df) == 1 && is.null(resource)){
+    file_url <- resource_df$url
   }
 
-  if(length(resource_df$ext[resource_df$ext %in% format]) == 1 && is.null(resource)){
-    file_url <- resource_df$url[resource_df$ext == format]
+
+  ## If the resource is specified
+  if(!is.null(resource)){
+    file_url <- resource_df$url[resource_df$id == resource]
   }
 
 
@@ -138,9 +176,9 @@ bcdc_get_data.character <- function(record, format = NULL, resource = NULL, ...)
   r$raise_for_status()
 
   ## Download file then read it in.
-  tmp <- tempfile(fileext = paste0(".", format))
+  tmp <- tempfile(fileext = paste0(".", tools::file_ext(file_url)))
   on.exit(unlink(tmp))
-  utils::download.file(file_url, tmp, mode = 'wb', quiet = FALSE)
+  utils::download.file(file_url, tmp, mode = 'wb', quiet = TRUE)
 
   read_fun <- function(x, type) {
     switch(type,
@@ -151,7 +189,7 @@ bcdc_get_data.character <- function(record, format = NULL, resource = NULL, ...)
            "xls" = readxl::read_excel(x, ...))
   }
 
-  read_fun(x = tmp, type = format)
+  read_fun(x = tmp, type = tools::file_ext(file_url))
 
 }
 

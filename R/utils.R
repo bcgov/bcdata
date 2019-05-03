@@ -160,8 +160,7 @@ resource_function_generator <- function(r){
   }
 
   if(any(r %in% formats_supported())){
-    return(cat("    code: bcdc_get_data(x = '", r$package_id, "',
-        format = '", fr, "', resource = '",r$id,"')\n", sep = ""))
+    return(cat("    code: bcdc_get_data(x = '", r$package_id,"', resource = '",r$id,"')\n", sep = ""))
   } else{
     cat("    code: No direct methods currently available in bcdata\n")
   }
