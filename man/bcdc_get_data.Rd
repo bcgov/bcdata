@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_data.R
 \name{bcdc_get_data}
 \alias{bcdc_get_data}
-\title{Download and read a dataset from a B.C. Data Catalogue resource}
+\title{Download and read a resource from a B.C. Data Catalogue record}
 \usage{
-bcdc_get_data(x, format = NULL, resource = NULL, ...)
+bcdc_get_data(record, format = NULL, resource = NULL, ...)
 }
 \arguments{
-\item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).
 
 It is advised to use the permament id for a record rather than the
@@ -32,7 +32,7 @@ on the file extension.}
 an object of a type relevant to the resource (usually a tibble or an sf object)
 }
 \description{
-Download and read a dataset from a B.C. Data Catalogue resource
+Download and read a resource from a B.C. Data Catalogue record
 }
 \examples{
 \dontrun{

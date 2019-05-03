@@ -22,8 +22,8 @@
 #' @examples
 #'  bcdc_describe_feature("bc-airports")
 
-bcdc_describe_feature <- function(x = NULL){
-  obj <- bcdc_get_record(x)
+bcdc_describe_feature <- function(record = NULL){
+  obj <- bcdc_get_record(record)
   if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
     stop("No WMS/WFS resource available for this dataset.",
          call. = FALSE

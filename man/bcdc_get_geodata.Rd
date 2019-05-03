@@ -4,10 +4,10 @@
 \alias{bcdc_get_geodata}
 \title{Get data from the B.C. Web Feature Service (DEPRECATED)}
 \usage{
-bcdc_get_geodata(x = NULL, crs = 3005)
+bcdc_get_geodata(record = NULL, crs = 3005)
 }
 \arguments{
-\item{x}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
 or a character string denoting the id of a resource (or the url).
 
 It is advised to use the permament id for a record rather than the
