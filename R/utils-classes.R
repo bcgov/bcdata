@@ -141,6 +141,13 @@ filter.bcdc_promise <- function(.data, ...) {
   ## Change CQL query on the fly if geom is not GEOMETRY
   .data$query_list$CQL_FILTER <- specify_geom_name(.data$obj, .data$query_list)
 
+  if(!safe_request_length(.data$query_list)){
+    stop("The vector you are trying to filter by is too long. Consider either breaking
+    up the request into two or more bcdc_query_geodata() calls or using a spatial
+    operator to spatial define your request. See ?cql_geom_predicates.",
+    call. = FALSE)
+  }
+
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
 }
 
@@ -203,6 +210,7 @@ select.bcdc_promise <- function(.data, ...){
 collect.bcdc_promise <- function(x, ...){
 
   query_list <- x$query_list
+  safe_request_length(query_list)
   cli <- x$cli
 
   ## Determine total number of records for pagination purposes
