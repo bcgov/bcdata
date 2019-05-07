@@ -34,9 +34,9 @@
 #' @examples
 #' \dontrun{
 #' bcdc_get_data("bc-airports")
-#' bcdc_get_data("bc-winery-locations", format = "csv")
+#' bcdc_get_data("bc-winery-locations")
 #' bcdc_get_data("local-government-population-and-household-projections-2018-2027",
-#' format = "xlsx", sheet = "Population", skip = 1)
+#' sheet = "Population", skip = 1)
 #'
 #' }
 bcdc_get_data <- function(record, resource = NULL,...) {
@@ -72,26 +72,24 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
       )
   )
 
-  if(resource_df$id[resource_df$format == "wms"] == resource){
+  wms_resource_id <- resource_df$id[resource_df$format == "wms"]
+
+
+  ## wms record; resource supplied
+  if(identical(wms_resource_id, resource)){
       query <- bcdc_query_geodata(record = x, ...)
       return(collect(query))
   }
 
-  # if(any(format == "wms")) {
-  #   query <- bcdc_query_geodata(record = record, ...)
-  #   return(collect(query))
-  # }
-  #
-  # if(!all(format %in% formats_supported())){
-  #   stop(paste0("The ", format, " extension is not currently supported by bcdata"),
-  #        call. = FALSE)
-  # }
+  ## wms record; no aux resources
+  if(!is_emptyish(wms_resource_id) && all(unique(resource_df$location) %in% c("bcgwdatastore","bcgeographicwarehouse"))){
+    query <- bcdc_query_geodata(record = x, ...)
+    return(collect(query))
+  }
 
-
-  ## A wms record with at least one non BCGW resource (test bc-airports)
-  wms_non_bcgw_res <- any(resource_df$format %in% "wms") && any(unique(resource_df$location) != "bcgwdatastore")
-
-  if(wms_non_bcgw_res && is.null(resource) && interactive()){
+  ## wms record with at least one non BCGW resource (test bc-airports)
+  wms_non_bcgw_res <- !is_emptyish(wms_resource_id) && any(unique(resource_df$location) != "bcgwdatastore")
+  if(wms_non_bcgw_res  && is.null(resource) && interactive()){
     cat("The record you are trying to access appears to have more than one resource.")
     cat("\n Resources: \n")
 
@@ -124,11 +122,9 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
   }
 
-  ## Not wms and with multiple supported resources (test grizzly)
-  no_wms_supp_res <- any(resource_df$format != "wms") && nrow(resource_df[resource_df$format %in% formats_supported(),]) > 1
-
-  ## Using menu to figure out resource
-  if(no_wms_supp_res && !any(resource_df$format != "wms") && is.null(resource) && interactive()){
+  ## tabular; multiple resources (test grizzly)
+  no_wms_supp_res <- is_emptyish(wms_resource_id) && nrow(resource_df[resource_df$format %in% formats_supported(),]) > 1
+  if(no_wms_supp_res && is.null(resource) && interactive()){
 
     cat("The record you are trying to access appears to have more than one resource.")
     cat("\n Resources: \n")
@@ -151,26 +147,24 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
   }
 
-  ## Bonk if not using interactively
+  ## fail if not using interactively and haven't specified resource
   if(is.null(resource) && !interactive()){
     stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
   }
 
-  ## If there is only one record and a resource hasn't be supplied
+  ## tabular; only one resource and not specified
   if(nrow(resource_df) == 1 && is.null(resource)){
     file_url <- resource_df$url
   }
 
 
-  ## If the resource is specified
+  ## tabular; resource specified
   if(!is.null(resource)){
     file_url <- resource_df$url[resource_df$id == resource]
   }
 
 
-
-
-  ## Do we need this?
+  ## Do we need a get call if we download the file anyway?
   cli <- bcdc_http_client(file_url)
   r <- cli$get()
   r$raise_for_status()

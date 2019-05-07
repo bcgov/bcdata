@@ -33,9 +33,9 @@ Download and read a resource from a B.C. Data Catalogue record
 \examples{
 \dontrun{
 bcdc_get_data("bc-airports")
-bcdc_get_data("bc-winery-locations", format = "csv")
+bcdc_get_data("bc-winery-locations")
 bcdc_get_data("local-government-population-and-household-projections-2018-2027",
-format = "xlsx", sheet = "Population", skip = 1)
+sheet = "Population", skip = 1)
 
 }
 }
