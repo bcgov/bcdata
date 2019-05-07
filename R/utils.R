@@ -189,7 +189,20 @@ get_record_warn_once <- function(...) {
 }
 
 
+
 is_emptyish <- function(x){
   length(x) == 0 || !nzchar(x)
+}
+
+safe_request_length <- function(query_list){
+  ## A conservative number of characters in the filter call.
+  ## Calculating from the query_list BEFORE the call actually happen.
+
+  ## Tested wfs url character limit
+  limits <- 5000
+  request_length <- nchar(query_list$CQL_FILTER)
+
+  return(request_length <= limits)
+
 }
 
