@@ -188,3 +188,8 @@ get_record_warn_once <- function(...) {
   }
 }
 
+
+is_emptyish <- function(x){
+  length(x) == 0 || !nzchar(x)
+}
+
