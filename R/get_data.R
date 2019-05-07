@@ -99,14 +99,14 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
     cat("--------\n")
     cat("Please choose one option:")
-    choices <- resource_df$name[ind]
+    choices <- clean_wfs(resource_df$name[ind])
     choice_input <- utils::menu(choices)
 
     if(choice_input == 0) stop("No resource selected", call. = FALSE)
 
     name_choice <- choices[choice_input]
 
-    if(name_choice == "WMS getCapabilities request"){
+    if(name_choice == "WFS request (Spatial Data)"){
       ## todo
       # cat("To directly access this record in the future please use this command:\n")
       # cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")

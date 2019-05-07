@@ -151,20 +151,7 @@ formats_from_resource <- function(x){
   )
 }
 
-resource_function_generator <- function(r){
 
-  fr <- formats_from_resource(r)
-
-  if(r[["resource_storage_location"]] == "BCGW Data Store"){
-    return(cat("    code: bcdc_get_data(x = '", r$package_id, "')\n", sep = ""))
-  }
-
-  if(any(r %in% formats_supported())){
-    return(cat("    code: bcdc_get_data(x = '", r$package_id,"', resource = '",r$id,"')\n", sep = ""))
-  } else{
-    cat("    code: No direct methods currently available in bcdata\n")
-  }
-}
 
 gml_types <- function(x) {
   c(
@@ -193,3 +180,11 @@ is_emptyish <- function(x){
   length(x) == 0 || !nzchar(x)
 }
 
+
+clean_wfs <- function(x){
+  dplyr::case_when(
+    x == "WMS getCapabilities request" ~ "WFS request (Spatial Data)",
+    x == "wms" ~ "wfs",
+    TRUE ~ x
+  )
+}
