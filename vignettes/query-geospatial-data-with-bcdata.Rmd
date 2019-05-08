@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with data"
+title: "Query Geospatial Data with bcdata"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 # WORK IN PROGRESS
 
 ## Getting Started
-First you need to loadthe package. We will also load the sf package to better enable our spatial data work:
+First you need to load the `bcdata` package. We will also load the `sf` package to better enable our spatial data work:
+
 ```{r}
 library(bcdata)
 library(sf)
