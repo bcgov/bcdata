@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 # WORK IN PROGRESS
 
 ## Getting Started
+
 First you need to load the `bcdata` package. We will also load the `sf` package to better enable our spatial data work:
 
 ```{r}
@@ -28,6 +29,7 @@ library(sf)
 
 
 ## Find your data set
+
 There are several ways that you might arrive at the data set you want. The simplest way is to make use of the web-based BC Data Catalogue. The package provides a convenience function that allows you to quickly open a broswer to the BC Data Catalogue:
 ```{r,eval=FALSE}
 bcdc_browse()

@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with bcdata"
-author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -15,3 +14,4 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
