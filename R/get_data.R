@@ -157,7 +157,7 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   }
 
   ## fail if not using interactively and haven't specified resource
-  if(is.null(resource) && !interactive()){
+  if(is.null(resource) && nrow(resource_df) > 1 && !interactive()){
     stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
   }
 

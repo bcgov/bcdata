@@ -25,13 +25,11 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
 
 
 test_that("bcdc_get_data works with a non-wms record with only one resource",{
-  skip("skipping because this fails when not interactive. Need to find a way to test.")
   name <- "criminal-code-traffic-offences"
   expect_is(bcdc_get_data(name), "tbl")
 })
 
 test_that("bcdc_get_data works when using read_excel arguments",{
-  skip("skipping because this fails when not interactive. Need to find a way to test.")
   name <- "local-government-population-and-household-projections-2018-2027"
   expect_is(bcdc_get_data(name, sheet = "Population", skip = 1), "tbl")
 })
@@ -42,7 +40,7 @@ test_that("bcdc_get_data works with an xls when specifying a specific resource",
 })
 
 test_that("bcdc_get_data will return non-wms resources",{
-  expect_is(bcdc_get_data(record = 'bc-airports',
+  expect_is(bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
                  resource = 'fcccba36-b528-4731-8978-940b3cc04f69'), "tbl")
 
   expect_is(bcdc_get_data(record = 'fa542137-a976-49a6-856d-f1201adb2243',
