@@ -53,7 +53,8 @@ print.bcdc_record <- function(x, ...) {
   cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
   cat("\nSector:", x$sector)
   cat("\nLicence:", x$license_title)
-  cat("\nType:", x$type, "\n")
+  cat("\nType:", x$type)
+  cat("\nLast Updated:", x$record_last_modified, "\n")
   cat("\nDescription:\n")
   cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
