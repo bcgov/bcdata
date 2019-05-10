@@ -79,7 +79,7 @@ record_print_helper <- function(r){
   if(r$format != "wms") cat("    url:", r$url, "\n")
   cat("    resource:", r$id, "\n")
   cat("    access:", r$resource_storage_access_method, "\n")
-  cat("    code: bcdc_get_data(x = '", r$package_id,"', resource = '",r$id,"')\n", sep = "")
+  cat("    code: bcdc_get_data(record = '", r$package_id,"', resource = '",r$id,"')\n", sep = "")
 }
 
 #' @export
