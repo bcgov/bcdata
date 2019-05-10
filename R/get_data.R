@@ -24,19 +24,37 @@
 #'
 #' @param resource option argument used when there are multiple data files of the same format
 #' within the same record. See examples.
-#' @param ... arguments passed to other functions. For spatial (WMS/WFS) data these are passed to
-#' `bcdc_query_geodata()`. Non spatial data is passed to a function to handle the import based
-#' on the file extension.
+#' @param ... arguments passed to other functions. Tabular data is passed to a function to handle
+#' the import based on the file extension. `bcdc_read_functions()` provides details on which functions
+#' handle the data import. You can then use this information to look at the help pages of those functions.
+#' See the examples for a workflow that illustrates this process.
+#' For spatial (WMS/WFS) data the `...` arguments are passed to `bcdc_query_geodata()`.
 #'
 #' @return an object of a type relevant to the resource (usually a tibble or an sf object)
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' bcdc_get_data("bc-airports")
-#' bcdc_get_data("bc-winery-locations")
-#' bcdc_get_data("local-government-population-and-household-projections-2018-2027",
-#' sheet = "Population", skip = 1)
+#' bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
+#'               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+#' bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#'
+#'
+#' ## Example of correcting import problems
+#'
+#' ## Some initial problems reading in the data
+#' bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+#'
+#' ## From bcdc_get_record we realize that the data is in xlsx format
+#' bcdc_get_record('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+#'
+#' ## bcdc_read_functions let's us know that bcdata
+#' ## uses readxl::read_excel to import xlsx files
+#' bcdc_read_functions()
+#'
+#' ## If you read the help page for readxl::read_excel,
+#' ## it seems likely that we need to skip the first row:
+#' bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4', skip = 1)
 #'
 #' }
 bcdc_get_data <- function(record, resource = NULL,...) {
@@ -159,3 +177,27 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
 }
 
+#' Formats supported and loading functions
+#'
+#' Provides a tibble of formats supported by bcdata and the associated function that
+#' reads that data into R. This function is meant as a resource to determine which parameters
+#' can be passed through the `bcdc_get_data` function to the reading function. This is
+#' particularly important to know if the data requires using arguments from the read in function.
+#'
+#' @export
+#'
+
+bcdc_read_functions <- function(){
+  x <- formats_supported()
+
+  f <- dplyr::case_when(
+    x == "csv" ~ "readr::read_csv",
+    x == "kml" ~ "sf::read_sf",
+    x == "txt" ~ "readr::read_tsv",
+    x == "xlsx" ~ "readxl::read_excel",
+    x == "xls" ~ "readxl::read_excel",
+    TRUE ~ "No function defined"
+  )
+
+  dplyr::tibble(format = x, `package::function` = f)
+}
