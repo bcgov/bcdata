@@ -61,16 +61,7 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
   record <- bcdc_get_record(x)
 
-  resource_df <- dplyr::tibble(
-    name = purrr::map_chr(record$resources, "name"),
-    url = purrr::map_chr(record$resources, "url"),
-    id = purrr::map_chr(record$resources, "id"),
-    format = purrr::map_chr(record$resources, "format"),
-    ext = tools::file_ext(url),
-    location = tolower(
-      gsub("\\s", "", purrr::map_chr(record$resources, "resource_storage_location"))
-      )
-  )
+  resource_df <- resource_to_tibble(record$resources)
 
   wms_resource_id <- resource_df$id[resource_df$format == "wms"]
 
@@ -164,26 +155,7 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   }
 
 
-  ## Do we need a get call if we download the file anyway?
-  cli <- bcdc_http_client(file_url)
-  r <- cli$get()
-  r$raise_for_status()
-
-  ## Download file then read it in.
-  tmp <- tempfile(fileext = paste0(".", tools::file_ext(file_url)))
-  on.exit(unlink(tmp))
-  utils::download.file(file_url, tmp, mode = 'wb', quiet = TRUE)
-
-  read_fun <- function(x, type) {
-    switch(type,
-           "csv" = readr::read_csv(x, ...),
-           "kml" = bcdc_read_sf(x, ...),
-           "txt" = readr::read_tsv(x, ...),
-           "xlsx" = readxl::read_excel(x, ...),
-           "xls" = readxl::read_excel(x, ...))
-  }
-
-  read_fun(x = tmp, type = tools::file_ext(file_url))
+  read_from_url(file_url, ...)
 
 }
 

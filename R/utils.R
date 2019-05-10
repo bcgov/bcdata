@@ -12,6 +12,10 @@
 
 base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
 
+bcdata_user_agent <- function(){
+  "https://github.com/bcgov/bcdata"
+}
+
 compact <- function(l) Filter(Negate(is.null), l)
 
 
@@ -84,7 +88,7 @@ formats_supported <- function(){
 bcdc_http_client <- function(url = NULL) {
 
   crul::HttpClient$new(url = url,
-                       headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
+                       headers = list(`User-Agent` = bcdata_user_agent()))
 
 }
 
@@ -201,5 +205,46 @@ safe_request_length <- function(query_list){
 
   return(request_length <= limits)
 
+}
+
+
+read_from_url <- function(file_url, ...){
+  #cli <- bcdc_http_client(file_url)
+  ## Establish where to download file
+  tmp <- tempfile(fileext = paste0(".", tools::file_ext(file_url)))
+  on.exit(unlink(tmp))
+
+  original_ua <- options(HTTPUserAgent = bcdata_user_agent())
+  on.exit(options(original_ua))
+
+  utils::download.file(file_url, tmp, mode = 'wb', quiet = TRUE)
+
+  # r <- cli$get(disk = tmp)
+  # r$raise_for_status()
+
+
+  read_fun <- function(x, type) {
+    switch(type,
+           "csv" = readr::read_csv(x, ...),
+           "kml" = bcdc_read_sf(x, ...),
+           "txt" = readr::read_tsv(x, ...),
+           "xlsx" = readxl::read_excel(x, ...),
+           "xls" = readxl::read_excel(x, ...))
+  }
+
+  read_fun(x = tmp, type = tools::file_ext(file_url))
+}
+
+resource_to_tibble <- function(x){
+  dplyr::tibble(
+    name = purrr::map_chr(x, "name"),
+    url = purrr::map_chr(x, "url"),
+    id = purrr::map_chr(x, "id"),
+    format = purrr::map_chr(x, "format"),
+    ext = tools::file_ext(url),
+    location = tolower(
+      gsub("\\s", "", purrr::map_chr(x, "resource_storage_location"))
+    )
+  )
 }
 
