@@ -209,19 +209,14 @@ safe_request_length <- function(query_list){
 
 
 read_from_url <- function(file_url, ...){
-  #cli <- bcdc_http_client(file_url)
+  cli <- bcdc_http_client(file_url)
+
   ## Establish where to download file
   tmp <- tempfile(fileext = paste0(".", tools::file_ext(file_url)))
   on.exit(unlink(tmp))
 
-  original_ua <- options(HTTPUserAgent = bcdata_user_agent())
-  on.exit(options(original_ua))
-
-  utils::download.file(file_url, tmp, mode = 'wb', quiet = TRUE)
-
-  # r <- cli$get(disk = tmp)
-  # r$raise_for_status()
-
+  r <- cli$get(disk = tmp)
+  r$raise_for_status()
 
   read_fun <- function(x, type) {
     switch(type,
