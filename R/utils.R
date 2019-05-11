@@ -82,7 +82,7 @@ slug_from_url <- function(x) {
 }
 
 formats_supported <- function(){
-  c("csv","kml","txt","xlsx", "xls")
+  bcdc_read_functions()[["format"]]
 }
 
 bcdc_http_client <- function(url = NULL) {
@@ -209,6 +209,11 @@ safe_request_length <- function(query_list){
 
 
 read_from_url <- function(file_url, ...){
+  format <- tools::file_ext(file_url)
+  if (!format %in% formats_supported()) {
+    stop("Reading ", format, " files is not currently supported in bcdata.")
+  }
+
   cli <- bcdc_http_client(file_url)
 
   ## Establish where to download file
@@ -218,16 +223,17 @@ read_from_url <- function(file_url, ...){
   r <- cli$get(disk = tmp)
   r$raise_for_status()
 
-  read_fun <- function(x, type) {
-    switch(type,
-           "csv" = readr::read_csv(x, ...),
-           "kml" = bcdc_read_sf(x, ...),
-           "txt" = readr::read_tsv(x, ...),
-           "xlsx" = readxl::read_excel(x, ...),
-           "xls" = readxl::read_excel(x, ...))
-  }
+  # Match the read function to the file format format and retrieve the function
+  funs <- bcdc_read_functions()
+  fun <- funs[funs$format == format, ]
+  read_fun <- utils::getFromNamespace(fun$fun, fun$package)
 
-  read_fun(x = tmp, type = tools::file_ext(file_url))
+  # This assumes that the function we are using to read the data takes the
+  # data as the first argument - will need revisiting if we find a situation
+  # where that's not the case
+  message("Reading the data using the ", fun$fun, " function from the ",
+          fun$package, " package.")
+  read_fun(tmp, ...)
 }
 
 resource_to_tibble <- function(x){
