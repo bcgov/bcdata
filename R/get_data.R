@@ -188,16 +188,12 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 #'
 
 bcdc_read_functions <- function(){
-  x <- formats_supported()
-
-  f <- dplyr::case_when(
-    x == "csv" ~ "readr::read_csv",
-    x == "kml" ~ "sf::read_sf",
-    x == "txt" ~ "readr::read_tsv",
-    x == "xlsx" ~ "readxl::read_excel",
-    x == "xls" ~ "readxl::read_excel",
-    TRUE ~ "No function defined"
+  dplyr::tribble(
+    ~format, ~package, ~fun,
+    "csv", "readr", "read_csv",
+    "kml", "sf", "read_sf",
+    "txt", "readr", "read_tsv",
+    "xlsx", "readxl", "read_xlsx",
+    "xls", "readxl", "read_xls"
   )
-
-  dplyr::tibble(format = x, `package::function` = f)
 }
