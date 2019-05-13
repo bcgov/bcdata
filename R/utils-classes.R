@@ -72,14 +72,15 @@ print.bcdc_record <- function(x, ...) {
   purrr::walk(resources, record_print_helper)
 }
 
-record_print_helper <- function(r){
-  cat("  ", clean_wfs(r$name), "\n", sep = "")
+record_print_helper <- function(r, n){
+  cat(n, ") ", clean_wfs(r$name), "\n", sep = "")
   #cat("    description:", r$description, "\n")
-  cat("    format:", clean_wfs(formats_from_resource(r)), "\n")
-  if(r$format != "wms") cat("    url:", r$url, "\n")
-  cat("    resource:", r$id, "\n")
-  cat("    access:", r$resource_storage_access_method, "\n")
-  cat("    code: bcdc_get_data(record = '", r$package_id,"', resource = '",r$id,"')\n", sep = "")
+  cat("     format:", clean_wfs(formats_from_resource(r)), "\n")
+  if(r$format != "wms") cat("     url:", r$url, "\n")
+  cat("     resource:", r$id, "\n")
+  cat("     access:", r$resource_storage_access_method, "\n")
+  cat("     code: bcdc_get_data(record = '", r$package_id,
+      "', resource = '",r$id,"')\n\n", sep = "")
 }
 
 #' @export

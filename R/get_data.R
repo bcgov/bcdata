@@ -116,8 +116,8 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   resources_to_choose_from <- resource_df$ext %in% formats_supported() |
     resource_df$format == "wms"
 
-  purrr::walk(record$resources[resources_to_choose_from],
-              record_print_helper)
+  purrr::iwalk(record$resources[resources_to_choose_from],
+               ~record_print_helper(.x, .y))
 
   cat("--------\n")
   cat("Please choose one option:")
