@@ -82,7 +82,7 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   resource_df <- resource_to_tibble(record$resources)
 
   ## fail if not using interactively and haven't specified resource
-  if(is.null(resource) && nrow(resource_df) > 1 && !interactive()){
+  if (is.null(resource) && nrow(resource_df) > 1L && !interactive()){
     stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
   }
 
@@ -99,75 +99,49 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   }
 
   ## non-wms; resource specified
-  if (!is.null(resource)){
+  if (!is.null(resource)) {
     return(read_from_url(resource_df$url[resource_df$id == resource], ...))
   }
 
   ## non-wms; only one resource and not specified
-  if (nrow(resource_df) == 1L){
+  if (nrow(resource_df) == 1L) {
     return(read_from_url(resource_df$url, ...))
   }
 
   ## wms record with at least one non BCGW resource (test bc-airports)
-  wms_non_bcgw_res <- !is_emptyish(wms_resource_id) && any(unique(resource_df$location) != "bcgwdatastore")
-  if(wms_non_bcgw_res  && is.null(resource) && interactive()){
-    cat("The record you are trying to access appears to have more than one resource.")
-    cat("\n Resources: \n")
-
-    purrr::walk(record$resources, record_print_helper)
-
-    cat("--------\n")
-    cat("Please choose one option:")
-    choices <- clean_wfs(resource_df$name)
-    choice_input <- utils::menu(choices)
-
-    if(choice_input == 0) stop("No resource selected", call. = FALSE)
-
-    name_choice <- choices[choice_input]
-
-    if(name_choice == "WFS request (Spatial Data)"){
-      ## todo
-      # cat("To directly access this record in the future please use this command:\n")
-      # cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
-        query <- bcdc_query_geodata(record = x, ...)
-        return(collect(query))
-    } else{
-      file_url <- resource_df$url[resource_df$name == name_choice]
-      id_choice <- resource_df$id[resource_df$name == name_choice]
-
-      cat("To directly access this record in the future please use this command:\n")
-      cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
-    }
-
-  }
-
   ## tabular; multiple resources (test grizzly)
-  no_wms_supp_res <- is_emptyish(wms_resource_id) && nrow(resource_df[resource_df$format %in% formats_supported(),]) > 1
-  if(no_wms_supp_res && is.null(resource) && interactive()){
+  cat("The record you are trying to access appears to have more than one resource.")
+  cat("\n Resources: \n")
 
-    cat("The record you are trying to access appears to have more than one resource.")
-    cat("\n Resources: \n")
+  resources_to_choose_from <- resource_df$ext %in% formats_supported() |
+    resource_df$format == "wms"
 
-    purrr::walk(record$resources[which(resource_df$ext %in% formats_supported())], record_print_helper)
+  purrr::walk(record$resources[resources_to_choose_from],
+              record_print_helper)
 
-    cat("--------\n")
-    cat("Please choose one option:")
-    choices <- resource_df$name[resource_df$ext %in% formats_supported()]
-    choice_input <- utils::menu(choices)
+  cat("--------\n")
+  cat("Please choose one option:")
+  choices <- clean_wfs(resource_df$name[resources_to_choose_from])
+  choice_input <- utils::menu(choices)
 
-    if(choice_input == 0) stop("No resource selected", call. = FALSE)
+  if (choice_input == 0) stop("No resource selected", call. = FALSE)
 
-    name_choice <- choices[choice_input]
+  name_choice <- choices[choice_input]
+
+  if (name_choice == "WFS request (Spatial Data)") {
+    ## todo
+    # cat("To directly access this record in the future please use this command:\n")
+    # cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
+    query <- bcdc_query_geodata(record = x, ...)
+    return(collect(query))
+  } else {
     file_url <- resource_df$url[resource_df$name == name_choice]
     id_choice <- resource_df$id[resource_df$name == name_choice]
 
     cat("To directly access this record in the future please use this command:\n")
     cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
-
+    read_from_url(file_url, ...)
   }
-
-  read_from_url(file_url, ...)
-
 }
 
 #' Formats supported and loading functions
