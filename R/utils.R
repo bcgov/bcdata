@@ -243,6 +243,8 @@ resource_to_tibble <- function(x){
     id = purrr::map_chr(x, "id"),
     format = purrr::map_chr(x, "format"),
     ext = safe_file_ext(url),
+    package_id = purrr::map_chr(x, "package_id"),
+    access = purrr::map_chr(x, "resource_storage_access_method"),
     location = simplify_string(purrr::map_chr(x, "resource_storage_location"))
   )
 }
