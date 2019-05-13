@@ -81,6 +81,12 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
   resource_df <- resource_to_tibble(record$resources)
 
+  ## fail if not using interactively and haven't specified resource
+  if(is.null(resource) && nrow(resource_df) > 1 && !interactive()){
+    stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
+  }
+
+  # get wms info
   wms_resource_id <- resource_df$id[resource_df$format == "wms"]
   wms_enabled <- !is_emptyish(wms_resource_id)
 
@@ -92,19 +98,27 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
     }
   }
 
+  ## non-wms; resource specified
+  if (!is.null(resource)){
+    return(read_from_url(resource_df$url[resource_df$id == resource], ...))
+  }
+
+  ## non-wms; only one resource and not specified
+  if (nrow(resource_df) == 1L){
+    return(read_from_url(resource_df$url, ...))
+  }
+
   ## wms record with at least one non BCGW resource (test bc-airports)
   wms_non_bcgw_res <- !is_emptyish(wms_resource_id) && any(unique(resource_df$location) != "bcgwdatastore")
   if(wms_non_bcgw_res  && is.null(resource) && interactive()){
     cat("The record you are trying to access appears to have more than one resource.")
     cat("\n Resources: \n")
 
-    ind <- (resource_df$format == "wms" & resource_df$location == "bcgwdatastore") | resource_df$location != "bcgwdatastore"
-
-    purrr::walk(record$resources[ind], record_print_helper)
+    purrr::walk(record$resources, record_print_helper)
 
     cat("--------\n")
     cat("Please choose one option:")
-    choices <- clean_wfs(resource_df$name[ind])
+    choices <- clean_wfs(resource_df$name)
     choice_input <- utils::menu(choices)
 
     if(choice_input == 0) stop("No resource selected", call. = FALSE)
@@ -151,23 +165,6 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
     cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
 
   }
-
-  ## fail if not using interactively and haven't specified resource
-  if(is.null(resource) && nrow(resource_df) > 1 && !interactive()){
-    stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
-  }
-
-  ## tabular; only one resource and not specified
-  if(nrow(resource_df) == 1 && is.null(resource)){
-    file_url <- resource_df$url
-  }
-
-
-  ## tabular; resource specified
-  if(!is.null(resource)){
-    file_url <- resource_df$url[resource_df$id == resource]
-  }
-
 
   read_from_url(file_url, ...)
 
