@@ -134,7 +134,7 @@ formats_from_record <- function(x, trim = TRUE){
 
   resource_df <- dplyr::tibble(
       name = purrr::map_chr(x$resources, "name"),
-      url = tools::file_ext(purrr::map_chr(x$resources, "url")),
+      url = safe_file_ext(purrr::map_chr(x$resources, "url")),
       format = purrr::map_chr(x$resources, "format")
     )
   x <- formats_from_resource(resource_df)
@@ -149,13 +149,13 @@ formats_from_resource <- function(x){
     x$format == x$url ~ x$format,
     x$format == "wms" ~ "wms",
     nchar(x$url) == 0 ~ x$format,
-    nchar(tools::file_ext(x$url)) == 0 ~ x$format,
+    nchar(safe_file_ext(x$url)) == 0 ~ x$format,
     x$url == "zip" ~ paste0(x$format, "(zipped)"),
-    TRUE ~ tools::file_ext(x$url)
+    TRUE ~ safe_file_ext(x$url)
   )
 }
 
-
+safe_file_ext <- function(x) as.character(tools::file_ext(x))
 
 gml_types <- function(x) {
   c(
@@ -209,7 +209,7 @@ safe_request_length <- function(query_list){
 
 
 read_from_url <- function(file_url, ...){
-  format <- tools::file_ext(file_url)
+  format <- safe_file_ext(file_url)
   if (!format %in% formats_supported()) {
     stop("Reading ", format, " files is not currently supported in bcdata.")
   }
@@ -242,7 +242,7 @@ resource_to_tibble <- function(x){
     url = purrr::map_chr(x, "url"),
     id = purrr::map_chr(x, "id"),
     format = purrr::map_chr(x, "format"),
-    ext = tools::file_ext(url),
+    ext = safe_file_ext(url),
     location = simplify_string(purrr::map_chr(x, "resource_storage_location"))
   )
 }
