@@ -81,6 +81,10 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
   resource_df <- resource_to_tibble(record$resources)
 
+  if (!nrow(resource_df)) {
+    stop("There are no resources that bcdata can download from this record", call. = FALSE)
+  }
+
   ## fail if not using interactively and haven't specified resource
   if (is.null(resource) && nrow(resource_df) > 1L && !interactive()){
     stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
