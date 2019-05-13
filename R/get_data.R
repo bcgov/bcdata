@@ -79,7 +79,8 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 
   record <- bcdc_get_record(x)
 
-  resource_df <- resource_to_tibble(record$resources)
+  # Only work with resources that are avaialable to read into R
+  resource_df <- record$resource_df[record$resource_df$bcdata_available, ]
 
   if (!nrow(resource_df)) {
     stop("There are no resources that bcdata can download from this record", call. = FALSE)
@@ -117,15 +118,13 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   cat("The record you are trying to access appears to have more than one resource.")
   cat("\n Resources: \n")
 
-  resources_to_choose_from <- resource_df$ext %in% formats_supported() |
-    resource_df$format == "wms"
-
-  purrr::iwalk(record$resources[resources_to_choose_from],
-               ~record_print_helper(.x, .y))
+  for (r in seq_len(nrow(resource_df))) {
+    record_print_helper(resource_df[r, ], r)
+  }
 
   cat("--------\n")
   cat("Please choose one option:")
-  choices <- clean_wfs(resource_df$name[resources_to_choose_from])
+  choices <- clean_wfs(resource_df$name)
   choice_input <- utils::menu(choices)
 
   if (choice_input == 0) stop("No resource selected", call. = FALSE)
