@@ -205,7 +205,7 @@ bcdc_get_record <- function(id) {
     get_record_warn_once(
       "It is advised to use the permanent id ('", ret$id, "') ",
       "rather than the name of the record ('", id,
-      "') to guard against future name changes"
+      "') to guard against future name changes."
     )
   }
 
@@ -214,14 +214,12 @@ bcdc_get_record <- function(id) {
 
 format_record <- function(pkg) {
   pkg$details <- dplyr::bind_rows(pkg$details)
-  # Keep only bcgw wms resources AND non-bcgw resources
-  drop <- vapply(pkg$resources, function(x) {
-    simplify_string(x$name) == "bcgeographicwarehousecustomdownload" |
-      (simplify_string(x$resource_storage_location) == "bcgwdatastore" &
-         simplify_string(x$format) != "wms")
-  },
-  FUN.VALUE = logical(1))
-  pkg$resources <- pkg$resources[!drop]
+  # Create a resources data frame
+  res_df <- resource_to_tibble(pkg$resources)
+  res_df$bcdata_available <- (res_df$ext %in% formats_supported() &
+                              res_df$location != "bcgwdatastore") |
+      (res_df$location == "bcgwdatastore" & res_df$format == "wms")
+  pkg$resource_df <- res_df
   pkg
 }
 
