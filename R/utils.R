@@ -217,7 +217,7 @@ read_from_url <- function(file_url, ...){
   cli <- bcdc_http_client(file_url)
 
   ## Establish where to download file
-  tmp <- tempfile(fileext = paste0(".", tools::file_ext(file_url)))
+  tmp <- tempfile(fileext = paste0(".", format))
   on.exit(unlink(tmp))
 
   r <- cli$get(disk = tmp)
