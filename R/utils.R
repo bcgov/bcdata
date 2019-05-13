@@ -243,9 +243,10 @@ resource_to_tibble <- function(x){
     id = purrr::map_chr(x, "id"),
     format = purrr::map_chr(x, "format"),
     ext = tools::file_ext(url),
-    location = tolower(
-      gsub("\\s", "", purrr::map_chr(x, "resource_storage_location"))
-    )
+    location = simplify_string(purrr::map_chr(x, "resource_storage_location"))
   )
 }
 
+simplify_string <- function(x) {
+  tolower(gsub("\\s+", "", x))
+}

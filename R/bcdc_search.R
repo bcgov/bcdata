@@ -214,6 +214,14 @@ bcdc_get_record <- function(id) {
 
 format_record <- function(pkg) {
   pkg$details <- dplyr::bind_rows(pkg$details)
+  # Keep only bcgw wms resources AND non-bcgw resources
+  drop <- vapply(pkg$resources, function(x) {
+    simplify_string(x$name) == "bcgeographicwarehousecustomdownload" |
+      (simplify_string(x$resource_storage_location) == "bcgwdatastore" &
+         simplify_string(x$format) != "wms")
+  },
+  FUN.VALUE = logical(1))
+  pkg$resources <- pkg$resources[!drop]
   pkg
 }
 

@@ -82,18 +82,14 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   resource_df <- resource_to_tibble(record$resources)
 
   wms_resource_id <- resource_df$id[resource_df$format == "wms"]
+  wms_enabled <- !is_emptyish(wms_resource_id)
 
-
-  ## wms record; resource supplied
-  if(identical(wms_resource_id, resource)){
+  ## wms record; resource supplied OR wms is the only resource
+  if (wms_enabled) {
+    if (nrow(resource_df) == 1L || identical(wms_resource_id, resource)) {
       query <- bcdc_query_geodata(record = x, ...)
       return(collect(query))
-  }
-
-  ## wms record; no aux resources
-  if(!is_emptyish(wms_resource_id) && all(unique(resource_df$location) %in% c("bcgwdatastore","bcgeographicwarehouse"))){
-    query <- bcdc_query_geodata(record = x, ...)
-    return(collect(query))
+    }
   }
 
   ## wms record with at least one non BCGW resource (test bc-airports)
