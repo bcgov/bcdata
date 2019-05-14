@@ -153,9 +153,14 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
 #' reads that data into R. This function is meant as a resource to determine which parameters
 #' can be passed through the `bcdc_get_data` function to the reading function. This is
 #' particularly important to know if the data requires using arguments from the read in function.
-#'
+#' @importFrom readr read_csv
+#' @importFrom readr read_tsv
+#' @importFrom sf read_sf
+#' @importFrom readxl read_xlsx
+#' @importFrom readxl read_xls
 #' @export
 #'
+
 
 bcdc_read_functions <- function(){
   dplyr::tribble(
