@@ -194,6 +194,11 @@ bcdc_get_record <- function(id) {
                                  "action/package_show"))
 
   r <- cli$get(query = list(id = id))
+
+  if (r$status_code == 404){
+    stop(paste0("'", id, "' is not a valid record id or name in the BC data catalogue"), call. = FALSE)
+  }
+
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"), simplifyVector = FALSE)
