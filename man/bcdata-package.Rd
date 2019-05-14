@@ -11,6 +11,14 @@ Search and retrieve data from the BC data catalogue
     non-spatial data are retrieved differently depending on the
     characteristics of the data object.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/bcgov/bcdata}
+  \item Report bugs at \url{https://github.com/bcgov/bcdata/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Andy Teucher \email{andy.teucher@gov.bc.ca}
 

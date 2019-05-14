@@ -207,7 +207,6 @@ safe_request_length <- function(query_list){
 
 }
 
-
 read_from_url <- function(file_url, ...){
   format <- safe_file_ext(file_url)
   if (!format %in% formats_supported()) {
@@ -226,14 +225,13 @@ read_from_url <- function(file_url, ...){
   # Match the read function to the file format format and retrieve the function
   funs <- bcdc_read_functions()
   fun <- funs[funs$format == format, ]
-  read_fun <- utils::getFromNamespace(fun$fun, fun$package)
 
   # This assumes that the function we are using to read the data takes the
   # data as the first argument - will need revisiting if we find a situation
   # where that's not the case
   message("Reading the data using the ", fun$fun, " function from the ",
           fun$package, " package.")
-  read_fun(tmp, ...)
+  do.call(fun$fun, list(tmp, ...))
 }
 
 resource_to_tibble <- function(x){
