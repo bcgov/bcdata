@@ -13,7 +13,6 @@
 ## Add "bcdc_promise" class
 as.bcdc_promise <- function(res) {
   structure(res,
-            foo = construct_query(res),
             class = c("bcdc_promise", setdiff(class(res), "bcdc_promise"))
   )
 }
