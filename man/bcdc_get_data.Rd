@@ -4,7 +4,7 @@
 \alias{bcdc_get_data}
 \title{Download and read a resource from a B.C. Data Catalogue record}
 \usage{
-bcdc_get_data(record, format = NULL, resource = NULL, ...)
+bcdc_get_data(record, resource = NULL, ...)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
@@ -17,16 +17,14 @@ session. You can silence these warnings altogether by setting an option:
 \code{options("silence_named_get_data_warning" = TRUE)} - which you can set
 in your .Rprofile file so the option persists across sessions.}
 
-\item{format}{Defaults to NULL which will first check to see if the record is a WMS/WFS record.
-If so an sf object is returned. Otherwise a format needs to be specified. \code{bcdc_get_record} can
-be used to identify which formats are available.}
-
 \item{resource}{option argument used when there are multiple data files of the same format
 within the same record. See examples.}
 
-\item{...}{arguments passed to other functions. For spatial (WMS/WFS) data these are passed to
-\code{bcdc_query_geodata()}. Non spatial data is passed to a function to handle the import based
-on the file extension.}
+\item{...}{arguments passed to other functions. Tabular data is passed to a function to handle
+the import based on the file extension. \code{bcdc_read_functions()} provides details on which functions
+handle the data import. You can then use this information to look at the help pages of those functions.
+See the examples for a workflow that illustrates this process.
+For spatial (WMS/WFS) data the \code{...} arguments are passed to \code{bcdc_query_geodata()}.}
 }
 \value{
 an object of a type relevant to the resource (usually a tibble or an sf object)
@@ -36,10 +34,26 @@ Download and read a resource from a B.C. Data Catalogue record
 }
 \examples{
 \dontrun{
-bcdc_get_data("bc-airports")
-bcdc_get_data("bc-winery-locations", format = "csv")
-bcdc_get_data("local-government-population-and-household-projections-2018-2027",
-format = "xlsx", sheet = "Population", skip = 1)
+bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
+              resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+
+
+## Example of correcting import problems
+
+## Some initial problems reading in the data
+bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+
+## From bcdc_get_record we realize that the data is in xlsx format
+bcdc_get_record('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+
+## bcdc_read_functions let's us know that bcdata
+## uses readxl::read_excel to import xlsx files
+bcdc_read_functions()
+
+## If you read the help page for readxl::read_excel,
+## it seems likely that we need to skip the first row:
+bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4', skip = 1)
 
 }
 }

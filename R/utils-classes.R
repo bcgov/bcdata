@@ -53,32 +53,30 @@ print.bcdc_record <- function(x, ...) {
   cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
   cat("\nSector:", x$sector)
   cat("\nLicence:", x$license_title)
-  cat("\nType:", x$type, "\n")
+  cat("\nType:", x$type)
+  cat("\nLast Updated:", x$record_last_modified, "\n")
   cat("\nDescription:\n")
   cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
-  resources <- x$resources
-  ## Assumption: any BCGW Data Store object is wfs/wms enabled
-  if (any(resource_locations(x) %in% "bcgwdatastore")) {
+  cat("\nResources: (", nrow(x$resource_df), ")\n")
 
-    formats <- formats_from_record(x, trim = FALSE)
-    locations <- resource_locations(x)
-    ind <- (formats == "wms" & locations == "bcgwdatastore") | locations != "bcgwdatastore"
-    resources <- resources[ind]
+  for (r in seq_len(nrow(x$resource_df))) {
+    record_print_helper(x$resource_df[r, ], r, print_avail = TRUE)
   }
-
-  cat("\nResources: (", length(resources), ")\n")
-  purrr::walk(resources, record_print_helper)
 }
 
-record_print_helper <- function(r){
-  cat("  ", r$name, "\n", sep = "")
+record_print_helper <- function(r, n, print_avail = FALSE){
+  cat(n, ") ", clean_wfs(r$name), "\n", sep = "")
   #cat("    description:", r$description, "\n")
-  cat("    format:", formats_from_resource(r), "\n")
-  if(r$format != "wms") cat("    url:", r$url, "\n")
-  cat("    resource:", r$id, "\n")
-  cat("    access:", r$resource_storage_access_method, "\n")
-  resource_function_generator(r)
+  cat("     format:", clean_wfs(formats_from_resource(r)), "\n")
+  if(r$format != "wms") cat("     url:", r$url, "\n")
+  cat("     resource:", r$id, "\n")
+  if (print_avail)
+    cat("     available in R via bcdata: ", r$bcdata_available, "\n")
+  if (r$bcdata_available)
+    cat("     code: bcdc_get_data(record = '", r$package_id,
+        "', resource = '",r$id,"')\n", sep = "")
+  cat("\n")
 }
 
 #' @export

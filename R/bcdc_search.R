@@ -151,7 +151,7 @@ bcdc_search <- function(..., license_id = NULL,
   cont <- res$result
 
   n_found <- cont$count
-  if(n_found > 100){
+  if(n_found > n){
     message("Found ", n_found, " matches. Returning the first ", n,
             ".\nTo see them all, rerun the search and set the 'n' argument to ",
             n_found, ".")
@@ -194,6 +194,11 @@ bcdc_get_record <- function(id) {
                                  "action/package_show"))
 
   r <- cli$get(query = list(id = id))
+
+  if (r$status_code == 404){
+    stop(paste0("'", id, "' is not a valid record id or name in the BC data catalogue"), call. = FALSE)
+  }
+
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"), simplifyVector = FALSE)
@@ -205,7 +210,7 @@ bcdc_get_record <- function(id) {
     get_record_warn_once(
       "It is advised to use the permanent id ('", ret$id, "') ",
       "rather than the name of the record ('", id,
-      "') to guard against future name changes"
+      "') to guard against future name changes."
     )
   }
 
@@ -214,16 +219,20 @@ bcdc_get_record <- function(id) {
 
 format_record <- function(pkg) {
   pkg$details <- dplyr::bind_rows(pkg$details)
+  # Create a resources data frame
+  res_df <- resource_to_tibble(pkg$resources)
+  res_df$bcdata_available <- (res_df$ext %in% formats_supported() &
+                                res_df$location != "bcgwdatastore") |
+    (res_df$location == "bcgwdatastore" & res_df$format == "wms")
+  pkg$resource_df <- res_df
   pkg
 }
-
 
 as.bcdc_record <- function(x) {
   x <- format_record(x)
   class(x) <- "bcdc_record"
   x
 }
-
 
 as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"

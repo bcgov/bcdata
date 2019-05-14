@@ -12,6 +12,10 @@
 
 base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
 
+bcdata_user_agent <- function(){
+  "https://github.com/bcgov/bcdata"
+}
+
 compact <- function(l) Filter(Negate(is.null), l)
 
 
@@ -78,13 +82,13 @@ slug_from_url <- function(x) {
 }
 
 formats_supported <- function(){
-  c("csv","kml","txt","xlsx", "xls")
+  bcdc_read_functions()[["format"]]
 }
 
 bcdc_http_client <- function(url = NULL) {
 
   crul::HttpClient$new(url = url,
-                       headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
+                       headers = list(`User-Agent` = bcdata_user_agent()))
 
 }
 
@@ -130,7 +134,7 @@ formats_from_record <- function(x, trim = TRUE){
 
   resource_df <- dplyr::tibble(
       name = purrr::map_chr(x$resources, "name"),
-      url = tools::file_ext(purrr::map_chr(x$resources, "url")),
+      url = safe_file_ext(purrr::map_chr(x$resources, "url")),
       format = purrr::map_chr(x$resources, "format")
     )
   x <- formats_from_resource(resource_df)
@@ -145,27 +149,13 @@ formats_from_resource <- function(x){
     x$format == x$url ~ x$format,
     x$format == "wms" ~ "wms",
     nchar(x$url) == 0 ~ x$format,
-    nchar(tools::file_ext(x$url)) == 0 ~ x$format,
+    nchar(safe_file_ext(x$url)) == 0 ~ x$format,
     x$url == "zip" ~ paste0(x$format, "(zipped)"),
-    TRUE ~ tools::file_ext(x$url)
+    TRUE ~ safe_file_ext(x$url)
   )
 }
 
-resource_function_generator <- function(r){
-
-  fr <- formats_from_resource(r)
-
-  if(r[["resource_storage_location"]] == "BCGW Data Store"){
-    return(cat("    code: bcdc_get_data(x = '", r$package_id, "')\n", sep = ""))
-  }
-
-  if(any(r %in% formats_supported())){
-    return(cat("    code: bcdc_get_data(x = '", r$package_id, "',
-        format = '", fr, "', resource = '",r$id,"')\n", sep = ""))
-  } else{
-    cat("    code: No direct methods currently available in bcdata\n")
-  }
-}
+safe_file_ext <- function(x) as.character(tools::file_ext(x))
 
 gml_types <- function(x) {
   c(
@@ -189,6 +179,22 @@ get_record_warn_once <- function(...) {
   }
 }
 
+
+
+is_emptyish <- function(x){
+  length(x) == 0 || !nzchar(x)
+}
+
+
+
+clean_wfs <- function(x){
+  dplyr::case_when(
+    x == "WMS getCapabilities request" ~ "WFS request (Spatial Data)",
+    x == "wms" ~ "wfs",
+    TRUE ~ x
+  )
+}
+
 safe_request_length <- function(query_list){
   ## A conservative number of characters in the filter call.
   ## Calculating from the query_list BEFORE the call actually happen.
@@ -198,5 +204,50 @@ safe_request_length <- function(query_list){
   request_length <- nchar(query_list$CQL_FILTER)
 
   return(request_length <= limits)
+
 }
 
+
+read_from_url <- function(file_url, ...){
+  format <- safe_file_ext(file_url)
+  if (!format %in% formats_supported()) {
+    stop("Reading ", format, " files is not currently supported in bcdata.")
+  }
+
+  cli <- bcdc_http_client(file_url)
+
+  ## Establish where to download file
+  tmp <- tempfile(fileext = paste0(".", format))
+  on.exit(unlink(tmp))
+
+  r <- cli$get(disk = tmp)
+  r$raise_for_status()
+
+  # Match the read function to the file format format and retrieve the function
+  funs <- bcdc_read_functions()
+  fun <- funs[funs$format == format, ]
+  read_fun <- utils::getFromNamespace(fun$fun, fun$package)
+
+  # This assumes that the function we are using to read the data takes the
+  # data as the first argument - will need revisiting if we find a situation
+  # where that's not the case
+  message("Reading the data using the ", fun$fun, " function from the ",
+          fun$package, " package.")
+  read_fun(tmp, ...)
+}
+
+resource_to_tibble <- function(x){
+  dplyr::tibble(
+    name = purrr::map_chr(x, "name"),
+    url = purrr::map_chr(x, "url"),
+    id = purrr::map_chr(x, "id"),
+    format = purrr::map_chr(x, "format"),
+    ext = safe_file_ext(url),
+    package_id = purrr::map_chr(x, "package_id"),
+    location = simplify_string(purrr::map_chr(x, "resource_storage_location"))
+  )
+}
+
+simplify_string <- function(x) {
+  tolower(gsub("\\s+", "", x))
+}
