@@ -15,3 +15,6 @@
 #' @importFrom memoise memoise
 #'
 "_PACKAGE"
+
+#' @importFrom cli cat_rule cat_line cat_bullet col_blue col_red
+NULL
