@@ -73,7 +73,7 @@ record_print_helper <- function(r, n, print_avail = FALSE){
   cat("     resource:", r$id, "\n")
   cat("     access:", r$access, "\n")
   if (print_avail)
-    cat("     avaialable in R via bcdata: ", r$bcdata_available, "\n")
+    cat("     available in R via bcdata: ", r$bcdata_available, "\n")
   if (r$bcdata_available)
     cat("     code: bcdc_get_data(record = '", r$package_id,
         "', resource = '",r$id,"')\n", sep = "")
