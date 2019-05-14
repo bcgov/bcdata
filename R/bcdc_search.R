@@ -151,7 +151,7 @@ bcdc_search <- function(..., license_id = NULL,
   cont <- res$result
 
   n_found <- cont$count
-  if(n_found > 100){
+  if(n_found > n){
     message("Found ", n_found, " matches. Returning the first ", n,
             ".\nTo see them all, rerun the search and set the 'n' argument to ",
             n_found, ".")
@@ -217,19 +217,17 @@ format_record <- function(pkg) {
   # Create a resources data frame
   res_df <- resource_to_tibble(pkg$resources)
   res_df$bcdata_available <- (res_df$ext %in% formats_supported() &
-                              res_df$location != "bcgwdatastore") |
-      (res_df$location == "bcgwdatastore" & res_df$format == "wms")
+                                res_df$location != "bcgwdatastore") |
+    (res_df$location == "bcgwdatastore" & res_df$format == "wms")
   pkg$resource_df <- res_df
   pkg
 }
-
 
 as.bcdc_record <- function(x) {
   x <- format_record(x)
   class(x) <- "bcdc_record"
   x
 }
-
 
 as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"
