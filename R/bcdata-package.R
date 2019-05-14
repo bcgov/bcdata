@@ -12,7 +12,6 @@
 
 
 #' @keywords internal
-#' @importFrom memoise memoise
 #'
 "_PACKAGE"
 

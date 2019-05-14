@@ -13,11 +13,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
 
-<a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)[![Travis
-build
-status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
+# bcdata <img src="tools/readme/bcdata-sticker.png" height="139" align="right"/>
 
-# bcdata
+### Version 0.0.0.9000
+
+<!-- badges: start -->
+
+<a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Travis build
+status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
+<!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
 Catalogue](https://catalogue.data.gov.bc.ca).
@@ -62,27 +70,27 @@ bcdc_search("airport")
 #> 1: Airport Capacity and Service Information (other)
 #>  ID: 553a8c7c-bca2-4b92-b925-ef6085724092
 #>  Name: airport-capacity-and-service-information
-#> 2: BC Airports (other, wms)
+#> 2: BC Airports (other, xlsx, wms, kml)
 #>  ID: 76b1b7a3-2112-4444-857a-afccf7b20da8
 #>  Name: bc-airports
 #> 3: Customs Ports of Entry (other)
 #>  ID: 4fac3ad6-8749-4741-ac98-527b23e4b0b2
 #>  Name: customs-ports-of-entry
-#> 4: BC Wildfire Active Weather Stations (other, wms)
+#> 4: BC Wildfire Active Weather Stations (other, wms, kml)
 #>  ID: c16867a3-a7ac-4c07-9a3e-0325e66e29c0
 #>  Name: bc-wildfire-active-weather-stations
-#> 5: NTS BC Transport Points 1:250,000 - Digital Baseline Mapping (NTS) (other, wms)
+#> 5: NTS BC Transport Points 1:250,000 - Digital Baseline Mapping (NTS) (other, wms, kml)
 #>  ID: 6ce711d4-5196-47fc-9bc0-0839b1aa2ca3
 #>  Name: nts-bc-transport-points-1-250-000-digital-baseline-mapping-nts
-#> 6: HelloBC Activities and Attractions Listing (other, wms)
-#>  ID: 3a7dc21c-be34-4b33-adbe-fadd3aaba2d7
-#>  Name: hellobc-activities-and-attractions-listing
-#> 7: BC Climate Stations (other, wms)
+#> 6: Sites Registry (Open Government License) (other, wms, kml)
+#>  ID: d5c6b8ed-c272-4c9e-8813-590a47b5c01c
+#>  Name: sites-registry-open-government-license-
+#> 7: BC Climate Stations (other, wms, kml)
 #>  ID: d9c6cafe-0b24-4197-a91d-8448aa4d98c7
 #>  Name: bc-climate-stations
-#> 8: Sites Registry (Open Government License) (other, wms)
-#>  ID: d5c6b8ed-c272-4c9e-8813-590a47b5c01c
-#>  Name: sites-registry-open-government-license- 
+#> 8: HelloBC Activities and Attractions Listing (other, wms, kml)
+#>  ID: 3a7dc21c-be34-4b33-adbe-fadd3aaba2d7
+#>  Name: hellobc-activities-and-attractions-listing 
 #> 
 #> Access a single record by calling bcdc_get_record(ID)
 #>       with the ID from the desired record.
@@ -105,19 +113,25 @@ bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #>     landing and take-off of any/all aircraft.  It includes airports, aerodromes, water
 #>     aerodromes, heliports, and airstrips. 
 #> 
-#> Resources: ( 2 )
-#>   BC Airports - Custom Download
-#>     format:  
-#>     resource: 03fdc03b-5487-4a2e-b7e3-a82e53db9ea1 
+#> Resources: ( 3 )
+#>   BC Geographic Warehouse Custom Download
+#>     format: other 
+#>     url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW 
+#>     resource: 604c8be1-b3f3-45b4-8030-5f9c8be71645 
 #>     access: Indirect Access 
-#>     bcdc_get_data(x = '76b1b7a3-2112-4444-857a-afccf7b20da8')
 #>     code: No direct methods currently available in bcdata
+#>   BC_Airports_Attribute_Values
+#>     format: xlsx 
+#>     url: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/fcccba36-b528-4731-8978-940b3cc04f69/download/wilmbvicgeobccriticalinfrastructuredocumentsbcairportsattributevalues.xlsx 
+#>     resource: fcccba36-b528-4731-8978-940b3cc04f69 
+#>     access: Direct Access 
+#>     code: bcdc_get_data(x = '76b1b7a3-2112-4444-857a-afccf7b20da8',
+#>         format = 'xlsx', resource = 'fcccba36-b528-4731-8978-940b3cc04f69')
 #>   WMS getCapabilities request
 #>     format: wms 
 #>     resource: 4d0377d9-e8a1-429b-824f-0ce8f363512c 
 #>     access: Service 
-#>     bcdc_get_data(x = '76b1b7a3-2112-4444-857a-afccf7b20da8')
-#>     code: No direct methods currently available in bcdata
+#>     code: bcdc_get_data(x = '76b1b7a3-2112-4444-857a-afccf7b20da8')
 ```
 
 ### bcdc\_get\_data
@@ -126,11 +140,12 @@ To have a quick look at spatial data, you can simply print the object:
 
 ``` r
 airports <- bcdc_query_geodata("bc-airports", crs = 3857)
+#> Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-
+#> afccf7b20da8') rather than the name of the record ('bc-airports')to guard
+#> against future changes
 airports
 #> # A B.C. Data Catalogue Record: 455 records and 42 columns
 #> # Columns:
-#> Warning in seq.default(along = x): partial argument match of 'along' to
-#> 'along.with'
 #> # A tibble: 42 x 4
 #>    col_name                 selectable remote_col_type       local_col_type
 #>    <chr>                    <lgl>      <chr>                 <chr>         
