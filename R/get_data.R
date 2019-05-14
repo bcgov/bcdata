@@ -162,6 +162,7 @@ bcdc_read_functions <- function(){
     ~format, ~package, ~fun,
     "csv", "readr", "read_csv",
     "kml", "sf", "read_sf",
+    "geojson", "sf", "read_sf",
     "txt", "readr", "read_tsv",
     "xlsx", "readxl", "read_xlsx",
     "xls", "readxl", "read_xls"
