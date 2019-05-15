@@ -60,12 +60,12 @@ library(bcdata)
 
 ### Functions
 
-- `bcdc_browse()` - Open the catalogue in your default browser
-- `bcdc_search()` - Search records in the catalogue
-- `bcdc_search_facet()` - List catalogue facet search options
 - `bcdc_get_record()` - Print a catalogue record
 - `bcdc_get_data()` - Get catalogue data
 - `bcdc_query_geodata()` - Get & query catalogue geospatial data (data must be available as a [WMS/WFS service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E))
+- `bcdc_browse()` - Open the catalogue in your default browser
+- `bcdc_search()` - Search records in the catalogue
+- `bcdc_search_facet()` - List catalogue facet search options
 
 ### Usage
 

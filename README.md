@@ -50,14 +50,14 @@ library(bcdata)
 
 ### Functions
 
-  - `bcdc_browse()` - Open the catalogue in your default browser
-  - `bcdc_search()` - Search records in the catalogue
-  - `bcdc_search_facet()` - List catalogue facet search options
   - `bcdc_get_record()` - Print a catalogue record
   - `bcdc_get_data()` - Get catalogue data
   - `bcdc_query_geodata()` - Get & query catalogue geospatial data (data
     must be available as a [WMS/WFS
     service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E))
+  - `bcdc_browse()` - Open the catalogue in your default browser
+  - `bcdc_search()` - Search records in the catalogue
+  - `bcdc_search_facet()` - List catalogue facet search options
 
 ### Usage
 
@@ -105,7 +105,8 @@ bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #> Permalink: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
 #> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
-#> Type: Geographic 
+#> Type: Geographic
+#> Last Updated: 2019-05-04 
 #> 
 #> Description:
 #>     BC Airports identifies locations where aircraft may take-off and land. No guarantee
@@ -113,25 +114,31 @@ bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #>     landing and take-off of any/all aircraft.  It includes airports, aerodromes, water
 #>     aerodromes, heliports, and airstrips. 
 #> 
-#> Resources: ( 3 )
-#>   BC Geographic Warehouse Custom Download
-#>     format: other 
-#>     url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW 
-#>     resource: 604c8be1-b3f3-45b4-8030-5f9c8be71645 
-#>     access: Indirect Access 
-#>     code: No direct methods currently available in bcdata
-#>   BC_Airports_Attribute_Values
-#>     format: xlsx 
-#>     url: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/fcccba36-b528-4731-8978-940b3cc04f69/download/wilmbvicgeobccriticalinfrastructuredocumentsbcairportsattributevalues.xlsx 
-#>     resource: fcccba36-b528-4731-8978-940b3cc04f69 
-#>     access: Direct Access 
-#>     code: bcdc_get_data(x = '76b1b7a3-2112-4444-857a-afccf7b20da8',
-#>         format = 'xlsx', resource = 'fcccba36-b528-4731-8978-940b3cc04f69')
-#>   WMS getCapabilities request
-#>     format: wms 
-#>     resource: 4d0377d9-e8a1-429b-824f-0ce8f363512c 
-#>     access: Service 
-#>     code: bcdc_get_data(x = '76b1b7a3-2112-4444-857a-afccf7b20da8')
+#> Resources: ( 4 )
+#> 1) BC Geographic Warehouse Custom Download
+#>      format: other 
+#>      url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW 
+#>      resource: 604c8be1-b3f3-45b4-8030-5f9c8be71645 
+#>      available in R via bcdata:  FALSE 
+#> 
+#> 2) BC_Airports_Attribute_Values
+#>      format: xlsx 
+#>      url: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/fcccba36-b528-4731-8978-940b3cc04f69/download/wilmbvicgeobccriticalinfrastructuredocumentsbcairportsattributevalues.xlsx 
+#>      resource: fcccba36-b528-4731-8978-940b3cc04f69 
+#>      available in R via bcdata:  TRUE 
+#>      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = 'fcccba36-b528-4731-8978-940b3cc04f69')
+#> 
+#> 3) WFS request (Spatial Data)
+#>      format: wfs 
+#>      resource: 4d0377d9-e8a1-429b-824f-0ce8f363512c 
+#>      available in R via bcdata:  TRUE 
+#>      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+#> 
+#> 4) KML Network Link
+#>      format: kml 
+#>      url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW_loader.kml 
+#>      resource: 5b9f22bf-eaa6-4640-ae65-9d3600672745 
+#>      available in R via bcdata:  FALSE
 ```
 
 ### bcdc\_get\_data
@@ -141,56 +148,42 @@ To have a quick look at spatial data, you can simply print the object:
 ``` r
 airports <- bcdc_query_geodata("bc-airports", crs = 3857)
 #> Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-
-#> afccf7b20da8') rather than the name of the record ('bc-airports')to guard
-#> against future changes
+#> afccf7b20da8') rather than the name of the record ('bc-airports') to guard
+#> against future name changes.
 airports
-#> # A B.C. Data Catalogue Record: 455 records and 42 columns
-#> # Columns:
-#> # A tibble: 42 x 4
-#>    col_name                 selectable remote_col_type       local_col_type
-#>    <chr>                    <lgl>      <chr>                 <chr>         
-#>  1 id                       FALSE      xsd:string            character     
-#>  2 CUSTODIAN_ORG_DESCRIPTI… FALSE      xsd:string            character     
-#>  3 BUSINESS_CATEGORY_CLASS  FALSE      xsd:string            character     
-#>  4 BUSINESS_CATEGORY_DESCR… FALSE      xsd:string            character     
-#>  5 OCCUPANT_TYPE_DESCRIPTI… FALSE      xsd:string            character     
-#>  6 SOURCE_DATA_ID           FALSE      xsd:string            character     
-#>  7 SUPPLIED_SOURCE_ID_IND   FALSE      xsd:string            character     
-#>  8 AIRPORT_NAME             FALSE      xsd:string            character     
-#>  9 DESCRIPTION              TRUE       xsd:string            character     
-#> 10 PHYSICAL_ADDRESS         TRUE       xsd:string            character     
-#> 11 ALIAS_ADDRESS            TRUE       xsd:string            character     
-#> 12 STREET_ADDRESS           TRUE       xsd:string            character     
-#> 13 POSTAL_CODE              TRUE       xsd:string            character     
-#> 14 LOCALITY                 FALSE      xsd:string            character     
-#> 15 CONTACT_PHONE            TRUE       xsd:string            character     
-#> 16 CONTACT_EMAIL            TRUE       xsd:string            character     
-#> 17 CONTACT_FAX              TRUE       xsd:string            character     
-#> 18 WEBSITE_URL              TRUE       xsd:string            character     
-#> 19 IMAGE_URL                TRUE       xsd:string            character     
-#> 20 LATITUDE                 FALSE      xsd:decimal           numeric       
-#> 21 LONGITUDE                FALSE      xsd:decimal           numeric       
-#> 22 KEYWORDS                 TRUE       xsd:string            character     
-#> 23 DATE_UPDATED             TRUE       xsd:date              date          
-#> 24 SITE_GEOCODED_IND        TRUE       xsd:string            character     
-#> 25 AERODROME_STATUS         TRUE       xsd:string            character     
-#> 26 AIRCRAFT_ACCESS_IND      TRUE       xsd:string            character     
-#> 27 DATA_SOURCE              TRUE       xsd:string            character     
-#> 28 DATA_SOURCE_YEAR         TRUE       xsd:string            character     
-#> 29 ELEVATION                TRUE       xsd:decimal           numeric       
-#> 30 FUEL_AVAILABILITY_IND    TRUE       xsd:string            character     
-#> 31 HELICOPTER_ACCESS_IND    TRUE       xsd:string            character     
-#> 32 IATA_CODE                TRUE       xsd:string            character     
-#> 33 ICAO_CODE                TRUE       xsd:string            character     
-#> 34 MAX_RUNWAY_LENGTH        TRUE       xsd:decimal           numeric       
-#> 35 NUMBER_OF_RUNWAYS        TRUE       xsd:decimal           numeric       
-#> 36 OIL_AVAILABILITY_IND     TRUE       xsd:string            character     
-#> 37 RUNWAY_SURFACE           TRUE       xsd:string            character     
-#> 38 SEAPLANE_ACCESS_IND      TRUE       xsd:string            character     
-#> 39 TC_LID_CODE              TRUE       xsd:string            character     
-#> 40 SEQUENCE_ID              FALSE      xsd:decimal           numeric       
-#> 41 SE_ANNO_CAD_DATA         TRUE       xsd:hexBinary         numeric       
-#> 42 geometry                 TRUE       gml:GeometryProperty… sfc geometry
+#> Querying 'bc-airports' record
+#> * Using collect() on this object will return 455 features and 41 fields
+#> * Only the first six rows of the record are printed here
+#> ---------------------------------------------------------------------------------
+#> Simple feature collection with 6 features and 41 fields
+#> geometry type:  POINT
+#> dimension:      XY
+#> bbox:           xmin: -14313270 ymin: 6176688 xmax: -13728510 ymax: 7259410
+#> epsg (SRID):    3857
+#> proj4string:    +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs
+#> # A tibble: 6 x 42
+#>   id    CUSTODIAN_ORG_D~ BUSINESS_CATEGO~ BUSINESS_CATEGO~ OCCUPANT_TYPE_D~
+#>   <chr> <chr>            <chr>            <chr>            <chr>           
+#> 1 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~ BC Airports     
+#> 2 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~ BC Airports     
+#> 3 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~ BC Airports     
+#> 4 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~ BC Airports     
+#> 5 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~ BC Airports     
+#> 6 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~ BC Airports     
+#> # ... with 37 more variables: SOURCE_DATA_ID <chr>,
+#> #   SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, DESCRIPTION <chr>,
+#> #   PHYSICAL_ADDRESS <chr>, ALIAS_ADDRESS <chr>, STREET_ADDRESS <chr>,
+#> #   POSTAL_CODE <chr>, LOCALITY <chr>, CONTACT_PHONE <chr>,
+#> #   CONTACT_EMAIL <chr>, CONTACT_FAX <chr>, WEBSITE_URL <chr>,
+#> #   IMAGE_URL <chr>, LATITUDE <dbl>, LONGITUDE <dbl>, KEYWORDS <chr>,
+#> #   DATE_UPDATED <chr>, SITE_GEOCODED_IND <chr>, AERODROME_STATUS <chr>,
+#> #   AIRCRAFT_ACCESS_IND <chr>, DATA_SOURCE <chr>, DATA_SOURCE_YEAR <chr>,
+#> #   ELEVATION <dbl>, FUEL_AVAILABILITY_IND <chr>,
+#> #   HELICOPTER_ACCESS_IND <chr>, IATA_CODE <chr>, ICAO_CODE <chr>,
+#> #   MAX_RUNWAY_LENGTH <dbl>, NUMBER_OF_RUNWAYS <int>,
+#> #   OIL_AVAILABILITY_IND <chr>, RUNWAY_SURFACE <chr>,
+#> #   SEAPLANE_ACCESS_IND <chr>, TC_LID_CODE <chr>, SEQUENCE_ID <int>,
+#> #   SE_ANNO_CAD_DATA <chr>, geometry <POINT [m]>
 ```
 
 If you need all the data, you need to retrieve the data using the
@@ -206,26 +199,26 @@ airports %>%
 #> epsg (SRID):    3857
 #> proj4string:    +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs
 #> # A tibble: 455 x 42
-#>    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO…
+#>    id    CUSTODIAN_ORG_D~ BUSINESS_CATEGO~ BUSINESS_CATEGO~
 #>    <chr> <chr>            <chr>            <chr>           
-#>  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#>  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#> 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat…
-#> # … with 445 more rows, and 38 more variables:
+#>  1 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  2 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  3 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  4 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  5 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  6 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  7 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  8 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#>  9 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#> 10 WHSE~ "Ministry of Fo~ airTransportati~ Air Transportat~
+#> # ... with 445 more rows, and 38 more variables:
 #> #   OCCUPANT_TYPE_DESCRIPTION <chr>, SOURCE_DATA_ID <chr>,
 #> #   SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, DESCRIPTION <chr>,
 #> #   PHYSICAL_ADDRESS <chr>, ALIAS_ADDRESS <chr>, STREET_ADDRESS <chr>,
 #> #   POSTAL_CODE <chr>, LOCALITY <chr>, CONTACT_PHONE <chr>,
 #> #   CONTACT_EMAIL <chr>, CONTACT_FAX <chr>, WEBSITE_URL <chr>,
 #> #   IMAGE_URL <chr>, LATITUDE <dbl>, LONGITUDE <dbl>, KEYWORDS <chr>,
-#> #   DATE_UPDATED <date>, SITE_GEOCODED_IND <chr>, AERODROME_STATUS <chr>,
+#> #   DATE_UPDATED <chr>, SITE_GEOCODED_IND <chr>, AERODROME_STATUS <chr>,
 #> #   AIRCRAFT_ACCESS_IND <chr>, DATA_SOURCE <chr>, DATA_SOURCE_YEAR <chr>,
 #> #   ELEVATION <dbl>, FUEL_AVAILABILITY_IND <chr>,
 #> #   HELICOPTER_ACCESS_IND <chr>, IATA_CODE <chr>, ICAO_CODE <chr>,

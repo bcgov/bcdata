@@ -30,26 +30,23 @@ as.bcdc_sf <- function(x, query_list, url) {
 #' @export
 print.bcdc_promise <- function(x, ...) {
 
-  id <- x[["obj"]][["id"]]
-
-  feature_spec <- bcdc_describe_feature(id)
-
-  if(!is.null(x[["query_list"]][["propertyName"]])){
-    selectables <- unlist(strsplit(x[["query_list"]][["propertyName"]],","))
-    feature_spec <- feature_spec[feature_spec$selectable == FALSE | feature_spec$col_name %in% selectables,]
-    geom_row <- dplyr::tibble(col_name = "geometry",
-                              selectable = TRUE,
-                              remote_col_type = "gml:GeometryPropertyType",
-                              local_col_type = wfs_to_r_col_type("gml:GeometryPropertyType"))
-    feature_spec <- dplyr::bind_rows(feature_spec, geom_row)
-  }
+  query_list <- c(x$query_list, COUNT = 6)
+  cli <- x$cli
+  cc <- cli$get(query = query_list)
+  cc$raise_for_status()
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
+  name <- paste0("'", x[["obj"]][["name"]], "'")
+  parsed <- bcdc_read_sf(cc$parse("UTF-8"))
+  fields <- ncol(parsed) - 1
 
-  cat(glue::glue("# A B.C. Data Catalogue Record: {number_of_records} records",
-                 "and {nrow(feature_spec)} columns\n\n", .sep = " "))
-  cat("# Columns:\n")
-  print(feature_spec, n = Inf)
+  cat_line(glue::glue("Querying {col_red(name)} record"))
+  cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {number_of_records} features ",
+                 "and {fields} fields"))
+  cat_bullet("Only the first six rows of the record are printed here")
+  cat_rule()
+  print(parsed)
+
 
 }
 
