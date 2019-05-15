@@ -17,6 +17,13 @@ as.bcdc_promise <- function(res) {
   )
 }
 
+as.bcdc_sf <- function(x, query_list, url) {
+  structure(x,
+            class = c("bcdc_sf", setdiff(class(x), "bcdc_sf")),
+            query_list = query_list,
+            url = url)
+}
+
 
 # print methods -----------------------------------------------------------
 
@@ -214,6 +221,7 @@ collect.bcdc_promise <- function(x, ...){
   if (number_of_records < 10000) {
     cc <- cli$get(query = query_list)
     status_failed <- cc$status_code >= 300
+    url <- cc$url
   } else {
     message("This record requires pagination to complete the request.")
     sorting_col <- x$obj[["details"]][["column_name"]][1]
@@ -234,6 +242,7 @@ collect.bcdc_promise <- function(x, ...){
 
     message("Retrieving data")
     cc$get(query = query_list)
+    url <- cc$url_fetch(query = query_list)
 
     status_failed <- any(cc$status_code() >= 300)
   }
@@ -247,7 +256,7 @@ collect.bcdc_promise <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  bcdc_read_sf(txt)
+  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url)
 
 }
 
@@ -256,31 +265,56 @@ collect.bcdc_promise <- function(x, ...){
 #'
 #' Display WFS query SQL
 #'
-#' @param x object of class bcdc_promise
+#' @param x object of class bcdc_promise or bcdc_sf
 #' @inheritParams show_query
 #' @describeIn show_query show_query.bcdc_promise
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
 #'   show_query()
-show_query.bcdc_promise <- function(x, ...){
+#'   }
+#'
+show_query.bcdc_promise <- function(x, ...) {
 
-  query_list <- x$query_list
+  url <-  x$cli$url_fetch(query = x$query_list)
 
-  query_list$CQL_FILTER <- NULL
+  url <- url_format(url)
 
-  ## Drop any NULLS from the list
-  query_list <- compact(query_list)
+  cat_line("<url>")
+  cat_line(url)
+  cat_line()
+  cat_line("<SQL>")
+  cat_line(x$query_list$CQL_FILTER)
 
-  url_params <- paste0(names(query_list),"=", query_list, collapse = "&\n")
-  url_params <- gsub(":", "%3A", url_params)
-  url_params <- gsub("/", "%2F", url_params)
+  invisible(x$cli$url_fetch(query = x$query_list))
 
-  url_query <- paste0("<url> \n", x$cli$url,"?\n", url_params, "\n")
-
-  cat(url_query)
-  cat(paste0("<SQL> \n", x$query_list$CQL_FILTER))
 }
 
+
+#' @describeIn show_query show_query.bcdc_promise
+#'
+#' @export
+#' @examples
+#' \dontrun{
+#' air <- bcdc_query_geodata("bc-airports") %>%
+#'   collect()
+#'
+#' show_query(air)
+#' }
+show_query.bcdc_sf <- function(x, ...) {
+
+  url <- url_format(attributes(x)$url)
+
+  url <- paste0(url,"\n")
+
+  cat_line("<url>")
+  for(i in seq_along(url)){
+    cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
+  }
+
+  invisible(attributes(x)$url)
+
+}

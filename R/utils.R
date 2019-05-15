@@ -249,3 +249,12 @@ resource_to_tibble <- function(x){
 simplify_string <- function(x) {
   tolower(gsub("\\s+", "", x))
 }
+
+
+url_format <- function(url) {
+
+  url <- gsub("&", "&\n", url)
+  sub("SERVICE", "\nSERVICE", url)
+
+
+}
