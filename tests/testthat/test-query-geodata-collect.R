@@ -45,6 +45,23 @@ test_that("bcdc_query_geodata works with spatial data that have SHAPE for the ge
   expect_is(ret1, "sf")
 })
 
+test_that("collect() returns a bcdc_sf object",{
+  sf_obj <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>%
+    filter(LOCALITY == "Terrace") %>%
+    select(LATITUDE) %>%
+    collect()
+  expect_s3_class(sf_obj, "bcdc_sf")
+})
+
+test_that("bcdc_sf objects have a url as an attributes",{
+  sf_obj <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>%
+    filter(LOCALITY == "Terrace") %>%
+    select(LATITUDE) %>%
+    collect()
+
+  res <- readLines(attributes(sf_obj)$url, warn = FALSE)
+  expect_true(nzchar(res))
+})
 
 
 
