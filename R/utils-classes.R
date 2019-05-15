@@ -289,6 +289,8 @@ show_query.bcdc_promise <- function(x, ...) {
   cat_line("<SQL>")
   cat_line(x$query_list$CQL_FILTER)
 
+  invisible(x$cli$url_fetch(query = x$query_list))
+
 }
 
 
@@ -312,5 +314,7 @@ show_query.bcdc_sf <- function(x, ...) {
   for(i in seq_along(url)){
     cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
   }
+
+  invisible(attributes(x)$url)
 
 }
