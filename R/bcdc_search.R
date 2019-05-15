@@ -210,7 +210,7 @@ bcdc_get_record <- function(id) {
     get_record_warn_once(
       "It is advised to use the permanent id ('", ret$id, "') ",
       "rather than the name of the record ('", id,
-      "') to guard against future name changes."
+      "') to guard against future name changes.\n"
     )
   }
 
