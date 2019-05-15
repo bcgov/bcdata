@@ -251,16 +251,10 @@ simplify_string <- function(x) {
 }
 
 
-url_format <- function(query_list) {
+url_format <- function(url) {
 
-  query_list$CQL_FILTER <- NULL
-
-  ## Drop any NULLS from the list
-  query_list <- compact(query_list)
-
-  url_params <- paste0(names(query_list),"=", query_list, collapse = "&\n")
-  url_params <- gsub(":", "%3A", url_params)
-  gsub("/", "%2F", url_params)
+  url <- gsub("&", "&\n", url)
+  sub("SERVICE", "\nSERVICE", url)
 
 
 }
