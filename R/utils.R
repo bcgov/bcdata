@@ -250,11 +250,17 @@ simplify_string <- function(x) {
   tolower(gsub("\\s+", "", x))
 }
 
-
 url_format <- function(url) {
-
   url <- gsub("&", "&\n", url)
   sub("SERVICE", "\nSERVICE", url)
+}
 
-
+pagination_sort_col <- function(x) {
+  cols <- bcdc_describe_feature(x)[["col_name"]]
+  # use OBJECTID as default sort key, if present
+  if ("OBJECTID" %in% cols) return("OBJECTID")
+  # if OBJECTID is not present (several GSR tables), use SEQUENCE_ID
+  if ("SEQUENCE_ID" %in% cols) return("SEQUENCE_ID")
+  #Otherwise use the first column - this is likely pretty fragile
+  cols[1]
 }
