@@ -1,6 +1,6 @@
 ---
-title: "Getting Started with data"
-author: "Vignette Author"
+title: "Querying Spatial Data with bcdata"
+author: "Sam Albers"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -19,26 +19,27 @@ knitr::opts_chunk$set(
 # WORK IN PROGRESS
 
 ## Getting Started
-First you need to loadthe package. We will also load the sf package to better enable our spatial data work:
+First you need to load the package. We will also load the `sf` package to help us wokr with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/):
 ```{r}
 library(bcdata)
 library(sf)
 ```
 
 
-## Find your data set
-There are several ways that you might arrive at the data set you want. The simplest way is to make use of the web-based BC Data Catalogue. The package provides a convenience function that allows you to quickly open a broswer to the BC Data Catalogue:
-```{r,eval=FALSE}
-bcdc_browse()
-```
-If you would like to further refine your search you can supply a string:
+## Geospatial Data in the BC Data Catalogue
+The BC Data Catalogue provides many datasets with spatial information over the web via a web feature service (wfs). Practically speaking, this means if we have an internet connection we can issue http requests to the wfs of the BC Data Catalogue and import the response data into R as an sf object very easily. The `bcdata` package provides a means to chose which layer you want and `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types.
+
+### Using dplyr verbs to fine tune your query
+For the purposes of this example, let's consider [this](catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da) layer in the catalogue. This layer is described here:
 ```{r}
-bcdc_browse("cities")
+bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 ```
 
+The key thing we are interested in here is that this is a *WFS record*. From this we know we can make use of `bcdc_query_geodata`.
 
-## Geospatial Data
-The BC Data Catalogue provides many dataset with spatial information via a web feature service (wfs). Practically speaking, this means that we can import this spatial data into R as an sf object very easily using the `bcdc_get_geodata` function. 
+```{r}
+bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
+```
 
 
 ### Schools in British Columbia
