@@ -223,7 +223,7 @@ collect.bcdc_promise <- function(x, ...){
     url <- cc$url
   } else {
     message("This record requires pagination to complete the request.")
-    sorting_col <- x$obj[["details"]][["column_name"]][1]
+    sorting_col <- pagination_sort_col(x$obj$id)
 
     query_list <- c(query_list, sortby = sorting_col)
 
