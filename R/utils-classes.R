@@ -41,8 +41,8 @@ print.bcdc_promise <- function(x, ...) {
   fields <- ncol(parsed) - 1
 
   cat_line(glue::glue("Querying {col_red(name)} record"))
-  cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {number_of_records} features ",
-                 "and {fields} fields"))
+  cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
+                 "and {col_green(fields)} fields"))
   cat_bullet("Only the first six rows of the record are printed here")
   cat_rule()
   print(parsed)
