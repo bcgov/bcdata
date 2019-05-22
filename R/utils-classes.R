@@ -212,7 +212,6 @@ select.bcdc_promise <- function(.data, ...){
 collect.bcdc_promise <- function(x, ...){
 
   query_list <- x$query_list
-  safe_request_length(query_list)
   cli <- x$cli
 
   ## Determine total number of records for pagination purposes
