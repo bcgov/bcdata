@@ -138,7 +138,14 @@ print.bcdc_recordlist <- function(x, ...) {
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
 
-  .data$query_list$CQL_FILTER <- cql_translate(...)
+  if(is.null(.data$query_list$CQL_FILTER)){
+    .data$query_list$CQL_FILTER = cql_translate(...)
+  } else{
+    current_cql = cql_translate(...)
+    existing_cql = .data$query_list$CQL_FILTER
+    .data$query_list$CQL_FILTER = glue::glue_sql("(", existing_cql, " AND ", current_cql, ")")
+  }
+
 
   ## Change CQL query on the fly if geom is not GEOMETRY
   .data$query_list$CQL_FILTER <- specify_geom_name(.data$obj, .data$query_list)

@@ -121,3 +121,26 @@ test_that("large vectors supplied to filter fail with an error",{
     filter(WATERSHED_KEY %in% pori$WATERSHED_KEY[1:510]))
 
 })
+
+test_that("multiple filter statements are additive",{
+  airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
+
+  heliports_in_victoria <-  airports %>%
+    filter(PHYSICAL_ADDRESS == "Victoria, BC") %>%
+    filter(DESCRIPTION == "heliport") %>%
+    collect()
+
+  ## this is additive only Victoria, BC should be a physical address
+  expect_true(unique(heliports_in_victoria$PHYSICAL_ADDRESS) == "Victoria, BC")
+
+  heliports_one_line <- airports %>%
+    filter(PHYSICAL_ADDRESS == "Victoria, BC", DESCRIPTION == "heliport")
+  heliports_two_line <- airports %>%
+    filter(PHYSICAL_ADDRESS == "Victoria, BC") %>%
+    filter(DESCRIPTION == "heliport")
+
+  expect_identical(heliports_one_line[["query_list"]][["CQL_FILTER"]],
+                   heliports_two_line[["query_list"]][["CQL_FILTER"]])
+
+
+})
