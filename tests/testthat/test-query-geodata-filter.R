@@ -141,6 +141,20 @@ test_that("multiple filter statements are additive",{
 
   expect_identical(heliports_one_line[["query_list"]][["CQL_FILTER"]],
                    heliports_two_line[["query_list"]][["CQL_FILTER"]])
+})
 
+test_that("multiple filter statements are additive with geometric operators",{
+  ## LOCAL
+  crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
+    collect()
 
+  ## REMOTE "GEOMETRY"
+  em_program <- bcdc_query_geodata("employment-program-of-british-columbia-regional-boundaries") %>%
+    filter(ELMSD_REGION_BOUNDARY_NAME == "Interior") %>%
+    filter(INTERSECTS(crd))
+
+  cql_query <- "((\"ELMSD_REGION_BOUNDARY_NAME\" = 'Interior') AND (INTERSECTS(GEOMETRY, POLYGON ((956376 653960.8, 1397042 653960.8, 1397042 949343.3, 956376 949343.3, 956376 653960.8)))))"
+
+  expect_equal(em_program$query_list$CQL_FILTER@.Data, cql_query)
 })
