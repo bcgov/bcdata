@@ -35,7 +35,7 @@ bcdc_number_wfs_records <- function(query_list, client){
 
 }
 
-specify_geom_name <- function(record, query_list){
+specify_geom_name <- function(record, CQL_statement){
 
   cols_df <- record$details
 
@@ -50,7 +50,7 @@ specify_geom_name <- function(record, query_list){
   geom_col <- cols_df$column_name[cols_df$data_type == "SDO_GEOMETRY"]
 
 
-  glue::glue(query_list$CQL_FILTER, geom_name = geom_col)
+  glue::glue_sql(glue::glue(CQL_statement, geom_name = geom_col))
   # if (geom_col != "GEOMETRY" && !is.null(query_list$CQL_FILTER)) {
   #   query_list$CQL_FILTER = gsub("GEOMETRY", geom_col, query_list$CQL_FILTER)
   # }
