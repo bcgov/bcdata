@@ -138,10 +138,15 @@ print.bcdc_recordlist <- function(x, ...) {
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
 
-  .data$query_list$CQL_FILTER <- cql_translate(...)
-
+  current_cql = cql_translate(...)
   ## Change CQL query on the fly if geom is not GEOMETRY
-  .data$query_list$CQL_FILTER <- specify_geom_name(.data$obj, .data$query_list)
+  current_cql = specify_geom_name(.data$obj, current_cql)
+
+  if(!is.null(.data$query_list$CQL_FILTER)){
+    current_cql = glue::glue_sql("(", .data$query_list$CQL_FILTER, " AND ", current_cql, ")")
+  }
+
+  .data$query_list$CQL_FILTER <- current_cql
 
   if(!safe_request_length(.data$query_list)){
     stop("The vector you are trying to filter by is too long. Consider either breaking

@@ -121,3 +121,40 @@ test_that("large vectors supplied to filter fail with an error",{
     filter(WATERSHED_KEY %in% pori$WATERSHED_KEY[1:510]))
 
 })
+
+test_that("multiple filter statements are additive",{
+  airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
+
+  heliports_in_victoria <-  airports %>%
+    filter(PHYSICAL_ADDRESS == "Victoria, BC") %>%
+    filter(DESCRIPTION == "heliport") %>%
+    collect()
+
+  ## this is additive only Victoria, BC should be a physical address
+  expect_true(unique(heliports_in_victoria$PHYSICAL_ADDRESS) == "Victoria, BC")
+
+  heliports_one_line <- airports %>%
+    filter(PHYSICAL_ADDRESS == "Victoria, BC", DESCRIPTION == "heliport")
+  heliports_two_line <- airports %>%
+    filter(PHYSICAL_ADDRESS == "Victoria, BC") %>%
+    filter(DESCRIPTION == "heliport")
+
+  expect_identical(heliports_one_line[["query_list"]][["CQL_FILTER"]],
+                   heliports_two_line[["query_list"]][["CQL_FILTER"]])
+})
+
+test_that("multiple filter statements are additive with geometric operators",{
+  ## LOCAL
+  crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
+    collect()
+
+  ## REMOTE "GEOMETRY"
+  em_program <- bcdc_query_geodata("employment-program-of-british-columbia-regional-boundaries") %>%
+    filter(ELMSD_REGION_BOUNDARY_NAME == "Interior") %>%
+    filter(INTERSECTS(crd))
+
+  cql_query <- "((\"ELMSD_REGION_BOUNDARY_NAME\" = 'Interior') AND (INTERSECTS(GEOMETRY, POLYGON ((956376 653960.8, 1397042 653960.8, 1397042 949343.3, 956376 949343.3, 956376 653960.8)))))"
+
+  expect_equal(em_program$query_list$CQL_FILTER@.Data, cql_query)
+})
