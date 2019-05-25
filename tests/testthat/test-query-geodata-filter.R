@@ -139,8 +139,8 @@ test_that("multiple filter statements are additive",{
     filter(PHYSICAL_ADDRESS == "Victoria, BC") %>%
     filter(DESCRIPTION == "heliport")
 
-  expect_identical(show_query(heliports_one_line),
-                   show_query(heliports_two_line))
+  expect_identical(finalize_cql(heliports_one_line$query_list$CQL_FILTER),
+                   finalize_cql(heliports_two_line$query_list$CQL_FILTER))
 })
 
 test_that("multiple filter statements are additive with geometric operators",{
