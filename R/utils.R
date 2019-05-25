@@ -202,7 +202,7 @@ safe_request_length <- function(query_list){
 
   ## Tested wfs url character limit
   limits <- 5000
-  request_length <- nchar(query_list$CQL_FILTER)
+  request_length <- nchar(finalize_cql(query_list$CQL_FILTER))
 
   return(request_length <= limits)
 
