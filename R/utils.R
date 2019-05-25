@@ -20,6 +20,7 @@ compact <- function(l) Filter(Negate(is.null), l)
 
 
 bcdc_number_wfs_records <- function(query_list, client){
+
   query_list <- c(query_list, resultType = "hits")
 
   if(!is.null(query_list$propertyName)){
@@ -43,7 +44,7 @@ specify_geom_name <- function(record, CQL_statement){
   if (!any(dim(cols_df))) {
     warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
             call. = FALSE)
-    return(query_list)
+    return(CQL_statement)
   }
 
   # Find the geometry field and get the name of the field
