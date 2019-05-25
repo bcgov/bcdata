@@ -143,6 +143,7 @@ filter.bcdc_promise <- function(.data, ...) {
   ## Change CQL query on the fly if geom is not GEOMETRY
   current_cql = specify_geom_name(.data$obj, current_cql)
 
+  # Add cql filter statement to any existing cql filter statements
   .data$query_list$CQL_FILTER <- c(.data$query_list$CQL_FILTER, current_cql)
 
   if (!safe_request_length(.data$query_list)) {
@@ -324,6 +325,7 @@ show_query.bcdc_sf <- function(x, ...) {
 
 }
 
+# collapse vector of cql statements into one
 finalize_cql <- function(x, con = cql_dummy_con) {
   if (is.null(x)) return(NULL)
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
