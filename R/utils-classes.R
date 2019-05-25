@@ -30,6 +30,8 @@ as.bcdc_sf <- function(x, query_list, url) {
 #' @export
 print.bcdc_promise <- function(x, ...) {
 
+  x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
+
   query_list <- c(x$query_list, COUNT = 6)
   cli <- x$cli
   cc <- cli$get(query = query_list)
@@ -116,7 +118,6 @@ print.bcdc_recordlist <- function(x, ...) {
 #' Filter a query from WFS using dplyr methods. This filtering is accomplished lazily so that the
 #' full sf object is not read into memory until `collect()` has been called.
 #'
-#'
 #' @param .data passed from bcdc_get_geodata
 #' @param ... Logical predicates with which to filter the results. Multiple
 #' conditions are combined with `&`. Only rows where the condition evaluates to
@@ -142,13 +143,9 @@ filter.bcdc_promise <- function(.data, ...) {
   ## Change CQL query on the fly if geom is not GEOMETRY
   current_cql = specify_geom_name(.data$obj, current_cql)
 
-  if(!is.null(.data$query_list$CQL_FILTER)){
-    current_cql = glue::glue_sql("(", .data$query_list$CQL_FILTER, " AND ", current_cql, ")")
-  }
+  .data$query_list$CQL_FILTER <- c(.data$query_list$CQL_FILTER, current_cql)
 
-  .data$query_list$CQL_FILTER <- current_cql
-
-  if(!safe_request_length(.data$query_list)){
+  if (!safe_request_length(.data$query_list)) {
     stop("The vector you are trying to filter by is too long. Consider either breaking
     up the request into two or more bcdc_query_geodata() calls or using a spatial
     operator to spatial define your request. See ?cql_geom_predicates.",
@@ -215,6 +212,8 @@ select.bcdc_promise <- function(.data, ...){
 #' }
 #'
 collect.bcdc_promise <- function(x, ...){
+
+  x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
 
   query_list <- x$query_list
   cli <- x$cli
@@ -283,6 +282,8 @@ collect.bcdc_promise <- function(x, ...){
 #'
 show_query.bcdc_promise <- function(x, ...) {
 
+  x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
+
   url <-  x$cli$url_fetch(query = x$query_list)
 
   url <- url_format(url)
@@ -321,4 +322,9 @@ show_query.bcdc_sf <- function(x, ...) {
 
   invisible(attributes(x)$url)
 
+}
+
+finalize_cql <- function(x, con = cql_dummy_con) {
+  if (is.null(x)) return(NULL)
+  dbplyr::sql_vector(x, collapse = " AND ", con = con)
 }
