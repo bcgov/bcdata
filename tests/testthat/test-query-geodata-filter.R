@@ -139,8 +139,8 @@ test_that("multiple filter statements are additive",{
     filter(PHYSICAL_ADDRESS == "Victoria, BC") %>%
     filter(DESCRIPTION == "heliport")
 
-  expect_identical(heliports_one_line[["query_list"]][["CQL_FILTER"]],
-                   heliports_two_line[["query_list"]][["CQL_FILTER"]])
+  expect_identical(show_query(heliports_one_line),
+                   show_query(heliports_two_line))
 })
 
 test_that("multiple filter statements are additive with geometric operators",{
@@ -156,5 +156,6 @@ test_that("multiple filter statements are additive with geometric operators",{
 
   cql_query <- "((\"ELMSD_REGION_BOUNDARY_NAME\" = 'Interior') AND (INTERSECTS(GEOMETRY, POLYGON ((956376 653960.8, 1397042 653960.8, 1397042 949343.3, 956376 949343.3, 956376 653960.8)))))"
 
-  expect_equal(em_program$query_list$CQL_FILTER@.Data, cql_query)
+  expect_equal(as.character(finalize_cql(em_program$query_list$CQL_FILTER)),
+               cql_query)
 })
