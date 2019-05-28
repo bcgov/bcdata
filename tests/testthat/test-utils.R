@@ -13,7 +13,7 @@ test_that("check_geom_col_names works", {
   ap <- bcdc_get_record("bc-airports")
   new_query <- specify_geom_name(ap, query_list[["CQL_FILTER"]])
   expect_equal(as.character(new_query), "DWITHIN(SHAPE, foobar)")
-  expect_is(new_query, "SQL")
+  expect_is(new_query, "sql")
 })
 
 test_that("get_record_warn_once warns once and only once", {

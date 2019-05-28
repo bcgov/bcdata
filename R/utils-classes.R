@@ -143,8 +143,12 @@ filter.bcdc_promise <- function(.data, ...) {
   ## Change CQL query on the fly if geom is not GEOMETRY
   current_cql = specify_geom_name(.data$obj, current_cql)
 
-  # Add cql filter statement to any existing cql filter statements
-  .data$query_list$CQL_FILTER <- c(.data$query_list$CQL_FILTER, current_cql)
+  # Add cql filter statement to any existing cql filter statements.
+  # ensure .data$query_list$CQL_FILTER is class sql even if NULL, so
+  # dispatches on sql class and dbplyr::c.sql method is used
+  .data$query_list$CQL_FILTER <- c(dbplyr::sql(.data$query_list$CQL_FILTER),
+                                   current_cql,
+                                   drop_null = TRUE)
 
   if (!safe_request_length(.data$query_list)) {
     stop("The vector you are trying to filter by is too long. Consider either breaking

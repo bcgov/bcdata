@@ -50,13 +50,8 @@ specify_geom_name <- function(record, CQL_statement){
   # Find the geometry field and get the name of the field
   geom_col <- cols_df$column_name[cols_df$data_type == "SDO_GEOMETRY"]
 
-
-  glue::glue_sql(glue::glue(CQL_statement, geom_name = geom_col))
-  # if (geom_col != "GEOMETRY" && !is.null(query_list$CQL_FILTER)) {
-  #   query_list$CQL_FILTER = gsub("GEOMETRY", geom_col, query_list$CQL_FILTER)
-  # }
-
-
+  # substitute the geometry column name into the CQL statement and add sql class
+  dbplyr::sql(glue::glue(CQL_statement, geom_name = geom_col))
 }
 
 bcdc_read_sf <- function(x, ...){
