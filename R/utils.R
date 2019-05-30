@@ -20,6 +20,7 @@ compact <- function(l) Filter(Negate(is.null), l)
 
 
 bcdc_number_wfs_records <- function(query_list, client){
+
   query_list <- c(query_list, resultType = "hits")
 
   if(!is.null(query_list$propertyName)){
@@ -43,19 +44,14 @@ specify_geom_name <- function(record, CQL_statement){
   if (!any(dim(cols_df))) {
     warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
             call. = FALSE)
-    return(query_list)
+    return(CQL_statement)
   }
 
   # Find the geometry field and get the name of the field
   geom_col <- cols_df$column_name[cols_df$data_type == "SDO_GEOMETRY"]
 
-
-  glue::glue_sql(glue::glue(CQL_statement, geom_name = geom_col))
-  # if (geom_col != "GEOMETRY" && !is.null(query_list$CQL_FILTER)) {
-  #   query_list$CQL_FILTER = gsub("GEOMETRY", geom_col, query_list$CQL_FILTER)
-  # }
-
-
+  # substitute the geometry column name into the CQL statement and add sql class
+  dbplyr::sql(glue::glue(CQL_statement, geom_name = geom_col))
 }
 
 bcdc_read_sf <- function(x, ...){
@@ -201,7 +197,7 @@ safe_request_length <- function(query_list){
 
   ## Tested wfs url character limit
   limits <- 5000
-  request_length <- nchar(query_list$CQL_FILTER)
+  request_length <- nchar(finalize_cql(query_list$CQL_FILTER))
 
   return(request_length <= limits)
 
