@@ -18,8 +18,11 @@ knitr::opts_chunk$set(
 
 # WORK IN PROGRESS
 
+## Overview
+For this vignette, we are going to illustrate how to fine tune a wfs request, merge two spatial datasets and summarise our results. The specific example will examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson school districts. 
+
 ## Getting Started
-First you need to load the package. We will also load the `sf` package to help us wokr with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/):
+First you need to load the package. We will also load the `sf` package to help us work with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/):
 ```{r}
 library(bcdata)
 library(sf)
@@ -29,8 +32,39 @@ library(sf)
 ## Geospatial Data in the BC Data Catalogue
 The BC Data Catalogue provides many datasets with spatial information over the web via a web feature service (wfs). Technically speaking, this means if we have an internet connection we can issue http requests to the wfs of the BC Data Catalogue and import the response data into R as an sf object very easily. In practice what it means is that all spatial datasets are available to users of bcdata as sf objects in R. The `bcdata` package provides a means to chose which layer you want and `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to `dbplyr` is available [here] (https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html).
 
-### Using dplyr verbs to fine tune your query
-For the purposes of this example, let's consider [this](catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da) layer in the catalogue. This layer is described here:
+## Using dplyr verbs to fine tune your query
+
+## School District Data
+Our first step is to extract the school district polygons from the data catalogue. This layer is described using this command:
+
+```{r}
+bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
+```
+
+This is a polygon of each school district.The key thing we are interested in here is that this is a *wfs record*. From this we know we can make use of `bcdc_query_geodata`.
+
+```{r}
+bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") 
+```
+
+This is the initial query to the data in the catalogue. What has been returned is *not* the actual data and rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also received instruction that using `collect()` will retrieve a given number of features and fields present for this query. Lastly there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the data catalogue for only those polygons:
+
+```{r}
+bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>% 
+  filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) 
+```
+
+To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. 
+
+```{r}
+bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>% 
+  filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>% 
+  select(SCHOOL_DISTRICT_NAME)
+```
+
+Note that in the select statement, we did not explicitly ask for the spatial data and also that there are several columns that we didn't select specifically. This is because there are several columns that will always be return by wfs regardless of what is selected 
+## Greenspaces Data
+For the purposes of this example, let's consider [this](catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da) greenspace layer in the catalogue. This layer is described here:
 ```{r}
 bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 ```
@@ -41,5 +75,10 @@ The key thing we are interested in here is that this is a *wfs record*. From thi
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 ```
 
+Since we are interested in only "Park" data we can subset our query:
+```{r}
+bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  filter(PARK_PRIMARY_USE == "Park")
+```
 
-
+Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actualy requested the full dataset. This is just still a preview. 
