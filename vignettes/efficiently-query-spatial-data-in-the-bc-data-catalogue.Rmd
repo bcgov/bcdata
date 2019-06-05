@@ -62,7 +62,23 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   select(SCHOOL_DISTRICT_NAME)
 ```
 
-Note that in the select statement, we did not explicitly ask for the spatial data and also that there are several columns that we didn't select specifically. This is because there are several columns that will always be return by wfs regardless of what is selected 
+Note that in the select statement, we did not explicitly ask for the spatial data and also that there are several columns that we didn't select. This is because within each dataset in the data catalogue, there are several columns that will always be returned by wfs regardless of what is selected. If you really don't want those columns, you can drop them after you `collect` the data which we will take care of right now:
+
+```{r}
+districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>% 
+  filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>% 
+  select(SCHOOL_DISTRICT_NAME) %>% 
+  collect()
+```
+
+Note here that we have assigned the object a name and added the `collect` statement. This step happens when you have selected the data you want and wish to begin working with it in R like a normal sf object. For example we can now plot these three school district:
+
+```{r}
+plot(districts)
+```
+
+This is useful exploratory plot. Better plots of spatial data can be found in both the `ggplot2` and `tmap` packages. Now that we have the spatial boundaries narrowed to exactly which districts we want can perform some spatial operations to determine parks in the school districts.
+
 ## Greenspaces Data
 For the purposes of this example, let's consider [this](catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da) greenspace layer in the catalogue. This layer is described here:
 ```{r}
