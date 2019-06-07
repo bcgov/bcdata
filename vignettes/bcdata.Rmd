@@ -1,12 +1,15 @@
 ---
-title: "Getting Started with bcdata"
-date: "`r Sys.Date()`"
+title: "Get started with bcdata"
+author: "" 
+date: ""
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{bcdata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
@@ -14,4 +17,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+
+
+
+### Further Reading
+vignette("Querying spatial data with bcdata") demonstrates how to use `bcdc::query_geodata()` to fine tune a Web Map or Web Feature Service (WMS/WFS) request for geospatial data from the B.C. Data Catalogue.
 
