@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+The `bcdata` [R](https://www.r-project.org/) package contains functions for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
+
 
 
 
