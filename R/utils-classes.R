@@ -150,12 +150,12 @@ filter.bcdc_promise <- function(.data, ...) {
                                    current_cql,
                                    drop_null = TRUE)
 
-  if (!safe_request_length(.data$query_list)) {
-    stop("The vector you are trying to filter by is too long. Consider either breaking
-    up the request into two or more bcdc_query_geodata() calls or using a spatial
-    operator to spatial define your request. See ?cql_geom_predicates.",
-    call. = FALSE)
-  }
+  # if (!safe_request_length(.data$query_list)) {
+  #   stop("The vector you are trying to filter by is too long. Consider either breaking
+  #   up the request into two or more bcdc_query_geodata() calls or using a spatial
+  #   operator to spatial define your request. See ?cql_geom_predicates.",
+  #   call. = FALSE)
+  # }
 
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
 }
@@ -227,7 +227,11 @@ collect.bcdc_promise <- function(x, ...){
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
   if (number_of_records < 10000) {
-    cc <- cli$get(query = query_list)
+
+    body_filter <- list(cql_filter = query_list$CQL_FILTER)
+    query_list$CQL_FILTER <- NULL
+
+    cc <- cli$post(query = query_list, body = body_filter, encode = "form")
     status_failed <- cc$status_code >= 300
     url <- cc$url
   } else {

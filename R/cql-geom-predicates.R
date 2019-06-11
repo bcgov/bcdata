@@ -57,7 +57,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
   # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
   if (!geometry_predicates == "BBOX") {
-    x <- sf_to_text_bbox(x)
+    x <- sf_union_to_text(x)
   }
 
   cql_args <-
@@ -86,14 +86,13 @@ cql_geom_predicate_list <- function() {
     "DWITHIN", "BEYOND", "BBOX")
 }
 
-sf_to_text_bbox <- function(x) {
+sf_union_to_text <- function(x) {
   if (!inherits(x, c("sf", "sfc", "sfg"))) {
     stop(paste(deparse(substitute(x)), "is not a valid sf object"),
          call. = FALSE)
   }
 
-  x = sf::st_bbox(x)
-  x = sf::st_as_sfc(x)
+  x = sf::st_union(x)
   sf::st_as_text(x)
 }
 
