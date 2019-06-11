@@ -17,8 +17,8 @@
 #'
 #' @inheritParams utils::browseURL
 #' @param query Default (NULL) opens a browser to \code{https://catalogue.data.gov.bc.ca}.
-#'        This argument will also accept a B.C. Data Catalogue record id or name to take you
-#'        directly to that page. If the provided id or name doesn't lead to a valid webpage,
+#'        This argument will also accept a B.C. Data Catalogue record ID or name to take you
+#'        directly to that page. If the provided ID or name doesn't lead to a valid webpage,
 #'        bcdc_browse will search the data catalogue for that string.
 #'
 #' @seealso \code{\link[utils]{browseURL}}
@@ -29,10 +29,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## Just take me to the B.C. data
+#' ## Take me to the B.C. Data Catalogue home page
 #' bcdc_browse()
 #'
-#' ## Take me to the B.C. airports
+#' ## Take me to the B.C. airports catalogue record
 #' bcdc_browse("bc-airports")
 #'
 #' ## Take me to the catalogue search results for 'fish'

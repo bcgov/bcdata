@@ -8,9 +8,9 @@ bcdc_get_data(record, format = NULL, resource = NULL, ...)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the id of a resource (or the url).
+or a character string denoting the ID of a resource (or the url).
 
-It is advised to use the permament id for a record rather than the
+It is advised to use the permament ID for a record rather than the
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
@@ -24,12 +24,12 @@ be used to identify which formats are available.}
 \item{resource}{option argument used when there are multiple data files of the same format
 within the same record. See examples.}
 
-\item{...}{arguments passed to other functions. For spatial (WMS/WFS) data these are passed to
-\code{bcdc_query_geodata()}. Non spatial data is passed to a function to handle the import based
+\item{...}{arguments passed to other functions. For geospatial (WMS/WFS) data these are passed to
+\code{bcdc_query_geodata()}. Non geospatial data is passed to a function to handle the import based
 on the file extension.}
 }
 \value{
-an object of a type relevant to the resource (usually a tibble or an sf object)
+An object of a type relevant to the resource (usually a tibble or an sf object)
 }
 \description{
 Download and read a resource from a B.C. Data Catalogue record
