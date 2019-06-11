@@ -47,7 +47,7 @@ An R package 📦 for searching & retrieving data from the [B.C. Data Catalogue]
 [bcdata package 📦 home page and reference guide](https://bcgov.github.io/bcdata/index.html)
 
 ### Installation
-You can install `bcdata` directly from this GitHub repository uaing the [remotes](https://cran.r-project.org/package=remotes) package:
+You can install `bcdata` directly from this GitHub repository using the [remotes](https://cran.r-project.org/package=remotes) package:
 
 ```{r, eval=FALSE}
 install.packages("remotes")
