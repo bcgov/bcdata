@@ -71,7 +71,7 @@ bcdc_query_geodata <- function(record = NULL, crs = 3005) {
 }
 
 #' @export
-bcdc_query_geodata.default <- function(record, resource = NULL, ...) {
+bcdc_query_geodata.default <- function(record, crs = 3005) {
   stop("No bcdc_query_geodata method for an object of class ", class(record),
        call. = FALSE)
 }
