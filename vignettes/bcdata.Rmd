@@ -46,7 +46,7 @@ library(bcdata)
 bcdc_browse()
 ```
 
-If you know the catalogue record human-readable name or permanent ID you can open directly to the record web page:
+If you know the catalogue record "human-readable" name or permanent ID you can open directly to the record web page:
 
 ```{r, eval=FALSE}
 ## Take me to the B.C. Winery Locations catalogue record using the record name
@@ -102,13 +102,13 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 
 ### `bcdc_get_data()`
 
-One you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  Let's look at B.C. Highway Web Cameras data:
+One you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  Let's look at the B.C. Highway Web Cameras data:
 
 ```{r}
-## Get the data resource for the `bc-winery-locations` catalogue record
+## Get the data resource for the `bc-highway-cams` catalogue record
 bcdc_get_data("bc-highway-cams") 
 
-## OR use the permanent ID, likely better for scripts or non-interactive use 
+## OR use the permanent ID, which is better for scripts or non-interactive use 
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 ```
 
@@ -119,7 +119,7 @@ A catalogue record can have one or multiple data files---or "resources". If ther
 bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
 ```
 
-We see there are two file formats available for this data---.txt or .xlsx---so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you to select the resource you want. But the full code to do so is also available _in_ the metdata record ☝️:
+We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you to select the resource you want. The full code---with the resource ID---is also available _in_ the metdata record ☝️:
 
 ```{r}
 ## Get the txt data resource from the `bc-schools-programs-offered-in-schools`
