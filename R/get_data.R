@@ -13,7 +13,7 @@
 #' Download and read a resource from a B.C. Data Catalogue record
 #'
 #' @param record either a `bcdc_record` object (from the result of `bcdc_get_record()`)
-#' or a character string denoting the id of a resource (or the url).
+#' or a character string denoting the name or id of a resource (or the url).
 #'
 #' It is advised to use the permament id for a record rather than the
 #' human-readable name to guard against future name changes of the record.
@@ -22,7 +22,7 @@
 #' `options("silence_named_get_data_warning" = TRUE)` - which you can set
 #' in your .Rprofile file so the option persists across sessions.
 #'
-#' @param resource option argument used when there are multiple data files of the same format
+#' @param resource optional argument used when there are multiple data files
 #' within the same record. See examples.
 #' @param ... arguments passed to other functions. Tabular data is passed to a function to handle
 #' the import based on the file extension. `bcdc_read_functions()` provides details on which functions
@@ -35,10 +35,14 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Using the record and resource id:
 #' bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
 #'               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
 #' bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
 #'
+#' # Using a `bcdc_record` object obtained from `bcdc_get_record`:
+#' record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#' bcdc_get_data(record)
 #'
 #' ## Example of correcting import problems
 #'
@@ -57,37 +61,41 @@
 #' bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4', skip = 1)
 #'
 #' }
-bcdc_get_data <- function(record, resource = NULL,...) {
+bcdc_get_data <- function(record, resource = NULL, ...) {
+  if (!has_internet()) stop("No access to internet", call. = FALSE)
   UseMethod("bcdc_get_data")
+}
+
+bcdc_get_data.default <- function(record, resource = NULL, ...) {
+  stop("No bcdc_get_data method for an object of class ", class(record),
+       call. = FALSE)
 }
 
 #' @export
 bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
-
-  stop("not working yet!")
-  # record can be either a url/slug or a bcdata_record
-  if (!interactive())
-    stop("Calling bcdc_get_data on a bcdc_record object is only meant for interactive use")
-  x <- utils::menu("pick one")
-  bcdc_get_data(record)
+  bcdc_get_data_internal(record, resource, ...)
 }
 
 #' @export
 bcdc_get_data.character <- function(record, resource = NULL, ...) {
   x <- slug_from_url(record)
-
   record <- bcdc_get_record(x)
+  bcdc_get_data_internal(record, resource, ...)
+}
+
+bcdc_get_data_internal <- function(record, resource, ...) {
+  record_id <- record$id
 
   # Only work with resources that are avaialable to read into R
   resource_df <- record$resource_df[record$resource_df$bcdata_available, ]
+
 
   if (!nrow(resource_df)) {
     stop("There are no resources that bcdata can download from this record", call. = FALSE)
   }
 
   ## fail if not using interactively and haven't specified resource
-  if (is.null(resource) && nrow(resource_df) > 1L && !interactive()){
+  if (is.null(resource) && nrow(resource_df) > 1L && !interactive()) {
     stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
   }
 
@@ -98,7 +106,7 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
   ## wms record; resource supplied OR wms is the only resource
   if (wms_enabled) {
     if (nrow(resource_df) == 1L || identical(wms_resource_id, resource)) {
-      query <- bcdc_query_geodata(record = x, ...)
+      query <- bcdc_query_geodata(record = record_id, ...)
       return(collect(query))
     }
   }
@@ -135,7 +143,7 @@ bcdc_get_data.character <- function(record, resource = NULL, ...) {
     ## todo
     # cat("To directly access this record in the future please use this command:\n")
     # cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
-    query <- bcdc_query_geodata(record = x, ...)
+    query <- bcdc_query_geodata(record = record_id, ...)
     return(collect(query))
   } else {
     file_url <- resource_df$url[resource_df$name == name_choice]

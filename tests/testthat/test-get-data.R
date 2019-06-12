@@ -57,6 +57,19 @@ test_that("a wms record with only one resource works with only the record id",{
   expect_is(bcdc_get_data("bc-college-region-boundaries"), "sf")
   })
 
+test_that("bcdc_get_data works with a bcdc_record object", {
+  record <- bcdc_get_record("bc-college-region-boundaries")
+  expect_is(bcdc_get_data(record), "sf")
 
+  record <- bcdc_get_record('fa542137-a976-49a6-856d-f1201adb2243')
+  expect_is(bcdc_get_data(record,
+                          resource = 'dc1098a7-a4b8-49a3-adee-9badd4429279'),
+            "tbl")
+})
+
+test_that("bcdc_get_data fails with invalid input", {
+  expect_error(bcdc_get_data(35L),
+               "No bcdc_get_data method for an object of class integer")
+})
 
 
