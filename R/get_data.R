@@ -73,18 +73,14 @@ bcdc_get_data.default <- function(record, resource = NULL, ...) {
 }
 
 #' @export
-bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
-  bcdc_get_data_internal(record, resource, ...)
-}
-
-#' @export
 bcdc_get_data.character <- function(record, resource = NULL, ...) {
   x <- slug_from_url(record)
   record <- bcdc_get_record(x)
-  bcdc_get_data_internal(record, resource, ...)
+  bcdc_get_data(record, resource, ...)
 }
 
-bcdc_get_data_internal <- function(record, resource, ...) {
+#' @export
+bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
   record_id <- record$id
 
   # Only work with resources that are avaialable to read into R
