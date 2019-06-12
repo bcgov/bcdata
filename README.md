@@ -35,10 +35,13 @@ Catalogue](https://catalogue.data.gov.bc.ca).
   - `bcdc_search_facet()` - List catalogue facet search options
   - `bcdc_get_record()` - Print a catalogue record
   - `bcdc_get_data()` - Get catalogue data
-  - `bcdc_query_geodata()` - Get & query catalogue geospatial
-    data—geospatial data must be available as a [Web Map or Web
-    Feature Service
+  - `bcdc_query_geodata()` - Get & query catalogue geospatial data
+    available as a [Web Map or Web Feature Service
     (WMS/WFS)](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
+
+The `bcdata` package supports downloading *most* file types, however the
+package does *not* retrieve .zip or compressed resource files at this
+time.
 
 ### Reference
 
