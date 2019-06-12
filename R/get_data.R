@@ -13,7 +13,7 @@
 #' Download and read a resource from a B.C. Data Catalogue record
 #'
 #' @param record either a `bcdc_record` object (from the result of `bcdc_get_record()`)
-#' or a character string denoting the id of a resource (or the url).
+#' or a character string denoting the name or id of a resource (or the url).
 #'
 #' It is advised to use the permament id for a record rather than the
 #' human-readable name to guard against future name changes of the record.
@@ -22,7 +22,7 @@
 #' `options("silence_named_get_data_warning" = TRUE)` - which you can set
 #' in your .Rprofile file so the option persists across sessions.
 #'
-#' @param resource option argument used when there are multiple data files of the same format
+#' @param resource optional argument used when there are multiple data files
 #' within the same record. See examples.
 #' @param ... arguments passed to other functions. Tabular data is passed to a function to handle
 #' the import based on the file extension. `bcdc_read_functions()` provides details on which functions
@@ -35,10 +35,14 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Using the record and resource id:
 #' bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
 #'               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
 #' bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
 #'
+#' # Using a `bcdc_record` object obtained from `bcdc_get_record`:
+#' record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#' bcdc_get_data(record)
 #'
 #' ## Example of correcting import problems
 #'

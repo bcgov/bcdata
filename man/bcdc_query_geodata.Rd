@@ -8,7 +8,7 @@ bcdc_query_geodata(record = NULL, crs = 3005)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the id of a resource (or the url).
+or a character string denoting the name or id of a resource (or the url).
 
 It is advised to use the permament id for a record rather than the
 human-readable name to guard against future name changes of the record.
