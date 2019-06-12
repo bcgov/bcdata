@@ -149,7 +149,6 @@ bc_az <- bcdc_get_data(bc_az_metadata, resource = "c495d082-b586-4df0-9e06-bd6b6
 bc_az %>% 
   ggplot() +
   geom_sf()
-
 ```
 
 **Note:** The `bcdata` package supports downloading _most_ file types, however the package does _not_ retrieve .zip or compressed resource files at this time.
@@ -159,6 +158,7 @@ bc_az %>%
 
 Many geospatial files in the B.C. Data Catalogue are available as a [Web Map or Web Feature Service (WMS/WFS)](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the WMS/WFS geospatial automatically from the web for you, sometimes the geospatial file is very large--and slow to download---and you may only want _some_ of the data. `bcdc_query_geodata()` let's you get & query catalogue geospatial data available as WMS/WFS, returning the query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
 
+Let's get the Regional Districts for British Columbia
 
 ```{r}
 bcdc_search("regional districts administrative areas", res_format = "wms", n = 1)
@@ -166,10 +166,11 @@ bcdc_search("regional districts administrative areas", res_format = "wms", n = 1
 bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
 
 
-bc_regional_districts <- bcdc_query_geodata(bc_regional_districts_metadata)
+bc_regional_districts <- bcdc_query_geodata("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
+foo <- bc_regional_districts  %>% collect()
 
 ## Look at the geospatial data with ggplot()
-bc_regional_district  %>% 
+foo  %>% 
   ggplot() +
   geom_sf()
 
