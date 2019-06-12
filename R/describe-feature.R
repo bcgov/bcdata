@@ -24,7 +24,8 @@
 
 bcdc_describe_feature <- function(record = NULL){
   obj <- bcdc_get_record(record)
-  if (!"wms" %in% vapply(obj$resources, `[[`, "format", FUN.VALUE = character(1))) {
+
+  if (!any(resource_locations(obj) %in% "bcgwdatastore")) {
     stop("No WMS/WFS resource available for this dataset.",
          call. = FALSE
     )

@@ -29,9 +29,18 @@ knitr::opts_chunk$set(
 library(bcdata)
 ```
 
-<a id="devex-badge" rel="Delivery" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/delivery.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a>[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)[![Travis build status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
 
-# bcdata
+# bcdata <img src="tools/readme/bcdata-sticker.png" height="139" align="right"/>
+
+
+### Version `r read.dcf("DESCRIPTION", "Version")`
+
+<!-- badges: start -->
+<a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Travis build status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
+[![CRAN status](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
+<!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
 
@@ -62,32 +71,6 @@ library(bcdata)
 - [Get started with bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
 - [Querying spatial data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
 - Using bcdata with bcmaps (coming soon!)
-
-<!--
-### Usage
-
-```{r, eval = TRUE, warnings=FALSE}
-bcdc_search("airport")
-```
-
-```{r eval = TRUE}
-bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
-```
-
-### bcdc_get_data
-To have a quick look at spatial data, you can simply print the object:
-```{r}
-airports <- bcdc_query_geodata("bc-airports", crs = 3857)
-airports
-```
-If you need all the data, you need to retrieve the data using the `collect` function:
-```{r}
-airports %>% 
-  collect()
-```
-This has the advantage of fine tuning your query without issuing a large request to the data catalogue. When you are finally ready to bring all the data you want into memory then you can use the `collect` function. This approach mimics that developed for `dbplyr`. You can read more about that [here](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html) 
-
---->
 
 
 ### Getting Help or Reporting an Issue

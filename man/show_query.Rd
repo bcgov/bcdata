@@ -2,13 +2,16 @@
 % Please edit documentation in R/utils-classes.R, R/utils-show-query.R
 \name{show_query.bcdc_promise}
 \alias{show_query.bcdc_promise}
+\alias{show_query.bcdc_sf}
 \alias{show_query}
 \title{Show SQL and URL used for WFS request from B.C. Data Catalogue}
 \usage{
 \method{show_query}{bcdc_promise}(x, ...)
+
+\method{show_query}{bcdc_sf}(x, ...)
 }
 \arguments{
-\item{x}{object of class bcdc_promise}
+\item{x}{object of class bcdc_promise or bcdc_sf}
 }
 \description{
 Display WFS query SQL
@@ -18,11 +21,22 @@ See \code{dplyr::\link[dplyr]{show_query}} for details.
 \section{Methods (by class)}{
 \itemize{
 \item \code{bcdc_promise}: show_query.bcdc_promise
+
+\item \code{bcdc_sf}: show_query.bcdc_promise
 }}
 
 \examples{
+\dontrun{
 bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
   filter(PERMIT_RELATIONSHIP == "DISCHARGE") \%>\%
   show_query()
+  }
+
+\dontrun{
+air <- bcdc_query_geodata("bc-airports") \%>\%
+  collect()
+
+show_query(air)
+}
 }
 \keyword{internal}
