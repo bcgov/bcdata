@@ -8,7 +8,7 @@ bcdc_get_data(record, resource = NULL, ...)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the ID of a resource (or the url).
+or a character string denoting the name or id of a resource (or the url).
 
 It is advised to use the permament ID for a record rather than the
 human-readable name to guard against future name changes of the record.
@@ -17,7 +17,7 @@ session. You can silence these warnings altogether by setting an option:
 \code{options("silence_named_get_data_warning" = TRUE)} - which you can set
 in your .Rprofile file so the option persists across sessions.}
 
-\item{resource}{option argument used when there are multiple data files of the same format
+\item{resource}{optional argument used when there are multiple data files
 within the same record. See examples.}
 
 \item{...}{arguments passed to other functions. Tabular data is passed to a function to handle
@@ -34,10 +34,14 @@ Download and read a resource from a B.C. Data Catalogue record
 }
 \examples{
 \dontrun{
+# Using the record and resource id:
 bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
 bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
 
+# Using a `bcdc_record` object obtained from `bcdc_get_record`:
+record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+bcdc_get_data(record)
 
 ## Example of correcting import problems
 

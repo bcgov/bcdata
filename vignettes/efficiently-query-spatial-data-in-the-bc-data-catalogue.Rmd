@@ -1,0 +1,167 @@
+---
+title: "Querying Spatial Data with bcdata"
+author: "Sam Albers"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(knitr)
+```
+
+# WORK IN PROGRESS
+
+## Overview
+For this vignette, we are going to illustrate how to fine tune a WFS request, merge two spatial datasets and summarise our results. The specific example will examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson school districts. 
+
+## Getting Started
+First you need to load the package. We will also load the `sf` and `dplyr` packages to help us work with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/):
+```{r, warning=FALSE}
+library(bcdata)
+library(sf)
+library(dplyr)
+```
+
+
+## Geospatial Data in the BC Data Catalogue
+The [BC Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides many datasets with spatial information over the web. Technically speaking, this means if we have an internet connection we can issue http requests to the BC Data Catalogue and import the response data into R as an sf object very easily. In practice what it means is that all spatial datasets are available over the web to users of bcdata as sf objects in R. The `bcdata` package provides a means to a) chose which layer you want and b) use `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to principles of `dbplyr` is available [here] (https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html).
+
+## School District Data
+Our first step is to extract the school district polygons from the data catalogue. This layer is described using this command:
+
+```{r}
+bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
+```
+
+This data is the boundary of each school district. The key thing we are interested in here is that this is a **WFS request (Spatial Data)**. From this we know we can make use of `bcdc_query_geodata`.
+
+```{r}
+bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") 
+```
+
+This is the initial query to the data in the catalogue. What has been returned is *not* the actual data and rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also received instruction that using `collect()` will retrieve a given number of features and fields present for this query. Lastly there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the data catalogue for only those polygons just like we would in a typical `dplyr` workflow:
+
+```{r}
+bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>% 
+  filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) 
+```
+
+To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. 
+
+```{r}
+bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>% 
+  filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>% 
+  select(SCHOOL_DISTRICT_NAME)
+```
+
+Note that in the `select` statement, we did not explicitly ask for the spatial data and also that there are several columns that we didn't select. This is because within each dataset in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don't want those columns, you can drop them after you `collect` the data which we will take care of right now:
+
+```{r}
+districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>% 
+  filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>% 
+  select(SCHOOL_DISTRICT_NAME) %>% 
+  collect()
+```
+
+Note here that we have assigned the object a name and added the `collect` statement. This step happens when you have selected the data you want and wish to begin working with it in R like a normal sf object. For example we can now plot these three school district:
+
+```{r}
+plot(st_geometry(districts))
+```
+
+This is useful exploratory plot. Better plots of spatial data can be found in both the `ggplot2` and `tmap` packages. Now that we have the spatial boundaries narrowed by district we can perform some spatial operations to determine parks in the school districts.
+
+## Greenspaces Data
+For the purposes of this example, let's consider [this greenspace](catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da) layer in the catalogue. This layer is described here:
+```{r}
+bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
+```
+
+Again we recognize this is Spatial Data which means we can make use of `bcdc_query_geodata`.
+
+```{r}
+bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
+```
+
+Since we are interested in only "Park" data we can subset our query:
+```{r}
+bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  filter(PARK_PRIMARY_USE == "Park")
+```
+
+Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full dataset. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object:
+
+```{r}
+districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  filter(PARK_PRIMARY_USE == "Park") %>% 
+  filter(INTERSECTS(districts)) %>% 
+  collect()
+```
+
+Plotting both the filtered parks data and the district polygons reveals a current limitation of `bcdata`:
+```{r, echo=FALSE}
+plot(st_geometry(districts))
+plot(st_geometry(districts_parks), add = TRUE, col = "green")
+```
+
+In this example, many parks not contained within of school districts are included in the `districts_parks` object. This is because rather than a full intersection, `bcdata` draws a bounding box around all the polygons that are doing the intersection (in this case `district`) and does the intersection based on that bounding box. This is a limitation imposed by the WFS and has the effect of shortening the number of characters in the url request. Drawing the bounding box illustrates this point:
+
+```{r, echo=FALSE}
+bounding_box <- st_as_sfc((st_bbox(districts)))
+
+plot(st_geometry(districts))
+plot(st_geometry(districts_parks), add = TRUE, col = "green")
+plot(bounding_box, add = TRUE, border = "purple")
+```
+
+To get around this problem, we can simply do some additional processing with the `sf` package. Specifically we can use a spatial join to assign parks into their respective district: 
+
+```{r}
+districts_parks_join <- districts_parks %>% 
+  st_join(districts, left = FALSE) 
+```
+
+```{r, echo=FALSE}
+plot(st_geometry(districts))
+plot(st_geometry(districts_parks_join), add = TRUE, col = "green")
+```
+
+Finally to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:
+
+```{r}
+districts_parks_join %>% 
+  mutate(area = st_area(geometry)) %>% 
+  st_set_geometry(NULL) %>% 
+  group_by(SCHOOL_DISTRICT_NAME) %>% 
+  summarise(total_area = sum(area)) %>% 
+  arrange(total_area)
+```
+
+## Additional Useful Functions
+There are a couple of other functions in `bcdata` that are useful to know when working with spatial data from the catalogue. `bcdc_describe_feature` gives the column names, whether the column is selectable, and the column types in both R and on the remote server:
+
+```{r}
+bcdc_describe_feature("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
+```
+
+This is helpful initial step to learn column names and types when you construct your query. 
+
+Another useful function is `show_query()` which provide information on the request issued to the remote server:
+
+```{r}
+bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  filter(PARK_PRIMARY_USE == "Park") %>% 
+  filter(INTERSECTS(districts)) %>% 
+  show_query()
+```
+
+This output is what being created by the dplyr code outlined above. 
