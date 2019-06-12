@@ -4,7 +4,7 @@
 \alias{bcdc_query_geodata}
 \title{Query data from the B.C. Web Feature Service}
 \usage{
-bcdc_query_geodata(record = NULL, crs = 3005)
+bcdc_query_geodata(record, crs = 3005)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
