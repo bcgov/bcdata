@@ -66,7 +66,8 @@ bcdc_get_geodata <- function(record = NULL, crs = 3005) {
 #' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 #' }
 #'
-bcdc_query_geodata <- function(record = NULL, crs = 3005) {
+bcdc_query_geodata <- function(record, crs = 3005) {
+  if (!has_internet()) stop("No access to internet", call. = FALSE)
   UseMethod("bcdc_query_geodata")
 }
 
@@ -77,10 +78,14 @@ bcdc_query_geodata.default <- function(record, crs = 3005) {
 }
 
 #' @export
-bcdc_query_geodata.character <- function(record = NULL, crs = 3005) {
+bcdc_query_geodata.character <- function(record, crs = 3005) {
   obj <- bcdc_get_record(record)
 
-  if (!any(resource_locations(obj) %in% "bcgwdatastore")) {
+  bcdc_query_geodata(obj, crs)
+}
+
+bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
+  if (!any(resource_locations(record) %in% "bcgwdatastore")) {
     stop("No WMS/WFS resource available for this dataset.",
          call. = FALSE
     )
@@ -92,7 +97,7 @@ bcdc_query_geodata.character <- function(record = NULL, crs = 3005) {
     VERSION = "2.0.0",
     REQUEST = "GetFeature",
     outputFormat = "application/json",
-    typeNames = obj$layer_name,
+    typeNames = record$layer_name,
     SRSNAME = paste0("EPSG:", crs)
   )
 
@@ -102,8 +107,7 @@ bcdc_query_geodata.character <- function(record = NULL, crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = obj))
-
+  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = record))
 }
 
 #' Get map from the B.C. Web Mapping Service
@@ -117,7 +121,7 @@ bcdc_query_geodata.character <- function(record = NULL, crs = 3005) {
 #' bcdc_preview("points-of-well-diversion-applications")
 #' }
 #' @export
-bcdc_preview <- function(record = NULL) {
+bcdc_preview <- function(record) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
   obj <- bcdc_get_record(record)
