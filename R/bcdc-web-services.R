@@ -67,6 +67,17 @@ bcdc_get_geodata <- function(record = NULL, crs = 3005) {
 #' }
 #'
 bcdc_query_geodata <- function(record = NULL, crs = 3005) {
+  UseMethod("bcdc_query_geodata")
+}
+
+#' @export
+bcdc_query_geodata.default <- function(record, resource = NULL, ...) {
+  stop("No bcdc_query_geodata method for an object of class ", class(record),
+       call. = FALSE)
+}
+
+#' @export
+bcdc_query_geodata.character <- function(record = NULL, crs = 3005) {
   obj <- bcdc_get_record(record)
 
   if (!any(resource_locations(obj) %in% "bcgwdatastore")) {
