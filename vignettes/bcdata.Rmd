@@ -26,6 +26,8 @@ The `bcdata` [R](https://www.r-project.org/) package contains functions for sear
 
 The [B.C. Data Catalogue](https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5) is the place to find British Columbia Government data, applications and web services. Much of the data are released under the [Open Government Licence --- British Columbia](https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc), as well as numerous other [licences](https://catalogue.data.gov.bc.ca/dataset?download_audience=Public).
 
+  
+  
 You can install `bcdata` directly from GitHub using the [remotes](https://cran.r-project.org/package=remotes) package:
 
 ```{r, eval=FALSE}
@@ -37,14 +39,14 @@ library(bcdata)
 
 ### `bcdc_browse()`
 
-`bcdata::bcdc_browse()` let's you access the B.C. Data Catalogue home page directly from R---opening the web page in your default browser:
+`bcdata::bcdc_browse()` let's you access the B.C. Data Catalogue home page directly from R---opening the catalogue home page in your default browser:
 
 ```{r, eval=FALSE}
 ## Take me to the B.C. Data Catalogue home page
 bcdc_browse()
 ```
 
-If you know the catalogue record human-readable _name_ or permanent _ID_ you can open the specific record page:
+If you know the catalogue record human-readable name or permanent ID you can open directly to the record web page:
 
 ```{r, eval=FALSE}
 ## Take me to the B.C. Winery Locations catalogue record using the record name
@@ -52,66 +54,87 @@ bcdc_browse("bc-winery-locations")
 
 ## Take me to the B.C. Winery Locations catalogue record using the record ID
 bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
+```
 
+You can also use `bcdc_browse()` to open to search results in the catalogue:
+
+```{r, eval=FALSE}
 ## Take me to the catalogue search results for 'wineries'
 bcdc_browse("wineries")
 ```
 
-
 ### `bcdc_search()`
 
-`bcdata::bcdc_search()` let's you search the B.C. Data Catalogue. Let's search for catalogue records that contain "recycling" in the title:
+`bcdata::bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session. 
+
+Let's search the catalogue for records that contain "recycling" in the title:
 
 ```{r}
 ## Give me the catalogue search results for 'recycling'
 bcdc_search("recycling")
 ```
 
-You can set the number of records to be returned from the search and/or you can tailor your search using the catalogue search facets `license_id`, `download_audience`, `type`, `res_format`, `sector`, and `organization`:
+You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search facets `license_id`, `download_audience`, `type`, `res_format`, `sector`, and `organization`:
 
 ```{r}
 ## Give me the first catalogue search result for 'recycling'
 bcdc_search("recycling", n = 1)
 
-## Give me the catalogue search results for 'recycling' where the data is tabular and the licence is Open Government Licence-British Columbia
+## Give me the catalogue search results for 'recycling' where the 
+## data is tabular and the licence is Open Government Licence – British Columbia
 bcdc_search("recycling", type = "Dataset", license_id = "2")
 ```
 
-You can retrieve the _metadata_ for a single catalogue record by using the record _name_ or _ID_ with `bcdc_get_record()`. It is advised to use the permanent _ID_ rather than the human-readable _name_ in scripts or non-interactive situations to guard against future name changes of a record:
-
-```{r}
-## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`
-bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
-```
-
-Finally, you can see all the valid values for the catalogue search facets using `bcdata::bcdc_search_facets()`:
+You can see all the valid values for the catalogue search facets using `bcdata::bcdc_search_facets()`:
 
 ```{r}
 ## Valid values for search facet 'type'
 bcdc_search_facets(facet = "type")
 ```
 
+Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in scripts or non-interactive situations to guard against future name changes of a record:
+
+```{r}
+## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`
+bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
+```
+
 
 ### `bcdc_get_data()`
 
-One you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  Let's return to the B.C. Winery Locations data:
+One you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  Let's look at B.C. Highway Web Cameras data:
 
 ```{r}
 ## Get the data resource for the `bc-winery-locations` catalogue record
-bcdc_get_data("bc-winery-locations") 
+bcdc_get_data("bc-highway-cams") 
 
 ## OR use the permanent ID, likely better for scripts or non-interactive use 
-bcdc_get_data("1d21922b-ec4f-42e5-8f6b-bf320a286157")
+bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 ```
-A catalogue record can have one or multiple data "resources"---as they are called. If there is only one resource it will be returned by default, as in the above `bc-winery-locations`. If there are multiple data resources you will need to specify which resource you want:
+
+A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default as in the above `bc-highway-cams` record. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:
 
 ```{r}
-## Get the data resource for the `bc-winery-locations` catalogue record
-bcdc_get_data("bc-winery-locations") 
+## Get the metadata for the `bc-schools-programs-offered-in-schools` catalogue record
+bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
+```
 
-## OR use the permanent ID, likely better for scripts or non-interactive use 
-bcdc_get_data("1d21922b-ec4f-42e5-8f6b-bf320a286157")
-``
+We see there are two file formats available for this data---.txt or .xlsx---so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you to select the resource you want. But the full code to do so is also available _in_ the metdata record ☝️:
+
+```{r}
+## Get the txt data resource from the `bc-schools-programs-offered-in-schools`
+## catalogue record
+bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
+```
+
+`bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically read it in as an `sf` object:
+
+```{r}
+## Get the Air Zone geospatial data
+bcdc_get_data("british-columbia-air-zones", resource = 'c495d082-b586-4df0-9e06-bd6b66a8acd9')
+```
+
+At this time, the `bcdata` package does not retrieve .zip or compressed resource files.
 
 ### `bcdc_query_geodata()`
 
