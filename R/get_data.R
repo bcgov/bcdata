@@ -66,6 +66,7 @@ bcdc_get_data <- function(record, resource = NULL, ...) {
   UseMethod("bcdc_get_data")
 }
 
+#' @export
 bcdc_get_data.default <- function(record, resource = NULL, ...) {
   stop("No bcdc_get_data method for an object of class ", class(record),
        call. = FALSE)
