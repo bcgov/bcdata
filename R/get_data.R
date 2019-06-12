@@ -150,7 +150,7 @@ bcdc_get_data_internal <- function(record, resource, ...) {
     id_choice <- resource_df$id[resource_df$name == name_choice]
 
     cat("To directly access this record in the future please use this command:\n")
-    cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
+    cat(glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
     read_from_url(file_url, ...)
   }
 }
