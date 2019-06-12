@@ -3,6 +3,7 @@
 S3method(bcdc_get_data,bcdc_record)
 S3method(bcdc_get_data,character)
 S3method(bcdc_get_data,default)
+S3method(bcdc_query_geodata,bcdc_record)
 S3method(bcdc_query_geodata,character)
 S3method(bcdc_query_geodata,default)
 S3method(collect,bcdc_promise)

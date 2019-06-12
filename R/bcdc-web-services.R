@@ -66,6 +66,7 @@ bcdc_get_geodata <- function(record = NULL, crs = 3005) {
 #' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 #' }
 #'
+#' @export
 bcdc_query_geodata <- function(record, crs = 3005) {
   if (!has_internet()) stop("No access to internet", call. = FALSE)
   UseMethod("bcdc_query_geodata")
@@ -84,6 +85,7 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
   bcdc_query_geodata(obj, crs)
 }
 
+#' @export
 bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   if (!any(resource_locations(record) %in% "bcgwdatastore")) {
     stop("No WMS/WFS resource available for this dataset.",
