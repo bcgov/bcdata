@@ -32,28 +32,43 @@ bcdc_get_geodata <- function(record = NULL, crs = 3005) {
 #' Query data from the B.C. Web Feature Service
 #'
 #' Queries features from the B.C. Web Feature Service. The data must be available as
-#' a WMS/WFS service. See `bcdc_get_record(record)$resources`). Pulls features off the web.
-#' See `bcdc_get_record(record)$resources`). If the record is greater than 10000 rows,
+#' a WMS/WFS service. See `bcdc_get_record(record)$resources`). If the record is greater than 10000 rows,
 #' the response will be paginated. If you are querying layers of this size, expect
 #' that the request will take quite a while.
 #'
-#' @inheritParams bcdc_get_data
-#' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
-#'        (B.C. Albers). See https://epsgi.io.
+#' Note that this function doesn't actually return the data, but rather an
+#' object of class `bcdc_promise``, which includes all of the information
+#' required to retrieve the requested data. In order to get the actual data as
+#' an `sf` object, you need to run [collect()] on the `bcdc_promise`. This
+#' allows further refining the call to `bcdc_query_geodata()` with [filter()]
+#' and/or [select()] statements before pulling down the actual data as an `sf`
+#' object with [collect()]. See examples.
 #'
-#' @return an `sf` object
+#' @inheritParams bcdc_get_data
+#' @param crs the epsg code for the coordinate reference system. Defaults to
+#'   `3005` (B.C. Albers). See https://epsgi.io.
+#'
+#' @return A `bcdc_promise` object. This object includes all of the information
+#'   required to retrieve the requested data. In order to get the actual data as
+#'   an `sf` object, you need to run [collect()] on the `bcdc_promise`.
 #'
 #' @export
 #'
 #' @examples
 #'
 #' \dontrun{
+#' # Returns a bcdc_promise, which can be further refined using filter/select:
 #' bcdc_query_geodata("bc-airports", crs = 3857)
+#'
+#' To obtain the actual data as an sf object, collect() must be called:
 #' bcdc_query_geodata("bc-airports", crs = 3857) %>%
 #'   filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
 #'   collect()
+#'
 #' bcdc_query_geodata("ground-water-wells") %>%
-#'   filter(OBSERVATION_WELL_NUMBER == 108)
+#'   filter(OBSERVATION_WELL_NUMBER == 108) %>%
+#'   select(WELL_TAG_NUMBER, WATERSHED_CODE) %>%
+#'   collect()
 #'
 #' ## A moderately large layer
 
@@ -66,10 +81,28 @@ bcdc_get_geodata <- function(record = NULL, crs = 3005) {
 #' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 #' }
 #'
-bcdc_query_geodata <- function(record = NULL, crs = 3005) {
+#' @export
+bcdc_query_geodata <- function(record, crs = 3005) {
+  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  UseMethod("bcdc_query_geodata")
+}
+
+#' @export
+bcdc_query_geodata.default <- function(record, crs = 3005) {
+  stop("No bcdc_query_geodata method for an object of class ", class(record),
+       call. = FALSE)
+}
+
+#' @export
+bcdc_query_geodata.character <- function(record, crs = 3005) {
   obj <- bcdc_get_record(record)
 
-  if (!any(resource_locations(obj) %in% "bcgwdatastore")) {
+  bcdc_query_geodata(obj, crs)
+}
+
+#' @export
+bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
+  if (!any(resource_locations(record) %in% "bcgwdatastore")) {
     stop("No WMS/WFS resource available for this dataset.",
          call. = FALSE
     )
@@ -81,7 +114,7 @@ bcdc_query_geodata <- function(record = NULL, crs = 3005) {
     VERSION = "2.0.0",
     REQUEST = "GetFeature",
     outputFormat = "application/json",
-    typeNames = obj$layer_name,
+    typeNames = record$layer_name,
     SRSNAME = paste0("EPSG:", crs)
   )
 
@@ -91,8 +124,7 @@ bcdc_query_geodata <- function(record = NULL, crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = obj))
-
+  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = record))
 }
 
 #' Get map from the B.C. Web Mapping Service
@@ -106,7 +138,7 @@ bcdc_query_geodata <- function(record = NULL, crs = 3005) {
 #' bcdc_preview("points-of-well-diversion-applications")
 #' }
 #' @export
-bcdc_preview <- function(record = NULL) {
+bcdc_preview <- function(record) {
   if(!has_internet()) stop("No access to internet", call. = FALSE)
 
   obj <- bcdc_get_record(record)
