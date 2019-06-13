@@ -163,7 +163,7 @@ test_that("multiple filter statements are additive with geometric operators",{
 })
 
 
-test_that("an intersect with an object greater than 1E6 bytes automatically gets turned into a bbox",{
+test_that("an intersect with an object greater than 5E5 bytes automatically gets turned into a bbox",{
   districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
     filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
     collect()
@@ -173,11 +173,6 @@ test_that("an intersect with an object greater than 1E6 bytes automatically gets
   expect_warning(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
     filter(WITHIN(districts)) %>%
       collect())
-
-  expect_equal(
-    as.character(attributes(parks)$query_list$CQL_FILTER),
-    "(WITHIN(SHAPE, POLYGON ((1126991 379215.8, 1528155 379215.8, 1528155 1224041, 1126991 1224041, 1126991 379215.8))))"
-  )
 })
 
 
