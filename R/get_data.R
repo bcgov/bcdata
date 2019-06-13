@@ -61,29 +61,28 @@
 #' bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4', skip = 1)
 #'
 #' }
+#'
+#' @export
 bcdc_get_data <- function(record, resource = NULL, ...) {
   if (!has_internet()) stop("No access to internet", call. = FALSE)
   UseMethod("bcdc_get_data")
 }
 
+#' @export
 bcdc_get_data.default <- function(record, resource = NULL, ...) {
   stop("No bcdc_get_data method for an object of class ", class(record),
        call. = FALSE)
 }
 
 #' @export
-bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
-  bcdc_get_data_internal(record, resource, ...)
-}
-
-#' @export
 bcdc_get_data.character <- function(record, resource = NULL, ...) {
   x <- slug_from_url(record)
   record <- bcdc_get_record(x)
-  bcdc_get_data_internal(record, resource, ...)
+  bcdc_get_data(record, resource, ...)
 }
 
-bcdc_get_data_internal <- function(record, resource, ...) {
+#' @export
+bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
   record_id <- record$id
 
   # Only work with resources that are avaialable to read into R

@@ -4,7 +4,7 @@
 \alias{bcdc_preview}
 \title{Get map from the B.C. Web Mapping Service}
 \usage{
-bcdc_preview(record = NULL)
+bcdc_preview(record)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
