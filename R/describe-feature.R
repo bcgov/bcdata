@@ -44,7 +44,7 @@ bcdc_describe_feature <- function(record = NULL){
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  cc <- cli$get(query = query_list)
+  cc <- cli$post(body = query_list, encode = "form")
   status_failed <- cc$status_code >= 300
 
   xml_res <- xml2::read_xml(cc$parse("UTF-8"))
