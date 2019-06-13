@@ -165,12 +165,15 @@ bcdc_search("regional districts administrative areas", res_format = "wms", n = 1
 
 bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
 
+bcdc_describe_feature("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
+# bcdc_describe_feature(bc_regional_districts_metadata)
 
-bc_regional_districts <- bcdc_query_geodata("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
-foo <- bc_regional_districts  %>% collect()
+my_regional_district <- bcdc_query_geodata("d1aff64e-dbfe-45a6-af97-582b7f6418b9") %>% 
+  filter(ADMIN_AREA_NAME == "Capital Regional District") %>% 
+  collect()
 
 ## Look at the geospatial data with ggplot()
-foo  %>% 
+my_regional_district  %>% 
   ggplot() +
   geom_sf()
 
