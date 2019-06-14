@@ -220,7 +220,11 @@ collect.bcdc_promise <- function(x, ...){
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
   if (number_of_records < 10000) {
-    cc <- cli$post(body = query_list, encode = "form")
+    cc <- tryCatch(cli$post(body = query_list, encode = "form"),
+             error = function(e) {
+               stop("The BC data catalogue experienced issues with this request.
+                     Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
+
     status_failed <- cc$status_code >= 300
     url <- cc$url
   } else {
