@@ -57,6 +57,10 @@ bcdc_browse("bc-winery-locations")
 bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
 ```
 
+```{r, include=FALSE}
+knitr::include_graphics("./vignettes/bcdc_browse.png")
+```
+
 You can also use `bcdc_browse()` to open to search results in the catalogue:
 
 ```{r, eval=FALSE}
