@@ -21,8 +21,15 @@
 #'
 #' @examples
 #'  bcdc_describe_feature("bc-airports")
+#'
+#' @export
+bcdc_describe_feature <- function(record){
+  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  UseMethod("bcdc_describe_feature")
+}
 
-bcdc_describe_feature <- function(record = NULL){
+#' @export
+bcdc_describe_feature.default <- function(record){
   obj <- bcdc_get_record(record)
 
   if (!any(resource_locations(obj) %in% "bcgwdatastore")) {
@@ -41,8 +48,37 @@ bcdc_describe_feature <- function(record = NULL){
   )
 
 
+  feature_helper(query_list)
+}
+
+
+#' @export
+bcdc_describe_feature.bcdc_record <- function(record){
+
+  if (!any(resource_locations(record) %in% "bcgwdatastore")) {
+    stop("No WMS/WFS resource available for this dataset.",
+         call. = FALSE
+    )
+  }
+
+  ## Parameters for the API call
+  query_list <- list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "DescribeFeatureType",
+    #outputFormat = "application/json",
+    typeNames = record$layer_name
+  )
+
+
+  feature_helper(query_list)
+}
+
+
+feature_helper <- function(query_list) {
   ## GET and parse data to sf object
-  cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+  cli <-
+    bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
   cc <- cli$get(query = query_list)
   status_failed <- cc$status_code >= 300
@@ -51,7 +87,7 @@ bcdc_describe_feature <- function(record = NULL){
   xml_res <- xml2::xml_find_all(xml_res, "//xsd:sequence")
   xml_res <- xml2::xml_find_all(xml_res, ".//xsd:element")
   xml_res <- purrr::map(xml_res, xml2::xml_attrs)
-  xml_df <- purrr::map_df(xml_res, ~as.list(.))
+  xml_df <- purrr::map_df(xml_res, ~ as.list(.))
 
   ## This is an ugly way of doing this
   ## Manually add id and turn into a row
@@ -62,15 +98,13 @@ bcdc_describe_feature <- function(record = NULL){
   ## Identify geometry column and move to last
   geom_type <- intersect(xml_df$type, gml_types())
   xml_df[xml_df$type == geom_type, "name"] <- "geometry"
-  xml_df <- dplyr::bind_rows(
-    xml_df[xml_df$name != "geometry", ],
-    xml_df[xml_df$name == "geometry", ]
-  )
+  xml_df <- dplyr::bind_rows(xml_df[xml_df$name != "geometry",],
+                             xml_df[xml_df$name == "geometry",])
 
   ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
 
-  xml_df <- xml_df[,c("name", "nillable","type")]
+  xml_df <- xml_df[, c("name", "nillable", "type")]
   ## Add the id_row back into the front
   xml_df <- dplyr::bind_rows(id_row, xml_df)
   colnames(xml_df) <- c("col_name", "selectable", "remote_col_type")
