@@ -156,7 +156,7 @@ bc_az %>%
 
 ### `bcdc_query_geodata()`
 
-Many geospatial files in the B.C. Data Catalogue are available as a [Web Map or Web Feature Service (WMS/WFS)](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the WMS/WFS geospatial automatically from the web for you, sometimes the geospatial file is very large--and slow to download---and you may only want _some_ of the data. `bcdc_query_geodata()` let's you get & query catalogue geospatial data available as WMS/WFS, returning the query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+Many geospatial datasets in the B.C. Data Catalogue are available as a [Web Map or Web Feature Service (WMS/WFS)](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the WMS/WFS geospatial data automatically from the web for you (and return it as an `sf` object), sometimes the geospatial file is very large--and slow to download---and you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as WMS/WFS using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), returning the query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
 
 Let's get the Regional Districts for British Columbia
 
