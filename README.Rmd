@@ -51,7 +51,7 @@ An R package 📦 for searching & retrieving data from the [B.C. Data Catalogue]
 - `bcdc_get_data()` - Get catalogue data
 - `bcdc_query_geodata()` - Get & query catalogue geospatial data available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
 
-The `bcdata` package supports downloading _most_ file types, however the package does _not_ retrieve .zip or compressed resource files at this time. If you encounter a file type in the BC Data Catalogue not currently supported by bcdata please file an issue. 
+The `bcdata` package supports downloading _most_ file types, however the package does _not_ retrieve .zip or compressed resource files at this time. If you encounter a file type in the B.C. Data Catalogue not currently supported by `bcdata` please file an [issue](https://github.com/bcgov/bcdata/issues/). 
 
 ### Reference
 [bcdata package 📦 home page and reference guide](https://bcgov.github.io/bcdata/index.html)

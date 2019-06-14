@@ -36,12 +36,14 @@ Catalogue](https://catalogue.data.gov.bc.ca).
   - `bcdc_get_record()` - Print a catalogue record
   - `bcdc_get_data()` - Get catalogue data
   - `bcdc_query_geodata()` - Get & query catalogue geospatial data
-    available as a [Web
+    available through a [Web
     Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
 
 The `bcdata` package supports downloading *most* file types, however the
 package does *not* retrieve .zip or compressed resource files at this
-time.
+time. If you encounter a file type in the B.C. Data Catalogue not
+currently supported by `bcdata` please file an
+[issue](https://github.com/bcgov/bcdata/issues/).
 
 ### Reference
 
