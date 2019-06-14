@@ -40,7 +40,7 @@ library(bcdata)
 
 ### `bcdc_browse()`
 
-`bcdata::bcdc_browse()` let's you access the B.C. Data Catalogue web interface directly from R---opening the home page in your default browser:
+`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface]( https://catalogue.data.gov.bc.ca) directly from R---opening the home page in your default browser:
 
 ```{r, eval=FALSE}
 ## Take me to the B.C. Data Catalogue home page
@@ -55,10 +55,6 @@ bcdc_browse("bc-winery-locations")
 
 ## Take me to the B.C. Winery Locations catalogue record using the record ID
 bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
-```
-
-```{r, include=FALSE}
-knitr::include_graphics("./vignettes/bcdc_browse.png")
 ```
 
 You can also use `bcdc_browse()` to open to search results in the catalogue:
@@ -93,8 +89,8 @@ bcdc_search("recycling", type = "Dataset", license_id = "2")
 You can see all valid values for the catalogue search facets using `bcdata::bcdc_search_facets()`:
 
 ```{r}
-## Valid values for search facet 'type'
-bcdc_search_facets(facet = "type")
+## Valid values for search facet 'license_id'
+bcdc_search_facets(facet = "license_id")
 ```
 
 Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:
@@ -139,17 +135,19 @@ We see there are two data files or resources available in this record, so we nee
 bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
 ```
 
-`bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically reads and returns it in as an [`sf` object](https://r-spatial.github.io/sf/) in your R session. Let's get the air zones for British Columbia:
+`bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically reads and returns it as an [`sf` object](https://r-spatial.github.io/sf/) in your R session. Let's get the air zones for British Columbia:
 
-```{r}
+```{r, fig.height = 5, fig.width = 7}
+## Find the B.C. Air Zones catalogue record
 bcdc_search("air zones", res_format = "geojson")
 
+## Get the metadata for the B.C. Air Zones catalogue record
 bc_az_metadata <- bcdc_get_record("e8eeefc4-2826-47bc-8430-85703d328516")
 
-## Get the Air Zone geospatial data ()
+## Get the B.C. Air Zone geospatial data
 bc_az <- bcdc_get_data(bc_az_metadata, resource = "c495d082-b586-4df0-9e06-bd6b66a8acd9")
 
-## Look at the air zone geospatial data with ggplot()
+## Plot the B.C. Air Zone geospatial data with ggplot()
 bc_az %>% 
   ggplot() +
   geom_sf()
@@ -160,30 +158,35 @@ bc_az %>%
 
 ### `bcdc_query_geodata()`
 
-Many geospatial datasets in the B.C. Data Catalogue are available as a [Web Map or Web Feature Service (WMS/WFS)](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the WMS/WFS geospatial data automatically from the web for you (and return it as an `sf` object), sometimes the geospatial file is very large--and slow to download---and you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as WMS/WFS using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), returning the query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+Many geospatial datasets in the B.C. Data Catalogue are available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
 
-Let's get the Regional Districts for British Columbia
+Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:
 
-```{r}
+```{r, fig.height = 5, fig.width = 7}
+## Find the B.C. Regional Districts catalogue record
 bcdc_search("regional districts administrative areas", res_format = "wms", n = 1)
 
+## Get the metadata for the B.C. Regional Districts catalogue record
 bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
 
-bcdc_describe_feature("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
-# bcdc_describe_feature(bc_regional_districts_metadata)
+## Have a quick look at the geospatial columns to help with filter or select
+bcdc_describe_feature(bc_regional_districts_metadata)
 
+## Get the Capital Regional District polygon from the B.C. Regional 
+## Districts geospatial data
 my_regional_district <- bcdc_query_geodata("d1aff64e-dbfe-45a6-af97-582b7f6418b9") %>% 
   filter(ADMIN_AREA_NAME == "Capital Regional District") %>% 
   collect()
 
-## Look at the geospatial data with ggplot()
+## Plot the Capital Regional District polygon with ggplot()
 my_regional_district  %>% 
   ggplot() +
   geom_sf()
-
 ```
 
-Please see the vignette("Querying spatial data with bcdata") for a demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a Web Map or Web Feature Service (WMS/WFS) request for geospatial data from the B.C. Data Catalogue.
+The vignette [Querying spatial data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a Web Service request for geospatial data from the B.C. Data Catalogue.
+
+
 
 
 
