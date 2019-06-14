@@ -246,7 +246,7 @@ collect.bcdc_promise <- function(x, ...){
     tryCatch(cc$post(body = query_list, encode = "form"),
              error = function(e) {
                stop("The BC data catalogue experienced issues with this request.
-                     Try reducing the size of the object you are trying", call. = FALSE)})
+                     Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
     url <- cc$url_fetch(query = query_list)
 
