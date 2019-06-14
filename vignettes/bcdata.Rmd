@@ -75,7 +75,7 @@ Let's search the catalogue for records that contain the word "recycling":
 bcdc_search("recycling")
 ```
 
-You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search facets `license_id`, `download_audience`, `type`, `res_format`, `sector`, and `organization`:
+You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search _facets_ `license_id`, `download_audience`, `type`, `res_format`, `sector`, and `organization`:
 
 ```{r}
 ## Give me the first catalogue search result for 'recycling'
