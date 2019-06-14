@@ -315,7 +315,7 @@ show_query.bcdc_promise <- function(x, ...) {
 #' }
 show_query.bcdc_sf <- function(x, ...) {
 
-  url <- attributes(x)$url
+  url <- attr(x, "url")
   query_list <- attributes(x)$query_list
   cql_filter <- query_list$CQL_FILTER
   query_list$CQL_FILTER <- NULL
