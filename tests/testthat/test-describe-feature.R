@@ -35,3 +35,9 @@ test_that("geometry column is last",{
   expect_identical(description$col_name[nrow(description)], "geometry")
 
 })
+
+test_that("bcdc_describe_feature accepts a bcdc_record object", {
+  airports <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
+  airport_feature <- bcdc_describe_feature(airports)
+  expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
+})
