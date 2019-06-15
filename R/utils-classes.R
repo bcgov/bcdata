@@ -34,7 +34,7 @@ print.bcdc_promise <- function(x, ...) {
 
   query_list <- c(x$query_list, COUNT = 6)
   cli <- x$cli
-  cc <- cli$get(query = query_list)
+  cc <- cli$post(body = query_list, encode = "form")
   cc$raise_for_status()
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
@@ -150,13 +150,6 @@ filter.bcdc_promise <- function(.data, ...) {
                                    current_cql,
                                    drop_null = TRUE)
 
-  if (!safe_request_length(.data$query_list)) {
-    stop("The vector you are trying to filter by is too long. Consider either breaking
-    up the request into two or more bcdc_query_geodata() calls or using a spatial
-    operator to spatial define your request. See ?cql_geom_predicates.",
-    call. = FALSE)
-  }
-
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
 }
 
@@ -227,7 +220,11 @@ collect.bcdc_promise <- function(x, ...){
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
   if (number_of_records < 10000) {
-    cc <- cli$get(query = query_list)
+    cc <- tryCatch(cli$post(body = query_list, encode = "form"),
+             error = function(e) {
+               stop("The BC data catalogue experienced issues with this request.
+                     Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
+
     status_failed <- cc$status_code >= 300
     url <- cc$url
   } else {
@@ -243,13 +240,18 @@ collect.bcdc_promise <- function(x, ...){
       limit_param = "count",
       offset_param = "startIndex",
       limit = number_of_records,
-      limit_chunk = 5000,
+      limit_chunk = 1000,
       progress = TRUE
     )
 
 
     message("Retrieving data")
-    cc$get(query = query_list)
+
+    tryCatch(cc$post(body = query_list, encode = "form"),
+             error = function(e) {
+               stop("The BC data catalogue experienced issues with this request.
+                     Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
+
     url <- cc$url_fetch(query = query_list)
 
     status_failed <- any(cc$status_code() >= 300)
@@ -288,18 +290,19 @@ collect.bcdc_promise <- function(x, ...){
 show_query.bcdc_promise <- function(x, ...) {
 
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
+  cql_filter <- x$query_list$CQL_FILTER
+  x$query_list$CQL_FILTER <- NULL
 
-  url <-  x$cli$url_fetch(query = x$query_list)
-
-  url <- url_format(url)
+  url <-  x$cli$url_fetch()
 
   cat_line("<url>")
   cat_line(url)
   cat_line()
-  cat_line("<SQL>")
-  cat_line(x$query_list$CQL_FILTER)
+  cat_line("<body>")
+  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
+  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
 
-  invisible(x$cli$url_fetch(query = x$query_list))
+  invisible(TRUE)
 
 }
 
@@ -316,7 +319,10 @@ show_query.bcdc_promise <- function(x, ...) {
 #' }
 show_query.bcdc_sf <- function(x, ...) {
 
-  url <- url_format(attributes(x)$url)
+  url <- attr(x, "url")
+  query_list <- attributes(x)$query_list
+  cql_filter <- query_list$CQL_FILTER
+  query_list$CQL_FILTER <- NULL
 
   url <- paste0(url,"\n")
 
@@ -325,7 +331,13 @@ show_query.bcdc_sf <- function(x, ...) {
     cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
   }
 
-  invisible(attributes(x)$url)
+  cat_line("<body>")
+  cat_line(glue::glue("   {names(query_list)}: {query_list}"))
+  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
+
+
+
+  invisible(TRUE)
 
 }
 

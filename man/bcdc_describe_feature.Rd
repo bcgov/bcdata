@@ -4,7 +4,7 @@
 \alias{bcdc_describe_feature}
 \title{Describe a WFS feature}
 \usage{
-bcdc_describe_feature(record = NULL)
+bcdc_describe_feature(record)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
@@ -24,4 +24,5 @@ This can be a helpful tool to examine a layer before issuing a query with \code{
 }
 \examples{
  bcdc_describe_feature("bc-airports")
+
 }

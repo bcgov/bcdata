@@ -111,14 +111,14 @@ test_that("subsetting works locally", {
                "(\"foo\" = 'b')")
 })
 
-test_that("large vectors supplied to filter fail with an error",{
+test_that("large vectors supplied to filter succeed",{
 
   pori <- bcdc_query_geodata("freshwater-atlas-stream-network") %>%
     filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
     collect()
 
-  expect_error(bcdc_query_geodata("freshwater-atlas-stream-network") %>%
-    filter(WATERSHED_KEY %in% pori$WATERSHED_KEY[1:510]))
+  expect_silent(bcdc_query_geodata("freshwater-atlas-stream-network") %>%
+    filter(WATERSHED_KEY %in% pori$WATERSHED_KEY))
 
 })
 
@@ -147,7 +147,9 @@ test_that("multiple filter statements are additive with geometric operators",{
   ## LOCAL
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
-    collect()
+    collect() %>%
+    st_bbox() %>%
+    st_as_sfc()
 
   ## REMOTE "GEOMETRY"
   em_program <- bcdc_query_geodata("employment-program-of-british-columbia-regional-boundaries") %>%
@@ -159,3 +161,31 @@ test_that("multiple filter statements are additive with geometric operators",{
   expect_equal(as.character(finalize_cql(em_program$query_list$CQL_FILTER)),
                cql_query)
 })
+
+
+test_that("an intersect with an object greater than 5E5 bytes automatically gets turned into a bbox",{
+  districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
+    filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
+    collect()
+
+  expect_true(utils::object.size(districts) > 5E5)
+
+  expect_warning(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+    filter(WITHIN(districts)) %>%
+      collect())
+})
+
+
+test_that("an intersect with an object less than 5E5 proceeds",{
+  small_districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
+    filter(SCHOOL_DISTRICT_NAME %in% c("Prince George")) %>%
+    collect() %>%
+    st_bbox() %>%
+    st_as_sfc()
+
+
+  expect_silent(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+    filter(WITHIN(small_districts)) %>%
+    collect())
+})
+

@@ -19,24 +19,24 @@ test_that("All cql geom predicate functions work", {
   for (f in single_arg_functions) {
     expect_equal(
       do.call(f, list(the_geom)),
-      CQL(paste0(f, "({geom_name}, POLYGON ((1 1, 1 1, 1 1, 1 1, 1 1)))"))
+      CQL(paste0(f, "({geom_name}, POINT (1 1))"))
       )
   }
   expect_equal(
     DWITHIN(the_geom, 1), #default units meters
-    CQL("DWITHIN({geom_name}, POLYGON ((1 1, 1 1, 1 1, 1 1, 1 1)), 1, 'meters')")
+    CQL("DWITHIN({geom_name}, POINT (1 1), 1, 'meters')")
   )
   expect_equal(
     DWITHIN(the_geom, 1, "meters"),
-    CQL("DWITHIN({geom_name}, POLYGON ((1 1, 1 1, 1 1, 1 1, 1 1)), 1, 'meters')")
+    CQL("DWITHIN({geom_name}, POINT (1 1), 1, 'meters')")
   )
   expect_equal(
     BEYOND(the_geom, 1, "feet"),
-    CQL("BEYOND({geom_name}, POLYGON ((1 1, 1 1, 1 1, 1 1, 1 1)), 1, 'feet')")
+    CQL("BEYOND({geom_name}, POINT (1 1), 1, 'feet')")
   )
   expect_equal(
     RELATE(the_geom, "*********"),
-    CQL("RELATE({geom_name}, POLYGON ((1 1, 1 1, 1 1, 1 1, 1 1)), '*********')")
+    CQL("RELATE({geom_name}, POINT (1 1), '*********')")
   )
   expect_equal(
     BBOX(c(1,2,1,2)),

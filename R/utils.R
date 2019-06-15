@@ -21,13 +21,12 @@ compact <- function(l) Filter(Negate(is.null), l)
 
 bcdc_number_wfs_records <- function(query_list, client){
 
-  query_list <- c(query_list, resultType = "hits")
-
   if(!is.null(query_list$propertyName)){
     query_list$propertyName <- NULL
   }
 
-  res_max <- client$get(query = query_list)
+  query_list <- c(resultType = "hits", query_list)
+  res_max <- client$post(body = query_list, encode = "form")
   txt_max <- res_max$parse("UTF-8")
 
   ## resultType is only returned as XML.
@@ -244,11 +243,6 @@ resource_to_tibble <- function(x){
 
 simplify_string <- function(x) {
   tolower(gsub("\\s+", "", x))
-}
-
-url_format <- function(url) {
-  url <- gsub("&", "&\n", url)
-  sub("SERVICE", "\nSERVICE", url)
 }
 
 pagination_sort_col <- function(x) {

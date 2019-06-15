@@ -59,8 +59,7 @@ test_that("bcdc_sf objects have a url as an attributes",{
     select(LATITUDE) %>%
     collect()
 
-  res <- readLines(attributes(sf_obj)$url, warn = FALSE)
-  expect_true(nzchar(res))
+  expect_true(nzchar(attributes(sf_obj)$url))
 })
 
 
