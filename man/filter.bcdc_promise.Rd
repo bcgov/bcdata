@@ -17,7 +17,7 @@ If you know \code{CQL} and want to write a \code{CQL} query directly, write it e
 in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("ID = '42'")}}
 }
 \description{
-Filter a query from WFS using dplyr methods. This filtering is accomplished lazily so that the
+Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
 full sf object is not read into memory until \code{collect()} has been called.
 }
 \examples{

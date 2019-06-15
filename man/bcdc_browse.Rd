@@ -45,6 +45,9 @@ bcdc_browse()
 ## Take me to the B.C. airports catalogue record
 bcdc_browse("bc-airports")
 
+#' ## Take me to the B.C. airports catalogue record
+bcdc_browse("76b1b7a3-2112-4444-857a-afccf7b20da8")
+
 ## Take me to the catalogue search results for 'fish'
 bcdc_browse("fish")
 

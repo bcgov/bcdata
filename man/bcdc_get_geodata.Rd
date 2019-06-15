@@ -2,13 +2,13 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_get_geodata}
 \alias{bcdc_get_geodata}
-\title{Get data from the B.C. Web Feature Service (DEPRECATED)}
+\title{Get data from the B.C. Web Service (DEPRECATED)}
 \usage{
 bcdc_get_geodata(record = NULL, crs = 3005)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or id of a resource (or the url).
+or a character string denoting the name or ID of a resource (or the URL).
 
 It is advised to use the permament ID for a record rather than the
 human-readable name to guard against future name changes of the record.
@@ -24,5 +24,5 @@ in your .Rprofile file so the option persists across sessions.}
 an \code{sf} object
 }
 \description{
-Get data from the B.C. Web Feature Service (DEPRECATED)
+Get data from the B.C. Web Service (DEPRECATED)
 }

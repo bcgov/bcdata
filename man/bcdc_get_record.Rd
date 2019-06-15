@@ -8,7 +8,7 @@ bcdc_get_record(id)
 }
 \arguments{
 \item{id}{the human-readable name, permalink ID, or
-url of the record.
+URL of the record.
 
 It is advised to use the permament ID for a record rather than the
 human-readable name to guard against future name changes of the record.

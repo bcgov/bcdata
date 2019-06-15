@@ -15,7 +15,7 @@
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
 #' filter strings which can then be supplied to the `...` argument in
 #' \code{bcdc_get_geodata}. The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the WFS call. Subsequent in-memory
+#' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
 #'
 #' There are wrapper functions for
@@ -116,7 +116,7 @@ sf_text <- function(x) {
 #' to filter results from [bcdc_get_geodata()].
 #' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
 #' The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the WFS call. Subsequent in-memory
+#' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 #' filtering may be needed to achieve exact results.
 #'
 #' @param geom an sf/sfc/sfg object

@@ -2,13 +2,13 @@
 % Please edit documentation in R/describe-feature.R
 \name{bcdc_describe_feature}
 \alias{bcdc_describe_feature}
-\title{Describe a WFS feature}
+\title{Describe a Web Service feature}
 \usage{
 bcdc_describe_feature(record)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or id of a resource (or the url).
+or a character string denoting the name or ID of a resource (or the URL).
 
 It is advised to use the permament ID for a record rather than the
 human-readable name to guard against future name changes of the record.
@@ -18,8 +18,8 @@ session. You can silence these warnings altogether by setting an option:
 in your .Rprofile file so the option persists across sessions.}
 }
 \description{
-Describe the columns from a WFS feature. The column name, whether a column can be
-separated from the record in WFS (nillable) and the type of column are returned.
+Describe the columns from a Web Service feature. The column name, whether a column can be
+separated from the record in Web Service (nillable) and the type of column are returned.
 This can be a helpful tool to examine a layer before issuing a query with \code{bcdc_get_geodata}
 }
 \examples{

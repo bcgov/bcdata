@@ -2,13 +2,13 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_preview}
 \alias{bcdc_preview}
-\title{Get map from the B.C. Web Mapping Service}
+\title{Get map from the B.C. Web Service}
 \usage{
 bcdc_preview(record)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or id of a resource (or the url).
+or a character string denoting the name or ID of a resource (or the URL).
 
 It is advised to use the permament ID for a record rather than the
 human-readable name to guard against future name changes of the record.
@@ -18,7 +18,7 @@ session. You can silence these warnings altogether by setting an option:
 in your .Rprofile file so the option persists across sessions.}
 }
 \description{
-Get map from the B.C. Web Mapping Service
+Get map from the B.C. Web Service
 }
 \examples{
 \dontrun{
