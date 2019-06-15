@@ -174,7 +174,7 @@ bcdc_describe_feature(bc_regional_districts_metadata)
 
 ## Get the Capital Regional District polygon from the B.C. Regional 
 ## Districts geospatial data
-my_regional_district <- bcdc_query_geodata("d1aff64e-dbfe-45a6-af97-582b7f6418b9") %>% 
+my_regional_district <- bcdc_query_geodata(bc_regional_districts_metadata) %>% 
   filter(ADMIN_AREA_NAME == "Capital Regional District") %>% 
   collect()
 
