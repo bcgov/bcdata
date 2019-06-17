@@ -58,7 +58,7 @@ bcdc_options <- function() {
   cat_rule("bcdc options")
   dplyr::tribble(
     ~ option, ~ value, ~default,
-    "max_geom_pred_size", null_to_na(options_list[["max_geom_pred_size"]]), 5E5,
+    "max_geom_pred_size", null_to_na(getOption("max_geom_pred_size")), 5E5,
     "chunk_limit",null_to_na(options_list[["chunk_limit"]]), 1000
   )
 }
