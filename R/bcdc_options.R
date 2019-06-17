@@ -54,7 +54,6 @@ bcdc_options <- function() {
     ifelse(is.null(x), NA, as.numeric(x))
   }
 
-  options_list <- options()
   cat_rule("bcdc options")
   dplyr::tribble(
     ~ option, ~ value, ~default,
