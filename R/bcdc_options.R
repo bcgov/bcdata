@@ -18,12 +18,12 @@
 #' failed calls to the data catalogue. Options in R are reset everytime R is re-started. See examples for
 #' addition ways to restore your initial state.
 #'
-#' `max_geom_pred_size` is the maximum size of an object used for a geometric operation. Objects
+#' `bcdata.max_geom_pred_size` is the maximum size of an object used for a geometric operation. Objects
 #' that are bigger than this value will have a bounding box drawn and apply the geometric operation
 #' on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
 #' if the bcdata catalogue accepts their request.
 #'
-#' `chunk_limit` is an option useful when dealing with very large datasets. When requesting large objects
+#' `bcdata.chunk_limit` is an option useful when dealing with very large datasets. When requesting large objects
 #' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
 #' been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
 #' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
@@ -37,7 +37,7 @@
 #' ## See initial options
 #' bcdc_options()
 #'
-#' options(max_geom_pred_size = 1E6)
+#' options(bcdata.max_geom_pred_size = 1E6)
 #'
 #' ## See updated options
 #' bcdc_options()
@@ -57,13 +57,13 @@ bcdc_options <- function() {
   cat_rule("bcdc options")
   dplyr::tribble(
     ~ option, ~ value, ~default,
-    "max_geom_pred_size", null_to_na(getOption("max_geom_pred_size")), 5E5,
-    "chunk_limit",null_to_na(getOption("chunk_limit")), 1000
+    "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
+    "bcdata.chunk_limit",null_to_na(getOption("bcdata.chunk_limit")), 1000
   )
 }
 
 check_chunk_limit <- function(){
-  chunk_value <- options("chunk_limit")$chunk_limit
+  chunk_value <- options("bcdata.chunk_limit")$chunk_limit
 
   if(!is.null(chunk_value) && chunk_value >= 10000){
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit"), call. = FALSE)

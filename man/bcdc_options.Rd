@@ -14,12 +14,12 @@ failed calls to the data catalogue. Options in R are reset everytime R is re-sta
 addition ways to restore your initial state.
 }
 \details{
-\code{max_geom_pred_size} is the maximum size of an object used for a geometric operation. Objects
+\code{bcdata.max_geom_pred_size} is the maximum size of an object used for a geometric operation. Objects
 that are bigger than this value will have a bounding box drawn and apply the geometric operation
 on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
 if the bcdata catalogue accepts their request.
 
-\code{chunk_limit} is an option useful when dealing with very large datasets. When requesting large objects
+\code{bcdata.chunk_limit} is an option useful when dealing with very large datasets. When requesting large objects
 from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
 been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
 requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
@@ -33,7 +33,7 @@ original_options <- options()
 ## See initial options
 bcdc_options()
 
-options(max_geom_pred_size = 1E6)
+options(bcdata.max_geom_pred_size = 1E6)
 
 ## See updated options
 bcdc_options()
