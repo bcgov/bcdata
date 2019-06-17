@@ -2,15 +2,15 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_query_geodata}
 \alias{bcdc_query_geodata}
-\title{Query data from the B.C. Web Feature Service}
+\title{Query data from the B.C. Web Service}
 \usage{
 bcdc_query_geodata(record, crs = 3005)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or id of a resource (or the url).
+or a character string denoting the name or ID of a resource (or the URL).
 
-It is advised to use the permament id for a record rather than the
+It is advised to use the permament ID for a record rather than the
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
@@ -26,8 +26,8 @@ required to retrieve the requested data. In order to get the actual data as
 an \code{sf} object, you need to run \code{\link[=collect]{collect()}} on the \code{bcdc_promise}.
 }
 \description{
-Queries features from the B.C. Web Feature Service. The data must be available as
-a WMS/WFS service. See \code{bcdc_get_record(record)$resources}). If the record is greater than 10000 rows,
+Queries features from the B.C. Web Service. The data must be available as
+a Web Service. See \code{bcdc_get_record(record)$resources}). If the record is greater than 10000 rows,
 the response will be paginated. If you are querying layers of this size, expect
 that the request will take quite a while.
 }

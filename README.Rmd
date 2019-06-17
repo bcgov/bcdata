@@ -29,7 +29,9 @@ knitr::opts_chunk$set(
 library(bcdata)
 ```
 
+
 # bcdata <img src="tools/readme/bcdata-sticker.png" height="139" align="right"/>
+
 
 ### Version `r read.dcf("DESCRIPTION", "Version")`
 
@@ -42,59 +44,35 @@ library(bcdata)
 
 An R package 📦 for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
 
+- `bcdc_browse()` - Open the catalogue in your default browser
+- `bcdc_search()` - Search records in the catalogue
+- `bcdc_search_facet()` - List catalogue facet search options
+- `bcdc_get_record()` - Print a catalogue record
+- `bcdc_get_data()` - Get catalogue data
+- `bcdc_query_geodata()` - Get & query catalogue geospatial data available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
+
+The `bcdata` package supports downloading _most_ file types, however the package does _not_ retrieve .zip or compressed resource files at this time. If you encounter a file type in the B.C. Data Catalogue not currently supported by `bcdata` please file an [issue](https://github.com/bcgov/bcdata/issues/). 
+
+### Reference
+[bcdata package 📦 home page and reference guide](https://bcgov.github.io/bcdata/index.html)
+
 ### Installation
-You can install `bcdata` directly from this GitHub repository. To do so, you will need the [remotes](https://cran.r-project.org/package=remotes) package:
+You can install `bcdata` directly from this GitHub repository using the [remotes](https://cran.r-project.org/package=remotes) package:
 
 ```{r, eval=FALSE}
 install.packages("remotes")
-```
 
-Next, install and load the `bcdata` package using `remotes::install_github()`:
-
-```{r, eval=FALSE}
 remotes::install_github("bcgov/bcdata")
 library(bcdata)
 ```
 
 
+### Vignettes
 
-### Functions
+- [Get started with bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
+- [Querying spatial data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
+- Using bcdata with bcmaps (coming soon!)
 
-- `bcdc_get_record()` - Print a catalogue record
-- `bcdc_get_data()` - Get catalogue data
-- `bcdc_query_geodata()` - Get & query catalogue geospatial data (data must be available as a [WMS/WFS service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E))
-- `bcdc_browse()` - Open the catalogue in your default browser
-- `bcdc_search()` - Search records in the catalogue
-- `bcdc_search_facet()` - List catalogue facet search options
-
-### Usage
-
-```{r, eval = TRUE, warnings=FALSE}
-bcdc_search("airport")
-```
-
-```{r eval = TRUE}
-bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
-```
-
-### bcdc_get_data
-To have a quick look at spatial data, you can simply print the object:
-```{r}
-airports <- bcdc_query_geodata("bc-airports", crs = 3857)
-airports
-```
-If you need all the data, you need to retrieve the data using the `collect` function:
-```{r}
-airports %>% 
-  collect()
-```
-This has the advantage of fine tuning your query without issuing a large request to the data catalogue. When you are finally ready to bring all the data you want into memory then you can use the `collect` function. This approach mimics that developed for `dbplyr`. You can read more about that [here](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html) 
-
-
-
-
-### Project Status
-This project is under active development.
 
 ### Getting Help or Reporting an Issue
 
@@ -106,6 +84,7 @@ If you would like to contribute to the package, please see our
 [CONTRIBUTING](CONTRIBUTING.md) guidelines.
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
 
 ### License
 

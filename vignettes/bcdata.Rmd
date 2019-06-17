@@ -1,0 +1,193 @@
+---
+title: "Get started with bcdata"
+author: "" 
+date: ""
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bcdata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
+)
+
+library(bcdata)
+library(ggplot2)
+```
+
+The `bcdata` [R](https://www.r-project.org/) package contains functions for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
+
+The [B.C. Data Catalogue](https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5) is the place to find British Columbia Government data, applications and web services. Much of the data are released under the [Open Government Licence --- British Columbia](https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc), as well as numerous other [licences](https://catalogue.data.gov.bc.ca/dataset?download_audience=Public).
+
+  
+  
+You can install `bcdata` directly from GitHub using the [remotes](https://cran.r-project.org/package=remotes) package:
+
+```{r, eval=FALSE}
+install.packages("remotes")
+
+remotes::install_github("bcgov/bcdata")
+library(bcdata)
+```
+
+### `bcdc_browse()`
+
+`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening the home page in your default browser:
+
+```{r, eval=FALSE}
+## Take me to the B.C. Data Catalogue home page
+bcdc_browse()
+```
+
+If you know the catalogue record "human-readable" name or permanent ID you can open directly to the record web page:
+
+```{r, eval=FALSE}
+## Take me to the B.C. Winery Locations catalogue record using the record name
+bcdc_browse("bc-winery-locations") 
+
+## Take me to the B.C. Winery Locations catalogue record using the record ID
+bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
+```
+
+You can also use `bcdc_browse()` to open to search results in the catalogue:
+
+```{r, eval=FALSE}
+## Take me to the catalogue search results for 'wineries'
+bcdc_browse("wineries")
+```
+
+### `bcdc_search()`
+
+`bcdata::bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session. 
+
+Let's search the catalogue for records that contain the word "recycling":
+
+```{r}
+## Give me the catalogue search results for 'recycling'
+bcdc_search("recycling")
+```
+
+You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search _facets_ `license_id`, `download_audience`, `type`, `res_format`, `sector`, and `organization`:
+
+```{r}
+## Give me the first catalogue search result for 'recycling'
+bcdc_search("recycling", n = 1)
+
+## Give me the catalogue search results for 'recycling' where the 
+## data is tabular and licenced under Open Government Licence – British Columbia
+bcdc_search("recycling", type = "Dataset", license_id = "2")
+```
+
+You can see all valid values for the catalogue search facets using `bcdata::bcdc_search_facets()`:
+
+```{r}
+## Valid values for search facet 'license_id'
+bcdc_search_facets(facet = "license_id")
+```
+
+Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:
+
+```{r}
+## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`
+bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
+```
+
+
+### `bcdc_get_data()`
+
+One you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
+
+```{r}
+## Get the data resource for the `bc-highway-cams` catalogue record
+bcdc_get_data("bc-highway-cams") 
+
+## OR use the permanent ID, which is better for scripts or non-interactive use 
+bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
+
+## OR use the result from bcdc_get_record()
+my_data <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
+bcdc_get_data(my_data)
+```
+
+A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:
+
+```{r}
+## Get the record ID for the `bc-schools-programs-offered-in-schools` catalogue record
+bcdc_search("school programs", n = 1)
+
+## Get the metadata for the `bc-schools-programs-offered-in-schools` catalogue record
+bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
+```
+
+We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The full code---with the resource ID for each data set---is also available _in_ the metdata record ☝️:
+
+```{r}
+## Get the txt data resource from the `bc-schools-programs-offered-in-schools`
+## catalogue record
+bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
+```
+
+`bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically reads and returns it as an [`sf` object](https://r-spatial.github.io/sf/) in your R session. Let's get the air zones for British Columbia:
+
+```{r, fig.height = 5, fig.width = 7}
+## Find the B.C. Air Zones catalogue record
+bcdc_search("air zones", res_format = "geojson")
+
+## Get the metadata for the B.C. Air Zones catalogue record
+bc_az_metadata <- bcdc_get_record("e8eeefc4-2826-47bc-8430-85703d328516")
+
+## Get the B.C. Air Zone geospatial data
+bc_az <- bcdc_get_data(bc_az_metadata, resource = "c495d082-b586-4df0-9e06-bd6b66a8acd9")
+
+## Plot the B.C. Air Zone geospatial data with ggplot()
+bc_az %>% 
+  ggplot() +
+  geom_sf()
+```
+
+**Note:** The `bcdata` package supports downloading _most_ file types, however the package does _not_ retrieve .zip or compressed resource files at this time.
+
+
+### `bcdc_query_geodata()`
+
+Many geospatial datasets in the B.C. Data Catalogue are available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+
+Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:
+
+```{r, fig.height = 5, fig.width = 7}
+## Find the B.C. Regional Districts catalogue record
+bcdc_search("regional districts administrative areas", res_format = "wms", n = 1)
+
+## Get the metadata for the B.C. Regional Districts catalogue record
+bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
+
+## Have a quick look at the geospatial columns to help with filter or select
+bcdc_describe_feature(bc_regional_districts_metadata)
+
+## Get the Capital Regional District polygon from the B.C. Regional 
+## Districts geospatial data
+my_regional_district <- bcdc_query_geodata(bc_regional_districts_metadata) %>% 
+  filter(ADMIN_AREA_NAME == "Capital Regional District") %>% 
+  collect()
+
+## Plot the Capital Regional District polygon with ggplot()
+my_regional_district  %>% 
+  ggplot() +
+  geom_sf()
+```
+
+The vignette [Querying spatial data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.
+
+
+
+
+
+

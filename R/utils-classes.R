@@ -115,7 +115,7 @@ print.bcdc_recordlist <- function(x, ...) {
 
 #' filter methods
 #'
-#' Filter a query from WFS using dplyr methods. This filtering is accomplished lazily so that the
+#' Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
 #' full sf object is not read into memory until `collect()` has been called.
 #'
 #' @param .data passed from bcdc_get_geodata
@@ -153,13 +153,13 @@ filter.bcdc_promise <- function(.data, ...) {
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
 }
 
-#' Select columns from WFS call
+#' Select columns from Web Service call
 #'
-#' Similar to a `dplyr::select` call, this allows you to select which columns you want the WFS to return.
+#' Similar to a `dplyr::select` call, this allows you to select which columns you want the Web Service to return.
 #' A key difference between `dplyr::select` and `bcdata::select` is the presence of "sticky" columns that are
 #' returned regardless of what columns are selected. If any of these "sticky" columns are selected
 #' only "sticky" columns are return. `bcdc_describe_feature` is one way to tell if columns are sticky in advance
-#' of issuing the WFS call.
+#' of issuing the Web Service call.
 #'
 #' @param .data passed from bcdc_get_geodata
 #' @param ... One or more unquoted expressions separated by commas. See details.
@@ -193,7 +193,7 @@ select.bcdc_promise <- function(.data, ...){
 }
 
 
-#' Force collection of WFS request from B.C. Data Catalogue
+#' Force collection of Web Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
 #' This will retrieve an sf object into R.
@@ -272,9 +272,9 @@ collect.bcdc_promise <- function(x, ...){
 }
 
 
-#' Show SQL and URL used for WFS request from B.C. Data Catalogue
+#' Show SQL and URL used for Web Service request from B.C. Data Catalogue
 #'
-#' Display WFS query SQL
+#' Display Web Service query SQL
 #'
 #' @param x object of class bcdc_promise or bcdc_sf
 #' @inheritParams show_query

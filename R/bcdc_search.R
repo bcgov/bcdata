@@ -16,7 +16,7 @@
 #' more of:
 #'  `"license_id", "download_audience", "type", "res_format", "sector", "organization"`
 #'
-#' @return a data frame of values for the selected facet
+#' @return A data frame of values for the selected facet
 #' @export
 #'
 #' @examples
@@ -164,12 +164,12 @@ bcdc_search <- function(..., license_id = NULL,
 
 #' Show a single B.C. Data Catalogue record
 #'
-#' @param id the human-readable name, permalink id, or
-#' url of the record.
+#' @param id the human-readable name, permalink ID, or
+#' URL of the record.
 #'
-#' It is advised to use the permament id for a record rather than the
+#' It is advised to use the permament ID for a record rather than the
 #' human-readable name to guard against future name changes of the record.
-#' If you use the human-readble name a warning will be issued once per
+#' If you use the human-readable name a warning will be issued once per
 #' session. You can silence these warnings altogether by setting an option:
 #' `options("silence_named_get_record_warning" = TRUE)` - which you can put
 #' in your .Rprofile file so the option persists across sessions.

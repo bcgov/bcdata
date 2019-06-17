@@ -13,9 +13,9 @@
 #' Download and read a resource from a B.C. Data Catalogue record
 #'
 #' @param record either a `bcdc_record` object (from the result of `bcdc_get_record()`)
-#' or a character string denoting the name or id of a resource (or the url).
+#' or a character string denoting the name or ID of a resource (or the URL).
 #'
-#' It is advised to use the permament id for a record rather than the
+#' It is advised to use the permament ID for a record rather than the
 #' human-readable name to guard against future name changes of the record.
 #' If you use the human-readable name a warning will be issued once per
 #' session. You can silence these warnings altogether by setting an option:
@@ -28,14 +28,14 @@
 #' the import based on the file extension. `bcdc_read_functions()` provides details on which functions
 #' handle the data import. You can then use this information to look at the help pages of those functions.
 #' See the examples for a workflow that illustrates this process.
-#' For spatial (WMS/WFS) data the `...` arguments are passed to `bcdc_query_geodata()`.
+#' For spatial Web Service data the `...` arguments are passed to `bcdc_query_geodata()`.
 #'
-#' @return an object of a type relevant to the resource (usually a tibble or an sf object)
+#' @return An object of a type relevant to the resource (usually a tibble or an sf object)
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Using the record and resource id:
+#' # Using the record and resource ID:
 #' bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
 #'               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
 #' bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
