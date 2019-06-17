@@ -42,6 +42,7 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
+    ggplot2,
     testthat
 VignetteBuilder: 
     knitr
