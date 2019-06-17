@@ -41,3 +41,8 @@ test_that("bcdc_describe_feature accepts a bcdc_record object", {
   airport_feature <- bcdc_describe_feature(airports)
   expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
 })
+
+test_that("bcdc_describe_feature fails on unsupported classes", {
+  expect_error(bcdc_describe_feature(1L))
+  expect_error(bcdc_describe_feature(list(a = 1)))
+})

@@ -29,26 +29,14 @@ bcdc_describe_feature <- function(record){
 }
 
 #' @export
-bcdc_describe_feature.default <- function(record){
-  obj <- bcdc_get_record(record)
+bcdc_describe_feature.default <- function(record) {
+  stop("No bcdc_describe_feature method for an object of class ", class(record),
+       call. = FALSE)
+}
 
-  if (!any(resource_locations(obj) %in% "bcgwdatastore")) {
-    stop("No WMS/WFS resource available for this dataset.",
-         call. = FALSE
-    )
-  }
-
-  ## Parameters for the API call
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "DescribeFeatureType",
-    #outputFormat = "application/json",
-    typeNames = obj$layer_name
-  )
-
-
-  feature_helper(query_list)
+#' @export
+bcdc_describe_feature.character <- function(record){
+  bcdc_describe_feature(bcdc_get_record(record))
 }
 
 

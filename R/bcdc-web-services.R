@@ -139,9 +139,23 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' }
 #' @export
 bcdc_preview <- function(record) {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  UseMethod("bcdc_preview")
+}
 
-  obj <- bcdc_get_record(record)
+#' @export
+bcdc_preview.default <- function(record) {
+  stop("No bcdc_preview method for an object of class ", class(record),
+       call. = FALSE)
+}
+
+#' @export
+bcdc_preview.character <- function(record) {
+  bcdc_preview(bcdc_get_record(record))
+}
+
+#' @export
+bcdc_preview.bcdc_record <- function(record) {
 
   wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
 
@@ -153,14 +167,14 @@ bcdc_preview <- function(record) {
              format=image%2Fpng&
              width=20&
              height=20&
-             layer=pub%3A{obj$layer_name}")
+             layer=pub%3A{record$layer_name}")
 
 
   leaflet::leaflet() %>%
     leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
                      options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
     leaflet::addWMSTiles(wms_url,
-                layers=glue::glue("pub:{obj$layer_name}"),
+                layers=glue::glue("pub:{record$layer_name}"),
                 options = wms_options) %>%
     leaflet.extras::addWMSLegend(uri = wms_legend) %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
