@@ -60,7 +60,7 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   select(SCHOOL_DISTRICT_NAME)
 ```
 
-Note that in the `select` statement, we did not explicitly ask for the spatial data, and also that there are several columns that we didn't select. This is because within each dataset in the catalogue there are several columns that will always be returned regardless of what is selected. If you really don't want those columns, you can drop them after you `collect` the data. We will take care of right now:
+Note that in the `select` statement, we did not explicitly ask for the spatial data, and also that there are several columns that we didn't select. This is because within each dataset in the catalogue there are several columns that will always be returned regardless of what is selected. If you really don't want those columns, you can drop them after you `collect` the data. We will take care of that right now:
 
 ```{r}
 districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>% 
