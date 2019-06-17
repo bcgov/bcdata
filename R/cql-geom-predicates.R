@@ -94,7 +94,7 @@ sf_text <- function(x) {
   }
 
   ## If too big here, drawing bounding
-  if(utils::object.size(x) > 5E5){
+  if(utils::object.size(x) > getOption("max_geom_pred_size", 5E5)){
     warning("The object is too large to perform exact spatial operations using bcdata.
              To simplify the polygon, a bounding box was drawn around the polygon and all
              features within the box will be returned. Options include further processing

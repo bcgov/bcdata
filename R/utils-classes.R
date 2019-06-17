@@ -210,6 +210,7 @@ select.bcdc_promise <- function(.data, ...){
 #' }
 #'
 collect.bcdc_promise <- function(x, ...){
+  check_chunk_limit()
 
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
 
@@ -240,7 +241,7 @@ collect.bcdc_promise <- function(x, ...){
       limit_param = "count",
       offset_param = "startIndex",
       limit = number_of_records,
-      limit_chunk = 1000,
+      limit_chunk = getOption("chunk-limit", default = 1000),
       progress = TRUE
     )
 
