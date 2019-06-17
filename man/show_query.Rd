@@ -4,7 +4,7 @@
 \alias{show_query.bcdc_promise}
 \alias{show_query.bcdc_sf}
 \alias{show_query}
-\title{Show SQL and URL used for WFS request from B.C. Data Catalogue}
+\title{Show SQL and URL used for Web Service request from B.C. Data Catalogue}
 \usage{
 \method{show_query}{bcdc_promise}(x, ...)
 
@@ -14,7 +14,7 @@
 \item{x}{object of class bcdc_promise or bcdc_sf}
 }
 \description{
-Display WFS query SQL
+Display Web Service query SQL
 
 See \code{dplyr::\link[dplyr]{show_query}} for details.
 }

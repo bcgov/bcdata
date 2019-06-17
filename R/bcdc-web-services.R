@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 
-#' Get data from the B.C. Web Feature Service (DEPRECATED)
+#' Get data from the B.C. Web Service (DEPRECATED)
 #'
 #'
 #' @inheritParams bcdc_get_data
@@ -29,10 +29,10 @@ bcdc_get_geodata <- function(record = NULL, crs = 3005) {
 
 }
 
-#' Query data from the B.C. Web Feature Service
+#' Query data from the B.C. Web Service
 #'
-#' Queries features from the B.C. Web Feature Service. The data must be available as
-#' a WMS/WFS service. See `bcdc_get_record(record)$resources`). If the record is greater than 10000 rows,
+#' Queries features from the B.C. Web Service. The data must be available as
+#' a Web Service. See `bcdc_get_record(record)$resources`). If the record is greater than 10000 rows,
 #' the response will be paginated. If you are querying layers of this size, expect
 #' that the request will take quite a while.
 #'
@@ -103,7 +103,7 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
 #' @export
 bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   if (!any(resource_locations(record) %in% "bcgwdatastore")) {
-    stop("No WMS/WFS resource available for this dataset.",
+    stop("No Web Service resource available for this dataset.",
          call. = FALSE
     )
   }
@@ -127,7 +127,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   as.bcdc_promise(list(query_list = query_list, cli = cli, obj = record))
 }
 
-#' Get map from the B.C. Web Mapping Service
+#' Get map from the B.C. Web Service
 #'
 #'
 #' @inheritParams bcdc_get_data

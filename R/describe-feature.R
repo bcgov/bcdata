@@ -10,10 +10,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Describe a WFS feature
+#' Describe a Web Service feature
 #'
-#' Describe the columns from a WFS feature. The column name, whether a column can be
-#' separated from the record in WFS (nillable) and the type of column are returned.
+#' Describe the columns from a Web Service feature. The column name, whether a column can be
+#' separated from the record in Web Service (nillable) and the type of column are returned.
 #' This can be a helpful tool to examine a layer before issuing a query with `bcdc_get_geodata`
 #'
 #' @inheritParams bcdc_get_geodata

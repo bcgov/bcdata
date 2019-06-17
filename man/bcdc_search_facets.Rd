@@ -13,7 +13,7 @@ more of:
 \code{"license_id", "download_audience", "type", "res_format", "sector", "organization"}}
 }
 \value{
-a data frame of values for the selected facet
+A data frame of values for the selected facet
 }
 \description{
 Get the valid values for a facet (that you can use in \code{\link[=bcdc_search]{bcdc_search()}})
