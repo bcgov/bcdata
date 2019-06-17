@@ -68,7 +68,8 @@ library(bcdata)
     bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
   - [Querying spatial data with
     bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
-  - Using bcdata with bcmaps (coming soon\!)
+  - Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (coming
+    soon\!)
 
 ### Getting Help or Reporting an Issue
 
