@@ -24,13 +24,13 @@ See the License for the specific language governing permissions and limitations 
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/"
 )
 library(bcdata)
 ```
 
 
-# bcdata <img src="tools/readme/bcdata-sticker.png" height="139" align="right"/>
+# bcdata <img src='man/figures/logo.png' align="right" height="138" />
 
 
 ### Version `r read.dcf("DESCRIPTION", "Version")`
