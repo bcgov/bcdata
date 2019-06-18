@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
 
-# bcdata <img src='man/figures/logo.png' align="right" height="138" />
+# bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.png' align="right" height="138" /></a>
 
 ### Version 0.0.0.9000
 

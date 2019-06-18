@@ -30,7 +30,7 @@ library(bcdata)
 ```
 
 
-# bcdata <img src='man/figures/logo.png' align="right" height="138" />
+# bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.png' align="right" height="138" /></a>
 
 
 ### Version `r read.dcf("DESCRIPTION", "Version")`
@@ -54,7 +54,7 @@ An R package 📦 for searching & retrieving data from the [B.C. Data Catalogue]
 The `bcdata` package supports downloading _most_ file types, however the package does _not_ retrieve .zip or compressed resource files at this time. If you encounter a file type in the B.C. Data Catalogue not currently supported by `bcdata` please file an [issue](https://github.com/bcgov/bcdata/issues/). 
 
 ### Reference
-[bcdata package 📦 home page and reference guide](https://bcgov.github.io/bcdata/index.html)
+[bcdata package 📦 home page and reference guide](https://bcgov.github.io/bcdata/)
 
 ### Installation
 You can install `bcdata` directly from this GitHub repository using the [remotes](https://cran.r-project.org/package=remotes) package:
