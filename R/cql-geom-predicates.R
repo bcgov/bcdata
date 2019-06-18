@@ -13,7 +13,7 @@
 #' Create CQL filter strings from sf objects
 #'
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
-#' filter strings which can then be supplied to filter.bcdc_promiese.
+#' filter strings which can then be supplied to filter.bcdc_promise.
 #' The sf object is automatically converted in a
 #' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
