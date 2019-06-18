@@ -13,14 +13,11 @@
 #' Create CQL filter strings from sf objects
 #'
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
-#' filter strings which can then be supplied to the `...` argument in
-#' \code{bcdc_get_geodata}. The sf object is automatically converted in a
+#' filter strings which can then be supplied to filter.bcdc_promiese.
+#' The sf object is automatically converted in a
 #' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
 #'
-#' There are wrapper functions for
-#' [each of the geometry predicates][cql_geom_predicates], which you may find
-#' more convenient than calling this function directly.
 #'
 #' @param x object of class sf, sfc or sfg
 #' @param geometry_predicates Geometry predicates that allow for spatial filtering.
@@ -35,11 +32,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' airports <- bcdc_get_geodata("bc-airports") %>% collect()
+#' airports <- bcdc_query_geodata("bc-airports") %>% collect()
 #' bcdc_cql_string(airports, "DWITHIN")
 #' }
 #'
-#' @export
+#' @noRd
 bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
                             distance = NULL, units = NULL,
                             coords = NULL, crs = NULL){
@@ -113,7 +110,7 @@ sf_text <- function(x) {
 #' CQL Geometry Predicates
 #'
 #' Functions to construct a CQL expression to be used
-#' to filter results from [bcdc_get_geodata()].
+#' to filter results from [bcdc_query_geodata()].
 #' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
 #' The sf object is automatically converted in a
 #' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory

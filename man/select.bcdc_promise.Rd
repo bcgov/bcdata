@@ -7,7 +7,7 @@
 \method{select}{bcdc_promise}(.data, ...)
 }
 \arguments{
-\item{.data}{passed from bcdc_get_geodata}
+\item{.data}{object of class \code{bcdc_promise} (likely passed from \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}})}
 
 \item{...}{One or more unquoted expressions separated by commas. See details.}
 }

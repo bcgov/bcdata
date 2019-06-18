@@ -14,7 +14,7 @@ An object of class \code{c("CQL", "SQL")}
 }
 \description{
 Write a CQL expression to escape its inputs, and return a CQL/SQL object.
-Used when writing filter expressions in \code{\link[=bcdc_get_geodata]{bcdc_get_geodata()}}.
+Used when writing filter expressions in \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}}.
 }
 \details{
 See \href{https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html}{the CQL/ECQL for Geoserver website}.

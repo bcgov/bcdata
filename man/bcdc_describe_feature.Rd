@@ -20,7 +20,7 @@ in your .Rprofile file so the option persists across sessions.}
 \description{
 Describe the columns from a Web Service feature. The column name, whether a column can be
 separated from the record in Web Service (nillable) and the type of column are returned.
-This can be a helpful tool to examine a layer before issuing a query with \code{bcdc_get_geodata}
+This can be a helpful tool to examine a layer before issuing a query with \code{bcdc_query_geodata}
 }
 \examples{
  bcdc_describe_feature("bc-airports")

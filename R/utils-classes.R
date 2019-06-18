@@ -118,7 +118,7 @@ print.bcdc_recordlist <- function(x, ...) {
 #' Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
 #' full sf object is not read into memory until `collect()` has been called.
 #'
-#' @param .data passed from bcdc_get_geodata
+#' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... Logical predicates with which to filter the results. Multiple
 #' conditions are combined with `&`. Only rows where the condition evaluates to
 #' `TRUE` are kept. Accepts normal R expressions as well as any of the special
@@ -161,7 +161,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #' only "sticky" columns are return. `bcdc_describe_feature` is one way to tell if columns are sticky in advance
 #' of issuing the Web Service call.
 #'
-#' @param .data passed from bcdc_get_geodata
+#' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
 #'
 #' @examples
