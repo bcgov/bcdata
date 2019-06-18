@@ -131,76 +131,16 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-interacting-with-the-b-c-data-catalogue" class="hasAnchor"><a href="#section-interacting-with-the-b-c-data-catalogue" class="anchor"></a>Interacting with the B.C. Data Catalogue</h2>
+          <p class="section-desc"><p>Functions to search, browse, list, and explore records and their resources (datasets) in the B.C. Data Catalogue</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="CQL.html">CQL()</a></code> </p>
-        </td>
-        <td><p>CQL escaping</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="bcdc_browse.html">bcdc_browse()</a></code> </p>
         </td>
         <td><p>Load the B.C. Data Catalogue URL into an HTML browser</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_cql_string.html">bcdc_cql_string()</a></code> </p>
-        </td>
-        <td><p>Create CQL filter strings from sf objects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_describe_feature.html">bcdc_describe_feature()</a></code> </p>
-        </td>
-        <td><p>Describe a Web Service feature</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_get_data.html">bcdc_get_data()</a></code> </p>
-        </td>
-        <td><p>Download and read a resource from a B.C. Data Catalogue record</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_get_geodata.html">bcdc_get_geodata()</a></code> </p>
-        </td>
-        <td><p>Get data from the B.C. Web Service (DEPRECATED)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_get_record.html">bcdc_get_record()</a></code> </p>
-        </td>
-        <td><p>Show a single B.C. Data Catalogue record</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_list.html">bcdc_list()</a></code> </p>
-        </td>
-        <td><p>Return a full list of the names of B.C. Data Catalogue records</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_preview.html">bcdc_preview()</a></code> </p>
-        </td>
-        <td><p>Get map from the B.C. Web Service</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_query_geodata.html">bcdc_query_geodata()</a></code> </p>
-        </td>
-        <td><p>Query data from the B.C. Web Service</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bcdc_read_functions.html">bcdc_read_functions()</a></code> </p>
-        </td>
-        <td><p>Formats supported and loading functions</p></td>
       </tr><tr>
         
         <td>
@@ -216,21 +156,91 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="cql_geom_predicates.html">EQUALS()</a></code> <code><a href="cql_geom_predicates.html">DISJOINT()</a></code> <code><a href="cql_geom_predicates.html">INTERSECTS()</a></code> <code><a href="cql_geom_predicates.html">TOUCHES()</a></code> <code><a href="cql_geom_predicates.html">CROSSES()</a></code> <code><a href="cql_geom_predicates.html">WITHIN()</a></code> <code><a href="cql_geom_predicates.html">CONTAINS()</a></code> <code><a href="cql_geom_predicates.html">OVERLAPS()</a></code> <code><a href="cql_geom_predicates.html">RELATE()</a></code> <code><a href="cql_geom_predicates.html">BBOX()</a></code> <code><a href="cql_geom_predicates.html">DWITHIN()</a></code> <code><a href="cql_geom_predicates.html">BEYOND()</a></code> </p>
+          <p><code><a href="bcdc_list.html">bcdc_list()</a></code> </p>
         </td>
-        <td><p>CQL Geometry Predicates</p></td>
+        <td><p>Return a full list of the names of B.C. Data Catalogue records</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bcdc_get_record.html">bcdc_get_record()</a></code> </p>
+        </td>
+        <td><p>Show a single B.C. Data Catalogue record</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-direct-downloads-of-datasets" class="hasAnchor"><a href="#section-direct-downloads-of-datasets" class="anchor"></a>Direct downloads of datasets</h2>
+          <p class="section-desc"><p>Directly dowload (or preview) datasets (resources) from the B.C. Data Catalogue</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="bcdc_get_data.html">bcdc_get_data()</a></code> </p>
+        </td>
+        <td><p>Download and read a resource from a B.C. Data Catalogue record</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bcdc_preview.html">bcdc_preview()</a></code> </p>
+        </td>
+        <td><p>Get map from the B.C. Web Service</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bcdc_read_functions.html">bcdc_read_functions()</a></code> </p>
+        </td>
+        <td><p>Formats supported and loading functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-querying-data-from-a-web-service-catalogue-record" class="hasAnchor"><a href="#section-querying-data-from-a-web-service-catalogue-record" class="anchor"></a>Querying data from a Web Service catalogue record</h2>
+          <p class="section-desc"><p>Issue queries using <code>select</code> and <code>filter</code> verbs against datasets in the B.C. Data Catalogue that have Web Services.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="bcdc_query_geodata.html">bcdc_query_geodata()</a></code> </p>
+        </td>
+        <td><p>Query data from the B.C. Web Service</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bcdc_describe_feature.html">bcdc_describe_feature()</a></code> </p>
+        </td>
+        <td><p>Describe a Web Service feature</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="filter.bcdc_promise.html">filter(<i>&lt;bcdc_promise&gt;</i>)</a></code> </p>
         </td>
-        <td><p>filter methods</p></td>
+        <td><p>Filter a query from Web Service call</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="select.bcdc_promise.html">select(<i>&lt;bcdc_promise&gt;</i>)</a></code> </p>
         </td>
         <td><p>Select columns from Web Service call</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cql_geom_predicates.html">EQUALS()</a></code> <code><a href="cql_geom_predicates.html">DISJOINT()</a></code> <code><a href="cql_geom_predicates.html">INTERSECTS()</a></code> <code><a href="cql_geom_predicates.html">TOUCHES()</a></code> <code><a href="cql_geom_predicates.html">CROSSES()</a></code> <code><a href="cql_geom_predicates.html">WITHIN()</a></code> <code><a href="cql_geom_predicates.html">CONTAINS()</a></code> <code><a href="cql_geom_predicates.html">OVERLAPS()</a></code> <code><a href="cql_geom_predicates.html">RELATE()</a></code> <code><a href="cql_geom_predicates.html">BBOX()</a></code> <code><a href="cql_geom_predicates.html">DWITHIN()</a></code> <code><a href="cql_geom_predicates.html">BEYOND()</a></code> </p>
+        </td>
+        <td><p>CQL Geometry Predicates</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="CQL.html">CQL()</a></code> </p>
+        </td>
+        <td><p>CQL escaping</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bcdc_options.html">bcdc_options()</a></code> </p>
+        </td>
+        <td><p>Retrieve options used in bcdata, their value if set and the default value.</p></td>
       </tr>
     </tbody>
     </table>
@@ -239,7 +249,9 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-interacting-with-the-b-c-data-catalogue">Interacting with the B.C. Data Catalogue</a></li>
+      <li><a href="#section-direct-downloads-of-datasets">Direct downloads of datasets</a></li>
+      <li><a href="#section-querying-data-from-a-web-service-catalogue-record">Querying data from a Web Service catalogue record</a></li>
     </ul>
   </div>
 </div>

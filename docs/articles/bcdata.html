@@ -128,29 +128,17 @@
 <a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="../reference/bcdc_search.html">bcdc_search</a></span>(<span class="st">"recycling"</span>)</a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; List of B.C. Data Catalogue Records</span></a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; Number of records: 6</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; Number of records: 2</span></a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; Titles:</span></a>
 <a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 1: BC FIRST Tire Recycling Data 1991-2006 (csv)</span></a>
 <a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt;  ID: a29ad492-29a2-44b9-8693-d27a8cc8e686</span></a>
 <a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt;  Name: bc-first-tire-recycling-data-1991-2006</span></a>
 <a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 2: Tire Stewardship BC Tire Recycling Data (csv)</span></a>
 <a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt;  ID: f791329b-c2dc-4f82-9993-209780f2a1c6</span></a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt;  Name: tire-stewardship-bc-tire-recycling-data</span></a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; 3: Environmental Protection Information Resources e-Library ()</span></a>
-<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt;  ID: dae0f2c3-b4f4-4d16-a96d-d7fe7c1581f3</span></a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt;  Name: environmental-protection-information-resources-e-library</span></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt; 4: PICES Tsunami Debris Aerial Photo Survey Map ()</span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt;  ID: 7e74680e-5851-4fc2-b0fa-5e18198b8fa6</span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt;  Name: pices-tsunami-debris-aerial-photo-survey-map</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; 5: Cross-linked Information Resources (CLIR) (other)</span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt;  ID: 6f8576bc-1585-429c-97f9-e94b059fa455</span></a>
-<a class="sourceLine" id="cb5-21" title="21"><span class="co">#&gt;  Name: cross-linked-information-resources-clir</span></a>
-<a class="sourceLine" id="cb5-22" title="22"><span class="co">#&gt; 6: Ministry of Transportation (MOT) Surface Type (other, wms, kml)</span></a>
-<a class="sourceLine" id="cb5-23" title="23"><span class="co">#&gt;  ID: 3a77f19f-2f49-416c-ad32-75e8d06e6c5a</span></a>
-<a class="sourceLine" id="cb5-24" title="24"><span class="co">#&gt;  Name: ministry-of-transportation-mot-surface-type </span></a>
-<a class="sourceLine" id="cb5-25" title="25"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-26" title="26"><span class="co">#&gt; Access a single record by calling bcdc_get_record(ID)</span></a>
-<a class="sourceLine" id="cb5-27" title="27"><span class="co">#&gt;       with the ID from the desired record.</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt;  Name: tire-stewardship-bc-tire-recycling-data </span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt; Access a single record by calling bcdc_get_record(ID)</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt;       with the ID from the desired record.</span></a></code></pre></div>
 <p>You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search <em>facets</em> <code>license_id</code>, <code>download_audience</code>, <code>type</code>, <code>res_format</code>, <code>sector</code>, and <code>organization</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">## Give me the first catalogue search result for 'recycling'</span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="../reference/bcdc_search.html">bcdc_search</a></span>(<span class="st">"recycling"</span>, <span class="dt">n =</span> <span class="dv">1</span>)</a>
@@ -181,30 +169,26 @@
 <p>You can see all valid values for the catalogue search facets using <code><a href="../reference/bcdc_search_facets.html">bcdata::bcdc_search_facets()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co">## Valid values for search facet 'license_id'</span></a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="../reference/bcdc_search_facets.html">bcdc_search_facets</a></span>(<span class="dt">facet =</span> <span class="st">"license_id"</span>)</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt;         facet count</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; 1  license_id    47</span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; 2  license_id     1</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; 3  license_id    11</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; 4  license_id    15</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; 5  license_id     4</span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; 6  license_id    25</span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt; 7  license_id  1520</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt; 8  license_id     2</span></a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; 9  license_id     2</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; 10 license_id    15</span></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 11 license_id  1215</span></a>
-<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;                                                display_name name</span></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 1                                         Statistics Canada   21</span></a>
-<a class="sourceLine" id="cb7-17" title="17"><span class="co">#&gt; 2                Queen's Printer Licence - British Columbia   25</span></a>
-<a class="sourceLine" id="cb7-18" title="18"><span class="co">#&gt; 3  Open Government Licence – Municipality of North Cowichan   44</span></a>
-<a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt; 4                      Open Government Licence - WorkSafeBC   41</span></a>
-<a class="sourceLine" id="cb7-20" title="20"><span class="co">#&gt; 5                  Open Government Licence - Destination BC   43</span></a>
-<a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt; 6                          Open Government Licence - Canada   24</span></a>
-<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; 7                Open Government Licence - British Columbia    2</span></a>
-<a class="sourceLine" id="cb7-23" title="23"><span class="co">#&gt; 8                   Open Government Licence - BC Assessment   47</span></a>
-<a class="sourceLine" id="cb7-24" title="24"><span class="co">#&gt; 9  Open Data Commons - Public Domain Dedication and Licence   45</span></a>
-<a class="sourceLine" id="cb7-25" title="25"><span class="co">#&gt; 10                           Elections BC Open Data Licence   42</span></a>
-<a class="sourceLine" id="cb7-26" title="26"><span class="co">#&gt; 11                                              Access Only   22</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt;        facet count</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; 1 license_id    10</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; 2 license_id    11</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; 3 license_id     2</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; 4 license_id    18</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; 5 license_id   502</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; 6 license_id     2</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt; 7 license_id     1</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt; 8 license_id     6</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; 9 license_id   491</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;                                               display_name name</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 1                                        Statistics Canada   21</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt; 2 Open Government Licence – Municipality of North Cowichan   44</span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 3                 Open Government Licence - Destination BC   43</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="co">#&gt; 4                         Open Government Licence - Canada   24</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="co">#&gt; 5               Open Government Licence - British Columbia    2</span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt; 6                  Open Government Licence - BC Assessment   47</span></a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="co">#&gt; 7 Open Data Commons - Public Domain Dedication and Licence   45</span></a>
+<a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt; 8                           Elections BC Open Data Licence   42</span></a>
+<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; 9                                              Access Only   22</span></a></code></pre></div>
 <p>Finally, you can retrieve the <em>metadata</em> for a single catalogue record by using the record name or ID with <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations—like scripts—to guard against future name changes of a record:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co">## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`</span></a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"a29ad492-29a2-44b9-8693-d27a8cc8e686"</span>)</a>
@@ -312,9 +296,9 @@
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; Number of records: 1</span></a>
 <a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; Titles:</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 1: BC Schools - Programs Offered in Schools (txt, xlsx)</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt;  ID: b1f27d1c-244a-410e-a361-931fac62a524</span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt;  Name: bc-schools-programs-offered-in-schools </span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 1: Adult Education Institutions (csv, xlsx)</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt;  ID: 29af9a16-17a0-499d-a927-1fec62d18a20</span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt;  Name: adult-education-institutions </span></a>
 <a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt; Access a single record by calling bcdc_get_record(ID)</span></a>
 <a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt;       with the ID from the desired record.</span></a>
@@ -383,11 +367,11 @@
 <a class="sourceLine" id="cb12-2" title="2"><span class="kw"><a href="../reference/bcdc_search.html">bcdc_search</a></span>(<span class="st">"air zones"</span>, <span class="dt">res_format =</span> <span class="st">"geojson"</span>)</a>
 <a class="sourceLine" id="cb12-3" title="3"><span class="co">#&gt; List of B.C. Data Catalogue Records</span></a>
 <a class="sourceLine" id="cb12-4" title="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; Number of records: 1</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; Number of records: 0</span></a>
 <a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; Titles:</span></a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="co">#&gt; 1: British Columbia Air Zones (shp, kml, geojson)</span></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="co">#&gt;  ID: e8eeefc4-2826-47bc-8430-85703d328516</span></a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="co">#&gt;  Name: british-columbia-air-zones </span></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="co">#&gt; 1:  ()</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="co">#&gt;  ID: </span></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="co">#&gt;  Name:  </span></a>
 <a class="sourceLine" id="cb12-10" title="10"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb12-11" title="11"><span class="co">#&gt; Access a single record by calling bcdc_get_record(ID)</span></a>
 <a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt;       with the ID from the desired record.</span></a>

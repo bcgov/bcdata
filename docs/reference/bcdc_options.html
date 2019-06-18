@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Describe a Web Service feature — bcdc_describe_feature • bcdata</title>
+<title>Retrieve options used in bcdata, their value if set and the default value. — bcdc_options • bcdata</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,13 @@
 
 
 
-<meta property="og:title" content="Describe a Web Service feature — bcdc_describe_feature" />
+<meta property="og:title" content="Retrieve options used in bcdata, their value if set and the default value. — bcdc_options" />
 
-<meta property="og:description" content="Describe the columns from a Web Service feature. The column name, whether a column can be
-separated from the record in Web Service (nillable) and the type of column are returned.
-This can be a helpful tool to examine a layer before issuing a query with bcdc_query_geodata" />
+<meta property="og:description" content="This function retrieves bcdata specific options that can be set. These options can be set
+using option({name of the option} = {value of the option}). The default options are purposefully
+set conversatively to hopefully ensure successful requests. Resetting these options may result in
+failed calls to the data catalogue. Options in R are reset everytime R is re-started. See examples for
+addition ways to restore your initial state." />
 
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -121,60 +123,61 @@ This can be a helpful tool to examine a layer before issuing a query with bcdc_q
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Describe a Web Service feature</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/describe-feature.R'><code>R/describe-feature.R</code></a></small>
-    <div class="hidden name"><code>bcdc_describe_feature.Rd</code></div>
+    <h1>Retrieve options used in bcdata, their value if set and the default value.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc_options.R'><code>R/bcdc_options.R</code></a></small>
+    <div class="hidden name"><code>bcdc_options.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Describe the columns from a Web Service feature. The column name, whether a column can be
-separated from the record in Web Service (nillable) and the type of column are returned.
-This can be a helpful tool to examine a layer before issuing a query with <code>bcdc_query_geodata</code></p>
+    <p>This function retrieves bcdata specific options that can be set. These options can be set
+using <code>option({name of the option} = {value of the option})</code>. The default options are purposefully
+set conversatively to hopefully ensure successful requests. Resetting these options may result in
+failed calls to the data catalogue. Options in R are reset everytime R is re-started. See examples for
+addition ways to restore your initial state.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_describe_feature</span>(<span class='no'>record</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>record</th>
-      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>)
-or a character string denoting the name or ID of a resource (or the URL).</p>
-<p>It is advised to use the permament ID for a record rather than the
-human-readable name to guard against future name changes of the record.
-If you use the human-readable name a warning will be issued once per
-session. You can silence these warnings altogether by setting an option:
-<code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options("silence_named_get_data_warning" = TRUE)</a></code> - which you can set
-in your .Rprofile file so the option persists across sessions.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>bcdc_options</span>()</pre>
+        
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>bcdata.max_geom_pred_size</code> is the maximum size of an object used for a geometric operation. Objects
+that are bigger than this value will have a bounding box drawn and apply the geometric operation
+on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
+if the bcdata catalogue accepts their request.</p>
+<p><code>bcdata.chunk_limit</code> is an option useful when dealing with very large datasets. When requesting large objects
+from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
+been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
+requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
+it is advisable to lower the chunk limit. Chunks must be less than 10000.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'>bcdc_describe_feature</span>(<span class='st'>"bc-airports"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 42 x 4</span><span>
-#&gt;    col_name                      selectable remote_col_type local_col_type
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
-#&gt; </span><span style='color: #555555;'> 1</span><span> id                            FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 2</span><span> CUSTODIAN_ORG_DESCRIPTION     FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 3</span><span> BUSINESS_CATEGORY_CLASS       FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 4</span><span> BUSINESS_CATEGORY_DESCRIPTION FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 5</span><span> OCCUPANT_TYPE_DESCRIPTION     FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 6</span><span> SOURCE_DATA_ID                FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 7</span><span> SUPPLIED_SOURCE_ID_IND        FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 8</span><span> AIRPORT_NAME                  FALSE      xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 9</span><span> DESCRIPTION                   TRUE       xsd:string      character     
-#&gt; </span><span style='color: #555555;'>10</span><span> PHYSICAL_ADDRESS              TRUE       xsd:string      character     
-#&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## Save initial conditions</span>
+<span class='no'>original_options</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>()
+
+<span class='co'>## See initial options</span>
+<span class='fu'>bcdc_options</span>()
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='kw'>bcdata.max_geom_pred_size</span> <span class='kw'>=</span> <span class='fl'>1E6</span>)
+
+<span class='co'>## See updated options</span>
+<span class='fu'>bcdc_options</span>()
+
+<span class='co'>## Reset initial conditions</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='no'>original_options</span>)
+
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
