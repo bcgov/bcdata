@@ -136,12 +136,12 @@ plot(st_geometry(districts))
 plot(st_geometry(districts_parks_join), add = TRUE, col = "green")
 ```
 
-A second approach is to set an internal option (`max_geom_pred_size`) and increase the threshold of when a bounding box is drawn. Options are set in R like this:
+A second approach is to set an internal option (`bcdata.max_geom_pred_size`) and increase the threshold of when a bounding box is drawn. Options are set in R like this:
 ```{r, eval=FALSE}
-options("max_geom_pred_size" = {object size in bytes})
+options("bcdata.max_geom_pred_size" = {object size in bytes})
 ```
 
-The value of `max_geom_pred_size` is set consertivately so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests. 
+The value of `bcdata.max_geom_pred_size` is set consertivately so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests. 
 
 Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:
 
