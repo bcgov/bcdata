@@ -113,7 +113,7 @@ print.bcdc_recordlist <- function(x, ...) {
 # dplyr methods -----------------------------------------------------------
 
 
-#' filter methods
+#' Filter a query from Web Service call
 #'
 #' Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
 #' full sf object is not read into memory until `collect()` has been called.

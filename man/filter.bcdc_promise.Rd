@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-classes.R
 \name{filter.bcdc_promise}
 \alias{filter.bcdc_promise}
-\title{filter methods}
+\title{Filter a query from Web Service call}
 \usage{
 \method{filter}{bcdc_promise}(.data, ...)
 }
