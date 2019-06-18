@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
 
-# bcdata <img src="tools/readme/bcdata-sticker.png" height="139" align="right"/>
+# bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.png' align="right" height="138" /></a>
 
 ### Version 0.0.0.9000
 
@@ -32,7 +32,7 @@ Catalogue](https://catalogue.data.gov.bc.ca).
 
   - `bcdc_browse()` - Open the catalogue in your default browser
   - `bcdc_search()` - Search records in the catalogue
-  - `bcdc_search_facet()` - List catalogue facet search options
+  - `bcdc_search_facets()` - List catalogue facet search options
   - `bcdc_get_record()` - Print a catalogue record
   - `bcdc_get_data()` - Get catalogue data
   - `bcdc_query_geodata()` - Get & query catalogue geospatial data
@@ -48,7 +48,7 @@ currently supported by `bcdata` please file an
 ### Reference
 
 [bcdata package 📦 home page and reference
-guide](https://bcgov.github.io/bcdata/index.html)
+guide](https://bcgov.github.io/bcdata/)
 
 ### Installation
 

@@ -8,3 +8,6 @@
 ^inst/sticker$
 
 efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
