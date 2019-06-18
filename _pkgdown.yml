@@ -1,3 +1,37 @@
 destination: docs
 
 url: https://bcgov.github.io/bcdata
+
+reference:
+  - title: "Interacting with the B.C. Data Catalogue"
+    desc: >
+      Functions to search, browse, list, and explore records and their
+      resources (datasets) in the B.C. Data Catalogue
+    contents:
+      - '`bcdc_browse`'
+      - '`bcdc_search`'
+      - '`bcdc_search_facets`'
+      - '`bcdc_list`'
+      - '`bcdc_get_record`'
+  - title: "Direct downloads of datasets"
+    desc: >
+      Directly dowload (or preview) datasets (resources) from the
+      B.C. Data Catalogue
+    contents:
+      - '`bcdc_get_data`'
+      - '`bcdc_preview`'
+      - '`bcdc_read_functions`'
+  - title: "Querying data from a Web Service catalogue record"
+    desc: >
+      Issue queries using `select` and `filter` verbs against datasets in the
+      B.C. Data Catalogue that have Web Services.
+    contents:
+      - '`bcdc_query_geodata`'
+      - '`bcdc_describe_feature`'
+      - '`filter.bcdc_promise`'
+      - '`select.bcdc_promise`'
+      - '`cql_geom_predicates`'
+      - '`CQL`'
+      - '`bcdc_options`'
+
+
