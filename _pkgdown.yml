@@ -1,5 +1,8 @@
 destination: docs
 
+development:
+  mode: auto
+
 url: https://bcgov.github.io/bcdata
 
 reference:
