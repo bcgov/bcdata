@@ -130,7 +130,7 @@ sql_escape_string.DummyCQL <- function(con, x) {
 #' CQL escaping
 #'
 #' Write a CQL expression to escape its inputs, and return a CQL/SQL object.
-#' Used when writing filter expressions in [bcdc_get_geodata()].
+#' Used when writing filter expressions in [bcdc_query_geodata()].
 #'
 #' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
 #'

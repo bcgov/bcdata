@@ -64,7 +64,7 @@ a CQL expression using the bounding box of the geom
 }
 \description{
 Functions to construct a CQL expression to be used
-to filter results from \code{\link[=bcdc_get_geodata]{bcdc_get_geodata()}}.
+to filter results from \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}}.
 See \href{https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate}{the geoserver CQL documentation for details}.
 The sf object is automatically converted in a
 bounding box to reduce the complexity of the Web Service call. Subsequent in-memory

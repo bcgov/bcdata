@@ -2,12 +2,12 @@
 % Please edit documentation in R/utils-classes.R
 \name{filter.bcdc_promise}
 \alias{filter.bcdc_promise}
-\title{filter methods}
+\title{Filter a query from Web Service call}
 \usage{
 \method{filter}{bcdc_promise}(.data, ...)
 }
 \arguments{
-\item{.data}{passed from bcdc_get_geodata}
+\item{.data}{object of class \code{bcdc_promise} (likely passed from \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}})}
 
 \item{...}{Logical predicates with which to filter the results. Multiple
 conditions are combined with \code{&}. Only rows where the condition evaluates to
