@@ -18,30 +18,33 @@ library(dplyr)
 library(rmapshaper)
 
 cities <- bc_cities()
-bc <- bc_bound_hres() %>%  ms_simplify(keep = 0.03)
+bc <- bc_bound() %>% ms_simplify(keep = .1)
 
 city_lines_df <- cities %>%
-  group_by(CITY_TYPE) %>%
-  summarise(do_union = FALSE) %>%
-  st_cast("LINESTRING")
+  st_union() %>%
+  st_triangulate(bOnlyEdges = TRUE) %>%
+  st_cast("LINESTRING") %>%
+  st_sf() %>%
+  mutate(length = as.numeric(st_length(.))) %>%
+  filter(length < 500000)
 
 p <- ggplot() +
-  geom_sf(data = city_lines_df, aes(colour = CITY_TYPE), size = 0.2) +
-  geom_sf(data = cities, size = .2) +
-  geom_sf(data = bc, fill = NA, size = 0.15, colour = "black") +
+  geom_sf(data = bc, fill = NA, size = 0.2, colour = "grey70") +
+  geom_sf(data = city_lines_df, aes(colour = length), size = 0.2) +
+  scale_colour_viridis_c(direction = -1, option = "plasma", begin = .3) +
+  geom_sf(data = cities, colour = "white", size = 0.01, shape = 20) +
   guides(colour = FALSE) +
   theme_void() +
   theme_transparent() +
-  theme(panel.grid.major = element_line(colour = "white", size = 0.1)) +
-  scale_colour_viridis_d()
+  coord_sf(datum = NULL)
 
 sysfonts::font_add("Century Gothic", "/Library/Fonts/Microsoft/Century Gothic")
 
 sticker(p, package = "bcdata",
         p_size = 5, # This seems to behave very differently on a Mac vs PC
-        p_y = 1.6, p_color = "black", p_family = "Century Gothic",
+        p_y = 1.6, p_color = "grey70", p_family = "Century Gothic",
         s_x = 1, s_y = .9,
         s_width = 1.5, s_height = 1.5,
-        h_fill = "white", h_color = "black",
+        h_fill = "#29303a", h_color = "grey70",
         filename = file.path("inst/sticker/bcdata.png"))
 
