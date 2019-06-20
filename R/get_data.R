@@ -173,9 +173,11 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
 bcdc_read_functions <- function(){
   dplyr::tribble(
     ~format, ~package, ~fun,
-    "csv", "readr", "read_csv",
     "kml", "sf", "read_sf",
     "geojson", "sf", "read_sf",
+    "gpkg", "sf", "read_sf",
+    "shp", "sf", "read_sf",
+    "csv", "readr", "read_csv",
     "txt", "readr", "read_tsv",
     "xlsx", "readxl", "read_xlsx",
     "xls", "readxl", "read_xls"
