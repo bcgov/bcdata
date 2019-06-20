@@ -280,7 +280,7 @@ handle_zip <- function(x) {
   }
   # decompress into same dir
   dir <- dirname(x)
-  unzip(x, exdir = dir)
+  utils::unzip(x, exdir = dir)
   files <- list.files(dir, full.names = TRUE, recursive = TRUE)
   # check if it's a shapefile
   shp <- is_filetype(files, "shp")
