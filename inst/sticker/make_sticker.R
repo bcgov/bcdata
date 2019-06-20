@@ -38,7 +38,12 @@ p <- ggplot() +
   theme_transparent() +
   coord_sf(datum = NULL)
 
-sysfonts::font_add("Century Gothic", "/Library/Fonts/Microsoft/Century Gothic")
+font_path <- switch (Sys.info()['sysname'],
+                     Darwin = "/Library/Fonts/Microsoft/Century Gothic",
+                     Windows = "C:/WINDOWS/FONTS/GOTHIC.TTF"
+)
+
+sysfonts::font_add("Century Gothic", font_path)
 
 sticker(p, package = "bcdata",
         p_size = 5, # This seems to behave very differently on a Mac vs PC
@@ -46,5 +51,8 @@ sticker(p, package = "bcdata",
         s_x = 1, s_y = .9,
         s_width = 1.5, s_height = 1.5,
         h_fill = "#29303a", h_color = "grey70",
-        filename = file.path("inst/sticker/bcdata.png"))
+        filename = file.path("inst/sticker/bcdata.svg"))
+
+# Run:
+# userthis::use_logo("inst/sticker/bcdata.svg")
 
