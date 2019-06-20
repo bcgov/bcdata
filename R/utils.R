@@ -273,12 +273,15 @@ pagination_sort_col <- function(x) {
 }
 
 handle_zip <- function(x) {
+  # Just give file back if it's not zipped
   if (!tools::file_ext(x) == "zip") {
     return(x)
   }
+  # decompress into same dir
   dir <- dirname(x)
   unzip(x, exdir = dir)
   files <- list.files(dir, full.names = TRUE, recursive = TRUE)
+  # check if it's a shapefile
   shp <- tools::file_ext(files) == "shp"
   if (any(shp)) {
     files <- files[shp]
