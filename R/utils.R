@@ -129,7 +129,7 @@ formats_from_record <- function(x, trim = TRUE){
 
   resource_df <- dplyr::tibble(
       name = purrr::map_chr(x$resources, "name"),
-      url = safe_file_ext(purrr::map_chr(x$resources, "url")),
+      url = purrr::map_chr(x$resources, safe_file_ext),
       format = purrr::map_chr(x$resources, "format")
     )
   x <- formats_from_resource(resource_df)
@@ -143,14 +143,20 @@ formats_from_resource <- function(x){
   dplyr::case_when(
     x$format == x$url ~ x$format,
     x$format == "wms" ~ "wms",
-    nchar(x$url) == 0 ~ x$format,
-    nchar(safe_file_ext(x$url)) == 0 ~ x$format,
+    !nzchar(x$url) ~ x$format,
+    !nzchar(safe_file_ext(x)) ~ x$format,
     x$url == "zip" ~ paste0(x$format, "(zipped)"),
-    TRUE ~ safe_file_ext(x$url)
+    TRUE ~ safe_file_ext(x)
   )
 }
 
-safe_file_ext <- function(x) as.character(tools::file_ext(x))
+safe_file_ext <- function(resource) {
+  url_format <- tools::file_ext(resource$url)
+  if (url_format == "zip") {
+    return(resource$format)
+  }
+  url_format
+}
 
 gml_types <- function(x) {
   c(
@@ -202,8 +208,10 @@ safe_request_length <- function(query_list){
 
 }
 
-read_from_url <- function(file_url, ...){
-  format <- safe_file_ext(file_url)
+read_from_url <- function(resource, ...){
+  if (nrow(resource) > 1) stop("more than one resource specified", call. = FALSE)
+  file_url <- resource$url
+  format <- safe_file_ext(resource)
   if (!format %in% formats_supported()) {
     stop("Reading ", format, " files is not currently supported in bcdata.")
   }
@@ -211,7 +219,7 @@ read_from_url <- function(file_url, ...){
   cli <- bcdc_http_client(file_url)
 
   ## Establish where to download file
-  tmp <- tempfile(fileext = paste0(".", format))
+  tmp <- tempfile(fileext = paste0(".", tools::file_ext(file_url)))
   on.exit(unlink(tmp))
 
   r <- cli$get(disk = tmp)
@@ -235,7 +243,7 @@ resource_to_tibble <- function(x){
     url = purrr::map_chr(x, "url"),
     id = purrr::map_chr(x, "id"),
     format = purrr::map_chr(x, "format"),
-    ext = safe_file_ext(url),
+    ext = purrr::map_chr(x, safe_file_ext),
     package_id = purrr::map_chr(x, "package_id"),
     location = simplify_string(purrr::map_chr(x, "resource_storage_location"))
   )

@@ -112,12 +112,13 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
 
   ## non-wms; resource specified
   if (!is.null(resource)) {
-    return(read_from_url(resource_df$url[resource_df$id == resource], ...))
+    return(read_from_url(resource_df[resource_df$id == resource, , drop = FALSE],
+                         ...))
   }
 
   ## non-wms; only one resource and not specified
   if (nrow(resource_df) == 1L) {
-    return(read_from_url(resource_df$url, ...))
+    return(read_from_url(resource_df, ...))
   }
 
   ## wms record with at least one non BCGW resource (test bc-airports)
@@ -145,12 +146,12 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
     query <- bcdc_query_geodata(record = record_id, ...)
     return(collect(query))
   } else {
-    file_url <- resource_df$url[resource_df$name == name_choice]
+    resource <- resource_df[resource_df$name == name_choice, , drop = FALSE]
     id_choice <- resource_df$id[resource_df$name == name_choice]
 
     cat("To directly access this record in the future please use this command:\n")
     cat(glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
-    read_from_url(file_url, ...)
+    read_from_url(resource, ...)
   }
 }
 
