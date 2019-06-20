@@ -39,3 +39,14 @@ test_that("bcdc_search works", {
             "bcdc_recordlist")
 })
 
+test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record",{
+  sr <- bcdc_get_record('95da1091-7e8c-4aa6-9c1b-5ab159ea7b42')
+  d <- sr$resource_df
+  expect_true(d$bcdata_available[d$location == "bcgeographicwarehouse" & d$format == "wms"])
+})
+
+test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record",{
+  sr <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
+  d <- sr$resource_df
+  expect_flase(d$bcdata_available[d$location == "bcgeographicwarehouse" & d$format != "wms"])
+  })
