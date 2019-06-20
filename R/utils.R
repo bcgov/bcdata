@@ -294,7 +294,7 @@ handle_zip <- function(x) {
   }
 
   if (!tools::file_ext(files) %in% formats_supported()) {
-    stop("Unkown format in zip file.")
+    stop("Unknown format in zip file.")
   }
   files
 }
