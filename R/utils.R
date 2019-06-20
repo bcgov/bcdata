@@ -225,6 +225,8 @@ read_from_url <- function(resource, ...){
   r <- cli$get(disk = tmp)
   r$raise_for_status()
 
+  tmp <- handle_zip(tmp)
+
   # Match the read function to the file format format and retrieve the function
   funs <- bcdc_read_functions()
   fun <- funs[funs$format == format, ]
@@ -267,4 +269,23 @@ pagination_sort_col <- function(x) {
           "). Please check your data for obvious duplicated or missing rows.",
           call. = FALSE)
   cols[1]
+}
+
+handle_zip <- function(x) {
+  if (!tools::file_ext(x) == "zip") {
+    return(x)
+  }
+  dir <- dirname(x)
+  unzip(x, exdir = dir)
+  unlink(x)
+  files <- list.files(dir, full.names = TRUE, recursive = TRUE)
+  shp <- tools::file_ext(files) == "shp"
+  if (any(shp)) {
+    files <- files[shp]
+  }
+
+  if (length(files) > 1L) {
+    stop("More than one file in zip", call. = FALSE)
+  }
+  files
 }
