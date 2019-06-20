@@ -274,7 +274,7 @@ pagination_sort_col <- function(x) {
 
 handle_zip <- function(x) {
   # Just give file back if it's not zipped
-  if (!tools::file_ext(x) == "zip") {
+  if (!is_filetype(x, "zip")) {
     return(x)
   }
   # decompress into same dir
@@ -282,19 +282,23 @@ handle_zip <- function(x) {
   unzip(x, exdir = dir)
   files <- list.files(dir, full.names = TRUE, recursive = TRUE)
   # check if it's a shapefile
-  shp <- tools::file_ext(files) == "shp"
+  shp <- is_filetype(files, "shp")
   if (any(shp)) {
     files <- files[shp]
   }
 
   if (length(files) > 1L) {
     stop("More than one file in zip file. It has been downloaded and extracted to '",
-         x, "', where you can access its contents manually.",
+         dir, "', where you can access its contents manually.",
          call. = FALSE)
   }
 
-  if (!tools::file_ext(files) %in% formats_supported()) {
+  if (!is_filetype(files, formats_supported())) {
     stop("Unknown format in zip file.")
   }
   files
+}
+
+is_filetype <- function(x, ext) {
+  tools::file_ext(x) %in% ext
 }
