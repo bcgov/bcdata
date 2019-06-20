@@ -53,9 +53,14 @@ test_that("bcdc_get_data works with a zipped shp file", {
             "sf")
 })
 
-test_that("unknown file type (shp) inside zip", {
+test_that("unknown single file (shp) inside zip", {
   expect_is(bcdc_get_data("e31f7488-27fa-4330-ae86-160a0deb8a59"),
             "sf")
+})
+
+test_that("fails when multiple files in a zip", {
+  expect_error(bcdc_get_data("300c0980-b5e3-4202-b0da-d816f14fadad"),
+               "More than one file in zip file")
 })
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
