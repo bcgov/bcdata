@@ -47,6 +47,12 @@ test_that("bcdc_get_data will return non-wms resources",{
                           resource = 'dc1098a7-a4b8-49a3-adee-9badd4429279'), "tbl")
 })
 
+test_that("bcdc_get_data works with a zipped shp file", {
+  expect_is(bcdc_get_data(record = '68f2f577-28a7-46b4-bca9-7e9770f2f357',
+                          resource = 'f89f99b0-ca68-41e2-afc4-63fdc0edb666'),
+            "sf")
+})
+
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
   expect_is(bcdc_get_data("bc-airports", resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"), "sf")
