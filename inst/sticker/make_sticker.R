@@ -13,14 +13,39 @@
 library(hexSticker)
 library(ggplot2)
 library(bcmaps)
+library(bcdata)
 library(sf)
 library(dplyr)
 library(rmapshaper)
 
-cities <- bc_cities()
+## bc bnoundary from bcmaps
 bc <- bc_bound() %>% ms_simplify(keep = .1)
 
-city_lines_df <- cities %>%
+## cities
+# city_lines_df <- cities %>%
+#   st_union() %>%
+#   st_triangulate(bOnlyEdges = TRUE) %>%
+#   st_cast("LINESTRING") %>%
+#   st_sf() %>%
+#   mutate(length = as.numeric(st_length(.))) %>%
+#   filter(length < 500000)
+#
+# p <- ggplot() +
+#   geom_sf(data = bc, fill = NA, size = 0.2, colour = "grey70") +
+#   geom_sf(data = city_lines_df, aes(colour = length), size = 0.2) +
+#   scale_colour_viridis_c(direction = -1, option = "plasma", begin = .3) +
+#   geom_sf(data = cities, colour = "white", size = 0.01, shape = 20) +
+#   guides(colour = FALSE) +
+#   theme_void() +
+#   theme_transparent() +
+#   coord_sf(datum = NULL)
+
+
+## schools
+schools <- bcdc_query_geodata("schools-k-12-with-francophone-indicators") %>%
+  collect()
+
+school_lines_df <- schools %>%
   st_union() %>%
   st_triangulate(bOnlyEdges = TRUE) %>%
   st_cast("LINESTRING") %>%
@@ -30,14 +55,16 @@ city_lines_df <- cities %>%
 
 p <- ggplot() +
   geom_sf(data = bc, fill = NA, size = 0.2, colour = "grey70") +
-  geom_sf(data = city_lines_df, aes(colour = length), size = 0.2) +
+  geom_sf(data = school_lines_df, aes(colour = length), size = 0.2) +
   scale_colour_viridis_c(direction = -1, option = "plasma", begin = .3) +
-  geom_sf(data = cities, colour = "white", size = 0.01, shape = 20) +
+  geom_sf(data = cic, colour = "white", size = 0.01, shape = 20) +
   guides(colour = FALSE) +
   theme_void() +
   theme_transparent() +
   coord_sf(datum = NULL)
 
+
+## sticker
 sysfonts::font_add("Century Gothic", "/Library/Fonts/Microsoft/Century Gothic")
 
 sticker(p, package = "bcdata",
