@@ -53,6 +53,10 @@ test_that("bcdc_get_data works with a zipped shp file", {
             "sf")
 })
 
+test_that("unknown file type (shp) inside zip", {
+  expect_is(bcdc_get_data("e31f7488-27fa-4330-ae86-160a0deb8a59"),
+            "sf")
+})
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
   expect_is(bcdc_get_data("bc-airports", resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"), "sf")
