@@ -219,7 +219,8 @@ read_from_url <- function(resource, ...){
   cli <- bcdc_http_client(file_url)
 
   ## Establish where to download file
-  tmp <- tempfile(fileext = paste0(".", tools::file_ext(file_url)))
+  tmp <- tempfile(tmpdir = unique_temp_dir(),
+                  fileext = paste0(".", tools::file_ext(file_url)))
   on.exit(unlink(tmp))
 
   r <- cli$get(disk = tmp)
@@ -301,4 +302,10 @@ handle_zip <- function(x) {
 
 is_filetype <- function(x, ext) {
   tools::file_ext(x) %in% ext
+}
+
+unique_temp_dir <- function(pattern = "bcdata_") {
+  dir <- tempfile(pattern = pattern)
+  dir.create(file.path(dirname(dir), basename(dir)))
+  dir
 }
