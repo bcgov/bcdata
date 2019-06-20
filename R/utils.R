@@ -77,7 +77,7 @@ slug_from_url <- function(x) {
 }
 
 formats_supported <- function(){
-  bcdc_read_functions()[["format"]]
+  c(bcdc_read_functions()[["format"]], "zip")
 }
 
 bcdc_http_client <- function(url = NULL) {
@@ -211,9 +211,9 @@ safe_request_length <- function(query_list){
 read_from_url <- function(resource, ...){
   if (nrow(resource) > 1) stop("more than one resource specified", call. = FALSE)
   file_url <- resource$url
-  format <- safe_file_ext(resource)
-  if (!format %in% formats_supported()) {
-    stop("Reading ", format, " files is not currently supported in bcdata.")
+  reported_format <- safe_file_ext(resource)
+  if (!reported_format %in% formats_supported()) {
+    stop("Reading ", reported_format, " files is not currently supported in bcdata.")
   }
 
   cli <- bcdc_http_client(file_url)
@@ -226,10 +226,11 @@ read_from_url <- function(resource, ...){
   r$raise_for_status()
 
   tmp <- handle_zip(tmp)
+  final_format <- tools::file_ext(tmp)
 
   # Match the read function to the file format format and retrieve the function
   funs <- bcdc_read_functions()
-  fun <- funs[funs$format == format, ]
+  fun <- funs[funs$format == final_format, ]
 
   # This assumes that the function we are using to read the data takes the
   # data as the first argument - will need revisiting if we find a situation
@@ -284,9 +285,13 @@ handle_zip <- function(x) {
   }
 
   if (length(files) > 1L) {
-    stop("More than one file in zip file. It has been downloaded to '",
-         x, "', where you can access it and its contents manually.",
+    stop("More than one file in zip file. It has been downloaded and extracted to '",
+         x, "', where you can access its contents manually.",
          call. = FALSE)
+  }
+
+  if (!tools::file_ext(files) %in% formats_supported()) {
+    stop("Unkown format in zip file.")
   }
   files
 }
