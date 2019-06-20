@@ -277,7 +277,6 @@ handle_zip <- function(x) {
   }
   dir <- dirname(x)
   unzip(x, exdir = dir)
-  unlink(x)
   files <- list.files(dir, full.names = TRUE, recursive = TRUE)
   shp <- tools::file_ext(files) == "shp"
   if (any(shp)) {
@@ -285,7 +284,9 @@ handle_zip <- function(x) {
   }
 
   if (length(files) > 1L) {
-    stop("More than one file in zip", call. = FALSE)
+    stop("More than one file in zip file. It has been downloaded to '",
+         x, "', where you can access it and its contents manually.",
+         call. = FALSE)
   }
   files
 }
