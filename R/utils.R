@@ -241,7 +241,8 @@ read_from_url <- function(resource, ...){
   tryCatch(do.call(fun$fun, list(tmp, ...)),
            error = function(e) {
              stop("Could not read data set. The file can be found here:\n '",
-                  tmp, "'\n if you would like to try to read it manually.\n\n")
+                  tmp, "'\n if you would like to try to read it manually.\n\n",
+                  call. = FALSE)
            })
 }
 

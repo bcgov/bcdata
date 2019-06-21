@@ -60,7 +60,13 @@ test_that("unknown single file (shp) inside zip", {
 
 test_that("fails when multiple files in a zip", {
   expect_error(bcdc_get_data("300c0980-b5e3-4202-b0da-d816f14fadad"),
-               "More than one file in zip file")
+               "More than one supported file in zip file")
+})
+
+test_that("fails informatively when can't read a file", {
+  expect_error(bcdc_get_data(record = '523dce9d-b464-44a5-b733-2022e94546c3',
+                             resource = '4cc98644-f6eb-410b-9df0-f9b2beac9717'),
+               "Could not read data set")
 })
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
