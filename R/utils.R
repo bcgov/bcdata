@@ -238,7 +238,11 @@ read_from_url <- function(resource, ...){
   # where that's not the case
   message("Reading the data using the ", fun$fun, " function from the ",
           fun$package, " package.")
-  do.call(fun$fun, list(tmp, ...))
+  tryCatch(do.call(fun$fun, list(tmp, ...)),
+           error = function(e) {
+             stop("Could not read data set. The file can be found here:\n '",
+                  tmp, "'\n if you would like to try to read it manually.\n\n")
+           })
 }
 
 resource_to_tibble <- function(x){
