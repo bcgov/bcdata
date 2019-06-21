@@ -73,17 +73,21 @@ font_path <- switch (Sys.info()['sysname'],
 
 sysfonts::font_add("Century Gothic", font_path)
 
-
 ## hex sticker
-sticker(p, package = "bcdata",
-        p_size = 5, # This seems to behave very differently on a Mac vs PC
-        p_y = 1.6, p_color = "#F6A97A", p_family = "Century Gothic",
-        s_x = 1, s_y = .9,
-        s_width = 1.5, s_height = 1.5,
-        h_fill = "#29303a", h_color = "#F6A97A",
-        filename = file.path("inst/sticker/bcdata.svg"))
 
+write_sticker <- function(p, format) {
+  sticker(p, package = "bcdata",
+          p_size = 5, # This seems to behave very differently on a Mac vs PC
+          p_y = 1.6, p_color = "#F6A97A", p_family = "Century Gothic",
+          s_x = 1, s_y = .9,
+          s_width = 1.5, s_height = 1.5,
+          h_fill = "#29303a", h_color = "#F6A97A",
+          filename = file.path(paste0("inst/sticker/bcdata.", format)))
+}
+
+write_sticker(p, "png")
+write_sticker(p, "svg")
 
 # Run:
-usethis::use_logo("inst/sticker/bcdata.svg")
+usethis::use_logo("inst/sticker/bcdata.png")
 
