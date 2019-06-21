@@ -9,9 +9,7 @@
 \if{html}{\figure{logo.png}{options: align='right'}}
 
 Search and retrieve data from the BC data catalogue
-    (<https://catalogue.data.gov.bc.ca/>) directly from R. Spatial and
-    non-spatial data are retrieved differently depending on the
-    characteristics of the data object.
+    (<https://catalogue.data.gov.bc.ca/>) directly from R.
 }
 \seealso{
 Useful links:

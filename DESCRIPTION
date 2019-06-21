@@ -17,9 +17,7 @@ Authors@R:
       person(given = "Province of British Columbia",
              role = "cph"))
 Description: Search and retrieve data from the BC data catalogue
-    (<https://catalogue.data.gov.bc.ca/>) directly from R. Spatial and
-    non-spatial data are retrieved differently depending on the
-    characteristics of the data object.
+    (<https://catalogue.data.gov.bc.ca/>) directly from R.
 License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/bcdata
 BugReports: https://github.com/bcgov/bcdata/issues
