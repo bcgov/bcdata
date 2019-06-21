@@ -11,24 +11,6 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 
-#' Get data from the B.C. Web Service (DEPRECATED)
-#'
-#'
-#' @inheritParams bcdc_get_data
-#' @param crs the epsg code for the coordinate reference system. Defaults to `3005`
-#'        (B.C. Albers). See https://epsgi.io.
-#'
-#' @return an `sf` object
-#'
-#' @export
-#'
-bcdc_get_geodata <- function(record = NULL, crs = 3005) {
-  message("bcdc_get_geodata is defunct in favour of bcdc_get_data")
-  message("You can use the same argument to pull spatial data from the B.C. Data Catalogue:")
-  message(glue::glue("    bcdc_get_data('{record}')"))
-
-}
-
 #' Query data from the B.C. Web Service
 #'
 #' Queries features from the B.C. Web Service. The data must be available as
