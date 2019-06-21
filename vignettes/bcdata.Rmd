@@ -154,7 +154,7 @@ bc_az %>%
 ```
 
 **Note:** The `bcdata` package supports downloading _most_ file types, including zip archives. It will do its best to identify and read data from
-zip files, however if there are multiple data files in the zip, or data files that bcdata doesn't know how to import, it will fail.
+zip files, however if there are multiple data files in the zip, or data files that `bcdata` doesn't know how to import, it will fail.
 
 ### `bcdc_query_geodata()`
 
