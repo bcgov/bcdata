@@ -77,7 +77,7 @@ slug_from_url <- function(x) {
 }
 
 formats_supported <- function(){
-  bcdc_read_functions()[["format"]]
+  c(bcdc_read_functions()[["format"]], "zip")
 }
 
 bcdc_http_client <- function(url = NULL) {
@@ -129,7 +129,7 @@ formats_from_record <- function(x, trim = TRUE){
 
   resource_df <- dplyr::tibble(
       name = purrr::map_chr(x$resources, "name"),
-      url = safe_file_ext(purrr::map_chr(x$resources, "url")),
+      url = purrr::map_chr(x$resources, safe_file_ext),
       format = purrr::map_chr(x$resources, "format")
     )
   x <- formats_from_resource(resource_df)
@@ -143,14 +143,20 @@ formats_from_resource <- function(x){
   dplyr::case_when(
     x$format == x$url ~ x$format,
     x$format == "wms" ~ "wms",
-    nchar(x$url) == 0 ~ x$format,
-    nchar(safe_file_ext(x$url)) == 0 ~ x$format,
+    !nzchar(x$url) ~ x$format,
+    !nzchar(safe_file_ext(x)) ~ x$format,
     x$url == "zip" ~ paste0(x$format, "(zipped)"),
-    TRUE ~ safe_file_ext(x$url)
+    TRUE ~ safe_file_ext(x)
   )
 }
 
-safe_file_ext <- function(x) as.character(tools::file_ext(x))
+safe_file_ext <- function(resource) {
+  url_format <- tools::file_ext(resource$url)
+  if (url_format == "zip") {
+    return(resource$format)
+  }
+  url_format
+}
 
 gml_types <- function(x) {
   c(
@@ -202,31 +208,42 @@ safe_request_length <- function(query_list){
 
 }
 
-read_from_url <- function(file_url, ...){
-  format <- safe_file_ext(file_url)
-  if (!format %in% formats_supported()) {
-    stop("Reading ", format, " files is not currently supported in bcdata.")
+read_from_url <- function(resource, ...){
+  if (nrow(resource) > 1) stop("more than one resource specified", call. = FALSE)
+  file_url <- resource$url
+  reported_format <- safe_file_ext(resource)
+  if (!reported_format %in% formats_supported()) {
+    stop("Reading ", reported_format, " files is not currently supported in bcdata.")
   }
 
   cli <- bcdc_http_client(file_url)
 
   ## Establish where to download file
-  tmp <- tempfile(fileext = paste0(".", format))
+  tmp <- tempfile(tmpdir = unique_temp_dir(),
+                  fileext = paste0(".", tools::file_ext(file_url)))
   on.exit(unlink(tmp))
 
   r <- cli$get(disk = tmp)
   r$raise_for_status()
 
+  tmp <- handle_zip(tmp)
+  final_format <- tools::file_ext(tmp)
+
   # Match the read function to the file format format and retrieve the function
   funs <- bcdc_read_functions()
-  fun <- funs[funs$format == format, ]
+  fun <- funs[funs$format == final_format, ]
 
   # This assumes that the function we are using to read the data takes the
   # data as the first argument - will need revisiting if we find a situation
   # where that's not the case
   message("Reading the data using the ", fun$fun, " function from the ",
           fun$package, " package.")
-  do.call(fun$fun, list(tmp, ...))
+  tryCatch(do.call(fun$fun, list(tmp, ...)),
+           error = function(e) {
+             stop("Could not read data set. The file can be found here:\n '",
+                  tmp, "'\n if you would like to try to read it manually.\n\n",
+                  call. = FALSE)
+           })
 }
 
 resource_to_tibble <- function(x){
@@ -235,7 +252,7 @@ resource_to_tibble <- function(x){
     url = purrr::map_chr(x, "url"),
     id = purrr::map_chr(x, "id"),
     format = purrr::map_chr(x, "format"),
-    ext = safe_file_ext(url),
+    ext = purrr::map_chr(x, safe_file_ext),
     package_id = purrr::map_chr(x, "package_id"),
     location = simplify_string(purrr::map_chr(x, "resource_storage_location"))
   )
@@ -259,4 +276,51 @@ pagination_sort_col <- function(x) {
           "). Please check your data for obvious duplicated or missing rows.",
           call. = FALSE)
   cols[1]
+}
+
+handle_zip <- function(x) {
+  # Just give file back if it's not zipped
+  if (!is_filetype(x, "zip")) {
+    return(x)
+  }
+  # decompress into same dir
+  dir <- dirname(x)
+  utils::unzip(x, exdir = dir)
+  unlink(x)
+  files <- list_supported_files(dir)
+  # check if it's a shapefile
+
+  if (length(files) > 1L) {
+    stop("More than one supported file in zip file. It has been downloaded and ",
+         "extracted to '", dir, "', where you can access its contents manually.",
+         call. = FALSE)
+  }
+
+  files
+}
+
+is_filetype <- function(x, ext) {
+  tools::file_ext(x) %in% ext
+}
+
+unique_temp_dir <- function(pattern = "bcdata_") {
+  dir <- tempfile(pattern = pattern)
+  dir.create(file.path(dirname(dir), basename(dir)))
+  dir
+}
+
+list_supported_files <- function(dir) {
+  files <- list.files(dir, full.names = TRUE)
+  supported <- is_filetype(files, formats_supported())
+
+  if (!any(supported)) {
+    # check if any are directories, if not bail, otherwise extract them
+    if (!length(list.dirs(dir, recursive = FALSE))) {
+      stop("No supported files found", call. = FALSE)
+    }
+      files <- list.files(dir, full.names = TRUE, recursive = TRUE)
+      supported <- is_filetype(files, formats_supported())
+  }
+
+  files[supported]
 }

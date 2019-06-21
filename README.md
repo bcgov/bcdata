@@ -39,10 +39,12 @@ Catalogue](https://catalogue.data.gov.bc.ca).
     available through a [Web
     Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
 
-The `bcdata` package supports downloading *most* file types, however the
-package does *not* retrieve .zip or compressed resource files at this
-time. If you encounter a file type in the B.C. Data Catalogue not
-currently supported by `bcdata` please file an
+**Note:** The `bcdata` package supports downloading *most* file types,
+including zip archives. It will do its best to identify and read data
+from zip files, however if there are multiple data files in the zip, or
+data files that `bcdata` doesn’t know how to import, it will fail. If
+you encounter a file type in the B.C. Data Catalogue not currently
+supported by `bcdata` please file an
 [issue](https://github.com/bcgov/bcdata/issues/).
 
 ### Reference
@@ -87,17 +89,19 @@ to abide by its terms.
 
 ### License
 
-    Copyright 2018 Province of British Columbia
-    
-    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    
-    http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and limitations under the License.
+Copyright 2018 Province of British Columbia
+
+Licensed under the Apache License, Version 2.0 (the “License”); you may
+not use this file except in compliance with the License. You may obtain
+a copy of the License at
+
+<http://www.apache.org/licenses/LICENSE-2.0>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an “AS IS” BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -----
 

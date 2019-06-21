@@ -223,7 +223,7 @@ format_record <- function(pkg) {
   res_df <- resource_to_tibble(pkg$resources)
   res_df$bcdata_available <- (res_df$ext %in% formats_supported() &
                                 res_df$location != "bcgwdatastore") |
-    (res_df$location == "bcgwdatastore" & res_df$format == "wms")
+    (res_df$location %in% c("bcgwdatastore", "bcgeographicwarehouse") & res_df$format == "wms")
   pkg$resource_df <- res_df
   pkg
 }
