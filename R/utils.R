@@ -281,22 +281,16 @@ handle_zip <- function(x) {
   # decompress into same dir
   dir <- dirname(x)
   utils::unzip(x, exdir = dir)
-  files <- list.files(dir, full.names = TRUE, recursive = TRUE)
+  unlink(x)
+  files <- list_supported_files(dir)
   # check if it's a shapefile
-  shp <- is_filetype(files, "shp")
-  if (any(shp)) {
-    files <- files[shp]
-  }
 
   if (length(files) > 1L) {
-    stop("More than one file in zip file. It has been downloaded and extracted to '",
-         dir, "', where you can access its contents manually.",
+    stop("More than one supported file in zip file. It has been downloaded and ",
+         "extracted to '", dir, "', where you can access its contents manually.",
          call. = FALSE)
   }
 
-  if (!is_filetype(files, formats_supported())) {
-    stop("Unknown format in zip file.")
-  }
   files
 }
 
@@ -308,4 +302,20 @@ unique_temp_dir <- function(pattern = "bcdata_") {
   dir <- tempfile(pattern = pattern)
   dir.create(file.path(dirname(dir), basename(dir)))
   dir
+}
+
+list_supported_files <- function(dir) {
+  files <- list.files(dir, full.names = TRUE)
+  supported <- is_filetype(files, formats_supported())
+
+  if (!any(supported)) {
+    # check if any are directories, if not bail, otherwise extract them
+    if (!length(list.dirs(dir, recursive = FALSE))) {
+      stop("No supported files found", call. = FALSE)
+    }
+      files <- list.files(dir, full.names = TRUE, recursive = TRUE)
+      supported <- is_filetype(files, formats_supported())
+  }
+
+  files[supported]
 }
