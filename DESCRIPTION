@@ -1,6 +1,6 @@
 Package: bcdata
 Title: Search and Retrieve Data from the BC Data Catalogue
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Andy",
              family = "Teucher",
