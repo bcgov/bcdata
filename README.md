@@ -39,10 +39,12 @@ Catalogue](https://catalogue.data.gov.bc.ca).
     available through a [Web
     Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
 
-The `bcdata` package supports downloading *most* file types, however the
-package does *not* retrieve .zip or compressed resource files at this
-time. If you encounter a file type in the B.C. Data Catalogue not
-currently supported by `bcdata` please file an
+**Note:** The `bcdata` package supports downloading *most* file types,
+including zip archives. It will do its best to identify and read data
+from zip files, however if there are multiple data files in the zip, or
+data files that `bcdata` doesn’t know how to import, it will fail. If
+you encounter a file type in the B.C. Data Catalogue not currently
+supported by `bcdata` please file an
 [issue](https://github.com/bcgov/bcdata/issues/).
 
 ### Reference

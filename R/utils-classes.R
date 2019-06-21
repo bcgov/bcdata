@@ -75,10 +75,16 @@ record_print_helper <- function(r, n, print_avail = FALSE){
   cat(n, ") ", clean_wfs(r$name), "\n", sep = "")
   #cat("    description:", r$description, "\n")
   cat("     format:", clean_wfs(formats_from_resource(r)), "\n")
-  if(r$format != "wms") cat("     url:", r$url, "\n")
+  if (r$format != "wms") cat("     url:", r$url, "\n")
   cat("     resource:", r$id, "\n")
-  if (print_avail)
-    cat("     available in R via bcdata: ", r$bcdata_available, "\n")
+  if (print_avail) {
+    cat("     available in R via bcdata: ",
+        if (r$format == "zip") {
+          "Will attempt - unknown format (zipped)"
+        } else {
+          r$bcdata_available
+        }, "\n")
+  }
   if (r$bcdata_available)
     cat("     code: bcdc_get_data(record = '", r$package_id,
         "', resource = '",r$id,"')\n", sep = "")
