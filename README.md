@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and limitations 
 
 # bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.svg' align="right" height="139" /></a>
 
-### Version 0.0.0.9000
+### Version 0.1.0
 
 <!-- badges: start -->
 
