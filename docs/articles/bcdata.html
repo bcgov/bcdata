@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -403,7 +403,7 @@
 <a class="sourceLine" id="cb12-22" title="22"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb12-23" title="23"><span class="st">  </span><span class="kw">geom_sf</span>()</a></code></pre></div>
 <p><img src="bcdata_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
-<p><strong>Note:</strong> The <code>bcdata</code> package supports downloading <em>most</em> file types, however the package does <em>not</em> retrieve .zip or compressed resource files at this time.</p>
+<p><strong>Note:</strong> The <code>bcdata</code> package supports downloading <em>most</em> file types, including zip archives. It will do its best to identify and read data from zip files, however if there are multiple data files in the zip, or data files that <code>bcdata</code> doesn’t know how to import, it will fail.</p>
 </div>
 <div id="bcdc_query_geodata" class="section level3">
 <h3 class="hasAnchor">
