@@ -177,6 +177,7 @@ bcdc_read_functions <- function(){
     "geojson", "sf",     "read_sf",
     "gpkg",    "sf",     "read_sf",
     "gdb",     "sf",     "read_sf",
+    "fgdb",    "sf",     "read_sf",
     "shp",     "sf",     "read_sf",
     "csv",     "readr",  "read_csv",
     "txt",     "readr",  "read_tsv",
