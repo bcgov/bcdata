@@ -33,6 +33,7 @@ reference:
       - '`bcdc_describe_feature`'
       - '`filter.bcdc_promise`'
       - '`select.bcdc_promise`'
+      - '`collect.bcdc_promise`'
       - '`cql_geom_predicates`'
       - '`CQL`'
       - '`bcdc_options`'
