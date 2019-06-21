@@ -45,6 +45,7 @@ bc <- bc_bound() %>% ms_simplify(keep = .1)
 schools <- bcdc_query_geodata("schools-k-12-with-francophone-indicators") %>%
   collect()
 
+## school lines
 school_lines_df <- schools %>%
   st_union() %>%
   st_triangulate(bOnlyEdges = TRUE) %>%
@@ -53,6 +54,7 @@ school_lines_df <- schools %>%
   mutate(length = as.numeric(st_length(.))) %>%
   filter(length < 500000)
 
+## map of bc + schools + school lines
 p <- ggplot() +
   geom_sf(data = bc, fill = NA, size = 0.2, colour = "grey70") +
   geom_sf(data = school_lines_df, aes(colour = length), size = 0.2) +
@@ -63,6 +65,7 @@ p <- ggplot() +
   theme_transparent() +
   coord_sf(datum = NULL)
 
+## fonts
 font_path <- switch (Sys.info()['sysname'],
                      Darwin = "/Library/Fonts/Microsoft/Century Gothic",
                      Windows = "C:/WINDOWS/FONTS/GOTHIC.TTF"
@@ -70,14 +73,17 @@ font_path <- switch (Sys.info()['sysname'],
 
 sysfonts::font_add("Century Gothic", font_path)
 
+
+## hex sticker
 sticker(p, package = "bcdata",
         p_size = 5, # This seems to behave very differently on a Mac vs PC
-        p_y = 1.6, p_color = "grey70", p_family = "Century Gothic",
+        p_y = 1.6, p_color = "#F6A97A", p_family = "Century Gothic",
         s_x = 1, s_y = .9,
         s_width = 1.5, s_height = 1.5,
-        h_fill = "#29303a", h_color = "grey70",
+        h_fill = "#29303a", h_color = "#F6A97A",
         filename = file.path("inst/sticker/bcdata.svg"))
 
+
 # Run:
-# userthis::use_logo("inst/sticker/bcdata.svg")
+usethis::use_logo("inst/sticker/bcdata.svg")
 
