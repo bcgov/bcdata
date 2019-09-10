@@ -104,11 +104,18 @@ geom_col_name <- function(x){
   cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
 }
 
-## Currently used to identify is record is wfs/wms enabled
-resource_locations <- function(x){
-  x <- purrr::map_chr(seq_along(x$resources), ~x[["resources"]][[.x]][["resource_storage_location"]])
-  ## to rectify inconsistent "BCGW DataStore" and "BCGW Data Store"
-  tolower(gsub("\\s", "", x))
+#' @param x a resource_df from formatted record
+#' @noRd
+wfs_available <- function(x) {
+  x$location %in% c("bcgwdatastore", "bcgeographicwarehouse") &
+    x$format == "wms"
+}
+
+#' @param x a resource_df from formatted record
+#' @noRd
+other_format_available <- function(x) {
+  x$ext %in% formats_supported() &
+    !x$location %in% c("bcgwdatastore", "bcgeographicwarehouse")
 }
 
 wfs_to_r_col_type <- function(col){

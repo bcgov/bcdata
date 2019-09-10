@@ -221,9 +221,7 @@ format_record <- function(pkg) {
   pkg$details <- dplyr::bind_rows(pkg$details)
   # Create a resources data frame
   res_df <- resource_to_tibble(pkg$resources)
-  res_df$bcdata_available <- (res_df$ext %in% formats_supported() &
-                                res_df$location != "bcgwdatastore") |
-    (res_df$location %in% c("bcgwdatastore", "bcgeographicwarehouse") & res_df$format == "wms")
+  res_df$bcdata_available <- other_format_available(res_df) | wfs_available(res_df)
   pkg$resource_df <- res_df
   pkg
 }
