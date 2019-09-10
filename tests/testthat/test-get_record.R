@@ -48,5 +48,5 @@ test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_rec
 test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record",{
   sr <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
   d <- sr$resource_df
-  expect_false(d$bcdata_available[d$location == "bcgeographicwarehouse" & d$format != "wms"])
+  expect_false(all(d$bcdata_available[d$location == "bcgeographicwarehouse" & d$format != "wms"]))
   })
