@@ -30,6 +30,7 @@ test_that("bcdc_get_data works with a non-wms record with only one resource",{
 })
 
 test_that("bcdc_get_data works when using read_excel arguments",{
+  skip("Need to find a replacement for this dataset")
   name <- "local-government-population-and-household-projections-2018-2027"
   expect_is(bcdc_get_data(name, sheet = "Population", skip = 1), "tbl")
 })
