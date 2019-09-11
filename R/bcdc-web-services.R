@@ -77,6 +77,28 @@ bcdc_query_geodata.default <- function(record, crs = 3005) {
 
 #' @export
 bcdc_query_geodata.character <- function(record, crs = 3005) {
+
+  if (length(record) != 1) {
+    stop("Only one record my be queried at a time.", call. = FALSE)
+  }
+
+  # Fist catch if a user has passed the name of a warehouse object directly,
+  # then can skip all the record parsing and make the API call directly
+  if (is_whse_object_name(record)) {
+    ## Parameters for the API call
+    query_list <- make_query_list(layer_name = record, crs = crs)
+
+    ## Drop any NULLS from the list
+    query_list <- compact(query_list)
+
+    ## GET and parse data to sf object
+    cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+
+    return(
+      as.bcdc_promise(list(query_list = query_list, cli = cli, obj = NULL))
+    )
+  }
+
   obj <- bcdc_get_record(record)
 
   bcdc_query_geodata(obj, crs)
@@ -91,14 +113,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   }
 
   ## Parameters for the API call
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "GetFeature",
-    outputFormat = "application/json",
-    typeNames = record$layer_name,
-    SRSNAME = paste0("EPSG:", crs)
-  )
+  query_list <- make_query_list(layer_name = record$layer_name, crs = crs)
 
   ## Drop any NULLS from the list
   query_list <- compact(query_list)
@@ -163,3 +178,13 @@ bcdc_preview.bcdc_record <- function(record) {
 
 }
 
+make_query_list <- function(layer_name, crs) {
+  list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "GetFeature",
+    outputFormat = "application/json",
+    typeNames = layer_name,
+    SRSNAME = paste0("EPSG:", crs)
+  )
+}

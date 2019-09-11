@@ -47,7 +47,7 @@ specify_geom_name <- function(record, CQL_statement){
   }
 
   # Find the geometry field and get the name of the field
-  geom_col <- cols_df$column_name[cols_df$data_type == "SDO_GEOMETRY"]
+  geom_col <- geom_col_name(record)
 
   # substitute the geometry column name into the CQL statement and add sql class
   dbplyr::sql(glue::glue(CQL_statement, geom_name = geom_col))
@@ -330,4 +330,8 @@ list_supported_files <- function(dir) {
   }
 
   files[supported]
+}
+
+is_whse_object_name <- function(x) {
+  grepl("^[A-Z_]+\\.[A-Z_]+$", x)
 }
