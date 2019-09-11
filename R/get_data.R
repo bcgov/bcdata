@@ -76,9 +76,16 @@ bcdc_get_data.default <- function(record, resource = NULL, ...) {
 
 #' @export
 bcdc_get_data.character <- function(record, resource = NULL, ...) {
+
+  if (is_whse_object_name(record)) {
+    query <- bcdc_query_geodata(record, ...)
+    return(collect(query))
+  }
+
   x <- slug_from_url(record)
-  record <- bcdc_get_record(x)
-  bcdc_get_data(record, resource, ...)
+  x <- bcdc_get_record(x)
+
+  bcdc_get_data(x, resource, ...)
 }
 
 #' @export
