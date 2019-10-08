@@ -21,6 +21,7 @@
 #'
 #' @examples
 #'  bcdc_describe_feature("bc-airports")
+#'  bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #'
 #' @export
 bcdc_describe_feature <- function(record){
@@ -36,6 +37,23 @@ bcdc_describe_feature.default <- function(record) {
 
 #' @export
 bcdc_describe_feature.character <- function(record){
+
+  query_list <- list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "DescribeFeatureType")
+
+  if (is_whse_object_name(record)) {
+    ## Parameters for the API call
+    query_list <- c(query_list,
+                    typeNames = record)
+
+    ## Drop any NULLS from the list
+    query_list <- compact(query_list)
+
+    return(feature_helper(query_list))
+  }
+
   bcdc_describe_feature(bcdc_get_record(record))
 }
 
@@ -58,12 +76,12 @@ bcdc_describe_feature.bcdc_record <- function(record){
     typeNames = record$layer_name
   )
 
-
   feature_helper(query_list)
 }
 
 
-feature_helper <- function(query_list) {
+feature_helper <- function(query_list){
+
   ## GET and parse data to sf object
   cli <-
     bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
@@ -99,4 +117,14 @@ feature_helper <- function(query_list) {
   xml_df$local_col_type <- wfs_to_r_col_type(xml_df$remote_col_type)
 
   xml_df
+}
+
+
+
+# Need the actual name of the geometry column
+geom_col_name <- function(x){
+  cols_df <- x$details
+
+  # Find the geometry field and get the name of the field
+  cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
 }

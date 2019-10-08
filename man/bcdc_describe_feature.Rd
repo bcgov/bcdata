@@ -24,5 +24,6 @@ This can be a helpful tool to examine a layer before issuing a query with \code{
 }
 \examples{
  bcdc_describe_feature("bc-airports")
+ bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 
 }
