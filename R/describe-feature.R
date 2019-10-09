@@ -112,9 +112,9 @@ feature_helper <- function(query_list){
   geom_type <- attr(xml_df, "geom_type")
 
   ## Identify geometry column and move to last
-  xml_df[xml_df$type == geom_type, "name"] <- "geometry"
-  xml_df <- dplyr::bind_rows(xml_df[xml_df$name != "geometry",],
-                             xml_df[xml_df$name == "geometry",])
+  # xml_df[xml_df$type == geom_type, "name"] <- "geometry"
+  # xml_df <- dplyr::bind_rows(xml_df[xml_df$name != "geometry",],
+  #                            xml_df[xml_df$name == "geometry",])
 
   ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
