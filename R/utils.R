@@ -37,13 +37,15 @@ bcdc_number_wfs_records <- function(query_list, client){
 
 specify_geom_name <- function(record, CQL_statement){
 
-  cols_df <- record$details
+  if(!is_whse_object_name(record)){
+    cols_df <- record$details
 
-  # Catch when no details df:
-  if (!any(dim(cols_df))) {
-    warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
-            call. = FALSE)
-    return(CQL_statement)
+    # Catch when no details df:
+    if (!any(dim(cols_df))) {
+      warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
+              call. = FALSE)
+      return(CQL_statement)
+    }
   }
 
   # Find the geometry field and get the name of the field
@@ -97,11 +99,32 @@ has_internet <- function() {
 
 
 # Need the actual name of the geometry column
+# Need the actual name of the geometry column
 geom_col_name <- function(x){
-  cols_df <- x$details
 
-  # Find the geometry field and get the name of the field
-  cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
+  query_list <- list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "DescribeFeatureType")
+
+  if (is_record(x)) {
+    query_list <- c(query_list,
+                    typeNames = x$layer_name)
+  }
+
+  if (is_whse_object_name(x)) {
+    ## Parameters for the API call
+    query_list <- c(query_list,
+                    typeNames = x)
+  }
+
+  ## Drop any NULLS from the list
+  query_list <- compact(query_list)
+
+  xml_df <- parse_raw_feature_tbl(query_list)
+  geom_type <- attr(xml_df, "geom_type")
+
+  xml_df[xml_df$type == geom_type,]$name
 }
 
 #' @param x a resource_df from formatted record
@@ -185,12 +208,6 @@ get_record_warn_once <- function(...) {
     warning(..., call. = FALSE)
     assign("named_get_record_warned", TRUE, envir = bcdata_env)
   }
-}
-
-
-
-is_emptyish <- function(x){
-  length(x) == 0 || !nzchar(x)
 }
 
 
@@ -306,9 +323,6 @@ handle_zip <- function(x) {
   files
 }
 
-is_filetype <- function(x, ext) {
-  tools::file_ext(x) %in% ext
-}
 
 unique_temp_dir <- function(pattern = "bcdata_") {
   dir <- tempfile(pattern = pattern)
@@ -330,8 +344,4 @@ list_supported_files <- function(dir) {
   }
 
   files[supported]
-}
-
-is_whse_object_name <- function(x) {
-  grepl("^[A-Z_]+\\.[A-Z_]+$", x)
 }

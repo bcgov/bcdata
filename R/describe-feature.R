@@ -79,8 +79,7 @@ bcdc_describe_feature.bcdc_record <- function(record){
   feature_helper(query_list)
 }
 
-
-feature_helper <- function(query_list){
+parse_raw_feature_tbl <- function(query_list){
 
   ## GET and parse data to sf object
   cli <-
@@ -95,14 +94,24 @@ feature_helper <- function(query_list){
   xml_res <- purrr::map(xml_res, xml2::xml_attrs)
   xml_df <- purrr::map_df(xml_res, ~ as.list(.))
 
+
+  attr(xml_df, "geom_type") <- intersect(xml_df$type, gml_types())
+
+  return(xml_df)
+}
+
+feature_helper <- function(query_list){
+
   ## This is an ugly way of doing this
   ## Manually add id and turn into a row
   id_row <- dplyr::tibble(name = "id",
                           nillable = FALSE,
                           type = "xsd:string")
 
+  xml_df <- parse_raw_feature_tbl(query_list)
+  geom_type <- attr(xml_df, "geom_type")
+
   ## Identify geometry column and move to last
-  geom_type <- intersect(xml_df$type, gml_types())
   xml_df[xml_df$type == geom_type, "name"] <- "geometry"
   xml_df <- dplyr::bind_rows(xml_df[xml_df$name != "geometry",],
                              xml_df[xml_df$name == "geometry",])
@@ -121,10 +130,4 @@ feature_helper <- function(query_list){
 
 
 
-# Need the actual name of the geometry column
-geom_col_name <- function(x){
-  cols_df <- x$details
 
-  # Find the geometry field and get the name of the field
-  cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
-}
