@@ -1,19 +1,15 @@
 context("test-utils")
 
 test_that("check_geom_col_names works", {
-  skip_if_net_down()
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "GetFeature",
-    outputFormat = "application/json",
-    typeNames = "bc-airports",
-    CQL_FILTER = "DWITHIN({geom_col}, foobar)")
-
-  ap <- bcdc_get_record("bc-airports")
-  new_query <- specify_geom_name(ap, query_list[["CQL_FILTER"]])
-  expect_equal(as.character(new_query), "DWITHIN(SHAPE, foobar)")
-  expect_is(new_query, "sql")
+  skip("for a moment")
+  col_df_list <- lapply(gml_types(), function(x) {
+    data.frame(col_name = "SHAPE", remote_col_type = x)
+  })
+  lapply(col_df_list, function(x) {
+    new_query <- specify_geom_name(x, "DWITHIN({geom_col}, foobar)")
+    expect_equal(as.character(new_query), "DWITHIN(SHAPE, foobar)")
+    expect_is(new_query, "sql")
+  })
 })
 
 test_that("get_record_warn_once warns once and only once", {

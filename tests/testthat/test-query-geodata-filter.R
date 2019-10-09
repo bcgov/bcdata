@@ -189,14 +189,13 @@ test_that("an intersect with an object less than 5E5 proceeds",{
     collect())
 })
 
-
 test_that("a BCGW name works with filter", {
   little_box <- st_as_sfc(st_bbox(c(xmin = 506543.662, ymin = 467957.582,
                                     xmax = 1696644.998, ymax = 1589145.873),
                                   crs = 3005))
 
-  expect_silent(bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
+  expect_silent(ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
     filter(WITHIN(little_box)) %>%
     collect())
+  expect_equal(nrow(ret), 367)
 })
-
