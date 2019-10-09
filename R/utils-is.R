@@ -20,6 +20,12 @@ is_emptyish <- function(x) {
 
 
 is_whse_object_name <- function(x) {
+
+  ## detect object is a record and then just return FALSE
+  if(any(class(x) %in% "bcdc_record")) {
+    return(FALSE)
+  }
+
   grepl("^[A-Z_]+\\.[A-Z_]+$", x)
 }
 
