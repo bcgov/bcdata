@@ -95,7 +95,7 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
     cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
     return(
-      as.bcdc_promise(list(query_list = query_list, cli = cli, obj = NULL))
+      as.bcdc_promise(list(query_list = query_list, cli = cli, obj = record))
     )
   }
 
