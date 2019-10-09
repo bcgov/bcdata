@@ -111,7 +111,7 @@ test_that("subsetting works locally", {
                "(\"foo\" = 'b')")
 })
 
-test_that("large vectors supplied to filter succeed",{
+test_that("large vectors supplied to filter succeeds",{
 
   pori <- bcdc_query_geodata("freshwater-atlas-stream-network") %>%
     filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
@@ -186,6 +186,17 @@ test_that("an intersect with an object less than 5E5 proceeds",{
 
   expect_silent(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
     filter(WITHIN(small_districts)) %>%
+    collect())
+})
+
+
+test_that("a BCGW name works with filter", {
+  little_box <- st_as_sfc(st_bbox(c(xmin = 506543.662, ymin = 467957.582,
+                                    xmax = 1696644.998, ymax = 1589145.873),
+                                  crs = 3005))
+
+  expect_silent(bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
+    filter(WITHIN(little_box)) %>%
     collect())
 })
 
