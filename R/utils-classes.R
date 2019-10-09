@@ -12,6 +12,9 @@
 
 ## Add "bcdc_promise" class
 as.bcdc_promise <- function(res) {
+
+  res$cols_df <- feature_helper(res$query_list$typeNames)
+
   structure(res,
             class = c("bcdc_promise", setdiff(class(res), "bcdc_promise"))
   )
@@ -43,9 +46,9 @@ print.bcdc_promise <- function(x, ...) {
 
   # Check if this was called using a whse name directly without going
   # through a catalogue record so don't have this info
-  name <- ifelse(is_whse_object_name(x$obj),
-                 paste0("'", x[["obj"]], "'"),
-                 paste0("'", x[["obj"]][["name"]], "'"))
+  name <- ifelse(is_record(x$record),
+                 paste0("'", x[["record"]][["name"]], "'"),
+                 paste0("'", x[["query_list"]][["typeNames"]], "'"))
   cat_line(glue::glue("Querying {col_red(name)} record"))
 
   cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
@@ -150,7 +153,7 @@ filter.bcdc_promise <- function(.data, ...) {
 
   current_cql = cql_translate(...)
   ## Change CQL query on the fly if geom is not GEOMETRY
-  current_cql = specify_geom_name(.data$obj, current_cql)
+  current_cql = specify_geom_name(.data$cols_df, current_cql)
 
   # Add cql filter statement to any existing cql filter statements.
   # ensure .data$query_list$CQL_FILTER is class sql even if NULL, so
@@ -159,7 +162,8 @@ filter.bcdc_promise <- function(.data, ...) {
                                    current_cql,
                                    drop_null = TRUE)
 
-  as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
+  as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli,
+                       record = .data$record))
 }
 
 #' Select columns from Web Service call
@@ -193,12 +197,12 @@ select.bcdc_promise <- function(.data, ...){
   dots <- rlang::exprs(...)
 
   ## Always add back in the geom
-  cols_to_select <- paste(geom_col_name(.data$obj), paste0(dots, collapse = ","), sep = ",")
+  cols_to_select <- paste(geom_col_name(.data$cols_df), paste0(dots, collapse = ","), sep = ",")
 
   query_list <- c(.data$query_list, propertyName = cols_to_select)
 
-  as.bcdc_promise(list(query_list = query_list, cli = .data$cli, obj = .data$obj))
-
+  as.bcdc_promise(list(query_list = query_list, cli = .data$cli,
+                       record = .data$record))
 }
 
 
@@ -239,7 +243,7 @@ collect.bcdc_promise <- function(x, ...){
     url <- cc$url
   } else {
     message("This record requires pagination to complete the request.")
-    sorting_col <- pagination_sort_col(x$obj$id)
+    sorting_col <- pagination_sort_col(x$cols_df)
 
     query_list <- c(query_list, sortby = sorting_col)
 
@@ -353,6 +357,6 @@ show_query.bcdc_sf <- function(x, ...) {
 
 # collapse vector of cql statements into one
 finalize_cql <- function(x, con = cql_dummy_con) {
-  if (is.null(x)) return(NULL)
+  if (is.null(x) || !length(x)) return(NULL)
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
 }
