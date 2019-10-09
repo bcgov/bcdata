@@ -35,21 +35,9 @@ bcdc_number_wfs_records <- function(query_list, client){
 
 }
 
-specify_geom_name <- function(record, CQL_statement){
-
-  if(!is_whse_object_name(record)){
-    cols_df <- record$details
-
-    # Catch when no details df:
-    if (!any(dim(cols_df))) {
-      warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
-              call. = FALSE)
-      return(CQL_statement)
-    }
-  }
-
+specify_geom_name <- function(cols_df, CQL_statement){
   # Find the geometry field and get the name of the field
-  geom_col <- geom_col_name(record)
+  geom_col <- geom_col_name(cols_df)
 
   # substitute the geometry column name into the CQL statement and add sql class
   dbplyr::sql(glue::glue(CQL_statement, geom_name = geom_col))
@@ -97,34 +85,10 @@ has_internet <- function() {
   !inherits(z, "try-error")
 }
 
-
 # Need the actual name of the geometry column
-# Need the actual name of the geometry column
-geom_col_name <- function(x){
-
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "DescribeFeatureType")
-
-  if (is_record(x)) {
-    query_list <- c(query_list,
-                    typeNames = x$layer_name)
-  }
-
-  if (is_whse_object_name(x)) {
-    ## Parameters for the API call
-    query_list <- c(query_list,
-                    typeNames = x)
-  }
-
-  ## Drop any NULLS from the list
-  query_list <- compact(query_list)
-
-  xml_df <- parse_raw_feature_tbl(query_list)
-  geom_type <- attr(xml_df, "geom_type")
-
-  xml_df[xml_df$type == geom_type,]$name
+geom_col_name <- function(x) {
+  geom_type <- intersect(x$remote_col_type, gml_types())
+  x[x$remote_col_type == geom_type, , drop = FALSE]$col_name
 }
 
 #' @param x a resource_df from formatted record
@@ -286,8 +250,8 @@ simplify_string <- function(x) {
   tolower(gsub("\\s+", "", x))
 }
 
-pagination_sort_col <- function(x) {
-  cols <- bcdc_describe_feature(x)[["col_name"]]
+pagination_sort_col <- function(cols_df) {
+  cols <- cols_df[["col_name"]]
   # use OBJECTID or OBJECT_ID as default sort key, if present
   # if not present (several GSR tables), use SEQUENCE_ID
   # Then try FEATURE_ID
