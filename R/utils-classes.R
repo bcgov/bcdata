@@ -43,14 +43,14 @@ print.bcdc_promise <- function(x, ...) {
 
   # Check if this was called using a whse name directly without going
   # through a catalogue record so don't have this info
-  if (!is.null(x$obj)) {
+  if (!is_whse_object_name(x$obj)) {
     name <- paste0("'", x[["obj"]][["name"]], "'")
     cat_line(glue::glue("Querying {col_red(name)} record"))
   }
 
   cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
                  "and {col_green(fields)} fields"))
-  cat_bullet("Only the first six rows of the record are printed here")
+  cat_bullet("At most six rows of the record are printed here")
   cat_rule()
   print(parsed)
 }
