@@ -30,8 +30,8 @@ test_that("pagination_sort_col works", {
                "OBJECT_ID")
   expect_equal(pagination_sort_col(cols_df[c(-2, -3), , drop = FALSE]),
                "SEQUENCE_ID")
-  expect_equal(
-    expect_warning(pagination_sort_col(cols_df[1, , drop = FALSE]),
+  expect_warning(
+    expect_equal(pagination_sort_col(cols_df[1, , drop = FALSE]),
                "foo")
   )
 })
