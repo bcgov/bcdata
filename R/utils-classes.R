@@ -46,6 +46,9 @@ print.bcdc_promise <- function(x, ...) {
   if (!is_whse_object_name(x$obj)) {
     name <- paste0("'", x[["obj"]][["name"]], "'")
     cat_line(glue::glue("Querying {col_red(name)} record"))
+  } else {
+    name <- paste0("'", x[["obj"]], "'")
+    cat_line(glue::glue("Querying {col_red(name)} record"))
   }
 
   cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
