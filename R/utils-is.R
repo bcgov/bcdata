@@ -22,7 +22,7 @@ is_emptyish <- function(x) {
 is_whse_object_name <- function(x) {
 
   ## detect object is a record and then just return FALSE
-  if(any(class(x) %in% "bcdc_record")) {
+  if (inherits(x, "bcdc_record")) {
     return(FALSE)
   }
 

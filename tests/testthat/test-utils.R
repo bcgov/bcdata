@@ -31,3 +31,10 @@ test_that("pagination_sort_col works", {
   expect_equal(pagination_sort_col("634ee4e0-c8f7-4971-b4de-12901b0b4be6"),
                "OBJECTID")
 })
+
+test_that("is_whse_object_name works", {
+  expect_true(is_whse_object_name("BCGW_FOO.BAR_BAZ"))
+  expect_false(is_whse_object_name("bcgw_foo.bar_baz"))
+  expect_false(is_whse_object_name("foo"))
+  expect_false(is_whse_object_name(structure(list(), class = "bcdc_record")))
+})
