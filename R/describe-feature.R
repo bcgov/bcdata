@@ -38,20 +38,8 @@ bcdc_describe_feature.default <- function(record) {
 #' @export
 bcdc_describe_feature.character <- function(record){
 
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "DescribeFeatureType")
-
   if (is_whse_object_name(record)) {
-    ## Parameters for the API call
-    query_list <- c(query_list,
-                    typeNames = record)
-
-    ## Drop any NULLS from the list
-    query_list <- compact(query_list)
-
-    return(feature_helper(query_list))
+    return(feature_helper(record))
   }
 
   bcdc_describe_feature(bcdc_get_record(record))
@@ -67,16 +55,7 @@ bcdc_describe_feature.bcdc_record <- function(record){
     )
   }
 
-  ## Parameters for the API call
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "DescribeFeatureType",
-    #outputFormat = "application/json",
-    typeNames = record$layer_name
-  )
-
-  feature_helper(query_list)
+  feature_helper(record$layer_name)
 }
 
 parse_raw_feature_tbl <- function(query_list){
@@ -100,7 +79,13 @@ parse_raw_feature_tbl <- function(query_list){
   return(xml_df)
 }
 
-feature_helper <- function(query_list){
+feature_helper <- function(whse_name){
+
+  query_list <- list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "DescribeFeatureType",
+    typeNames = whse_name)
 
   ## This is an ugly way of doing this
   ## Manually add id and turn into a row
