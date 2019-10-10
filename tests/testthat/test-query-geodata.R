@@ -16,10 +16,10 @@ test_that("bcdc_query_geodata returns an bcdc_promise object for a valid id OR b
                "No bcdc_query_geodata method for an object of class integer")
 })
 
-test_that("bcdc_query_geodata returns an object with a query, a cli and the catalogue object",{
+test_that("bcdc_query_geodata returns an object with a query, a cli, the catalogue object, and a df of column names",{
   skip_if_net_down()
   bc_airports <- bcdc_query_geodata("bc-airports")
-  expect_equivalent(names(bc_airports), c("query_list", "cli", "obj"))
+  expect_equivalent(names(bc_airports), c("query_list", "cli", "record", "cols_df"))
 })
 
 

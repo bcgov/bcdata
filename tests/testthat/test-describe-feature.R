@@ -18,7 +18,8 @@ test_that("Test that bcdc_describe feature returns the correct columns",{
 })
 
 
-test_that("columns and column order are the same as the query",{
+test_that("columns and column order are the same as the query", {
+  skip("How necessary is this?")
   query <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>% ## just to make the query smaller
     collect()
@@ -30,10 +31,10 @@ test_that("columns and column order are the same as the query",{
   )
 })
 
-test_that("geometry column is last",{
+test_that("geometry column is last", {
+  skip("How necessary is this?")
   description <- bcdc_describe_feature("regional-districts-legally-defined-administrative-areas-of-bc")
   expect_identical(description$col_name[nrow(description)], "geometry")
-
 })
 
 test_that("bcdc_describe_feature accepts a bcdc_record object", {
@@ -42,7 +43,14 @@ test_that("bcdc_describe_feature accepts a bcdc_record object", {
   expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
 })
 
+test_that("bcdc_describe_feature accepts BCGW name",{
+  airport_feature <- bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+  expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
+})
+
 test_that("bcdc_describe_feature fails on unsupported classes", {
   expect_error(bcdc_describe_feature(1L))
   expect_error(bcdc_describe_feature(list(a = 1)))
 })
+
+

@@ -7,10 +7,11 @@
 bcdc_describe_feature(record)
 }
 \arguments{
-\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or ID of a resource (or the URL).
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()}),
+a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+Warehouse (BCGW) name.
 
-It is advised to use the permament ID for a record rather than the
+It is advised to use the permament ID for a record or the BCGW name rather than the
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
@@ -24,5 +25,6 @@ This can be a helpful tool to examine a layer before issuing a query with \code{
 }
 \examples{
  bcdc_describe_feature("bc-airports")
+ bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 
 }

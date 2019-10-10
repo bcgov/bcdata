@@ -35,9 +35,11 @@ test_that("select reduces the number of columns when a sticky ",{
     select(WELL_ID) %>%
     collect()
 
-
   expect_identical(names(sub_cols), sticky_cols)
+})
 
-
-
+test_that("select works with BCGW name", {
+  expect_silent(ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
+                  select(AIRPORT_NAME, DESCRIPTION) %>%
+                  collect())
 })

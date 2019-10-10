@@ -35,19 +35,9 @@ bcdc_number_wfs_records <- function(query_list, client){
 
 }
 
-specify_geom_name <- function(record, CQL_statement){
-
-  cols_df <- record$details
-
-  # Catch when no details df:
-  if (!any(dim(cols_df))) {
-    warning("Unable to determine the name of the geometry column; assuming 'GEOMETRY'",
-            call. = FALSE)
-    return(CQL_statement)
-  }
-
+specify_geom_name <- function(cols_df, CQL_statement){
   # Find the geometry field and get the name of the field
-  geom_col <- cols_df$column_name[cols_df$data_type == "SDO_GEOMETRY"]
+  geom_col <- geom_col_name(cols_df)
 
   # substitute the geometry column name into the CQL statement and add sql class
   dbplyr::sql(glue::glue(CQL_statement, geom_name = geom_col))
@@ -95,13 +85,10 @@ has_internet <- function() {
   !inherits(z, "try-error")
 }
 
-
 # Need the actual name of the geometry column
-geom_col_name <- function(x){
-  cols_df <- x$details
-
-  # Find the geometry field and get the name of the field
-  cols_df[cols_df$data_type == "SDO_GEOMETRY",]$column_name
+geom_col_name <- function(x) {
+  geom_type <- intersect(x$remote_col_type, gml_types())
+  x[x$remote_col_type == geom_type, , drop = FALSE]$col_name
 }
 
 #' @param x a resource_df from formatted record
@@ -159,9 +146,7 @@ formats_from_resource <- function(x){
 
 safe_file_ext <- function(resource) {
   url_format <- tools::file_ext(resource$url)
-  if (url_format == "zip") {
-    return(resource$format)
-  }
+  url_format <- ifelse(url_format == "zip", resource$format, url_format)
   url_format
 }
 
@@ -185,12 +170,6 @@ get_record_warn_once <- function(...) {
     warning(..., call. = FALSE)
     assign("named_get_record_warned", TRUE, envir = bcdata_env)
   }
-}
-
-
-
-is_emptyish <- function(x){
-  length(x) == 0 || !nzchar(x)
 }
 
 
@@ -269,8 +248,8 @@ simplify_string <- function(x) {
   tolower(gsub("\\s+", "", x))
 }
 
-pagination_sort_col <- function(x) {
-  cols <- bcdc_describe_feature(x)[["col_name"]]
+pagination_sort_col <- function(cols_df) {
+  cols <- cols_df[["col_name"]]
   # use OBJECTID or OBJECT_ID as default sort key, if present
   # if not present (several GSR tables), use SEQUENCE_ID
   # Then try FEATURE_ID
@@ -306,9 +285,6 @@ handle_zip <- function(x) {
   files
 }
 
-is_filetype <- function(x, ext) {
-  tools::file_ext(x) %in% ext
-}
 
 unique_temp_dir <- function(pattern = "bcdata_") {
   dir <- tempfile(pattern = pattern)

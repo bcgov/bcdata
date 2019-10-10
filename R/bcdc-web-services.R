@@ -61,6 +61,9 @@
 #'
 #' ## A very large layer
 #' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#'
+#' ## Using a BCGW name
+#' bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #' }
 #'
 #' @export
@@ -77,6 +80,31 @@ bcdc_query_geodata.default <- function(record, crs = 3005) {
 
 #' @export
 bcdc_query_geodata.character <- function(record, crs = 3005) {
+
+  if (length(record) != 1) {
+    stop("Only one record my be queried at a time.", call. = FALSE)
+  }
+
+  # Fist catch if a user has passed the name of a warehouse object directly,
+  # then can skip all the record parsing and make the API call directly
+  if (is_whse_object_name(record)) {
+    ## Parameters for the API call
+    query_list <- make_query_list(layer_name = record, crs = crs)
+
+    ## Drop any NULLS from the list
+    query_list <- compact(query_list)
+
+    ## GET and parse data to sf object
+    cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+
+    cols_df <- feature_helper(record)
+
+    return(
+      as.bcdc_promise(list(query_list = query_list, cli = cli, record = NULL,
+                           cols_df = cols_df))
+    )
+  }
+
   obj <- bcdc_get_record(record)
 
   bcdc_query_geodata(obj, crs)
@@ -91,14 +119,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   }
 
   ## Parameters for the API call
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "GetFeature",
-    outputFormat = "application/json",
-    typeNames = record$layer_name,
-    SRSNAME = paste0("EPSG:", crs)
-  )
+  query_list <- make_query_list(layer_name = record$layer_name, crs = crs)
 
   ## Drop any NULLS from the list
   query_list <- compact(query_list)
@@ -106,7 +127,10 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = record))
+  cols_df <- feature_helper(query_list$typeNames)
+
+  as.bcdc_promise(list(query_list = query_list, cli = cli, record = record,
+                       cols_df = cols_df))
 }
 
 #' Get map from the B.C. Web Service
@@ -118,6 +142,9 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' \dontrun{
 #' bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
 #' bcdc_preview("points-of-well-diversion-applications")
+#'
+#' # Using BCGW name
+#' bcdc_preview("WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP")
 #' }
 #' @export
 bcdc_preview <- function(record) {
@@ -133,33 +160,51 @@ bcdc_preview.default <- function(record) {
 
 #' @export
 bcdc_preview.character <- function(record) {
-  bcdc_preview(bcdc_get_record(record))
+
+  if (is_whse_object_name(record)) {
+    make_wms(record)
+  } else {
+    bcdc_preview(bcdc_get_record(record))
+  }
 }
 
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
 
+  make_wms(record$layer)
+
+}
+
+make_wms <- function(x){
   wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
-
   wms_options <- leaflet::WMSTileOptions(format = "image/png",
-                          transparent = TRUE,
-                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
-
+                                         transparent = TRUE,
+                                         attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
   wms_legend <- glue::glue("{wms_url}?request=GetLegendGraphic&
              format=image%2Fpng&
              width=20&
              height=20&
-             layer=pub%3A{record$layer_name}")
-
+             layer=pub%3A{x}")
 
   leaflet::leaflet() %>%
     leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
-                     options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
+                              options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
     leaflet::addWMSTiles(wms_url,
-                layers=glue::glue("pub:{record$layer_name}"),
-                options = wms_options) %>%
+                         layers=glue::glue("pub:{x}"),
+                         options = wms_options) %>%
     leaflet.extras::addWMSLegend(uri = wms_legend) %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
+}
 
+
+make_query_list <- function(layer_name, crs) {
+  list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "GetFeature",
+    outputFormat = "application/json",
+    typeNames = layer_name,
+    SRSNAME = paste0("EPSG:", crs)
+  )
 }
 

@@ -21,6 +21,7 @@
 #'
 #' @examples
 #'  bcdc_describe_feature("bc-airports")
+#'  bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #'
 #' @export
 bcdc_describe_feature <- function(record){
@@ -36,6 +37,11 @@ bcdc_describe_feature.default <- function(record) {
 
 #' @export
 bcdc_describe_feature.character <- function(record){
+
+  if (is_whse_object_name(record)) {
+    return(feature_helper(record))
+  }
+
   bcdc_describe_feature(bcdc_get_record(record))
 }
 
@@ -49,21 +55,11 @@ bcdc_describe_feature.bcdc_record <- function(record){
     )
   }
 
-  ## Parameters for the API call
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "DescribeFeatureType",
-    #outputFormat = "application/json",
-    typeNames = record$layer_name
-  )
-
-
-  feature_helper(query_list)
+  feature_helper(record$layer_name)
 }
 
+parse_raw_feature_tbl <- function(query_list){
 
-feature_helper <- function(query_list) {
   ## GET and parse data to sf object
   cli <-
     bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
@@ -77,17 +73,33 @@ feature_helper <- function(query_list) {
   xml_res <- purrr::map(xml_res, xml2::xml_attrs)
   xml_df <- purrr::map_df(xml_res, ~ as.list(.))
 
+
+  attr(xml_df, "geom_type") <- intersect(xml_df$type, gml_types())
+
+  return(xml_df)
+}
+
+feature_helper <- function(whse_name){
+
+  query_list <- list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "DescribeFeatureType",
+    typeNames = whse_name)
+
   ## This is an ugly way of doing this
   ## Manually add id and turn into a row
   id_row <- dplyr::tibble(name = "id",
                           nillable = FALSE,
                           type = "xsd:string")
 
+  xml_df <- parse_raw_feature_tbl(query_list)
+  geom_type <- attr(xml_df, "geom_type")
+
   ## Identify geometry column and move to last
-  geom_type <- intersect(xml_df$type, gml_types())
-  xml_df[xml_df$type == geom_type, "name"] <- "geometry"
-  xml_df <- dplyr::bind_rows(xml_df[xml_df$name != "geometry",],
-                             xml_df[xml_df$name == "geometry",])
+  # xml_df[xml_df$type == geom_type, "name"] <- "geometry"
+  # xml_df <- dplyr::bind_rows(xml_df[xml_df$name != "geometry",],
+  #                            xml_df[xml_df$name == "geometry",])
 
   ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
@@ -100,3 +112,7 @@ feature_helper <- function(query_list) {
 
   xml_df
 }
+
+
+
+
