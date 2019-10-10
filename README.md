@@ -25,6 +25,8 @@ See the License for the specific language governing permissions and limitations 
 status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
+[![Codecov test
+coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://codecov.io/gh/bcgov/bcdata?branch=master)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data

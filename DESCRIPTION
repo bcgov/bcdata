@@ -41,7 +41,8 @@ Suggests:
     knitr,
     rmarkdown,
     ggplot2,
-    testthat
+    testthat,
+    covr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
