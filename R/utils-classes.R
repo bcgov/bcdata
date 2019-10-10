@@ -12,9 +12,6 @@
 
 ## Add "bcdc_promise" class
 as.bcdc_promise <- function(res) {
-
-  res$cols_df <- feature_helper(res$query_list$typeNames)
-
   structure(res,
             class = c("bcdc_promise", setdiff(class(res), "bcdc_promise"))
   )
@@ -163,7 +160,7 @@ filter.bcdc_promise <- function(.data, ...) {
                                    drop_null = TRUE)
 
   as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli,
-                       record = .data$record))
+                       record = .data$record, cols_df = .data$cols_df))
 }
 
 #' Select columns from Web Service call
@@ -202,7 +199,7 @@ select.bcdc_promise <- function(.data, ...){
   query_list <- c(.data$query_list, propertyName = cols_to_select)
 
   as.bcdc_promise(list(query_list = query_list, cli = .data$cli,
-                       record = .data$record))
+                       record = .data$record, cols_df = .data$cols_df))
 }
 
 

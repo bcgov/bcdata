@@ -94,8 +94,11 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
     ## GET and parse data to sf object
     cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
+    cols_df <- feature_helper(record)
+
     return(
-      as.bcdc_promise(list(query_list = query_list, cli = cli, record = NULL))
+      as.bcdc_promise(list(query_list = query_list, cli = cli, record = NULL,
+                           cols_df = cols_df))
     )
   }
 
@@ -121,7 +124,10 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  as.bcdc_promise(list(query_list = query_list, cli = cli, record = record))
+  cols_df <- feature_helper(query_list$typeNames)
+
+  as.bcdc_promise(list(query_list = query_list, cli = cli, record = record,
+                       cols_df = cols_df))
 }
 
 #' Get map from the B.C. Web Service
