@@ -61,6 +61,9 @@
 #'
 #' ## A very large layer
 #' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#'
+#' ## Using a BCGW name
+#' bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #' }
 #'
 #' @export
@@ -139,6 +142,9 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' \dontrun{
 #' bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
 #' bcdc_preview("points-of-well-diversion-applications")
+#'
+#' # Using BCGW name
+#' bcdc_preview("WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP")
 #' }
 #' @export
 bcdc_preview <- function(record) {
@@ -154,35 +160,42 @@ bcdc_preview.default <- function(record) {
 
 #' @export
 bcdc_preview.character <- function(record) {
-  bcdc_preview(bcdc_get_record(record))
+
+  if (is_whse_object_name(record)) {
+    make_wms(record)
+  } else {
+    bcdc_preview(bcdc_get_record(record))
+  }
 }
 
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
 
+  make_wms(record$layer)
+
+}
+
+make_wms <- function(x){
   wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
-
   wms_options <- leaflet::WMSTileOptions(format = "image/png",
-                          transparent = TRUE,
-                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
-
+                                         transparent = TRUE,
+                                         attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
   wms_legend <- glue::glue("{wms_url}?request=GetLegendGraphic&
              format=image%2Fpng&
              width=20&
              height=20&
-             layer=pub%3A{record$layer_name}")
-
+             layer=pub%3A{x}")
 
   leaflet::leaflet() %>%
     leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
-                     options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
+                              options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
     leaflet::addWMSTiles(wms_url,
-                layers=glue::glue("pub:{record$layer_name}"),
-                options = wms_options) %>%
+                         layers=glue::glue("pub:{x}"),
+                         options = wms_options) %>%
     leaflet.extras::addWMSLegend(uri = wms_legend) %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
-
 }
+
 
 make_query_list <- function(layer_name, crs) {
   list(
@@ -194,3 +207,4 @@ make_query_list <- function(layer_name, crs) {
     SRSNAME = paste0("EPSG:", crs)
   )
 }
+
