@@ -7,10 +7,11 @@
 bcdc_query_geodata(record, crs = 3005)
 }
 \arguments{
-\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or ID of a resource (or the URL).
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()}),
+a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+Warehouse (BCGW) name.
 
-It is advised to use the permament ID for a record rather than the
+It is advised to use the permament ID for a record or the BCGW name rather than the
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
@@ -60,6 +61,9 @@ bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
 
 ## A very large layer
 bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+
+## Using a BCGW name
+bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 }
 
 }

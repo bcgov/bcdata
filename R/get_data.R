@@ -12,10 +12,11 @@
 
 #' Download and read a resource from a B.C. Data Catalogue record
 #'
-#' @param record either a `bcdc_record` object (from the result of `bcdc_get_record()`)
-#' or a character string denoting the name or ID of a resource (or the URL).
+#' @param record either a `bcdc_record` object (from the result of `bcdc_get_record()`),
+#' a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+#' Warehouse (BCGW) name.
 #'
-#' It is advised to use the permament ID for a record rather than the
+#' It is advised to use the permament ID for a record or the BCGW name rather than the
 #' human-readable name to guard against future name changes of the record.
 #' If you use the human-readable name a warning will be issued once per
 #' session. You can silence these warnings altogether by setting an option:
@@ -43,6 +44,9 @@
 #' # Using a `bcdc_record` object obtained from `bcdc_get_record`:
 #' record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
 #' bcdc_get_data(record)
+#'
+#' # Using a BCGW name
+#' bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #'
 #' ## Example of correcting import problems
 #'
