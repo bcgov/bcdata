@@ -146,9 +146,7 @@ formats_from_resource <- function(x){
 
 safe_file_ext <- function(resource) {
   url_format <- tools::file_ext(resource$url)
-  if (url_format == "zip") {
-    return(resource$format)
-  }
+  url_format <- ifelse(url_format == "zip", resource$format, url_format)
   url_format
 }
 
