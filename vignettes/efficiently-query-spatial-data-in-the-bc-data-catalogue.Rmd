@@ -163,7 +163,7 @@ bcdc_describe_feature("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 
 This is a helpful initial step to learn column names and types when you construct your query. 
 
-Another useful function is `show_query()` which provide information on the request issued to the remote server:
+Another useful function is `show_query()` which provides information on the request issued to the remote server:
 
 ```{r}
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
@@ -173,3 +173,23 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 ```
 
 This output is what being created by the dplyr code outlined above. 
+
+## Using B.C. Geographic Warehouse (BCGW) layer names
+
+If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse),
+you may already know the name of a layer that you want from the BCGW.
+`bcdc_query_geodata()` (as well as all other related functions)
+supports supplying that name directly. For example, the
+[record for the B.C. airports layer](https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description)
+shows that the object name is `WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW`, and
+we can use that in `bcdc_query_geodata()`:
+
+```{r}
+# Look at the columns available:
+bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+
+# Query the data with bcdc_query_geodata and filter + select:
+bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>% 
+  filter(DESCRIPTION == "airport") %>% 
+  select(AIRPORT_NAME, LOCALITY, NUMBER_OF_RUNWAYS)
+```

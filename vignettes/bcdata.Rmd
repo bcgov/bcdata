@@ -156,6 +156,19 @@ bc_az %>%
 **Note:** The `bcdata` package supports downloading _most_ file types, including zip archives. It will do its best to identify and read data from
 zip files, however if there are multiple data files in the zip, or data files that `bcdata` doesn't know how to import, it will fail.
 
+### Using B.C. Geographic Warehouse (BCGW) layer names
+
+If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse),
+you may already know the name of a layer that you want from the BCGW.
+`bcdc_get_data()` supports supplying that name directly. For example, the
+[record for the B.C. airports layer](https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description)
+shows that the object name is `WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW`, and
+we can use that in `bcdc_get_data()`:
+
+```{r}
+bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+```
+
 ### `bcdc_query_geodata()`
 
 Many geospatial datasets in the B.C. Data Catalogue are available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
@@ -185,9 +198,3 @@ my_regional_district  %>%
 ```
 
 The vignette [Querying spatial data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.
-
-
-
-
-
-
