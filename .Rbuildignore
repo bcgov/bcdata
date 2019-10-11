@@ -12,4 +12,3 @@ efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
-^tic.R$
