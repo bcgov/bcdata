@@ -3,28 +3,6 @@
 # tic documentation to get started: https://ropenscilabs.github.io/tic/
 # Usually you shouldn't need to change the first part of the file
 
-# DO NOT CHANGE THE CODE BELOW
-before_install:
-  - R -q -e 'if (!requireNamespace("remotes")) install.packages("remotes")'
-  - R -q -e 'if (getRversion() < "3.2" && !requireNamespace("curl")) install.packages("curl")'
-  - R -q -e 'remotes::install_github("ropenscilabs/tic", upgrade = "always"); print(tic::dsl_load()); tic::prepare_all_stages()'
-  - R -q -e 'tic::before_install()'
-install: R -q -e 'tic::install()'
-after_install: R -q -e 'tic::after_install()'
-before_script: R -q -e 'tic::before_script()'
-script: R -q -e 'tic::script()'
-after_success: R -q -e 'tic::after_success()'
-after_failure: R -q -e 'tic::after_failure()'
-before_deploy: R -q -e 'tic::before_deploy()'
-deploy:
-  provider: script
-  script: R -q -e 'tic::deploy()'
-  on:
-    all_branches: true
-after_deploy: R -q -e 'tic::after_deploy()'
-after_script: R -q -e 'tic::after_script()'
-# DO NOT CHANGE THE CODE ABOVE
-
 language: r
 cache: packages
 sudo: required
@@ -33,6 +11,8 @@ repos:
 
 r_packages:
   - devtools
+
+deploy.skip_cleanup: true
 
 addons:
   apt:
@@ -64,7 +44,23 @@ matrix:
       os: osx
 
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - R -q -e 'covr::codecov(quiet = FALSE)'
+
+before_install:
+  - R -q -e 'install.packages("remotes"); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages()'
+
+install: R -q -e 'tic::install()'
+script: R -q -e 'tic::script()'
+before_deploy: R -q -e 'tic::before_deploy()'
+deploy:
+   provider: script
+   script: R -q -e 'tic::deploy()'
+   on:
+     branch: master
+     condition:
+       - $TRAVIS_PULL_REQUEST = false
+       - $TRAVIS_EVENT_TYPE != cron
+       - $TRAVIS_R_VERSION_STRING = release
 
 notifications:
   email:
