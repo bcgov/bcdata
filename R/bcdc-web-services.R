@@ -42,7 +42,7 @@
 #' # Returns a bcdc_promise, which can be further refined using filter/select:
 #' bcdc_query_geodata("bc-airports", crs = 3857)
 #'
-#' To obtain the actual data as an sf object, collect() must be called:
+#' # To obtain the actual data as an sf object, collect() must be called:
 #' bcdc_query_geodata("bc-airports", crs = 3857) %>%
 #'   filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
 #'   collect()
@@ -53,7 +53,6 @@
 #'   collect()
 #'
 #' ## A moderately large layer
-
 #' bcdc_query_geodata("bc-environmental-monitoring-locations")
 #' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE")
