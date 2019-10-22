@@ -24,7 +24,9 @@ separated from the record in Web Service (nillable) and the type of column are r
 This can be a helpful tool to examine a layer before issuing a query with \code{bcdc_query_geodata}
 }
 \examples{
+\dontrun{
  bcdc_describe_feature("bc-airports")
  bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+}
 
 }
