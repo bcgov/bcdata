@@ -146,7 +146,7 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
   choices <- clean_wfs(resource_df$name)
 
   ## To deal with situations where the resource names are the same
-  dup_choice <- length(choices) != length(unique(choices))
+  dup_choice <- any(duplicated(choices))
   if(dup_choice) choices <- glue::glue("{choices} ({resource_df$format})")
 
   choice_input <- utils::menu(choices)
