@@ -16,8 +16,12 @@ Authors@R:
              email = "stephanie.hazlitt@gov.bc.ca"),
       person(given = "Province of British Columbia",
              role = "cph"))
-Description: Search and retrieve data from the BC data catalogue
-    (<https://catalogue.data.gov.bc.ca/>) directly from R.
+Description: Search for, query, and download spatial and tabular data from the 
+             British Columbia Data Catalogue(<https://catalogue.data.gov.bc.ca/>).
+             Search based on keywords, data licence, sector, data format, and 
+             organization. View metadata directly in R, and download and
+             import many data formats. Query geospatial data available via the 
+             B.C. government Web Feature Service (WFS) using familiar syntax.
 License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/bcdata
 BugReports: https://github.com/bcgov/bcdata/issues
