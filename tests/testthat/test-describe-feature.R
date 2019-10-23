@@ -18,23 +18,16 @@ test_that("Test that bcdc_describe feature returns the correct columns",{
 })
 
 
-test_that("columns and column order are the same as the query", {
-  skip("How necessary is this?")
+test_that("columns are the same as the query", {
   query <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>% ## just to make the query smaller
     collect()
 
   description <- bcdc_describe_feature("regional-districts-legally-defined-administrative-areas-of-bc")
 
-  expect_identical(names(query),
-                   unique(description$col_name)
+  expect_identical(sort(setdiff(names(query), "geometry")),
+                   sort(setdiff(unique(description$col_name), "SHAPE"))
   )
-})
-
-test_that("geometry column is last", {
-  skip("How necessary is this?")
-  description <- bcdc_describe_feature("regional-districts-legally-defined-administrative-areas-of-bc")
-  expect_identical(description$col_name[nrow(description)], "geometry")
 })
 
 test_that("bcdc_describe_feature accepts a bcdc_record object", {

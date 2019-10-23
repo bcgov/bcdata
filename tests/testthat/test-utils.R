@@ -13,7 +13,6 @@
 context("test-utils")
 
 test_that("check_geom_col_names works", {
-  skip("for a moment")
   col_df_list <- lapply(gml_types(), function(x) {
     data.frame(col_name = "SHAPE", remote_col_type = x)
   })
