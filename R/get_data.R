@@ -144,6 +144,11 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
   cat("--------\n")
   cat("Please choose one option:")
   choices <- clean_wfs(resource_df$name)
+
+  ## To deal with situations where the resource names are the same
+  dup_choice <- length(choices) != length(unique(choices))
+  if(dup_choice) choices <- glue::glue("{choices} ({resource_df$format})")
+
   choice_input <- utils::menu(choices)
 
   if (choice_input == 0) stop("No resource selected", call. = FALSE)
@@ -156,14 +161,24 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
     # cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
     query <- bcdc_query_geodata(record = record_id, ...)
     return(collect(query))
+  }
+
+  if(dup_choice){
+    ext <- gsub(".*\\((.*)\\).*", "\\1", name_choice)
+    name <- gsub("\\s*\\([^\\)]+\\)","", name_choice)
+
+    resource <- resource_df[resource_df$name == name & resource_df$format == ext, , drop = FALSE]
+    id_choice <- resource_df$id[resource_df$name == name & resource_df$format == ext]
+
   } else {
     resource <- resource_df[resource_df$name == name_choice, , drop = FALSE]
     id_choice <- resource_df$id[resource_df$name == name_choice]
 
-    cat("To directly access this record in the future please use this command:\n")
-    cat(glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
-    read_from_url(resource, ...)
   }
+
+  cat("To directly access this record in the future please use this command:\n")
+  cat(glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
+  read_from_url(resource, ...)
 }
 
 #' Formats supported and loading functions
