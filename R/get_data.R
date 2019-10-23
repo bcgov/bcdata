@@ -144,6 +144,10 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
   cat("--------\n")
   cat("Please choose one option:")
   choices <- clean_wfs(resource_df$name)
+
+  ## To deal with situations where the resource names are the same
+  if(any(duplicated(choices))) choices <- glue::glue("{choices} ({resource_df$format})")
+
   choice_input <- utils::menu(choices)
 
   if (choice_input == 0) stop("No resource selected", call. = FALSE)
@@ -157,13 +161,15 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
     query <- bcdc_query_geodata(record = record_id, ...)
     return(collect(query))
   } else {
-    resource <- resource_df[resource_df$name == name_choice, , drop = FALSE]
-    id_choice <- resource_df$id[resource_df$name == name_choice]
+    resource <- resource_df[choice_input, , drop = FALSE]
+    id_choice <- resource_df$id[choice_input]
 
     cat("To directly access this record in the future please use this command:\n")
     cat(glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
     read_from_url(resource, ...)
   }
+
+
 }
 
 #' Formats supported and loading functions
