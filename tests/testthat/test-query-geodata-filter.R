@@ -14,6 +14,7 @@ context("testing ability of filter methods to narrow a wfs query")
 library(sf, quietly = TRUE)
 
 test_that("bcdc_query_geodata accepts R expressions to refine data call",{
+  skip_on_cran()
   skip_if_net_down()
   one_well <- bcdc_query_geodata("ground-water-wells") %>%
     filter(OBSERVATION_WELL_NUMBER == 108) %>%
@@ -24,6 +25,7 @@ test_that("bcdc_query_geodata accepts R expressions to refine data call",{
 })
 
 test_that("bcdc_query_geodata accepts R expressions to refine data call",{
+  skip_on_cran()
   skip_if_net_down()
   one_well <- bcdc_query_geodata("ground-water-wells") %>%
     filter(OBSERVATION_WELL_NUMBER == 108) %>%
@@ -34,6 +36,7 @@ test_that("bcdc_query_geodata accepts R expressions to refine data call",{
 })
 
 test_that("operators work with different remote geom col names",{
+  skip_on_cran()
   skip_if_net_down()
 
   ## LOCAL
@@ -60,6 +63,7 @@ test_that("operators work with different remote geom col names",{
 })
 
 test_that("Different combinations of predicates work", {
+  skip_on_cran()
   the_bbox <- st_sfc(st_polygon(
     list(structure(c(1670288.515, 1719022.009,
                      1719022.009, 1670288.515, 1670288.515, 667643.77, 667643.77,
@@ -126,7 +130,7 @@ test_that("subsetting works locally", {
 })
 
 test_that("large vectors supplied to filter succeeds",{
-
+  skip_on_cran()
   pori <- bcdc_query_geodata("freshwater-atlas-stream-network") %>%
     filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
     collect()
@@ -137,6 +141,7 @@ test_that("large vectors supplied to filter succeeds",{
 })
 
 test_that("multiple filter statements are additive",{
+  skip_on_cran()
   airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
 
   heliports_in_victoria <-  airports %>%
@@ -158,6 +163,7 @@ test_that("multiple filter statements are additive",{
 })
 
 test_that("multiple filter statements are additive with geometric operators",{
+  skip_on_cran()
   ## LOCAL
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
@@ -178,6 +184,7 @@ test_that("multiple filter statements are additive with geometric operators",{
 
 
 test_that("an intersect with an object greater than 5E5 bytes automatically gets turned into a bbox",{
+  skip_on_cran()
   districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
     filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
     collect()
@@ -191,6 +198,7 @@ test_that("an intersect with an object greater than 5E5 bytes automatically gets
 
 
 test_that("an intersect with an object less than 5E5 proceeds",{
+  skip_on_cran()
   small_districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
     filter(SCHOOL_DISTRICT_NAME %in% c("Prince George")) %>%
     collect() %>%
@@ -204,6 +212,7 @@ test_that("an intersect with an object less than 5E5 proceeds",{
 })
 
 test_that("a BCGW name works with filter", {
+  skip_on_cran()
   little_box <- st_as_sfc(st_bbox(c(xmin = 506543.662, ymin = 467957.582,
                                     xmax = 1696644.998, ymax = 1589145.873),
                                   crs = 3005))

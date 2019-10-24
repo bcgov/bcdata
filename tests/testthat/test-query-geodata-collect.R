@@ -13,6 +13,7 @@
 context("testing ability of bcdc_query_geodata to retrieve for bcdc using collect")
 
 test_that("bcdc_query_geodata collects an sf object for a valid id", {
+  skip_on_cran()
   skip_if_net_down()
   bc_airports <- bcdc_query_geodata("bc-airports") %>% collect()
   expect_is(bc_airports, "sf")
@@ -20,12 +21,14 @@ test_that("bcdc_query_geodata collects an sf object for a valid id", {
 })
 
 test_that("bcdc_query_geodata succeeds with a records over 10000 rows",{
+  skip_on_cran()
   skip("Skipping the BEC test, though available for testing")
   expect_silent(bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit"))
 })
 
 
 test_that("bcdc_query_geodata works with slug and full url using collect", {
+  skip_on_cran()
   skip_if_net_down()
   expect_is(ret1 <- bcdc_query_geodata("https://catalogue.data.gov.bc.ca/dataset/bc-airports") %>% collect(),
             "sf")
@@ -45,6 +48,7 @@ test_that("bcdc_query_geodata works with slug and full url using collect", {
 test_that("bcdc_query_geodata works with spatial data that have SHAPE for the geom",{
   ## View metadata to see that geom is SHAPE
   ##bcdc_browse("fire-perimeters-historical")
+  skip_on_cran()
   skip_if_net_down()
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
@@ -59,6 +63,7 @@ test_that("bcdc_query_geodata works with spatial data that have SHAPE for the ge
 })
 
 test_that("collect() returns a bcdc_sf object",{
+  skip_on_cran()
   sf_obj <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>%
     filter(LOCALITY == "Terrace") %>%
     select(LATITUDE) %>%
@@ -67,6 +72,7 @@ test_that("collect() returns a bcdc_sf object",{
 })
 
 test_that("bcdc_sf objects have a url as an attributes",{
+  skip_on_cran()
   sf_obj <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>%
     filter(LOCALITY == "Terrace") %>%
     select(LATITUDE) %>%
@@ -74,6 +80,3 @@ test_that("bcdc_sf objects have a url as an attributes",{
 
   expect_true(nzchar(attributes(sf_obj)$url))
 })
-
-
-
