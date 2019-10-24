@@ -13,12 +13,14 @@
 context("Testing bcdc_describe_feature function")
 
 test_that("Test that bcdc_describe feature returns the correct columns",{
+  skip_on_cran()
   airport_feature <- bcdc_describe_feature("bc-airports")
   expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
 })
 
 
 test_that("columns are the same as the query", {
+  skip_on_cran()
   query <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>% ## just to make the query smaller
     collect()
@@ -31,17 +33,20 @@ test_that("columns are the same as the query", {
 })
 
 test_that("bcdc_describe_feature accepts a bcdc_record object", {
+  skip_on_cran()
   airports <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
   airport_feature <- bcdc_describe_feature(airports)
   expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
 })
 
 test_that("bcdc_describe_feature accepts BCGW name",{
+  skip_on_cran()
   airport_feature <- bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
   expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
 })
 
 test_that("bcdc_describe_feature fails on unsupported classes", {
+  skip_on_cran()
   expect_error(bcdc_describe_feature(1L))
   expect_error(bcdc_describe_feature(list(a = 1)))
 })
