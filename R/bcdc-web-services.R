@@ -146,7 +146,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' bcdc_preview("WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP")
 #' }
 #' @export
-bcdc_preview <- function(record) {
+bcdc_preview <- function(record) { # nocov start
   if (!has_internet()) stop("No access to internet", call. = FALSE)
   UseMethod("bcdc_preview")
 }
@@ -193,7 +193,7 @@ make_wms <- function(x){
                          options = wms_options) %>%
     leaflet.extras::addWMSLegend(uri = wms_legend) %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
-}
+} # nocov end
 
 
 make_query_list <- function(layer_name, crs) {
