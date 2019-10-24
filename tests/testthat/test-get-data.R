@@ -1,11 +1,11 @@
 # Copyright 2019 Province of British Columbia
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 # http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
@@ -14,7 +14,8 @@ context("testing ability of bcdc_get_data to retrieve an valid object")
 
 test_that("bcdc_get_data collects an sf object for a valid record and resource id", {
   skip_if_net_down()
-  bc_airports <- bcdc_get_data("bc-airports", resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c")
+  bc_airports <- bcdc_get_data('76b1b7a3-2112-4444-857a-afccf7b20da8',
+                               resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c")
   expect_is(bc_airports, "sf")
   expect_equal(attr(bc_airports, "sf_column"), "geometry")
 })
@@ -41,10 +42,12 @@ test_that("bcdc_get_data works with a non-wms record with only one resource",{
   expect_is(bcdc_get_data(name), "tbl")
 })
 
-test_that("bcdc_get_data works when using read_excel arguments",{
-  skip("Need to find a replacement for this dataset")
-  name <- "local-government-population-and-household-projections-2018-2027"
-  expect_is(bcdc_get_data(name, sheet = "Population", skip = 1), "tbl")
+test_that("bcdc_get_data works when using read_excel arguments", {
+  ret <- bcdc_get_data("2e469ff2-dadb-45ea-af9d-f5683a4b9465",
+                       resource = "18510a60-de82-440a-b806-06fba70eaf9d",
+                       skip = 4, n_max = 3)
+  expect_is(ret, "tbl")
+  expect_equivalent(nrow(ret), 3L)
 })
 
 test_that("bcdc_get_data works with an xls when specifying a specific resource",{
@@ -83,7 +86,8 @@ test_that("fails informatively when can't read a file", {
 })
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
-  expect_is(bcdc_get_data("bc-airports", resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"), "sf")
+  expect_is(bcdc_get_data('76b1b7a3-2112-4444-857a-afccf7b20da8',
+                          resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"), "sf")
 })
 
 
@@ -106,6 +110,17 @@ test_that("bcdc_get_data fails with invalid input", {
                "No bcdc_get_data method for an object of class integer")
 })
 
+test_that("bcdc_get_data works with BCGW name", {
+  expect_is(bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"), "bcdc_sf")
+})
 
+test_that("bcdc_get_data fails when no downloadable resources", {
+  expect_error(bcdc_get_data("4e237966-3db8-4e28-8e59-296bf0b8d8e4"),
+               "There are no resources that bcdata can download from this record")
+})
 
+test_that("bcdc_get_data fails when >1 resource not specified & noninteractive", {
+  expect_error(bcdc_get_data("21c72822-2502-4431-b9a2-92fc9401ef12"),
+               "The record you are trying to access appears to have more than one resource.")
+})
 
