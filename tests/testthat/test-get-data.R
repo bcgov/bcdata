@@ -130,6 +130,8 @@ test_that("bcdc_get_data works with a bcdc_record object", {
 })
 
 test_that("bcdc_get_data fails with invalid input", {
+  skip_if_net_down()
+  skip_on_cran()
   expect_error(bcdc_get_data(35L),
                "No bcdc_get_data method for an object of class integer")
 })
