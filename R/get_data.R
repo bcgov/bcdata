@@ -134,6 +134,9 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
 
   ## wms record with at least one non BCGW resource (test bc-airports)
   ## tabular; multiple resources (test grizzly)
+
+  # Can't test due to interactive menu
+  # nocov start
   cat("The record you are trying to access appears to have more than one resource.")
   cat("\n Resources: \n")
 
@@ -168,8 +171,7 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, ...) {
     cat(glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
     read_from_url(resource, ...)
   }
-
-
+  # nocov end
 }
 
 #' Formats supported and loading functions
