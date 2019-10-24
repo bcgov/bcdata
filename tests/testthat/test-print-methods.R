@@ -14,19 +14,18 @@ context("testprint methods")
 
 test_that("bcdc_promise print methods work",{
   promise_print <- capture_output(bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8'), print = TRUE)
-  expect_equal(substr(promise_print, 1, 100), "Querying 'bc-airports' record\n* Using collect() on this object will return 455 features and 41 field")
+  expect_true(nzchar(promise_print))
 })
 
 test_that("bcdc_record print methods work",{
   record_print <- capture_output(bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8'), print = TRUE)
-  expect_equal(substr(record_print, 1, 100), "B.C. Data Catalogue Record:\n    BC Airports \n\nName: bc-airports (ID: 76b1b7a3-2112-4444-857a-afccf7b")
+  expect_true(nzchar(record_print))
 })
 
 
 test_that("bcdc_recordlist print methods work",{
-  skip_on_cran() ## this test feels a bit fragile and therefore skipping on CRAN to avoid spurious failures
   recordlist_print <- capture_output(bcdc_list(), print = TRUE)
-  expect_equal(substr(recordlist_print, 1, 100), "  [1] \"fire-perimeters-current\"                                                  \n  [2] \"coalfile-da")
+  expect_true(nzchar(recordlist_print))
 })
 
 test_that("show query works for bcdc_promise object",{
