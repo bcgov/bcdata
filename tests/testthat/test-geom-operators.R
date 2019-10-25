@@ -14,6 +14,7 @@ context("Geometric operators work with appropriate data")
 
 test_that("WITHIN works",{
   skip_on_cran()
+  skip_if_net_down()
   local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
@@ -32,6 +33,7 @@ test_that("WITHIN works",{
 
 test_that("INTERSECT works",{
   skip_on_cran()
+  skip_if_net_down()
   local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
