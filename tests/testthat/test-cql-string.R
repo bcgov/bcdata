@@ -20,6 +20,11 @@ test_that("bcdc_cql_string fails when an invalid arguments are given",{
   expect_error(bcdc_cql_string(quakes, "DWITHIN"))
 })
 
+test_that("bcdc_cql_string fails when used on an uncollected (promise) object", {
+  expect_error(bcdc_cql_string(structure(list, class = "bcdc_promise")),
+               "you need to use collect")
+})
+
 test_that("CQL function works", {
   expect_is(CQL("SELECT * FROM foo;"), c("CQL", "SQL"))
 })
@@ -64,12 +69,19 @@ test_that("CQL functions fail correctly", {
   expect_error(EQUALS(quakes), "x is not a valid sf object")
   expect_error(BEYOND(the_geom, "five"), "'distance' must be numeric")
   expect_error(DWITHIN(the_geom, 5, "fathoms"), "'arg' should be one of")
+  expect_error(DWITHIN(the_geom, 10, "meters"), "must be numeric")
   expect_error(RELATE(the_geom, "********"), "pattern") # 8 characters
   expect_error(RELATE(the_geom, "********5"), "pattern") # invalid character
   expect_error(RELATE(the_geom, rep("TTTTTTTTT", 2)), "pattern") # > length 1
+  expect_error(BBOX(c(1,2,3)), "numeric vector")
+  expect_error(BBOX(c("1","2","3", "4")), "numeric vector")
+  expect_error(BBOX(c(1,2,3,4), crs = 4326), "must be a character string")
+  expect_error(BBOX(c(1,2,3,4), crs = 4326), "must be a character string")
+  expect_error(BBOX(c(1,2,3,4), crs = c("EPSG:4326", "EPSG:3005")),
+               "must be a character string")
 })
 
 test_that("unsupported aggregation functions fail correctly", {
   expect_error(filter(structure(list(), class = "bcdc_promise"), mean(x) > 5),
-               "Aggregation function `mean()` is not supported by this database")
+               "not supported by this database")
 })
