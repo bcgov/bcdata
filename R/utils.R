@@ -50,11 +50,14 @@ bcdc_read_sf <- function(x, ...){
     return(sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...))
 
   } else{
+    # tests that cover this are skipped due to large size
+    # nocov start
     ## Parse the Paginated response
     message("Parsing data")
     sf_responses <- lapply(x, function(x) {sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)})
 
     do.call(rbind, sf_responses)
+    # nocov end
   }
 
 
