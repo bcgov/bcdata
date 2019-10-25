@@ -24,10 +24,9 @@ test_that("bcdc_record print methods work",{
   expect_true(nzchar(record_print))
 })
 
-
 test_that("bcdc_recordlist print methods work",{
   skip_on_cran()
-  recordlist_print <- capture_output(bcdc_list(), print = TRUE)
+  recordlist_print <- capture_output(bcdc_search("bears"), print = TRUE)
   expect_true(nzchar(recordlist_print))
 })
 
@@ -42,4 +41,12 @@ test_that("show query works for bcdc_sf object",{
   skip_on_cran()
   sf_obj <- collect(bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8'))
   expect_true(show_query(sf_obj))
+})
+
+test_that("record with a zip file prints correctly", {
+  skip_on_cran()
+  skip_if_net_down()
+  output <- capture_output(bcdc_get_record("bc-grizzly-bear-habitat-classification-and-rating"),
+                           print = TRUE)
+  expect_true(any(grepl("unknown format (zipped)", output)))
 })
