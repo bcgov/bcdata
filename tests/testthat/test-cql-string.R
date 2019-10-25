@@ -69,7 +69,7 @@ test_that("CQL functions fail correctly", {
   expect_error(EQUALS(quakes), "x is not a valid sf object")
   expect_error(BEYOND(the_geom, "five"), "'distance' must be numeric")
   expect_error(DWITHIN(the_geom, 5, "fathoms"), "'arg' should be one of")
-  expect_error(DWITHIN(the_geom, 10, "meters"), "must be numeric")
+  expect_error(DWITHIN(the_geom, "10", "meters"), "must be numeric")
   expect_error(RELATE(the_geom, "********"), "pattern") # 8 characters
   expect_error(RELATE(the_geom, "********5"), "pattern") # invalid character
   expect_error(RELATE(the_geom, rep("TTTTTTTTT", 2)), "pattern") # > length 1
