@@ -26,7 +26,7 @@
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   facet <- match.arg(facet, several.ok = TRUE)
   query <- paste0("\"", facet, "\"", collapse = ",")
@@ -58,7 +58,7 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 #' @return A character vector of the names of B.C. Data Catalogue records
 #' @export
 bcdc_list <- function() {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   l_new_ret <- 1
   ret <- character()
@@ -112,7 +112,7 @@ bcdc_search <- function(..., license_id = NULL,
                         organization = NULL,
                         n = 100) {
 
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   # TODO: allow terms to be passed as a vector, and allow use of | for OR
   terms <- paste0(compact(list(...)), collapse = "+")
@@ -186,7 +186,7 @@ bcdc_search <- function(..., license_id = NULL,
 #' }
 bcdc_get_record <- function(id) {
 
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   id <- slug_from_url(id)
 
