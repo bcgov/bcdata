@@ -27,7 +27,7 @@
 #'
 #' @export
 bcdc_describe_feature <- function(record){
-  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
   UseMethod("bcdc_describe_feature")
 }
 
