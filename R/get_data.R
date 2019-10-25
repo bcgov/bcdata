@@ -68,7 +68,7 @@
 #'
 #' @export
 bcdc_get_data <- function(record, resource = NULL, ...) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
   UseMethod("bcdc_get_data")
 }
 
