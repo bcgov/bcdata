@@ -95,7 +95,7 @@
     <div class="page-header toc-ignore">
       <h1>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2019-10-11</h4>
+            <h4 class="date">2019-10-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -104,6 +104,19 @@
 
     
     
+<!--
+Copyright 2019 Province of British Columbia
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License.
+-->
 <p>This vignette illustrates how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata</a></code> to request and query <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data from the B.C. Data Catalogue. To illustrate, we will request and merge two spatial datasets from the catalogue—school district and greenspaces spatial data—and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.</p>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
@@ -116,7 +129,7 @@
 <span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; </span></span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt;     filter</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(sf)</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt; Linking to GEOS 3.7.2, GDAL 3.0.0, PROJ 6.2.0</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt; Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; </span></span>
 <span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
@@ -177,13 +190,13 @@
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Querying 'school-districts-of-bc' record</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; ● Using collect() on this object will return 59 features and 9 fields</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; ● At most six rows of the record are printed here</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; Simple feature collection with 6 features and 9 fields</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; geometry type:  POLYGON</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; dimension:      XY</span></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; bbox:           xmin: 1480584 ymin: 475225.2 xmax: 1870586 ymax: 862609.6</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; epsg (SRID):    3005</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_0=45 +lon_0=-126 +lat_1=50 +lat_2=58.5 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; # A tibble: 6 x 10</span></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;       </span></span>
@@ -201,13 +214,13 @@
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Querying 'school-districts-of-bc' record</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; ● Using collect() on this object will return 3 features and 9 fields</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; ● At most six rows of the record are printed here</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────</span></span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; Simple feature collection with 3 features and 9 fields</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></span>
 <span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; dimension:      XY</span></span>
 <span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; bbox:           xmin: 1126991 ymin: 379215.8 xmax: 1528154 ymax: 1224041</span></span>
 <span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; epsg (SRID):    3005</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_0=45 +lon_0=-126 +lat_1=50 +lat_2=58.5 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
 <span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; # A tibble: 3 x 10</span></span>
 <span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE</span></span>
 <span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;       </span></span>
@@ -223,13 +236,13 @@
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; Querying 'school-districts-of-bc' record</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; ● Using collect() on this object will return 3 features and 5 fields</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; ● At most six rows of the record are printed here</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────</span></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; Simple feature collection with 3 features and 5 fields</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></span>
 <span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; dimension:      XY</span></span>
 <span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; bbox:           xmin: 1126991 ymin: 379215.8 xmax: 1528154 ymax: 1224041</span></span>
 <span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; epsg (SRID):    3005</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_0=45 +lon_0=-126 +lat_1=50 +lat_2=58.5 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
 <span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; # A tibble: 3 x 6</span></span>
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt;   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… OBJECTID</span></span>
 <span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;                       &lt;int&gt;    &lt;int&gt;</span></span>
@@ -302,13 +315,13 @@
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; ● Using collect() on this object will return 8708 features and 19 fields</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; ● At most six rows of the record are printed here</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────</span></span>
 <span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></span>
 <span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; geometry type:  POLYGON</span></span>
 <span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; dimension:      XY</span></span>
 <span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; bbox:           xmin: 1228760 ymin: 459819.7 xmax: 1242329 ymax: 469547.6</span></span>
 <span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; epsg (SRID):    3005</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_0=45 +lon_0=-126 +lat_1=50 +lat_2=58.5 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
 <span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; # A tibble: 6 x 20</span></span>
 <span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE</span></span>
 <span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;           </span></span>
@@ -330,13 +343,13 @@
 <span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; ● Using collect() on this object will return 4373 features and 19 fields</span></span>
 <span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; ● At most six rows of the record are printed here</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></span>
 <span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; geometry type:  POLYGON</span></span>
 <span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; dimension:      XY</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; bbox:           xmin: 1227676 ymin: 459819.7 xmax: 1242329 ymax: 467135.4</span></span>
 <span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; epsg (SRID):    3005</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_0=45 +lon_0=-126 +lat_1=50 +lat_2=58.5 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
 <span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; # A tibble: 6 x 20</span></span>
 <span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE</span></span>
 <span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;           </span></span>
@@ -465,13 +478,13 @@
 <span id="cb17-22"><a href="#cb17-22"></a><span class="co">#&gt; Querying 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW' record</span></span>
 <span id="cb17-23"><a href="#cb17-23"></a><span class="co">#&gt; ● Using collect() on this object will return 37 features and 13 fields</span></span>
 <span id="cb17-24"><a href="#cb17-24"></a><span class="co">#&gt; ● At most six rows of the record are printed here</span></span>
-<span id="cb17-25"><a href="#cb17-25"></a><span class="co">#&gt; ─────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────</span></span>
 <span id="cb17-26"><a href="#cb17-26"></a><span class="co">#&gt; Simple feature collection with 6 features and 13 fields</span></span>
 <span id="cb17-27"><a href="#cb17-27"></a><span class="co">#&gt; geometry type:  POINT</span></span>
 <span id="cb17-28"><a href="#cb17-28"></a><span class="co">#&gt; dimension:      XY</span></span>
 <span id="cb17-29"><a href="#cb17-29"></a><span class="co">#&gt; bbox:           xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950</span></span>
 <span id="cb17-30"><a href="#cb17-30"></a><span class="co">#&gt; epsg (SRID):    3005</span></span>
-<span id="cb17-31"><a href="#cb17-31"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_0=45 +lon_0=-126 +lat_1=50 +lat_2=58.5 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
 <span id="cb17-32"><a href="#cb17-32"></a><span class="co">#&gt; # A tibble: 6 x 14</span></span>
 <span id="cb17-33"><a href="#cb17-33"></a><span class="co">#&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…</span></span>
 <span id="cb17-34"><a href="#cb17-34"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
