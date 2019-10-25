@@ -53,6 +53,8 @@ test_that("bcdc_search works", {
   expect_is(bcdc_search("regional district",
                         type = "Geographic", res_format = "fgdb"),
             "bcdc_recordlist")
+  expect_error(bcdc_search(organization = "foo"),
+               "foo is not a valid value for organization")
 })
 
 test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record",{
