@@ -1,4 +1,4 @@
-# bcdata 0.1.0.9999
+# bcdata 0.1.1
 
 * Expand and standardize checking w[ms]f features to make package more resistant to slight warehouse API changes. 
 * Data retrieval functions now work with BCGW name (#106)
