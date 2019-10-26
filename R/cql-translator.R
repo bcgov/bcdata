@@ -134,7 +134,7 @@ sql_escape_string.DummyCQL <- function(con, x) {
 #'
 #' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
 #'
-#' @param ... Character vectors that will be comined into a single CQL statement.
+#' @param ... Character vectors that will be combined into a single CQL statement.
 #'
 #' @return An object of class `c("CQL", "SQL")`
 #' @export
