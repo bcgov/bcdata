@@ -185,18 +185,6 @@ clean_wfs <- function(x){
   )
 }
 
-safe_request_length <- function(query_list){
-  ## A conservative number of characters in the filter call.
-  ## Calculating from the query_list BEFORE the call actually happen.
-
-  ## Tested wfs url character limit
-  limits <- 5000
-  request_length <- nchar(finalize_cql(query_list$CQL_FILTER))
-
-  return(request_length <= limits)
-
-}
-
 read_from_url <- function(resource, ...){
   if (nrow(resource) > 1) stop("more than one resource specified", call. = FALSE)
   file_url <- resource$url
