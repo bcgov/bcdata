@@ -67,7 +67,7 @@
 #'
 #' @export
 bcdc_query_geodata <- function(record, crs = 3005) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
   UseMethod("bcdc_query_geodata")
 }
 

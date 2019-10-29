@@ -16,7 +16,7 @@
 #' a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
 #' Warehouse (BCGW) name.
 #'
-#' It is advised to use the permament ID for a record or the BCGW name rather than the
+#' It is advised to use the permanent ID for a record or the BCGW name rather than the
 #' human-readable name to guard against future name changes of the record.
 #' If you use the human-readable name a warning will be issued once per
 #' session. You can silence these warnings altogether by setting an option:
@@ -68,7 +68,7 @@
 #'
 #' @export
 bcdc_get_data <- function(record, resource = NULL, ...) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
   UseMethod("bcdc_get_data")
 }
 

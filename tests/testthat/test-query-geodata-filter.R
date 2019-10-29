@@ -131,6 +131,7 @@ test_that("subsetting works locally", {
 
 test_that("large vectors supplied to filter succeeds",{
   skip_on_cran()
+  skip_if_net_down()
   pori <- bcdc_query_geodata("freshwater-atlas-stream-network") %>%
     filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
     collect()
@@ -142,6 +143,7 @@ test_that("large vectors supplied to filter succeeds",{
 
 test_that("multiple filter statements are additive",{
   skip_on_cran()
+  skip_if_net_down()
   airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
 
   heliports_in_victoria <-  airports %>%
@@ -164,6 +166,7 @@ test_that("multiple filter statements are additive",{
 
 test_that("multiple filter statements are additive with geometric operators",{
   skip_on_cran()
+  skip_if_net_down()
   ## LOCAL
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
@@ -185,6 +188,7 @@ test_that("multiple filter statements are additive with geometric operators",{
 
 test_that("an intersect with an object greater than 5E5 bytes automatically gets turned into a bbox",{
   skip_on_cran()
+  skip_if_net_down()
   districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
     filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
     collect()
@@ -199,6 +203,7 @@ test_that("an intersect with an object greater than 5E5 bytes automatically gets
 
 test_that("an intersect with an object less than 5E5 proceeds",{
   skip_on_cran()
+  skip_if_net_down()
   small_districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
     filter(SCHOOL_DISTRICT_NAME %in% c("Prince George")) %>%
     collect() %>%
@@ -213,6 +218,7 @@ test_that("an intersect with an object less than 5E5 proceeds",{
 
 test_that("a BCGW name works with filter", {
   skip_on_cran()
+  skip_if_net_down()
   little_box <- st_as_sfc(st_bbox(c(xmin = 506543.662, ymin = 467957.582,
                                     xmax = 1696644.998, ymax = 1589145.873),
                                   crs = 3005))

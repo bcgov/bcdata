@@ -7,7 +7,7 @@
 CQL(...)
 }
 \arguments{
-\item{...}{Character vectors that will be comined into a single CQL statement.}
+\item{...}{Character vectors that will be combined into a single CQL statement.}
 }
 \value{
 An object of class \code{c("CQL", "SQL")}

@@ -53,6 +53,7 @@ test_that("select reduces the number of columns when a sticky ",{
 
 test_that("select works with BCGW name", {
   skip_on_cran()
+  skip_if_net_down()
   expect_silent(ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
                   select(AIRPORT_NAME, DESCRIPTION) %>%
                   collect())

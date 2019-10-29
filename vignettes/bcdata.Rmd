@@ -140,7 +140,7 @@ bcdc_search("school programs", n = 1)
 bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
 ```
 
-We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The full code---with the resource ID for each data set---is also available _in_ the metdata record ☝️:
+We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The full code---with the resource ID for each data set---is also available _in_ the metadata record ☝️:
 
 ```{r}
 ## Get the txt data resource from the `bc-schools-programs-offered-in-schools`

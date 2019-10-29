@@ -50,11 +50,14 @@ bcdc_read_sf <- function(x, ...){
     return(sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...))
 
   } else{
+    # tests that cover this are skipped due to large size
+    # nocov start
     ## Parse the Paginated response
     message("Parsing data")
     sf_responses <- lapply(x, function(x) {sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)})
 
     do.call(rbind, sf_responses)
+    # nocov end
   }
 
 
@@ -180,18 +183,6 @@ clean_wfs <- function(x){
     x == "wms" ~ "wfs",
     TRUE ~ x
   )
-}
-
-safe_request_length <- function(query_list){
-  ## A conservative number of characters in the filter call.
-  ## Calculating from the query_list BEFORE the call actually happen.
-
-  ## Tested wfs url character limit
-  limits <- 5000
-  request_length <- nchar(finalize_cql(query_list$CQL_FILTER))
-
-  return(request_length <= limits)
-
 }
 
 read_from_url <- function(resource, ...){

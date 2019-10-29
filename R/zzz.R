@@ -18,4 +18,4 @@ bcdata_env <- new.env(parent = emptyenv())
 
 # Define bcdc_sf as a subclass of sf so that it works
 # with S4 methods for sf (eg mapview)
-setOldClass(c("bcdc_sf", "sf"))
+methods::setOldClass(c("bcdc_sf", "sf"))

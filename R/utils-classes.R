@@ -240,6 +240,8 @@ collect.bcdc_promise <- function(x, ...){
     status_failed <- status_code >= 300
     url <- cc$url
   } else {
+    # tests that cover this are skipped due to large size
+    # nocov start
     message("This record requires pagination to complete the request.")
     sorting_col <- pagination_sort_col(x$cols_df)
 
@@ -268,6 +270,7 @@ collect.bcdc_promise <- function(x, ...){
 
     status_code <- cc$status_code()
     status_failed <- any(status_code  >= 300)
+    # nocov end
   }
 
   if (status_failed) {

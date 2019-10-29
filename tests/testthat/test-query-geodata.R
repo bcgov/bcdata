@@ -39,6 +39,7 @@ test_that("bcdc_query_geodata returns an object with a query, a cli, the catalog
 
 test_that("bcdc_query_geodata returns an object with bcdc_promise class when using filter",{
   skip_on_cran()
+  skip_if_net_down()
   bc_eml <- bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
     filter(PERMIT_RELATIONSHIP == "DISCHARGE")
   expect_is(bc_eml, "bcdc_promise")
@@ -50,4 +51,18 @@ test_that("bcdc_query_geodata returns an object with bcdc_promise class on recor
   skip_if_net_down()
   airports <- bcdc_query_geodata("bc-airports")
   expect_is(airports, "bcdc_promise")
+})
+
+test_that("bcdc_query_geodata fails when >1 record", {
+  skip_if_net_down()
+  skip_on_cran()
+  expect_error(bcdc_query_geodata(c("bc-airports", "bc-environmental-monitoring-locations")),
+               "Only one record my be queried at a time")
+})
+
+test_that("bcdc_query_geodata fails when no wfs available", {
+  skip_if_net_down()
+  skip_on_cran()
+  expect_error(bcdc_query_geodata("dba6c78a-1bc1-4d4f-b75c-96b5b0e7fd30"),
+               "No Web Service resource available")
 })

@@ -44,7 +44,7 @@
 #' }
 bcdc_browse <- function(query = NULL, browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
 
   if(is.null(query))  url <- "https://catalogue.data.gov.bc.ca"
@@ -64,8 +64,10 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
 
   ## Facilitates testing
   if(interactive()){
+    # nocov start
     utils::browseURL(url = url, browser = browser,
                      encodeIfNeeded = encodeIfNeeded)
+    # nocov end
   }
 
   invisible(url)
