@@ -307,3 +307,9 @@ list_supported_files <- function(dir) {
 
   files[supported]
 }
+
+catalogue_error <- function(status_code = NULL){
+  msg <- "The BC data catalogue is currently unable to process this request"
+  if (!is.null(status_code)) msg <- paste0(msg, "\nhttp status code: ", status_code)
+  stop(msg, call. = FALSE)
+}

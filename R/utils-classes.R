@@ -236,7 +236,8 @@ collect.bcdc_promise <- function(x, ...){
                stop("The BC data catalogue experienced issues with this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    status_failed <- cc$status_code >= 300
+    status_code <- cc$status_code
+    status_failed <- status_code >= 300
     url <- cc$url
   } else {
     message("This record requires pagination to complete the request.")
@@ -265,14 +266,12 @@ collect.bcdc_promise <- function(x, ...){
 
     url <- cc$url_fetch(query = query_list)
 
-    status_failed <- any(cc$status_code() >= 300)
+    status_code <- cc$status_code()
+    status_failed <- any(status_code  >= 300)
   }
 
   if (status_failed) {
-    ## TODO: This error message could be more informative
-    stop("The BC data catalogue experienced issues with this request",
-         call. = FALSE
-    )
+    catalogue_error(status_code)
   }
 
   txt <- cc$parse("UTF-8")
