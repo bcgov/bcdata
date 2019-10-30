@@ -5,6 +5,7 @@
 * Add CITATION file (#104)
 * Increased test coverage (#112)
 * Skipping all tests on CRAN that require a web connection
+* Better and more informative error message when experiencing http failures occur (#121)
 
 # bcdata 0.1.0
 
