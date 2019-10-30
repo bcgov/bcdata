@@ -14,3 +14,4 @@ efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd
 ^codecov\.yml$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^LICENSE.md$
