@@ -268,7 +268,7 @@ collect.bcdc_promise <- function(x, ...){
 
     url <- cc$url_fetch(query = query_list)
 
-    catalogue_error(cc)
+    catch_catalogue_error(cc)
     # nocov end
   }
 
