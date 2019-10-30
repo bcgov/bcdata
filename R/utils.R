@@ -299,7 +299,7 @@ list_supported_files <- function(dir) {
   files[supported]
 }
 
-catalogue_error <- function(catalogue_response){
+catch_catalogue_error <- function(catalogue_response){
 
   status_failed <- catalogue_response$status_code >= 300
 
