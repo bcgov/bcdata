@@ -25,6 +25,19 @@ as.bcdc_sf <- function(x, query_list, url) {
 }
 
 
+as.bcdc_query_promise <- function(x) {
+  structure(x,
+            class = c("bcdc_query_promise", setdiff(class(x), "bcdc_query_promise"))
+  )
+}
+
+as.bcdc_query_sf <- function(x) {
+  structure(x,
+            class = c("bcdc_query_sf", setdiff(class(x), "bcdc_query_sf"))
+  )
+}
+
+
 # print methods -----------------------------------------------------------
 
 #' @export
@@ -118,6 +131,37 @@ print.bcdc_recordlist <- function(x, ...) {
       with the ID from the desired record.")
 }
 
+#' @export
+print.bcdc_query_promise <- function(x) {
+  url <-  x$cli$url_fetch()
+
+  cat_line("<url>")
+  cat_line(url)
+  cat_line()
+  cat_line("<body>")
+  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
+  invisible(TRUE)
+}
+
+print.bcdc_query_sf <- function(x) {
+  url <- attr(x, "url")
+  query_list <- attributes(x)$query_list
+  query_list$CQL_FILTER <- NULL
+
+  url <- paste0(url,"\n")
+
+  cat_line("<url>")
+  for(i in seq_along(url)){
+    cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
+  }
+
+  cat_line("<body>")
+  cat_line(glue::glue("   {names(query_list)}: {query_list}"))
+
+
+  invisible(TRUE)
+
+}
 
 
 # dplyr methods -----------------------------------------------------------
@@ -301,18 +345,10 @@ show_query.bcdc_promise <- function(x, ...) {
   cql_filter <- x$query_list$CQL_FILTER
   x$query_list$CQL_FILTER <- NULL
 
-  url <-  x$cli$url_fetch()
-
-  cat_line("<url>")
-  cat_line(url)
-  cat_line()
-  cat_line("<body>")
-  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
-  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
-
-  invisible(TRUE)
+  as.bcdc_query_promise(x)
 
 }
+
 
 
 #' @describeIn show_query show_query.bcdc_promise
@@ -326,27 +362,7 @@ show_query.bcdc_promise <- function(x, ...) {
 #' show_query(air)
 #' }
 show_query.bcdc_sf <- function(x, ...) {
-
-  url <- attr(x, "url")
-  query_list <- attributes(x)$query_list
-  cql_filter <- query_list$CQL_FILTER
-  query_list$CQL_FILTER <- NULL
-
-  url <- paste0(url,"\n")
-
-  cat_line("<url>")
-  for(i in seq_along(url)){
-    cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
-  }
-
-  cat_line("<body>")
-  cat_line(glue::glue("   {names(query_list)}: {query_list}"))
-  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
-
-
-
-  invisible(TRUE)
-
+  as.bcdc_query_sf(x)
 }
 
 # collapse vector of cql statements into one
