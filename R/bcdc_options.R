@@ -54,7 +54,6 @@ bcdc_options <- function() {
     ifelse(is.null(x), NA, as.numeric(x))
   }
 
-  cat_rule("bcdc options")
   dplyr::tribble(
     ~ option, ~ value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
