@@ -19,7 +19,7 @@ only "sticky" columns are return. \code{bcdc_describe_feature} is one way to tel
 of issuing the Web Service call.
 }
 \examples{
-\dontrun{
+\donttest{
 feature_spec <- bcdc_describe_feature("bc-airports")
 ## Columns that can selected:
 feature_spec[feature_spec$nillable == TRUE,]

@@ -28,7 +28,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## Take me to the B.C. Data Catalogue home page
 #' bcdc_browse()
 #'

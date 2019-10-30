@@ -24,7 +24,7 @@ A list containing the metadata for the record
 Show a single B.C. Data Catalogue record
 }
 \examples{
-\dontrun{
+\donttest{
 bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
 bcdc_get_record("bc-airports")
 bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")

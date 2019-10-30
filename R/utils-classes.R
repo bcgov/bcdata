@@ -137,7 +137,7 @@ print.bcdc_recordlist <- function(x, ...) {
 #' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
 #'     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
 #'     collect()
@@ -176,7 +176,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #' @param ... One or more unquoted expressions separated by commas. See details.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' feature_spec <- bcdc_describe_feature("bc-airports")
 #' ## Columns that can selected:
 #' feature_spec[feature_spec$nillable == TRUE,]
@@ -215,7 +215,7 @@ select.bcdc_promise <- function(.data, ...){
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_query_geodata("bc-airports") %>%
 #'   collect()
 #' }
@@ -289,7 +289,7 @@ collect.bcdc_promise <- function(x, ...){
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
 #'   show_query()
@@ -319,7 +319,7 @@ show_query.bcdc_promise <- function(x, ...) {
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' air <- bcdc_query_geodata("bc-airports") %>%
 #'   collect()
 #'

@@ -22,7 +22,7 @@ See \code{dplyr::\link[dplyr]{collect}} for details.
 }}
 
 \examples{
-\dontrun{
+\donttest{
 bcdc_query_geodata("bc-airports") \%>\%
   collect()
 }

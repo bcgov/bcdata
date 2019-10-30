@@ -38,7 +38,7 @@ This is a wrapper around utils::browseURL with the URL for the B.C. Data Catalog
 the default
 }
 \examples{
-\dontrun{
+\donttest{
 ## Take me to the B.C. Data Catalogue home page
 bcdc_browse()
 

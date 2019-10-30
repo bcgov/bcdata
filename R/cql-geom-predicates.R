@@ -31,7 +31,7 @@
 #' @seealso sql_geom_predicates
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' airports <- bcdc_query_geodata("bc-airports") %>% collect()
 #' bcdc_cql_string(airports, "DWITHIN")
 #' }

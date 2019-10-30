@@ -34,7 +34,7 @@ An object of a type relevant to the resource (usually a tibble or an sf object)
 Download and read a resource from a B.C. Data Catalogue record
 }
 \examples{
-\dontrun{
+\donttest{
 # Using the record and resource ID:
 bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
