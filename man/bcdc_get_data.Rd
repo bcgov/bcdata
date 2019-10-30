@@ -4,7 +4,7 @@
 \alias{bcdc_get_data}
 \title{Download and read a resource from a B.C. Data Catalogue record}
 \usage{
-bcdc_get_data(record, resource = NULL, ...)
+bcdc_get_data(record, resource = NULL, verbose = TRUE, ...)
 }
 \arguments{
 \item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()}),
@@ -20,6 +20,10 @@ in your .Rprofile file so the option persists across sessions.}
 
 \item{resource}{optional argument used when there are multiple data files
 within the same record. See examples.}
+
+\item{verbose}{When more than one resource is available for a record,
+should extra information about those resources be printed to the console?
+Default \code{TRUE}}
 
 \item{...}{arguments passed to other functions. Tabular data is passed to a function to handle
 the import based on the file extension. \code{bcdc_read_functions()} provides details on which functions
