@@ -237,7 +237,7 @@ collect.bcdc_promise <- function(x, ...){
                stop("The BC data catalogue experienced issues with this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    catalogue_error(cc)
+    catch_catalogue_error(cc)
     url <- cc$url
   } else {
     # tests that cover this are skipped due to large size
