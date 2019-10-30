@@ -17,23 +17,17 @@ as.bcdc_promise <- function(res) {
   )
 }
 
-as.bcdc_sf <- function(x, query_list, url) {
+as.bcdc_sf <- function(x, query_list, url, full_url) {
   structure(x,
             class = c("bcdc_sf", setdiff(class(x), "bcdc_sf")),
             query_list = query_list,
-            url = url)
+            url = url, full_url = full_url)
 }
 
 
-as.bcdc_query_promise <- function(x) {
+as.bcdc_query <- function(x) {
   structure(x,
-            class = c("bcdc_query_promise", setdiff(class(x), "bcdc_query_promise"))
-  )
-}
-
-as.bcdc_query_sf <- function(x) {
-  structure(x,
-            class = c("bcdc_query_sf", setdiff(class(x), "bcdc_query_sf"))
+            class = c("bcdc_query", setdiff(class(x), "bcdc_query"))
   )
 }
 
@@ -132,35 +126,21 @@ print.bcdc_recordlist <- function(x, ...) {
 }
 
 #' @export
-print.bcdc_query_promise <- function(x) {
-  url <-  x$cli$url_fetch()
+print.bcdc_query <- function(x, ...) {
 
   cat_line("<url>")
-  cat_line(url)
-  cat_line()
-  cat_line("<body>")
-  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
-  invisible(TRUE)
-}
-
-print.bcdc_query_sf <- function(x) {
-  url <- attr(x, "url")
-  query_list <- attributes(x)$query_list
-  query_list$CQL_FILTER <- NULL
-
-  url <- paste0(url,"\n")
-
-  cat_line("<url>")
-  for(i in seq_along(url)){
-    cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
+  if (length(x$url) > 1) {
+    for(i in seq_along(x$url)){
+      cat_line(glue::glue("Request {i} of {length(x$url)} \n{x$url[i]} \n"))
+    }
   }
 
   cat_line("<body>")
-  cat_line(glue::glue("   {names(query_list)}: {query_list}"))
-
-
-  invisible(TRUE)
-
+  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
+  cat_line()
+  cat_line("<full query url>")
+  cat_line(x$full_url)
+  invisible(x)
 }
 
 
@@ -283,6 +263,7 @@ collect.bcdc_promise <- function(x, ...){
 
     catch_catalogue_error(cc)
     url <- cc$url
+    full_url <- cli$url_fetch(query = query_list)
   } else {
     # tests that cover this are skipped due to large size
     # nocov start
@@ -310,7 +291,8 @@ collect.bcdc_promise <- function(x, ...){
                stop("The BC data catalogue experienced issues with this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    url <- cc$url_fetch(query = query_list)
+    url <- cc$url
+    full_url <- cc$url_fetch(query = query_list)
 
     catch_catalogue_error(cc)
     # nocov end
@@ -318,7 +300,8 @@ collect.bcdc_promise <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url)
+  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
+             full_url = full_url)
 
 }
 
@@ -341,11 +324,13 @@ collect.bcdc_promise <- function(x, ...){
 #'
 show_query.bcdc_promise <- function(x, ...) {
 
-  x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
-  cql_filter <- x$query_list$CQL_FILTER
-  x$query_list$CQL_FILTER <- NULL
+  y <- list()
+  y$base_url <- x$cli$url
+  y$query_list <- x$query_list
+  y$query_list$CQL_FILTER <- finalize_cql(y$query_list$CQL_FILTER)
+  y$full_url <- x$cli$url_fetch(query = y$query_list)
 
-  as.bcdc_query_promise(x)
+  as.bcdc_query(y)
 
 }
 
@@ -362,7 +347,13 @@ show_query.bcdc_promise <- function(x, ...) {
 #' show_query(air)
 #' }
 show_query.bcdc_sf <- function(x, ...) {
-  as.bcdc_query_sf(x)
+
+  y <- list()
+  y$url <- attr(x, "url")
+  y$query_list <- attr(x, "query_list")
+  y$full_url <- attr(x, "full_url")
+
+  as.bcdc_query(y)
 }
 
 # collapse vector of cql statements into one
