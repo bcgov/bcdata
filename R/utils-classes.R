@@ -36,7 +36,7 @@ print.bcdc_promise <- function(x, ...) {
   cli <- x$cli
   cc <- cli$post(body = query_list, encode = "form")
 
-  catalogue_error(cc)
+  catch_catalogue_error(cc)
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
   parsed <- bcdc_read_sf(cc$parse("UTF-8"))
