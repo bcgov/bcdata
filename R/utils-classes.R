@@ -35,7 +35,8 @@ print.bcdc_promise <- function(x, ...) {
   query_list <- c(x$query_list, COUNT = 6)
   cli <- x$cli
   cc <- cli$post(body = query_list, encode = "form")
-  cc$raise_for_status()
+
+  catch_catalogue_error(cc)
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
   parsed <- bcdc_read_sf(cc$parse("UTF-8"))
@@ -236,7 +237,7 @@ collect.bcdc_promise <- function(x, ...){
                stop("The BC data catalogue experienced issues with this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    status_failed <- cc$status_code >= 300
+    catch_catalogue_error(cc)
     url <- cc$url
   } else {
     # tests that cover this are skipped due to large size
@@ -267,15 +268,8 @@ collect.bcdc_promise <- function(x, ...){
 
     url <- cc$url_fetch(query = query_list)
 
-    status_failed <- any(cc$status_code() >= 300)
+    catch_catalogue_error(cc)
     # nocov end
-  }
-
-  if (status_failed) {
-    ## TODO: This error message could be more informative
-    stop("The BC data catalogue experienced issues with this request",
-         call. = FALSE
-    )
   }
 
   txt <- cc$parse("UTF-8")

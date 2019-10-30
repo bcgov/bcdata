@@ -298,3 +298,26 @@ list_supported_files <- function(dir) {
 
   files[supported]
 }
+
+catch_catalogue_error <- function(catalogue_response){
+
+  status_failed <- catalogue_response$status_code >= 300
+
+  request_res <- catalogue_response$request_headers
+  response_res <- catalogue_response$response_headers
+
+  if(status_failed) {
+    msg <- "The BC data catalogue is currently unable to process this request\nCatalogue request:\n"
+    for (i in seq_along(request_res)) {
+      msg <- paste0(msg, "  ", names(request_res)[i],": ",
+                      request_res[i],"\n")
+    }
+    msg <- paste0(msg, "Catalogue response:\n")
+    for (i in seq_along(response_res)) {
+      msg <- paste0(msg, "  ", names(response_res)[i],": ",
+                    response_res[i],"\n")
+    }
+
+    stop(msg, call. = FALSE)
+  }
+}

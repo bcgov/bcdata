@@ -67,7 +67,8 @@ parse_raw_feature_tbl <- function(query_list){
     bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
   cc <- cli$post(body = query_list, encode = "form")
-  status_failed <- cc$status_code >= 300
+
+  catch_catalogue_error(cc)
 
   xml_res <- xml2::read_xml(cc$parse("UTF-8"))
   xml_res <- xml2::xml_find_all(xml_res, "//xsd:sequence")
