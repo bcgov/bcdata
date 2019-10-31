@@ -30,7 +30,6 @@
 #' it is advisable to lower the chunk limit. Chunks must be less than 10000.
 #'
 #' @examples
-#' \donttest{
 #' ## Save initial conditions
 #' original_options <- options()
 #'
@@ -44,8 +43,6 @@
 #'
 #' ## Reset initial conditions
 #' options(original_options)
-#'
-#' }
 #'
 #' @export
 
