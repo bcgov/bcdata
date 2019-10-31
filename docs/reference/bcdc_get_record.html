@@ -163,12 +163,173 @@ in your .Rprofile file so the option persists across sessions.</p></td>
     <p>A list containing the metadata for the record</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>bcdc_get_record</span>(<span class='st'>"https://catalogue.data.gov.bc.ca/dataset/bc-airports"</span>)
-<span class='fu'>bcdc_get_record</span>(<span class='st'>"bc-airports"</span>)
-<span class='fu'>bcdc_get_record</span>(<span class='st'>"https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)
-<span class='fu'>bcdc_get_record</span>(<span class='st'>"76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='fu'>bcdc_get_record</span>(<span class='st'>"https://catalogue.data.gov.bc.ca/dataset/bc-airports"</span>)</div><div class='output co'>#&gt; B.C. Data Catalogue Record:
+#&gt;     BC Airports 
+#&gt; 
+#&gt; Name: bc-airports (ID: 76b1b7a3-2112-4444-857a-afccf7b20da8 )
+#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#&gt; Sector: Natural Resources
+#&gt; Licence: Open Government Licence - British Columbia
+#&gt; Type: Geographic
+#&gt; Last Updated: 2019-09-05 
+#&gt; 
+#&gt; Description:
+#&gt;     BC Airports identifies locations where aircraft may take-off and land. No guarantee
+#&gt;     is given that an identified point will be maintained to sufficient standards for
+#&gt;     landing and take-off of any/all aircraft.  It includes airports, aerodromes, water
+#&gt;     aerodromes, heliports, and airstrips. 
+#&gt; 
+#&gt; Resources: ( 4 )
+#&gt; 1) BC Geographic Warehouse Custom Download
+#&gt;      format: other 
+#&gt;      url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW 
+#&gt;      resource: 604c8be1-b3f3-45b4-8030-5f9c8be71645 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; 
+#&gt; 2) BC_Airports_Attribute_Values
+#&gt;      format: xlsx 
+#&gt;      url: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/fcccba36-b528-4731-8978-940b3cc04f69/download/wilmbvicgeobccriticalinfrastructuredocumentsbcairportsattributevalues.xlsx 
+#&gt;      resource: fcccba36-b528-4731-8978-940b3cc04f69 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = 'fcccba36-b528-4731-8978-940b3cc04f69')
+#&gt; 
+#&gt; 3) WFS request (Spatial Data)
+#&gt;      format: wfs 
+#&gt;      resource: 4d0377d9-e8a1-429b-824f-0ce8f363512c 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+#&gt; 
+#&gt; 4) KML Network Link
+#&gt;      format: kml 
+#&gt;      url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW_loader.kml 
+#&gt;      resource: 5b9f22bf-eaa6-4640-ae65-9d3600672745 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; </div><div class='input'><span class='fu'>bcdc_get_record</span>(<span class='st'>"bc-airports"</span>)</div><div class='output co'>#&gt; B.C. Data Catalogue Record:
+#&gt;     BC Airports 
+#&gt; 
+#&gt; Name: bc-airports (ID: 76b1b7a3-2112-4444-857a-afccf7b20da8 )
+#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#&gt; Sector: Natural Resources
+#&gt; Licence: Open Government Licence - British Columbia
+#&gt; Type: Geographic
+#&gt; Last Updated: 2019-09-05 
+#&gt; 
+#&gt; Description:
+#&gt;     BC Airports identifies locations where aircraft may take-off and land. No guarantee
+#&gt;     is given that an identified point will be maintained to sufficient standards for
+#&gt;     landing and take-off of any/all aircraft.  It includes airports, aerodromes, water
+#&gt;     aerodromes, heliports, and airstrips. 
+#&gt; 
+#&gt; Resources: ( 4 )
+#&gt; 1) BC Geographic Warehouse Custom Download
+#&gt;      format: other 
+#&gt;      url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW 
+#&gt;      resource: 604c8be1-b3f3-45b4-8030-5f9c8be71645 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; 
+#&gt; 2) BC_Airports_Attribute_Values
+#&gt;      format: xlsx 
+#&gt;      url: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/fcccba36-b528-4731-8978-940b3cc04f69/download/wilmbvicgeobccriticalinfrastructuredocumentsbcairportsattributevalues.xlsx 
+#&gt;      resource: fcccba36-b528-4731-8978-940b3cc04f69 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = 'fcccba36-b528-4731-8978-940b3cc04f69')
+#&gt; 
+#&gt; 3) WFS request (Spatial Data)
+#&gt;      format: wfs 
+#&gt;      resource: 4d0377d9-e8a1-429b-824f-0ce8f363512c 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+#&gt; 
+#&gt; 4) KML Network Link
+#&gt;      format: kml 
+#&gt;      url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW_loader.kml 
+#&gt;      resource: 5b9f22bf-eaa6-4640-ae65-9d3600672745 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; </div><div class='input'><span class='fu'>bcdc_get_record</span>(<span class='st'>"https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)</div><div class='output co'>#&gt; B.C. Data Catalogue Record:
+#&gt;     BC Airports 
+#&gt; 
+#&gt; Name: bc-airports (ID: 76b1b7a3-2112-4444-857a-afccf7b20da8 )
+#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#&gt; Sector: Natural Resources
+#&gt; Licence: Open Government Licence - British Columbia
+#&gt; Type: Geographic
+#&gt; Last Updated: 2019-09-05 
+#&gt; 
+#&gt; Description:
+#&gt;     BC Airports identifies locations where aircraft may take-off and land. No guarantee
+#&gt;     is given that an identified point will be maintained to sufficient standards for
+#&gt;     landing and take-off of any/all aircraft.  It includes airports, aerodromes, water
+#&gt;     aerodromes, heliports, and airstrips. 
+#&gt; 
+#&gt; Resources: ( 4 )
+#&gt; 1) BC Geographic Warehouse Custom Download
+#&gt;      format: other 
+#&gt;      url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW 
+#&gt;      resource: 604c8be1-b3f3-45b4-8030-5f9c8be71645 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; 
+#&gt; 2) BC_Airports_Attribute_Values
+#&gt;      format: xlsx 
+#&gt;      url: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/fcccba36-b528-4731-8978-940b3cc04f69/download/wilmbvicgeobccriticalinfrastructuredocumentsbcairportsattributevalues.xlsx 
+#&gt;      resource: fcccba36-b528-4731-8978-940b3cc04f69 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = 'fcccba36-b528-4731-8978-940b3cc04f69')
+#&gt; 
+#&gt; 3) WFS request (Spatial Data)
+#&gt;      format: wfs 
+#&gt;      resource: 4d0377d9-e8a1-429b-824f-0ce8f363512c 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+#&gt; 
+#&gt; 4) KML Network Link
+#&gt;      format: kml 
+#&gt;      url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW_loader.kml 
+#&gt;      resource: 5b9f22bf-eaa6-4640-ae65-9d3600672745 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; </div><div class='input'><span class='fu'>bcdc_get_record</span>(<span class='st'>"76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)</div><div class='output co'>#&gt; B.C. Data Catalogue Record:
+#&gt;     BC Airports 
+#&gt; 
+#&gt; Name: bc-airports (ID: 76b1b7a3-2112-4444-857a-afccf7b20da8 )
+#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#&gt; Sector: Natural Resources
+#&gt; Licence: Open Government Licence - British Columbia
+#&gt; Type: Geographic
+#&gt; Last Updated: 2019-09-05 
+#&gt; 
+#&gt; Description:
+#&gt;     BC Airports identifies locations where aircraft may take-off and land. No guarantee
+#&gt;     is given that an identified point will be maintained to sufficient standards for
+#&gt;     landing and take-off of any/all aircraft.  It includes airports, aerodromes, water
+#&gt;     aerodromes, heliports, and airstrips. 
+#&gt; 
+#&gt; Resources: ( 4 )
+#&gt; 1) BC Geographic Warehouse Custom Download
+#&gt;      format: other 
+#&gt;      url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW 
+#&gt;      resource: 604c8be1-b3f3-45b4-8030-5f9c8be71645 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; 
+#&gt; 2) BC_Airports_Attribute_Values
+#&gt;      format: xlsx 
+#&gt;      url: https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/fcccba36-b528-4731-8978-940b3cc04f69/download/wilmbvicgeobccriticalinfrastructuredocumentsbcairportsattributevalues.xlsx 
+#&gt;      resource: fcccba36-b528-4731-8978-940b3cc04f69 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = 'fcccba36-b528-4731-8978-940b3cc04f69')
+#&gt; 
+#&gt; 3) WFS request (Spatial Data)
+#&gt;      format: wfs 
+#&gt;      resource: 4d0377d9-e8a1-429b-824f-0ce8f363512c 
+#&gt;      available in R via bcdata:  TRUE 
+#&gt;      code: bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+#&gt; 
+#&gt; 4) KML Network Link
+#&gt;      format: kml 
+#&gt;      url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW_loader.kml 
+#&gt;      resource: 5b9f22bf-eaa6-4640-ae65-9d3600672745 
+#&gt;      available in R via bcdata:  FALSE 
+#&gt; </div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

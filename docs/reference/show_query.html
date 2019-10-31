@@ -166,18 +166,38 @@ See dplyr::show_query for details." />
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-environmental-monitoring-locations"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>PERMIT_RELATIONSHIP</span> <span class='kw'>==</span> <span class='st'>"DISCHARGE"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>show_query</span>()
-  }
+  <span class='fu'>show_query</span>()</div><div class='output co'>#&gt; &lt;url&gt;
+#&gt; &lt;body&gt;
+#&gt;    SERVICE: WFS
+#&gt;    VERSION: 2.0.0
+#&gt;    REQUEST: GetFeature
+#&gt;    outputFormat: application/json
+#&gt;    typeNames: WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW
+#&gt;    SRSNAME: EPSG:3005
+#&gt;    CQL_FILTER: ("PERMIT_RELATIONSHIP" = 'DISCHARGE')
+#&gt; 
+#&gt; &lt;full query url&gt;
+#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%22PERMIT_RELATIONSHIP%22%20%3D%20%27DISCHARGE%27%29</div><div class='input'>  <span class='co'># }</span>
 
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># \donttest{</span>
 <span class='no'>air</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='collect.html'>collect</a></span>()
 
-<span class='fu'>show_query</span>(<span class='no'>air</span>)
-}</div></pre>
+<span class='fu'>show_query</span>(<span class='no'>air</span>)</div><div class='output co'>#&gt; &lt;url&gt;
+#&gt; &lt;body&gt;
+#&gt;    SERVICE: WFS
+#&gt;    VERSION: 2.0.0
+#&gt;    REQUEST: GetFeature
+#&gt;    outputFormat: application/json
+#&gt;    typeNames: WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW
+#&gt;    SRSNAME: EPSG:3005
+#&gt; 
+#&gt; &lt;full query url&gt;
+#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

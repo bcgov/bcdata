@@ -166,19 +166,63 @@ of issuing the Web Service call.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='no'>feature_spec</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bcdc_describe_feature.html'>bcdc_describe_feature</a></span>(<span class='st'>"bc-airports"</span>)
 <span class='co'>## Columns that can selected:</span>
-<span class='no'>feature_spec</span>[<span class='no'>feature_spec</span>$<span class='no'>nillable</span> <span class='kw'>==</span> <span class='fl'>TRUE</span>,]
-
+<span class='no'>feature_spec</span>[<span class='no'>feature_spec</span>$<span class='no'>nillable</span> <span class='kw'>==</span> <span class='fl'>TRUE</span>,]</div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: 'nillable'.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Length of logical index must be 1 or 42, not 0</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 0 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># … with 4 variables: col_name </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, selectable </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, remote_col_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   local_col_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
 <span class='co'>## Select columns</span>
 <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='select.html'>select</a></span>(<span class='no'>DESCRIPTION</span>, <span class='no'>PHYSICAL_ADDRESS</span>)
-
+  <span class='fu'><a href='select.html'>select</a></span>(<span class='no'>DESCRIPTION</span>, <span class='no'>PHYSICAL_ADDRESS</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>14</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt; Simple feature collection with 6 features and 14 fields
+#&gt; geometry type:  POINT
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
+#&gt; epsg (SRID):    3005
+#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; </span><span style='color: #555555;'># A tibble: 6 x 15</span><span>
+#&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'># … with 10 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Select "sticky" columns</span>
 <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='select.html'>select</a></span>(<span class='no'>LOCALITY</span>)
-}</div></pre>
+  <span class='fu'><a href='select.html'>select</a></span>(<span class='no'>LOCALITY</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>12</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt; Simple feature collection with 6 features and 12 fields
+#&gt; geometry type:  POINT
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
+#&gt; epsg (SRID):    3005
+#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; </span><span style='color: #555555;'># A tibble: 6 x 13</span><span>
+#&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'># … with 8 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+#&gt; #   SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'># }
+
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
