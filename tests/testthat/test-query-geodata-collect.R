@@ -23,7 +23,8 @@ test_that("bcdc_query_geodata collects an sf object for a valid id", {
 test_that("bcdc_query_geodata succeeds with a records over 10000 rows",{
   skip_on_cran()
   skip("Skipping the BEC test, though available for testing")
-  expect_silent(bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit"))
+  expect_is(collect(bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")),
+            "bcdc_sf")
 })
 
 
