@@ -1,11 +1,11 @@
 ## Resubmission
-This is a resubmission. In this version I have:
+This is a resubmission. In this version we have:
 
 * Removed the redundant file LICENSE and its reference in the DESCRIPTION file 
 * Changed `\dontrun{}` examples to `\donttest{}` 
 * Changed `cat()` and `print()` calls to `message()` or `warning()` when used 
   outside of `print()` and `summary()` methods. In the function 
-  `bcdc_get_data()`, I made the use of `cat()` calls conditional on a new 
+  `bcdc_get_data()`, we made the use of `cat()` calls conditional on a new 
   `verbose` argument (and only then when interactive).
 
 ## Test environments
