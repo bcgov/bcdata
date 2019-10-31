@@ -17,11 +17,18 @@ as.bcdc_promise <- function(res) {
   )
 }
 
-as.bcdc_sf <- function(x, query_list, url) {
+as.bcdc_sf <- function(x, query_list, url, full_url) {
   structure(x,
             class = c("bcdc_sf", setdiff(class(x), "bcdc_sf")),
             query_list = query_list,
-            url = url)
+            url = url, full_url = full_url)
+}
+
+
+as.bcdc_query <- function(x) {
+  structure(x,
+            class = c("bcdc_query", setdiff(class(x), "bcdc_query"))
+  )
 }
 
 
@@ -118,6 +125,23 @@ print.bcdc_recordlist <- function(x, ...) {
       with the ID from the desired record.")
 }
 
+#' @export
+print.bcdc_query <- function(x, ...) {
+
+  cat_line("<url>")
+  if (length(x$url) > 1) {
+    for(i in seq_along(x$url)){
+      cat_line(glue::glue("Request {i} of {length(x$url)} \n{x$url[i]} \n"))
+    }
+  }
+
+  cat_line("<body>")
+  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
+  cat_line()
+  cat_line("<full query url>")
+  cat_line(x$full_url)
+  invisible(x)
+}
 
 
 # dplyr methods -----------------------------------------------------------
@@ -137,7 +161,7 @@ print.bcdc_recordlist <- function(x, ...) {
 #' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
 #'     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
 #'     collect()
@@ -176,7 +200,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #' @param ... One or more unquoted expressions separated by commas. See details.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' feature_spec <- bcdc_describe_feature("bc-airports")
 #' ## Columns that can selected:
 #' feature_spec[feature_spec$nillable == TRUE,]
@@ -215,7 +239,7 @@ select.bcdc_promise <- function(.data, ...){
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_query_geodata("bc-airports") %>%
 #'   collect()
 #' }
@@ -239,6 +263,7 @@ collect.bcdc_promise <- function(x, ...){
 
     catch_catalogue_error(cc)
     url <- cc$url
+    full_url <- cli$url_fetch(query = query_list)
   } else {
     # tests that cover this are skipped due to large size
     # nocov start
@@ -266,7 +291,8 @@ collect.bcdc_promise <- function(x, ...){
                stop("The BC data catalogue experienced issues with this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    url <- cc$url_fetch(query = query_list)
+    url <- cc$url
+    full_url <- cc$url_fetch(query = query_list)
 
     catch_catalogue_error(cc)
     # nocov end
@@ -274,7 +300,8 @@ collect.bcdc_promise <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url)
+  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
+             full_url = full_url)
 
 }
 
@@ -289,7 +316,7 @@ collect.bcdc_promise <- function(x, ...){
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
 #'   show_query()
@@ -297,29 +324,23 @@ collect.bcdc_promise <- function(x, ...){
 #'
 show_query.bcdc_promise <- function(x, ...) {
 
-  x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
-  cql_filter <- x$query_list$CQL_FILTER
-  x$query_list$CQL_FILTER <- NULL
+  y <- list()
+  y$base_url <- x$cli$url
+  y$query_list <- x$query_list
+  y$query_list$CQL_FILTER <- finalize_cql(y$query_list$CQL_FILTER)
+  y$full_url <- x$cli$url_fetch(query = y$query_list)
 
-  url <-  x$cli$url_fetch()
-
-  cat_line("<url>")
-  cat_line(url)
-  cat_line()
-  cat_line("<body>")
-  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
-  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
-
-  invisible(TRUE)
+  as.bcdc_query(y)
 
 }
+
 
 
 #' @describeIn show_query show_query.bcdc_promise
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' air <- bcdc_query_geodata("bc-airports") %>%
 #'   collect()
 #'
@@ -327,26 +348,12 @@ show_query.bcdc_promise <- function(x, ...) {
 #' }
 show_query.bcdc_sf <- function(x, ...) {
 
-  url <- attr(x, "url")
-  query_list <- attributes(x)$query_list
-  cql_filter <- query_list$CQL_FILTER
-  query_list$CQL_FILTER <- NULL
+  y <- list()
+  y$url <- attr(x, "url")
+  y$query_list <- attr(x, "query_list")
+  y$full_url <- attr(x, "full_url")
 
-  url <- paste0(url,"\n")
-
-  cat_line("<url>")
-  for(i in seq_along(url)){
-    cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
-  }
-
-  cat_line("<body>")
-  cat_line(glue::glue("   {names(query_list)}: {query_list}"))
-  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
-
-
-
-  invisible(TRUE)
-
+  as.bcdc_query(y)
 }
 
 # collapse vector of cql statements into one

@@ -39,7 +39,7 @@ object with \code{\link[=collect]{collect()}}. See examples.
 }
 \examples{
 
-\dontrun{
+\donttest{
 # Returns a bcdc_promise, which can be further refined using filter/select:
 bcdc_query_geodata("bc-airports", crs = 3857)
 

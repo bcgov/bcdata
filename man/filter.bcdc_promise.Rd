@@ -21,7 +21,7 @@ Filter a query from Web Service using dplyr methods. This filtering is accomplis
 full sf object is not read into memory until \code{collect()} has been called.
 }
 \examples{
-\dontrun{
+\donttest{
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") \%>\%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") \%>\%
     collect()

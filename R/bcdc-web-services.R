@@ -38,7 +38,7 @@
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #' # Returns a bcdc_promise, which can be further refined using filter/select:
 #' bcdc_query_geodata("bc-airports", crs = 3857)
 #'
@@ -138,7 +138,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' @inheritParams bcdc_get_data
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
 #' bcdc_preview("points-of-well-diversion-applications")
 #'
@@ -170,7 +170,7 @@ bcdc_preview.character <- function(record) {
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
 
-  make_wms(record$layer)
+  make_wms(record$layer_name)
 
 }
 

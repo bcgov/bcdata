@@ -20,7 +20,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_search_facets("type")
 #' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
@@ -100,7 +100,7 @@ bcdc_list <- function() {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_search("forest")
 #' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
 #' }
@@ -178,7 +178,7 @@ bcdc_search <- function(..., license_id = NULL,
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
 #' bcdc_get_record("bc-airports")
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")

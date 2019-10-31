@@ -23,7 +23,7 @@ Description: Search, query, and download tabular and 'geospatial' data from the
              metadata directly in R, download many data formats, and query
              'geospatial' data available via the B.C. government Web Feature 
              Service ('WFS') using 'dplyr' syntax. 
-License: Apache License (== 2.0) | file LICENSE
+License: Apache License (== 2.0)
 URL: https://github.com/bcgov/bcdata
 BugReports: https://github.com/bcgov/bcdata/issues
 Imports:

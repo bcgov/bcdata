@@ -22,7 +22,7 @@ in your .Rprofile file so the option persists across sessions.}
 Get map from the B.C. Web Service
 }
 \examples{
-\dontrun{
+\donttest{
 bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
 bcdc_preview("points-of-well-diversion-applications")
 
