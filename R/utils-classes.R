@@ -61,6 +61,7 @@ print.bcdc_promise <- function(x, ...) {
   cat_bullet("At most six rows of the record are printed here")
   cat_rule()
   print(parsed)
+  invisible(x)
 }
 
 #' @export
@@ -80,6 +81,7 @@ print.bcdc_record <- function(x, ...) {
   for (r in seq_len(nrow(x$resource_df))) {
     record_print_helper(x$resource_df[r, ], r, print_avail = TRUE)
   }
+  invisible(x)
 }
 
 record_print_helper <- function(r, n, print_avail = FALSE){
@@ -123,6 +125,7 @@ print.bcdc_recordlist <- function(x, ...) {
   }), collapse = "\n"), "\n")
   cat("\nAccess a single record by calling bcdc_get_record(ID)
       with the ID from the desired record.")
+  invisible(x)
 }
 
 #' @export
