@@ -170,7 +170,7 @@ bcdc_preview.character <- function(record) {
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
 
-  make_wms(record$layer)
+  make_wms(record$layer_name)
 
 }
 
