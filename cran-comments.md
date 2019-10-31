@@ -1,9 +1,11 @@
 ## Resubmission
-This is a resubmission. In this version we have:
+This is a resubmission. As recommended by the CRAN maintainer who inspected the
+package, in this version we have:
 
 * Removed the redundant file LICENSE and its reference in the DESCRIPTION file 
-* Changed `\dontrun{}` examples to `\donttest{}` 
-* Changed `cat()` and `print()` calls to `message()` or `warning()` when used 
+* Changed `\dontrun{}` examples to `\donttest{}`. These examples are long-running
+  and/or require internet access and so are liable to create spurious failures.
+* Eliminated printing to the console with `cat()` and `print()` functions
   outside of `print()` and `summary()` methods. In the function 
   `bcdc_get_data()`, we made the use of `cat()` calls conditional on a new 
   `verbose` argument (and only then when interactive).
