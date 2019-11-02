@@ -26,7 +26,7 @@ is_whse_object_name <- function(x) {
     return(FALSE)
   }
 
-  grepl("^[A-Z_]+\\.[A-Z_]+$", x)
+  grepl("^[0-9A-Z_]+\\.[0-9A-Z_]+$", x)
 }
 
 is_record <- function(x) {

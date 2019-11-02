@@ -1,11 +1,11 @@
 # Copyright 2019 Province of British Columbia
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 # http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
@@ -49,6 +49,9 @@ test_that("pagination_sort_col works", {
 
 test_that("is_whse_object_name works", {
   expect_true(is_whse_object_name("BCGW_FOO.BAR_BAZ"))
+  expect_true(is_whse_object_name("BCGW_FOO1.BAR_BAZ"))
+  expect_true(is_whse_object_name("BCGW_FOO6.BAR8_BAZ"))
+  expect_true(is_whse_object_name("BCGW_FOO.BAR9_BAZ"))
   expect_false(is_whse_object_name("bcgw_foo.bar_baz"))
   expect_false(is_whse_object_name("foo"))
   expect_false(is_whse_object_name(structure(list(), class = "bcdc_record")))
