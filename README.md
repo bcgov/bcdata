@@ -15,8 +15,6 @@ See the License for the specific language governing permissions and limitations 
 
 # bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
-### Version 0.1.1
-
 <!-- badges: start -->
 
 <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
@@ -56,7 +54,14 @@ guide](https://bcgov.github.io/bcdata/)
 
 ### Installation
 
-You can install `bcdata` directly from this GitHub repository using the
+You can install `bcdata` v0.1.1 directly from
+[CRAN](https://cran.r-project.org/package=bcdata):
+
+``` r
+install.packages("bcdata")
+```
+
+To install the development version from GitHub, use the
 [remotes](https://cran.r-project.org/package=remotes) package:
 
 ``` r
