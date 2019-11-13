@@ -231,7 +231,7 @@ select.bcdc_promise <- function(.data, ...){
 }
 
 
-#' Mutate columns from Web Service call
+#' Throw an informative error when attempting mutate on a Web Service call
 #'
 #' The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
 #' this function exists solely to generate an informative error that suggests an alternative
