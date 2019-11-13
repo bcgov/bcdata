@@ -231,6 +231,33 @@ select.bcdc_promise <- function(.data, ...){
 }
 
 
+#' Throw an informative error when attempting mutate on a Web Service call
+#'
+#' The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
+#' this function exists solely to generate an informative error that suggests an alternative
+#' approach to use mutate with bcdata
+#'
+#' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
+#' @param ... One or more unquoted expressions separated by commas. See details.
+#'
+#' @examples
+#' \dontrun{
+#'
+#' ## Mutate columns
+#' bcdc_query_geodata("bc-airports") %>%
+#'   mutate(LATITUDE * 100)
+#' }
+#'
+#'@export
+mutate.bcdc_promise <- function(.data, ...){
+  dots <- rlang::exprs(...)
+
+  stop(glue::glue(
+  "You must type collect() before using mutate() on a WFS. \nAfter using collect() add this mutate call::
+    mutate({dots}) "), call. = FALSE)
+}
+
+
 #' Force collection of Web Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
