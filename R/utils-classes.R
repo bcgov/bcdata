@@ -253,7 +253,7 @@ mutate.bcdc_promise <- function(.data, ...){
 
   stop(glue::glue(
   "mutate is not supported by a WFS. \nAfter using collect() add this mutate call:
-    `mutate({dots})` "), call. = FALSE)
+    mutate({dots}) "), call. = FALSE)
 }
 
 
