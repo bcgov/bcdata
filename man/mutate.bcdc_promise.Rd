@@ -13,7 +13,8 @@
 }
 \description{
 The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
-this function exists to
+this function exists solely to generate an informative error that suggests an alternative
+approach to use mutate with bcdata
 }
 \examples{
 \dontrun{

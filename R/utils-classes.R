@@ -234,7 +234,8 @@ select.bcdc_promise <- function(.data, ...){
 #' Mutate columns from Web Service call
 #'
 #' The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
-#' this function exists to
+#' this function exists solely to generate an informative error that suggests an alternative
+#' approach to use mutate with bcdata
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
@@ -252,7 +253,7 @@ mutate.bcdc_promise <- function(.data, ...){
   dots <- rlang::exprs(...)
 
   stop(glue::glue(
-  "mutate is not supported by a WFS. \nAfter using collect() add this mutate call:
+  "You must type collect() before using mutate() on a WFS. \nAfter using collect() add this mutate call::
     mutate({dots}) "), call. = FALSE)
 }
 
