@@ -2,6 +2,7 @@
 
 # bcdata 0.1.1.9999
 * Add `mutate` method for bcdc_promise that only fails and suggest an alternative approach. (PR#134)
+* Add back in querying vignette
 
 # bcdata 0.1.1
 
