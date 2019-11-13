@@ -1,5 +1,8 @@
 # bcdata (development version)
 
+# bcdata 0.1.1.9999
+* Add `mutate` method for bcdc_promise that only fails and suggest an alternative approach. (PR#134)
+
 # bcdata 0.1.1
 
 * Expand and standardize checking w[ms]f features to make package more resistant to slight warehouse API changes. 
