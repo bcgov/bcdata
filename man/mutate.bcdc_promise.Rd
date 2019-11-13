@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-classes.R
 \name{mutate.bcdc_promise}
 \alias{mutate.bcdc_promise}
-\title{Mutate columns from Web Service call}
+\title{Throw an informative error when attempting mutate on a Web Service call}
 \usage{
 \method{mutate}{bcdc_promise}(.data, ...)
 }
