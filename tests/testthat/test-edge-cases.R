@@ -9,7 +9,7 @@ test_that("recods with wms but inconsistent layer_name, object_name fieldds work
 
   # https://github.com/bcgov/bcdata/issues/129
   # layer_name = WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SPG
-  # objec_name = WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP
+  # object_name = WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP
   # wms uses layer_name (generalized)
   expect_is(bcdc_query_geodata("natural-resource-nr-district"), "bcdc_promise")
 })

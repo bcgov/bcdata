@@ -1,8 +1,11 @@
 # bcdata (development version)
 
 # bcdata 0.1.1.9999
+
+* More reliable detection of layer name for a wfs call in `bcdc_query_geodata()` (#129, #138, #139)
 * Fixed a bug where `BBOX()` used in a `filter()` statement combined with `bcdc_query_geodata()` did not work (#135, #137)
 * Add `mutate` method for bcdc_promise that only fails and suggest an alternative approach. (PR#134)
+* Fixed a bug where layer names with a number in them would not work in `bcdc_query_geodata()` (#126, #127)
 * Add back in querying vignette
 
 # bcdata 0.1.1
