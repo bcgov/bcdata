@@ -41,16 +41,12 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
                             distance = NULL, units = NULL,
                             coords = NULL, crs = NULL){
 
-  if(inherits(x, "bcdc_promise")) {
+  if (inherits(x, "bcdc_promise")) {
     stop("To use spatial operators, you need to use collect() to retrieve the object used to filter",
          call. = FALSE)
   }
 
-  geom_col <- attr(x, "geom_col")
-  if(is.null(geom_col)) geom_col <- "GEOMETRY"
-
   match.arg(geometry_predicates, cql_geom_predicate_list())
-
 
   # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
@@ -118,7 +114,7 @@ sf_text <- function(x) {
 #'
 #' @param geom an sf/sfc/sfg object
 #' @name cql_geom_predicates
-#' @return a CQL expression using the bounding box of the geom
+#' @return a CQL expression to be passed on to the WFS call
 NULL
 
 #' @rdname cql_geom_predicates
