@@ -185,7 +185,8 @@ RELATE <- function(geom, pattern) {
 
 #' @rdname cql_geom_predicates
 #' @param coords the coordinates of the bounding box as four-element numeric
-#'        vector `c(xmin, ymin, xmax, ymax)`.
+#'        vector `c(xmin, ymin, xmax, ymax)`, or a `bbox` object from the `sf`
+#'        package (the result of running `sf::st_bbox()` on an `sf` object).
 #' @param crs (Optional) A string containing an SRS code
 #' (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)
 #' @export

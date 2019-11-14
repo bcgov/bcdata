@@ -56,7 +56,8 @@ A DE-9IM pattern is a string of length 9 specified using the characters
 \verb{*TF012}. Example: \code{'1*T***T**'}}
 
 \item{coords}{the coordinates of the bounding box as four-element numeric
-vector \code{c(xmin, ymin, xmax, ymax)}.}
+vector \code{c(xmin, ymin, xmax, ymax)}, or a \code{bbox} object from the \code{sf}
+package (the result of running \code{sf::st_bbox()} on an \code{sf} object).}
 
 \item{crs}{(Optional) A string containing an SRS code
 (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)}
