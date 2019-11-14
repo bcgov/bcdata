@@ -57,19 +57,19 @@ cql_scalar <- dbplyr::sql_translator(
   `[` = `[`,
   `[[` = `[[`,
   `$` = `$`,
-  DWITHIN = function(x) DWITHIN(x),
-  EQUALS = function(x) EQUALS(x),
-  DISJOINT = function(x) DISJOINT(x),
-  INTERSECTS = function(x) INTERSECTS(x),
-  TOUCHES = function(x) TOUCHES(x),
-  CROSSES = function(x) CROSSES(x),
-  WITHIN = function(x) WITHIN(x),
-  CONTAINS = function(x) CONTAINS(x),
-  OVERLAPS = function(x) OVERLAPS(x),
-  RELATE = function(x) RELATE(x),
-  DWITHIN = function(x) DWITHIN(x),
-  BEYOND = function(x) BEYOND(x),
-  CQL = function(x) CQL(x)
+  EQUALS = function(geom) EQUALS(geom),
+  DISJOINT = function(geom) DISJOINT(geom),
+  INTERSECTS = function(geom) INTERSECTS(geom),
+  TOUCHES = function(geom) TOUCHES(geom),
+  CROSSES = function(geom) CROSSES(geom),
+  WITHIN = function(geom) WITHIN(geom),
+  CONTAINS = function(geom) CONTAINS(geom),
+  OVERLAPS = function(geom) OVERLAPS(geom),
+  RELATE = function(geom, pattern) RELATE(geom, pattern),
+  DWITHIN = function(geom, distance, units) DWITHIN(geom, distance, units),
+  BEYOND = function(geom, distance, units) BEYOND(geom, distance, units),
+  BBOX = function(coords, crs) BBOX(coords, crs),
+  CQL = function(...) CQL(...)
 )
 
 # No aggregation functions available in CQL
