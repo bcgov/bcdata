@@ -4,9 +4,16 @@
 \alias{bcdc_search}
 \title{Search the B.C. Data Catalogue}
 \usage{
-bcdc_search(..., license_id = NULL, download_audience = "Public",
-  type = NULL, res_format = NULL, sector = NULL,
-  organization = NULL, n = 100)
+bcdc_search(
+  ...,
+  license_id = NULL,
+  download_audience = "Public",
+  type = NULL,
+  res_format = NULL,
+  sector = NULL,
+  organization = NULL,
+  n = 100
+)
 }
 \arguments{
 \item{...}{search terms}

@@ -6,7 +6,7 @@
 \alias{bcdata-package}
 \title{bcdata: Search and Retrieve Data from the BC Data Catalogue}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Search, query, and download tabular and 'geospatial' data from the 
              British Columbia Data Catalogue(<https://catalogue.data.gov.bc.ca/>). 

@@ -24,9 +24,6 @@
 #' bcbdc_cql_string accepts the following geometric predicates: EQUALS,
 #' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS, RELATE,
 #' DWITHIN, BEYOND, BBOX.
-#' @inheritParams RELATE
-#' @inheritParams BBOX
-#' @inheritParams DWITHIN
 #'
 #' @seealso sql_geom_predicates
 #'
@@ -181,7 +178,8 @@ RELATE <- function(geom, pattern) {
 }
 
 #' @rdname cql_geom_predicates
-#' @param coords the coordinates of the bounding box.
+#' @param coords the coordinates of the bounding box as four-element numeric
+#'        vector `c(xmin, ymin, xmax, ymax)`.
 #' @param crs (Optional) A string containing an SRS code
 #' (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)
 #' @export
@@ -211,7 +209,6 @@ DWITHIN <- function(geom, distance,
 }
 
 #' @rdname cql_geom_predicates
-#' @inheritParams DWITHIN
 #' @export
 BEYOND <- function(geom, distance,
                    units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {

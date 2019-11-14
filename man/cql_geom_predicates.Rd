@@ -36,20 +36,27 @@ RELATE(geom, pattern)
 
 BBOX(coords, crs = NULL)
 
-DWITHIN(geom, distance, units = c("meters", "feet", "statute miles",
-  "nautical miles", "kilometers"))
+DWITHIN(
+  geom,
+  distance,
+  units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")
+)
 
-BEYOND(geom, distance, units = c("meters", "feet", "statute miles",
-  "nautical miles", "kilometers"))
+BEYOND(
+  geom,
+  distance,
+  units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")
+)
 }
 \arguments{
 \item{geom}{an sf/sfc/sfg object}
 
 \item{pattern}{spatial relationship specified by a DE-9IM matrix pattern.
 A DE-9IM pattern is a string of length 9 specified using the characters
-\code{*TF012}. Example: \code{'1*T***T**'}}
+\verb{*TF012}. Example: \code{'1*T***T**'}}
 
-\item{coords}{the coordinates of the bounding box.}
+\item{coords}{the coordinates of the bounding box as four-element numeric
+vector \code{c(xmin, ymin, xmax, ymax)}.}
 
 \item{crs}{(Optional) A string containing an SRS code
 (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)}
@@ -60,7 +67,7 @@ A DE-9IM pattern is a string of length 9 specified using the characters
 \code{"feet"}, \code{"meters"}, \code{"statute miles"}, \code{"nautical miles"}, \code{"kilometers"}}
 }
 \value{
-a CQL expression using the bounding box of the geom
+a CQL expression to be passed on to the WFS call
 }
 \description{
 Functions to construct a CQL expression to be used
