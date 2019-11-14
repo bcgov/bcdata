@@ -24,9 +24,6 @@
 #' bcbdc_cql_string accepts the following geometric predicates: EQUALS,
 #' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS, RELATE,
 #' DWITHIN, BEYOND, BBOX.
-#' @inheritParams RELATE
-#' @inheritParams BBOX
-#' @inheritParams DWITHIN
 #'
 #' @seealso sql_geom_predicates
 #'
@@ -51,12 +48,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
          call. = FALSE)
   }
 
-
-  geom_col <- attr(x, "geom_col")
-  if(is.null(geom_col)) geom_col <- "GEOMETRY"
-
   match.arg(geometry_predicates, cql_geom_predicate_list())
-
 
   # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
@@ -97,8 +89,6 @@ sf_text <- function(x) {
          call. = FALSE)
   }
 
-
-
   ## If too big here, drawing bounding
   if(utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)){
     warning("The object is too large to perform exact spatial operations using bcdata.
@@ -127,7 +117,7 @@ sf_text <- function(x) {
 #'
 #' @param geom an sf/sfc/sfg object
 #' @name cql_geom_predicates
-#' @return a CQL expression using the bounding box of the geom
+#' @return a CQL expression to be passed on to the WFS call
 NULL
 
 #' @rdname cql_geom_predicates
@@ -194,7 +184,9 @@ RELATE <- function(geom, pattern) {
 }
 
 #' @rdname cql_geom_predicates
-#' @param coords the coordinates of the bounding box.
+#' @param coords the coordinates of the bounding box as four-element numeric
+#'        vector `c(xmin, ymin, xmax, ymax)`, or a `bbox` object from the `sf`
+#'        package (the result of running `sf::st_bbox()` on an `sf` object).
 #' @param crs (Optional) A string containing an SRS code
 #' (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)
 #' @export
@@ -224,7 +216,6 @@ DWITHIN <- function(geom, distance,
 }
 
 #' @rdname cql_geom_predicates
-#' @inheritParams DWITHIN
 #' @export
 BEYOND <- function(geom, distance,
                    units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {

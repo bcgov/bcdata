@@ -1,6 +1,7 @@
 # bcdata (development version)
 
 # bcdata 0.1.1.9999
+* Fixed a bug where `BBOX()` used in a `filter()` statement combined with `bcdc_query_geodata()` did not work (#135, #137)
 * Add `mutate` method for bcdc_promise that only fails and suggest an alternative approach. (PR#134)
 * Add back in querying vignette
 

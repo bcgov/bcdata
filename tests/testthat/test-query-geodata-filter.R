@@ -228,3 +228,12 @@ test_that("a BCGW name works with filter", {
     collect())
   expect_equal(nrow(ret), 367)
 })
+
+test_that("Using BBOX works", {
+  query <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY", crs = 4326) %>%
+    filter(BBOX(c(1639473.0,528785.2,1665979.9,541201.0), crs = "EPSG:3005")) %>%
+    show_query()
+  expect_equal(query$query_list$CQL_FILTER,
+               structure("(BBOX(GEOMETRY, 1639473, 528785.2, 1665979.9, 541201, 'EPSG:3005'))",
+                         class = c("sql", "character")))
+})

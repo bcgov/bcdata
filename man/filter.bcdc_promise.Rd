@@ -10,7 +10,7 @@
 \item{.data}{object of class \code{bcdc_promise} (likely passed from \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}})}
 
 \item{...}{Logical predicates with which to filter the results. Multiple
-conditions are combined with \code{&}. Only rows where the condition evaluates to
+conditions are combined with \verb{&}. Only rows where the condition evaluates to
 \code{TRUE} are kept. Accepts normal R expressions as well as any of the special
 \link[=cql_geom_predicates]{CQL geometry functions} such as \code{WITHIN()} or \code{INTERSECTS()}.
 If you know \code{CQL} and want to write a \code{CQL} query directly, write it enclosed
@@ -22,12 +22,12 @@ full sf object is not read into memory until \code{collect()} has been called.
 }
 \examples{
 \donttest{
-  crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") \%>\%
-    filter(ADMIN_AREA_NAME == "Cariboo Regional District") \%>\%
+  crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
 
-ret1 <- bcdc_query_geodata("fire-perimeters-historical") \%>\%
-  filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
+ret1 <- bcdc_query_geodata("fire-perimeters-historical") %>%
+  filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
   collect()
   }
 }

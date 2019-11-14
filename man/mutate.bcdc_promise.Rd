@@ -20,7 +20,7 @@ approach to use mutate with bcdata
 \dontrun{
 
 ## Mutate columns
-bcdc_query_geodata("bc-airports") \%>\%
+bcdc_query_geodata("bc-airports") %>%
   mutate(LATITUDE * 100)
 }
 

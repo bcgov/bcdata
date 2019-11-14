@@ -34,7 +34,7 @@ that the request will take quite a while.
 }
 \details{
 Note that this function doesn't actually return the data, but rather an
-object of class \code{bcdc_promise``, which includes all of the information required to retrieve the requested data. In order to get the actual data as an }sf\code{object, you need to run [collect()] on the}bcdc_promise\code{. This allows further refining the call to }bcdc_query_geodata()\code{with [filter()] and/or [select()] statements before pulling down the actual data as an}sf`
+object of class \verb{bcdc_promise``, which includes all of the information required to retrieve the requested data. In order to get the actual data as an }sf\verb{object, you need to run [collect()] on the}bcdc_promise\verb{. This allows further refining the call to }bcdc_query_geodata()\verb{with [filter()] and/or [select()] statements before pulling down the actual data as an}sf`
 object with \code{\link[=collect]{collect()}}. See examples.
 }
 \examples{
@@ -44,18 +44,18 @@ object with \code{\link[=collect]{collect()}}. See examples.
 bcdc_query_geodata("bc-airports", crs = 3857)
 
 # To obtain the actual data as an sf object, collect() must be called:
-bcdc_query_geodata("bc-airports", crs = 3857) \%>\%
-  filter(PHYSICAL_ADDRESS == 'Victoria, BC') \%>\%
+bcdc_query_geodata("bc-airports", crs = 3857) %>%
+  filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
   collect()
 
-bcdc_query_geodata("ground-water-wells") \%>\%
-  filter(OBSERVATION_WELL_NUMBER == 108) \%>\%
-  select(WELL_TAG_NUMBER, WATERSHED_CODE) \%>\%
+bcdc_query_geodata("ground-water-wells") %>%
+  filter(OBSERVATION_WELL_NUMBER == 108) %>%
+  select(WELL_TAG_NUMBER, WATERSHED_CODE) %>%
   collect()
 
 ## A moderately large layer
 bcdc_query_geodata("bc-environmental-monitoring-locations")
-bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
+bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
   filter(PERMIT_RELATIONSHIP == "DISCHARGE")
 
 
