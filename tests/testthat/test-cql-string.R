@@ -85,3 +85,9 @@ test_that("unsupported aggregation functions fail correctly", {
   expect_error(filter(structure(list(), class = "bcdc_promise"), mean(x) > 5),
                "not supported by this database")
 })
+
+test_that("passing an non-existent object to a geom predicate",{
+  expect_error(bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+                 filter(INTERSECTS(districts)),
+               'object "districts" not found.\nThe object passed to INTERSECTS needs to be valid sf object.')
+})

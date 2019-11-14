@@ -41,10 +41,16 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
                             distance = NULL, units = NULL,
                             coords = NULL, crs = NULL){
 
+  if (inherits(x, "sql")) {
+    stop(glue::glue("object {as.character(x)} not found.\n The object passed to {geometry_predicates} needs to be valid sf object."),
+         call. = FALSE)
+  }
+
   if(inherits(x, "bcdc_promise")) {
     stop("To use spatial operators, you need to use collect() to retrieve the object used to filter",
          call. = FALSE)
   }
+
 
   geom_col <- attr(x, "geom_col")
   if(is.null(geom_col)) geom_col <- "GEOMETRY"
@@ -85,10 +91,13 @@ cql_geom_predicate_list <- function() {
 }
 
 sf_text <- function(x) {
+
   if (!inherits(x, c("sf", "sfc", "sfg"))) {
     stop(paste(deparse(substitute(x)), "is not a valid sf object"),
          call. = FALSE)
   }
+
+
 
   ## If too big here, drawing bounding
   if(utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)){
