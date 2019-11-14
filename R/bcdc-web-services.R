@@ -117,8 +117,12 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
     )
   }
 
+  layer_name <- basename(dirname(
+    record$resource_df$url[record$resource_df$format == "wms"]
+  ))
+
   ## Parameters for the API call
-  query_list <- make_query_list(layer_name = record$layer_name, crs = crs)
+  query_list <- make_query_list(layer_name = layer_name, crs = crs)
 
   ## Drop any NULLS from the list
   query_list <- compact(query_list)
