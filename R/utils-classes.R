@@ -219,15 +219,19 @@ filter.bcdc_promise <- function(.data, ...) {
 #'
 #'@export
 select.bcdc_promise <- function(.data, ...){
-  dots <- rlang::exprs(...)
 
+  cols_to_select <- tidyselect::vars_select(.data$cols_df$col_name, !!!dplyr::vars(...))
+
+  ## id is always added in. web request doesn't like asking for it twice
+  cols_to_select <- remove_id_col(cols_to_select)
   ## Always add back in the geom
-  cols_to_select <- paste(geom_col_name(.data$cols_df), paste0(dots, collapse = ","), sep = ",")
+  cols_to_select <- paste(geom_col_name(.data$cols_df), paste0(cols_to_select, collapse = ","), sep = ",")
 
   query_list <- c(.data$query_list, propertyName = cols_to_select)
 
   as.bcdc_promise(list(query_list = query_list, cli = .data$cli,
                        record = .data$record, cols_df = .data$cols_df))
+
 }
 
 
