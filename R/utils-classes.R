@@ -220,7 +220,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #'@export
 select.bcdc_promise <- function(.data, ...){
 
-  cols_to_select <- tidyselect::vars_select(.data$cols_df$col_name, !!!dplyr::vars(...))
+  cols_to_select <- tidyselect::vars_select(.data$cols_df$col_name, ...)
 
   ## id is always added in. web request doesn't like asking for it twice
   cols_to_select <- remove_id_col(cols_to_select)
