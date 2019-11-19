@@ -95,7 +95,7 @@ geom_col_name <- function(x) {
 }
 
 remove_id_col <- function(x){
-  x[!x %in% "id"]
+setdiff(x, "id")
 }
 
 #' @param x a resource_df from formatted record
