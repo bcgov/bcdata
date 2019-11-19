@@ -21,10 +21,14 @@ See the License for the specific language governing permissions and limitations 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Travis build
 status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
 [![Codecov test
 coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://codecov.io/gh/bcgov/bcdata?branch=master)
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
+[![cran
+checks](https://cranchecks.info/badges/worst/bcdata)](https://cran.rstudio.com/web/checks/check_results_bcdata.html)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
