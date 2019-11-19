@@ -220,6 +220,8 @@ filter.bcdc_promise <- function(.data, ...) {
 #'@export
 select.bcdc_promise <- function(.data, ...){
 
+  ## Eventually have to migrate to tidyselect::eval_select
+  ## https://community.rstudio.com/t/evaluating-using-rlang-when-supplying-a-vector/44693/10
   cols_to_select <- tidyselect::vars_select(.data$cols_df$col_name, ...)
 
   ## id is always added in. web request doesn't like asking for it twice
