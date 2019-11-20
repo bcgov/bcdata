@@ -52,7 +52,7 @@ jobs:
           sudo -E apt-get -yq --no-install-suggests --no-install-recommends install libudunits2-dev libproj-dev libgeos-dev libgdal-dev
 
       - name: Install brew spatial libs
-        if: runner.os == "macOS" && matrix.config.r == 'devel'
+        if: runner.os == 'macOS' && matrix.config.r == 'devel'
         run: |
           brew install pkg-config
           brew install gdal
