@@ -43,6 +43,12 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
 
+      - name: Install spatial libs
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: sudo -E apt-get -yq --no-install-suggests --no-install-recommends install libudunits2-dev libproj-dev libgeos-dev libgdal
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
