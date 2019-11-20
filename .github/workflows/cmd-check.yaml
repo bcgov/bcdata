@@ -47,7 +47,10 @@ jobs:
         if: runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
-        run: sudo -E apt-get -yq --no-install-suggests --no-install-recommends install libudunits2-dev libproj-dev libgeos-dev libgdal
+        run: |
+          sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt-get update
+          sudo -E apt-get -yq --no-install-suggests --no-install-recommends install libudunits2-dev libproj-dev libgeos-dev libgdal-dev
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
