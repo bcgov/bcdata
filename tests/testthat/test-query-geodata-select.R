@@ -58,3 +58,24 @@ test_that("select works with BCGW name", {
                   select(AIRPORT_NAME, DESCRIPTION) %>%
                   collect())
 })
+
+
+test_that("select accept dplyr like column specifications",{
+  layer <-  bcdc_query_geodata("2ebb35d8-c82f-4a17-9c96-612ac3532d55")
+  wrong_fields <-  c('BCLCS_LEVEL_1', 'dummy_col')
+  correct_fields <-  c('BCLCS_LEVEL_1', 'OPENING_NUMBER')
+
+
+  ## Most basic select
+  expect_is(select(layer, BCLCS_LEVEL_1, POLYGON_ID), "bcdc_promise")
+  ## Using a pre-assigned vecotr
+  expect_is(select(layer, correct_fields), "bcdc_promise")
+  ## Throws an error when column doesn't exist
+  expect_error(select(layer, wrong_fields))
+  expect_is(select(layer, MAP_ID:POLYGON_AREA), "bcdc_promise")
+  ## Some weird mix
+  expect_is(select(layer, 'BCLCS_LEVEL_1', OPENING_NUMBER), "bcdc_promise")
+  ## Another weird mix
+  expect_is(select(layer, c('BCLCS_LEVEL_1','OPENING_SOURCE') , OPENING_NUMBER), "bcdc_promise")
+  expect_is(select(layer, 1:5), "bcdc_promise")
+})

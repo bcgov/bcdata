@@ -7,6 +7,7 @@
 * Add `mutate` method for bcdc_promise that only fails and suggest an alternative approach. (PR#134)
 * Fixed a bug where layer names with a number in them would not work in `bcdc_query_geodata()` (#126, #127)
 * Add back in querying vignette
+* Using `tidyselect` so that `select.bcdc_promise` behaviour is typical of `dplyr::select`
 
 # bcdata 0.1.1
 

@@ -94,6 +94,10 @@ geom_col_name <- function(x) {
   x[x$remote_col_type == geom_type, , drop = FALSE]$col_name
 }
 
+remove_id_col <- function(x){
+setdiff(x, "id")
+}
+
 #' @param x a resource_df from formatted record
 #' @noRd
 wfs_available <- function(x) {
