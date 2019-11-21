@@ -87,6 +87,7 @@ print.bcdc_record <- function(x, ...) {
 record_print_helper <- function(r, n, print_avail = FALSE){
   cat(n, ") ", clean_wfs(r$name), "\n", sep = "")
   #cat("    description:", r$description, "\n")
+  cat("     warehouse name:", ifelse(is_whse_object_name(r$whse_name), r$whse_name, NA_character_), "\n")
   cat("     format:", clean_wfs(formats_from_resource(r)), "\n")
   if (r$format != "wms") cat("     url:", r$url, "\n")
   cat("     resource:", r$id, "\n")
