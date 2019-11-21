@@ -14,7 +14,6 @@ jobs:
         config:
         - { os: windows-latest, r: '3.6', args: "--no-manual"}
         - { os: macOS-latest, r: '3.6'}
-        - { os: macOS-latest, r: 'devel', args: "--no-manual"}
         - { os: ubuntu-16.04, r: '3.3', cran: "https://cloud.r-project.org", args: "--no-manual" }
         - { os: ubuntu-16.04, r: '3.4', cran: "https://cloud.r-project.org", args: "--no-manual" }
         - { os: ubuntu-16.04, r: '3.5', cran: "https://cloud.r-project.org", args: "--no-manual" }
@@ -41,12 +40,6 @@ jobs:
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
-
-      - name: Install brew spatial libs
-        if: runner.os == 'macOS' && matrix.config.r == 'devel'
-        run: |
-          brew install pkg-config
-          brew install gdal || true
 
       - name: Install apt spatial libs
         if: runner.os == 'Linux'
