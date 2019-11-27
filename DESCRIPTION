@@ -9,6 +9,7 @@ Authors@R:
       person(given = "Sam",
              family = "Albers",
              role = c("aut", "ctb"),
+             comment = c(ORCID = "0000-0002-9270-7884"),
              email = "sam.albers@gov.bc.ca"),
       person(given = "Stephanie",
              family = "Hazlitt",
