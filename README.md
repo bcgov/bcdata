@@ -22,7 +22,7 @@ See the License for the specific language governing permissions and limitations 
 [![Travis build
 status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
 [![R build
-status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata/actions?workflow=R-CMD-check)
+status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata)
 [![Codecov test
 coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://codecov.io/gh/bcgov/bcdata?branch=master)
 
@@ -30,7 +30,7 @@ coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](htt
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
 [![cran
-checks](https://cranchecks.info/badges/worst/bcdata)](https://cran.rstudio.com/web/checks/check_results_bcdata.html)
+checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org/web/checks/check_results_bcdata.html)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
