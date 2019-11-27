@@ -195,7 +195,7 @@ BBOX <- function(coords, crs = NULL){
     stop("'coords' must be a length 4 numeric vector", call. = FALSE)
   }
   if (!is.null(crs) && !(is.character(crs) && length(crs) == 1L)) {
-    stop("crs must be a character string denoting the CRS (e.g., 'EPSG:4326'",
+    stop("crs must be a character string denoting the CRS (e.g., 'EPSG:4326')",
          call. = FALSE)
   }
   bcdc_cql_string(x = NULL, "BBOX", coords = coords, crs = crs)
