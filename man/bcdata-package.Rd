@@ -19,7 +19,7 @@ Search, query, and download tabular and 'geospatial' data from the
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/bcgov/bcdata}
+  \item \url{https://bcgov.github.io/bcdata/}
   \item Report bugs at \url{https://github.com/bcgov/bcdata/issues}
 }
 
@@ -29,7 +29,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Sam Albers \email{sam.albers@gov.bc.ca} [contributor]
+  \item Sam Albers \email{sam.albers@gov.bc.ca} (\href{https://orcid.org/0000-0002-9270-7884}{ORCID}) [contributor]
   \item Stephanie Hazlitt \email{stephanie.hazlitt@gov.bc.ca} [contributor]
 }
 
