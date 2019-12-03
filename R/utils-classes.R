@@ -66,21 +66,21 @@ print.bcdc_promise <- function(x, ...) {
 
 #' @export
 print.bcdc_record <- function(x, ...) {
-  cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
+  cat("B.C. Data Catalogue Record:", x$title, "\n")
   cat("\nName:", x$name, "(ID:", x$id, ")")
   cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
   cat("\nSector:", x$sector)
   cat("\nLicence:", x$license_title)
   cat("\nType:", x$type)
   cat("\nLast Updated:", x$record_last_modified, "\n")
-  cat("\nDescription:\n")
-  cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
+  cat("\nDescription:", paste0(strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
   cat("\nResources: (", nrow(x$resource_df), ")\n")
+  print(x$resource_df)
 
-  for (r in seq_len(nrow(x$resource_df))) {
-    record_print_helper(x$resource_df[r, ], r, print_avail = TRUE)
-  }
+  # for (r in seq_len(nrow(x$resource_df))) {
+  #   record_print_helper(x$resource_df[r, ], r, print_avail = TRUE)
+  # }
   invisible(x)
 }
 
