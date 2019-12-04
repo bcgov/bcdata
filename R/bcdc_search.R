@@ -196,7 +196,7 @@ bcdc_get_record <- function(id) {
   r <- cli$get(query = list(id = id))
 
   if (r$status_code == 404){
-    stop(paste0("'", id, "' is not a valid record id or name in the BC data catalogue"), call. = FALSE)
+    stop(paste0("'", id, "' is not a valid record id or name in the B.C. Data Catalogue"), call. = FALSE)
   }
 
   r$raise_for_status()
@@ -236,3 +236,24 @@ as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"
   x
 }
+
+
+#' Provide metadata for all the resources from a single B.C. Data Catalogue record
+#'
+#' @param x a list containing the metadata for a record
+#'  (result of running bcdc_get_record() function)
+#'
+#'
+#' @return A data frame containing the metadata for all the resources for a record
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' airports <- bcdc_get_record("bc-airports")
+#' bcdc_tidy_resources(airports)
+#' }
+bcdc_tidy_resources <- function(x) {
+  df <- x$resource_df
+  df
+}
+
