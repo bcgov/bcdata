@@ -255,5 +255,4 @@ as.bcdc_recordlist <- function(x) {
 bcdc_tidy_resources <- function(x) {
   if (!inherits(x, "bcdc_record")) stop("x needs to be generated from bcdc_get_record")
   x$resource_df
-  df
 }
