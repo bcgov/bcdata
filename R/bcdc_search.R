@@ -253,7 +253,7 @@ as.bcdc_recordlist <- function(x) {
 #' bcdc_tidy_resources(airports)
 #' }
 bcdc_tidy_resources <- function(x) {
-  df <- x$resource_df
+  if (!inherits(x, "bcdc_record")) stop("x needs to be generated from bcdc_get_record")
+  x$resource_df
   df
 }
-
