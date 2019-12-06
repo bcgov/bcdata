@@ -238,10 +238,9 @@ as.bcdc_recordlist <- function(x) {
 }
 
 
-#' Provide metadata for all the resources from a single B.C. Data Catalogue record
+#' Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
 #'
-#' @param x a list containing the metadata for a record
-#'  (result of running bcdc_get_record() function)
+#' @param record a `bcdc_record` object (from the result of `bcdc_get_record()`)
 #'
 #'
 #' @return A data frame containing the metadata for all the resources for a record
@@ -252,7 +251,7 @@ as.bcdc_recordlist <- function(x) {
 #' airports <- bcdc_get_record("bc-airports")
 #' bcdc_tidy_resources(airports)
 #' }
-bcdc_tidy_resources <- function(x) {
-  if (!inherits(x, "bcdc_record")) stop("x needs to be generated from bcdc_get_record")
-  x$resource_df
+bcdc_tidy_resources <- function(record) {
+  if (!inherits(record, "bcdc_record")) stop("record needs to be generated from bcdc_get_record()")
+  record$resource_df
 }
