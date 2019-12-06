@@ -66,21 +66,20 @@ print.bcdc_promise <- function(x, ...) {
 
 #' @export
 print.bcdc_record <- function(x, ...) {
-  cat("B.C. Data Catalogue Record:", x$title, "\n")
-  cat("\nName:", x$name, "(ID:", x$id, ")")
-  cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
-  cat("\nSector:", x$sector)
-  cat("\nLicence:", x$license_title)
-  cat("\nType:", x$type)
-  cat("\nLast Updated:", x$record_last_modified, "\n")
-  cat("\nDescription:", paste0(strwrap(x$notes, width = 85), collapse = "\n"), "\n")
+  cat(cli::col_blue(cli::style_bold("B.C. Data Catalogue Record:")), x$title, "\n")
+  cat(cli::col_blue(cli::style_italic("\nName:")), x$name, "(ID:", x$id, ")")
+  cat(cli::col_blue(cli::style_italic("\nPermalink:")), paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
+  cat(cli::col_blue(cli::style_italic("\nSector:")), x$sector)
+  cat(cli::col_blue(cli::style_italic("\nLicence:")), x$license_title)
+  cat(cli::col_blue(cli::style_italic("\nType:")), x$type)
+  cat(cli::col_blue(cli::style_italic("\nLast Updated:")), x$record_last_modified, "\n")
+  cat(cli::col_blue(cli::style_italic("\nDescription:")), paste0(strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
-  cat("\nResources: (", nrow(x$resource_df), ")\n")
-  print(x$resource_df)
+  cat(cli::col_blue(cli::style_italic("\nResources: (", nrow(bcdc_tidy_resources(x)), ")\n")))
+  print(bcdc_tidy_resources(x))
 
-  # for (r in seq_len(nrow(x$resource_df))) {
-  #   record_print_helper(x$resource_df[r, ], r, print_avail = TRUE)
-  # }
+  cat(cli::col_blue("\n", symbol$arrow_up,symbol$arrow_up, " You can access the 'Resources' data frame using bcdc_tidy_resources()\n\n"))
+
   invisible(x)
 }
 
