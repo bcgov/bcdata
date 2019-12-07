@@ -2,19 +2,19 @@
 % Please edit documentation in R/bcdc_search.R
 \name{bcdc_tidy_resources}
 \alias{bcdc_tidy_resources}
-\title{Provide metadata for all the resources from a single B.C. Data Catalogue record}
+\title{Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record}
 \usage{
-bcdc_tidy_resources(x)
+bcdc_tidy_resources(record)
 }
 \arguments{
-\item{x}{a list containing the metadata for a record
-(result of running bcdc_get_record() function)}
+\item{record}{the human-readable name, permalink ID, or
+URL of the record, or a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})}
 }
 \value{
 A data frame containing the metadata for all the resources for a record
 }
 \description{
-Provide metadata for all the resources from a single B.C. Data Catalogue record
+Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
 }
 \examples{
 \donttest{
