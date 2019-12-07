@@ -240,7 +240,8 @@ as.bcdc_recordlist <- function(x) {
 
 #' Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
 #'
-#' @param record a `bcdc_record` object (from the result of `bcdc_get_record()`)
+#' @param record the human-readable name, permalink ID, or
+#' URL of the record, or a `bcdc_record` object (from the result of `bcdc_get_record()`)
 #'
 #'
 #' @return A data frame containing the metadata for all the resources for a record
@@ -251,7 +252,31 @@ as.bcdc_recordlist <- function(x) {
 #' airports <- bcdc_get_record("bc-airports")
 #' bcdc_tidy_resources(airports)
 #' }
-bcdc_tidy_resources <- function(record) {
-  if (!inherits(record, "bcdc_record")) stop("record needs to be generated from bcdc_get_record()")
+bcdc_tidy_resources <- function(record){
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  UseMethod("bcdc_tidy_resources")
+}
+
+
+#' @export
+bcdc_tidy_resources.default <- function(record) {
+  stop("No bcdc_tidy_resources method for an object of class ", class(record),
+       call. = FALSE)
+}
+
+
+#' @export
+bcdc_tidy_resources.character <- function(record){
+
+  if (is_whse_object_name(record)) {
+    stop("No bcdc_tidy_resources method for a BCGW object name", call. = FALSE)
+  }
+
+  bcdc_tidy_resources(bcdc_get_record(record))
+}
+
+
+#' @export
+bcdc_tidy_resources.bcdc_record <- function(record) {
   record$resource_df
 }
