@@ -78,7 +78,7 @@ print.bcdc_record <- function(x, ...) {
   cat(cli::col_blue(cli::style_italic("\nResources: (", nrow(bcdc_tidy_resources(x)), ")\n")))
   print(bcdc_tidy_resources(x))
 
-  cat(cli::col_blue("\n", symbol$arrow_up,symbol$arrow_up, " You can access the 'Resources' data frame using bcdc_tidy_resources()\n\n"))
+  cat(cli::col_blue("\nYou can access the 'Resources' data frame using bcdc_tidy_resources()\n\n"))
 
   invisible(x)
 }
