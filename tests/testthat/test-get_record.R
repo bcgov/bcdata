@@ -72,3 +72,21 @@ test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_rec
   d <- sr$resource_df
   expect_false(all(d$bcdata_available[d$location == "bcgeographicwarehouse" & d$format != "wms"]))
   })
+
+
+test_that("a data frame with 8 columns of expected types is returned by bcdc_tidy_resources",{
+sr <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
+d <- bcdc_tidy_resources(sr)
+expect_s3_class(d, "data.frame")
+expect_true(ncol(d) == 8)
+expect_type(d$name, "character")
+expect_type(d$url, "character")
+expect_type(d$id, "character")
+expect_type(d$format, "character")
+expect_type(d$ext, "character")
+expect_type(d$package_id, "character")
+expect_type(d$location, "character")
+expect_type(d$bcdata_available, "logical")
+})
+
+
