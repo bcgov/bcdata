@@ -87,6 +87,10 @@ expect_type(d$ext, "character")
 expect_type(d$package_id, "character")
 expect_type(d$location, "character")
 expect_type(d$bcdata_available, "logical")
+expect_equal(d, bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8'))
+expect_error(bcdc_tidy_resources(list()), "No bcdc_tidy_resources method for an object of class")
+expect_error(bcdc_tidy_resources("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"),
+"No bcdc_tidy_resources method for a BCGW object name")
 })
 
 
