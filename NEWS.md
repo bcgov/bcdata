@@ -1,5 +1,10 @@
 # bcdata (development version)
 
+# bcdata 0.1.2.9999
+
+* Add `bcdc_tidy_resources` for retrieving a data frame containing the metadata for all resources from a single B.C. Data Catalogue record (PR#149, #147)
+* Add a more decorative record print method  (#73)
+
 # bcdata 0.1.1.9999
 
 * More reliable detection of layer name for a wfs call in `bcdc_query_geodata()` (#129, #138, #139)
