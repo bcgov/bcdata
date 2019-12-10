@@ -16,8 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: '3.6', args: "--no-manual"}
-        - { os: macOS-latest, r: '3.6' , args: "--no-manual"}
+        - { os: windows-latest, r: '3.6'}
+        - { os: macOS-latest, r: '3.6'}
         - { os: ubuntu-16.04, r: '3.3'}
         - { os: ubuntu-16.04, r: '3.4'}
         - { os: ubuntu-16.04, r: '3.5'}
