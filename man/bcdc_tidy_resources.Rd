@@ -7,14 +7,24 @@
 bcdc_tidy_resources(record)
 }
 \arguments{
-\item{record}{the human-readable name, permalink ID, or
-URL of the record, or a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})}
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()}),
+a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+Warehouse (BCGW) name.
+
+It is advised to use the permanent ID for a record or the BCGW name rather than the
+human-readable name to guard against future name changes of the record.
+If you use the human-readable name a warning will be issued once per
+session. You can silence these warnings altogether by setting an option:
+\code{options("silence_named_get_data_warning" = TRUE)} - which you can set
+in your .Rprofile file so the option persists across sessions.}
 }
 \value{
 A data frame containing the metadata for all the resources for a record
 }
 \description{
-Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
+Returns a rectangular data frame of all resources contained within a record. This is particularly useful
+if you are trying to construct a vector of multiple resources in a record. The data frame also provides
+useful information on the formats, availability and types of data available.
 }
 \examples{
 \donttest{

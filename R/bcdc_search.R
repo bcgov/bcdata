@@ -240,8 +240,11 @@ as.bcdc_recordlist <- function(x) {
 
 #' Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
 #'
-#' @param record the human-readable name, permalink ID, or
-#' URL of the record, or a `bcdc_record` object (from the result of `bcdc_get_record()`)
+#' Returns a rectangular data frame of all resources contained within a record. This is particularly useful
+#' if you are trying to construct a vector of multiple resources in a record. The data frame also provides
+#' useful information on the formats, availability and types of data available.
+#'
+#' @inheritParams bcdc_get_data
 #'
 #'
 #' @return A data frame containing the metadata for all the resources for a record
