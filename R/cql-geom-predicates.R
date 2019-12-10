@@ -63,7 +63,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
         if (!is.null(crs)) paste0(", '", crs, "'")
       )
     } else if (geometry_predicates %in% c("DWITHIN", "BEYOND")) {
-      paste0(x, ", ", distance, ", '", units, "'")
+      paste0(x, ", ", distance, ", ", units, "")
     } else if (geometry_predicates == "RELATE") {
       paste0(x, ", '", pattern, "'")
     } else {
