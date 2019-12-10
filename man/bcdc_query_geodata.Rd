@@ -44,18 +44,18 @@ object with \code{\link[=collect]{collect()}}. See examples.
 bcdc_query_geodata("bc-airports", crs = 3857)
 
 # To obtain the actual data as an sf object, collect() must be called:
-bcdc_query_geodata("bc-airports", crs = 3857) %>%
-  filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
+bcdc_query_geodata("bc-airports", crs = 3857) \%>\%
+  filter(PHYSICAL_ADDRESS == 'Victoria, BC') \%>\%
   collect()
 
-bcdc_query_geodata("ground-water-wells") %>%
-  filter(OBSERVATION_WELL_NUMBER == 108) %>%
-  select(WELL_TAG_NUMBER, WATERSHED_CODE) %>%
+bcdc_query_geodata("ground-water-wells") \%>\%
+  filter(OBSERVATION_WELL_NUMBER == 108) \%>\%
+  select(WELL_TAG_NUMBER, WATERSHED_CODE) \%>\%
   collect()
 
 ## A moderately large layer
 bcdc_query_geodata("bc-environmental-monitoring-locations")
-bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
+bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
   filter(PERMIT_RELATIONSHIP == "DISCHARGE")
 
 

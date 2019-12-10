@@ -25,11 +25,11 @@ feature_spec <- bcdc_describe_feature("bc-airports")
 feature_spec[feature_spec$nillable == TRUE,]
 
 ## Select columns
-bcdc_query_geodata("bc-airports") %>%
+bcdc_query_geodata("bc-airports") \%>\%
   select(DESCRIPTION, PHYSICAL_ADDRESS)
 
 ## Select "sticky" columns
-bcdc_query_geodata("bc-airports") %>%
+bcdc_query_geodata("bc-airports") \%>\%
   select(LOCALITY)
 }
 

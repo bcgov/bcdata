@@ -196,7 +196,7 @@ bcdc_get_record <- function(id) {
   r <- cli$get(query = list(id = id))
 
   if (r$status_code == 404){
-    stop(paste0("'", id, "' is not a valid record id or name in the BC data catalogue"), call. = FALSE)
+    stop(paste0("'", id, "' is not a valid record id or name in the B.C. Data Catalogue"), call. = FALSE)
   }
 
   r$raise_for_status()
@@ -235,4 +235,51 @@ as.bcdc_record <- function(x) {
 as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"
   x
+}
+
+
+#' Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
+#'
+#' Returns a rectangular data frame of all resources contained within a record. This is particularly useful
+#' if you are trying to construct a vector of multiple resources in a record. The data frame also provides
+#' useful information on the formats, availability and types of data available.
+#'
+#' @inheritParams bcdc_get_data
+#'
+#'
+#' @return A data frame containing the metadata for all the resources for a record
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' airports <- bcdc_get_record("bc-airports")
+#' bcdc_tidy_resources(airports)
+#' }
+bcdc_tidy_resources <- function(record){
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  UseMethod("bcdc_tidy_resources")
+}
+
+
+#' @export
+bcdc_tidy_resources.default <- function(record) {
+  stop("No bcdc_tidy_resources method for an object of class ", class(record),
+       call. = FALSE)
+}
+
+
+#' @export
+bcdc_tidy_resources.character <- function(record){
+
+  if (is_whse_object_name(record)) {
+    stop("No bcdc_tidy_resources method for a BCGW object name", call. = FALSE)
+  }
+
+  bcdc_tidy_resources(bcdc_get_record(record))
+}
+
+
+#' @export
+bcdc_tidy_resources.bcdc_record <- function(record) {
+  record$resource_df
 }

@@ -53,5 +53,5 @@ test_that("record with a zip file prints correctly", {
   skip_if_net_down()
   output <- capture_output(bcdc_get_record("bc-grizzly-bear-habitat-classification-and-rating"),
                            print = TRUE)
-  expect_true(any(grepl("(zipped)", output)))
+  expect_true(any(grepl("zip", output)))
 })
