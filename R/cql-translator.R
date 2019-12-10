@@ -22,10 +22,27 @@ cql_translate <- function(...) {
   ## predicates and CQL() expressions are evaluated into valid CQL code
   ## so they can be combined with the rest of the query
   dots <- lapply(dots, function(x) {
+
+    # make sure all arguments are named in the call so can be modified
+    x <- rlang::call_standardise(x, env = rlang::get_env(x))
+
+    # if an argument to a predicate is a call itself, need to evaluate it
+    # locally, as by default all functions are treated as remote and thus
+    # not evaluated.
+    # See ?rlang::partial_eval and https://github.com/bcgov/bcdata/issues/146
+    for (call_arg in rlang::call_args_names(x)) {
+      if (is.call(rlang::call_args(x)[[call_arg]])) {
+        arg_eval <- rlang::eval_tidy(rlang::call_args(x)[[call_arg]],
+                                     env = rlang::get_env(x))
+        x <- rlang::call_modify(x, !!call_arg := arg_eval)
+      }
+    }
+
     rlang::new_quosure(
       dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
-                rlang::get_env(x))
+      rlang::get_env(x))
   })
+
   sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
   build_where(sql_where)
 }
