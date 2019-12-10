@@ -237,3 +237,20 @@ test_that("Using BBOX works", {
                structure("(BBOX(GEOMETRY, 1639473, 528785.2, 1665979.9, 541201, 'EPSG:3005'))",
                          class = c("sql", "character")))
 })
+
+test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
+  the_geom <- st_sfc(st_point(c(1164434.444, 368738.74)),
+                     st_point(c(1203023.699, 412959.018)),
+                     crs = 3005)
+
+  qry <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
+    filter(BBOX(st_bbox(the_geom), crs = paste0("EPSG:", st_crs(the_geom)$epsg))) %>%
+    show_query()
+
+  expect_equal(qry$query_list$CQL_FILTER,
+               "(BBOX(SHAPE, 1164434.444, 368738.74, 1203023.699, 412959.018, 'EPSG:3005'))")
+
+  bcdc_query_geodata("local-and-regional-greenspaces") %>%
+    filter(DWITHIN(the_geom, 100, "meters")) %>%
+    show_query()
+})
