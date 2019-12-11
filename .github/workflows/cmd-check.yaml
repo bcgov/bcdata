@@ -40,7 +40,9 @@ jobs:
         if: contains(matrix.config.args, 'no-manual') == false
 
       - name: Install TeX pkgs
-        run: tlmgr install bitset
+        run: |
+          tlmgr update --self
+          tlmgr install bitset
 
       - name: Cache R packages
         uses: actions/cache@v1
