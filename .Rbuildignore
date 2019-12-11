@@ -10,6 +10,7 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^precompile.R$
 ^codecov\.yml$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
