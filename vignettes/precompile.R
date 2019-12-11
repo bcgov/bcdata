@@ -35,7 +35,7 @@ success <- file.copy(images, dest_images, overwrite = TRUE)
 
 # Clean up if successful --------------------------------------------------
 
-if (!any(success)) {
+if (!all(success)) {
   stop("Image files were not successfully transferred to vignettes directory")
 } else {
   unlink(images)
