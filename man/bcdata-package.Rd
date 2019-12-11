@@ -27,7 +27,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Andy Teucher \email{andy.teucher@gov.bc.ca}
+\strong{Maintainer}: Andy Teucher \email{andy.teucher@gov.bc.ca} (\href{https://orcid.org/0000-0002-7840-692X}{ORCID})
 
 Authors:
 \itemize{
