@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2019-12-10"
+date: "2019-12-11"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -67,11 +67,11 @@ bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> 
 #> Resources: ( 3 )
 #> # A tibble: 3 x 8
-#>   name                     url                                                             id                    format ext   package_id               location        bcdata_available
-#>   <chr>                    <chr>                                                           <chr>                 <chr>  <chr> <chr>                    <chr>           <lgl>           
-#> 1 BC Geographic Warehouse… https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_TANTALIS.T… 529507c4-d155-4c4d-a… other  ""    78ec5279-4534-49a1-97e8… bcgeographicwa… FALSE           
-#> 2 WMS getCapabilities req… https://openmaps.gov.bc.ca/geo/pub/WHSE_TANTALIS.TA_SCHOOL_DIS… 57d8843b-5278-4a0f-b… wms    ""    78ec5279-4534-49a1-97e8… bcgeographicwa… TRUE            
-#> 3 KML Network Link         http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_TANTALIS.TA_SCHO… 7493e749-0e16-440c-9… kml    kml   78ec5279-4534-49a1-97e8… bcgeographicwa… FALSE
+#>   name                     url                                                              id                    format ext   package_id               location        bcdata_available
+#>   <chr>                    <chr>                                                            <chr>                 <chr>  <chr> <chr>                    <chr>           <lgl>           
+#> 1 BC Geographic Warehouse… https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_TANTALIS.TA… 529507c4-d155-4c4d-a… other  ""    78ec5279-4534-49a1-97e8… bcgeographicwa… FALSE           
+#> 2 WMS getCapabilities req… https://openmaps.gov.bc.ca/geo/pub/WHSE_TANTALIS.TA_SCHOOL_DIST… 57d8843b-5278-4a0f-b… wms    ""    78ec5279-4534-49a1-97e8… bcgeographicwa… TRUE            
+#> 3 KML Network Link         http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_TANTALIS.TA_SCHOO… 7493e749-0e16-440c-9… kml    kml   78ec5279-4534-49a1-97e8… bcgeographicwa… FALSE
 ```
 
 This data is the boundary of each school district. The key information in this metadata is that the layer is a `**WFS request (Spatial Data)**`---which means it is available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). From this we know we can make use of `bcdc_query_geodata`.
@@ -90,14 +90,14 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #> # A tibble: 6 x 10
-#>   id                 ADMIN_AREA_SID SCHOOL_DISTRICT_… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM FEATURE_LENGTH_M OBJECTID SE_ANNO_CAD_DATA                               geometry
-#>   <chr>                       <int> <chr>                         <int> <chr>                   <dbl>            <dbl>    <int> <chr>                                     <POLYGON [m]>
-#> 1 WHSE_TANTALIS.TA_…            121 Southeast Kooten…                 5 FA91800600       12518364168.          729285.        1 <NA>             ((1777342 674389.7, 1777324 674398.8,…
-#> 2 WHSE_TANTALIS.TA_…            122 Rocky Mountain                    6 FA91800600       28672897783.         1410275.        2 <NA>             ((1542332 861060.3, 1542312 861062.6,…
-#> 3 WHSE_TANTALIS.TA_…            123 Kootenay Lake                     8 FA91800600       15148870602.         1025248.        3 <NA>             ((1605026 706122.4, 1605024 706116.2,…
-#> 4 WHSE_TANTALIS.TA_…            124 Arrow Lakes                      10 FA91800600        7391752941.          617156.        4 <NA>             ((1600141 682325.2, 1599877 682298.8,…
-#> 5 WHSE_TANTALIS.TA_…            125 Revelstoke                       19 FA91800600        9320096494.          667611.        5 <NA>             ((1541172 678950.9, 1541191 678882.1,…
-#> 6 WHSE_TANTALIS.TA_…            126 Kootenay-Columbia                20 FA91800600        3074361162.          338055.        6 <NA>             ((1552779 562929.4, 1552798 562926.6,…
+#>   id                 ADMIN_AREA_SID SCHOOL_DISTRICT_… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM FEATURE_LENGTH_M OBJECTID SE_ANNO_CAD_DATA                                geometry
+#>   <chr>                       <int> <chr>                         <int> <chr>                   <dbl>            <dbl>    <int> <chr>                                      <POLYGON [m]>
+#> 1 WHSE_TANTALIS.TA_…            121 Southeast Kooten…                 5 FA91800600       12518364168.          729285.        1 <NA>             ((1777342 674389.7, 1777324 674398.8, …
+#> 2 WHSE_TANTALIS.TA_…            122 Rocky Mountain                    6 FA91800600       28672897783.         1410275.        2 <NA>             ((1542332 861060.3, 1542312 861062.6, …
+#> 3 WHSE_TANTALIS.TA_…            123 Kootenay Lake                     8 FA91800600       15148870602.         1025248.        3 <NA>             ((1605026 706122.4, 1605024 706116.2, …
+#> 4 WHSE_TANTALIS.TA_…            124 Arrow Lakes                      10 FA91800600        7391752941.          617156.        4 <NA>             ((1600141 682325.2, 1599877 682298.8, …
+#> 5 WHSE_TANTALIS.TA_…            125 Revelstoke                       19 FA91800600        9320096494.          667611.        5 <NA>             ((1541172 678950.9, 1541191 678882.1, …
+#> 6 WHSE_TANTALIS.TA_…            126 Kootenay-Columbia                20 FA91800600        3074361162.          338055.        6 <NA>             ((1552779 562929.4, 1552798 562926.6, …
 ```
 
 This is the initial query to the data in the catalogue. What has been returned is *not* the actual data but rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also receive instruction that using `collect()` will retrieve a given number of features and fields present for this query. Lastly, there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the catalogue for only those polygons just like we would in a typical `dplyr` workflow:
@@ -117,11 +117,11 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #> # A tibble: 3 x 10
-#>   id                 ADMIN_AREA_SID SCHOOL_DISTRICT_… SCHOOL_DISTRICT_N… FEATURE_CODE FEATURE_AREA_SQM FEATURE_LENGTH_M OBJECTID SE_ANNO_CAD_DATA                              geometry
-#>   <chr>                       <int> <chr>                          <int> <chr>                   <dbl>            <dbl>    <int> <chr>                               <MULTIPOLYGON [m]>
-#> 1 WHSE_TANTALIS.TA_…            133 Prince George                     57 FA91800600       52156022749.         2170693.       13 <NA>             (((1139512 1219856, 1139379 1219892,…
-#> 2 WHSE_TANTALIS.TA_…            157 Greater Victoria                  61 FA91800600         112290667.          162930.       37 <NA>             (((1188094 392987.8, 1187514 392967.…
-#> 3 WHSE_TANTALIS.TA_…            167 Kamloops/Thompson                 73 FA91800600       26181564963.         1202467.       47 <NA>             (((1393261 890465.4, 1393261 890465.…
+#>   id                  ADMIN_AREA_SID SCHOOL_DISTRICT_… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM FEATURE_LENGTH_M OBJECTID SE_ANNO_CAD_DATA                               geometry
+#>   <chr>                        <int> <chr>                         <int> <chr>                   <dbl>            <dbl>    <int> <chr>                                <MULTIPOLYGON [m]>
+#> 1 WHSE_TANTALIS.TA_S…            133 Prince George                    57 FA91800600       52156022749.         2170693.       13 <NA>             (((1139512 1219856, 1139379 1219892, …
+#> 2 WHSE_TANTALIS.TA_S…            157 Greater Victoria                 61 FA91800600         112290667.          162930.       37 <NA>             (((1188094 392987.8, 1187514 392967.3…
+#> 3 WHSE_TANTALIS.TA_S…            167 Kamloops/Thompson                73 FA91800600       26181564963.         1202467.       47 <NA>             (((1393261 890465.4, 1393261 890465.4…
 ```
 
 To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. During an actual analysis, it is possible that you may need to initially collect more data than you want to determine value to subset by. For example, there is currently no way to ask the catalogue for all possible unique values of `SCHOOL_DISTRICT_NAME`. Is that case the data will need to be brought into R and unique values will need to be determined there.
@@ -142,12 +142,11 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #> # A tibble: 3 x 6
-#>   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… OBJECTID
-#>   <chr>          <int> <chr>                       <int>    <int>
-#> 1 WHSE…            133 Prince George                  57       13
-#> 2 WHSE…            157 Greater Victoria               61       37
-#> 3 WHSE…            167 Kamloops/Thomps…               73       47
-#> # … with 1 more variable: geometry <MULTIPOLYGON [m]>
+#>   id                                                ADMIN_AREA_SID SCHOOL_DISTRICT_NA… SCHOOL_DISTRICT_NUM… OBJECTID                                                            geometry
+#>   <chr>                                                      <int> <chr>                              <int>    <int>                                                  <MULTIPOLYGON [m]>
+#> 1 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.fid--50d1d…            133 Prince George                         57       13 (((1139512 1219856, 1139379 1219892, 1139246 1219944, 1139138 1220…
+#> 2 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.fid--50d1d…            157 Greater Victoria                      61       37 (((1188094 392987.8, 1187514 392967.3, 1186934 392946.8, 1186950 3…
+#> 3 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.fid--50d1d…            167 Kamloops/Thompson                     73       47 (((1393261 890465.4, 1393261 890465.4, 1393222 890468.5, 1393222 8…
 ```
 
 Note that in the `select` statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn't select. This is because within each dataset in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don't want those columns after you `collect` the data, which we will take care of right now, you can drop them:
@@ -197,12 +196,12 @@ bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> 
 #> Resources: ( 4 )
 #> # A tibble: 4 x 8
-#>   name     url         id      format ext   package_id   location  bcdata_available
-#>   <chr>    <chr>       <chr>   <chr>  <chr> <chr>        <chr>     <lgl>           
-#> 1 BC Geog… https://ca… dac897… other  ""    6a2fea1b-0c… bcgwdata… FALSE           
-#> 2 WMS get… https://op… a8d5b5… wms    ""    6a2fea1b-0c… bcgeogra… TRUE            
-#> 3 KML Net… http://ope… a7454e… kml    kml   6a2fea1b-0c… bcgeogra… FALSE           
-#> 4 LocalRe… https://ca… 766631… xlsx   xlsx  6a2fea1b-0c… external  TRUE
+#>   name                 url                                                                          id                 format ext   package_id            location      bcdata_available
+#>   <chr>                <chr>                                                                        <chr>              <chr>  <chr> <chr>                 <chr>         <lgl>           
+#> 1 BC Geographic Wareh… https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_BASEMAPPING.GBA_LOCAL_R… dac89711-ebf4-46a… other  ""    6a2fea1b-0cc4-4fc2-8… bcgwdatastore FALSE           
+#> 2 WMS getCapabilities… https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPAC… a8d5b53e-2ecf-434… wms    ""    6a2fea1b-0cc4-4fc2-8… bcgeographic… TRUE            
+#> 3 KML Network Link     http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_BASEMAPPING.GBA_LOCAL_REG_GRE… a7454e41-017b-42c… kml    kml   6a2fea1b-0cc4-4fc2-8… bcgeographic… FALSE           
+#> 4 LocalRegionalParksA… https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516… 76663191-43b6-4a1… xlsx   xlsx  6a2fea1b-0cc4-4fc2-8… external      TRUE
 ```
 
 Again we recognize this is [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data, which means we can make use of `bcdc_query_geodata`.
@@ -221,19 +220,15 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #> # A tibble: 6 x 20
-#>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
-#>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver 
-#> 2 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> 3 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> 4 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
-#> 5 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
-#> 6 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
-#> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
-#> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>, LONGITUDE <dbl>,
-#> #   WHEN_UPDATED <chr>, WEBSITE_URL <chr>, LICENCE_COMMENTS <chr>,
-#> #   FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
-#> #   SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
+#>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY CIVIC_NUMBER CIVIC_NUMBER_SU… STREET_NAME LATITUDE LONGITUDE WHEN_UPDATED WEBSITE_URL
+#>   <chr>            <int> <chr>     <chr>     <chr>            <chr>            <chr>               <int> <chr>            <chr>          <dbl>     <dbl> <chr>        <chr>      
+#> 1 WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver  Surrey               7634 <NA>             164 St          49.1     -123. 2017-05-15Z  http://www…
+#> 2 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver  Surrey              12586 <NA>             80 Ave          49.1     -123. 2017-05-15Z  http://www…
+#> 3 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver  Surrey              13750 <NA>             88 Ave          49.2     -123. 2017-05-15Z  http://www…
+#> 4 WHSE…               22 Beaver C… Local     Park             Metro Vancouver  Surrey               6722 <NA>             122A St         49.1     -123. 2017-05-15Z  http://www…
+#> 5 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver  Surrey               9314 <NA>             157 St          49.2     -123. 2017-05-15Z  http://www…
+#> 6 WHSE…               24 Bell Est… Local     Park             Metro Vancouver  Surrey               1884 <NA>             137A St         49.0     -123. 2017-05-15Z  http://www…
+#> # … with 6 more variables: LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Since we are interested in only "Park" data we can subset our query:
@@ -253,19 +248,15 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #> # A tibble: 6 x 20
-#>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
-#>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
-#> 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
-#> 5 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
-#> 6 WHSE…               25 Bell Park Local     Park             Metro Vancouver 
-#> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
-#> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>, LONGITUDE <dbl>,
-#> #   WHEN_UPDATED <chr>, WEBSITE_URL <chr>, LICENCE_COMMENTS <chr>,
-#> #   FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
-#> #   SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
+#>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY CIVIC_NUMBER CIVIC_NUMBER_SU… STREET_NAME LATITUDE LONGITUDE WHEN_UPDATED WEBSITE_URL
+#>   <chr>            <int> <chr>     <chr>     <chr>            <chr>            <chr>               <int> <chr>            <chr>          <dbl>     <dbl> <chr>        <chr>      
+#> 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver  Surrey              12586 <NA>             80 Ave          49.1     -123. 2017-05-15Z  http://www…
+#> 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver  Surrey              13750 <NA>             88 Ave          49.2     -123. 2017-05-15Z  http://www…
+#> 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver  Surrey               6722 <NA>             122A St         49.1     -123. 2017-05-15Z  http://www…
+#> 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver  Surrey               9314 <NA>             157 St          49.2     -123. 2017-05-15Z  http://www…
+#> 5 WHSE…               24 Bell Est… Local     Park             Metro Vancouver  Surrey               1884 <NA>             137A St         49.0     -123. 2017-05-15Z  http://www…
+#> 6 WHSE…               25 Bell Park Local     Park             Metro Vancouver  Surrey               1782 <NA>             136 St          49.0     -123. 2017-05-15Z  http://www…
+#> # … with 6 more variables: LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full dataset. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
@@ -431,15 +422,13 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #> # A tibble: 6 x 14
-#>   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#>   <chr> <chr>            <chr>            <chr>            <chr>           
-#> 1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> 2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> 3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> 4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> 5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> 6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> # … with 9 more variables: SOURCE_DATA_ID <chr>, SUPPLIED_SOURCE_ID_IND <chr>,
-#> #   AIRPORT_NAME <chr>, LOCALITY <chr>, LATITUDE <dbl>, LONGITUDE <dbl>,
-#> #   NUMBER_OF_RUNWAYS <int>, SEQUENCE_ID <int>, geometry <POINT [m]>
+#>   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID SUPPLIED_SOURCE… AIRPORT_NAME LOCALITY LATITUDE LONGITUDE NUMBER_OF_RUNWA… SEQUENCE_ID
+#>   <chr> <chr>            <chr>            <chr>            <chr>            <chr>          <chr>            <chr>        <chr>       <dbl>     <dbl>            <int>       <int>
+#> 1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      455            N                Terrace (No… Terrace      54.5     -129.                2         577
+#> 2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      464            N                Victoria In… North S…     48.6     -123.                3         733
+#> 3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      482            N                Nanaimo Air… Nanaimo      49.1     -124.                1         853
+#> 4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      483            N                Tofino/Long… Tofino       49.1     -126.                3         641
+#> 5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      484            N                Abbotsford … Abbotsf…     49.0     -122.                2        1039
+#> 6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      487            N                Boundary Ba… Delta        49.1     -123.                2         827
+#> # … with 1 more variable: geometry <POINT [m]>
 ```

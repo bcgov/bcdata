@@ -17,20 +17,23 @@
 
 
 library(knitr)
-
+library(tools)
+library(purrr)
 
 # Convert *.orig to *.Rmd -------------------------------------------------
 
-knit("vignettes/bcdata.Rmd.orig", "vignettes/bcdata.Rmd")
-knit("vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd.orig", "vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd")
+orig_files <- list.files(path = "vignettes/", pattern = "*\\.Rmd\\.orig", full.names = TRUE)
+
+walk(orig_files, ~knit(.x, file_path_sans_ext(.x)))
 
 
 # Move .png files into correct directory so they render -------------------
 
 images <- list.files(".", pattern = 'vignette-fig.*\\.png$')
-dest_images <- file.path("vignettes", images)
 
-success <- file.copy(images, dest_images, overwrite = TRUE)
+success <- file.copy(from = images,
+                     to = file.path("vignettes", images),
+                     overwrite = TRUE)
 
 
 # Clean up if successful --------------------------------------------------
