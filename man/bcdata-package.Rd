@@ -8,18 +8,20 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Search, query, and download tabular and 'geospatial' data from the 
-             British Columbia Data Catalogue(<https://catalogue.data.gov.bc.ca/>). 
-             Search catalogue data records based on keywords, data licence, 
-             sector, data format, and B.C. government organization. View 
-             metadata directly in R, download many data formats, and query
-             'geospatial' data available via the B.C. government Web Feature 
-             Service ('WFS') using 'dplyr' syntax.
+Search, query, and download tabular and
+    'geospatial' data from the British Columbia Data Catalogue
+    (<https://catalogue.data.gov.bc.ca/>).  Search catalogue data records
+    based on keywords, data licence, sector, data format, and B.C.
+    government organization. View metadata directly in R, download many
+    data formats, and query 'geospatial' data available via the B.C.
+    government Web Feature Service ('WFS') using 'dplyr' syntax.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://bcgov.github.io/bcdata/}
+  \item \url{https://catalogue.data.gov.bc.ca/}
+  \item \url{https://github.com/bcgov/bcdata}
   \item Report bugs at \url{https://github.com/bcgov/bcdata/issues}
 }
 
