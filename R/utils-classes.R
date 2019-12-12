@@ -114,7 +114,7 @@ print.bcdc_recordlist <- function(x, ...) {
   x <- purrr::set_names(x, NULL)
   cat(paste(purrr::imap(x[1:n_print], ~ {
 
-    if (nrow(x[[.y]][["resource_df"]]) == 0) {
+    if (!nrow(bcdc_tidy_resources(x[[.y]]))) {
       return(paste0(.y, ": ",purrr::pluck(.x, "title"),
                     col_red("\n This record has no resources. bcdata will not be able to access any data."),
                     "\n ID: ", purrr::pluck(.x, "id"),
