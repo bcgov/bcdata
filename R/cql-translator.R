@@ -10,6 +10,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
+#' @importFrom rlang :=
+
 # Function to translate R code to CQL
 cql_translate <- function(...) {
   ## convert dots to list of quosures
