@@ -99,7 +99,7 @@ bcdc_get_data.character <- function(record, resource = NULL, verbose = TRUE, ...
 bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, ...) {
   record_id <- record$id
 
-  # Only work with resources that are avaialable to read into R
+  # Only work with resources that are available to read into R
   resource_df <- record$resource_df[record$resource_df$bcdata_available, ]
 
 
