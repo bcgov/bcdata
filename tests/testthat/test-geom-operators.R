@@ -49,4 +49,20 @@ test_that("INTERSECT works",{
 
 })
 
+test_that("RELATE works", {
+  skip_on_cran()
+  skip_if_net_down()
+  local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
+    collect()
+
+  remote <- suppressWarnings(
+    bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
+      filter(RELATE(local, "*********")) %>%
+      collect()
+  )
+
+  expect_is(remote, "sf")
+  expect_equal(attr(remote, "sf_column"), "geometry")
+})
 
