@@ -26,24 +26,24 @@ cql_translate <- function(...) {
     # make sure all arguments are named in the call so can be modified
     x <- rlang::call_standardise(x, env = rlang::get_env(x))
 
-    # if an argument to a predicate is a call itself, need to evaluate it
+    # if an argument to a predicate is a function call, need to tell it to evaluate
     # locally, as by default all functions are treated as remote and thus
-    # not evaluated.
+    # not evaluated. Do this by using `rlang::call2` to wrap the function call in
+    # local()
     # See ?rlang::partial_eval and https://github.com/bcgov/bcdata/issues/146
     for (call_arg in rlang::call_args_names(x)) {
       if (is.call(rlang::call_args(x)[[call_arg]])) {
-        arg_eval <- rlang::eval_tidy(rlang::call_args(x)[[call_arg]],
-                                     env = rlang::get_env(x))
-        x <- rlang::call_modify(x, !!call_arg := arg_eval)
+        x <- rlang::call_modify(
+          x, !!call_arg := rlang::call2("local", rlang::call_args(x)[[call_arg]])
+        )
       }
     }
 
-    rlang::new_quosure(
-      dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
-      rlang::get_env(x))
+    rlang::new_quosure(dbplyr::partial_eval(x), rlang::get_env(x))
   })
 
   sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
+
   build_where(sql_where)
 }
 
