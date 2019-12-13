@@ -1,23 +1,21 @@
-## Resubmission
-This is a resubmission. As recommended by the CRAN maintainer who inspected the
-package, in this version we have:
+## CRAN check issues
+* Fixed this warning: https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/bcdata-00check.html
+We are now precompiling vignettes so that functions are run locally and not on CRAN. This will ensure 
+that any outages in the data source will not cause false positive for CRAN checks.
+* Fixed this note: https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/bcdata-00check.html
+We are now explicitly importing `methods::setoldClass`
 
-* Removed the redundant file LICENSE and its reference in the DESCRIPTION file 
-* Changed `\dontrun{}` examples to `\donttest{}`. These examples are long-running
-  and/or require internet access and so are liable to create spurious failures.
-* Eliminated printing to the console with `cat()` and `print()` functions
-  outside of `print()` and `summary()` methods. In the function 
-  `bcdc_get_data()`, we made the use of `cat()` calls conditional on a new 
-  `verbose` argument (and only then when interactive).
 
 ## Test environments
 * local OS X install, R 3.6.1
 * local Windows 10 install, R 3.6.1
-* ubuntu 14.04 (on travis-ci), R 3.6.1, R-oldrel, R-devel
+* ubuntu 16.04 (on travis-ci), R 3.6.1, R-oldrel, R-devel
+* ubuntu 16.04 (on github actions), R 3.6, R 3.5, R 3.4, R 3.3
+* windows-latest (on github actions), R 3.6.1
+* macOS-latest (on github actions), R 3.6.1
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
-* This is a new submission.
