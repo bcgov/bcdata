@@ -12,7 +12,6 @@
 \alias{OVERLAPS}
 \alias{BBOX}
 \alias{DWITHIN}
-\alias{BEYOND}
 \title{CQL Geometry Predicates}
 \usage{
 EQUALS(geom)
@@ -34,12 +33,6 @@ OVERLAPS(geom)
 BBOX(coords, crs = NULL)
 
 DWITHIN(
-  geom,
-  distance,
-  units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")
-)
-
-BEYOND(
   geom,
   distance,
   units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")

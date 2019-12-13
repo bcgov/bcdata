@@ -23,7 +23,7 @@
 #' @param geometry_predicates Geometry predicates that allow for spatial filtering.
 #' bcbdc_cql_string accepts the following geometric predicates: EQUALS,
 #' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS,
-#' DWITHIN, BEYOND, BBOX.
+#' DWITHIN, BBOX.
 #'
 #' @seealso sql_geom_predicates
 #'
@@ -216,7 +216,8 @@ DWITHIN <- function(geom, distance,
 }
 
 #' @rdname cql_geom_predicates
-#' @export
+#' @noRd
+# https://osgeo-org.atlassian.net/browse/GEOS-8922
 BEYOND <- function(geom, distance,
                    units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {
   if (!is.numeric(distance)) {
