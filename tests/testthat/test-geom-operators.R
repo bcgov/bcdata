@@ -50,6 +50,7 @@ test_that("INTERSECT works",{
 })
 
 test_that("RELATE works", {
+  skip("RELATE not supported. https://github.com/bcgov/bcdata/pull/154")
   skip_on_cran()
   skip_if_net_down()
   local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%

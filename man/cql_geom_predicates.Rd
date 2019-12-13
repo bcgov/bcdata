@@ -10,7 +10,6 @@
 \alias{WITHIN}
 \alias{CONTAINS}
 \alias{OVERLAPS}
-\alias{RELATE}
 \alias{BBOX}
 \alias{DWITHIN}
 \alias{BEYOND}
@@ -32,8 +31,6 @@ CONTAINS(geom)
 
 OVERLAPS(geom)
 
-RELATE(geom, pattern)
-
 BBOX(coords, crs = NULL)
 
 DWITHIN(
@@ -50,10 +47,6 @@ BEYOND(
 }
 \arguments{
 \item{geom}{an sf/sfc/sfg object}
-
-\item{pattern}{spatial relationship specified by a DE-9IM matrix pattern.
-A DE-9IM pattern is a string of length 9 specified using the characters
-\verb{*TF012}. Example: \code{'1*T***T**'}}
 
 \item{coords}{the coordinates of the bounding box as four-element numeric
 vector \code{c(xmin, ymin, xmax, ymax)}, or a \code{bbox} object from the \code{sf}

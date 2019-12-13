@@ -53,7 +53,7 @@ test_that("All cql geom predicate functions work", {
   )
   expect_equal(
     RELATE(the_geom, "*********"),
-    CQL("RELATE({geom_name}, POINT (1 1), '*********')")
+    CQL("RELATE({geom_name}, POINT (1 1), *********)")
   )
   expect_equal(
     BBOX(c(1,2,1,2)),

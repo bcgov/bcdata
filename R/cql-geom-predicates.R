@@ -22,7 +22,7 @@
 #' @param x object of class sf, sfc or sfg
 #' @param geometry_predicates Geometry predicates that allow for spatial filtering.
 #' bcbdc_cql_string accepts the following geometric predicates: EQUALS,
-#' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS, RELATE,
+#' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS,
 #' DWITHIN, BEYOND, BBOX.
 #'
 #' @seealso sql_geom_predicates
@@ -172,7 +172,7 @@ OVERLAPS <- function(geom) {
 #' @param pattern spatial relationship specified by a DE-9IM matrix pattern.
 #' A DE-9IM pattern is a string of length 9 specified using the characters
 #' `*TF012`. Example: `'1*T***T**'`
-#' @export
+#' @noRd
 RELATE <- function(geom, pattern) {
   if (!is.character(pattern) ||
       length(pattern) != 1L ||
