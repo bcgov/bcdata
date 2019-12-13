@@ -1,4 +1,4 @@
-# bcdata 0.1.1.9999
+# bcdata 0.1.2
 
 ### IMPROVEMENTS
 * Add `bcdc_tidy_resources` for retrieving a data frame containing the metadata for all resources from a single B.C. Data Catalogue record (PR#149, #147)
