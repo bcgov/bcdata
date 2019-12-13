@@ -12,12 +12,15 @@
 
 context("Geometric operators work with appropriate data")
 
-test_that("WITHIN works",{
-  skip_on_cran()
-  skip_if_net_down()
+if (has_internet() && identical(Sys.getenv("NOT_CRAN"), "true")) {
   local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
+}
+
+test_that("WITHIN works",{
+  skip_on_cran()
+  skip_if_net_down()
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-airports") %>%
@@ -27,16 +30,12 @@ test_that("WITHIN works",{
 
   expect_is(remote, "sf")
   expect_equal(attr(remote, "sf_column"), "geometry")
-
 })
 
 
 test_that("INTERSECT works",{
   skip_on_cran()
   skip_if_net_down()
-  local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
-    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
-    collect()
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
@@ -49,4 +48,47 @@ test_that("INTERSECT works",{
 
 })
 
+test_that("RELATE works", {
+  skip("RELATE not supported. https://github.com/bcgov/bcdata/pull/154")
+  skip_on_cran()
+  skip_if_net_down()
 
+  remote <- suppressWarnings(
+    bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
+      filter(RELATE(local, "*********")) %>%
+      collect()
+  )
+
+  expect_is(remote, "sf")
+  expect_equal(attr(remote, "sf_column"), "geometry")
+})
+
+test_that("DWITHIN works", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  remote <- suppressWarnings(
+    bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
+      filter(DWITHIN(local, 100, "meters")) %>%
+      collect()
+  )
+
+  expect_is(remote, "sf")
+  expect_equal(attr(remote, "sf_column"), "geometry")
+})
+
+test_that("BEYOND works", {
+  skip("BEYOND currently not supported")
+  # https://osgeo-org.atlassian.net/browse/GEOS-8922
+  skip_on_cran()
+  skip_if_net_down()
+
+  remote <- suppressWarnings(
+    bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
+      filter(BEYOND(local, 100, "meters")) %>%
+      collect()
+  )
+
+  expect_is(remote, "sf")
+  expect_equal(attr(remote, "sf_column"), "geometry")
+})

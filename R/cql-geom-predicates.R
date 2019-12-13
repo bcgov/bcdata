@@ -22,8 +22,8 @@
 #' @param x object of class sf, sfc or sfg
 #' @param geometry_predicates Geometry predicates that allow for spatial filtering.
 #' bcbdc_cql_string accepts the following geometric predicates: EQUALS,
-#' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS, RELATE,
-#' DWITHIN, BEYOND, BBOX.
+#' DISJOINT, INTERSECTS, TOUCHES, CROSSES,  WITHIN, CONTAINS, OVERLAPS,
+#' DWITHIN, BBOX.
 #'
 #' @seealso sql_geom_predicates
 #'
@@ -63,9 +63,9 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
         if (!is.null(crs)) paste0(", '", crs, "'")
       )
     } else if (geometry_predicates %in% c("DWITHIN", "BEYOND")) {
-      paste0(x, ", ", distance, ", '", units, "'")
+      paste0(x, ", ", distance, ", ", units, "")
     } else if (geometry_predicates == "RELATE") {
-      paste0(x, ", '", pattern, "'")
+      paste0(x, ", ", pattern)
     } else {
       x
     }
@@ -172,7 +172,7 @@ OVERLAPS <- function(geom) {
 #' @param pattern spatial relationship specified by a DE-9IM matrix pattern.
 #' A DE-9IM pattern is a string of length 9 specified using the characters
 #' `*TF012`. Example: `'1*T***T**'`
-#' @export
+#' @noRd
 RELATE <- function(geom, pattern) {
   if (!is.character(pattern) ||
       length(pattern) != 1L ||
@@ -216,7 +216,8 @@ DWITHIN <- function(geom, distance,
 }
 
 #' @rdname cql_geom_predicates
-#' @export
+#' @noRd
+# https://osgeo-org.atlassian.net/browse/GEOS-8922
 BEYOND <- function(geom, distance,
                    units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {
   if (!is.numeric(distance)) {

@@ -4,6 +4,10 @@
 
 * Add `bcdc_tidy_resources` for retrieving a data frame containing the metadata for all resources from a single B.C. Data Catalogue record (PR#149, #147)
 * Add a more decorative record print method  (#73)
+* Remove `BEYOND()` and `RELATE()` geometry predicates as they are currently
+not fully supported by geoserver
+* Fixed a bug where functions nested inside geometry predicates were not evaluated (#146, #154)
+* Fixed a bug where `DWITHIN` wasn't working because `units` needed to be unqoted (#154)
 
 # bcdata 0.1.1.9999
 

@@ -230,10 +230,34 @@ test_that("a BCGW name works with filter", {
 })
 
 test_that("Using BBOX works", {
+  skip_on_cran()
+  skip_if_net_down()
   query <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY", crs = 4326) %>%
     filter(BBOX(c(1639473.0,528785.2,1665979.9,541201.0), crs = "EPSG:3005")) %>%
     show_query()
   expect_equal(query$query_list$CQL_FILTER,
                structure("(BBOX(GEOMETRY, 1639473, 528785.2, 1665979.9, 541201, 'EPSG:3005'))",
                          class = c("sql", "character")))
+})
+
+test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
+  skip_on_cran()
+  skip_if_net_down()
+  the_geom <- st_sfc(st_point(c(1164434, 368738)),
+                     st_point(c(1203023, 412959)),
+                     crs = 3005)
+
+  qry <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
+    filter(BBOX(st_bbox(the_geom), crs = paste0("EPSG:", st_crs(the_geom)$epsg))) %>%
+    show_query()
+
+  expect_equal(as.character(qry$query_list$CQL_FILTER),
+               "(BBOX(SHAPE, 1164434, 368738, 1203023, 412959, 'EPSG:3005'))")
+
+  qry2 <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
+    filter(DWITHIN(st_buffer(the_geom, 10000, nQuadSegs = 2), 100, "meters")) %>%
+    show_query()
+
+  expect_equal(as.character(qry2$query_list$CQL_FILTER),
+               "(DWITHIN(SHAPE, MULTIPOLYGON (((1174434 368738, 1171505 361666.9, 1164434 358738, 1157363 361666.9, 1154434 368738, 1157363 375809.1, 1164434 378738, 1171505 375809.1, 1174434 368738)), ((1213023 412959, 1210094 405887.9, 1203023 402959, 1195952 405887.9, 1193023 412959, 1195952 420030.1, 1203023 422959, 1210094 420030.1, 1213023 412959))), 100, meters))")
 })
