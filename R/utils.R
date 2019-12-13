@@ -27,6 +27,7 @@ bcdc_number_wfs_records <- function(query_list, client){
 
   query_list <- c(resultType = "hits", query_list)
   res_max <- client$post(body = query_list, encode = "form")
+  catch_catalogue_error(res_max)
   txt_max <- res_max$parse("UTF-8")
 
   ## resultType is only returned as XML.
