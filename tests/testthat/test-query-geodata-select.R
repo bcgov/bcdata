@@ -61,6 +61,8 @@ test_that("select works with BCGW name", {
 
 
 test_that("select accept dplyr like column specifications",{
+  skip_if_net_down()
+  skip_on_cran()
   layer <-  bcdc_query_geodata("2ebb35d8-c82f-4a17-9c96-612ac3532d55")
   wrong_fields <-  c('BCLCS_LEVEL_1', 'dummy_col')
   correct_fields <-  c('BCLCS_LEVEL_1', 'OPENING_NUMBER')

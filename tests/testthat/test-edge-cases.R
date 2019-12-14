@@ -1,7 +1,9 @@
 context("Edge cases and catalogue peculiarities")
 
 test_that("recods with wms but inconsistent layer_name, object_name fieldds work", {
-  # https://github.com/bcgov/bcdata/issues/138
+  skip_if_net_down()
+  skip_on_cran()
+    # https://github.com/bcgov/bcdata/issues/138
   # layer_name = RSLT_PLANTING_ALL_RSLT_CF
   # object_name = WHSE_FOREST_VEGETATION.RSLT_PLANTING_SVW
   # wms uses object_name

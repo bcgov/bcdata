@@ -75,6 +75,8 @@ test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_rec
 
 
 test_that("a data frame with 8 columns of expected types is returned by bcdc_tidy_resources",{
+  skip_if_net_down()
+  skip_on_cran()
 sr <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
 d <- bcdc_tidy_resources(sr)
 expect_s3_class(d, "data.frame")
