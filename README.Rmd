@@ -59,7 +59,7 @@ If you encounter a file type in the B.C. Data Catalogue not currently supported 
 [bcdata package 📦 home page and reference guide](https://bcgov.github.io/bcdata/)
 
 ### Installation
-You can install `bcdata` v0.1.1 directly from [CRAN](https://cran.r-project.org/package=bcdata): 
+You can install `bcdata` directly from [CRAN](https://cran.r-project.org/package=bcdata): 
 
 ```{r eval=FALSE}
 install.packages("bcdata")

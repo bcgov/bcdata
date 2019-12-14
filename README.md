@@ -60,7 +60,7 @@ guide](https://bcgov.github.io/bcdata/)
 
 ### Installation
 
-You can install `bcdata` v0.1.1 directly from
+You can install `bcdata` directly from
 [CRAN](https://cran.r-project.org/package=bcdata):
 
 ``` r
