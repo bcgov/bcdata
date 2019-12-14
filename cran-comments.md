@@ -8,7 +8,7 @@ We are now explicitly importing `methods::setoldClass`
 
 
 ## Test environments
-* local OS X install, R 3.6.1
+* local macOS install (macOS Mojave 10.14.6), R 3.6.1
 * local Windows 10 install, R 3.6.1
 * ubuntu 16.04 (on travis-ci), R 3.6.1, R-oldrel, R-devel
 * ubuntu 16.04 (on github actions), R 3.6, R 3.5, R 3.4, R 3.3
