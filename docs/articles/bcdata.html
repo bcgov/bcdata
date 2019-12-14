@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -93,6 +93,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Get started with bcdata</h1>
+                        <h4 class="author"></h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/bcdata.Rmd"><code>vignettes/bcdata.Rmd</code></a></small>
@@ -131,7 +132,7 @@ See the License for the specific language governing permissions and limitations 
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span>()</span></code></pre></div>
 <p>If you know the catalogue record “human-readable” name or permanent ID you can open directly to the record web page:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## Take me to the B.C. Winery Locations catalogue record using the record name</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span>(<span class="st">"bc-winery-locations"</span>) </span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span>(<span class="st">"bc-winery-locations"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co">## Take me to the B.C. Winery Locations catalogue record using the record ID</span></span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="kw"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span>(<span class="st">"1d21922b-ec4f-42e5-8f6b-bf320a286157"</span>)</span></code></pre></div>
@@ -186,7 +187,7 @@ See the License for the specific language governing permissions and limitations 
 <span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; Access a single record by calling bcdc_get_record(ID)</span></span>
 <span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;       with the ID from the desired record.</span></span>
 <span id="cb6-13"><a href="#cb6-13"></a></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">## Give me the catalogue search results for 'recycling' where the </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">## Give me the catalogue search results for 'recycling' where the</span></span>
 <span id="cb6-15"><a href="#cb6-15"></a><span class="co">## data is tabular and licenced under Open Government Licence – British Columbia</span></span>
 <span id="cb6-16"><a href="#cb6-16"></a><span class="kw"><a href="../reference/bcdc_search.html">bcdc_search</a></span>(<span class="st">"recycling"</span>, <span class="dt">type =</span> <span class="st">"Dataset"</span>, <span class="dt">license_id =</span> <span class="st">"2"</span>)</span>
 <span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; List of B.C. Data Catalogue Records</span></span>
@@ -202,58 +203,42 @@ See the License for the specific language governing permissions and limitations 
 <p>You can see all valid values for the catalogue search facets using <code><a href="../reference/bcdc_search_facets.html">bcdata::bcdc_search_facets()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## Valid values for search facet 'license_id'</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw"><a href="../reference/bcdc_search_facets.html">bcdc_search_facets</a></span>(<span class="dt">facet =</span> <span class="st">"license_id"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt;         facet count</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; 1  license_id    47</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 2  license_id     1</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 3  license_id    11</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 4  license_id    15</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; 5  license_id     4</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; 6  license_id    58</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; 7  license_id  1531</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; 8  license_id     3</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; 9  license_id     2</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; 10 license_id    16</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; 11 license_id  1250</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt;                                                display_name name</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; 1                                         Statistics Canada   21</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; 2                Queen's Printer Licence - British Columbia   25</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; 3  Open Government Licence – Municipality of North Cowichan   44</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; 4                      Open Government Licence - WorkSafeBC   41</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt; 5                  Open Government Licence - Destination BC   43</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; 6                          Open Government Licence - Canada   24</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; 7                Open Government Licence - British Columbia    2</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; 8                   Open Government Licence - BC Assessment   47</span></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; 9  Open Data Commons - Public Domain Dedication and Licence   45</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; 10                           Elections BC Open Data Licence   42</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; 11                                              Access Only   22</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt;         facet count                                             display_name name</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; 1  license_id    47                                        Statistics Canada   21</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; 2  license_id     1               Queen's Printer Licence - British Columbia   25</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; 3  license_id    11 Open Government Licence – Municipality of North Cowichan   44</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; 4  license_id    15                     Open Government Licence - WorkSafeBC   41</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; 5  license_id     4                 Open Government Licence - Destination BC   43</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; 6  license_id    58                         Open Government Licence - Canada   24</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; 7  license_id  1533               Open Government Licence - British Columbia    2</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; 8  license_id     3                  Open Government Licence - BC Assessment   47</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; 9  license_id     2 Open Data Commons - Public Domain Dedication and Licence   45</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; 10 license_id    16                           Elections BC Open Data Licence   42</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; 11 license_id  1249                                              Access Only   22</span></span></code></pre></div>
 <p>Finally, you can retrieve the <em>metadata</em> for a single catalogue record by using the record name or ID with <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations—like scripts—to guard against future name changes of a record:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"a29ad492-29a2-44b9-8693-d27a8cc8e686"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; B.C. Data Catalogue Record:</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;     BC FIRST Tire Recycling Data 1991-2006 </span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; </span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; Name: bc-first-tire-recycling-data-1991-2006 (ID: a29ad492-29a2-44b9-8693-d27a8cc8e686 )</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e686</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; Sector: Natural Resources</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; Type: Dataset</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; Last Updated: 2018-07-12 </span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; </span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; Description:</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;     Financial Incentives for Recycling Scrap Tires (FIRST) collection and recycling data</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt;     (tonnes) from 1991 to 2006. In 2007 [Tire Stewardship BC](http://www.tsbc.ca/), a</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt;     not for profit society, launched the new scrap tire recycling program replacing the</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt;     government-run program that had been in place since 1991. Tire Stewardship BC</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt;     collection and recycling data is available</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt;     [here](https://catalogue.data.gov.bc.ca/dataset/f791329b-c2dc-4f82-9993-209780f2a1c6). </span></span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="co">#&gt; </span></span>
-<span id="cb8-21"><a href="#cb8-21"></a><span class="co">#&gt; Resources: ( 1 )</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="co">#&gt; 1) BC FIRST Tire Recycling Data 1991-2006</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a><span class="co">#&gt;      format: csv </span></span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="co">#&gt;      url: https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e686/resource/ed24cca3-d8cb-4f5e-8f53-67d819640d71/download/eprbcfirsttires1991-2006data.csv </span></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="co">#&gt;      resource: ed24cca3-d8cb-4f5e-8f53-67d819640d71 </span></span>
-<span id="cb8-26"><a href="#cb8-26"></a><span class="co">#&gt;      available in R via bcdata:  TRUE </span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="co">#&gt;      code: bcdc_get_data(record = 'a29ad492-29a2-44b9-8693-d27a8cc8e686', resource = 'ed24cca3-d8cb-4f5e-8f53-67d819640d71')</span></span></code></pre></div>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; B.C. Data Catalogue Record: BC FIRST Tire Recycling Data 1991-2006 </span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; </span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; Name: bc-first-tire-recycling-data-1991-2006 (ID: a29ad492-29a2-44b9-8693-d27a8cc8e686 )</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e686</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; Sector: Natural Resources</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; Type: Dataset</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; Last Updated: 2018-07-12 </span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; </span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; Description: Financial Incentives for Recycling Scrap Tires (FIRST) collection and recycling data</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; (tonnes) from 1991 to 2006. In 2007 [Tire Stewardship BC](http://www.tsbc.ca/), a</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; not for profit society, launched the new scrap tire recycling program replacing the</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; government-run program that had been in place since 1991. Tire Stewardship BC</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; collection and recycling data is available</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; [here](https://catalogue.data.gov.bc.ca/dataset/f791329b-c2dc-4f82-9993-209780f2a1c6). </span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; </span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt; Resources: ( 1 )</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="co">#&gt; # A tibble: 1 x 8</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="co">#&gt;   name                 url                                                                          id                  format ext   package_id            location     bcdata_available</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;                                                                        &lt;chr&gt;               &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                 &lt;chr&gt;        &lt;lgl&gt;           </span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="co">#&gt; 1 BC FIRST Tire Recyc… https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e6… ed24cca3-d8cb-4f5e… csv    csv   a29ad492-29a2-44b9-8… catalogueda… TRUE</span></span></code></pre></div>
 </div>
 <div id="bcdc_get_data" class="section level3">
 <h3 class="hasAnchor">
@@ -261,71 +246,56 @@ See the License for the specific language governing permissions and limitations 
 </h3>
 <p>One you have located the B.C. Data Catalogue record with the data you want, you can use <code><a href="../reference/bcdc_get_data.html">bcdata::bcdc_get_data()</a></code> to download and read the data from the record. You can use the record name, ID or the result from <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. Let’s look at the B.C. Highway Web Cameras data:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## Get the data resource for the `bc-highway-cams` catalogue record</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(<span class="st">"bc-highway-cams"</span>) </span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; # A tibble: 874 x 19</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;  1 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;  2 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;  3 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  4 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;  5 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;  6 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;  7 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;  8 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;  9 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; 10 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; # … with 864 more rows, and 15 more variables: id &lt;dbl&gt;,</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; #   highway_number &lt;chr&gt;, highway_locationDescription &lt;chr&gt;,</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt; #   camName &lt;chr&gt;, caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;,</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, imageStats_updatePeriodMean &lt;chr&gt;,</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; #   imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;,</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; #   updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="co">## OR use the permanent ID, which is better for scripts or non-interactive use </span></span>
-<span id="cb9-24"><a href="#cb9-24"></a><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(<span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span>)</span>
-<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt; # A tibble: 874 x 19</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt;    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
-<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt;  1 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt;  2 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt;  3 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a><span class="co">#&gt;  4 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-32"><a href="#cb9-32"></a><span class="co">#&gt;  5 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a><span class="co">#&gt;  6 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-34"><a href="#cb9-34"></a><span class="co">#&gt;  7 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a><span class="co">#&gt;  8 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-36"><a href="#cb9-36"></a><span class="co">#&gt;  9 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="co">#&gt; 10 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-38"><a href="#cb9-38"></a><span class="co">#&gt; # … with 864 more rows, and 15 more variables: id &lt;dbl&gt;,</span></span>
-<span id="cb9-39"><a href="#cb9-39"></a><span class="co">#&gt; #   highway_number &lt;chr&gt;, highway_locationDescription &lt;chr&gt;,</span></span>
-<span id="cb9-40"><a href="#cb9-40"></a><span class="co">#&gt; #   camName &lt;chr&gt;, caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;,</span></span>
-<span id="cb9-41"><a href="#cb9-41"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, imageStats_updatePeriodMean &lt;chr&gt;,</span></span>
-<span id="cb9-42"><a href="#cb9-42"></a><span class="co">#&gt; #   imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;,</span></span>
-<span id="cb9-43"><a href="#cb9-43"></a><span class="co">#&gt; #   updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span></span>
-<span id="cb9-44"><a href="#cb9-44"></a></span>
-<span id="cb9-45"><a href="#cb9-45"></a><span class="co">## OR use the result from bcdc_get_record()</span></span>
-<span id="cb9-46"><a href="#cb9-46"></a>my_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span>)</span>
-<span id="cb9-47"><a href="#cb9-47"></a><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(my_data)</span>
-<span id="cb9-48"><a href="#cb9-48"></a><span class="co">#&gt; # A tibble: 874 x 19</span></span>
-<span id="cb9-49"><a href="#cb9-49"></a><span class="co">#&gt;    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…</span></span>
-<span id="cb9-50"><a href="#cb9-50"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
-<span id="cb9-51"><a href="#cb9-51"></a><span class="co">#&gt;  1 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a><span class="co">#&gt;  2 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-53"><a href="#cb9-53"></a><span class="co">#&gt;  3 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-54"><a href="#cb9-54"></a><span class="co">#&gt;  4 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-55"><a href="#cb9-55"></a><span class="co">#&gt;  5 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-56"><a href="#cb9-56"></a><span class="co">#&gt;  6 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-57"><a href="#cb9-57"></a><span class="co">#&gt;  7 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-58"><a href="#cb9-58"></a><span class="co">#&gt;  8 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-59"><a href="#cb9-59"></a><span class="co">#&gt;  9 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-60"><a href="#cb9-60"></a><span class="co">#&gt; 10 http://images.d… http://images.d… http://images.d… http://images.d…</span></span>
-<span id="cb9-61"><a href="#cb9-61"></a><span class="co">#&gt; # … with 864 more rows, and 15 more variables: id &lt;dbl&gt;,</span></span>
-<span id="cb9-62"><a href="#cb9-62"></a><span class="co">#&gt; #   highway_number &lt;chr&gt;, highway_locationDescription &lt;chr&gt;,</span></span>
-<span id="cb9-63"><a href="#cb9-63"></a><span class="co">#&gt; #   camName &lt;chr&gt;, caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;,</span></span>
-<span id="cb9-64"><a href="#cb9-64"></a><span class="co">#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, imageStats_updatePeriodMean &lt;chr&gt;,</span></span>
-<span id="cb9-65"><a href="#cb9-65"></a><span class="co">#&gt; #   imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;,</span></span>
-<span id="cb9-66"><a href="#cb9-66"></a><span class="co">#&gt; #   updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span></span></code></pre></div>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(<span class="st">"bc-highway-cams"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; # A tibble: 880 x 19</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id highway_number highway_locatio… camName caption credit orientation latitude longitude imageStats_upda…</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           </span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;  1 http://images.d… http://images.d… http://images.d… http://images.d…     2 5              Coquihalla       Coquih… Hwy 5,… &lt;NA&gt;   N               49.6     -121. 2019-11-26 12:33</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;  2 http://images.d… http://images.d… http://images.d… http://images.d…     5 3              &lt;NA&gt;             Kooten… Hwy 3,… &lt;NA&gt;   E               49.1     -117. 2019-11-26 12:33</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;  3 http://images.d… http://images.d… http://images.d… http://images.d…     6 16             &lt;NA&gt;             Smithe… Hwy 16… &lt;NA&gt;   N               54.8     -127. 2019-11-26 12:27</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  4 http://images.d… http://images.d… http://images.d… http://images.d…     7 1              Fraser Valley    Cole R… Hwy 1 … &lt;NA&gt;   E               49.1     -122. 2019-11-26 12:25</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;  5 http://images.d… http://images.d… http://images.d… http://images.d…     8 1              Vancouver Island Malaha… Hwy 1 … &lt;NA&gt;   N               48.6     -124. 2019-11-26 12:30</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;  6 http://images.d… http://images.d… http://images.d… http://images.d…     9 19             &lt;NA&gt;             Nanaim… Hwy 19… &lt;NA&gt;   N               49.2     -124. 2019-11-26 12:21</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;  7 http://images.d… http://images.d… http://images.d… http://images.d…    10 97             Northern Region  South … Hwy 97… &lt;NA&gt;   N               56.1     -121. 2019-11-26 12:21</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;  8 http://images.d… http://images.d… http://images.d… http://images.d…    11 1              Trans Canada Hi… Revels… Hwy 1 … &lt;NA&gt;   NE              51.0     -118. 2019-11-26 12:34</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;  9 http://images.d… http://images.d… http://images.d… http://images.d…    12 1              Trans Canada Hi… Three … Hwy 1,… &lt;NA&gt;   E               50.9     -118. 2019-10-25 16:34</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; 10 http://images.d… http://images.d… http://images.d… http://images.d…    13 99             Peace Arch Bord… Peace … Hwy 99… "For … N               49.0     -123. 2019-11-26 12:34</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; # … with 870 more rows, and 5 more variables: imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">## OR use the permanent ID, which is better for scripts or non-interactive use</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(<span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; # A tibble: 880 x 19</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt;    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id highway_number highway_locatio… camName caption credit orientation latitude longitude imageStats_upda…</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           </span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;  1 http://images.d… http://images.d… http://images.d… http://images.d…     2 5              Coquihalla       Coquih… Hwy 5,… &lt;NA&gt;   N               49.6     -121. 2019-11-26 12:33</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt;  2 http://images.d… http://images.d… http://images.d… http://images.d…     5 3              &lt;NA&gt;             Kooten… Hwy 3,… &lt;NA&gt;   E               49.1     -117. 2019-11-26 12:33</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt;  3 http://images.d… http://images.d… http://images.d… http://images.d…     6 16             &lt;NA&gt;             Smithe… Hwy 16… &lt;NA&gt;   N               54.8     -127. 2019-11-26 12:27</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt;  4 http://images.d… http://images.d… http://images.d… http://images.d…     7 1              Fraser Valley    Cole R… Hwy 1 … &lt;NA&gt;   E               49.1     -122. 2019-11-26 12:25</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt;  5 http://images.d… http://images.d… http://images.d… http://images.d…     8 1              Vancouver Island Malaha… Hwy 1 … &lt;NA&gt;   N               48.6     -124. 2019-11-26 12:30</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt;  6 http://images.d… http://images.d… http://images.d… http://images.d…     9 19             &lt;NA&gt;             Nanaim… Hwy 19… &lt;NA&gt;   N               49.2     -124. 2019-11-26 12:21</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt;  7 http://images.d… http://images.d… http://images.d… http://images.d…    10 97             Northern Region  South … Hwy 97… &lt;NA&gt;   N               56.1     -121. 2019-11-26 12:21</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt;  8 http://images.d… http://images.d… http://images.d… http://images.d…    11 1              Trans Canada Hi… Revels… Hwy 1 … &lt;NA&gt;   NE              51.0     -118. 2019-11-26 12:34</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="co">#&gt;  9 http://images.d… http://images.d… http://images.d… http://images.d…    12 1              Trans Canada Hi… Three … Hwy 1,… &lt;NA&gt;   E               50.9     -118. 2019-10-25 16:34</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="co">#&gt; 10 http://images.d… http://images.d… http://images.d… http://images.d…    13 99             Peace Arch Bord… Peace … Hwy 99… "For … N               49.0     -123. 2019-11-26 12:34</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="co">#&gt; # … with 870 more rows, and 5 more variables: imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="co">## OR use the result from bcdc_get_record()</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a>my_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span>)</span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(my_data)</span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="co">#&gt; # A tibble: 880 x 19</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="co">#&gt;    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id highway_number highway_locatio… camName caption credit orientation latitude longitude imageStats_upda…</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           </span></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="co">#&gt;  1 http://images.d… http://images.d… http://images.d… http://images.d…     2 5              Coquihalla       Coquih… Hwy 5,… &lt;NA&gt;   N               49.6     -121. 2019-11-26 12:33</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="co">#&gt;  2 http://images.d… http://images.d… http://images.d… http://images.d…     5 3              &lt;NA&gt;             Kooten… Hwy 3,… &lt;NA&gt;   E               49.1     -117. 2019-11-26 12:33</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="co">#&gt;  3 http://images.d… http://images.d… http://images.d… http://images.d…     6 16             &lt;NA&gt;             Smithe… Hwy 16… &lt;NA&gt;   N               54.8     -127. 2019-11-26 12:27</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a><span class="co">#&gt;  4 http://images.d… http://images.d… http://images.d… http://images.d…     7 1              Fraser Valley    Cole R… Hwy 1 … &lt;NA&gt;   E               49.1     -122. 2019-11-26 12:25</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a><span class="co">#&gt;  5 http://images.d… http://images.d… http://images.d… http://images.d…     8 1              Vancouver Island Malaha… Hwy 1 … &lt;NA&gt;   N               48.6     -124. 2019-11-26 12:30</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="co">#&gt;  6 http://images.d… http://images.d… http://images.d… http://images.d…     9 19             &lt;NA&gt;             Nanaim… Hwy 19… &lt;NA&gt;   N               49.2     -124. 2019-11-26 12:21</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a><span class="co">#&gt;  7 http://images.d… http://images.d… http://images.d… http://images.d…    10 97             Northern Region  South … Hwy 97… &lt;NA&gt;   N               56.1     -121. 2019-11-26 12:21</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="co">#&gt;  8 http://images.d… http://images.d… http://images.d… http://images.d…    11 1              Trans Canada Hi… Revels… Hwy 1 … &lt;NA&gt;   NE              51.0     -118. 2019-11-26 12:34</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="co">#&gt;  9 http://images.d… http://images.d… http://images.d… http://images.d…    12 1              Trans Canada Hi… Three … Hwy 1,… &lt;NA&gt;   E               50.9     -118. 2019-10-25 16:34</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="co">#&gt; 10 http://images.d… http://images.d… http://images.d… http://images.d…    13 99             Peace Arch Bord… Peace … Hwy 99… "For … N               49.0     -123. 2019-11-26 12:34</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="co">#&gt; # … with 870 more rows, and 5 more variables: imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span></span></code></pre></div>
 <p>A catalogue record can have one or multiple data files—or “resources”. If there is only one resource, <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will return that resource by default, as in the above <code>bc-highway-cams</code> example. If there are multiple data resources you will need to specify which resource you want. Let’s look at a catalogue record that contains multiple data resources—BC Schools - Programs Offered in Schools:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## Get the record ID for the `bc-schools-programs-offered-in-schools` catalogue record</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw"><a href="../reference/bcdc_search.html">bcdc_search</a></span>(<span class="st">"school programs"</span>, <span class="dt">n =</span> <span class="dv">1</span>)</span>
@@ -342,63 +312,46 @@ See the License for the specific language governing permissions and limitations 
 <span id="cb10-13"><a href="#cb10-13"></a></span>
 <span id="cb10-14"><a href="#cb10-14"></a><span class="co">## Get the metadata for the `bc-schools-programs-offered-in-schools` catalogue record</span></span>
 <span id="cb10-15"><a href="#cb10-15"></a><span class="kw"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"b1f27d1c-244a-410e-a361-931fac62a524"</span>)</span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; B.C. Data Catalogue Record:</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt;     BC Schools - Programs Offered in Schools </span></span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; </span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; Name: bc-schools-programs-offered-in-schools (ID: b1f27d1c-244a-410e-a361-931fac62a524 )</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/b1f27d1c-244a-410e-a361-931fac62a524</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; Sector: Education</span></span>
-<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></span>
-<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; Type: Dataset</span></span>
-<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; Last Updated: 2017-02-02 </span></span>
-<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt; </span></span>
-<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; Description:</span></span>
-<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt;     BC Schools English Language Learners, French Immersion, Francophone, Career</span></span>
-<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt;     Preparation, Aboriginal Support Services, Aboriginal Language and Culture,</span></span>
-<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt;     Continuing Education and Career Technical Programs offered in BC schools up to</span></span>
-<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt;     2013/2014. </span></span>
-<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; </span></span>
-<span id="cb10-32"><a href="#cb10-32"></a><span class="co">#&gt; Resources: ( 2 )</span></span>
-<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#&gt; 1) ProgramsOfferedinSchools.txt</span></span>
-<span id="cb10-34"><a href="#cb10-34"></a><span class="co">#&gt;      format: txt </span></span>
-<span id="cb10-35"><a href="#cb10-35"></a><span class="co">#&gt;      url: http://www.bced.gov.bc.ca/reporting/odefiles/ProgramsOfferedinSchools.txt </span></span>
-<span id="cb10-36"><a href="#cb10-36"></a><span class="co">#&gt;      resource: a393f8cf-51ec-42c6-8449-4cea4c75385c </span></span>
-<span id="cb10-37"><a href="#cb10-37"></a><span class="co">#&gt;      available in R via bcdata:  TRUE </span></span>
-<span id="cb10-38"><a href="#cb10-38"></a><span class="co">#&gt;      code: bcdc_get_data(record = 'b1f27d1c-244a-410e-a361-931fac62a524', resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')</span></span>
-<span id="cb10-39"><a href="#cb10-39"></a><span class="co">#&gt; </span></span>
-<span id="cb10-40"><a href="#cb10-40"></a><span class="co">#&gt; 2) ProgramsOfferedinSchools.xlsx</span></span>
-<span id="cb10-41"><a href="#cb10-41"></a><span class="co">#&gt;      format: xlsx </span></span>
-<span id="cb10-42"><a href="#cb10-42"></a><span class="co">#&gt;      url: http://www.bced.gov.bc.ca/reporting/odefiles/ProgramsOfferedinSchools.xlsx </span></span>
-<span id="cb10-43"><a href="#cb10-43"></a><span class="co">#&gt;      resource: 1e34098e-70d3-454d-a0fb-e4f8f477d0c0 </span></span>
-<span id="cb10-44"><a href="#cb10-44"></a><span class="co">#&gt;      available in R via bcdata:  TRUE </span></span>
-<span id="cb10-45"><a href="#cb10-45"></a><span class="co">#&gt;      code: bcdc_get_data(record = 'b1f27d1c-244a-410e-a361-931fac62a524', resource = '1e34098e-70d3-454d-a0fb-e4f8f477d0c0')</span></span></code></pre></div>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; B.C. Data Catalogue Record: BC Schools - Programs Offered in Schools </span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; </span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; Name: bc-schools-programs-offered-in-schools (ID: b1f27d1c-244a-410e-a361-931fac62a524 )</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/b1f27d1c-244a-410e-a361-931fac62a524</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; Sector: Education</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; Type: Dataset</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; Last Updated: 2017-02-02 </span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; </span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt; Description: BC Schools English Language Learners, French Immersion, Francophone, Career</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; Preparation, Aboriginal Support Services, Aboriginal Language and Culture,</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt; Continuing Education and Career Technical Programs offered in BC schools up to</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt; 2013/2014. </span></span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt; </span></span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt; Resources: ( 2 )</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="co">#&gt;   name                     url                                                        id                            format ext   package_id                    location bcdata_available</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;                                                      &lt;chr&gt;                         &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                         &lt;chr&gt;    &lt;lgl&gt;           </span></span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="co">#&gt; 1 ProgramsOfferedinSchool… http://www.bced.gov.bc.ca/reporting/odefiles/ProgramsOffe… a393f8cf-51ec-42c6-8449-4cea… txt    txt   b1f27d1c-244a-410e-a361-931f… external TRUE            </span></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="co">#&gt; 2 ProgramsOfferedinSchool… http://www.bced.gov.bc.ca/reporting/odefiles/ProgramsOffe… 1e34098e-70d3-454d-a0fb-e4f8… xlsx   xlsx  b1f27d1c-244a-410e-a361-931f… external TRUE</span></span></code></pre></div>
 <p>We see there are two data files or resources available in this record, so we need to tell <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> which one we want. When used interactively, <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will prompt you with the list of available resources through <code>bcdata</code> and ask you to select the resource you want. The full code—with the resource ID for each data set—is also available <em>in</em> the metadata record ☝️:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## Get the txt data resource from the `bc-schools-programs-offered-in-schools`</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">## catalogue record</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(<span class="st">"b1f27d1c-244a-410e-a361-931fac62a524"</span>, <span class="dt">resource =</span> <span class="st">'a393f8cf-51ec-42c6-8449-4cea4c75385c'</span>)</span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; # A tibble: 16,152 x 24</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;    `Data Level` `School Year` `Facility Type` `Public Or Inde…</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;           </span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt;  2 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;  3 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt;  4 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt;  5 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;  6 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt;  7 SCHOOL LEVEL 2008/2009     STANDARD        BC Public School</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt;  8 SCHOOL LEVEL 2009/2010     STANDARD        BC Public School</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt;  9 SCHOOL LEVEL 2010/2011     STANDARD        BC Public School</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 10 SCHOOL LEVEL 2011/2012     STANDARD        BC Public School</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; # … with 16,142 more rows, and 20 more variables: `District Number` &lt;chr&gt;,</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; #   `District Name` &lt;chr&gt;, `School Number` &lt;chr&gt;, `School Name` &lt;chr&gt;,</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; #   `Has Eng Lang Learner Prog` &lt;lgl&gt;, `Has Core French` &lt;lgl&gt;, `Has Early</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; #   French Immersion` &lt;lgl&gt;, `Has Late French Immersion` &lt;lgl&gt;, `Has Prog</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; #   Francophone` &lt;lgl&gt;, `Has Any French Immersion Prog` &lt;lgl&gt;, `Has Any</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt; #   French Prog` &lt;lgl&gt;, `Has Aborig Supp Services` &lt;lgl&gt;, `Has Other Appr</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt; #   Aborig Prog` &lt;lgl&gt;, `Has Aborig Lang And Cult` &lt;lgl&gt;, `Has Continuing</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt; #   Ed Prog` &lt;lgl&gt;, `Has Distributed Learn Prog` &lt;lgl&gt;, `Has Career Prep</span></span>
-<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt; #   Prog` &lt;lgl&gt;, `Has Coop Prog` &lt;lgl&gt;, `Has Apprenticeship Prog` &lt;lgl&gt;,</span></span>
-<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt; #   `Has Career Technical Prog` &lt;lgl&gt;</span></span></code></pre></div>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;    `Data Level` `School Year` `Facility Type` `Public Or Inde… `District Numbe… `District Name` `School Number` `School Name` `Has Eng Lang L… `Has Core Frenc… `Has Early Fren…</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;         &lt;lgl&gt;            &lt;lgl&gt;            &lt;lgl&gt;           </span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005              Southeast Koot… 00501006        Sparwood Sec… NA               TRUE             NA              </span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt;  2 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005              Southeast Koot… 00501006        Sparwood Sec… NA               TRUE             NA              </span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;  3 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005              Southeast Koot… 00501006        Sparwood Sec… NA               TRUE             NA              </span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt;  4 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              </span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt;  5 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              </span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;  6 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              </span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt;  7 SCHOOL LEVEL 2008/2009     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              </span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt;  8 SCHOOL LEVEL 2009/2010     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              </span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt;  9 SCHOOL LEVEL 2010/2011     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              </span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 10 SCHOOL LEVEL 2011/2012     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              </span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; # … with 16,142 more rows, and 13 more variables: `Has Late French Immersion` &lt;lgl&gt;, `Has Prog Francophone` &lt;lgl&gt;, `Has Any French Immersion Prog` &lt;lgl&gt;, `Has Any French Prog` &lt;lgl&gt;,</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; #   `Has Aborig Supp Services` &lt;lgl&gt;, `Has Other Appr Aborig Prog` &lt;lgl&gt;, `Has Aborig Lang And Cult` &lt;lgl&gt;, `Has Continuing Ed Prog` &lt;lgl&gt;, `Has Distributed Learn Prog` &lt;lgl&gt;, `Has</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; #   Career Prep Prog` &lt;lgl&gt;, `Has Coop Prog` &lt;lgl&gt;, `Has Apprenticeship Prog` &lt;lgl&gt;, `Has Career Technical Prog` &lt;lgl&gt;</span></span></code></pre></div>
 <p><code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will also detect if the data resource is a geospatial file, and automatically reads and returns it as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session. Let’s get the air zones for British Columbia:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## Find the B.C. Air Zones catalogue record</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw"><a href="../reference/bcdc_search.html">bcdc_search</a></span>(<span class="st">"air zones"</span>, <span class="dt">res_format =</span> <span class="st">"geojson"</span>)</span>
@@ -420,10 +373,12 @@ See the License for the specific language governing permissions and limitations 
 <span id="cb12-18"><a href="#cb12-18"></a>bc_az &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(bc_az_metadata, <span class="dt">resource =</span> <span class="st">"c495d082-b586-4df0-9e06-bd6b66a8acd9"</span>)</span>
 <span id="cb12-19"><a href="#cb12-19"></a></span>
 <span id="cb12-20"><a href="#cb12-20"></a><span class="co">## Plot the B.C. Air Zone geospatial data with ggplot()</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a>bc_az <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>bc_az <span class="op">%&gt;%</span></span>
 <span id="cb12-22"><a href="#cb12-22"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb12-23"><a href="#cb12-23"></a><span class="st">  </span><span class="kw">geom_sf</span>()</span></code></pre></div>
-<p><img src="bcdata_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+<div class="figure">
+<img src="vignette-fig-air_zones-1.png" alt=""><p class="caption">plot of chunk air_zones</p>
+</div>
 <p><strong>Note:</strong> The <code>bcdata</code> package supports downloading <em>most</em> file types, including zip archives. It will do its best to identify and read data from zip files, however if there are multiple data files in the zip, or data files that <code>bcdata</code> doesn’t know how to import, it will fail.</p>
 </div>
 <div id="using-b-c--geographic-warehouse-bcgw-layer-names" class="section level3">
@@ -438,33 +393,23 @@ See the License for the specific language governing permissions and limitations 
 <span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; epsg (SRID):    3005</span></span>
 <span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></span>
 <span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; # A tibble: 455 x 42</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO…</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt;  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt;  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt;  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a><span class="co">#&gt;  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt;  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt;  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt; 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat…</span></span>
-<span id="cb13-21"><a href="#cb13-21"></a><span class="co">#&gt; # … with 445 more rows, and 38 more variables:</span></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="co">#&gt; #   OCCUPANT_TYPE_DESCRIPTION &lt;chr&gt;, SOURCE_DATA_ID &lt;chr&gt;,</span></span>
-<span id="cb13-23"><a href="#cb13-23"></a><span class="co">#&gt; #   SUPPLIED_SOURCE_ID_IND &lt;chr&gt;, AIRPORT_NAME &lt;chr&gt;, DESCRIPTION &lt;chr&gt;,</span></span>
-<span id="cb13-24"><a href="#cb13-24"></a><span class="co">#&gt; #   PHYSICAL_ADDRESS &lt;chr&gt;, ALIAS_ADDRESS &lt;chr&gt;, STREET_ADDRESS &lt;chr&gt;,</span></span>
-<span id="cb13-25"><a href="#cb13-25"></a><span class="co">#&gt; #   POSTAL_CODE &lt;chr&gt;, LOCALITY &lt;chr&gt;, CONTACT_PHONE &lt;chr&gt;,</span></span>
-<span id="cb13-26"><a href="#cb13-26"></a><span class="co">#&gt; #   CONTACT_EMAIL &lt;chr&gt;, CONTACT_FAX &lt;chr&gt;, WEBSITE_URL &lt;chr&gt;,</span></span>
-<span id="cb13-27"><a href="#cb13-27"></a><span class="co">#&gt; #   IMAGE_URL &lt;chr&gt;, LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, KEYWORDS &lt;chr&gt;,</span></span>
-<span id="cb13-28"><a href="#cb13-28"></a><span class="co">#&gt; #   DATE_UPDATED &lt;date&gt;, SITE_GEOCODED_IND &lt;chr&gt;, AERODROME_STATUS &lt;chr&gt;,</span></span>
-<span id="cb13-29"><a href="#cb13-29"></a><span class="co">#&gt; #   AIRCRAFT_ACCESS_IND &lt;chr&gt;, DATA_SOURCE &lt;chr&gt;, DATA_SOURCE_YEAR &lt;chr&gt;,</span></span>
-<span id="cb13-30"><a href="#cb13-30"></a><span class="co">#&gt; #   ELEVATION &lt;dbl&gt;, FUEL_AVAILABILITY_IND &lt;chr&gt;,</span></span>
-<span id="cb13-31"><a href="#cb13-31"></a><span class="co">#&gt; #   HELICOPTER_ACCESS_IND &lt;chr&gt;, IATA_CODE &lt;chr&gt;, ICAO_CODE &lt;chr&gt;,</span></span>
-<span id="cb13-32"><a href="#cb13-32"></a><span class="co">#&gt; #   MAX_RUNWAY_LENGTH &lt;dbl&gt;, NUMBER_OF_RUNWAYS &lt;int&gt;,</span></span>
-<span id="cb13-33"><a href="#cb13-33"></a><span class="co">#&gt; #   OIL_AVAILABILITY_IND &lt;chr&gt;, RUNWAY_SURFACE &lt;chr&gt;,</span></span>
-<span id="cb13-34"><a href="#cb13-34"></a><span class="co">#&gt; #   SEAPLANE_ACCESS_IND &lt;chr&gt;, TC_LID_CODE &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;,</span></span>
-<span id="cb13-35"><a href="#cb13-35"></a><span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POINT [m]&gt;</span></span></code></pre></div>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID SUPPLIED_SOURCE… AIRPORT_NAME DESCRIPTION PHYSICAL_ADDRESS ALIAS_ADDRESS STREET_ADDRESS</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;         &lt;chr&gt;         </span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      455            N                Terrace (No… airport     4401 Bristol Rd… 4401 Bristol… 4401 Bristol …</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      456            N                Victoria Ha… heliport    Victoria, BC     Victoria, BC  &lt;NA&gt;          </span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt;  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      457            N                Victoria In… water aero… Victoria, BC     Victoria, BC  &lt;NA&gt;          </span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt;  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      458            N                Victoria Ha… heliport    Victoria, BC     Victoria, BC  &lt;NA&gt;          </span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      459            N                Victoria (R… hospital h… 1952 Bay St, Sa… 1952 Bay St,… 1952 Bay St   </span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt;  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      460            N                Victoria (G… hospital h… 1 Hospital Way,… 1 Hospital W… 1 Hospital Way</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co">#&gt;  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      461            N                Victoria (B… heliport    Saanich, BC      Saanich, BC   &lt;NA&gt;          </span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt;  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      462            N                San Juan Po… heliport    Port Renfrew, BC Port Renfrew… &lt;NA&gt;          </span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt;  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      463            N                Shawnigan L… water aero… Shawnigan Lake,… Shawnigan La… &lt;NA&gt;          </span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt; 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      464            N                Victoria In… airport     1640 Electra Bl… 1640 Electra… 1640 Electra …</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co">#&gt; # … with 445 more rows, and 30 more variables: POSTAL_CODE &lt;chr&gt;, LOCALITY &lt;chr&gt;, CONTACT_PHONE &lt;chr&gt;, CONTACT_EMAIL &lt;chr&gt;, CONTACT_FAX &lt;chr&gt;, WEBSITE_URL &lt;chr&gt;, IMAGE_URL &lt;chr&gt;,</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, KEYWORDS &lt;chr&gt;, DATE_UPDATED &lt;chr&gt;, SITE_GEOCODED_IND &lt;chr&gt;, AERODROME_STATUS &lt;chr&gt;, AIRCRAFT_ACCESS_IND &lt;chr&gt;, DATA_SOURCE &lt;chr&gt;,</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="co">#&gt; #   DATA_SOURCE_YEAR &lt;chr&gt;, ELEVATION &lt;dbl&gt;, FUEL_AVAILABILITY_IND &lt;chr&gt;, HELICOPTER_ACCESS_IND &lt;chr&gt;, IATA_CODE &lt;chr&gt;, ICAO_CODE &lt;chr&gt;, MAX_RUNWAY_LENGTH &lt;dbl&gt;,</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="co">#&gt; #   NUMBER_OF_RUNWAYS &lt;int&gt;, OIL_AVAILABILITY_IND &lt;chr&gt;, RUNWAY_SURFACE &lt;chr&gt;, SEAPLANE_ACCESS_IND &lt;chr&gt;, TC_LID_CODE &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POINT</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="co">#&gt; #   [m]&gt;</span></span></code></pre></div>
 </div>
 <div id="bcdc_query_geodata" class="section level3">
 <h3 class="hasAnchor">
@@ -491,44 +436,57 @@ See the License for the specific language governing permissions and limitations 
 <span id="cb14-17"><a href="#cb14-17"></a><span class="co">## Have a quick look at the geospatial columns to help with filter or select</span></span>
 <span id="cb14-18"><a href="#cb14-18"></a><span class="kw"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span>(bc_regional_districts_metadata)</span>
 <span id="cb14-19"><a href="#cb14-19"></a><span class="co">#&gt; # A tibble: 18 x 4</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a><span class="co">#&gt;    col_name                selectable remote_col_type        local_col_type</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt;    &lt;chr&gt;                   &lt;lgl&gt;      &lt;chr&gt;                  &lt;chr&gt;         </span></span>
-<span id="cb14-22"><a href="#cb14-22"></a><span class="co">#&gt;  1 id                      FALSE      xsd:string             character     </span></span>
-<span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt;  2 LGL_ADMIN_AREA_ID       FALSE      xsd:decimal            numeric       </span></span>
-<span id="cb14-24"><a href="#cb14-24"></a><span class="co">#&gt;  3 ADMIN_AREA_NAME         TRUE       xsd:string             character     </span></span>
-<span id="cb14-25"><a href="#cb14-25"></a><span class="co">#&gt;  4 ADMIN_AREA_ABBREVIATION TRUE       xsd:string             character     </span></span>
-<span id="cb14-26"><a href="#cb14-26"></a><span class="co">#&gt;  5 ADMIN_AREA_BOUNDARY_TY… TRUE       xsd:string             character     </span></span>
-<span id="cb14-27"><a href="#cb14-27"></a><span class="co">#&gt;  6 ADMIN_AREA_TYPE         TRUE       xsd:string             character     </span></span>
-<span id="cb14-28"><a href="#cb14-28"></a><span class="co">#&gt;  7 ADMIN_AREA_GROUP_NAME   TRUE       xsd:string             character     </span></span>
-<span id="cb14-29"><a href="#cb14-29"></a><span class="co">#&gt;  8 CHANGE_REQUESTED_ORG    TRUE       xsd:string             character     </span></span>
-<span id="cb14-30"><a href="#cb14-30"></a><span class="co">#&gt;  9 UPDATE_TYPE             TRUE       xsd:string             character     </span></span>
-<span id="cb14-31"><a href="#cb14-31"></a><span class="co">#&gt; 10 WHEN_UPDATED            TRUE       xsd:date               date          </span></span>
-<span id="cb14-32"><a href="#cb14-32"></a><span class="co">#&gt; 11 OIC_NUMBER              TRUE       xsd:string             character     </span></span>
-<span id="cb14-33"><a href="#cb14-33"></a><span class="co">#&gt; 12 OIC_YEAR                TRUE       xsd:string             character     </span></span>
-<span id="cb14-34"><a href="#cb14-34"></a><span class="co">#&gt; 13 AFFECTED_ADMIN_AREA_AB… TRUE       xsd:string             character     </span></span>
-<span id="cb14-35"><a href="#cb14-35"></a><span class="co">#&gt; 14 FEATURE_AREA_SQM        TRUE       xsd:decimal            numeric       </span></span>
-<span id="cb14-36"><a href="#cb14-36"></a><span class="co">#&gt; 15 FEATURE_LENGTH_M        TRUE       xsd:decimal            numeric       </span></span>
-<span id="cb14-37"><a href="#cb14-37"></a><span class="co">#&gt; 16 SHAPE                   TRUE       gml:GeometryPropertyT… sfc geometry  </span></span>
-<span id="cb14-38"><a href="#cb14-38"></a><span class="co">#&gt; 17 OBJECTID                FALSE      xsd:decimal            numeric       </span></span>
-<span id="cb14-39"><a href="#cb14-39"></a><span class="co">#&gt; 18 SE_ANNO_CAD_DATA        TRUE       xsd:hexBinary          numeric</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co">#&gt;    col_name                  selectable remote_col_type          local_col_type</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt;    &lt;chr&gt;                     &lt;lgl&gt;      &lt;chr&gt;                    &lt;chr&gt;         </span></span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="co">#&gt;  1 id                        FALSE      xsd:string               character     </span></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt;  2 LGL_ADMIN_AREA_ID         FALSE      xsd:decimal              numeric       </span></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="co">#&gt;  3 ADMIN_AREA_NAME           TRUE       xsd:string               character     </span></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="co">#&gt;  4 ADMIN_AREA_ABBREVIATION   TRUE       xsd:string               character     </span></span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="co">#&gt;  5 ADMIN_AREA_BOUNDARY_TYPE  TRUE       xsd:string               character     </span></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="co">#&gt;  6 ADMIN_AREA_TYPE           TRUE       xsd:string               character     </span></span>
+<span id="cb14-28"><a href="#cb14-28"></a><span class="co">#&gt;  7 ADMIN_AREA_GROUP_NAME     TRUE       xsd:string               character     </span></span>
+<span id="cb14-29"><a href="#cb14-29"></a><span class="co">#&gt;  8 CHANGE_REQUESTED_ORG      TRUE       xsd:string               character     </span></span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="co">#&gt;  9 UPDATE_TYPE               TRUE       xsd:string               character     </span></span>
+<span id="cb14-31"><a href="#cb14-31"></a><span class="co">#&gt; 10 WHEN_UPDATED              TRUE       xsd:date                 date          </span></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="co">#&gt; 11 OIC_NUMBER                TRUE       xsd:string               character     </span></span>
+<span id="cb14-33"><a href="#cb14-33"></a><span class="co">#&gt; 12 OIC_YEAR                  TRUE       xsd:string               character     </span></span>
+<span id="cb14-34"><a href="#cb14-34"></a><span class="co">#&gt; 13 AFFECTED_ADMIN_AREA_ABRVN TRUE       xsd:string               character     </span></span>
+<span id="cb14-35"><a href="#cb14-35"></a><span class="co">#&gt; 14 FEATURE_AREA_SQM          TRUE       xsd:decimal              numeric       </span></span>
+<span id="cb14-36"><a href="#cb14-36"></a><span class="co">#&gt; 15 FEATURE_LENGTH_M          TRUE       xsd:decimal              numeric       </span></span>
+<span id="cb14-37"><a href="#cb14-37"></a><span class="co">#&gt; 16 SHAPE                     TRUE       gml:GeometryPropertyType sfc geometry  </span></span>
+<span id="cb14-38"><a href="#cb14-38"></a><span class="co">#&gt; 17 OBJECTID                  FALSE      xsd:decimal              numeric       </span></span>
+<span id="cb14-39"><a href="#cb14-39"></a><span class="co">#&gt; 18 SE_ANNO_CAD_DATA          TRUE       xsd:hexBinary            numeric</span></span>
 <span id="cb14-40"><a href="#cb14-40"></a></span>
-<span id="cb14-41"><a href="#cb14-41"></a><span class="co">## Get the Capital Regional District polygon from the B.C. Regional </span></span>
+<span id="cb14-41"><a href="#cb14-41"></a><span class="co">## Get the Capital Regional District polygon from the B.C. Regional</span></span>
 <span id="cb14-42"><a href="#cb14-42"></a><span class="co">## Districts geospatial data</span></span>
-<span id="cb14-43"><a href="#cb14-43"></a>my_regional_district &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(bc_regional_districts_metadata) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-44"><a href="#cb14-44"></a><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(ADMIN_AREA_NAME <span class="op">==</span><span class="st"> "Capital Regional District"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb14-43"><a href="#cb14-43"></a>my_regional_district &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(bc_regional_districts_metadata) <span class="op">%&gt;%</span></span>
+<span id="cb14-44"><a href="#cb14-44"></a><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(ADMIN_AREA_NAME <span class="op">==</span><span class="st"> "Capital Regional District"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb14-45"><a href="#cb14-45"></a><span class="st">  </span><span class="kw"><a href="../reference/collect.html">collect</a></span>()</span>
 <span id="cb14-46"><a href="#cb14-46"></a></span>
 <span id="cb14-47"><a href="#cb14-47"></a><span class="co">## Plot the Capital Regional District polygon with ggplot()</span></span>
-<span id="cb14-48"><a href="#cb14-48"></a>my_regional_district  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb14-48"><a href="#cb14-48"></a>my_regional_district  <span class="op">%&gt;%</span></span>
 <span id="cb14-49"><a href="#cb14-49"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb14-50"><a href="#cb14-50"></a><span class="st">  </span><span class="kw">geom_sf</span>()</span></code></pre></div>
-<p><img src="bcdata_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+<div class="figure">
+<img src="vignette-fig-regional_districts-1.png" alt=""><p class="caption">plot of chunk regional_districts</p>
+</div>
 <p>The vignette <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying spatial data with bcdata</a> provides a full demonstration on how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata()</a></code> to fine tune a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a> request for geospatial data from the B.C. Data Catalogue.</p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#bcdc_browse"><code>bcdc_browse()</code></a></li>
+      <li><a href="#bcdc_search"><code>bcdc_search()</code></a></li>
+      <li><a href="#bcdc_get_data"><code>bcdc_get_data()</code></a></li>
+      <li><a href="#using-b-c--geographic-warehouse-bcgw-layer-names">Using B.C. Geographic Warehouse (BCGW) layer names</a></li>
+      <li><a href="#bcdc_query_geodata"><code>bcdc_query_geodata()</code></a></li>
+      </ul>
+</div>
       </div>
 
 </div>

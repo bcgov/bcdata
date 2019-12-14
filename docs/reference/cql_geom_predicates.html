@@ -82,7 +82,7 @@ filtering may be needed to achieve exact results." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -166,15 +166,13 @@ filtering may be needed to achieve exact results.</p>
 
 <span class='fu'>OVERLAPS</span>(<span class='no'>geom</span>)
 
-<span class='fu'>RELATE</span>(<span class='no'>geom</span>, <span class='no'>pattern</span>)
-
 <span class='fu'>BBOX</span>(<span class='no'>coords</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>DWITHIN</span>(<span class='no'>geom</span>, <span class='no'>distance</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"meters"</span>, <span class='st'>"feet"</span>, <span class='st'>"statute miles"</span>,
-  <span class='st'>"nautical miles"</span>, <span class='st'>"kilometers"</span>))
-
-<span class='fu'>BEYOND</span>(<span class='no'>geom</span>, <span class='no'>distance</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"meters"</span>, <span class='st'>"feet"</span>, <span class='st'>"statute miles"</span>,
-  <span class='st'>"nautical miles"</span>, <span class='st'>"kilometers"</span>))</pre>
+<span class='fu'>DWITHIN</span>(
+  <span class='no'>geom</span>,
+  <span class='no'>distance</span>,
+  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"meters"</span>, <span class='st'>"feet"</span>, <span class='st'>"statute miles"</span>, <span class='st'>"nautical miles"</span>, <span class='st'>"kilometers"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,14 +182,10 @@ filtering may be needed to achieve exact results.</p>
       <td><p>an sf/sfc/sfg object</p></td>
     </tr>
     <tr>
-      <th>pattern</th>
-      <td><p>spatial relationship specified by a DE-9IM matrix pattern.
-A DE-9IM pattern is a string of length 9 specified using the characters
-<code>*TF012</code>. Example: <code>'1*T***T**'</code></p></td>
-    </tr>
-    <tr>
       <th>coords</th>
-      <td><p>the coordinates of the bounding box.</p></td>
+      <td><p>the coordinates of the bounding box as four-element numeric
+vector <code><a href='https://rdrr.io/r/base/c.html'>c(xmin, ymin, xmax, ymax)</a></code>, or a <code>bbox</code> object from the <code>sf</code>
+package (the result of running <code><a href='https://rdrr.io/pkg/sf/man/st_bbox.html'>sf::st_bbox()</a></code> on an <code>sf</code> object).</p></td>
     </tr>
     <tr>
       <th>crs</th>
@@ -211,7 +205,7 @@ A DE-9IM pattern is a string of length 9 specified using the characters
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a CQL expression using the bounding box of the geom</p>
+    <p>a CQL expression to be passed on to the WFS call</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

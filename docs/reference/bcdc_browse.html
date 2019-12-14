@@ -78,7 +78,7 @@ the default" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -142,8 +142,11 @@ the default" />
 the default</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_browse</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>browser</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"browser"</span>),
-  <span class='kw'>encodeIfNeeded</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>bcdc_browse</span>(
+  <span class='kw'>query</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>browser</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"browser"</span>),
+  <span class='kw'>encodeIfNeeded</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,9 +192,8 @@ session is interactive. The URL used is returned as a character string.</p>
 <span class='fu'>bcdc_browse</span>()
 
 <span class='co'>## Take me to the B.C. airports catalogue record</span>
-<span class='fu'>bcdc_browse</span>(<span class='st'>"bc-airports"</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'crul':</span>
-#&gt; <span class='message'>  method                 from</span>
-#&gt; <span class='message'>  as.character.form_file httr</span></div><div class='input'>
+<span class='fu'>bcdc_browse</span>(<span class='st'>"bc-airports"</span>)
+
 <span class='co'>#' ## Take me to the B.C. airports catalogue record</span>
 <span class='fu'>bcdc_browse</span>(<span class='st'>"76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)
 

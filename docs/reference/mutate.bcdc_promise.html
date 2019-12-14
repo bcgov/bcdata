@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • bcdata</title>
+<title>Throw an informative error when attempting mutate on a Web Service call — mutate.bcdc_promise • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,10 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Throw an informative error when attempting mutate on a Web Service call — mutate.bcdc_promise" />
+<meta property="og:description" content="The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
+this function exists solely to generate an informative error that suggests an alternative
+approach to use mutate with bcdata" />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +66,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -130,18 +133,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Throw an informative error when attempting mutate on a Web Service call</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/utils-classes.R'><code>R/utils-classes.R</code></a></small>
+    <div class="hidden name"><code>mutate.bcdc_promise.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <ul>
-        <li><a href="bcdata.html">Get started with bcdata</a></li>
-        <li><a href="efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a></li>
-      </ul>
+    <div class="ref-description">
+    <p>The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
+this function exists solely to generate an informative error that suggests an alternative
+approach to use mutate with bcdata</p>
     </div>
+
+    <pre class="usage"><span class='co'># S3 method for bcdc_promise</span>
+<span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>object of class <code>bcdc_promise</code> (likely passed from <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>)</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>One or more unquoted expressions separated by commas. See details.</p></td>
+    </tr>
+    </table>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='co'>## Mutate columns</span>
+<span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='mutate.html'>mutate</a></span>(<span class='no'>LATITUDE</span> * <span class='fl'>100</span>)
+}</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 

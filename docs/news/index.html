@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -134,9 +134,47 @@
       <small>Source: <a href='https://github.com/bcgov/bcdata/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="bcdata-012" class="section level1">
+<h1 class="page-header">
+<a href="#bcdata-012" class="anchor"></a>bcdata 0.1.2<small> Unreleased </small>
+</h1>
+<div id="improvements" class="section level3">
+<h3 class="hasAnchor">
+<a href="#improvements" class="anchor"></a>IMPROVEMENTS</h3>
+<ul>
+<li>Add <code>bcdc_tidy_resources</code> for retrieving a data frame containing the metadata for all resources from a single B.C. Data Catalogue record (PR<a href='https://github.com/bcgov/bcdata/issues/149'>#149</a>, <a href='https://github.com/bcgov/bcdata/issues/147'>#147</a>)</li>
+<li>Add a more decorative record print method (<a href='https://github.com/bcgov/bcdata/issues/73'>#73</a>)</li>
+<li>More reliable detection of layer name for a wfs call in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (<a href='https://github.com/bcgov/bcdata/issues/129'>#129</a>, <a href='https://github.com/bcgov/bcdata/issues/138'>#138</a>, <a href='https://github.com/bcgov/bcdata/issues/139'>#139</a>)</li>
+<li>Add <code>mutate</code> method for bcdc_promise that only fails and suggest an alternative approach. (PR<a href='https://github.com/bcgov/bcdata/issues/134'>#134</a>)</li>
+<li>Add back in querying vignette</li>
+<li>Using <code>tidyselect</code> so that <code>select.bcdc_promise</code> behaviour is typical of <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code> ($140, <a href='https://github.com/bcgov/bcdata/issues/138'>#138</a>)</li>
+<li>Using GitHub actions for CI.</li>
+</ul>
+</div>
+<div id="minor-breaking-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-breaking-changes" class="anchor"></a>MINOR BREAKING CHANGES</h3>
+<ul>
+<li>Remove <code>BEYOND()</code> and <code>RELATE()</code> geometry predicates as they are currently not fully supported by geoserver</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>BUG FIXES</h3>
+<ul>
+<li>Now precompiling vignettes so that queries are submitted locally and no actually requests are made from CRAN (<a href='https://github.com/bcgov/bcdata/issues/151'>#151</a>)</li>
+<li>Fix <code>NOTE: Namespace in Imports field not imported from: ‘methods’</code> error on CRAN (<a href='https://github.com/bcgov/bcdata/issues/145'>#145</a>)</li>
+<li>Fixed a bug where functions nested inside geometry predicates were not evaluated (<a href='https://github.com/bcgov/bcdata/issues/146'>#146</a>, <a href='https://github.com/bcgov/bcdata/issues/154'>#154</a>)</li>
+<li>Fixed a bug where <code>DWITHIN</code> wasn’t working because <code>units</code> needed to be unqoted (<a href='https://github.com/bcgov/bcdata/issues/154'>#154</a>)</li>
+<li>Fixed a bug where <code><a href="../reference/cql_geom_predicates.html">BBOX()</a></code> used in a <code><a href="../reference/filter.html">filter()</a></code> statement combined with <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> did not work (<a href='https://github.com/bcgov/bcdata/issues/135'>#135</a>, <a href='https://github.com/bcgov/bcdata/issues/137'>#137</a>, <a href='https://github.com/bcgov/bcdata/issues/131'>#131</a>)</li>
+<li>Fixed a bug where layer names with a number in them would not work in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (<a href='https://github.com/bcgov/bcdata/issues/126'>#126</a>, <a href='https://github.com/bcgov/bcdata/issues/127'>#127</a>)</li>
+</ul>
+</div>
+</div>
     <div id="bcdata-011" class="section level1">
 <h1 class="page-header">
-<a href="#bcdata-011" class="anchor"></a>bcdata 0.1.1</h1>
+<a href="#bcdata-011" class="anchor"></a>bcdata 0.1.1<small> 2019-11-05 </small>
+</h1>
 <ul>
 <li>Expand and standardize checking w[ms]f features to make package more resistant to slight warehouse API changes.</li>
 <li>Data retrieval functions now work with BCGW name (<a href='https://github.com/bcgov/bcdata/issues/106'>#106</a>)</li>
@@ -152,7 +190,8 @@
 </div>
     <div id="bcdata-010" class="section level1">
 <h1 class="page-header">
-<a href="#bcdata-010" class="anchor"></a>bcdata 0.1.0</h1>
+<a href="#bcdata-010" class="anchor"></a>bcdata 0.1.0<small> Unreleased </small>
+</h1>
 <ul>
 <li>Initial Release</li>
 </ul>
@@ -163,6 +202,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#bcdata-012">0.1.2</a></li>
         <li><a href="#bcdata-011">0.1.1</a></li>
         <li><a href="#bcdata-010">0.1.0</a></li>
       </ul>

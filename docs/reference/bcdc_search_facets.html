@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -140,8 +140,10 @@
     <p>Get the valid values for a facet (that you can use in <code><a href='bcdc_search.html'>bcdc_search()</a></code>)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_search_facets</span>(<span class='kw'>facet</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"license_id"</span>, <span class='st'>"download_audience"</span>, <span class='st'>"type"</span>,
-  <span class='st'>"res_format"</span>, <span class='st'>"sector"</span>, <span class='st'>"organization"</span>))</pre>
+    <pre class="usage"><span class='fu'>bcdc_search_facets</span>(
+  <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"license_id"</span>, <span class='st'>"download_audience"</span>, <span class='st'>"type"</span>, <span class='st'>"res_format"</span>, <span class='st'>"sector"</span>,
+    <span class='st'>"organization"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,9 +164,9 @@ more of:
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'>bcdc_search_facets</span>(<span class='st'>"type"</span>)</div><div class='output co'>#&gt;   facet count display_name        name
 #&gt; 1  type    32   WebService  WebService
-#&gt; 2  type  1690   Geographic  Geographic
-#&gt; 3  type  1079      Dataset     Dataset
-#&gt; 4  type   137  Application Application</div><div class='input'># }
+#&gt; 2  type  1686   Geographic  Geographic
+#&gt; 3  type  1082      Dataset     Dataset
+#&gt; 4  type   138  Application Application</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

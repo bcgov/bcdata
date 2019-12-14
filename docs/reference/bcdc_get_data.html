@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -316,30 +316,29 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>10</span><span> 1000              East… Male  2026  4853  1680  1534  17518 7569  705   33859
 #&gt; </span><span style='color: #555555;'># … with 891 more rows</span><span></div><div class='input'>
 <span class='co'>## From bcdc_get_record we realize that the data is in xlsx format</span>
-<span class='fu'><a href='bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span>)</div><div class='output co'>#&gt; B.C. Data Catalogue Record:
-#&gt;     Local Government Population and Household Projections (2018-2027) 
+<span class='fu'><a href='bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record:</span><span> Local Government Population and Household Projections (2018-2027) 
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Name:</span><span> local-government-population-and-household-projections-2018-2027- (ID: d7e6c8c7-052f-4f06-b178-74c02c243ea4 )</span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Permalink:</span><span> https://catalogue.data.gov.bc.ca/dataset/d7e6c8c7-052f-4f06-b178-74c02c243ea4</span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Sector:</span><span> Economy</span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Licence:</span><span> Access Only</span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Type:</span><span> Dataset</span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Last Updated:</span><span> 2019-07-17 
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Description:</span><span> This dataset contains population and household projections for 2018-2027 including:
+#&gt; overall population, gender distribution, age distribution, median age, average age,
+#&gt; population growth rates, number of households, average number of people per
+#&gt; household.  
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Resources: (1)
+#&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
+#&gt;   name      url        id     format ext   package_id  location bcdata_available
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>           
+#&gt; </span><span style='color: #555555;'>1</span><span> Populati… https://c… d39bd… xlsx   xlsx  d7e6c8c7-0… catalog… TRUE            
+#&gt; </span><span style='color: #0000BB;'>
+#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()
 #&gt; 
-#&gt; Name: local-government-population-and-household-projections-2018-2027- (ID: d7e6c8c7-052f-4f06-b178-74c02c243ea4 )
-#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/d7e6c8c7-052f-4f06-b178-74c02c243ea4
-#&gt; Sector: Economy
-#&gt; Licence: Access Only
-#&gt; Type: Dataset
-#&gt; Last Updated: 2019-07-17 
-#&gt; 
-#&gt; Description:
-#&gt;     This dataset contains population and household projections for 2018-2027 including:
-#&gt;     overall population, gender distribution, age distribution, median age, average age,
-#&gt;     population growth rates, number of households, average number of people per
-#&gt;     household.  
-#&gt; 
-#&gt; Resources: ( 1 )
-#&gt; 1) Population and Household Projections &amp; Summaries (2018-2027)
-#&gt;      format: xlsx 
-#&gt;      url: https://catalogue.data.gov.bc.ca/dataset/d7e6c8c7-052f-4f06-b178-74c02c243ea4/resource/d39bda1b-b9a9-4d2c-8c83-2eb1d8b6dbcc/download/local-government-population-and-household-projections-2018-2027-bc-stats.xlsx 
-#&gt;      resource: d39bda1b-b9a9-4d2c-8c83-2eb1d8b6dbcc 
-#&gt;      available in R via bcdata:  TRUE 
-#&gt;      code: bcdc_get_data(record = 'd7e6c8c7-052f-4f06-b178-74c02c243ea4', resource = 'd39bda1b-b9a9-4d2c-8c83-2eb1d8b6dbcc')
-#&gt; </div><div class='input'>
+#&gt; </span><span></div><div class='input'>
 <span class='co'>## bcdc_read_functions let's us know that bcdata</span>
 <span class='co'>## uses readxl::read_excel to import xlsx files</span>
 <span class='fu'><a href='bcdc_read_functions.html'>bcdc_read_functions</a></span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 3</span><span>

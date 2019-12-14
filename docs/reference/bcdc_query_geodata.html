@@ -80,7 +80,7 @@ that the request will take quite a while." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -188,7 +188,7 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 <span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-airports"</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='fl'>3857</span>)</div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-airports'</span><span> record
 #&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>41</span><span> fields
 #&gt; ● At most six rows of the record are printed here
-#&gt; ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
@@ -257,29 +257,29 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 #&gt; </span><span style='color: #555555;'># A tibble: 1 x 10</span><span>
 #&gt;   id    WELL_TAG_NO OBJECTID WELL_ID WELL_TAG_NUMBER WATERSHED_CODE WHEN_CREATED
 #&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0000000227… 55</span><span style='text-decoration: underline;'>872</span><span>082   </span><span style='text-decoration: underline;'>57</span><span>864           </span><span style='text-decoration: underline;'>22</span><span>722 0              2003-08-13  
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0000000227… 59</span><span style='text-decoration: underline;'>138</span><span>197   </span><span style='text-decoration: underline;'>57</span><span>864           </span><span style='text-decoration: underline;'>22</span><span>722 0              2003-08-13  
 #&gt; </span><span style='color: #555555;'># … with 3 more variables: WHO_CREATED </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   WELL_LICENCE_GENERAL_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## A moderately large layer</span>
 <span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-environmental-monitoring-locations"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37024</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37048</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
 #&gt; ● At most six rows of the record are printed here
-#&gt; ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1276641 ymin: 622430.9 xmax: 1404100 ymax: 799315.9
+#&gt; bbox:           xmin: 1395608 ymin: 473055.4 xmax: 1532872 ymax: 507976.1
 #&gt; epsg (SRID):    3005
 #&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 36</span><span>
 #&gt;   id    MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0600121                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… 0600122                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… 0600123                        48 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… 0600124                        48 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… 0600127                        48 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… 0600128                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… E105593                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… E105594                        41 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… E105595                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… E105596                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… E105597                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… E105598                        41 </span><span style='color: #BB0000;'>NA</span><span>               3               
 #&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
@@ -288,29 +288,29 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 #&gt; #   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LEGAL_DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   MONITORING_LOCN_COMMENT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MONITORING_LOCATION_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   SOURCE_CLASS_NARRATIVE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WELL_IDENTIFICATION_PLATE_NO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
 #&gt; #   RESULT_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PERMIT_RELATIONSHIP </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   FEATURE_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT</span><span>
 #&gt; # </span><span style='color: #555555;font-style: italic;'>  [m]&gt;</span><span></div><div class='input'><span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-environmental-monitoring-locations"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>PERMIT_RELATIONSHIP</span> <span class='kw'>==</span> <span class='st'>"DISCHARGE"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>11777</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>11786</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
 #&gt; ● At most six rows of the record are printed here
-#&gt; ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1249115 ymin: 495286.5 xmax: 1500113 ymax: 896127.6
+#&gt; bbox:           xmin: 1395332 ymin: 475321 xmax: 1569195 ymax: 508264.5
 #&gt; epsg (SRID):    3005
 #&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 36</span><span>
 #&gt;   id    MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0600174                        48 </span><span style='color: #BB0000;'>NA</span><span>               1               
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… E105586                        52 </span><span style='color: #BB0000;'>NA</span><span>               1               
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… E105587                        41 </span><span style='color: #BB0000;'>NA</span><span>               3               
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… E105610                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… E105611                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… E105616                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… E105610                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… E105611                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… E105616                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… E105623                        41 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… E105627                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… E105631                        41 </span><span style='color: #BB0000;'>NA</span><span>               3               
 #&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
@@ -319,7 +319,7 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 #&gt; #   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LEGAL_DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   MONITORING_LOCN_COMMENT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MONITORING_LOCATION_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   SOURCE_CLASS_NARRATIVE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WELL_IDENTIFICATION_PLATE_NO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
 #&gt; #   RESULT_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_RELATIONSHIP </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   FEATURE_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT</span><span>
 #&gt; # </span><span style='color: #555555;font-style: italic;'>  [m]&gt;</span><span></div><div class='input'>
@@ -328,22 +328,22 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 <span class='fu'>bcdc_query_geodata</span>(<span class='st'>"terrestrial-protected-areas-representation-by-biogeoclimatic-unit"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'terrestrial-protected-areas-representation-by-biogeoclimatic-unit'</span><span> record
 #&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>15267</span><span> features and </span><span style='color: #00BB00;'>25</span><span> fields
 #&gt; ● At most six rows of the record are printed here
-#&gt; ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 25 fields
 #&gt; geometry type:  POLYGON
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1330553 ymin: 559937.5 xmax: 1550288 ymax: 581116.8
+#&gt; bbox:           xmin: 1084136 ymin: 465827.5 xmax: 1565462 ymax: 749984.1
 #&gt; epsg (SRID):    3005
 #&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 26</span><span>
 #&gt;   id    BG_CODE BCAREAPR PRPA_BC NUMPA_BC PCTBCPR PCTPPABC FEATURE_CLASS_S…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… ESSFdcw   </span><span style='text-decoration: underline;'>60</span><span>737.  </span><span style='text-decoration: underline;'>23</span><span>401.        8    38.5    0.164              435
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… ESSFdcw   </span><span style='text-decoration: underline;'>60</span><span>737.  </span><span style='text-decoration: underline;'>23</span><span>401.        8    38.5    0.164              435
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… ESSFdcw   </span><span style='text-decoration: underline;'>60</span><span>737.  </span><span style='text-decoration: underline;'>23</span><span>401.        8    38.5    0.164              435
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… ESSFdcw   </span><span style='text-decoration: underline;'>60</span><span>737.  </span><span style='text-decoration: underline;'>23</span><span>401.        8    38.5    0.164              435
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… ESSFdcw   </span><span style='text-decoration: underline;'>60</span><span>737.  </span><span style='text-decoration: underline;'>23</span><span>401.        8    38.5    0.164              435
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… ESSFdcw   </span><span style='text-decoration: underline;'>60</span><span>737.  </span><span style='text-decoration: underline;'>23</span><span>401.        8    38.5    0.164              435
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… IDF dw    </span><span style='text-decoration: underline;'>88</span><span>067.  </span><span style='text-decoration: underline;'>30</span><span>714.        4   34.9    0.216               435
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… IDF dw    </span><span style='text-decoration: underline;'>88</span><span>067.  </span><span style='text-decoration: underline;'>30</span><span>714.        4   34.9    0.216               435
 #&gt; </span><span style='color: #555555;'># … with 18 more variables: ZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   PHASE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NATURAL_DISTURBANCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAP_LABEL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   SUBZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHASE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
@@ -354,7 +354,7 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 <span class='fu'>bcdc_query_geodata</span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'</span><span> record
 #&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>41</span><span> fields
 #&gt; ● At most six rows of the record are printed here
-#&gt; ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt; ─────────────────────────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY

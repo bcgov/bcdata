@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -140,9 +140,16 @@
     <p>Search the B.C. Data Catalogue</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_search</span>(<span class='no'>...</span>, <span class='kw'>license_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>download_audience</span> <span class='kw'>=</span> <span class='st'>"Public"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>organization</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
+    <pre class="usage"><span class='fu'>bcdc_search</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>license_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>download_audience</span> <span class='kw'>=</span> <span class='st'>"Public"</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>organization</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,8 +197,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 297 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 297.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
+<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 293 matches. Returning the first 100.</span>
+#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 293.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
 #&gt; 
 #&gt; Number of records: 100 (Showing the top 10)
 #&gt; Titles:
@@ -247,15 +254,15 @@
 #&gt; 5: Legally Defined Administrative Areas of BC (other, xlsx)
 #&gt;  ID: 12f0fd64-94d5-422a-832e-6627a2a01702
 #&gt;  Name: legally-defined-administrative-areas-of-bc
-#&gt; 6: Communities Affected by Evacuation Orders and Alerts (other, wms, kml)
-#&gt;  ID: 284f6b3f-e1ce-4394-81aa-1a4af9feee56
-#&gt;  Name: communities-affected-by-evacuation-orders-and-alerts
-#&gt; 7: BC College Region Boundaries (other, wms, kml)
-#&gt;  ID: 6b8da230-9bc2-4bb4-989e-7d5dad84a4ac
-#&gt;  Name: bc-college-region-boundaries
-#&gt; 8: Environmental Emergency Response (EER) District Boundaries (other, wms, kml)
+#&gt; 6: Environmental Emergency Response (EER) District Boundaries (other, wms, kml)
 #&gt;  ID: e87e1db2-d99c-412f-be36-650d84c9540f
 #&gt;  Name: environmental-emergency-response-eer-district-boundaries
+#&gt; 7: Communities Affected by Evacuation Orders and Alerts (other, wms, kml)
+#&gt;  ID: 284f6b3f-e1ce-4394-81aa-1a4af9feee56
+#&gt;  Name: communities-affected-by-evacuation-orders-and-alerts
+#&gt; 8: BC College Region Boundaries (other, wms, kml)
+#&gt;  ID: 6b8da230-9bc2-4bb4-989e-7d5dad84a4ac
+#&gt;  Name: bc-college-region-boundaries
 #&gt; 9: Local and Regional Greenspaces (other, wms, kml, xlsx)
 #&gt;  ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da
 #&gt;  Name: local-and-regional-greenspaces

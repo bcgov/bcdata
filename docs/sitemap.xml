@@ -43,6 +43,9 @@
     <loc>https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html</loc>
   </url>
   <url>
+    <loc>https://bcgov.github.io/bcdata/reference/bcdc_tidy_resources.html</loc>
+  </url>
+  <url>
     <loc>https://bcgov.github.io/bcdata/reference/collect.html</loc>
   </url>
   <url>
@@ -53,6 +56,12 @@
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/filter.bcdc_promise.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/reference/mutate.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/reference/mutate.bcdc_promise.html</loc>
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/pipe.html</loc>
