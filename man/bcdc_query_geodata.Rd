@@ -34,7 +34,11 @@ that the request will take quite a while.
 }
 \details{
 Note that this function doesn't actually return the data, but rather an
-object of class \verb{bcdc_promise``, which includes all of the information required to retrieve the requested data. In order to get the actual data as an }sf\verb{object, you need to run [collect()] on the}bcdc_promise\verb{. This allows further refining the call to }bcdc_query_geodata()\verb{with [filter()] and/or [select()] statements before pulling down the actual data as an}sf`
+object of class \code{bcdc_promise}, which includes all of the information
+required to retrieve the requested data. In order to get the actual data as
+an \code{sf} object, you need to run \code{\link[=collect]{collect()}} on the \code{bcdc_promise}. This
+allows further refining the call to \code{bcdc_query_geodata()} with \code{\link[=filter]{filter()}}
+and/or \code{\link[=select]{select()}} statements before pulling down the actual data as an \code{sf}
 object with \code{\link[=collect]{collect()}}. See examples.
 }
 \examples{

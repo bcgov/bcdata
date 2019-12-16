@@ -19,7 +19,7 @@
 #' that the request will take quite a while.
 #'
 #' Note that this function doesn't actually return the data, but rather an
-#' object of class `bcdc_promise``, which includes all of the information
+#' object of class `bcdc_promise`, which includes all of the information
 #' required to retrieve the requested data. In order to get the actual data as
 #' an `sf` object, you need to run [collect()] on the `bcdc_promise`. This
 #' allows further refining the call to `bcdc_query_geodata()` with [filter()]
