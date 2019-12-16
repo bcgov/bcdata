@@ -7,12 +7,12 @@ We are now explicitly importing `methods::setoldClass`
 
 
 ## Test environments
-* local macOS install (macOS Mojave 10.14.6), R 3.6.1
+* local macOS install (macOS Mojave 10.14.6), R 3.6.2
 * local Windows 10 install, R 3.6.1
-* ubuntu 16.04 (on travis-ci), R 3.6.1, R-oldrel, R-devel
+* ubuntu 16.04 (on travis-ci), R-devel
 * ubuntu 16.04 (on github actions), R 3.6, R 3.5, R 3.4, R 3.3
-* Windows Server 2019 (on github actions), R 3.6.1
-* macOS Catalina 10.15 (on github actions), R 3.6.1
+* Windows Server 2019 (on github actions), R 3.6.2
+* macOS Catalina 10.15 (on github actions), R 3.6.2
 * win-builder (devel and release)
 
 ## R CMD check results
