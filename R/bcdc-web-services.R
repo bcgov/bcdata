@@ -28,7 +28,7 @@
 #'
 #' @inheritParams bcdc_get_data
 #' @param crs the epsg code for the coordinate reference system. Defaults to
-#'   `3005` (B.C. Albers). See https://epsgi.io.
+#'   `3005` (B.C. Albers). See https://epsg.io.
 #'
 #' @return A `bcdc_promise` object. This object includes all of the information
 #'   required to retrieve the requested data. In order to get the actual data as

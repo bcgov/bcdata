@@ -19,7 +19,7 @@ session. You can silence these warnings altogether by setting an option:
 in your .Rprofile file so the option persists across sessions.}
 
 \item{crs}{the epsg code for the coordinate reference system. Defaults to
-\code{3005} (B.C. Albers). See https://epsgi.io.}
+\code{3005} (B.C. Albers). See https://epsg.io.}
 }
 \value{
 A \code{bcdc_promise} object. This object includes all of the information
