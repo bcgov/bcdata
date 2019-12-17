@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the valid values for a facet (that you can use in <code><a href='bcdc_search.html'>bcdc_search()</a></code>) — bcdc_search_facets • bcdata</title>
+<title>Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record — bcdc_tidy_resources • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,13 +42,15 @@
 
 
 
-<meta property="og:title" content="Get the valid values for a facet (that you can use in <code><a href='bcdc_search.html'>bcdc_search()</a></code>) — bcdc_search_facets" />
-<meta property="og:description" content="Get the valid values for a facet (that you can use in bcdc_search())" />
+<meta property="og:title" content="Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record — bcdc_tidy_resources" />
+<meta property="og:description" content="Returns a rectangular data frame of all resources contained within a record. This is particularly useful
+if you are trying to construct a vector of multiple resources in a record. The data frame also provides
+useful information on the formats, availability and types of data available." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -77,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.2.9000</span>
       </span>
     </div>
 
@@ -131,43 +133,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the valid values for a facet (that you can use in <code><a href='bcdc_search.html'>bcdc_search()</a></code>)</h1>
+    <h1>Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc_search.R'><code>R/bcdc_search.R</code></a></small>
-    <div class="hidden name"><code>bcdc_search_facets.Rd</code></div>
+    <div class="hidden name"><code>bcdc_tidy_resources.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the valid values for a facet (that you can use in <code><a href='bcdc_search.html'>bcdc_search()</a></code>)</p>
+    <p>Returns a rectangular data frame of all resources contained within a record. This is particularly useful
+if you are trying to construct a vector of multiple resources in a record. The data frame also provides
+useful information on the formats, availability and types of data available.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_search_facets</span>(
-  <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"license_id"</span>, <span class='st'>"download_audience"</span>, <span class='st'>"type"</span>, <span class='st'>"res_format"</span>, <span class='st'>"sector"</span>,
-    <span class='st'>"organization"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>bcdc_tidy_resources</span>(<span class='no'>record</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>facet</th>
-      <td><p>the facet(s) for which to retrieve valid values. Can be one or
-more of:
-<code>"license_id", "download_audience", "type", "res_format", "sector", "organization"</code></p></td>
+      <th>record</th>
+      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>),
+a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+Warehouse (BCGW) name.</p>
+<p>It is advised to use the permanent ID for a record or the BCGW name rather than the
+human-readable name to guard against future name changes of the record.
+If you use the human-readable name a warning will be issued once per
+session. You can silence these warnings altogether by setting an option:
+<code><a href='https://rdrr.io/r/base/options.html'>options("silence_named_get_data_warning" = TRUE)</a></code> - which you can set
+in your .Rprofile file so the option persists across sessions.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame of values for the selected facet</p>
+    <p>A data frame containing the metadata for all the resources for a record</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bcdc_search_facets</span>(<span class='st'>"type"</span>)</div><div class='output co'>#&gt;   facet count display_name        name
-#&gt; 1  type    32   WebService  WebService
-#&gt; 2  type  1687   Geographic  Geographic
-#&gt; 3  type  1082      Dataset     Dataset
-#&gt; 4  type   138  Application Application</div><div class='input'># }
-</div></pre>
+<span class='no'>airports</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>"bc-airports"</span>)
+<span class='fu'>bcdc_tidy_resources</span>(<span class='no'>airports</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 8</span><span>
+#&gt;   name     url        id      format ext   package_id  location bcdata_available
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>           
+#&gt; </span><span style='color: #555555;'>1</span><span> BC Geog… https://c… 604c8b… other  </span><span style='color: #555555;'>""</span><span>    76b1b7a3-2… bcgeogr… FALSE           
+#&gt; </span><span style='color: #555555;'>2</span><span> BC_Airp… https://c… fcccba… xlsx   xlsx  76b1b7a3-2… catalog… TRUE            
+#&gt; </span><span style='color: #555555;'>3</span><span> WMS get… https://o… 4d0377… wms    </span><span style='color: #555555;'>""</span><span>    76b1b7a3-2… bcgeogr… TRUE            
+#&gt; </span><span style='color: #555555;'>4</span><span> KML Net… http://op… 5b9f22… kml    kml   76b1b7a3-2… bcgeogr… FALSE           </div><div class='input'># }
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
