@@ -320,7 +320,14 @@ catch_catalogue_error <- function(catalogue_response) {
     request_res <- catalogue_response$request_headers
     response_res <- catalogue_response$response_headers
 
-    msg <- paste0(msg, "Catalogue request:\n")
+    msg <- paste0(
+      msg,
+      "Catalogue request:",
+      "\n  URL: ", catalogue_response$request$url$url,
+      "\n  POST fields:\n    ", rawToChar(catalogue_response$request$options$postfields),
+      "\n"
+    )
+
     for (i in seq_along(request_res)) {
       msg <- paste0(
         msg, "  ", names(request_res)[i], ": ",
