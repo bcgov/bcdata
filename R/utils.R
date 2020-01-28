@@ -310,10 +310,13 @@ catch_catalogue_error <- function(catalogue_response) {
   if (inherits(catalogue_response, "Paginator")) {
     statuses <- catalogue_response$status_code()
     status_failed <- any(statuses >= 300)
-    msg <- paste0(msg, paste0(length(statuses), " paginated requests issued"))
+    if (!status_failed) return(invisible(NULL))
 
+    msg <- paste0(msg, paste0(length(statuses), " paginated requests issued"))
   } else {
     status_failed <- catalogue_response$status_code >= 300
+    if (!status_failed) return(invisible(NULL))
+
     request_res <- catalogue_response$request_headers
     response_res <- catalogue_response$response_headers
 
@@ -333,7 +336,5 @@ catch_catalogue_error <- function(catalogue_response) {
     }
   }
 
-  if (status_failed) {
-    stop(msg, call. = FALSE)
-  }
+  stop(msg, call. = FALSE)
 }
