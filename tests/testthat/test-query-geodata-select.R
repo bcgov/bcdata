@@ -15,11 +15,11 @@ context("testing ability of select methods to narrow a wfs query")
 test_that("select doesn't remove the geometry column",{
   skip_if_net_down()
   skip_on_cran()
-  gw_wells <- bcdc_query_geodata("ground-water-wells") %>%
-    filter(OBSERVATION_WELL_NUMBER == 108) %>%
-    select(SOURCE_ACCURACY) %>%
+  feat <- bcdc_query_geodata(point_record) %>%
+    filter(SOURCE_DATA_ID == 455) %>%
+    select(SOURCE_DATA_ID) %>%
     collect()
-  expect_false(st_is_empty(gw_wells$geometry))
+  expect_s3_class(feat, "bcdc_sf")
 })
 
 test_that("select works when selecting a column that isn't sticky",{
@@ -37,15 +37,14 @@ test_that("select works when selecting a column that isn't sticky",{
 test_that("select reduces the number of columns when a sticky ",{
   skip_if_net_down()
   skip_on_cran()
-  feature_spec <- bcdc_describe_feature("ground-water-wells")
+  feature_spec <- bcdc_describe_feature(point_record)
   ## Columns that can selected, while manually including GEOMETRY col
   sticky_cols <- c(
     feature_spec[feature_spec$selectable != TRUE,]$col_name,
     "geometry")
 
-  sub_cols <- bcdc_query_geodata("ground-water-wells") %>%
-    filter(OBSERVATION_WELL_NUMBER == 108) %>%
-    select(WELL_ID) %>%
+  sub_cols <- bcdc_query_geodata(point_record) %>%
+    select(BUSINESS_CATEGORY_CLASS) %>%
     collect()
 
   expect_identical(names(sub_cols), sticky_cols)
@@ -54,7 +53,7 @@ test_that("select reduces the number of columns when a sticky ",{
 test_that("select works with BCGW name", {
   skip_on_cran()
   skip_if_net_down()
-  expect_silent(ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
+  expect_silent(ret <- bcdc_query_geodata(bcgw_point_record) %>%
                   select(AIRPORT_NAME, DESCRIPTION) %>%
                   collect())
 })
@@ -63,21 +62,21 @@ test_that("select works with BCGW name", {
 test_that("select accept dplyr like column specifications",{
   skip_if_net_down()
   skip_on_cran()
-  layer <-  bcdc_query_geodata("2ebb35d8-c82f-4a17-9c96-612ac3532d55")
-  wrong_fields <-  c('BCLCS_LEVEL_1', 'dummy_col')
-  correct_fields <-  c('BCLCS_LEVEL_1', 'OPENING_NUMBER')
+  layer <-  bcdc_query_geodata(polygon_record)
+  wrong_fields <-  c('ADMIN_AREA_NAME', 'dummy_col')
+  correct_fields <-  c('ADMIN_AREA_NAME', 'OIC_YEAR')
 
 
   ## Most basic select
-  expect_is(select(layer, BCLCS_LEVEL_1, POLYGON_ID), "bcdc_promise")
+  expect_is(select(layer, ADMIN_AREA_NAME, OIC_YEAR), "bcdc_promise")
   ## Using a pre-assigned vecotr
   expect_is(select(layer, correct_fields), "bcdc_promise")
   ## Throws an error when column doesn't exist
   expect_error(select(layer, wrong_fields))
-  expect_is(select(layer, MAP_ID:POLYGON_AREA), "bcdc_promise")
+  expect_is(select(layer, ADMIN_AREA_NAME:OIC_YEAR), "bcdc_promise")
   ## Some weird mix
-  expect_is(select(layer, 'BCLCS_LEVEL_1', OPENING_NUMBER), "bcdc_promise")
+  expect_is(select(layer, 'ADMIN_AREA_NAME', OIC_YEAR), "bcdc_promise")
   ## Another weird mix
-  expect_is(select(layer, c('BCLCS_LEVEL_1','OPENING_SOURCE') , OPENING_NUMBER), "bcdc_promise")
+  expect_is(select(layer, c('ADMIN_AREA_NAME','OIC_YEAR') , OIC_NUMBER), "bcdc_promise")
   expect_is(select(layer, 1:5), "bcdc_promise")
 })
