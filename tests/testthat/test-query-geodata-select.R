@@ -25,12 +25,12 @@ test_that("select doesn't remove the geometry column",{
 test_that("select works when selecting a column that isn't sticky",{
   skip_if_net_down()
   skip_on_cran()
-  one_well <- bcdc_query_geodata("ground-water-wells") %>%
-    filter(OBSERVATION_WELL_NUMBER == 108) %>%
-    select(FCODE) %>%
+  feat <- bcdc_query_geodata(point_record) %>%
+    filter(LOCALITY == 'Terrace') %>%
+    select(DESCRIPTION) %>%
     collect()
 
-  expect_true("FCODE" %in% names(one_well))
+  expect_true("DESCRIPTION" %in% names(feat))
 })
 
 

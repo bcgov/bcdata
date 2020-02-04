@@ -15,4 +15,4 @@ old_silence_get_record <- options("silence_named_get_record_warning" = TRUE)
 point_record <- '76b1b7a3-2112-4444-857a-afccf7b20da8'
 polygon_record <- 'd1aff64e-dbfe-45a6-af97-582b7f6418b9'
 lines_record <- '92344413-8035-4c08-b996-65a9b3f62fca'
-bcgw_point_record <- "WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"
+bcgw_point_record <- 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'
