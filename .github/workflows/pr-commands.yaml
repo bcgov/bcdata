@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: Rscript -e 'install.packages(c("devtools", "tools"))'
       - name: Install pr version of bcdata and pkg dependencies
-        run: Rscript -e 'devtools::install()'
+        run: Rscript -e 'devtools::install(dependencies = c("Depends", "Imports", "LinkingTo", "Suggests"))'
       - name: Precompile vignettes
         run: Rscript -e 'source("./vignettes/precompile.R")'
       - name: commit
