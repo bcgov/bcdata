@@ -54,7 +54,7 @@ library(bcdata)
 
 ### `bcdc_browse()`
 
-`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening the home page in your default browser:
+`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening catalogue search page in your default browser:
 
 ```{r, eval=FALSE}
 ## Take me to the B.C. Data Catalogue home page
