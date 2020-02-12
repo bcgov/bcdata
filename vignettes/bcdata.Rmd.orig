@@ -73,7 +73,7 @@ bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
 
 ### `bcdc_search()`
 
-`bcdata::bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session.
+`bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session.
 
 Let's search the catalogue for records that contain the word "recycling":
 

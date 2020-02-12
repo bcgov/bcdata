@@ -35,9 +35,9 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
-        run: Rscript -e 'install.packages(c("devtools", "tools"))'
+        run: Rscript -e 'install.packages(c("devtools", "tools", "knitr", "purrr"))'
       - name: Install pr version of bcdata and pkg dependencies
-        run: Rscript -e 'devtools::install(dependencies = c("Depends", "Imports", "LinkingTo", "Suggests"))'
+        run: Rscript -e 'devtools::install()'
       - name: Precompile vignettes
         run: Rscript -e 'source("./vignettes/precompile.R")'
       - name: commit
