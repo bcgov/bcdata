@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2020-02-12"
+date: "2020-02-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -59,32 +59,30 @@ Our first step is to extract the [school district polygons](https://catalog.data
 
 ```r
 bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
-#> [34m[1mB.C. Data Catalogue Record:[22m[39m School Districts of BC 
-#> [34m[3m
-#> Name:[23m[39m school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b )[34m[3m
-#> Permalink:[23m[39m https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b[34m[3m
-#> Sector:[23m[39m Education[34m[3m
-#> Licence:[23m[39m Open Government Licence - British Columbia[34m[3m
-#> Type:[23m[39m Geographic[34m[3m
-#> Last Updated:[23m[39m 2019-12-17 
-#> [34m[3m
-#> Description:[23m[39m The School Districts dataset contains the spatial representation (polygon) of the
+#> B.C. Data Catalogue Record: School Districts of BC 
+#> 
+#> Name: school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b )
+#> Permalink: https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b
+#> Sector: Education
+#> Licence: Open Government Licence - British Columbia
+#> Type: Geographic
+#> Last Updated: 2019-12-17 
+#> 
+#> Description: The School Districts dataset contains the spatial representation (polygon) of the
 #> current extent of the administrative areas defined under section 176(1) of the
 #> School Act for the purposes of preservation and promotion of the fundamental
 #> principle of local autonomy and control of public education at the public and
 #> governmental levels through locally elected school boards. 
-#> [34m[3m
-#> Resources: (3)
-#> [23m[39m[90m# A tibble: 3 x 8[39m
-#>   name     url        id      format ext   package_id  location bcdata_available
-#>   [3m[90m<chr>[39m[23m    [3m[90m<chr>[39m[23m      [3m[90m<chr>[39m[23m   [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m       [3m[90m<chr>[39m[23m    [3m[90m<lgl>[39m[23m           
-#> [90m1[39m BC Geog… https://c… 529507… other  [90m"[39m[90m"[39m    78ec5279-4… bcgeogr… FALSE           
-#> [90m2[39m WMS get… https://o… 57d884… wms    [90m"[39m[90m"[39m    78ec5279-4… bcgeogr… TRUE            
-#> [90m3[39m KML Net… http://op… 7493e7… kml    [90m"[39mkml[90m"[39m 78ec5279-4… bcgeogr… FALSE           
-#> [34m
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 #> 
-#> [39m
+#> Resources: (3)
+#> # A tibble: 3 x 8
+#>   name     url        id      format ext   package_id  location bcdata_available
+#>   <chr>    <chr>      <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
+#> 1 BC Geog… https://c… 529507… other  ""    78ec5279-4… bcgeogr… FALSE           
+#> 2 WMS get… https://o… 57d884… wms    ""    78ec5279-4… bcgeogr… TRUE            
+#> 3 KML Net… http://op… 7493e7… kml    "kml" 78ec5279-4… bcgeogr… FALSE           
+#> 
+#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 ```
 
 This data is the boundary of each school district. The key information in this metadata is that the layer is a `**WFS request (Spatial Data)**`---which means it is available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). From this we know we can make use of `bcdc_query_geodata`.
@@ -92,8 +90,8 @@ This data is the boundary of each school district. The key information in this m
 
 ```r
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
-#> Querying [31m'school-districts-of-bc'[39m record
-#> ● Using [34mcollect()[39m on this object will return [32m59[39m features and [32m9[39m fields
+#> Querying 'school-districts-of-bc' record
+#> ● Using collect() on this object will return 59 features and 9 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 9 fields
@@ -102,17 +100,17 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> bbox:           xmin: 1480584 ymin: 475225.2 xmax: 1870586 ymax: 862609.6
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> [90m# A tibble: 6 x 10[39m
+#> # A tibble: 6 x 10
 #>   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE
-#>   [3m[90m<chr>[39m[23m          [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m                       [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m       
-#> [90m1[39m WHSE…            121 Southeast Koote…                5 FA91800600  
-#> [90m2[39m WHSE…            122 Rocky Mountain                  6 FA91800600  
-#> [90m3[39m WHSE…            123 Kootenay Lake                   8 FA91800600  
-#> [90m4[39m WHSE…            124 Arrow Lakes                    10 FA91800600  
-#> [90m5[39m WHSE…            125 Revelstoke                     19 FA91800600  
-#> [90m6[39m WHSE…            126 Kootenay-Columb…               20 FA91800600  
-#> [90m# … with 5 more variables: FEATURE_AREA_SQM [3m[90m<dbl>[90m[23m, FEATURE_LENGTH_M [3m[90m<dbl>[90m[23m,
-#> #   OBJECTID [3m[90m<int>[90m[23m, SE_ANNO_CAD_DATA [3m[90m<chr>[90m[23m, geometry [3m[90m<POLYGON [m]>[90m[23m[39m
+#>   <chr>          <int> <chr>                       <int> <chr>       
+#> 1 WHSE…            121 Southeast Koote…                5 FA91800600  
+#> 2 WHSE…            122 Rocky Mountain                  6 FA91800600  
+#> 3 WHSE…            123 Kootenay Lake                   8 FA91800600  
+#> 4 WHSE…            124 Arrow Lakes                    10 FA91800600  
+#> 5 WHSE…            125 Revelstoke                     19 FA91800600  
+#> 6 WHSE…            126 Kootenay-Columb…               20 FA91800600  
+#> # … with 5 more variables: FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
 ```
 
 This is the initial query to the data in the catalogue. What has been returned is *not* the actual data but rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also receive instruction that using `collect()` will retrieve a given number of features and fields present for this query. Lastly, there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the catalogue for only those polygons just like we would in a typical `dplyr` workflow:
@@ -121,8 +119,8 @@ This is the initial query to the data in the catalogue. What has been returned i
 ```r
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson"))
-#> Querying [31m'school-districts-of-bc'[39m record
-#> ● Using [34mcollect()[39m on this object will return [32m3[39m features and [32m9[39m fields
+#> Querying 'school-districts-of-bc' record
+#> ● Using collect() on this object will return 3 features and 9 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 3 features and 9 fields
@@ -131,14 +129,14 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> bbox:           xmin: 1126991 ymin: 379215.8 xmax: 1528154 ymax: 1224041
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> [90m# A tibble: 3 x 10[39m
+#> # A tibble: 3 x 10
 #>   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE
-#>   [3m[90m<chr>[39m[23m          [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m                       [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m       
-#> [90m1[39m WHSE…            133 Prince George                  57 FA91800600  
-#> [90m2[39m WHSE…            157 Greater Victoria               61 FA91800600  
-#> [90m3[39m WHSE…            167 Kamloops/Thomps…               73 FA91800600  
-#> [90m# … with 5 more variables: FEATURE_AREA_SQM [3m[90m<dbl>[90m[23m, FEATURE_LENGTH_M [3m[90m<dbl>[90m[23m,
-#> #   OBJECTID [3m[90m<int>[90m[23m, SE_ANNO_CAD_DATA [3m[90m<chr>[90m[23m, geometry [3m[90m<MULTIPOLYGON [m]>[90m[23m[39m
+#>   <chr>          <int> <chr>                       <int> <chr>       
+#> 1 WHSE…            133 Prince George                  57 FA91800600  
+#> 2 WHSE…            157 Greater Victoria               61 FA91800600  
+#> 3 WHSE…            167 Kamloops/Thomps…               73 FA91800600  
+#> # … with 5 more variables: FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. During an actual analysis, it is possible that you may need to initially collect more data than you want to determine value to subset by. For example, there is currently no way to ask the catalogue for all possible unique values of `SCHOOL_DISTRICT_NAME`. Is that case the data will need to be brought into R and unique values will need to be determined there.
@@ -148,8 +146,8 @@ To further tune our query, we can also request only the columns we want. Really 
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
   select(SCHOOL_DISTRICT_NAME)
-#> Querying [31m'school-districts-of-bc'[39m record
-#> ● Using [34mcollect()[39m on this object will return [32m3[39m features and [32m5[39m fields
+#> Querying 'school-districts-of-bc' record
+#> ● Using collect() on this object will return 3 features and 5 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 3 features and 5 fields
@@ -158,13 +156,13 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> bbox:           xmin: 1126991 ymin: 379215.8 xmax: 1528154 ymax: 1224041
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> [90m# A tibble: 3 x 6[39m
+#> # A tibble: 3 x 6
 #>   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… OBJECTID
-#>   [3m[90m<chr>[39m[23m          [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m                       [3m[90m<int>[39m[23m    [3m[90m<int>[39m[23m
-#> [90m1[39m WHSE…            133 Prince George                  57       13
-#> [90m2[39m WHSE…            157 Greater Victoria               61       37
-#> [90m3[39m WHSE…            167 Kamloops/Thomps…               73       47
-#> [90m# … with 1 more variable: geometry [3m[90m<MULTIPOLYGON [m]>[90m[23m[39m
+#>   <chr>          <int> <chr>                       <int>    <int>
+#> 1 WHSE…            133 Prince George                  57       13
+#> 2 WHSE…            157 Greater Victoria               61       37
+#> 3 WHSE…            167 Kamloops/Thomps…               73       47
+#> # … with 1 more variable: geometry <MULTIPOLYGON [m]>
 ```
 
 Note that in the `select` statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn't select. This is because within each dataset in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don't want those columns after you `collect` the data, which we will take care of right now, you can drop them:
@@ -194,16 +192,16 @@ For the purposes of this example, let's consider [this greenspace](https://catal
 
 ```r
 bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
-#> [34m[1mB.C. Data Catalogue Record:[22m[39m Local and Regional Greenspaces 
-#> [34m[3m
-#> Name:[23m[39m local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da )[34m[3m
-#> Permalink:[23m[39m https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da[34m[3m
-#> Sector:[23m[39m Natural Resources[34m[3m
-#> Licence:[23m[39m Open Government Licence - British Columbia[34m[3m
-#> Type:[23m[39m Geographic[34m[3m
-#> Last Updated:[23m[39m 2019-12-17 
-#> [34m[3m
-#> Description:[23m[39m This dataset contains spatial and attribute information for local and regional
+#> B.C. Data Catalogue Record: Local and Regional Greenspaces 
+#> 
+#> Name: local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da )
+#> Permalink: https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da
+#> Sector: Natural Resources
+#> Licence: Open Government Licence - British Columbia
+#> Type: Geographic
+#> Last Updated: 2019-12-17 
+#> 
+#> Description: This dataset contains spatial and attribute information for local and regional
 #> greenspaces in British Columbia. Local and regional greenspaces are municipal or
 #> regional district lands designated by local government agencies and managed for
 #> public enjoyment, ecosystem or wildlife values. Spatial boundaries were sourced from
@@ -211,19 +209,17 @@ bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> under Open Government Licence, and in other cases, publicize parks and greenspaces
 #> on web maps or pdf maps. Boundaries were edge-matched to the ParcelMap BC cadastre.
 #> This spatial layer contains multipart polygons. 
-#> [34m[3m
-#> Resources: (4)
-#> [23m[39m[90m# A tibble: 4 x 8[39m
-#>   name     url        id      format ext   package_id  location bcdata_available
-#>   [3m[90m<chr>[39m[23m    [3m[90m<chr>[39m[23m      [3m[90m<chr>[39m[23m   [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m       [3m[90m<chr>[39m[23m    [3m[90m<lgl>[39m[23m           
-#> [90m1[39m BC Geog… https://c… dac897… other  [90m"[39m[90m"[39m    6a2fea1b-0… bcgwdat… FALSE           
-#> [90m2[39m WMS get… https://o… a8d5b5… wms    [90m"[39m[90m"[39m    6a2fea1b-0… bcgeogr… TRUE            
-#> [90m3[39m KML Net… http://op… a7454e… kml    [90m"[39mkml[90m"[39m 6a2fea1b-0… bcgeogr… FALSE           
-#> [90m4[39m LocalRe… https://c… 766631… xlsx   [90m"[39mxls… 6a2fea1b-0… external TRUE            
-#> [34m
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 #> 
-#> [39m
+#> Resources: (4)
+#> # A tibble: 4 x 8
+#>   name     url        id      format ext   package_id  location bcdata_available
+#>   <chr>    <chr>      <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
+#> 1 BC Geog… https://c… dac897… other  ""    6a2fea1b-0… bcgwdat… FALSE           
+#> 2 WMS get… https://o… a8d5b5… wms    ""    6a2fea1b-0… bcgeogr… TRUE            
+#> 3 KML Net… http://op… a7454e… kml    "kml" 6a2fea1b-0… bcgeogr… FALSE           
+#> 4 LocalRe… https://c… 766631… xlsx   "xls… 6a2fea1b-0… external TRUE            
+#> 
+#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 ```
 
 Again we recognize this is [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data, which means we can make use of `bcdc_query_geodata`.
@@ -231,8 +227,8 @@ Again we recognize this is [Web Service-enabled](https://www2.gov.bc.ca/gov/cont
 
 ```r
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
-#> Querying [31m'local-and-regional-greenspaces'[39m record
-#> ● Using [34mcollect()[39m on this object will return [32m8707[39m features and [32m19[39m fields
+#> Querying 'local-and-regional-greenspaces' record
+#> ● Using collect() on this object will return 8707 features and 19 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
@@ -241,20 +237,20 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> bbox:           xmin: 1227676 ymin: 451802.2 xmax: 1236544 ymax: 467135.4
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> [90m# A tibble: 6 x 20[39m
+#> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
-#>   [3m[90m<chr>[39m[23m            [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m           
-#> [90m1[39m WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver 
-#> [90m2[39m WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> [90m3[39m WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> [90m4[39m WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
-#> [90m5[39m WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
-#> [90m6[39m WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
-#> [90m# … with 14 more variables: MUNICIPALITY [3m[90m<chr>[90m[23m, CIVIC_NUMBER [3m[90m<int>[90m[23m,
-#> #   CIVIC_NUMBER_SUFFIX [3m[90m<chr>[90m[23m, STREET_NAME [3m[90m<chr>[90m[23m, LATITUDE [3m[90m<dbl>[90m[23m,
-#> #   LONGITUDE [3m[90m<dbl>[90m[23m, WHEN_UPDATED [3m[90m<date>[90m[23m, WEBSITE_URL [3m[90m<chr>[90m[23m,
-#> #   LICENCE_COMMENTS [3m[90m<chr>[90m[23m, FEATURE_AREA_SQM [3m[90m<dbl>[90m[23m, FEATURE_LENGTH_M [3m[90m<dbl>[90m[23m,
-#> #   OBJECTID [3m[90m<int>[90m[23m, SE_ANNO_CAD_DATA [3m[90m<chr>[90m[23m, geometry [3m[90m<MULTIPOLYGON [m]>[90m[23m[39m
+#>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
+#> 1 WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver 
+#> 2 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
+#> 3 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
+#> 4 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
+#> 5 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
+#> 6 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
+#> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
+#> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
+#> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
+#> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Since we are interested in only "Park" data we can subset our query:
@@ -263,8 +259,8 @@ Since we are interested in only "Park" data we can subset our query:
 ```r
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park")
-#> Querying [31m'local-and-regional-greenspaces'[39m record
-#> ● Using [34mcollect()[39m on this object will return [32m4373[39m features and [32m19[39m fields
+#> Querying 'local-and-regional-greenspaces' record
+#> ● Using collect() on this object will return 4373 features and 19 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
@@ -273,20 +269,20 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> bbox:           xmin: 1227676 ymin: 451450.3 xmax: 1234629 ymax: 467135.4
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> [90m# A tibble: 6 x 20[39m
+#> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
-#>   [3m[90m<chr>[39m[23m            [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m     [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m           
-#> [90m1[39m WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> [90m2[39m WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> [90m3[39m WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
-#> [90m4[39m WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
-#> [90m5[39m WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
-#> [90m6[39m WHSE…               25 Bell Park Local     Park             Metro Vancouver 
-#> [90m# … with 14 more variables: MUNICIPALITY [3m[90m<chr>[90m[23m, CIVIC_NUMBER [3m[90m<int>[90m[23m,
-#> #   CIVIC_NUMBER_SUFFIX [3m[90m<chr>[90m[23m, STREET_NAME [3m[90m<chr>[90m[23m, LATITUDE [3m[90m<dbl>[90m[23m,
-#> #   LONGITUDE [3m[90m<dbl>[90m[23m, WHEN_UPDATED [3m[90m<date>[90m[23m, WEBSITE_URL [3m[90m<chr>[90m[23m,
-#> #   LICENCE_COMMENTS [3m[90m<chr>[90m[23m, FEATURE_AREA_SQM [3m[90m<dbl>[90m[23m, FEATURE_LENGTH_M [3m[90m<dbl>[90m[23m,
-#> #   OBJECTID [3m[90m<int>[90m[23m, SE_ANNO_CAD_DATA [3m[90m<chr>[90m[23m, geometry [3m[90m<MULTIPOLYGON [m]>[90m[23m[39m
+#>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
+#> 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
+#> 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
+#> 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
+#> 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
+#> 5 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
+#> 6 WHSE…               25 Bell Park Local     Park             Metro Vancouver 
+#> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
+#> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
+#> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
+#> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full dataset. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
@@ -339,12 +335,12 @@ districts_parks_join %>%
   group_by(SCHOOL_DISTRICT_NAME) %>%
   summarise(total_area = sum(area)) %>%
   arrange(total_area)
-#> [90m# A tibble: 3 x 2[39m
+#> # A tibble: 3 x 2
 #>   SCHOOL_DISTRICT_NAME total_area
-#>   [3m[90m<chr>[39m[23m                     [90m[m^2][39m
-#> [90m1[39m Kamloops/Thompson       3982629
-#> [90m2[39m Prince George          12254343
-#> [90m3[39m Greater Victoria       25587503
+#>   <chr>                     [m^2]
+#> 1 Kamloops/Thompson       3982629
+#> 2 Prince George          12254343
+#> 3 Greater Victoria       25587503
 ```
 
 ## Additional Useful Functions
@@ -353,29 +349,29 @@ There are a couple of other functions in `bcdata` that are useful to know when w
 
 ```r
 bcdc_describe_feature("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
-#> [90m# A tibble: 20 x 4[39m
+#> # A tibble: 20 x 4
 #>    col_name                selectable remote_col_type          local_col_type
-#>    [3m[90m<chr>[39m[23m                   [3m[90m<lgl>[39m[23m      [3m[90m<chr>[39m[23m                    [3m[90m<chr>[39m[23m         
-#> [90m 1[39m id                      FALSE      xsd:string               character     
-#> [90m 2[39m LOCAL_REG_GREENSPACE_ID FALSE      xsd:decimal              numeric       
-#> [90m 3[39m PARK_NAME               TRUE       xsd:string               character     
-#> [90m 4[39m PARK_TYPE               TRUE       xsd:string               character     
-#> [90m 5[39m PARK_PRIMARY_USE        TRUE       xsd:string               character     
-#> [90m 6[39m REGIONAL_DISTRICT       TRUE       xsd:string               character     
-#> [90m 7[39m MUNICIPALITY            TRUE       xsd:string               character     
-#> [90m 8[39m CIVIC_NUMBER            TRUE       xsd:decimal              numeric       
-#> [90m 9[39m CIVIC_NUMBER_SUFFIX     TRUE       xsd:string               character     
-#> [90m10[39m STREET_NAME             TRUE       xsd:string               character     
-#> [90m11[39m LATITUDE                TRUE       xsd:decimal              numeric       
-#> [90m12[39m LONGITUDE               TRUE       xsd:decimal              numeric       
-#> [90m13[39m WHEN_UPDATED            TRUE       xsd:date                 date          
-#> [90m14[39m WEBSITE_URL             TRUE       xsd:string               character     
-#> [90m15[39m LICENCE_COMMENTS        TRUE       xsd:string               character     
-#> [90m16[39m FEATURE_AREA_SQM        TRUE       xsd:decimal              numeric       
-#> [90m17[39m FEATURE_LENGTH_M        TRUE       xsd:decimal              numeric       
-#> [90m18[39m SHAPE                   TRUE       gml:GeometryPropertyType sfc geometry  
-#> [90m19[39m OBJECTID                FALSE      xsd:decimal              numeric       
-#> [90m20[39m SE_ANNO_CAD_DATA        TRUE       xsd:hexBinary            numeric
+#>    <chr>                   <lgl>      <chr>                    <chr>         
+#>  1 id                      FALSE      xsd:string               character     
+#>  2 LOCAL_REG_GREENSPACE_ID FALSE      xsd:decimal              numeric       
+#>  3 PARK_NAME               TRUE       xsd:string               character     
+#>  4 PARK_TYPE               TRUE       xsd:string               character     
+#>  5 PARK_PRIMARY_USE        TRUE       xsd:string               character     
+#>  6 REGIONAL_DISTRICT       TRUE       xsd:string               character     
+#>  7 MUNICIPALITY            TRUE       xsd:string               character     
+#>  8 CIVIC_NUMBER            TRUE       xsd:decimal              numeric       
+#>  9 CIVIC_NUMBER_SUFFIX     TRUE       xsd:string               character     
+#> 10 STREET_NAME             TRUE       xsd:string               character     
+#> 11 LATITUDE                TRUE       xsd:decimal              numeric       
+#> 12 LONGITUDE               TRUE       xsd:decimal              numeric       
+#> 13 WHEN_UPDATED            TRUE       xsd:date                 date          
+#> 14 WEBSITE_URL             TRUE       xsd:string               character     
+#> 15 LICENCE_COMMENTS        TRUE       xsd:string               character     
+#> 16 FEATURE_AREA_SQM        TRUE       xsd:decimal              numeric       
+#> 17 FEATURE_LENGTH_M        TRUE       xsd:decimal              numeric       
+#> 18 SHAPE                   TRUE       gml:GeometryPropertyType sfc geometry  
+#> 19 OBJECTID                FALSE      xsd:decimal              numeric       
+#> 20 SE_ANNO_CAD_DATA        TRUE       xsd:hexBinary            numeric
 ```
 
 This is a helpful initial step to learn column names and types when you construct your query.
@@ -422,27 +418,27 @@ we can use that in `bcdc_query_geodata()`:
 ```r
 # Look at the columns available:
 bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
-#> [90m# A tibble: 42 x 4[39m
+#> # A tibble: 42 x 4
 #>    col_name                      selectable remote_col_type local_col_type
-#>    [3m[90m<chr>[39m[23m                         [3m[90m<lgl>[39m[23m      [3m[90m<chr>[39m[23m           [3m[90m<chr>[39m[23m         
-#> [90m 1[39m id                            FALSE      xsd:string      character     
-#> [90m 2[39m CUSTODIAN_ORG_DESCRIPTION     FALSE      xsd:string      character     
-#> [90m 3[39m BUSINESS_CATEGORY_CLASS       FALSE      xsd:string      character     
-#> [90m 4[39m BUSINESS_CATEGORY_DESCRIPTION FALSE      xsd:string      character     
-#> [90m 5[39m OCCUPANT_TYPE_DESCRIPTION     FALSE      xsd:string      character     
-#> [90m 6[39m SOURCE_DATA_ID                FALSE      xsd:string      character     
-#> [90m 7[39m SUPPLIED_SOURCE_ID_IND        FALSE      xsd:string      character     
-#> [90m 8[39m AIRPORT_NAME                  FALSE      xsd:string      character     
-#> [90m 9[39m DESCRIPTION                   TRUE       xsd:string      character     
-#> [90m10[39m PHYSICAL_ADDRESS              TRUE       xsd:string      character     
-#> [90m# … with 32 more rows[39m
+#>    <chr>                         <lgl>      <chr>           <chr>         
+#>  1 id                            FALSE      xsd:string      character     
+#>  2 CUSTODIAN_ORG_DESCRIPTION     FALSE      xsd:string      character     
+#>  3 BUSINESS_CATEGORY_CLASS       FALSE      xsd:string      character     
+#>  4 BUSINESS_CATEGORY_DESCRIPTION FALSE      xsd:string      character     
+#>  5 OCCUPANT_TYPE_DESCRIPTION     FALSE      xsd:string      character     
+#>  6 SOURCE_DATA_ID                FALSE      xsd:string      character     
+#>  7 SUPPLIED_SOURCE_ID_IND        FALSE      xsd:string      character     
+#>  8 AIRPORT_NAME                  FALSE      xsd:string      character     
+#>  9 DESCRIPTION                   TRUE       xsd:string      character     
+#> 10 PHYSICAL_ADDRESS              TRUE       xsd:string      character     
+#> # … with 32 more rows
 
 # Query the data with bcdc_query_geodata and filter + select:
 bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
   filter(DESCRIPTION == "airport") %>%
   select(AIRPORT_NAME, LOCALITY, NUMBER_OF_RUNWAYS)
-#> Querying [31m'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'[39m record
-#> ● Using [34mcollect()[39m on this object will return [32m37[39m features and [32m13[39m fields
+#> Querying 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW' record
+#> ● Using collect() on this object will return 37 features and 13 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 13 fields
@@ -451,16 +447,16 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> bbox:           xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> [90m# A tibble: 6 x 14[39m
+#> # A tibble: 6 x 14
 #>   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#>   [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m           
-#> [90m1[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m2[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m3[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m4[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m5[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m6[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m# … with 9 more variables: SOURCE_DATA_ID [3m[90m<chr>[90m[23m, SUPPLIED_SOURCE_ID_IND [3m[90m<chr>[90m[23m,
-#> #   AIRPORT_NAME [3m[90m<chr>[90m[23m, LOCALITY [3m[90m<chr>[90m[23m, LATITUDE [3m[90m<dbl>[90m[23m, LONGITUDE [3m[90m<dbl>[90m[23m,
-#> #   NUMBER_OF_RUNWAYS [3m[90m<int>[90m[23m, SEQUENCE_ID [3m[90m<int>[90m[23m, geometry [3m[90m<POINT [m]>[90m[23m[39m
+#>   <chr> <chr>            <chr>            <chr>            <chr>           
+#> 1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> 2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> 3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> 4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> 5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> 6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> # … with 9 more variables: SOURCE_DATA_ID <chr>, SUPPLIED_SOURCE_ID_IND <chr>,
+#> #   AIRPORT_NAME <chr>, LOCALITY <chr>, LATITUDE <dbl>, LONGITUDE <dbl>,
+#> #   NUMBER_OF_RUNWAYS <int>, SEQUENCE_ID <int>, geometry <POINT [m]>
 ```

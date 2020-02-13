@@ -167,31 +167,29 @@ Finally, you can retrieve the _metadata_ for a single catalogue record by using 
 ```r
 ## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`
 bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
-#> [34m[1mB.C. Data Catalogue Record:[22m[39m BC FIRST Tire Recycling Data 1991-2006 
-#> [34m[3m
-#> Name:[23m[39m bc-first-tire-recycling-data-1991-2006 (ID: a29ad492-29a2-44b9-8693-d27a8cc8e686 )[34m[3m
-#> Permalink:[23m[39m https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e686[34m[3m
-#> Sector:[23m[39m Natural Resources[34m[3m
-#> Licence:[23m[39m Open Government Licence - British Columbia[34m[3m
-#> Type:[23m[39m Dataset[34m[3m
-#> Last Updated:[23m[39m 2018-07-12 
-#> [34m[3m
-#> Description:[23m[39m Financial Incentives for Recycling Scrap Tires (FIRST) collection and recycling data
+#> B.C. Data Catalogue Record: BC FIRST Tire Recycling Data 1991-2006 
+#> 
+#> Name: bc-first-tire-recycling-data-1991-2006 (ID: a29ad492-29a2-44b9-8693-d27a8cc8e686 )
+#> Permalink: https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e686
+#> Sector: Natural Resources
+#> Licence: Open Government Licence - British Columbia
+#> Type: Dataset
+#> Last Updated: 2018-07-12 
+#> 
+#> Description: Financial Incentives for Recycling Scrap Tires (FIRST) collection and recycling data
 #> (tonnes) from 1991 to 2006. In 2007 [Tire Stewardship BC](http://www.tsbc.ca/), a
 #> not for profit society, launched the new scrap tire recycling program replacing the
 #> government-run program that had been in place since 1991. Tire Stewardship BC
 #> collection and recycling data is available
 #> [here](https://catalogue.data.gov.bc.ca/dataset/f791329b-c2dc-4f82-9993-209780f2a1c6). 
-#> [34m[3m
-#> Resources: (1)
-#> [23m[39m[90m# A tibble: 1 x 8[39m
-#>   name     url        id      format ext   package_id  location bcdata_available
-#>   [3m[90m<chr>[39m[23m    [3m[90m<chr>[39m[23m      [3m[90m<chr>[39m[23m   [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m       [3m[90m<chr>[39m[23m    [3m[90m<lgl>[39m[23m           
-#> [90m1[39m BC FIRS… https://c… ed24cc… csv    csv   a29ad492-2… catalog… TRUE            
-#> [34m
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 #> 
-#> [39m
+#> Resources: (1)
+#> # A tibble: 1 x 8
+#>   name     url        id      format ext   package_id  location bcdata_available
+#>   <chr>    <chr>      <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
+#> 1 BC FIRS… https://c… ed24cc… csv    csv   a29ad492-2… catalog… TRUE            
+#> 
+#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 ```
 
 
@@ -203,70 +201,70 @@ One you have located the B.C. Data Catalogue record with the data you want, you 
 ```r
 ## Get the data resource for the `bc-highway-cams` catalogue record
 bcdc_get_data("bc-highway-cams")
-#> [90m# A tibble: 884 x 19[39m
+#> # A tibble: 884 x 19
 #>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id
-#>    [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<dbl>[39m[23m
-#> [90m 1[39m http://images.d… http://images.d… http://images.d… http://images.d…     2
-#> [90m 2[39m http://images.d… http://images.d… http://images.d… http://images.d…     5
-#> [90m 3[39m http://images.d… http://images.d… http://images.d… http://images.d…     6
-#> [90m 4[39m http://images.d… http://images.d… http://images.d… http://images.d…     7
-#> [90m 5[39m http://images.d… http://images.d… http://images.d… http://images.d…     8
-#> [90m 6[39m http://images.d… http://images.d… http://images.d… http://images.d…     9
-#> [90m 7[39m http://images.d… http://images.d… http://images.d… http://images.d…    10
-#> [90m 8[39m http://images.d… http://images.d… http://images.d… http://images.d…    11
-#> [90m 9[39m http://images.d… http://images.d… http://images.d… http://images.d…    12
-#> [90m10[39m http://images.d… http://images.d… http://images.d… http://images.d…    13
-#> [90m# … with 874 more rows, and 14 more variables: highway_number [3m[90m<chr>[90m[23m,
-#> #   highway_locationDescription [3m[90m<chr>[90m[23m, camName [3m[90m<chr>[90m[23m, caption [3m[90m<chr>[90m[23m,
-#> #   credit [3m[90m<chr>[90m[23m, orientation [3m[90m<chr>[90m[23m, latitude [3m[90m<dbl>[90m[23m, longitude [3m[90m<dbl>[90m[23m,
-#> #   imageStats_updatePeriodMean [3m[90m<chr>[90m[23m, imageStats_updatePeriodStdDev [3m[90m<dbl>[90m[23m,
-#> #   markedDelayed [3m[90m<dbl>[90m[23m, updatePeriodMean [3m[90m<dbl>[90m[23m, updatePeriodStdDev [3m[90m<dbl>[90m[23m,
-#> #   fetchMean [3m[90m<dbl>[90m[23m[39m
+#>    <chr>            <chr>            <chr>            <chr>            <dbl>
+#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2
+#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5
+#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6
+#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7
+#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8
+#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9
+#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10
+#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11
+#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12
+#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13
+#> # … with 874 more rows, and 14 more variables: highway_number <chr>,
+#> #   highway_locationDescription <chr>, camName <chr>, caption <chr>,
+#> #   credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>,
+#> #   markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>,
+#> #   fetchMean <dbl>
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-#> [90m# A tibble: 884 x 19[39m
+#> # A tibble: 884 x 19
 #>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id
-#>    [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<dbl>[39m[23m
-#> [90m 1[39m http://images.d… http://images.d… http://images.d… http://images.d…     2
-#> [90m 2[39m http://images.d… http://images.d… http://images.d… http://images.d…     5
-#> [90m 3[39m http://images.d… http://images.d… http://images.d… http://images.d…     6
-#> [90m 4[39m http://images.d… http://images.d… http://images.d… http://images.d…     7
-#> [90m 5[39m http://images.d… http://images.d… http://images.d… http://images.d…     8
-#> [90m 6[39m http://images.d… http://images.d… http://images.d… http://images.d…     9
-#> [90m 7[39m http://images.d… http://images.d… http://images.d… http://images.d…    10
-#> [90m 8[39m http://images.d… http://images.d… http://images.d… http://images.d…    11
-#> [90m 9[39m http://images.d… http://images.d… http://images.d… http://images.d…    12
-#> [90m10[39m http://images.d… http://images.d… http://images.d… http://images.d…    13
-#> [90m# … with 874 more rows, and 14 more variables: highway_number [3m[90m<chr>[90m[23m,
-#> #   highway_locationDescription [3m[90m<chr>[90m[23m, camName [3m[90m<chr>[90m[23m, caption [3m[90m<chr>[90m[23m,
-#> #   credit [3m[90m<chr>[90m[23m, orientation [3m[90m<chr>[90m[23m, latitude [3m[90m<dbl>[90m[23m, longitude [3m[90m<dbl>[90m[23m,
-#> #   imageStats_updatePeriodMean [3m[90m<chr>[90m[23m, imageStats_updatePeriodStdDev [3m[90m<dbl>[90m[23m,
-#> #   markedDelayed [3m[90m<dbl>[90m[23m, updatePeriodMean [3m[90m<dbl>[90m[23m, updatePeriodStdDev [3m[90m<dbl>[90m[23m,
-#> #   fetchMean [3m[90m<dbl>[90m[23m[39m
+#>    <chr>            <chr>            <chr>            <chr>            <dbl>
+#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2
+#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5
+#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6
+#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7
+#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8
+#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9
+#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10
+#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11
+#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12
+#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13
+#> # … with 874 more rows, and 14 more variables: highway_number <chr>,
+#> #   highway_locationDescription <chr>, camName <chr>, caption <chr>,
+#> #   credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>,
+#> #   markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>,
+#> #   fetchMean <dbl>
 
 ## OR use the result from bcdc_get_record()
 my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 bcdc_get_data(my_record)
-#> [90m# A tibble: 884 x 19[39m
+#> # A tibble: 884 x 19
 #>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id
-#>    [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<dbl>[39m[23m
-#> [90m 1[39m http://images.d… http://images.d… http://images.d… http://images.d…     2
-#> [90m 2[39m http://images.d… http://images.d… http://images.d… http://images.d…     5
-#> [90m 3[39m http://images.d… http://images.d… http://images.d… http://images.d…     6
-#> [90m 4[39m http://images.d… http://images.d… http://images.d… http://images.d…     7
-#> [90m 5[39m http://images.d… http://images.d… http://images.d… http://images.d…     8
-#> [90m 6[39m http://images.d… http://images.d… http://images.d… http://images.d…     9
-#> [90m 7[39m http://images.d… http://images.d… http://images.d… http://images.d…    10
-#> [90m 8[39m http://images.d… http://images.d… http://images.d… http://images.d…    11
-#> [90m 9[39m http://images.d… http://images.d… http://images.d… http://images.d…    12
-#> [90m10[39m http://images.d… http://images.d… http://images.d… http://images.d…    13
-#> [90m# … with 874 more rows, and 14 more variables: highway_number [3m[90m<chr>[90m[23m,
-#> #   highway_locationDescription [3m[90m<chr>[90m[23m, camName [3m[90m<chr>[90m[23m, caption [3m[90m<chr>[90m[23m,
-#> #   credit [3m[90m<chr>[90m[23m, orientation [3m[90m<chr>[90m[23m, latitude [3m[90m<dbl>[90m[23m, longitude [3m[90m<dbl>[90m[23m,
-#> #   imageStats_updatePeriodMean [3m[90m<chr>[90m[23m, imageStats_updatePeriodStdDev [3m[90m<dbl>[90m[23m,
-#> #   markedDelayed [3m[90m<dbl>[90m[23m, updatePeriodMean [3m[90m<dbl>[90m[23m, updatePeriodStdDev [3m[90m<dbl>[90m[23m,
-#> #   fetchMean [3m[90m<dbl>[90m[23m[39m
+#>    <chr>            <chr>            <chr>            <chr>            <dbl>
+#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2
+#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5
+#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6
+#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7
+#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8
+#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9
+#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10
+#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11
+#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12
+#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13
+#> # … with 874 more rows, and 14 more variables: highway_number <chr>,
+#> #   highway_locationDescription <chr>, camName <chr>, caption <chr>,
+#> #   credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>,
+#> #   markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>,
+#> #   fetchMean <dbl>
 ```
 
 A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:
@@ -288,30 +286,28 @@ bcdc_search("school programs", n = 1)
 
 ## Get the metadata for the `bc-schools-programs-offered-in-schools` catalogue record
 bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
-#> [34m[1mB.C. Data Catalogue Record:[22m[39m BC Schools - Programs Offered in Schools 
-#> [34m[3m
-#> Name:[23m[39m bc-schools-programs-offered-in-schools (ID: b1f27d1c-244a-410e-a361-931fac62a524 )[34m[3m
-#> Permalink:[23m[39m https://catalogue.data.gov.bc.ca/dataset/b1f27d1c-244a-410e-a361-931fac62a524[34m[3m
-#> Sector:[23m[39m Education[34m[3m
-#> Licence:[23m[39m Open Government Licence - British Columbia[34m[3m
-#> Type:[23m[39m Dataset[34m[3m
-#> Last Updated:[23m[39m 2017-02-02 
-#> [34m[3m
-#> Description:[23m[39m BC Schools English Language Learners, French Immersion, Francophone, Career
+#> B.C. Data Catalogue Record: BC Schools - Programs Offered in Schools 
+#> 
+#> Name: bc-schools-programs-offered-in-schools (ID: b1f27d1c-244a-410e-a361-931fac62a524 )
+#> Permalink: https://catalogue.data.gov.bc.ca/dataset/b1f27d1c-244a-410e-a361-931fac62a524
+#> Sector: Education
+#> Licence: Open Government Licence - British Columbia
+#> Type: Dataset
+#> Last Updated: 2017-02-02 
+#> 
+#> Description: BC Schools English Language Learners, French Immersion, Francophone, Career
 #> Preparation, Aboriginal Support Services, Aboriginal Language and Culture,
 #> Continuing Education and Career Technical Programs offered in BC schools up to
 #> 2013/2014. 
-#> [34m[3m
-#> Resources: (2)
-#> [23m[39m[90m# A tibble: 2 x 8[39m
-#>   name    url         id      format ext   package_id  location bcdata_available
-#>   [3m[90m<chr>[39m[23m   [3m[90m<chr>[39m[23m       [3m[90m<chr>[39m[23m   [3m[90m<chr>[39m[23m  [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m       [3m[90m<chr>[39m[23m    [3m[90m<lgl>[39m[23m           
-#> [90m1[39m Progra… http://www… a393f8… txt    txt   b1f27d1c-2… external TRUE            
-#> [90m2[39m Progra… http://www… 1e3409… xlsx   xlsx  b1f27d1c-2… external TRUE            
-#> [34m
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 #> 
-#> [39m
+#> Resources: (2)
+#> # A tibble: 2 x 8
+#>   name    url         id      format ext   package_id  location bcdata_available
+#>   <chr>   <chr>       <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
+#> 1 Progra… http://www… a393f8… txt    txt   b1f27d1c-2… external TRUE            
+#> 2 Progra… http://www… 1e3409… xlsx   xlsx  b1f27d1c-2… external TRUE            
+#> 
+#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 ```
 
 We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The full code---with the resource ID for each data set---is also available _in_ the metadata record ☝️:
@@ -321,28 +317,28 @@ We see there are two data files or resources available in this record, so we nee
 ## Get the txt data resource from the `bc-schools-programs-offered-in-schools`
 ## catalogue record
 bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
-#> [90m# A tibble: 16,152 x 24[39m
+#> # A tibble: 16,152 x 24
 #>    `Data Level` `School Year` `Facility Type` `Public Or Inde… `District Numbe…
-#>    [3m[90m<chr>[39m[23m        [3m[90m<chr>[39m[23m         [3m[90m<chr>[39m[23m           [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m           
-#> [90m 1[39m SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005             
-#> [90m 2[39m SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005             
-#> [90m 3[39m SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005             
-#> [90m 4[39m SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005             
-#> [90m 5[39m SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005             
-#> [90m 6[39m SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005             
-#> [90m 7[39m SCHOOL LEVEL 2008/2009     STANDARD        BC Public School 005             
-#> [90m 8[39m SCHOOL LEVEL 2009/2010     STANDARD        BC Public School 005             
-#> [90m 9[39m SCHOOL LEVEL 2010/2011     STANDARD        BC Public School 005             
-#> [90m10[39m SCHOOL LEVEL 2011/2012     STANDARD        BC Public School 005             
-#> [90m# … with 16,142 more rows, and 19 more variables: `District Name` [3m[90m<chr>[90m[23m,
-#> #   `School Number` [3m[90m<chr>[90m[23m, `School Name` [3m[90m<chr>[90m[23m, `Has Eng Lang Learner
-#> #   Prog` [3m[90m<lgl>[90m[23m, `Has Core French` [3m[90m<lgl>[90m[23m, `Has Early French Immersion` [3m[90m<lgl>[90m[23m,
-#> #   `Has Late French Immersion` [3m[90m<lgl>[90m[23m, `Has Prog Francophone` [3m[90m<lgl>[90m[23m, `Has Any
-#> #   French Immersion Prog` [3m[90m<lgl>[90m[23m, `Has Any French Prog` [3m[90m<lgl>[90m[23m, `Has Aborig Supp
-#> #   Services` [3m[90m<lgl>[90m[23m, `Has Other Appr Aborig Prog` [3m[90m<lgl>[90m[23m, `Has Aborig Lang And
-#> #   Cult` [3m[90m<lgl>[90m[23m, `Has Continuing Ed Prog` [3m[90m<lgl>[90m[23m, `Has Distributed Learn
-#> #   Prog` [3m[90m<lgl>[90m[23m, `Has Career Prep Prog` [3m[90m<lgl>[90m[23m, `Has Coop Prog` [3m[90m<lgl>[90m[23m, `Has
-#> #   Apprenticeship Prog` [3m[90m<lgl>[90m[23m, `Has Career Technical Prog` [3m[90m<lgl>[90m[23m[39m
+#>    <chr>        <chr>         <chr>           <chr>            <chr>           
+#>  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005             
+#>  2 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005             
+#>  3 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005             
+#>  4 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005             
+#>  5 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005             
+#>  6 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005             
+#>  7 SCHOOL LEVEL 2008/2009     STANDARD        BC Public School 005             
+#>  8 SCHOOL LEVEL 2009/2010     STANDARD        BC Public School 005             
+#>  9 SCHOOL LEVEL 2010/2011     STANDARD        BC Public School 005             
+#> 10 SCHOOL LEVEL 2011/2012     STANDARD        BC Public School 005             
+#> # … with 16,142 more rows, and 19 more variables: `District Name` <chr>,
+#> #   `School Number` <chr>, `School Name` <chr>, `Has Eng Lang Learner
+#> #   Prog` <lgl>, `Has Core French` <lgl>, `Has Early French Immersion` <lgl>,
+#> #   `Has Late French Immersion` <lgl>, `Has Prog Francophone` <lgl>, `Has Any
+#> #   French Immersion Prog` <lgl>, `Has Any French Prog` <lgl>, `Has Aborig Supp
+#> #   Services` <lgl>, `Has Other Appr Aborig Prog` <lgl>, `Has Aborig Lang And
+#> #   Cult` <lgl>, `Has Continuing Ed Prog` <lgl>, `Has Distributed Learn
+#> #   Prog` <lgl>, `Has Career Prep Prog` <lgl>, `Has Coop Prog` <lgl>, `Has
+#> #   Apprenticeship Prog` <lgl>, `Has Career Technical Prog` <lgl>
 ```
 
 `bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically reads and returns it as an [`sf` object](https://r-spatial.github.io/sf/) in your R session. Let's get the air zones for British Columbia:
@@ -397,32 +393,32 @@ bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #> bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> [90m# A tibble: 455 x 42[39m
+#> # A tibble: 455 x 42
 #>    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#>  [90m*[39m [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m            [3m[90m<chr>[39m[23m           
-#> [90m 1[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 2[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 3[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 4[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 5[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 6[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 7[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 8[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m 9[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m10[39m WHSE… [90m"[39mMinistry of Fo… airTransportati… Air Transportat… BC Airports     
-#> [90m# … with 445 more rows, and 37 more variables: SOURCE_DATA_ID [3m[90m<chr>[90m[23m,
-#> #   SUPPLIED_SOURCE_ID_IND [3m[90m<chr>[90m[23m, AIRPORT_NAME [3m[90m<chr>[90m[23m, DESCRIPTION [3m[90m<chr>[90m[23m,
-#> #   PHYSICAL_ADDRESS [3m[90m<chr>[90m[23m, ALIAS_ADDRESS [3m[90m<chr>[90m[23m, STREET_ADDRESS [3m[90m<chr>[90m[23m,
-#> #   POSTAL_CODE [3m[90m<chr>[90m[23m, LOCALITY [3m[90m<chr>[90m[23m, CONTACT_PHONE [3m[90m<chr>[90m[23m,
-#> #   CONTACT_EMAIL [3m[90m<chr>[90m[23m, CONTACT_FAX [3m[90m<chr>[90m[23m, WEBSITE_URL [3m[90m<chr>[90m[23m, IMAGE_URL [3m[90m<chr>[90m[23m,
-#> #   LATITUDE [3m[90m<dbl>[90m[23m, LONGITUDE [3m[90m<dbl>[90m[23m, KEYWORDS [3m[90m<chr>[90m[23m, DATE_UPDATED [3m[90m<date>[90m[23m,
-#> #   SITE_GEOCODED_IND [3m[90m<chr>[90m[23m, AERODROME_STATUS [3m[90m<chr>[90m[23m, AIRCRAFT_ACCESS_IND [3m[90m<chr>[90m[23m,
-#> #   DATA_SOURCE [3m[90m<chr>[90m[23m, DATA_SOURCE_YEAR [3m[90m<chr>[90m[23m, ELEVATION [3m[90m<dbl>[90m[23m,
-#> #   FUEL_AVAILABILITY_IND [3m[90m<chr>[90m[23m, HELICOPTER_ACCESS_IND [3m[90m<chr>[90m[23m, IATA_CODE [3m[90m<chr>[90m[23m,
-#> #   ICAO_CODE [3m[90m<chr>[90m[23m, MAX_RUNWAY_LENGTH [3m[90m<dbl>[90m[23m, NUMBER_OF_RUNWAYS [3m[90m<int>[90m[23m,
-#> #   OIL_AVAILABILITY_IND [3m[90m<chr>[90m[23m, RUNWAY_SURFACE [3m[90m<chr>[90m[23m,
-#> #   SEAPLANE_ACCESS_IND [3m[90m<chr>[90m[23m, TC_LID_CODE [3m[90m<chr>[90m[23m, SEQUENCE_ID [3m[90m<int>[90m[23m,
-#> #   SE_ANNO_CAD_DATA [3m[90m<chr>[90m[23m, geometry [3m[90m<POINT [m]>[90m[23m[39m
+#>  * <chr> <chr>            <chr>            <chr>            <chr>           
+#>  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> # … with 445 more rows, and 37 more variables: SOURCE_DATA_ID <chr>,
+#> #   SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, DESCRIPTION <chr>,
+#> #   PHYSICAL_ADDRESS <chr>, ALIAS_ADDRESS <chr>, STREET_ADDRESS <chr>,
+#> #   POSTAL_CODE <chr>, LOCALITY <chr>, CONTACT_PHONE <chr>,
+#> #   CONTACT_EMAIL <chr>, CONTACT_FAX <chr>, WEBSITE_URL <chr>, IMAGE_URL <chr>,
+#> #   LATITUDE <dbl>, LONGITUDE <dbl>, KEYWORDS <chr>, DATE_UPDATED <date>,
+#> #   SITE_GEOCODED_IND <chr>, AERODROME_STATUS <chr>, AIRCRAFT_ACCESS_IND <chr>,
+#> #   DATA_SOURCE <chr>, DATA_SOURCE_YEAR <chr>, ELEVATION <dbl>,
+#> #   FUEL_AVAILABILITY_IND <chr>, HELICOPTER_ACCESS_IND <chr>, IATA_CODE <chr>,
+#> #   ICAO_CODE <chr>, MAX_RUNWAY_LENGTH <dbl>, NUMBER_OF_RUNWAYS <int>,
+#> #   OIL_AVAILABILITY_IND <chr>, RUNWAY_SURFACE <chr>,
+#> #   SEAPLANE_ACCESS_IND <chr>, TC_LID_CODE <chr>, SEQUENCE_ID <int>,
+#> #   SE_ANNO_CAD_DATA <chr>, geometry <POINT [m]>
 ```
 
 ### `bcdc_query_geodata()`
@@ -451,27 +447,27 @@ bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7
 
 ## Have a quick look at the geospatial columns to help with filter or select
 bcdc_describe_feature(bc_regional_districts_metadata)
-#> [90m# A tibble: 18 x 4[39m
+#> # A tibble: 18 x 4
 #>    col_name                  selectable remote_col_type          local_col_type
-#>    [3m[90m<chr>[39m[23m                     [3m[90m<lgl>[39m[23m      [3m[90m<chr>[39m[23m                    [3m[90m<chr>[39m[23m         
-#> [90m 1[39m id                        FALSE      xsd:string               character     
-#> [90m 2[39m LGL_ADMIN_AREA_ID         FALSE      xsd:decimal              numeric       
-#> [90m 3[39m ADMIN_AREA_NAME           TRUE       xsd:string               character     
-#> [90m 4[39m ADMIN_AREA_ABBREVIATION   TRUE       xsd:string               character     
-#> [90m 5[39m ADMIN_AREA_BOUNDARY_TYPE  TRUE       xsd:string               character     
-#> [90m 6[39m ADMIN_AREA_TYPE           TRUE       xsd:string               character     
-#> [90m 7[39m ADMIN_AREA_GROUP_NAME     TRUE       xsd:string               character     
-#> [90m 8[39m CHANGE_REQUESTED_ORG      TRUE       xsd:string               character     
-#> [90m 9[39m UPDATE_TYPE               TRUE       xsd:string               character     
-#> [90m10[39m WHEN_UPDATED              TRUE       xsd:date                 date          
-#> [90m11[39m OIC_NUMBER                TRUE       xsd:string               character     
-#> [90m12[39m OIC_YEAR                  TRUE       xsd:string               character     
-#> [90m13[39m AFFECTED_ADMIN_AREA_ABRVN TRUE       xsd:string               character     
-#> [90m14[39m FEATURE_AREA_SQM          TRUE       xsd:decimal              numeric       
-#> [90m15[39m FEATURE_LENGTH_M          TRUE       xsd:decimal              numeric       
-#> [90m16[39m SHAPE                     TRUE       gml:GeometryPropertyType sfc geometry  
-#> [90m17[39m OBJECTID                  FALSE      xsd:decimal              numeric       
-#> [90m18[39m SE_ANNO_CAD_DATA          TRUE       xsd:hexBinary            numeric
+#>    <chr>                     <lgl>      <chr>                    <chr>         
+#>  1 id                        FALSE      xsd:string               character     
+#>  2 LGL_ADMIN_AREA_ID         FALSE      xsd:decimal              numeric       
+#>  3 ADMIN_AREA_NAME           TRUE       xsd:string               character     
+#>  4 ADMIN_AREA_ABBREVIATION   TRUE       xsd:string               character     
+#>  5 ADMIN_AREA_BOUNDARY_TYPE  TRUE       xsd:string               character     
+#>  6 ADMIN_AREA_TYPE           TRUE       xsd:string               character     
+#>  7 ADMIN_AREA_GROUP_NAME     TRUE       xsd:string               character     
+#>  8 CHANGE_REQUESTED_ORG      TRUE       xsd:string               character     
+#>  9 UPDATE_TYPE               TRUE       xsd:string               character     
+#> 10 WHEN_UPDATED              TRUE       xsd:date                 date          
+#> 11 OIC_NUMBER                TRUE       xsd:string               character     
+#> 12 OIC_YEAR                  TRUE       xsd:string               character     
+#> 13 AFFECTED_ADMIN_AREA_ABRVN TRUE       xsd:string               character     
+#> 14 FEATURE_AREA_SQM          TRUE       xsd:decimal              numeric       
+#> 15 FEATURE_LENGTH_M          TRUE       xsd:decimal              numeric       
+#> 16 SHAPE                     TRUE       gml:GeometryPropertyType sfc geometry  
+#> 17 OBJECTID                  FALSE      xsd:decimal              numeric       
+#> 18 SE_ANNO_CAD_DATA          TRUE       xsd:hexBinary            numeric
 
 ## Get the Capital Regional District polygon from the B.C. Regional
 ## Districts geospatial data
