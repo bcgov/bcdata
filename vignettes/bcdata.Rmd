@@ -44,7 +44,7 @@ library(bcdata)
 
 ### `bcdc_browse()`
 
-`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening the home page in your default browser:
+`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening catalogue search page in your default browser:
 
 
 ```r
@@ -63,17 +63,9 @@ bcdc_browse("bc-winery-locations")
 bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
 ```
 
-You can also use `bcdc_browse()` to open to search results in the catalogue:
-
-
-```r
-## Take me to the catalogue search results for 'wineries'
-bcdc_browse("wineries")
-```
-
 ### `bcdc_search()`
 
-`bcdata::bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session.
+`bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session.
 
 Let's search the catalogue for records that contain the word "recycling":
 
@@ -83,7 +75,7 @@ Let's search the catalogue for records that contain the word "recycling":
 bcdc_search("recycling")
 #> List of B.C. Data Catalogue Records
 #> 
-#> Number of records: 6
+#> Number of records: 5
 #> Titles:
 #> 1: BC FIRST Tire Recycling Data 1991-2006 (csv)
 #>  ID: a29ad492-29a2-44b9-8693-d27a8cc8e686
@@ -94,13 +86,10 @@ bcdc_search("recycling")
 #> 3: Environmental Protection Information Resources e-Library ()
 #>  ID: dae0f2c3-b4f4-4d16-a96d-d7fe7c1581f3
 #>  Name: environmental-protection-information-resources-e-library
-#> 4: PICES Tsunami Debris Aerial Photo Survey Map ()
-#>  ID: 7e74680e-5851-4fc2-b0fa-5e18198b8fa6
-#>  Name: pices-tsunami-debris-aerial-photo-survey-map
-#> 5: Cross-linked Information Resources (CLIR) (other)
+#> 4: Cross-linked Information Resources (CLIR) (other)
 #>  ID: 6f8576bc-1585-429c-97f9-e94b059fa455
 #>  Name: cross-linked-information-resources-clir
-#> 6: Ministry of Transportation (MOT) Surface Type (other, wms, kml)
+#> 5: Ministry of Transportation (MOT) Surface Type (other, wms, kml)
 #>  ID: 3a77f19f-2f49-416c-ad32-75e8d06e6c5a
 #>  Name: ministry-of-transportation-mot-surface-type 
 #> 
@@ -146,18 +135,30 @@ You can see all valid values for the catalogue search facets using `bcdata::bcdc
 ```r
 ## Valid values for search facet 'license_id'
 bcdc_search_facets(facet = "license_id")
-#>         facet count                                             display_name name
-#> 1  license_id    47                                        Statistics Canada   21
-#> 2  license_id     1               Queen's Printer Licence - British Columbia   25
-#> 3  license_id    11 Open Government Licence – Municipality of North Cowichan   44
-#> 4  license_id    15                     Open Government Licence - WorkSafeBC   41
-#> 5  license_id     4                 Open Government Licence - Destination BC   43
-#> 6  license_id    58                         Open Government Licence - Canada   24
-#> 7  license_id  1533               Open Government Licence - British Columbia    2
-#> 8  license_id     3                  Open Government Licence - BC Assessment   47
-#> 9  license_id     2 Open Data Commons - Public Domain Dedication and Licence   45
-#> 10 license_id    16                           Elections BC Open Data Licence   42
-#> 11 license_id  1249                                              Access Only   22
+#>         facet count                                             display_name
+#> 1  license_id    47                                        Statistics Canada
+#> 2  license_id     1               Queen's Printer Licence - British Columbia
+#> 3  license_id    11 Open Government Licence – Municipality of North Cowichan
+#> 4  license_id    15                     Open Government Licence - WorkSafeBC
+#> 5  license_id     4                 Open Government Licence - Destination BC
+#> 6  license_id    58                         Open Government Licence - Canada
+#> 7  license_id  1538               Open Government Licence - British Columbia
+#> 8  license_id     3                  Open Government Licence - BC Assessment
+#> 9  license_id     2 Open Data Commons - Public Domain Dedication and Licence
+#> 10 license_id    16                           Elections BC Open Data Licence
+#> 11 license_id  1259                                              Access Only
+#>    name
+#> 1    21
+#> 2    25
+#> 3    44
+#> 4    41
+#> 5    43
+#> 6    24
+#> 7     2
+#> 8    47
+#> 9    45
+#> 10   42
+#> 11   22
 ```
 
 Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:
@@ -182,11 +183,13 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 #> collection and recycling data is available
 #> [here](https://catalogue.data.gov.bc.ca/dataset/f791329b-c2dc-4f82-9993-209780f2a1c6). 
 #> 
-#> Resources: ( 1 )
+#> Resources: (1)
 #> # A tibble: 1 x 8
-#>   name                 url                                                                          id                  format ext   package_id            location     bcdata_available
-#>   <chr>                <chr>                                                                        <chr>               <chr>  <chr> <chr>                 <chr>        <lgl>           
-#> 1 BC FIRST Tire Recyc… https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e6… ed24cca3-d8cb-4f5e… csv    csv   a29ad492-29a2-44b9-8… catalogueda… TRUE
+#>   name     url        id      format ext   package_id  location bcdata_available
+#>   <chr>    <chr>      <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
+#> 1 BC FIRS… https://c… ed24cc… csv    csv   a29ad492-2… catalog… TRUE            
+#> 
+#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 ```
 
 
@@ -198,55 +201,70 @@ One you have located the B.C. Data Catalogue record with the data you want, you 
 ```r
 ## Get the data resource for the `bc-highway-cams` catalogue record
 bcdc_get_data("bc-highway-cams")
-#> # A tibble: 880 x 19
-#>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id highway_number highway_locatio… camName caption credit orientation latitude longitude imageStats_upda…
-#>    <chr>            <chr>            <chr>            <chr>            <dbl> <chr>          <chr>            <chr>   <chr>   <chr>  <chr>          <dbl>     <dbl> <chr>           
-#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2 5              Coquihalla       Coquih… Hwy 5,… <NA>   N               49.6     -121. 2019-11-26 12:33
-#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5 3              <NA>             Kooten… Hwy 3,… <NA>   E               49.1     -117. 2019-11-26 12:33
-#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6 16             <NA>             Smithe… Hwy 16… <NA>   N               54.8     -127. 2019-11-26 12:27
-#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7 1              Fraser Valley    Cole R… Hwy 1 … <NA>   E               49.1     -122. 2019-11-26 12:25
-#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8 1              Vancouver Island Malaha… Hwy 1 … <NA>   N               48.6     -124. 2019-11-26 12:30
-#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9 19             <NA>             Nanaim… Hwy 19… <NA>   N               49.2     -124. 2019-11-26 12:21
-#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10 97             Northern Region  South … Hwy 97… <NA>   N               56.1     -121. 2019-11-26 12:21
-#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11 1              Trans Canada Hi… Revels… Hwy 1 … <NA>   NE              51.0     -118. 2019-11-26 12:34
-#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12 1              Trans Canada Hi… Three … Hwy 1,… <NA>   E               50.9     -118. 2019-10-25 16:34
-#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13 99             Peace Arch Bord… Peace … Hwy 99… "For … N               49.0     -123. 2019-11-26 12:34
-#> # … with 870 more rows, and 5 more variables: imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>, fetchMean <dbl>
+#> # A tibble: 884 x 19
+#>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id
+#>    <chr>            <chr>            <chr>            <chr>            <dbl>
+#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2
+#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5
+#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6
+#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7
+#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8
+#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9
+#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10
+#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11
+#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12
+#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13
+#> # … with 874 more rows, and 14 more variables: highway_number <chr>,
+#> #   highway_locationDescription <chr>, camName <chr>, caption <chr>,
+#> #   credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>,
+#> #   markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>,
+#> #   fetchMean <dbl>
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-#> # A tibble: 880 x 19
-#>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id highway_number highway_locatio… camName caption credit orientation latitude longitude imageStats_upda…
-#>    <chr>            <chr>            <chr>            <chr>            <dbl> <chr>          <chr>            <chr>   <chr>   <chr>  <chr>          <dbl>     <dbl> <chr>           
-#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2 5              Coquihalla       Coquih… Hwy 5,… <NA>   N               49.6     -121. 2019-11-26 12:33
-#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5 3              <NA>             Kooten… Hwy 3,… <NA>   E               49.1     -117. 2019-11-26 12:33
-#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6 16             <NA>             Smithe… Hwy 16… <NA>   N               54.8     -127. 2019-11-26 12:27
-#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7 1              Fraser Valley    Cole R… Hwy 1 … <NA>   E               49.1     -122. 2019-11-26 12:25
-#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8 1              Vancouver Island Malaha… Hwy 1 … <NA>   N               48.6     -124. 2019-11-26 12:30
-#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9 19             <NA>             Nanaim… Hwy 19… <NA>   N               49.2     -124. 2019-11-26 12:21
-#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10 97             Northern Region  South … Hwy 97… <NA>   N               56.1     -121. 2019-11-26 12:21
-#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11 1              Trans Canada Hi… Revels… Hwy 1 … <NA>   NE              51.0     -118. 2019-11-26 12:34
-#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12 1              Trans Canada Hi… Three … Hwy 1,… <NA>   E               50.9     -118. 2019-10-25 16:34
-#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13 99             Peace Arch Bord… Peace … Hwy 99… "For … N               49.0     -123. 2019-11-26 12:34
-#> # … with 870 more rows, and 5 more variables: imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>, fetchMean <dbl>
+#> # A tibble: 884 x 19
+#>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id
+#>    <chr>            <chr>            <chr>            <chr>            <dbl>
+#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2
+#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5
+#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6
+#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7
+#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8
+#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9
+#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10
+#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11
+#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12
+#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13
+#> # … with 874 more rows, and 14 more variables: highway_number <chr>,
+#> #   highway_locationDescription <chr>, camName <chr>, caption <chr>,
+#> #   credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>,
+#> #   markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>,
+#> #   fetchMean <dbl>
 
 ## OR use the result from bcdc_get_record()
-my_data <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-bcdc_get_data(my_data)
-#> # A tibble: 880 x 19
-#>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id highway_number highway_locatio… camName caption credit orientation latitude longitude imageStats_upda…
-#>    <chr>            <chr>            <chr>            <chr>            <dbl> <chr>          <chr>            <chr>   <chr>   <chr>  <chr>          <dbl>     <dbl> <chr>           
-#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2 5              Coquihalla       Coquih… Hwy 5,… <NA>   N               49.6     -121. 2019-11-26 12:33
-#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5 3              <NA>             Kooten… Hwy 3,… <NA>   E               49.1     -117. 2019-11-26 12:33
-#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6 16             <NA>             Smithe… Hwy 16… <NA>   N               54.8     -127. 2019-11-26 12:27
-#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7 1              Fraser Valley    Cole R… Hwy 1 … <NA>   E               49.1     -122. 2019-11-26 12:25
-#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8 1              Vancouver Island Malaha… Hwy 1 … <NA>   N               48.6     -124. 2019-11-26 12:30
-#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9 19             <NA>             Nanaim… Hwy 19… <NA>   N               49.2     -124. 2019-11-26 12:21
-#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10 97             Northern Region  South … Hwy 97… <NA>   N               56.1     -121. 2019-11-26 12:21
-#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11 1              Trans Canada Hi… Revels… Hwy 1 … <NA>   NE              51.0     -118. 2019-11-26 12:34
-#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12 1              Trans Canada Hi… Three … Hwy 1,… <NA>   E               50.9     -118. 2019-10-25 16:34
-#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13 99             Peace Arch Bord… Peace … Hwy 99… "For … N               49.0     -123. 2019-11-26 12:34
-#> # … with 870 more rows, and 5 more variables: imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>, fetchMean <dbl>
+my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
+bcdc_get_data(my_record)
+#> # A tibble: 884 x 19
+#>    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id
+#>    <chr>            <chr>            <chr>            <chr>            <dbl>
+#>  1 http://images.d… http://images.d… http://images.d… http://images.d…     2
+#>  2 http://images.d… http://images.d… http://images.d… http://images.d…     5
+#>  3 http://images.d… http://images.d… http://images.d… http://images.d…     6
+#>  4 http://images.d… http://images.d… http://images.d… http://images.d…     7
+#>  5 http://images.d… http://images.d… http://images.d… http://images.d…     8
+#>  6 http://images.d… http://images.d… http://images.d… http://images.d…     9
+#>  7 http://images.d… http://images.d… http://images.d… http://images.d…    10
+#>  8 http://images.d… http://images.d… http://images.d… http://images.d…    11
+#>  9 http://images.d… http://images.d… http://images.d… http://images.d…    12
+#> 10 http://images.d… http://images.d… http://images.d… http://images.d…    13
+#> # … with 874 more rows, and 14 more variables: highway_number <chr>,
+#> #   highway_locationDescription <chr>, camName <chr>, caption <chr>,
+#> #   credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>,
+#> #   markedDelayed <dbl>, updatePeriodMean <dbl>, updatePeriodStdDev <dbl>,
+#> #   fetchMean <dbl>
 ```
 
 A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:
@@ -282,12 +300,14 @@ bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
 #> Continuing Education and Career Technical Programs offered in BC schools up to
 #> 2013/2014. 
 #> 
-#> Resources: ( 2 )
+#> Resources: (2)
 #> # A tibble: 2 x 8
-#>   name                     url                                                        id                            format ext   package_id                    location bcdata_available
-#>   <chr>                    <chr>                                                      <chr>                         <chr>  <chr> <chr>                         <chr>    <lgl>           
-#> 1 ProgramsOfferedinSchool… http://www.bced.gov.bc.ca/reporting/odefiles/ProgramsOffe… a393f8cf-51ec-42c6-8449-4cea… txt    txt   b1f27d1c-244a-410e-a361-931f… external TRUE            
-#> 2 ProgramsOfferedinSchool… http://www.bced.gov.bc.ca/reporting/odefiles/ProgramsOffe… 1e34098e-70d3-454d-a0fb-e4f8… xlsx   xlsx  b1f27d1c-244a-410e-a361-931f… external TRUE
+#>   name    url         id      format ext   package_id  location bcdata_available
+#>   <chr>   <chr>       <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
+#> 1 Progra… http://www… a393f8… txt    txt   b1f27d1c-2… external TRUE            
+#> 2 Progra… http://www… 1e3409… xlsx   xlsx  b1f27d1c-2… external TRUE            
+#> 
+#> You can access the 'Resources' data frame using bcdc_tidy_resources()
 ```
 
 We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The full code---with the resource ID for each data set---is also available _in_ the metadata record ☝️:
@@ -298,21 +318,27 @@ We see there are two data files or resources available in this record, so we nee
 ## catalogue record
 bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
 #> # A tibble: 16,152 x 24
-#>    `Data Level` `School Year` `Facility Type` `Public Or Inde… `District Numbe… `District Name` `School Number` `School Name` `Has Eng Lang L… `Has Core Frenc… `Has Early Fren…
-#>    <chr>        <chr>         <chr>           <chr>            <chr>            <chr>           <chr>           <chr>         <lgl>            <lgl>            <lgl>           
-#>  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005              Southeast Koot… 00501006        Sparwood Sec… NA               TRUE             NA              
-#>  2 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005              Southeast Koot… 00501006        Sparwood Sec… NA               TRUE             NA              
-#>  3 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005              Southeast Koot… 00501006        Sparwood Sec… NA               TRUE             NA              
-#>  4 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              
-#>  5 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              
-#>  6 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              
-#>  7 SCHOOL LEVEL 2008/2009     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              
-#>  8 SCHOOL LEVEL 2009/2010     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              
-#>  9 SCHOOL LEVEL 2010/2011     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              
-#> 10 SCHOOL LEVEL 2011/2012     STANDARD        BC Public School 005              Southeast Koot… 00501007        Jaffray Elem… NA               TRUE             NA              
-#> # … with 16,142 more rows, and 13 more variables: `Has Late French Immersion` <lgl>, `Has Prog Francophone` <lgl>, `Has Any French Immersion Prog` <lgl>, `Has Any French Prog` <lgl>,
-#> #   `Has Aborig Supp Services` <lgl>, `Has Other Appr Aborig Prog` <lgl>, `Has Aborig Lang And Cult` <lgl>, `Has Continuing Ed Prog` <lgl>, `Has Distributed Learn Prog` <lgl>, `Has
-#> #   Career Prep Prog` <lgl>, `Has Coop Prog` <lgl>, `Has Apprenticeship Prog` <lgl>, `Has Career Technical Prog` <lgl>
+#>    `Data Level` `School Year` `Facility Type` `Public Or Inde… `District Numbe…
+#>    <chr>        <chr>         <chr>           <chr>            <chr>           
+#>  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005             
+#>  2 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005             
+#>  3 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005             
+#>  4 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School 005             
+#>  5 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School 005             
+#>  6 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School 005             
+#>  7 SCHOOL LEVEL 2008/2009     STANDARD        BC Public School 005             
+#>  8 SCHOOL LEVEL 2009/2010     STANDARD        BC Public School 005             
+#>  9 SCHOOL LEVEL 2010/2011     STANDARD        BC Public School 005             
+#> 10 SCHOOL LEVEL 2011/2012     STANDARD        BC Public School 005             
+#> # … with 16,142 more rows, and 19 more variables: `District Name` <chr>,
+#> #   `School Number` <chr>, `School Name` <chr>, `Has Eng Lang Learner
+#> #   Prog` <lgl>, `Has Core French` <lgl>, `Has Early French Immersion` <lgl>,
+#> #   `Has Late French Immersion` <lgl>, `Has Prog Francophone` <lgl>, `Has Any
+#> #   French Immersion Prog` <lgl>, `Has Any French Prog` <lgl>, `Has Aborig Supp
+#> #   Services` <lgl>, `Has Other Appr Aborig Prog` <lgl>, `Has Aborig Lang And
+#> #   Cult` <lgl>, `Has Continuing Ed Prog` <lgl>, `Has Distributed Learn
+#> #   Prog` <lgl>, `Has Career Prep Prog` <lgl>, `Has Coop Prog` <lgl>, `Has
+#> #   Apprenticeship Prog` <lgl>, `Has Career Technical Prog` <lgl>
 ```
 
 `bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically reads and returns it as an [`sf` object](https://r-spatial.github.io/sf/) in your R session. Let's get the air zones for British Columbia:
@@ -368,23 +394,31 @@ bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #> epsg (SRID):    3005
 #> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #> # A tibble: 455 x 42
-#>    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID SUPPLIED_SOURCE… AIRPORT_NAME DESCRIPTION PHYSICAL_ADDRESS ALIAS_ADDRESS STREET_ADDRESS
-#>  * <chr> <chr>            <chr>            <chr>            <chr>            <chr>          <chr>            <chr>        <chr>       <chr>            <chr>         <chr>         
-#>  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      455            N                Terrace (No… airport     4401 Bristol Rd… 4401 Bristol… 4401 Bristol …
-#>  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      456            N                Victoria Ha… heliport    Victoria, BC     Victoria, BC  <NA>          
-#>  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      457            N                Victoria In… water aero… Victoria, BC     Victoria, BC  <NA>          
-#>  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      458            N                Victoria Ha… heliport    Victoria, BC     Victoria, BC  <NA>          
-#>  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      459            N                Victoria (R… hospital h… 1952 Bay St, Sa… 1952 Bay St,… 1952 Bay St   
-#>  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      460            N                Victoria (G… hospital h… 1 Hospital Way,… 1 Hospital W… 1 Hospital Way
-#>  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      461            N                Victoria (B… heliport    Saanich, BC      Saanich, BC   <NA>          
-#>  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      462            N                San Juan Po… heliport    Port Renfrew, BC Port Renfrew… <NA>          
-#>  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      463            N                Shawnigan L… water aero… Shawnigan Lake,… Shawnigan La… <NA>          
-#> 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      464            N                Victoria In… airport     1640 Electra Bl… 1640 Electra… 1640 Electra …
-#> # … with 445 more rows, and 30 more variables: POSTAL_CODE <chr>, LOCALITY <chr>, CONTACT_PHONE <chr>, CONTACT_EMAIL <chr>, CONTACT_FAX <chr>, WEBSITE_URL <chr>, IMAGE_URL <chr>,
-#> #   LATITUDE <dbl>, LONGITUDE <dbl>, KEYWORDS <chr>, DATE_UPDATED <chr>, SITE_GEOCODED_IND <chr>, AERODROME_STATUS <chr>, AIRCRAFT_ACCESS_IND <chr>, DATA_SOURCE <chr>,
-#> #   DATA_SOURCE_YEAR <chr>, ELEVATION <dbl>, FUEL_AVAILABILITY_IND <chr>, HELICOPTER_ACCESS_IND <chr>, IATA_CODE <chr>, ICAO_CODE <chr>, MAX_RUNWAY_LENGTH <dbl>,
-#> #   NUMBER_OF_RUNWAYS <int>, OIL_AVAILABILITY_IND <chr>, RUNWAY_SURFACE <chr>, SEAPLANE_ACCESS_IND <chr>, TC_LID_CODE <chr>, SEQUENCE_ID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POINT
-#> #   [m]>
+#>    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
+#>  * <chr> <chr>            <chr>            <chr>            <chr>           
+#>  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#>  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#> # … with 445 more rows, and 37 more variables: SOURCE_DATA_ID <chr>,
+#> #   SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, DESCRIPTION <chr>,
+#> #   PHYSICAL_ADDRESS <chr>, ALIAS_ADDRESS <chr>, STREET_ADDRESS <chr>,
+#> #   POSTAL_CODE <chr>, LOCALITY <chr>, CONTACT_PHONE <chr>,
+#> #   CONTACT_EMAIL <chr>, CONTACT_FAX <chr>, WEBSITE_URL <chr>, IMAGE_URL <chr>,
+#> #   LATITUDE <dbl>, LONGITUDE <dbl>, KEYWORDS <chr>, DATE_UPDATED <date>,
+#> #   SITE_GEOCODED_IND <chr>, AERODROME_STATUS <chr>, AIRCRAFT_ACCESS_IND <chr>,
+#> #   DATA_SOURCE <chr>, DATA_SOURCE_YEAR <chr>, ELEVATION <dbl>,
+#> #   FUEL_AVAILABILITY_IND <chr>, HELICOPTER_ACCESS_IND <chr>, IATA_CODE <chr>,
+#> #   ICAO_CODE <chr>, MAX_RUNWAY_LENGTH <dbl>, NUMBER_OF_RUNWAYS <int>,
+#> #   OIL_AVAILABILITY_IND <chr>, RUNWAY_SURFACE <chr>,
+#> #   SEAPLANE_ACCESS_IND <chr>, TC_LID_CODE <chr>, SEQUENCE_ID <int>,
+#> #   SE_ANNO_CAD_DATA <chr>, geometry <POINT [m]>
 ```
 
 ### `bcdc_query_geodata()`
