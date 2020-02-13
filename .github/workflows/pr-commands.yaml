@@ -39,7 +39,7 @@ jobs:
       - name: Install pr version of bcdata and pkg dependencies
         run: Rscript -e 'devtools::install()'
       - name: Precompile vignettes
-        run: Rscript -e 'source("./vignettes/precompile.R")'
+        run: Rscript './vignettes/precompile.R'
       - name: commit
         run: |
           git add \*.R
