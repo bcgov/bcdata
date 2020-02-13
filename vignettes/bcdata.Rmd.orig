@@ -112,7 +112,7 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 
 ### `bcdc_get_data()`
 
-One you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
+Once you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
 
 ```{r}
 ## Get the data resource for the `bc-highway-cams` catalogue record
