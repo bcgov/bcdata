@@ -322,6 +322,7 @@ catch_catalogue_error <- function(catalogue_response) {
 
     msg <- paste0(
       msg,
+      cli::rule(line = "bar4", line_col = 'red'),"\n",
       "Catalogue request:",
       "\n  URL: ", catalogue_response$request$url$url,
       "\n  POST fields:\n    ", rawToChar(catalogue_response$request$options$postfields),
