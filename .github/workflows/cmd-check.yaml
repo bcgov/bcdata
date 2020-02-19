@@ -70,7 +70,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Check
-        run: rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }}, error_on = 'warning', check_dir = 'check')
+        run: rcmdcheck::rcmdcheck(args = '${{ matrix.config.args }}', error_on = 'warning', check_dir = 'check')
         shell: Rscript {0}
 
       - name: Upload check results
