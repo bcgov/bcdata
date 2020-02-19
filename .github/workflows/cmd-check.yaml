@@ -58,9 +58,9 @@ jobs:
           sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
           sudo apt-get -y update
           sudo apt-get -y install libgdal-dev gdal-bin libgeos-dev \
-          libgeos++-dev pandoc pandoc-citeproc libproj-dev libudunits2-dev \
+          libgeos++-dev libproj-dev libudunits2-dev \
           libcurl4-openssl-dev libssl-dev libprotobuf-dev protobuf-compiler \
-          libprotoc-dev libghc-pandoc-citeproc-data libxml2 libxml2-dev git-core
+          libprotoc-dev libxml2 libxml2-dev git-core
 
       - name: Install dependencies
         run: |
