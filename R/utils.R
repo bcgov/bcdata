@@ -27,7 +27,7 @@ bcdc_number_wfs_records <- function(query_list, client){
 
   query_list <- c(resultType = "hits", query_list)
   res_max <- client$post(body = query_list, encode = "form")
-  catch_catalogue_error(res_max)
+  catch_wfs_error(res_max)
   txt_max <- res_max$parse("UTF-8")
 
   ## resultType is only returned as XML.
@@ -304,27 +304,38 @@ list_supported_files <- function(dir) {
   files[supported]
 }
 
-catch_catalogue_error <- function(catalogue_response) {
-  msg <- "The BC data catalogue is currently unable to process this request\n"
+catch_wfs_error <- function(catalogue_response) {
+  msg <- "There was an issue sending this WFS request\n"
 
   if (inherits(catalogue_response, "Paginator")) {
     statuses <- catalogue_response$status_code()
     status_failed <- any(statuses >= 300)
-    msg <- paste0(msg, paste0(length(statuses), " paginated requests issued"))
+    if (!status_failed) return(invisible(NULL))
 
+    msg <- paste0(msg, paste0(length(statuses), " paginated requests issued"))
   } else {
     status_failed <- catalogue_response$status_code >= 300
+    if (!status_failed) return(invisible(NULL))
+
     request_res <- catalogue_response$request_headers
     response_res <- catalogue_response$response_headers
 
-    msg <- paste0(msg, "Catalogue request:\n")
+    msg <- paste0(
+      msg,
+      cli::rule(line = "bar4", line_col = 'red'),"\n",
+      "Request:",
+      "\n  URL: ", catalogue_response$request$url$url,
+      "\n  POST fields:\n    ", rawToChar(catalogue_response$request$options$postfields),
+      "\n"
+    )
+
     for (i in seq_along(request_res)) {
       msg <- paste0(
         msg, "  ", names(request_res)[i], ": ",
         request_res[i], "\n"
       )
     }
-    msg <- paste0(msg, "Catalogue response:\n")
+    msg <- paste0(msg, "Response:\n")
     for (i in seq_along(response_res)) {
       msg <- paste0(
         msg, "  ", names(response_res)[i], ": ",
@@ -333,7 +344,5 @@ catch_catalogue_error <- function(catalogue_response) {
     }
   }
 
-  if (status_failed) {
-    stop(msg, call. = FALSE)
-  }
+  stop(msg, call. = FALSE)
 }

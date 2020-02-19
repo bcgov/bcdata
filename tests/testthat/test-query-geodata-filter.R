@@ -16,23 +16,23 @@ library(sf, quietly = TRUE)
 test_that("bcdc_query_geodata accepts R expressions to refine data call",{
   skip_on_cran()
   skip_if_net_down()
-  one_well <- bcdc_query_geodata("ground-water-wells") %>%
-    filter(OBSERVATION_WELL_NUMBER == 108) %>%
+  one_feature <- bcdc_query_geodata(point_record) %>%
+    filter(SOURCE_DATA_ID == '455') %>%
     collect()
-  expect_is(one_well, "sf")
-  expect_equal(attr(one_well, "sf_column"), "geometry")
-  expect_equal(nrow(one_well), 1)
+  expect_is(one_feature, "sf")
+  expect_equal(attr(one_feature, "sf_column"), "geometry")
+  expect_equal(nrow(one_feature), 1)
 })
 
 test_that("bcdc_query_geodata accepts R expressions to refine data call",{
   skip_on_cran()
   skip_if_net_down()
-  one_well <- bcdc_query_geodata("ground-water-wells") %>%
-    filter(OBSERVATION_WELL_NUMBER == 108) %>%
+  one_feature <- bcdc_query_geodata(point_record) %>%
+    filter(SOURCE_DATA_ID == '455') %>%
     collect()
-  expect_is(one_well, "sf")
-  expect_equal(attr(one_well, "sf_column"), "geometry")
-  expect_equal(nrow(one_well), 1)
+  expect_is(one_feature, "sf")
+  expect_equal(attr(one_feature, "sf_column"), "geometry")
+  expect_equal(nrow(one_feature), 1)
 })
 
 test_that("operators work with different remote geom col names",{
@@ -40,7 +40,7 @@ test_that("operators work with different remote geom col names",{
   skip_if_net_down()
 
   ## LOCAL
-  crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+  crd <- bcdc_query_geodata(polygon_record) %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
 
@@ -132,11 +132,11 @@ test_that("subsetting works locally", {
 test_that("large vectors supplied to filter succeeds",{
   skip_on_cran()
   skip_if_net_down()
-  pori <- bcdc_query_geodata("freshwater-atlas-stream-network") %>%
+  pori <- bcdc_query_geodata(lines_record) %>%
     filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
     collect()
 
-  expect_silent(bcdc_query_geodata("freshwater-atlas-stream-network") %>%
+  expect_silent(bcdc_query_geodata(lines_record) %>%
     filter(WATERSHED_KEY %in% pori$WATERSHED_KEY))
 
 })
@@ -144,7 +144,7 @@ test_that("large vectors supplied to filter succeeds",{
 test_that("multiple filter statements are additive",{
   skip_on_cran()
   skip_if_net_down()
-  airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
+  airports <- bcdc_query_geodata(point_record)
 
   heliports_in_victoria <-  airports %>%
     filter(PHYSICAL_ADDRESS == "Victoria, BC") %>%
@@ -168,7 +168,7 @@ test_that("multiple filter statements are additive with geometric operators",{
   skip_on_cran()
   skip_if_net_down()
   ## LOCAL
-  crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+  crd <- bcdc_query_geodata(polygon_record) %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect() %>%
     st_bbox() %>%
@@ -189,14 +189,15 @@ test_that("multiple filter statements are additive with geometric operators",{
 test_that("an intersect with an object greater than 5E5 bytes automatically gets turned into a bbox",{
   skip_on_cran()
   skip_if_net_down()
-  districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
-    filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
+
+  regions <- bcdc_query_geodata(polygon_record) %>%
+    filter(ADMIN_AREA_NAME %in% c("Bulkley Nechako Regional District", "Cariboo Regional District", "Regional District of Fraser-Fort George")) %>%
     collect()
 
-  expect_true(utils::object.size(districts) > 5E5)
+  expect_true(utils::object.size(regions) > 5E5)
 
   expect_warning(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
-    filter(WITHIN(districts)) %>%
+    filter(WITHIN(regions)) %>%
       collect())
 })
 

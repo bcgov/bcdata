@@ -68,7 +68,7 @@ parse_raw_feature_tbl <- function(query_list){
 
   cc <- cli$post(body = query_list, encode = "form")
 
-  catch_catalogue_error(cc)
+  catch_wfs_error(cc)
 
   xml_res <- xml2::read_xml(cc$parse("UTF-8"))
   xml_res <- xml2::xml_find_all(xml_res, "//xsd:sequence")
