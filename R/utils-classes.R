@@ -43,7 +43,7 @@ print.bcdc_promise <- function(x, ...) {
   cli <- x$cli
   cc <- cli$post(body = query_list, encode = "form")
 
-  catch_catalogue_error(cc)
+  catch_wfs_error(cc)
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
   parsed <- bcdc_read_sf(cc$parse("UTF-8"))
@@ -301,10 +301,10 @@ collect.bcdc_promise <- function(x, ...){
   if (number_of_records < 10000) {
     cc <- tryCatch(cli$post(body = query_list, encode = "form"),
              error = function(e) {
-               stop("The BC data catalogue experienced issues with this request.
+               stop("There was an issue processing this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    catch_catalogue_error(cc)
+    catch_wfs_error(cc)
     url <- cc$url
     full_url <- cli$url_fetch(query = query_list)
   } else {
@@ -331,13 +331,13 @@ collect.bcdc_promise <- function(x, ...){
 
     tryCatch(cc$post(body = query_list, encode = "form"),
              error = function(e) {
-               stop("The BC data catalogue experienced issues with this request.
+               stop("There was an issue processing this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
     url <- cc$url
     full_url <- cc$url_fetch(query = query_list)
 
-    catch_catalogue_error(cc)
+    catch_wfs_error(cc)
     # nocov end
   }
 
