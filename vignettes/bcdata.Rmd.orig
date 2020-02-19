@@ -33,6 +33,8 @@ knitr::opts_chunk$set(
   fig.path = "vignette-fig-"
 )
 
+options(crayon.enabled = FALSE)
+
 library(bcdata)
 library(ggplot2)
 ```
@@ -54,7 +56,7 @@ library(bcdata)
 
 ### `bcdc_browse()`
 
-`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening the home page in your default browser:
+`bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening catalogue search page in your default browser:
 
 ```{r, eval=FALSE}
 ## Take me to the B.C. Data Catalogue home page
@@ -71,16 +73,9 @@ bcdc_browse("bc-winery-locations")
 bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
 ```
 
-You can also use `bcdc_browse()` to open to search results in the catalogue:
-
-```{r, eval=FALSE}
-## Take me to the catalogue search results for 'wineries'
-bcdc_browse("wineries")
-```
-
 ### `bcdc_search()`
 
-`bcdata::bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session.
+`bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session.
 
 Let's search the catalogue for records that contain the word "recycling":
 
@@ -117,7 +112,7 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 
 ### `bcdc_get_data()`
 
-One you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
+Once you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
 
 ```{r}
 ## Get the data resource for the `bc-highway-cams` catalogue record
@@ -127,8 +122,8 @@ bcdc_get_data("bc-highway-cams")
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 
 ## OR use the result from bcdc_get_record()
-my_data <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-bcdc_get_data(my_data)
+my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
+bcdc_get_data(my_record)
 ```
 
 A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:

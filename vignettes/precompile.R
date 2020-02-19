@@ -22,14 +22,14 @@ library(purrr)
 
 # Convert *.orig to *.Rmd -------------------------------------------------
 
-orig_files <- list.files(path = "vignettes/", pattern = "*\\.Rmd\\.orig", full.names = TRUE)
+orig_files <- file.path(list.files(path = "vignettes/", pattern = "*\\.Rmd\\.orig", full.names = TRUE))
 
 walk(orig_files, ~knit(.x, file_path_sans_ext(.x)))
 
 
 # Move .png files into correct directory so they render -------------------
 
-images <- list.files(".", pattern = 'vignette-fig.*\\.png$')
+images <- file.path(list.files(".", pattern = 'vignette-fig.*\\.png$'))
 
 success <- file.copy(from = images,
                      to = file.path("vignettes", images),

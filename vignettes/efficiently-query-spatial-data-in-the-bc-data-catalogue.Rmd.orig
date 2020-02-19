@@ -29,6 +29,8 @@ knitr::opts_chunk$set(
   fig.path = "vignette-fig-"
 )
 
+options(crayon.enabled = FALSE)
+
 library(knitr)
 ```
 
