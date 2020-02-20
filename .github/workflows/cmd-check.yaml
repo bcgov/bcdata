@@ -16,11 +16,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: '3.6', args: "--no-manual"}
-        - { os: macOS-latest, r: '3.6', args: 'c("--no-manual", "--run-donttest")'}
-        - { os: ubuntu-16.04, r: '3.3', args: "--no-manual"}
-        - { os: ubuntu-16.04, r: '3.4', args: "--no-manual"}
-        - { os: ubuntu-16.04, r: '3.5', args: "--no-manual"}
+        - { os: windows-latest, r: '3.6', args: "'--no-manual'"}
+        - { os: macOS-latest, r: '3.6', args: "c('--no-manual', '--test-dontrun')"}
+        - { os: ubuntu-16.04, r: '3.3', args: "'--no-manual'"}
+        - { os: ubuntu-16.04, r: '3.4', args: "'--no-manual'"}
+        - { os: ubuntu-16.04, r: '3.5', args: "'--no-manual'"}
         - { os: ubuntu-16.04, r: '3.6'}
 
     env:
@@ -52,29 +52,25 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
 
-      - name: Install apt spatial libs
-        if: runner.os == 'Linux'
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
-        run: |
-          sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-          sudo apt-get update
-          sudo -E apt-get -yq --no-install-suggests --no-install-recommends install libudunits2-dev libproj-dev libgeos-dev libgdal-dev
-
       - name: Install system dependencies
         if: runner.os == 'Linux'
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "install.packages('remotes')" -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
+          sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
+          sudo apt-get -y update
+          sudo apt-get -y install libgdal-dev gdal-bin libgeos-dev \
+          libgeos++-dev libproj-dev libudunits2-dev \
+          libcurl4-openssl-dev libssl-dev libprotobuf-dev protobuf-compiler \
+          libprotoc-dev libxml2 libxml2-dev git-core
 
       - name: Install dependencies
-        run: Rscript -e "install.packages('remotes')" -e "remotes::install_deps(dependencies = TRUE)" -e "remotes::install_cran('rcmdcheck')"
+        run: |
+          install.packages(c('remotes', 'rcmdcheck'))
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
 
       - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(args = '${{ matrix.config.args }}', error_on = 'warning', check_dir = 'check')"
+        run: rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }}, error_on = 'warning', check_dir = 'check')
+        shell: Rscript {0}
 
       - name: Upload check results
         if: failure()
@@ -86,5 +82,6 @@ jobs:
       - name: Test coverage
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
         run: |
-          Rscript -e 'remotes::install_github("r-lib/covr@gh-actions")'
-          Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
+          remotes::install_github("r-lib/covr@gh-actions")
+          covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")
+        shell: Rscript {0}
