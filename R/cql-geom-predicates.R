@@ -118,7 +118,7 @@ sf_text <- function(x) {
 #' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 #' filtering may be needed to achieve exact results.
 #'
-#' @param geom an sf/sfc/sfg object
+#' @param geom an `sf`/`sfc`/`sfg` or `bbox` object (from the `sf` package)
 #' @name cql_geom_predicates
 #' @return a CQL expression to be passed on to the WFS call
 NULL
@@ -190,8 +190,10 @@ RELATE <- function(geom, pattern) {
 #' @param coords the coordinates of the bounding box as four-element numeric
 #'        vector `c(xmin, ymin, xmax, ymax)`, or a `bbox` object from the `sf`
 #'        package (the result of running `sf::st_bbox()` on an `sf` object).
-#' @param crs (Optional) A string containing an SRS code
-#' (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)
+#' @param crs (Optional) A numeric value or string containing an SRS code. If
+#' `coords` is a `bbox` object with non-empty crs, it is taken from that.
+#' (For example, `'EPSG:3005'` or just `3005`. The default is to use the CRS of
+#' the queried layer)
 #' @export
 BBOX <- function(coords, crs = NULL){
   if (!is.numeric(coords) || length(coords) != 4L) {
