@@ -75,8 +75,6 @@ test_that("CQL functions fail correctly", {
   expect_error(RELATE(the_geom, rep("TTTTTTTTT", 2)), "pattern") # > length 1
   expect_error(BBOX(c(1,2,3)), "numeric vector")
   expect_error(BBOX(c("1","2","3", "4")), "numeric vector")
-  expect_error(BBOX(c(1,2,3,4), crs = 4326), "must be a character string")
-  expect_error(BBOX(c(1,2,3,4), crs = 4326), "must be a character string")
   expect_error(BBOX(c(1,2,3,4), crs = c("EPSG:4326", "EPSG:3005")),
                "must be a character string")
 })
