@@ -87,7 +87,7 @@ cql_scalar <- dbplyr::sql_translator(
   RELATE = function(geom, pattern) RELATE(geom, pattern),
   DWITHIN = function(geom, distance, units) DWITHIN(geom, distance, units),
   BEYOND = function(geom, distance, units) BEYOND(geom, distance, units),
-  BBOX = function(coords, crs) BBOX(coords, crs),
+  BBOX = function(coords, crs = NULL) BBOX(coords, crs),
   CQL = function(...) CQL(...)
 )
 
