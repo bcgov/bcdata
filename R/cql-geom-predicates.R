@@ -43,7 +43,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
          call. = FALSE)
   }
 
-  if(inherits(x, "bcdc_promise")) {
+  if (inherits(x, "bcdc_promise")) {
     stop("To use spatial operators, you need to use collect() to retrieve the object used to filter",
          call. = FALSE)
   }
@@ -53,6 +53,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
   # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
   if (!geometry_predicates == "BBOX") {
+    if (inherits(x, "bbox")) x <- sf::st_as_sfc(x)
     x <- sf_text(x)
   }
 
