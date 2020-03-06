@@ -53,7 +53,6 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
   # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
   if (!geometry_predicates == "BBOX") {
-    if (inherits(x, "bbox")) x <- sf::st_as_sfc(x)
     x <- sf_text(x)
   }
 
@@ -85,21 +84,24 @@ cql_geom_predicate_list <- function() {
 
 sf_text <- function(x) {
 
-  if (!inherits(x, c("sf", "sfc", "sfg"))) {
+  if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
     stop(paste(deparse(substitute(x)), "is not a valid sf object"),
          call. = FALSE)
   }
 
   ## If too big here, drawing bounding
-  if(utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)){
+  if (utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)) {
     warning("The object is too large to perform exact spatial operations using bcdata.
              To simplify the polygon, a bounding box was drawn around the polygon and all
              features within the box will be returned. Options include further processing
              with on the returned object or simplify the object.", call. = FALSE)
-    x = sf::st_bbox(x)
-    x = sf::st_as_sfc(x)
-  } else{
-    x = sf::st_union(x)
+    x <- sf::st_bbox(x)
+  }
+
+  if (inherits(x, "bbox")) {
+    x <- sf::st_as_sfc(x)
+  } else {
+    x <- sf::st_union(x)
   }
 
   sf::st_as_text(x)
