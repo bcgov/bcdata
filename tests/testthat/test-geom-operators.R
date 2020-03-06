@@ -33,7 +33,7 @@ test_that("WITHIN works",{
 })
 
 
-test_that("INTERSECT works",{
+test_that("INTERSECTS works",{
   skip_on_cran()
   skip_if_net_down()
 
@@ -86,6 +86,34 @@ test_that("BEYOND works", {
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
       filter(BEYOND(local, 100, "meters")) %>%
+      collect()
+  )
+
+  expect_is(remote, "sf")
+  expect_equal(attr(remote, "sf_column"), "geometry")
+})
+
+test_that("BBOX works with an sf bbox", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  remote <- suppressWarnings(
+    bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
+      filter(FEATURE_LENGTH_M <= 1000, BBOX(sf::st_bbox(local))) %>%
+      collect()
+  )
+
+  expect_is(remote, "sf")
+  expect_equal(attr(remote, "sf_column"), "geometry")
+})
+
+test_that("Other predicates work with an sf bbox", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  remote <- suppressWarnings(
+    bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
+      filter(FEATURE_LENGTH_M <= 1000, INTERSECTS(sf::st_bbox(local))) %>%
       collect()
   )
 
