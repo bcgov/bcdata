@@ -63,6 +63,10 @@ test_that("All cql geom predicate functions work", {
     BBOX(c(1,2,1,2), crs = 'EPSG:4326'),
     CQL("BBOX({geom_name}, 1, 2, 1, 2, 'EPSG:4326')")
   )
+  expect_equal(
+    BBOX(c(1,2,1,2), crs = 4326),
+    CQL("BBOX({geom_name}, 1, 2, 1, 2, 'EPSG:4326')")
+  )
 })
 
 test_that("CQL functions fail correctly", {
