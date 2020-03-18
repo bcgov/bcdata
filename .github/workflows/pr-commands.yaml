@@ -20,6 +20,7 @@ jobs:
       - name: commit
         run: |
           git add man/\* NAMESPACE
+          git add DESCRIPTION
           git commit -m 'Document'
       - uses: r-lib/actions/pr-push@master
         with:
