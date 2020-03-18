@@ -43,7 +43,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
          call. = FALSE)
   }
 
-  if(inherits(x, "bcdc_promise")) {
+  if (inherits(x, "bcdc_promise")) {
     stop("To use spatial operators, you need to use collect() to retrieve the object used to filter",
          call. = FALSE)
   }
@@ -84,21 +84,24 @@ cql_geom_predicate_list <- function() {
 
 sf_text <- function(x) {
 
-  if (!inherits(x, c("sf", "sfc", "sfg"))) {
+  if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
     stop(paste(deparse(substitute(x)), "is not a valid sf object"),
          call. = FALSE)
   }
 
   ## If too big here, drawing bounding
-  if(utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)){
+  if (utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)) {
     warning("The object is too large to perform exact spatial operations using bcdata.
              To simplify the polygon, a bounding box was drawn around the polygon and all
              features within the box will be returned. Options include further processing
              with on the returned object or simplify the object.", call. = FALSE)
-    x = sf::st_bbox(x)
-    x = sf::st_as_sfc(x)
-  } else{
-    x = sf::st_union(x)
+    x <- sf::st_bbox(x)
+  }
+
+  if (inherits(x, "bbox")) {
+    x <- sf::st_as_sfc(x)
+  } else {
+    x <- sf::st_union(x)
   }
 
   sf::st_as_text(x)
@@ -115,7 +118,7 @@ sf_text <- function(x) {
 #' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 #' filtering may be needed to achieve exact results.
 #'
-#' @param geom an sf/sfc/sfg object
+#' @param geom an `sf`/`sfc`/`sfg` or `bbox` object (from the `sf` package)
 #' @name cql_geom_predicates
 #' @return a CQL expression to be passed on to the WFS call
 NULL
@@ -187,13 +190,25 @@ RELATE <- function(geom, pattern) {
 #' @param coords the coordinates of the bounding box as four-element numeric
 #'        vector `c(xmin, ymin, xmax, ymax)`, or a `bbox` object from the `sf`
 #'        package (the result of running `sf::st_bbox()` on an `sf` object).
-#' @param crs (Optional) A string containing an SRS code
-#' (For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)
+#' @param crs (Optional) A numeric value or string containing an SRS code. If
+#' `coords` is a `bbox` object with non-empty crs, it is taken from that.
+#' (For example, `'EPSG:3005'` or just `3005`. The default is to use the CRS of
+#' the queried layer)
 #' @export
 BBOX <- function(coords, crs = NULL){
   if (!is.numeric(coords) || length(coords) != 4L) {
     stop("'coords' must be a length 4 numeric vector", call. = FALSE)
   }
+
+  if (inherits(coords, "bbox")) {
+    crs <- sf::st_crs(coords)[["epsg"]]
+    coords <- as.numeric(coords)
+  }
+
+  if (is.numeric(crs)) {
+    crs <- paste0("EPSG:", crs)
+  }
+
   if (!is.null(crs) && !(is.character(crs) && length(crs) == 1L)) {
     stop("crs must be a character string denoting the CRS (e.g., 'EPSG:4326')",
          call. = FALSE)

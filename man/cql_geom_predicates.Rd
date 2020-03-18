@@ -39,14 +39,16 @@ DWITHIN(
 )
 }
 \arguments{
-\item{geom}{an sf/sfc/sfg object}
+\item{geom}{an \code{sf}/\code{sfc}/\code{sfg} or \code{bbox} object (from the \code{sf} package)}
 
 \item{coords}{the coordinates of the bounding box as four-element numeric
 vector \code{c(xmin, ymin, xmax, ymax)}, or a \code{bbox} object from the \code{sf}
 package (the result of running \code{sf::st_bbox()} on an \code{sf} object).}
 
-\item{crs}{(Optional) A string containing an SRS code
-(For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)}
+\item{crs}{(Optional) A numeric value or string containing an SRS code. If
+\code{coords} is a \code{bbox} object with non-empty crs, it is taken from that.
+(For example, \code{'EPSG:3005'} or just \code{3005}. The default is to use the CRS of
+the queried layer)}
 
 \item{distance}{numeric value for distance tolerance}
 
