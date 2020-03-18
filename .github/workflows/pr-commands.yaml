@@ -45,10 +45,12 @@ jobs:
         run: Rscript './vignettes/precompile.R'
       - name: commit
         run: |
-          git add \*.R
-          git add \*.Rmd
-          git add \*.png
-          git commit -m 'precompile vignettes'
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add \*.R
+            git add \*.Rmd
+            git add \*.png
+            git commit -m 'precompile vignettes'
+          fi
       - uses: r-lib/actions/pr-push@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
