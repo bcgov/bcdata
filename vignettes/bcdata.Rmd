@@ -138,15 +138,15 @@ bcdc_search_facets(facet = "license_id")
 #>         facet count                                             display_name
 #> 1  license_id    47                                        Statistics Canada
 #> 2  license_id     1               Queen's Printer Licence - British Columbia
-#> 3  license_id    11 Open Government Licence – Municipality of North Cowichan
+#> 3  license_id    12 Open Government Licence – Municipality of North Cowichan
 #> 4  license_id    15                     Open Government Licence - WorkSafeBC
 #> 5  license_id     4                 Open Government Licence - Destination BC
 #> 6  license_id    58                         Open Government Licence - Canada
-#> 7  license_id  1538               Open Government Licence - British Columbia
+#> 7  license_id  1542               Open Government Licence - British Columbia
 #> 8  license_id     3                  Open Government Licence - BC Assessment
 #> 9  license_id     2 Open Data Commons - Public Domain Dedication and Licence
 #> 10 license_id    16                           Elections BC Open Data Licence
-#> 11 license_id  1259                                              Access Only
+#> 11 license_id  1265                                              Access Only
 #>    name
 #> 1    21
 #> 2    25
