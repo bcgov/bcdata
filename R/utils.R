@@ -185,6 +185,7 @@ get_record_warn_once <- function(...) {
 clean_wfs <- function(x){
   dplyr::case_when(
     x == "WMS getCapabilities request" ~ "WFS request (Spatial Data)",
+    x == "WMS getCapabilities request (Generalized View)" ~ "WFS request (Spatial Data)",
     x == "wms" ~ "wfs",
     TRUE ~ x
   )
@@ -232,6 +233,7 @@ resource_to_tibble <- function(x){
   dplyr::tibble(
     name = purrr::map_chr(x, "name"),
     url = purrr::map_chr(x, "url"),
+    whse_name = parse_url_for_whse_name(url),
     id = purrr::map_chr(x, "id"),
     format = purrr::map_chr(x, "format"),
     ext = purrr::map_chr(x, safe_file_ext),
@@ -345,4 +347,16 @@ catch_wfs_error <- function(catalogue_response) {
   }
 
   stop(msg, call. = FALSE)
+}
+
+get_whse_from_resource <- function(record, resource){
+
+  #record <- bcdc_get_record(record)
+  rdf <- record$resource_df$url[record$resource_df$id == resource]
+  parse_url_for_whse_name(rdf)
+
+}
+
+parse_url_for_whse_name <- function(x) {
+  basename(dirname(x))
 }
