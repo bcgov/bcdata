@@ -40,7 +40,7 @@ test_that("select reduces the number of columns when a sticky ",{
   feature_spec <- bcdc_describe_feature(point_record)
   ## Columns that can selected, while manually including GEOMETRY col
   sticky_cols <- c(
-    feature_spec[feature_spec$selectable != TRUE,]$col_name,
+    feature_spec[feature_spec$sticky != TRUE,]$col_name,
     "geometry")
 
   sub_cols <- bcdc_query_geodata(point_record) %>%
