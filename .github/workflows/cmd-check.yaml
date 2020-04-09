@@ -17,7 +17,7 @@ jobs:
       matrix:
         config:
         - { os: windows-latest, r: '3.6', args: "'--no-manual'"}
-        - { os: macOS-latest, r: '3.6', args: "c('--no-manual', '--test-dontrun')"}
+        - { os: macOS-latest, r: '3.6', args: "c('--no-manual', '--test-dontrun')", sf_args: "--with-proj-lib=/usr/local/lib/"}
         - { os: ubuntu-16.04, r: '3.4', args: "'--no-manual'"}
         - { os: ubuntu-16.04, r: '3.5', args: "'--no-manual'"}
         - { os: ubuntu-16.04, r: '3.6'}
@@ -64,7 +64,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c('remotes', 'rcmdcheck'))
-          remotes::install_deps(dependencies = TRUE)
+          remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
         shell: Rscript {0}
 
       - name: Check
