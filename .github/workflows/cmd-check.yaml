@@ -51,6 +51,12 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
 
+      - name: install macOS system dependencies
+        if: runner.os == 'macOS'
+        continue-on-error: true
+        run: |
+          brew install pkg-config gdal udunits
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
