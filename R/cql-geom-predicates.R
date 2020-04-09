@@ -206,7 +206,7 @@ BBOX <- function(coords, crs = NULL){
     coords <- as.numeric(coords)
   }
 
-  if (is.integer(crs)) {
+  if (is.numeric(crs)) {
     crs <- paste0("EPSG:", crs)
   }
 
