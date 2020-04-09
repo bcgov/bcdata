@@ -249,7 +249,7 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
                      crs = 3005)
 
   qry <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
-    filter(BBOX(st_bbox(the_geom), crs = paste0("EPSG:", st_crs(the_geom)$epsg))) %>%
+    filter(BBOX(st_bbox(the_geom, crs = st_crs(the_geom)$epsg))) %>%
     show_query()
 
   expect_equal(as.character(qry$query_list$CQL_FILTER),
