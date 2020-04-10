@@ -196,12 +196,13 @@ RELATE <- function(geom, pattern) {
 #' the queried layer)
 #' @export
 BBOX <- function(coords, crs = NULL){
+
   if (!is.numeric(coords) || length(coords) != 4L) {
     stop("'coords' must be a length 4 numeric vector", call. = FALSE)
   }
 
   if (inherits(coords, "bbox")) {
-    crs <- sf::st_crs(coords)[["epsg"]]
+    crs <- sf::st_crs(coords)$epsg
     coords <- as.numeric(coords)
   }
 

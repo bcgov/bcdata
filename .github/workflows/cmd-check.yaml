@@ -17,7 +17,7 @@ jobs:
       matrix:
         config:
         - { os: windows-latest, r: '3.6', args: "'--no-manual'"}
-        - { os: macOS-latest, r: '3.6', args: "c('--no-manual', '--test-dontrun')"}
+        - { os: macOS-latest, r: '3.6', args: "c('--no-manual', '--test-dontrun')", sf_args: "--with-proj-lib=/usr/local/lib/"}
         - { os: ubuntu-16.04, r: '3.4', args: "'--no-manual'"}
         - { os: ubuntu-16.04, r: '3.5', args: "'--no-manual'"}
         - { os: ubuntu-16.04, r: '3.6'}
@@ -51,6 +51,12 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
 
+      - name: install macOS system dependencies
+        if: runner.os == 'macOS'
+        continue-on-error: true
+        run: |
+          brew install pkg-config gdal udunits
+
       - name: Install system dependencies
         if: runner.os == 'Linux'
         run: |
@@ -64,7 +70,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c('remotes', 'rcmdcheck'))
-          remotes::install_deps(dependencies = TRUE)
+          remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
         shell: Rscript {0}
 
       - name: Check

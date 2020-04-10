@@ -1,6 +1,7 @@
 # bcdata (development version)
 
 * Geometry predicates can now take a `bbox` object as well as an `sf*` object (#176)
+* Rename `selectable` column from `bcdc_describe_feature` to `sticky` and modify corresponding docs and tests (#180)
 
 # bcdata 0.1.2
 
