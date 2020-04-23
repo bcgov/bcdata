@@ -39,17 +39,32 @@ jobs:
       - uses: r-lib/actions/setup-tinytex@master
         if: contains(matrix.config.args, 'no-manual') == false
 
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
+        shell: Rscript {0}
+
       - name: Cache R packages
+        if: runner.os != 'Windows'
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
+          key: ${{ env.cache-version }}-${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
 
       - name: install macOS system dependencies
         if: runner.os == 'macOS'
         continue-on-error: true
         run: |
           brew install pkg-config gdal udunits
+
+      # TODO: Remove this when https://github.com/r-lib/xml2/issues/296 is fixed on CRAN
+      - name: Install the dev version of xml2 as a workaround
+        if: runner.os == 'macOS' && matrix.config.r == 'devel'
+        run: |
+          remotes::install_github('r-lib/xml2')
+        shell: Rscript {0}
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -71,8 +86,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c('remotes', 'rcmdcheck'))
           remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
+          install.packages("rcmdcheck")
         shell: Rscript {0}
 
       - name: Check
