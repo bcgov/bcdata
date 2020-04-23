@@ -46,6 +46,12 @@ print.bcdc_promise <- function(x, ...) {
   catch_wfs_error(cc)
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
+
+  if (!is.null(x$query_list$count)) {
+    # head or tail have updated the count
+    number_of_records <- x$query_list$count
+  }
+
   parsed <- bcdc_read_sf(cc$parse("UTF-8"))
   fields <- ncol(parsed) - 1
 
@@ -57,7 +63,7 @@ print.bcdc_promise <- function(x, ...) {
   cat_line(glue::glue("Querying {col_red(name)} record"))
 
   cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
-                 "and {col_green(fields)} fields"))
+                        "and {col_green(fields)} fields"))
   cat_bullet("At most six rows of the record are printed here")
   cat_rule()
   print(parsed)
@@ -247,6 +253,32 @@ select.bcdc_promise <- function(.data, ...){
 
 }
 
+#' @importFrom utils head
+#' @export
+head.bcdc_promise <- function(x, n = 6L, ...) {
+  sorting_col <- pagination_sort_col(x$cols_df)
+  x$query_list <- c(
+    x$query_list,
+    count = n,
+    sortBy = sorting_col
+  )
+  x
+}
+
+#' @importFrom utils tail
+#' @export
+tail.bcdc_promise <- function(x, n = 6L, ...) {
+  number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
+  sorting_col <- pagination_sort_col(x$cols_df)
+  x$query_list <- c(
+    x$query_list,
+    count = n,
+    sortBy = sorting_col,
+    startIndex = number_of_records - n
+  )
+  x
+}
+
 
 #' Throw an informative error when attempting mutate on a Web Service call
 #'
@@ -270,7 +302,7 @@ mutate.bcdc_promise <- function(.data, ...){
   dots <- rlang::exprs(...)
 
   stop(glue::glue(
-  "You must type collect() before using mutate() on a WFS. \nAfter using collect() add this mutate call::
+    "You must type collect() before using mutate() on a WFS. \nAfter using collect() add this mutate call::
     mutate({dots}) "), call. = FALSE)
 }
 
@@ -304,8 +336,8 @@ collect.bcdc_promise <- function(x, ...){
 
   if (number_of_records < 10000) {
     cc <- tryCatch(cli$post(body = query_list, encode = "form"),
-             error = function(e) {
-               stop("There was an issue processing this request.
+                   error = function(e) {
+                     stop("There was an issue processing this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
     catch_wfs_error(cc)
@@ -351,7 +383,6 @@ collect.bcdc_promise <- function(x, ...){
              full_url = full_url)
 
 }
-
 
 #' Show SQL and URL used for Web Service request from B.C. Data Catalogue
 #'

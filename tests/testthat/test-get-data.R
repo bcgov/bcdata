@@ -42,7 +42,7 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
 test_that("bcdc_get_data works with a non-wms record with only one resource",{
   skip_if_net_down()
   skip_on_cran()
-  name <- "criminal-code-traffic-offences"
+  name <- "ee9d4ee0-6a34-4dff-89e0-9add9a969168" # "criminal-code-traffic-offences"
   expect_is(bcdc_get_data(name), "tbl")
 })
 
