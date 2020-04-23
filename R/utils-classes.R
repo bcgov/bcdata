@@ -46,6 +46,12 @@ print.bcdc_promise <- function(x, ...) {
   catch_wfs_error(cc)
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
+
+  if (!is.null(x$query_list$count)) {
+    # head or tail have updated the count
+    number_of_records <- x$query_list$count
+  }
+
   parsed <- bcdc_read_sf(cc$parse("UTF-8"))
   fields <- ncol(parsed) - 1
 
