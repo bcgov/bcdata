@@ -243,6 +243,13 @@ select.bcdc_promise <- function(.data, ...){
 
 }
 
+#' @importFrom utils head
+#' @export
+head.bcdc_promise <- function(x, n = 6L, ...) {
+  x$query_list <- c(x$query_list, COUNT = n)
+  x
+}
+
 
 #' Throw an informative error when attempting mutate on a Web Service call
 #'
@@ -347,7 +354,6 @@ collect.bcdc_promise <- function(x, ...){
              full_url = full_url)
 
 }
-
 
 #' Show SQL and URL used for Web Service request from B.C. Data Catalogue
 #'
