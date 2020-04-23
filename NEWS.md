@@ -2,6 +2,7 @@
 
 * Geometry predicates can now take a `bbox` object as well as an `sf*` object (#176)
 * Rename `selectable` column from `bcdc_describe_feature` to `sticky` and modify corresponding docs and tests (#180)
+* Fix `select`, `filter` and `mutate` roxygen so that bcdata specific documentation to these methods is available
 
 # bcdata 0.1.2
 

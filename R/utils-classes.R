@@ -170,6 +170,7 @@ print.bcdc_query <- function(x, ...) {
 #' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
 #' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #'
+#' @describeIn filter filter.bcdc_promise
 #' @examples
 #' \donttest{
 #'   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
@@ -209,6 +210,8 @@ filter.bcdc_promise <- function(.data, ...) {
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
 #'
+#' @describeIn select select.bcdc_promise
+#'
 #' @examples
 #' \donttest{
 #' feature_spec <- bcdc_describe_feature("bc-airports")
@@ -223,6 +226,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #' bcdc_query_geodata("bc-airports") %>%
 #'   select(LOCALITY)
 #' }
+#'
 #'
 #'@export
 select.bcdc_promise <- function(.data, ...){
@@ -252,7 +256,7 @@ select.bcdc_promise <- function(.data, ...){
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
-#'
+#' @describeIn mutate mutate.bcdc_promise
 #' @examples
 #' \dontrun{
 #'
