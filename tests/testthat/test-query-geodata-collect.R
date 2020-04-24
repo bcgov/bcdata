@@ -20,6 +20,14 @@ test_that("bcdc_query_geodata collects an sf object for a valid id", {
   expect_equal(attr(bc_airports, "sf_column"), "geometry")
 })
 
+test_that("bcdc_query_geodata collects using as_tibble", {
+  skip_on_cran()
+  skip_if_net_down()
+  bc_airports <- bcdc_query_geodata("bc-airports") %>% as_tibble()
+  expect_is(bc_airports, "sf")
+  expect_equal(attr(bc_airports, "sf_column"), "geometry")
+})
+
 test_that("bcdc_query_geodata succeeds with a records over 10000 rows",{
   skip_on_cran()
   skip("Skipping the BEC test, though available for testing")

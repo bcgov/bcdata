@@ -2,29 +2,38 @@
 % Please edit documentation in R/utils-classes.R, R/utils-collect.R
 \name{collect.bcdc_promise}
 \alias{collect.bcdc_promise}
+\alias{as_tibble.bcdc_promise}
 \alias{collect}
 \title{Force collection of Web Service request from B.C. Data Catalogue}
 \usage{
 \method{collect}{bcdc_promise}(x, ...)
+
+\method{as_tibble}{bcdc_promise}(x, ...)
 }
 \arguments{
 \item{x}{object of class bcdc_promise}
 }
 \description{
 After tuning a query, \code{collect()} is used to actually bring the data into memory.
-This will retrieve an sf object into R.
+This will retrieve an sf object into R. The \code{as_tibble} can be used interchangeably
+with \code{collect} which matches \code{dbplyr} behaviour.
 
 See \code{dplyr::\link[dplyr]{collect}} for details.
 }
 \section{Methods (by class)}{
 \itemize{
 \item \code{bcdc_promise}: collect.bcdc_promise
+
+\item \code{bcdc_promise}: as_tibble.bcdc_promise
 }}
 
 \examples{
 \donttest{
 bcdc_query_geodata("bc-airports") \%>\%
   collect()
+
+bcdc_query_geodata("bc-airports") \%>\%
+  as_tibble()
 }
 
 }
