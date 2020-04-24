@@ -54,7 +54,7 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
     ## Check if the record is valid, if not return a query
     url <- paste0("https://catalogue.data.gov.bc.ca/dataset/", query)
     cli <- crul::HttpClient$new(url = url,
-                         headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
+                                headers = list(`User-Agent` = bcdata_user_agent()))
     res <- cli$get()
 
     if(res$status_code == 404){
@@ -71,7 +71,7 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
   }
 
   invisible(url)
-  }
+}
 
 
 
