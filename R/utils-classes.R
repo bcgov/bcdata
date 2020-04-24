@@ -310,7 +310,8 @@ mutate.bcdc_promise <- function(.data, ...){
 #' Force collection of Web Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
-#' This will retrieve an sf object into R.
+#' This will retrieve an sf object into R. The `as_tibble` can be used interchangeably
+#' with `collect` which matches `dbplyr` behaviour.
 #'
 #' @param x object of class bcdc_promise
 #' @inheritParams collect
@@ -321,6 +322,9 @@ mutate.bcdc_promise <- function(.data, ...){
 #' \donttest{
 #' bcdc_query_geodata("bc-airports") %>%
 #'   collect()
+#'
+#' bcdc_query_geodata("bc-airports") %>%
+#'   as_tibble()
 #' }
 #'
 collect.bcdc_promise <- function(x, ...){
@@ -383,6 +387,12 @@ collect.bcdc_promise <- function(x, ...){
              full_url = full_url)
 
 }
+
+
+#' @describeIn collect as_tibble.bcdc_promise
+#' @importFrom dplyr as_tibble
+#' @export
+as_tibble.bcdc_promise <- collect.bcdc_promise
 
 #' Show SQL and URL used for Web Service request from B.C. Data Catalogue
 #'
