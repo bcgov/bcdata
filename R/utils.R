@@ -197,7 +197,6 @@ read_from_url <- function(resource, ...){
   if (!reported_format %in% formats_supported()) {
     stop("Reading ", reported_format, " files is not currently supported in bcdata.")
   }
-
   cli <- bcdc_http_client(file_url)
 
   ## Establish where to download file
@@ -220,6 +219,16 @@ read_from_url <- function(resource, ...){
   # where that's not the case
   message("Reading the data using the ", fun$fun, " function from the ",
           fun$package, " package.")
+
+  if (reported_format %in% c("xls", "xlsx")) {
+    sheets <- readxl::excel_sheets(tmp)
+    if (length(sheets) > 1) {
+      message(paste0("\nThis .", reported_format, " resource contains the following sheets: \n",
+                     paste0(" '", sheets,"'", collapse = "\n")))
+      message("Defaulting to the '", sheets[1], "' sheet. See ?bcdc_get_data for examples on how to specify a sheet.\n")
+    }
+  }
+
   tryCatch(do.call(fun$fun, list(tmp, ...)),
            error = function(e) {
              stop("Could not read data set. The file can be found here:\n '",
