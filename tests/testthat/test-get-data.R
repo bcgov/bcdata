@@ -156,3 +156,11 @@ test_that("bcdc_get_data fails when >1 resource not specified & noninteractive",
                "The record you are trying to access appears to have more than one resource.")
 })
 
+test_that("bcdc_get_data handles sheet name specification", {
+  expect_message(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6'), 'This .xlsx resource contains the following sheets:')
+
+  out <- capture.output(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = "Single Detached"), type = 'message')
+  expect_false(any(grepl('This .xlsx resource contains the following sheets:', out)))
+
+})
+
