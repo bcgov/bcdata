@@ -222,7 +222,7 @@ read_from_url <- function(resource, ...){
 
   if (reported_format %in% c("xls", "xlsx")) {
     sheets <- readxl::excel_sheets(tmp)
-    if (length(sheets) > 1) {
+    if (length(sheets) > 1 && !"sheet" %in% names(list(...))) {
       message(paste0("\nThis .", reported_format, " resource contains the following sheets: \n",
                      paste0(" '", sheets,"'", collapse = "\n")))
       message("Defaulting to the '", sheets[1], "' sheet. See ?bcdc_get_data for examples on how to specify a sheet.\n")
