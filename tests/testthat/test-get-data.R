@@ -100,7 +100,7 @@ test_that("fails informatively when can't read a file", {
   skip_on_cran()
   expect_error(bcdc_get_data(record = '523dce9d-b464-44a5-b733-2022e94546c3',
                              resource = '4cc98644-f6eb-410b-9df0-f9b2beac9717'),
-               "Could not read data set")
+               "Reading the data set failed with the following error message:")
 })
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
