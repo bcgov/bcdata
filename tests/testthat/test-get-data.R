@@ -100,7 +100,7 @@ test_that("fails informatively when can't read a file", {
   skip_on_cran()
   expect_error(bcdc_get_data(record = '523dce9d-b464-44a5-b733-2022e94546c3',
                              resource = '4cc98644-f6eb-410b-9df0-f9b2beac9717'),
-               "Could not read data set")
+               "Reading the data set failed with the following error message:")
 })
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
@@ -154,5 +154,13 @@ test_that("bcdc_get_data fails when >1 resource not specified & noninteractive",
   skip_on_cran()
   expect_error(bcdc_get_data("21c72822-2502-4431-b9a2-92fc9401ef12"),
                "The record you are trying to access appears to have more than one resource.")
+})
+
+test_that("bcdc_get_data handles sheet name specification", {
+  expect_message(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6'), 'This .xlsx resource contains the following sheets:')
+  expect_error(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = "foo"), "Error: Sheet 'foo' not found")
+  out <- capture.output(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = "Single Detached"), type = 'message')
+  expect_false(any(grepl('This .xlsx resource contains the following sheets:', out)))
+
 })
 

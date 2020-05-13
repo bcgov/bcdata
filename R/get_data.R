@@ -26,13 +26,14 @@
 #' @param resource optional argument used when there are multiple data files
 #' within the same record. See examples.
 #' @param ... arguments passed to other functions. Tabular data is passed to a function to handle
-#' the import based on the file extension. `bcdc_read_functions()` provides details on which functions
+#' the import based on the file extension. [bcdc_read_functions()] provides details on which functions
 #' handle the data import. You can then use this information to look at the help pages of those functions.
 #' See the examples for a workflow that illustrates this process.
-#' For spatial Web Service data the `...` arguments are passed to `bcdc_query_geodata()`.
+#' For spatial Web Service data the `...` arguments are passed to [bcdc_query_geodata()].
 #' @param verbose When more than one resource is available for a record,
 #' should extra information about those resources be printed to the console?
 #' Default `TRUE`
+#'
 #'
 #' @return An object of a type relevant to the resource (usually a tibble or an sf object)
 #' @export
@@ -57,16 +58,20 @@
 #' bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
 #'
 #' ## From bcdc_get_record we realize that the data is in xlsx format
-#' bcdc_get_record('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+#' bcdc_get_record('8620ce82-4943-43c4-9932-40730a0255d6')
 #'
 #' ## bcdc_read_functions let's us know that bcdata
 #' ## uses readxl::read_excel to import xlsx files
 #' bcdc_read_functions()
 #'
-#' ## If you read the help page for readxl::read_excel,
-#' ## it seems likely that we need to skip the first row:
-#' bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4', skip = 1)
+#' ## bcdata let's you know that this resource has
+#' ## multiple worksheets
+#' bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6')
 #'
+#' ## we can control what is read in from an excel file
+#' ## using arguments from readxl::read_excel
+#'
+#' bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Regional Districts')
 #' }
 #'
 #' @export
