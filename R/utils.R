@@ -289,10 +289,12 @@ handle_excel <- function(tmp, ...) {
   }
 
   sheets <- readxl::excel_sheets(tmp)
-  if (length(sheets) > 1 && !hasArg("sheet")) {
+  if (length(sheets) > 1L) {
     message(paste0("\nThis .", tools::file_ext(tmp), " resource contains the following sheets: \n",
                    paste0(" '", sheets,"'", collapse = "\n")))
-    message("Defaulting to the '", sheets[1], "' sheet. See ?bcdc_get_data for examples on how to specify a sheet.\n")
+    if (!methods::hasArg("sheet")) {
+      message("Defaulting to the '", sheets[1], "' sheet. See ?bcdc_get_data for examples on how to specify a sheet.\n")
+    }
   }
 }
 
