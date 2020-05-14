@@ -222,7 +222,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #' \donttest{
 #' feature_spec <- bcdc_describe_feature("bc-airports")
 #' ## Columns that can selected:
-#' feature_spec[feature_spec$nillable == TRUE,]
+#' feature_spec[feature_spec$sticky == TRUE,]
 #'
 #' ## Select columns
 #' bcdc_query_geodata("bc-airports") %>%
