@@ -10,13 +10,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Collect
+#' as_tibble
 #'
-#' See \code{dplyr::\link[dplyr]{collect}} for details.
+#' See \code{tibble::\link[tibble]{as_tibble}} for details.
 #'
-#' @name collect
+#' @name as_tibble
 #' @rdname collect-methods
 #' @keywords internal
 #' @export
-#' @importFrom dplyr collect
+#' @importFrom tibble as_tibble
 NULL
