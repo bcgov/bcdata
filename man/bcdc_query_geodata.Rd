@@ -54,7 +54,7 @@ bcdc_query_geodata("bc-airports", crs = 3857) \%>\%
 
 bcdc_query_geodata("ground-water-wells") \%>\%
   filter(OBSERVATION_WELL_NUMBER == 108) \%>\%
-  select(WELL_TAG_NUMBER, WATERSHED_CODE) \%>\%
+  select(WELL_TAG_NUMBER, INTENDED_WATER_USE) \%>\%
   collect()
 
 ## A moderately large layer
