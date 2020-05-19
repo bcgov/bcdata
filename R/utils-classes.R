@@ -222,7 +222,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #' \donttest{
 #' feature_spec <- bcdc_describe_feature("bc-airports")
 #' ## Columns that can selected:
-#' feature_spec[feature_spec$nillable == TRUE,]
+#' feature_spec[feature_spec$sticky == TRUE,]
 #'
 #' ## Select columns
 #' bcdc_query_geodata("bc-airports") %>%
@@ -310,12 +310,12 @@ mutate.bcdc_promise <- function(.data, ...){
 #' Force collection of Web Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
-#' This will retrieve an sf object into R. The `as_tibble` can be used interchangeably
-#' with `collect` which matches `dbplyr` behaviour.
+#' This will retrieve an sf object into R. The `as_tibble()` function can be used
+#' interchangeably with `collect` which matches `dbplyr` behaviour.
 #'
 #' @param x object of class bcdc_promise
 #' @inheritParams collect
-#' @describeIn collect collect.bcdc_promise
+#' @rdname collect-methods
 #' @export
 #'
 #' @examples
@@ -389,8 +389,8 @@ collect.bcdc_promise <- function(x, ...){
 }
 
 
-#' @describeIn collect as_tibble.bcdc_promise
-#' @importFrom dplyr as_tibble
+#' @inheritParams collect.bcdc_promise
+#' @rdname collect-methods
 #' @export
 as_tibble.bcdc_promise <- collect.bcdc_promise
 
