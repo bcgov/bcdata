@@ -2,10 +2,11 @@
 title: "Querying RESULTS silviculture data using the bcdata package"
 author: "Hardy Griesbauer"
 date: "06/04/2020"
-output: 
-  
- github_document
- 
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Querying silviculture data with bcdata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 
 ---
 
