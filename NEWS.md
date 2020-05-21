@@ -6,6 +6,7 @@
 * Add `head` and `tail` methods for `bcdc.promise` objects. Thanks to @hgriesbauer for the suggestion! (#182, #186)
 * Provide `as_tibble` as an alias for `collect` in line with `dbplyr` behaviour (#166)
 * When reading in excel files, `bcdc_get_data` now outputs a messages indicating the presence and names of any sheets (#190)
+* `bcdc_get_data()` & `bcdc_query_geodata()` will now work with full B.C. data catalogue url including resource (#125, #196)
 
 ### BUG FIXES
 * Fix `select`, `filter` and `mutate` roxygen so that bcdata specific documentation to these methods is available
