@@ -44,8 +44,6 @@ First you need to load the package. We will also load the `sf` and `dplyr` packa
 library(bcdata)
 library(sf)
 library(dplyr)
-
-getwd()
 ```
 
 

@@ -136,29 +136,31 @@ You can see all valid values for the catalogue search facets using `bcdata::bcdc
 ## Valid values for search facet 'license_id'
 bcdc_search_facets(facet = "license_id")
 #>         facet count                                             display_name
-#> 1  license_id    47                                        Statistics Canada
+#> 1  license_id    68                           Statistics Canada Open Licence
 #> 2  license_id     1               Queen's Printer Licence - British Columbia
-#> 3  license_id    12 Open Government Licence – Municipality of North Cowichan
-#> 4  license_id    15                     Open Government Licence - WorkSafeBC
-#> 5  license_id     4                 Open Government Licence - Destination BC
-#> 6  license_id    58                         Open Government Licence - Canada
-#> 7  license_id  1542               Open Government Licence - British Columbia
-#> 8  license_id     3                  Open Government Licence - BC Assessment
-#> 9  license_id     2 Open Data Commons - Public Domain Dedication and Licence
-#> 10 license_id    16                           Elections BC Open Data Licence
-#> 11 license_id  1265                                              Access Only
+#> 3  license_id    12                      Open Government Licence – TransLink
+#> 4  license_id    12 Open Government Licence – Municipality of North Cowichan
+#> 5  license_id    15                     Open Government Licence - WorkSafeBC
+#> 6  license_id     4                 Open Government Licence - Destination BC
+#> 7  license_id    58                         Open Government Licence - Canada
+#> 8  license_id  1544               Open Government Licence - British Columbia
+#> 9  license_id     3                  Open Government Licence - BC Assessment
+#> 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence
+#> 11 license_id    16                           Elections BC Open Data Licence
+#> 12 license_id  1278                                              Access Only
 #>    name
 #> 1    21
 #> 2    25
-#> 3    44
-#> 4    41
-#> 5    43
-#> 6    24
-#> 7     2
-#> 8    47
-#> 9    45
-#> 10   42
-#> 11   22
+#> 3    48
+#> 4    44
+#> 5    41
+#> 6    43
+#> 7    24
+#> 8     2
+#> 9    47
+#> 10   45
+#> 11   42
+#> 12   22
 ```
 
 Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:
@@ -391,8 +393,7 @@ bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #> geometry type:  POINT
 #> dimension:      XY
 #> bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#> epsg (SRID):    3005
-#> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#> CRS:            3005
 #> # A tibble: 455 x 42
 #>    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #>  * <chr> <chr>            <chr>            <chr>            <chr>           
@@ -448,26 +449,26 @@ bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7
 ## Have a quick look at the geospatial columns to help with filter or select
 bcdc_describe_feature(bc_regional_districts_metadata)
 #> # A tibble: 18 x 4
-#>    col_name                  selectable remote_col_type          local_col_type
-#>    <chr>                     <lgl>      <chr>                    <chr>         
-#>  1 id                        FALSE      xsd:string               character     
-#>  2 LGL_ADMIN_AREA_ID         FALSE      xsd:decimal              numeric       
-#>  3 ADMIN_AREA_NAME           TRUE       xsd:string               character     
-#>  4 ADMIN_AREA_ABBREVIATION   TRUE       xsd:string               character     
-#>  5 ADMIN_AREA_BOUNDARY_TYPE  TRUE       xsd:string               character     
-#>  6 ADMIN_AREA_TYPE           TRUE       xsd:string               character     
-#>  7 ADMIN_AREA_GROUP_NAME     TRUE       xsd:string               character     
-#>  8 CHANGE_REQUESTED_ORG      TRUE       xsd:string               character     
-#>  9 UPDATE_TYPE               TRUE       xsd:string               character     
-#> 10 WHEN_UPDATED              TRUE       xsd:date                 date          
-#> 11 OIC_NUMBER                TRUE       xsd:string               character     
-#> 12 OIC_YEAR                  TRUE       xsd:string               character     
-#> 13 AFFECTED_ADMIN_AREA_ABRVN TRUE       xsd:string               character     
-#> 14 FEATURE_AREA_SQM          TRUE       xsd:decimal              numeric       
-#> 15 FEATURE_LENGTH_M          TRUE       xsd:decimal              numeric       
-#> 16 SHAPE                     TRUE       gml:GeometryPropertyType sfc geometry  
-#> 17 OBJECTID                  FALSE      xsd:decimal              numeric       
-#> 18 SE_ANNO_CAD_DATA          TRUE       xsd:hexBinary            numeric
+#>    col_name                  sticky remote_col_type          local_col_type
+#>    <chr>                     <lgl>  <chr>                    <chr>         
+#>  1 id                        FALSE  xsd:string               character     
+#>  2 LGL_ADMIN_AREA_ID         FALSE  xsd:decimal              numeric       
+#>  3 ADMIN_AREA_NAME           TRUE   xsd:string               character     
+#>  4 ADMIN_AREA_ABBREVIATION   TRUE   xsd:string               character     
+#>  5 ADMIN_AREA_BOUNDARY_TYPE  TRUE   xsd:string               character     
+#>  6 ADMIN_AREA_TYPE           TRUE   xsd:string               character     
+#>  7 ADMIN_AREA_GROUP_NAME     TRUE   xsd:string               character     
+#>  8 CHANGE_REQUESTED_ORG      TRUE   xsd:string               character     
+#>  9 UPDATE_TYPE               TRUE   xsd:string               character     
+#> 10 WHEN_UPDATED              TRUE   xsd:date                 date          
+#> 11 OIC_NUMBER                TRUE   xsd:string               character     
+#> 12 OIC_YEAR                  TRUE   xsd:string               character     
+#> 13 AFFECTED_ADMIN_AREA_ABRVN TRUE   xsd:string               character     
+#> 14 FEATURE_AREA_SQM          TRUE   xsd:decimal              numeric       
+#> 15 FEATURE_LENGTH_M          TRUE   xsd:decimal              numeric       
+#> 16 SHAPE                     TRUE   gml:GeometryPropertyType sfc geometry  
+#> 17 OBJECTID                  FALSE  xsd:decimal              numeric       
+#> 18 SE_ANNO_CAD_DATA          TRUE   xsd:hexBinary            numeric
 
 ## Get the Capital Regional District polygon from the B.C. Regional
 ## Districts geospatial data
