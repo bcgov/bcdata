@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2020-03-18"
+date: "2020-05-21"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -44,9 +44,6 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
-
-getwd()
-#> [1] "/Users/runner/runners/2.165.2/work/bcdata/bcdata/vignettes"
 ```
 
 
@@ -98,8 +95,7 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> geometry type:  POLYGON
 #> dimension:      XY
 #> bbox:           xmin: 1480584 ymin: 475225.2 xmax: 1870586 ymax: 862609.6
-#> epsg (SRID):    3005
-#> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#> CRS:            3005
 #> # A tibble: 6 x 10
 #>   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE
 #>   <chr>          <int> <chr>                       <int> <chr>       
@@ -127,8 +123,7 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
 #> bbox:           xmin: 1126991 ymin: 379215.8 xmax: 1528154 ymax: 1224041
-#> epsg (SRID):    3005
-#> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#> CRS:            3005
 #> # A tibble: 3 x 10
 #>   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE
 #>   <chr>          <int> <chr>                       <int> <chr>       
@@ -154,8 +149,7 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
 #> bbox:           xmin: 1126991 ymin: 379215.8 xmax: 1528154 ymax: 1224041
-#> epsg (SRID):    3005
-#> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#> CRS:            3005
 #> # A tibble: 3 x 6
 #>   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… OBJECTID
 #>   <chr>          <int> <chr>                       <int>    <int>
@@ -234,18 +228,17 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Simple feature collection with 6 features and 19 fields
 #> geometry type:  POLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1232157 ymin: 463112.6 xmax: 1236660 ymax: 464253
-#> epsg (SRID):    3005
-#> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#> bbox:           xmin: 1228737 ymin: 450539 xmax: 1234131 ymax: 469687.8
+#> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               10 53E - Gr… Local     Green Space      Metro Vancouver 
-#> 2 WHSE…               11 53F - Gr… Local     Green Space      Metro Vancouver 
-#> 3 WHSE…               12 53G - Gr… Local     Green Space      Metro Vancouver 
-#> 4 WHSE…               13 53H - Gr… Local     Green Space      Metro Vancouver 
-#> 5 WHSE…               14 55A - Ut… Local     Green Space      Metro Vancouver 
-#> 6 WHSE…               15 55B - Gr… Local     Green Space      Metro Vancouver 
+#> 1 WHSE…               77 Kiyo Park Local     Park             Metro Vancouver 
+#> 2 WHSE…               78 Kwomais … Local     Park             Metro Vancouver 
+#> 3 WHSE…               79 Ocean Cl… Local     Park             Metro Vancouver 
+#> 4 WHSE…               80 Ocean Es… Local     Park             Metro Vancouver 
+#> 5 WHSE…               81 Ocean Pa… Local     Park             Metro Vancouver 
+#> 6 WHSE…               82 Ocean Pa… Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
@@ -264,25 +257,24 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> geometry type:  MULTIPOLYGON
+#> geometry type:  POLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1227676 ymin: 451450.3 xmax: 1234629 ymax: 467135.4
-#> epsg (SRID):    3005
-#> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#> bbox:           xmin: 1228737 ymin: 450539 xmax: 1234131 ymax: 469687.8
+#> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
-#> 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
-#> 5 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
-#> 6 WHSE…               25 Bell Park Local     Park             Metro Vancouver 
+#> 1 WHSE…               77 Kiyo Park Local     Park             Metro Vancouver 
+#> 2 WHSE…               78 Kwomais … Local     Park             Metro Vancouver 
+#> 3 WHSE…               79 Ocean Cl… Local     Park             Metro Vancouver 
+#> 4 WHSE…               80 Ocean Es… Local     Park             Metro Vancouver 
+#> 5 WHSE…               81 Ocean Pa… Local     Park             Metro Vancouver 
+#> 6 WHSE…               82 Ocean Pa… Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
-#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full dataset. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
@@ -350,28 +342,28 @@ There are a couple of other functions in `bcdata` that are useful to know when w
 ```r
 bcdc_describe_feature("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> # A tibble: 20 x 4
-#>    col_name                selectable remote_col_type          local_col_type
-#>    <chr>                   <lgl>      <chr>                    <chr>         
-#>  1 id                      FALSE      xsd:string               character     
-#>  2 LOCAL_REG_GREENSPACE_ID FALSE      xsd:decimal              numeric       
-#>  3 PARK_NAME               TRUE       xsd:string               character     
-#>  4 PARK_TYPE               TRUE       xsd:string               character     
-#>  5 PARK_PRIMARY_USE        TRUE       xsd:string               character     
-#>  6 REGIONAL_DISTRICT       TRUE       xsd:string               character     
-#>  7 MUNICIPALITY            TRUE       xsd:string               character     
-#>  8 CIVIC_NUMBER            TRUE       xsd:decimal              numeric       
-#>  9 CIVIC_NUMBER_SUFFIX     TRUE       xsd:string               character     
-#> 10 STREET_NAME             TRUE       xsd:string               character     
-#> 11 LATITUDE                TRUE       xsd:decimal              numeric       
-#> 12 LONGITUDE               TRUE       xsd:decimal              numeric       
-#> 13 WHEN_UPDATED            TRUE       xsd:date                 date          
-#> 14 WEBSITE_URL             TRUE       xsd:string               character     
-#> 15 LICENCE_COMMENTS        TRUE       xsd:string               character     
-#> 16 FEATURE_AREA_SQM        TRUE       xsd:decimal              numeric       
-#> 17 FEATURE_LENGTH_M        TRUE       xsd:decimal              numeric       
-#> 18 SHAPE                   TRUE       gml:GeometryPropertyType sfc geometry  
-#> 19 OBJECTID                FALSE      xsd:decimal              numeric       
-#> 20 SE_ANNO_CAD_DATA        TRUE       xsd:hexBinary            numeric
+#>    col_name                sticky remote_col_type          local_col_type
+#>    <chr>                   <lgl>  <chr>                    <chr>         
+#>  1 id                      FALSE  xsd:string               character     
+#>  2 LOCAL_REG_GREENSPACE_ID FALSE  xsd:decimal              numeric       
+#>  3 PARK_NAME               TRUE   xsd:string               character     
+#>  4 PARK_TYPE               TRUE   xsd:string               character     
+#>  5 PARK_PRIMARY_USE        TRUE   xsd:string               character     
+#>  6 REGIONAL_DISTRICT       TRUE   xsd:string               character     
+#>  7 MUNICIPALITY            TRUE   xsd:string               character     
+#>  8 CIVIC_NUMBER            TRUE   xsd:decimal              numeric       
+#>  9 CIVIC_NUMBER_SUFFIX     TRUE   xsd:string               character     
+#> 10 STREET_NAME             TRUE   xsd:string               character     
+#> 11 LATITUDE                TRUE   xsd:decimal              numeric       
+#> 12 LONGITUDE               TRUE   xsd:decimal              numeric       
+#> 13 WHEN_UPDATED            TRUE   xsd:date                 date          
+#> 14 WEBSITE_URL             TRUE   xsd:string               character     
+#> 15 LICENCE_COMMENTS        TRUE   xsd:string               character     
+#> 16 FEATURE_AREA_SQM        TRUE   xsd:decimal              numeric       
+#> 17 FEATURE_LENGTH_M        TRUE   xsd:decimal              numeric       
+#> 18 SHAPE                   TRUE   gml:GeometryPropertyType sfc geometry  
+#> 19 OBJECTID                FALSE  xsd:decimal              numeric       
+#> 20 SE_ANNO_CAD_DATA        TRUE   xsd:hexBinary            numeric
 ```
 
 This is a helpful initial step to learn column names and types when you construct your query.
@@ -419,18 +411,18 @@ we can use that in `bcdc_query_geodata()`:
 # Look at the columns available:
 bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #> # A tibble: 42 x 4
-#>    col_name                      selectable remote_col_type local_col_type
-#>    <chr>                         <lgl>      <chr>           <chr>         
-#>  1 id                            FALSE      xsd:string      character     
-#>  2 CUSTODIAN_ORG_DESCRIPTION     FALSE      xsd:string      character     
-#>  3 BUSINESS_CATEGORY_CLASS       FALSE      xsd:string      character     
-#>  4 BUSINESS_CATEGORY_DESCRIPTION FALSE      xsd:string      character     
-#>  5 OCCUPANT_TYPE_DESCRIPTION     FALSE      xsd:string      character     
-#>  6 SOURCE_DATA_ID                FALSE      xsd:string      character     
-#>  7 SUPPLIED_SOURCE_ID_IND        FALSE      xsd:string      character     
-#>  8 AIRPORT_NAME                  FALSE      xsd:string      character     
-#>  9 DESCRIPTION                   TRUE       xsd:string      character     
-#> 10 PHYSICAL_ADDRESS              TRUE       xsd:string      character     
+#>    col_name                      sticky remote_col_type local_col_type
+#>    <chr>                         <lgl>  <chr>           <chr>         
+#>  1 id                            FALSE  xsd:string      character     
+#>  2 CUSTODIAN_ORG_DESCRIPTION     FALSE  xsd:string      character     
+#>  3 BUSINESS_CATEGORY_CLASS       FALSE  xsd:string      character     
+#>  4 BUSINESS_CATEGORY_DESCRIPTION FALSE  xsd:string      character     
+#>  5 OCCUPANT_TYPE_DESCRIPTION     FALSE  xsd:string      character     
+#>  6 SOURCE_DATA_ID                FALSE  xsd:string      character     
+#>  7 SUPPLIED_SOURCE_ID_IND        FALSE  xsd:string      character     
+#>  8 AIRPORT_NAME                  FALSE  xsd:string      character     
+#>  9 DESCRIPTION                   TRUE   xsd:string      character     
+#> 10 PHYSICAL_ADDRESS              TRUE   xsd:string      character     
 #> # … with 32 more rows
 
 # Query the data with bcdc_query_geodata and filter + select:
@@ -438,16 +430,15 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
   filter(DESCRIPTION == "airport") %>%
   select(AIRPORT_NAME, LOCALITY, NUMBER_OF_RUNWAYS)
 #> Querying 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW' record
-#> ● Using collect() on this object will return 37 features and 13 fields
+#> ● Using collect() on this object will return 37 features and 11 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
-#> Simple feature collection with 6 features and 13 fields
+#> Simple feature collection with 6 features and 11 fields
 #> geometry type:  POINT
 #> dimension:      XY
 #> bbox:           xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950
-#> epsg (SRID):    3005
-#> proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#> # A tibble: 6 x 14
+#> CRS:            3005
+#> # A tibble: 6 x 12
 #>   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #>   <chr> <chr>            <chr>            <chr>            <chr>           
 #> 1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
@@ -456,7 +447,7 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> 4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #> 5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #> 6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> # … with 9 more variables: SOURCE_DATA_ID <chr>, SUPPLIED_SOURCE_ID_IND <chr>,
-#> #   AIRPORT_NAME <chr>, LOCALITY <chr>, LATITUDE <dbl>, LONGITUDE <dbl>,
-#> #   NUMBER_OF_RUNWAYS <int>, SEQUENCE_ID <int>, geometry <POINT [m]>
+#> # … with 7 more variables: SOURCE_DATA_ID <chr>, SUPPLIED_SOURCE_ID_IND <chr>,
+#> #   AIRPORT_NAME <chr>, LOCALITY <chr>, NUMBER_OF_RUNWAYS <int>,
+#> #   SEQUENCE_ID <int>, geometry <POINT [m]>
 ```
