@@ -33,9 +33,13 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
             "sf")
   expect_is(ret4 <- bcdc_get_data("76b1b7a3-2112-4444-857a-afccf7b20da8", resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"),
             "sf")
-  ## Must be a better way to test if these objects are equal
-  expect_true(all(unlist(lapply(list(ret1, ret2, ret3, ret4), nrow))))
-  expect_true(all(unlist(lapply(list(ret1, ret2, ret3, ret4), ncol))))
+  expect_is(ret5 <- bcdc_get_data("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c"),
+            "sf")
+
+  for (x in list(ret2, ret3, ret4, ret5)) {
+    expect_equal(dim(x), dim(ret1))
+    expect_equal(names(x), names(ret1))
+  }
 })
 
 

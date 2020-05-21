@@ -104,6 +104,12 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
     )
   }
 
+  if (grepl("/resource/", record)) {
+    #  A full url was passed including record and resource compenents.
+    # Grab the resource id and strip it off the url
+    record <- gsub("/resource/.+", "", record)
+  }
+
   obj <- bcdc_get_record(record)
 
   bcdc_query_geodata(obj, crs)
