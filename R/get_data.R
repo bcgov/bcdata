@@ -94,6 +94,13 @@ bcdc_get_data.character <- function(record, resource = NULL, verbose = TRUE, ...
     return(collect(query))
   }
 
+  if (grepl("/resource/", record)) {
+    #  A full url was passed including record and resource compenents.
+    # Grab the resource id and strip it off the url
+    resource <- slug_from_url(record)
+    record <- gsub("/resource/.+", "", record)
+  }
+
   x <- slug_from_url(record)
   x <- bcdc_get_record(x)
 
