@@ -4,7 +4,7 @@ pkgdown_sha: 655ca6929440a01d10e6d3d5eb49616a7afa9377
 articles:
   bcdata: bcdata.html
   efficiently-query-spatial-data-in-the-bc-data-catalogue: efficiently-query-spatial-data-in-the-bc-data-catalogue.html
-last_built: 2020-05-21T15:59Z
+last_built: 2020-05-22T04:07Z
 urls:
   reference: https://bcgov.github.io/bcdata/reference
   article: https://bcgov.github.io/bcdata/articles
