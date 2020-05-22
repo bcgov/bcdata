@@ -31,4 +31,5 @@ useful information on the formats, availability and types of data available.
 airports <- bcdc_get_record("bc-airports")
 bcdc_tidy_resources(airports)
 }
+
 }
