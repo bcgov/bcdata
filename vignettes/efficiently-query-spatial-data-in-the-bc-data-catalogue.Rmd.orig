@@ -35,7 +35,7 @@ library(knitr)
 ```
 
 
-This vignette illustrates how to use `bcdata::bcdc_query_geodata` to request and query [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data from the B.C. Data Catalogue. To illustrate, we will request and merge two spatial datasets from the catalogue---school district and greenspaces spatial data---and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.
+This vignette illustrates how to use `bcdata::bcdc_query_geodata` to request and query [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset). To illustrate, we will request and merge two spatial data sets from the catalogue---school district and greenspaces spatial data---and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.
 
 ## Getting Started
 First you need to load the package. We will also load the `sf` and `dplyr` packages to help us work with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/) and `dplyr` [here](https://dplyr.tidyverse.org/):
@@ -48,7 +48,7 @@ library(dplyr)
 
 
 ## Geospatial Data in the B.C. Data Catalogue
-The [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides many datasets with spatial information through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). Technically speaking, this means if we have an internet connection we can issue [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) requests to the catalogue and seamlessly import the response data into R as an `sf` objects. The `bcdata` package provides a means to a) choose which layer you want and b) use `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the `collect` function. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to principles of `dbplyr` is available [here](https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html).
+The [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides many data sets with spatial information through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). Technically speaking, this means if we have an internet connection we can issue [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) requests to the catalogue and seamlessly import the response data into R as an `sf` objects. The `bcdata` package provides a means to a) choose which layer you want and b) use `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the `collect` function. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to principles of `dbplyr` is available [here](https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html).
 
 ## School District Data
 Our first step is to extract the [school district polygons](https://catalog.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b) from the B.C. Data Catalogue. This layer is described using this command:
@@ -78,7 +78,7 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   select(SCHOOL_DISTRICT_NAME)
 ```
 
-Note that in the `select` statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn't select. This is because within each dataset in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don't want those columns after you `collect` the data, which we will take care of right now, you can drop them:
+Note that in the `select` statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn't select. This is because within each data set in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don't want those columns after you `collect` the data, which we will take care of right now, you can drop them:
 
 ```{r}
 districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
@@ -115,7 +115,7 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park")
 ```
 
-Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full dataset. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
+Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
 
 ```{r}
 districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
