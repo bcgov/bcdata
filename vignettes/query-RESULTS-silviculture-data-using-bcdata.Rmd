@@ -1,17 +1,15 @@
 ---
-title: "An Analysis of Silviculture Data with bcdata"
+title: "An Exploration of Silviculture Data with bcdata"
 author: "Hardy Griesbauer"
-date: "06/04/2020"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying silviculture data with bcdata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-
 ---
 
 <!--
-
 Copyright 2019 Province of British Columbia
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,233 +21,195 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
-
 -->
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  fig.height = 5,
+  fig.width = 7
+)
+
+library(knitr)
 library(bcdata)
-library(tidyverse)
-library(leaflet)
+library(dplyr)
+library(ggplot2)
 library(sf)
 ```
 
-This short vignette will demonstrate a few ways that a user can use `bcdata` to work with and analyze the [RESULTS silviculture data sets](https://catalogue.data.gov.bc.ca/dataset?q=silviculture&download_audience=Public&sort=score+desc%2C+record_publish_date+desc) available through the B.C. Data Catalogue.  
+
+This vignette will demonstrate how you can use `bcdata` to access and explore British Columbia silviculture data.
+
+Silviculture data for British Columbia is largely collected and stored through the [Reporting Silviculture Updates and Land Status Tracking System (RESULTS) database](https://www2.gov.bc.ca/gov/content?id=F62992DA5B324446AD5E1B5BFFA404CC)---including information on the management of openings, disturbances, silviculture activities and obligation declarations as required by the [Forest and Range Practices Act](https://www2.gov.bc.ca/gov/content?id=D65006C0326B4E0F838194044C10CA86). [RESULTS data sets are publically available through the B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset?q=RESULTS+silviculture) under the [Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61).
 
 
-## Getting Started
+## A Silviculture Data Exploration&mdash;Reforestation with Climate Considerations
 
-To start, let's load `bcdata` and some other R libraries we will need:
-```{r , eval = FALSE}
+[Western larch](https://en.wikipedia.org/wiki/Larix_occidentalis) has been identified as a tree species that will be well-adapted to projected future climates in northern British Columbia.  In 2013, forest policy was developed that allowed foresters to plant western larch outside of its natural range as a climate change adaptation silviculture measure. 
+
+**How much western larch has been planted in the Prince George Natural Resource District?**  
+
+Let's use the `bcdata` package to search, retrieve and explore the RESULTS silviculture data and answer this question. 
+
+
+### Getting Started
+
+To start, let's load the `bcdata` package. We will also load the `dplyr` and `ggplot2` packages to help us work with the data. You can learn more about the `dplyr` package [here](https://dplyr.tidyverse.org/) and the `ggplot2` package [here](https://ggplot2.tidyverse.org/):
+
+```{r libs, eval = FALSE}
 library(bcdata)
-library(tidyverse)
-library(leaflet)
-library(sf)
+library(dplyr)
+library(ggplot2)
 ```
 
-### Different ways to use the bcdata package
 
-The main functions in `bcdata` are:
+### Getting the Data
 
-1. bcdc_browse() - Open the catalogue in your default browser
-2. bcdc_search() - Search records in the catalogue
-3. bcdc_search_facets() - List catalogue facet search options
-4. bcdc_get_record() - Print a catalogue record
-5. bcdc_get_data() - Get catalogue data
-6. bcdc_query_geodata() - Get & query catalogue geospatial data available through a Web Service
+We can gather the data we need to answer our question using the [RESULTS - silviculture forest cover dataset](https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3). First, let's take a look at the metadata record using `bcdc_get_record()`:
 
-In general, I use an iterative workflow with these packages:
-
-1. Search for datasets in the catalogue;
-2. Query the dataset to understand the data structure;
-3. Filter for records of interest; and
-4. Download the data into R
-
-As an example, here is how you would search for datasets related to `silviculture`:
-```{r search}
-
-bcdc_search("silviculture")
-
+```{r get-record}
+# Get the metadata using the human-readable record name
+bcdc_get_record("results-forest-cover-silviculture")
 ```
 
-Records with *wms* are spatial files that can be queried and downloaded using `bcdc_query_geodata`. 
+We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data set, so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
 
-### Silviculture data in BC
-Silviculture information in BC is largely collected and tracked through the RESULTS database (Reporting Silviculture Updates and Land Status Tracking System).  The database stores silviculture-related information on the management of openings, disturbances, silviculture activities and obligation declarations as required by the Forest and Range Practices Act.  Data in RESULTS are publically available through catalogue.data.gov.bc.ca.  More information on RESULTS can be found [here](https://www2.gov.bc.ca/gov/content/industry/forestry/managing-our-forest-resources/silviculture/silviculture-reporting-results).
-
-### Reforestation with climate considerations in the Prince George District
-Western larch has been identified as a tree species that will be well-adapted to projected future climates in northern BC.  In 2013, forest policy was developed that allowed foresters to plant larch outside its natural range as a climate change adaptation silviculture measure.  
-
-#### Question: how much western larch is being planted in the Prince George District?
-
-We can gather information to answer this question using RESULTS - silviculture forest cover dataset.  First, let's take a look at the dataset contents using `bcdc_query_geodata`:
-
-```{r examine RESULTS silv layer}
-
-bcdc_query_geodata("results-forest-cover-silviculture") 
-
+```{r examine-silv-layer}
+# Query the data using the permanent ID of the record to guard against name changes
+bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 ```
 
-The output from this query shows that this dataset has over 850,000 features and 159 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
+This query shows that this data set has over 850,000 features and 159 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
 
-*Note this could be better accomplished using the RESULTS-planting layer, however, the dataset appears incomplete at this point*
+Note that we have only _queried_ the data set so far---the data set would be too large (~1GB) to download efficiently.  So, let's use `filter` with `bcdc_query_geodata()` to refine our query _before_ we collect the data and import it into R.
 
-This dataset would be too large (~1GB) to download efficiently.  So, let's use `filter` to refine our query:
 
-1. Filter openings that are in Prince George District; and
-2. Filter treatment units that have western larch present.
+### Refining a Geospatial Data Query
 
-First, let's filter for openings in the PG Natural Resource District.  We'll use `bcdata` package to do this by downloading the spatial boundary for the PG Natural Resource District and use that as a filter:
 
-```{r filter openings for DPG}
+To address our question, we need the treatment data (1) from the Prince George Natural Resource District _and_ (2) that contain western larch.
 
-# First, let's take a look at the natural resource district dataset
-bcdc_query_geodata("natural-resource-nr-district")
+First, we'll use the `bcdata` package to download the spatial boundary for the Prince George Natural Resource District:
 
+```{r download-dpg}
+## Create a spatial feature object named dpg
+dpg <- bcdc_query_geodata("natural-resource-nr-district") %>%  
+  filter(ORG_UNIT=="DPG") %>% # filter for Prince George Natural Resource District
+  collect() # and collect the data
 ```
 
-We can see that there are 23 Natural Resource districts in the province.  District codes are stored in the 'ORG_UNIT' column  Let's filter districts for DPG (Prince George) and download it as a `simple feature`.
+Let's plot this spatial object and double check we have we what we need:
 
-```{r download DPG}
-
-dpg<-  # Create new spatial feature called dpg
-  bcdc_query_geodata("natural-resource-nr-district") %>%  # query the nr district dataset 
-  filter(ORG_UNIT=="DPG") %>% # filter for Prince George District
-  collect() # and download it 
-
-```
-
-This is a small file, and shouldn't take long to download.  We can plot it to double check:
-
-```{r plot DPG}
-
+```{r plot-dpg}
 dpg %>% 
-  ggplot()+
+  ggplot() +
   geom_sf()
-
 ```
 
-Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer.  We'll just download openings that have larch planted, to make for a smaller file size.
+Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District. 
 
-*Note the chunk below can take a few minutes to run, depending on your network connection!*
+We only need to download the treatments that have western larch planted. We can use the `bcdc_describe_feature()` helper function to examine the column names and types of the layer. In this case, we want to keep rows where the five `S_SPECIES_CODE_*` columns contain `"LW"`, the code for western larch.
 
-```{r load Lw data, cache=TRUE}
-
-# First, let's list what tree species we are interested in
- sppList=c("LW") # LW is the code for western larch
+```{r load-lw-data, cache = TRUE}
+# Make a vector of tree species we are interested in 
+# (in this case only LW for western larch)
+spp_list = c("LW")
  
-# Now let's filter the records and download the data
-
-  treesDPG<- # create new spatial feature by
-    
-    bcdc_query_geodata("results-forest-cover-silviculture") %>% # querying the results silviculture layer and
-   
-    filter(INTERSECTS(dpg)) %>% # filter for records that are within the DPG and
-    
-   # filter for our species within any of the five species per TU
-            filter(S_SPECIES_CODE_1 %in% sppList|
-            S_SPECIES_CODE_2 %in% sppList|
-            S_SPECIES_CODE_3 %in% sppList|
-            S_SPECIES_CODE_4 %in% sppList|
-            S_SPECIES_CODE_5 %in% sppList) %>% 
-    
-    collect() # and download the file
-
+# Query and filter the data layer
+trees_dpg <-
+  bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3") %>%
+  filter(INTERSECTS(dpg)) %>% #filter for records that are within the DPG boundary
+  filter(
+      S_SPECIES_CODE_1 %in% spp_list |  #filter for LW records 
+      S_SPECIES_CODE_2 %in% spp_list |
+      S_SPECIES_CODE_3 %in% spp_list |
+      S_SPECIES_CODE_4 %in% spp_list |
+      S_SPECIES_CODE_5 %in% spp_list
+  ) %>% 
+  collect() #collect/download the data
 ```
 
-Let's look at the dimensions of this object:
-```{r load lw data}
 
-dim(treesDPG)
+### Exploring the Data
 
+Let's look at the dimensions of this now much more manageable data object we have downloaded from the B.C. Data Catalogue:
+
+```{r dim-data}
+dim(trees_dpg)
 ```
 
-We can see here are `r dim(treesDPG)[1]` treatment units planted with larch in DPG.
+We can see there are `r dim(trees_dpg)[1]` treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:
 
-Now we can plot the openings and see how things look:
-
-```{r map larch plantations in DPG,message=FALSE}
-
-# Transform projection to WGS84 
-x<-st_transform(treesDPG,4326)
-
-# Create map
-leaflet() %>% 
-  addTiles() %>% 
-  addPolygons(data=x,weight=1,fillColor="red",fillOpacity=0.6) %>% 
-  setView(-123.4,53.765,zoom=12) # Zoom in to area west of Prince George
-
-
-
+```{r map-larch-plantations-dpg, message = FALSE}
+trees_dpg %>% 
+  ggplot() + 
+  geom_sf() + 
+  geom_sf(data = dpg, fill = NA) + #add the DPG spatial boundary
+  theme_minimal()
 ```
 
-*Note:* This map is just as an example.  I've zoomed in to show larch plantations (in red) west of Prince George.  
 
-### Summaries
-We can also create some quick summaries of the data, treating the attribute table as a data frame in R:
-
-#### Question: what is the age distribution of larch plantations in DPG?
-```{r,warning=FALSE}
-
-treesDPG %>% 
-  st_drop_geometry() %>% # drop geometry, likely not necessary
-  mutate(age=2020-REFERENCE_YEAR+S_SPECIES_AGE_1) %>% # create an age column
-
-  # plotting
-  ggplot()+
-  aes(x=age,y=FEATURE_AREA_SQM/10000)+ # convert area to hectares
-  geom_bar(stat="sum")+
-  ylab("Sum treatment unit area (ha)")+
-  theme(legend.position="none")+
-  scale_x_continuous(name="Stand age", limits=c(2,30),
-                     breaks=seq(from=5,to=30,by=5))+
-  ggtitle("Area planted with larch by age in DPG, as of 2020")+
-  theme(legend.position = "none")+
-  theme_bw()
+We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
 
 
+#### What is the size and age distribution of larch plantations in the Prince George Natural Resource District?
 
+```{r, warning = FALSE}
+trees_dpg %>% 
+  mutate(age = 2020 - REFERENCE_YEAR + S_SPECIES_AGE_1) %>% #create a plantation age column
+  ggplot() +  #start a plot
+  aes(x = age, y = FEATURE_AREA_SQM/10000) + #convert feature area to hectares
+  geom_bar(stat = "sum") +
+  scale_x_continuous(name = "Stand Age (years)",
+                     limits = c(2, 30),
+                     breaks = seq(from = 5, to = 30, by = 5)) +
+  labs(y = "Sum Treatment Unit Area (ha)",
+       title = "Area Planted with Western Larch by Stand Age\nin Prince George Natural Resource District",
+       caption = paste0("Data sourced from the B.C. Data Catalogue\n on ",
+                        Sys.Date(),
+                        " using the bcdata R package")) +
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
-#### Question: what is the BEC distribution of larch plantations in DPG?
-We can download biogeoclimatic data using `bcdata` and join to an existing dataset using the `st_join` function.  
+#### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
 
-```{r,cache=TRUE}
+We can download [British Columbia biogeoclimatic (BEC) data](https://catalogue.data.gov.bc.ca/dataset/bec-map) from the B.C. Data Catalogue using `bcdata` and join to our existing `trees_dpg` geospatial dataset using the `st_join` function from the `sf` package. You can learn more about `sf` [here](https://r-spatial.github.io/sf/).
 
-# First, load BEC data into your workspace 
-# by querying BGC data and filtering for DPG
-bgcPG <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") %>% 
-  filter(BBOX(st_bbox(dpg),crs=`ESP:3005`)) %>% # Note the different way to filter
+
+```{r, cache = TRUE}
+library(sf) #load the sf package
+
+# Load the BEC data for Prince George Natural Resource District
+bgc_dpg <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") %>%
+  filter(BBOX(st_bbox(dpg), crs = `ESP:3005`)) %>% #note filtering with a BoundingBox
   collect()
 
-
-# Now join with dataset
-treesDPG<-  # update spatial feature 
-    st_join(treesDPG,bgcPG[,"MAP_LABEL"]) # join BEC data for each polygon
-
+# Join the BEC data with our tress_dpg geospatial data set
+trees_bec_dpg <- trees_dpg %>% 
+  st_join(bgc_dpg[, "MAP_LABEL"]) #join BEC data for each polygon
 ```
 
-Now, we can summarize area planted with larch by BGC unit.
+Now, we can summarize the area planted with western larch by biogeoclimatic unit:
 
-```{r,warning=FALSE}
-
-treesDPG %>% 
-  st_drop_geometry() %>% # drop geometry
-  group_by(MAP_LABEL) %>% # group polygons by BGC unit
-  summarise(Area=sum(FEATURE_AREA_SQM)/10000) %>% 
- 
-   # plotting
-  ggplot()+
-  aes(x=MAP_LABEL,y=Area)+
-  geom_bar(stat="Identity")+
-  ylab("Sum treatment unit area (ha)")+
-  theme(legend.position="none")+
-  ggtitle("Area planted with larch by BGC unit in DPG")+
-  xlab("BGC unit")+
-  theme_bw()
-
-
-
+```{r, warning = FALSE}
+trees_bec_dpg %>% 
+  group_by(MAP_LABEL) %>% # group polygons by biogeoclimatic unit
+  summarise(Area = sum(FEATURE_AREA_SQM)/10000) %>%
+  ggplot() +
+  aes(x = MAP_LABEL, y = Area) +
+  geom_col() +
+  labs(y = "Sum Treatment Unit Area (ha)",
+       x = "Biogeoclimatic Unit",
+       title = "Area Planted with Western Larch by Biogeoclimatic Unit\nin Prince George Natural Resource District",
+       caption = paste0("Data sourced from the B.C. Data Catalogue\n on ",
+                        Sys.Date(),
+                        " using the bcdata R package")) +
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
----
+
