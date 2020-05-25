@@ -4,7 +4,7 @@ author: "Hardy Griesbauer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Querying silviculture data with bcdata}
+  %\VignetteIndexEntry{Explore Silviculture Data with bcdata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -211,4 +211,3 @@ trees_bec_dpg %>%
   theme_minimal() +
   theme(legend.position = "none")
 ```
-
