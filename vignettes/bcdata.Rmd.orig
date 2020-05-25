@@ -1,10 +1,10 @@
 ---
-title: "Get started with bcdata"
+title: "Get Started with bcdata"
 author: ""
 date: ""
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{bcdata}
+  %\VignetteIndexEntry{Get Started with bcdata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
