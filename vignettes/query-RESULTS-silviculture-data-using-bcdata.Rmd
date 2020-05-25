@@ -155,7 +155,7 @@ trees_dpg %>%
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
 
 
-#### What is the size and age distribution of larch plantations in the Prince George Natural Resource District?
+#### What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?
 
 ```{r, warning = FALSE}
 trees_dpg %>% 
@@ -211,5 +211,4 @@ trees_bec_dpg %>%
   theme_minimal() +
   theme(legend.position = "none")
 ```
-
 
