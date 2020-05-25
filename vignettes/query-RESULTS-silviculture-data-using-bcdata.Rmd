@@ -92,7 +92,14 @@ Note that we have only _queried_ the data set so far---the data set would be too
 
 To address our question, we need the treatment data (1) from the Prince George Natural Resource District _and_ (2) that contain western larch.
 
-First, we'll use the `bcdata` package to download the spatial boundary for the Prince George Natural Resource District:
+First, we can use the `bcdata` package to preview and then download the spatial boundary for the Prince George Natural Resource District. We can use `bcdc_preview()` to interactively preview a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data set from the B.C. Data Catalogue:
+
+```{r preview}
+bcdc_preview("natural-resource-nr-district")
+```
+
+
+Now we can use `DPG`, the `ORG_UNIT` for Prince George Natural Resource District, to filter and download the spatial boundary we need:
 
 ```{r download-dpg}
 ## Create a spatial feature object named dpg
