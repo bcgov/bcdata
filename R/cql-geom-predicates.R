@@ -197,6 +197,10 @@ RELATE <- function(geom, pattern) {
 #' @export
 BBOX <- function(coords, crs = NULL){
 
+  if (inherits(coords, c("sf", "sfc"))) {
+    coords <- sf::st_bbox(coords)
+  }
+
   if (!is.numeric(coords) || length(coords) != 4L) {
     stop("'coords' must be a length 4 numeric vector", call. = FALSE)
   }
