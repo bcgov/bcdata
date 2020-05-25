@@ -42,8 +42,9 @@ DWITHIN(
 \item{geom}{an \code{sf}/\code{sfc}/\code{sfg} or \code{bbox} object (from the \code{sf} package)}
 
 \item{coords}{the coordinates of the bounding box as four-element numeric
-vector \code{c(xmin, ymin, xmax, ymax)}, or a \code{bbox} object from the \code{sf}
-package (the result of running \code{sf::st_bbox()} on an \code{sf} object).}
+vector \code{c(xmin, ymin, xmax, ymax)}, a \code{bbox} object from the \code{sf}
+package (the result of running \code{sf::st_bbox()} on an \code{sf} object), or
+an \code{sf} object which then gets converted to a bounding box on the fly.}
 
 \item{crs}{(Optional) A numeric value or string containing an SRS code. If
 \code{coords} is a \code{bbox} object with non-empty crs, it is taken from that.
