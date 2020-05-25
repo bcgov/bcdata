@@ -187,8 +187,9 @@ filtering may be needed to achieve exact results.</p>
     <tr>
       <th>coords</th>
       <td><p>the coordinates of the bounding box as four-element numeric
-vector <code><a href='https://rdrr.io/r/base/c.html'>c(xmin, ymin, xmax, ymax)</a></code>, or a <code>bbox</code> object from the <code>sf</code>
-package (the result of running <code><a href='https://rdrr.io/pkg/sf/man/st_bbox.html'>sf::st_bbox()</a></code> on an <code>sf</code> object).</p></td>
+vector <code><a href='https://rdrr.io/r/base/c.html'>c(xmin, ymin, xmax, ymax)</a></code>, a <code>bbox</code> object from the <code>sf</code>
+package (the result of running <code><a href='https://rdrr.io/pkg/sf/man/st_bbox.html'>sf::st_bbox()</a></code> on an <code>sf</code> object), or
+an <code>sf</code> object which then gets converted to a bounding box on the fly.</p></td>
     </tr>
     <tr>
       <th>crs</th>
