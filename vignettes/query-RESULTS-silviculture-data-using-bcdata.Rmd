@@ -82,7 +82,7 @@ We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?i
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 ```
 
-This query shows that this data set has over 850,000 features and 159 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
+This query shows that this data set has over 850,000 features and over 150 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
 
 Note that we have only _queried_ the data set so far---the data set would be too large (~1GB) to download efficiently.  So, let's use `filter` with `bcdc_query_geodata()` to refine our query _before_ we collect the data and import it into R.
 
