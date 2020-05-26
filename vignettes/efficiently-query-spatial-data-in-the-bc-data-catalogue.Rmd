@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2020-05-21"
+date: "2020-05-26"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -228,17 +228,17 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Simple feature collection with 6 features and 19 fields
 #> geometry type:  POLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1228737 ymin: 450539 xmax: 1234131 ymax: 469687.8
+#> bbox:           xmin: 1228760 ymin: 459819.7 xmax: 1242329 ymax: 469547.6
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               77 Kiyo Park Local     Park             Metro Vancouver 
-#> 2 WHSE…               78 Kwomais … Local     Park             Metro Vancouver 
-#> 3 WHSE…               79 Ocean Cl… Local     Park             Metro Vancouver 
-#> 4 WHSE…               80 Ocean Es… Local     Park             Metro Vancouver 
-#> 5 WHSE…               81 Ocean Pa… Local     Park             Metro Vancouver 
-#> 6 WHSE…               82 Ocean Pa… Local     Park             Metro Vancouver 
+#> 1 WHSE…                1 Guildfor… Local     Civic Facility   Metro Vancouver 
+#> 2 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver 
+#> 3 WHSE…                3 Hartnell… Local     Park             Metro Vancouver 
+#> 4 WHSE…                4 51C - Wa… Local     Trail            Metro Vancouver 
+#> 5 WHSE…                5 52A - Gr… Local     Green Space      Metro Vancouver 
+#> 6 WHSE…                6 52G - De… Local     Green Space      Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
@@ -259,17 +259,17 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> Simple feature collection with 6 features and 19 fields
 #> geometry type:  POLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1228737 ymin: 450539 xmax: 1234131 ymax: 469687.8
+#> bbox:           xmin: 1227676 ymin: 459819.7 xmax: 1242329 ymax: 467135.4
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               77 Kiyo Park Local     Park             Metro Vancouver 
-#> 2 WHSE…               78 Kwomais … Local     Park             Metro Vancouver 
-#> 3 WHSE…               79 Ocean Cl… Local     Park             Metro Vancouver 
-#> 4 WHSE…               80 Ocean Es… Local     Park             Metro Vancouver 
-#> 5 WHSE…               81 Ocean Pa… Local     Park             Metro Vancouver 
-#> 6 WHSE…               82 Ocean Pa… Local     Park             Metro Vancouver 
+#> 1 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver 
+#> 2 WHSE…                3 Hartnell… Local     Park             Metro Vancouver 
+#> 3 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
+#> 4 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
+#> 5 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
+#> 6 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
