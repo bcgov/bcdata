@@ -1,6 +1,7 @@
 # bcdata (development version)
 
 ### IMPROVEMENTS
+* Add explore-silviculture-data-using-bcdata vignette/article 
 * Geometry predicates can now take a `bbox` object as well as an `sf*` object (#176)
 * Rename `selectable` column from `bcdc_describe_feature` to `sticky` and modify corresponding docs and tests (#180)
 * Add `head` and `tail` methods for `bcdc.promise` objects. Thanks to @hgriesbauer for the suggestion! (#182, #186)
