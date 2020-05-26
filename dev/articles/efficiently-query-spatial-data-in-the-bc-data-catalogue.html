@@ -67,6 +67,9 @@
 <li>
       <a href="../articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a>
     </li>
+    <li>
+      <a href="../articles/explore-silviculture-data-using-bcdata.html">An Exploration of Silviculture Data with bcdata</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -95,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2020-05-21</h4>
+            <h4 class="date">2020-05-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -285,17 +288,17 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
 <span class="co">#&gt; geometry type:  POLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 1228737 ymin: 450539 xmax: 1234131 ymax: 469687.8</span>
+<span class="co">#&gt; bbox:           xmin: 1228760 ymin: 459819.7 xmax: 1242329 ymax: 469547.6</span>
 <span class="co">#&gt; CRS:            3005</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
 <span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…</span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE…               77 Kiyo Park Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 2 WHSE…               78 Kwomais … Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 3 WHSE…               79 Ocean Cl… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 4 WHSE…               80 Ocean Es… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 5 WHSE…               81 Ocean Pa… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 6 WHSE…               82 Ocean Pa… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 1 WHSE…                1 Guildfor… Local     Civic Facility   Metro Vancouver </span>
+<span class="co">#&gt; 2 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 3 WHSE…                3 Hartnell… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 4 WHSE…                4 51C - Wa… Local     Trail            Metro Vancouver </span>
+<span class="co">#&gt; 5 WHSE…                5 52A - Gr… Local     Green Space      Metro Vancouver </span>
+<span class="co">#&gt; 6 WHSE…                6 52G - De… Local     Green Space      Metro Vancouver </span>
 <span class="co">#&gt; # … with 14 more variables: MUNICIPALITY &lt;chr&gt;, CIVIC_NUMBER &lt;int&gt;,</span>
 <span class="co">#&gt; #   CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;, LATITUDE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
@@ -311,17 +314,17 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
 <span class="co">#&gt; geometry type:  POLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 1228737 ymin: 450539 xmax: 1234131 ymax: 469687.8</span>
+<span class="co">#&gt; bbox:           xmin: 1227676 ymin: 459819.7 xmax: 1242329 ymax: 467135.4</span>
 <span class="co">#&gt; CRS:            3005</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
 <span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…</span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE…               77 Kiyo Park Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 2 WHSE…               78 Kwomais … Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 3 WHSE…               79 Ocean Cl… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 4 WHSE…               80 Ocean Es… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 5 WHSE…               81 Ocean Pa… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 6 WHSE…               82 Ocean Pa… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 1 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 2 WHSE…                3 Hartnell… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 3 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 4 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 5 WHSE…               22 Beaver C… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 6 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver </span>
 <span class="co">#&gt; # … with 14 more variables: MUNICIPALITY &lt;chr&gt;, CIVIC_NUMBER &lt;int&gt;,</span>
 <span class="co">#&gt; #   CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;, LATITUDE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
