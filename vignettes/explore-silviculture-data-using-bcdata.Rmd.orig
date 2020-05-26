@@ -39,6 +39,7 @@ library(bcdata)
 library(dplyr)
 library(ggplot2)
 library(sf)
+library(webshot)
 ```
 
 
