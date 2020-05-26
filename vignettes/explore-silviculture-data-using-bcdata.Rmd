@@ -33,11 +33,11 @@ Silviculture data for British Columbia are largely collected and stored through 
 
 ## A Silviculture Data Exploration&mdash;Reforestation with Climate Considerations
 
-[Western larch](https://en.wikipedia.org/wiki/Larix_occidentalis) has been identified as a tree species that will be well-adapted to projected future climates in northern British Columbia.  In 2013, forest policy was developed that allowed foresters to plant western larch outside of its natural range as a climate change adaptation silviculture measure. 
+[Western larch](https://en.wikipedia.org/wiki/Larix_occidentalis) has been identified as a tree species that will be well-adapted to projected future climates in northern British Columbia.  In 2013, forest policy was developed that allowed foresters to plant western larch outside of its natural range as a climate change adaptation silviculture measure.
 
-**How much western larch has been planted in the Prince George Natural Resource District?**  
+**How much western larch has been planted in the Prince George Natural Resource District?**
 
-Let's use the `bcdata` package to search, retrieve and explore the RESULTS silviculture data and answer this question. 
+Let's use the `bcdata` package to search, retrieve and explore the RESULTS silviculture data and answer this question.
 
 
 ### Getting Started
@@ -184,7 +184,7 @@ Now we can use `DPG`, the `ORG_UNIT` for Prince George Natural Resource District
 
 ```r
 ## Create a spatial feature object named dpg
-dpg <- bcdc_query_geodata("natural-resource-nr-district") %>%  
+dpg <- bcdc_query_geodata("natural-resource-nr-district") %>%
   filter(ORG_UNIT=="DPG") %>% # filter for Prince George Natural Resource District
   collect() # and collect the data
 ```
@@ -193,34 +193,35 @@ Let's plot this spatial object and double check we have we what we need:
 
 
 ```r
-dpg %>% 
+dpg %>%
   ggplot() +
   geom_sf()
 ```
 
-![plot of chunk plot-dpg](figure/plot-dpg-1.png)
 
-Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District. 
+![plot of chunk plot-dpg](vignette-fig-plot-dpg-1.png)
+
+Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.
 
 We only need to download the treatments that have western larch planted. We can use the `bcdc_describe_feature()` helper function to examine the column names and types of the layer. In this case, we want to keep rows where the five `S_SPECIES_CODE_*` columns contain `"LW"`, the code for western larch.
 
 
 ```r
-# Make a vector of tree species we are interested in 
+# Make a vector of tree species we are interested in
 # (in this case only LW for western larch)
 spp_list = c("LW")
- 
+
 # Query and filter the data layer
 trees_dpg <-
   bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3") %>%
   filter(INTERSECTS(dpg)) %>% #filter for records that are within the DPG boundary
   filter(
-      S_SPECIES_CODE_1 %in% spp_list |  #filter for LW records 
+      S_SPECIES_CODE_1 %in% spp_list |  #filter for LW records
       S_SPECIES_CODE_2 %in% spp_list |
       S_SPECIES_CODE_3 %in% spp_list |
       S_SPECIES_CODE_4 %in% spp_list |
       S_SPECIES_CODE_5 %in% spp_list
-  ) %>% 
+  ) %>%
   collect() #collect/download the data
 ```
 
@@ -239,14 +240,16 @@ We can see there are 160 treatment units planted with western larch, and we can 
 
 
 ```r
-trees_dpg %>% 
-  ggplot() + 
-  geom_sf() + 
+trees_dpg %>%
+  ggplot() +
+  geom_sf() +
   geom_sf(data = dpg, fill = NA) + #add the DPG spatial boundary
   theme_minimal()
 ```
 
-![plot of chunk map-larch-plantations-dpg](figure/map-larch-plantations-dpg-1.png)
+
+![plot of chunk map-larch-plantations-dpg](vignette-fig-map-larch-plantations-dpg-1.png)
+
 
 
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
@@ -256,7 +259,7 @@ We can also create some quick descriptive summaries of the data, treating the ge
 
 
 ```r
-trees_dpg %>% 
+trees_dpg %>%
   mutate(age = 2020 - REFERENCE_YEAR + S_SPECIES_AGE_1) %>% #create a plantation age column
   ggplot() +  #start a plot
   aes(x = age, y = FEATURE_AREA_SQM/10000) + #convert feature area to hectares
@@ -273,7 +276,9 @@ trees_dpg %>%
   theme(legend.position = "none")
 ```
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
+
+![plot of chunk unnamed-chunk-1](vignette-fig-unnamed-chunk-1-1.png)
+
 
 #### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
 
@@ -290,7 +295,8 @@ bgc_dpg <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") 
   collect()
 
 # Join the BEC data with our tress_dpg geospatial data set
-trees_bec_dpg <- trees_dpg %>% 
+
+trees_bec_dpg <- trees_dpg %>%
   st_join(bgc_dpg[, "MAP_LABEL"]) #join BEC data for each polygon
 ```
 
@@ -298,7 +304,7 @@ Now, we can summarize the area planted with western larch by biogeoclimatic unit
 
 
 ```r
-trees_bec_dpg %>% 
+trees_bec_dpg %>%
   group_by(MAP_LABEL) %>% # group polygons by biogeoclimatic unit
   summarise(Area = sum(FEATURE_AREA_SQM)/10000) %>%
   ggplot() +
@@ -314,4 +320,4 @@ trees_bec_dpg %>%
   theme(legend.position = "none")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-3](vignette-fig-unnamed-chunk-3-1.png)
