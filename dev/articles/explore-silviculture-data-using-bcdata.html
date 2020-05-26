@@ -327,6 +327,7 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu"><a href="../reference/collect-methods.html">collect</a></span>()
 
 <span class="co"># Join the BEC data with our tress_dpg geospatial data set</span>
+
 <span class="no">trees_bec_dpg</span> <span class="kw">&lt;-</span> <span class="no">trees_dpg</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_join.html">st_join</a></span>(<span class="no">bgc_dpg</span>[, <span class="st">"MAP_LABEL"</span>]) <span class="co">#join BEC data for each polygon</span></pre></body></html></div>
 <p>Now, we can summarize the area planted with western larch by biogeoclimatic unit:</p>
