@@ -1,6 +1,5 @@
 ---
 title: "An Exploration of Silviculture Data with bcdata"
-author: "Hardy Griesbauer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -163,7 +162,7 @@ trees_dpg %>%
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
 
 
-#### What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?
+**What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?**
 
 ```{r, warning = FALSE}
 trees_dpg %>%
@@ -183,7 +182,7 @@ trees_dpg %>%
   theme(legend.position = "none")
 ```
 
-#### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
+**What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?**
 
 We can download [British Columbia biogeoclimatic (BEC) data](https://catalogue.data.gov.bc.ca/dataset/bec-map) from the B.C. Data Catalogue using `bcdata` and join to our existing `trees_dpg` geospatial dataset using the `st_join` function from the `sf` package. You can learn more about `sf` [here](https://r-spatial.github.io/sf/).
 
