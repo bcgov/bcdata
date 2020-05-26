@@ -146,7 +146,7 @@ bcdc_search_facets(facet = "license_id")
 #> 9  license_id     3                  Open Government Licence - BC Assessment
 #> 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence
 #> 11 license_id    16                           Elections BC Open Data Licence
-#> 12 license_id  1280                                              Access Only
+#> 12 license_id  1281                                              Access Only
 #>    name
 #> 1    21
 #> 2    25
