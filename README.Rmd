@@ -33,7 +33,7 @@ library(bcdata)
 # bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
-<a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
+<a id="devex-badge" rel="Delivery" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/delivery.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a>
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Travis build status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
 [![R build status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata)
@@ -80,7 +80,8 @@ library(bcdata)
 
 - [Get started with bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
 - [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
-- Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (coming soon!)
+- [An Exploration of Silviculture Data with bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
+- Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (Coming Soon!)
 
 
 ### Getting Help or Reporting an Issue
