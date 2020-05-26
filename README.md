@@ -40,6 +40,7 @@ Catalogue](https://catalogue.data.gov.bc.ca).
   - `bcdc_search()` - Search records in the catalogue
   - `bcdc_search_facets()` - List catalogue facet search options
   - `bcdc_get_record()` - Print a catalogue record
+  - `bcdc_tidy_resources()` - Get a data frame of resources for a record
   - `bcdc_get_data()` - Get catalogue data
   - `bcdc_query_geodata()` - Get & query catalogue geospatial data
     available through a [Web
@@ -81,7 +82,7 @@ library(bcdata)
 
   - [Get started with
     bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
-  - [Querying spatial data with
+  - [Querying Spatial Data with
     bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
   - Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (coming
     soon\!)

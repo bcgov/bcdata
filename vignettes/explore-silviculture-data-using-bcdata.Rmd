@@ -198,6 +198,7 @@ dpg %>%
   geom_sf()
 ```
 
+
 ![plot of chunk plot-dpg](vignette-fig-plot-dpg-1.png)
 
 Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.
@@ -246,7 +247,9 @@ trees_dpg %>%
   theme_minimal()
 ```
 
+
 ![plot of chunk map-larch-plantations-dpg](vignette-fig-map-larch-plantations-dpg-1.png)
+
 
 
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
@@ -273,7 +276,9 @@ trees_dpg %>%
   theme(legend.position = "none")
 ```
 
+
 ![plot of chunk unnamed-chunk-1](vignette-fig-unnamed-chunk-1-1.png)
+
 
 #### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
 
@@ -290,6 +295,7 @@ bgc_dpg <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") 
   collect()
 
 # Join the BEC data with our tress_dpg geospatial data set
+
 trees_bec_dpg <- trees_dpg %>%
   st_join(bgc_dpg[, "MAP_LABEL"]) #join BEC data for each polygon
 ```
