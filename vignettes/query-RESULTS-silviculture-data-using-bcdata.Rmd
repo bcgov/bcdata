@@ -75,7 +75,7 @@ We can gather the data we need to answer our question using the [RESULTS - silvi
 bcdc_get_record("results-forest-cover-silviculture")
 ```
 
-We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data set, so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
+We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data set&mdash;the list of data resources includes `WMS getCapabilities request`&mdash;so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
 
 ```{r examine-silv-layer}
 # Query the data using the permanent ID of the record to guard against name changes
@@ -84,7 +84,7 @@ bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 
 This query shows that this data set has over 850,000 features and over 150 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
 
-Note that we have only _queried_ the data set so far---the data set would be too large (~1GB) to download efficiently.  So, let's use `filter` with `bcdc_query_geodata()` to refine our query _before_ we collect the data and import it into R.
+Note that we have only _queried_ the data set so far---the data set would be too large (~1GB) to download efficiently.  So, let's use `filter()` with `bcdc_query_geodata()` to refine our query _before_ we collect the data and import it into R.
 
 
 ### Refining a Geospatial Data Query
