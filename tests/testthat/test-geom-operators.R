@@ -107,6 +107,21 @@ test_that("BBOX works with an sf bbox", {
   expect_equal(attr(remote, "sf_column"), "geometry")
 })
 
+
+test_that("BBOX works with an sf object", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  remote <- suppressWarnings(
+    bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
+      filter(FEATURE_LENGTH_M <= 1000, BBOX(local)) %>%
+      collect()
+  )
+
+  expect_is(remote, "sf")
+  expect_equal(attr(remote, "sf_column"), "geometry")
+})
+
 test_that("Other predicates work with an sf bbox", {
   skip_on_cran()
   skip_if_net_down()

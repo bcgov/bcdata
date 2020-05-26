@@ -248,13 +248,14 @@ as.bcdc_recordlist <- function(x) {
 #'
 #'
 #' @return A data frame containing the metadata for all the resources for a record
-#' @export
 #'
 #' @examples
 #' \donttest{
 #' airports <- bcdc_get_record("bc-airports")
 #' bcdc_tidy_resources(airports)
 #' }
+#'
+#' @export
 bcdc_tidy_resources <- function(record){
   if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
   UseMethod("bcdc_tidy_resources")
