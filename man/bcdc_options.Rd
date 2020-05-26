@@ -8,9 +8,9 @@ bcdc_options()
 }
 \description{
 This function retrieves bcdata specific options that can be set. These options can be set
-using \code{option({name of the option} = {value of the option})}. The default options are purposefully
-set conversatively to hopefully ensure successful requests. Resetting these options may result in
-failed calls to the data catalogue. Options in R are reset everytime R is re-started. See examples for
+using \verb{option(\{name of the option\} = \{value of the option\})}. The default options are purposefully
+set conservatively to hopefully ensure successful requests. Resetting these options may result in
+failed calls to the data catalogue. Options in R are reset every time R is re-started. See examples for
 addition ways to restore your initial state.
 }
 \details{
@@ -26,7 +26,6 @@ requested. On faster internet connections, a bigger chunk limit could be useful 
 it is advisable to lower the chunk limit. Chunks must be less than 10000.
 }
 \examples{
-\dontrun{
 ## Save initial conditions
 original_options <- options()
 
@@ -40,7 +39,5 @@ bcdc_options()
 
 ## Reset initial conditions
 options(original_options)
-
-}
 
 }

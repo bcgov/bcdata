@@ -28,7 +28,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## Take me to the B.C. Data Catalogue home page
 #' bcdc_browse()
 #'
@@ -44,7 +44,7 @@
 #' }
 bcdc_browse <- function(query = NULL, browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
 
   if(is.null(query))  url <- "https://catalogue.data.gov.bc.ca"
@@ -54,7 +54,7 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
     ## Check if the record is valid, if not return a query
     url <- paste0("https://catalogue.data.gov.bc.ca/dataset/", query)
     cli <- crul::HttpClient$new(url = url,
-                         headers = list(`User-Agent` = "https://github.com/bcgov/bcdata"))
+                                headers = list(`User-Agent` = bcdata_user_agent()))
     res <- cli$get()
 
     if(res$status_code == 404){
@@ -64,12 +64,14 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
 
   ## Facilitates testing
   if(interactive()){
+    # nocov start
     utils::browseURL(url = url, browser = browser,
                      encodeIfNeeded = encodeIfNeeded)
+    # nocov end
   }
 
   invisible(url)
-  }
+}
 
 
 

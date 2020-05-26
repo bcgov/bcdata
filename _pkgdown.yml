@@ -16,6 +16,7 @@ reference:
       - '`bcdc_search_facets`'
       - '`bcdc_list`'
       - '`bcdc_get_record`'
+      - '`bcdc_tidy_resources`'
   - title: "Direct downloads of datasets"
     desc: >
       Directly dowload (or preview) datasets (resources) from the
@@ -33,6 +34,7 @@ reference:
       - '`bcdc_describe_feature`'
       - '`filter.bcdc_promise`'
       - '`select.bcdc_promise`'
+      - '`mutate.bcdc_promise`'
       - '`collect.bcdc_promise`'
       - '`cql_geom_predicates`'
       - '`CQL`'

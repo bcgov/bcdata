@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Querying Spatial Data with bcdata • bcdata</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Querying Spatial Data with bcdata">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png">
@@ -31,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -39,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -68,7 +75,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/bcgov/bcdata">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -81,12 +88,13 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2019-06-21</h4>
+            <h4 class="date">2019-12-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -95,80 +103,69 @@
 
     
     
+<!--
+Copyright 2019 Province of British Columbia
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License.
+-->
 <p>This vignette illustrates how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata</a></code> to request and query <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data from the B.C. Data Catalogue. To illustrate, we will request and merge two spatial datasets from the catalogue—school district and greenspaces spatial data—and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.</p>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h2>
 <p>First you need to load the package. We will also load the <code>sf</code> and <code>dplyr</code> packages to help us work with spatial data. You can learn more about the <code>sf</code> package <a href="https://r-spatial.github.io/sf/">here</a> and <code>dplyr</code> <a href="https://dplyr.tidyverse.org/">here</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(bcdata)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt; Attaching package: 'bcdata'</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; The following object is masked from 'package:stats':</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt;     filter</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(sf)</a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; Linking to GEOS 3.6.1, GDAL 2.1.3, PROJ 4.9.3</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="co">#&gt; Attaching package: 'dplyr'</span></a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt; The following objects are masked from 'package:stats':</span></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt;     filter, lag</span></a>
-<a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; The following objects are masked from 'package:base':</span></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(bcdata)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(sf)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span>()</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt; [1] "C:/_dev/GitHub_repos/bcdata/vignettes"</span></a></code></pre></div>
 </div>
 <div id="geospatial-data-in-the-b-c--data-catalogue" class="section level2">
 <h2 class="hasAnchor">
 <a href="#geospatial-data-in-the-b-c--data-catalogue" class="anchor"></a>Geospatial Data in the B.C. Data Catalogue</h2>
-<p>The <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a> provides many datasets with spatial information through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. Technically speaking, this means if we have an internet connection we can issue <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> requests to the catalogue and seamlessly import the response data into R as an <code>sf</code> objects. The <code>bcdata</code> package provides a means to a) choose which layer you want and b) use <code>dplyr</code> verbs to specifically tailor your request. A <code>dbplyr</code> backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the <code>collect</code> function. This approach mimics the <code>dplyr</code> verb translation to <code>SQL</code> seen for many database types. A good introduction to principles of <code>dbplyr</code> is available <a href="https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html">here</a>.</p>
+<p>The <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a> provides many datasets with spatial information through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. Technically speaking, this means if we have an internet connection we can issue <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> requests to the catalogue and seamlessly import the response data into R as an <code>sf</code> objects. The <code>bcdata</code> package provides a means to a) choose which layer you want and b) use <code>dplyr</code> verbs to specifically tailor your request. A <code>dbplyr</code> backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the <code>collect</code> function. This approach mimics the <code>dplyr</code> verb translation to <code>SQL</code> seen for many database types. A good introduction to principles of <code>dbplyr</code> is available <a href="https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html">here</a>.</p>
 </div>
 <div id="school-district-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#school-district-data" class="anchor"></a>School District Data</h2>
 <p>Our first step is to extract the <a href="https://catalog.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b">school district polygons</a> from the B.C. Data Catalogue. This layer is described using this command:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt; B.C. Data Catalogue Record:</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt;     School Districts of BC </span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; Name: school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b )</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; Sector: Education</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; Type: Geographic</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; Last Updated: 2019-05-04 </span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; Description:</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt;     The School Districts dataset contains the spatial representation (polygon) of the</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt;     current extent of the administrative areas defined under section 176(1) of the</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt;     School Act for the purposes of preservation and promotion of the fundamental</span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt;     principle of local autonomy and control of public education at the public and</span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt;     governmental levels through locally elected school boards. </span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; Resources: ( 3 )</span></a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; 1) BC Geographic Warehouse Custom Download</span></a>
-<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt;      format: other </span></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt;      url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW </span></a>
-<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt;      resource: 529507c4-d155-4c4d-a499-1a50be41b49d </span></a>
-<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt;      available in R via bcdata:  FALSE </span></a>
-<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; 2) WFS request (Spatial Data)</span></a>
-<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt;      format: wfs </span></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt;      resource: 57d8843b-5278-4a0f-ba6b-7c6c3be2a81f </span></a>
-<a class="sourceLine" id="cb2-29" title="29"><span class="co">#&gt;      available in R via bcdata:  TRUE </span></a>
-<a class="sourceLine" id="cb2-30" title="30"><span class="co">#&gt;      code: bcdc_get_data(record = '78ec5279-4534-49a1-97e8-9d315936f08b', resource = '57d8843b-5278-4a0f-ba6b-7c6c3be2a81f')</span></a>
-<a class="sourceLine" id="cb2-31" title="31"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-32" title="32"><span class="co">#&gt; 3) KML Network Link</span></a>
-<a class="sourceLine" id="cb2-33" title="33"><span class="co">#&gt;      format: kml </span></a>
-<a class="sourceLine" id="cb2-34" title="34"><span class="co">#&gt;      url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW_loader.kml </span></a>
-<a class="sourceLine" id="cb2-35" title="35"><span class="co">#&gt;      resource: 7493e749-0e16-440c-94c0-521e5ad7c6de </span></a>
-<a class="sourceLine" id="cb2-36" title="36"><span class="co">#&gt;      available in R via bcdata:  FALSE</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt; B.C. Data Catalogue Record: School Districts of BC </span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; Name: school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b )</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; Sector: Education</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; Type: Geographic</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; Last Updated: 2019-09-05 </span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; Description: The School Districts dataset contains the spatial representation (polygon) of the</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; current extent of the administrative areas defined under section 176(1) of the</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; School Act for the purposes of preservation and promotion of the fundamental</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; principle of local autonomy and control of public education at the public and</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; governmental levels through locally elected school boards. </span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; Resources: ( 3 )</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; # A tibble: 3 x 8</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt;   name                     url                                                              id                    format ext   package_id               location        bcdata_available</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;                                                            &lt;chr&gt;                 &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                    &lt;chr&gt;           &lt;lgl&gt;           </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt; 1 BC Geographic Warehouse… https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_TANTALIS.TA… 529507c4-d155-4c4d-a… other  ""    78ec5279-4534-49a1-97e8… bcgeographicwa… FALSE           </span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; 2 WMS getCapabilities req… https://openmaps.gov.bc.ca/geo/pub/WHSE_TANTALIS.TA_SCHOOL_DIST… 57d8843b-5278-4a0f-b… wms    ""    78ec5279-4534-49a1-97e8… bcgeographicwa… TRUE            </span></a>
+<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; 3 KML Network Link         http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_TANTALIS.TA_SCHOO… 7493e749-0e16-440c-9… kml    kml   78ec5279-4534-49a1-97e8… bcgeographicwa… FALSE</span></a></code></pre></div>
 <p>This data is the boundary of each school district. The key information in this metadata is that the layer is a <code>**WFS request (Spatial Data)**</code>—which means it is available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. From this we know we can make use of <code>bcdc_query_geodata</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>) </a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="co">#&gt; Querying 'school-districts-of-bc' record</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; ● Using collect() on this object will return 59 features and 9 fields</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; ● Only the first six rows of the record are printed here</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; &lt;U+25CF&gt; Using collect() on this object will return 59 features and 9 fields</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; --------------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; Simple feature collection with 6 features and 9 fields</span></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; geometry type:  POLYGON</span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; dimension:      XY</span></a>
@@ -176,23 +173,21 @@
 <a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt; epsg (SRID):    3005</span></a>
 <a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></a>
 <a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; # A tibble: 6 x 10</span></a>
-<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt;   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE</span></a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt;   &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;       </span></a>
-<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; 1 WHSE…            121 Southeast Koote…                5 FH10000300  </span></a>
-<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; 2 WHSE…            122 Rocky Mountain                  6 FH10000300  </span></a>
-<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; 3 WHSE…            123 Kootenay Lake                   8 FH10000300  </span></a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; 4 WHSE…            124 Arrow Lakes                    10 FH10000300  </span></a>
-<a class="sourceLine" id="cb3-19" title="19"><span class="co">#&gt; 5 WHSE…            125 Revelstoke                     19 FH10000300  </span></a>
-<a class="sourceLine" id="cb3-20" title="20"><span class="co">#&gt; 6 WHSE…            126 Kootenay-Columb…               20 FH10000300  </span></a>
-<a class="sourceLine" id="cb3-21" title="21"><span class="co">#&gt; # … with 5 more variables: FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb3-22" title="22"><span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt;   id                 ADMIN_AREA_SID SCHOOL_DISTRICT_… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM FEATURE_LENGTH_M OBJECTID SE_ANNO_CAD_DATA                                geometry</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt;   &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;                         &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;    &lt;int&gt; &lt;chr&gt;                                      &lt;POLYGON [m]&gt;</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; 1 WHSE_TANTALIS.TA_…            121 Southeast Kooten…                 5 FA91800600       12518364168.          729285.        1 &lt;NA&gt;             ((1777342 674389.7, 1777324 674398.8, …</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; 2 WHSE_TANTALIS.TA_…            122 Rocky Mountain                    6 FA91800600       28672897783.         1410275.        2 &lt;NA&gt;             ((1542332 861060.3, 1542312 861062.6, …</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; 3 WHSE_TANTALIS.TA_…            123 Kootenay Lake                     8 FA91800600       15148870602.         1025248.        3 &lt;NA&gt;             ((1605026 706122.4, 1605024 706116.2, …</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; 4 WHSE_TANTALIS.TA_…            124 Arrow Lakes                      10 FA91800600        7391752941.          617156.        4 &lt;NA&gt;             ((1600141 682325.2, 1599877 682298.8, …</span></a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="co">#&gt; 5 WHSE_TANTALIS.TA_…            125 Revelstoke                       19 FA91800600        9320096494.          667611.        5 &lt;NA&gt;             ((1541172 678950.9, 1541191 678882.1, …</span></a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="co">#&gt; 6 WHSE_TANTALIS.TA_…            126 Kootenay-Columbia                20 FA91800600        3074361162.          338055.        6 &lt;NA&gt;             ((1552779 562929.4, 1552798 562926.6, …</span></a></code></pre></div>
 <p>This is the initial query to the data in the catalogue. What has been returned is <em>not</em> the actual data but rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also receive instruction that using <code><a href="../reference/collect.html">collect()</a></code> will retrieve a given number of features and fields present for this query. Lastly, there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the catalogue for only those polygons just like we would in a typical <code>dplyr</code> workflow:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(SCHOOL_DISTRICT_NAME <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span>)) </a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(SCHOOL_DISTRICT_NAME <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span>))</a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; Querying 'school-districts-of-bc' record</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; ● Using collect() on this object will return 3 features and 9 fields</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; ● Only the first six rows of the record are printed here</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; &lt;U+25CF&gt; Using collect() on this object will return 3 features and 9 fields</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; --------------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; Simple feature collection with 3 features and 9 fields</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></a>
 <a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; dimension:      XY</span></a>
@@ -200,21 +195,19 @@
 <a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; epsg (SRID):    3005</span></a>
 <a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></a>
 <a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; # A tibble: 3 x 10</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… FEATURE_CODE</span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;   &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;       </span></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 1 WHSE…            133 Prince George                  57 FH10000300  </span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 2 WHSE…            157 Greater Victoria               61 FH10000300  </span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 3 WHSE…            167 Kamloops/Thomps…               73 FH10000300  </span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; # … with 5 more variables: FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;   id                  ADMIN_AREA_SID SCHOOL_DISTRICT_… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM FEATURE_LENGTH_M OBJECTID SE_ANNO_CAD_DATA                               geometry</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;   &lt;chr&gt;                        &lt;int&gt; &lt;chr&gt;                         &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;    &lt;int&gt; &lt;chr&gt;                                &lt;MULTIPOLYGON [m]&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 1 WHSE_TANTALIS.TA_S…            133 Prince George                    57 FA91800600       52156022749.         2170693.       13 &lt;NA&gt;             (((1139512 1219856, 1139379 1219892, …</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 2 WHSE_TANTALIS.TA_S…            157 Greater Victoria                 61 FA91800600         112290667.          162930.       37 &lt;NA&gt;             (((1188094 392987.8, 1187514 392967.3…</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 3 WHSE_TANTALIS.TA_S…            167 Kamloops/Thompson                73 FA91800600       26181564963.         1202467.       47 &lt;NA&gt;             (((1393261 890465.4, 1393261 890465.4…</span></a></code></pre></div>
 <p>To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. During an actual analysis, it is possible that you may need to initially collect more data than you want to determine value to subset by. For example, there is currently no way to ask the catalogue for all possible unique values of <code>SCHOOL_DISTRICT_NAME</code>. Is that case the data will need to be brought into R and unique values will need to be determined there.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(SCHOOL_DISTRICT_NAME <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(SCHOOL_DISTRICT_NAME <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(SCHOOL_DISTRICT_NAME)</a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; Querying 'school-districts-of-bc' record</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; ● Using collect() on this object will return 3 features and 5 fields</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; ● Only the first six rows of the record are printed here</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; &lt;U+25CF&gt; Using collect() on this object will return 3 features and 5 fields</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; --------------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; Simple feature collection with 3 features and 5 fields</span></a>
 <a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></a>
 <a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; dimension:      XY</span></a>
@@ -222,154 +215,132 @@
 <a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; epsg (SRID):    3005</span></a>
 <a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></a>
 <a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt; # A tibble: 3 x 6</span></a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt;   id    ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… OBJECTID</span></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt;   &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;                       &lt;int&gt;    &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt; 1 WHSE…            133 Prince George                  57       13</span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt; 2 WHSE…            157 Greater Victoria               61       37</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; 3 WHSE…            167 Kamloops/Thomps…               73       47</span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt; # … with 1 more variable: geometry &lt;MULTIPOLYGON [m]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt;   id                                                ADMIN_AREA_SID SCHOOL_DISTRICT_NA… SCHOOL_DISTRICT_NUM… OBJECTID                                                            geometry</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt;   &lt;chr&gt;                                                      &lt;int&gt; &lt;chr&gt;                              &lt;int&gt;    &lt;int&gt;                                                  &lt;MULTIPOLYGON [m]&gt;</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt; 1 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.fid--50d1d…            133 Prince George                         57       13 (((1139512 1219856, 1139379 1219892, 1139246 1219944, 1139138 1220…</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt; 2 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.fid--50d1d…            157 Greater Victoria                      61       37 (((1188094 392987.8, 1187514 392967.3, 1186934 392946.8, 1186950 3…</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; 3 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.fid--50d1d…            167 Kamloops/Thompson                     73       47 (((1393261 890465.4, 1393261 890465.4, 1393222 890468.5, 1393222 8…</span></a></code></pre></div>
 <p>Note that in the <code>select</code> statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn’t select. This is because within each dataset in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don’t want those columns after you <code>collect</code> the data, which we will take care of right now, you can drop them:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">districts &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(SCHOOL_DISTRICT_NAME <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(SCHOOL_DISTRICT_NAME) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">districts &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(SCHOOL_DISTRICT_NAME <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(SCHOOL_DISTRICT_NAME) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/collect.html">collect</a></span>()</a></code></pre></div>
 <p>Again note here that we have assigned the object a name and added the <code>collect</code> statement. This step happens when you have selected the data you want and wish to begin working with it in R like a normal <code>sf</code> object. For example, we can now plot these three school districts:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/plot">plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_geometry">st_geometry</a></span>(districts))</a></code></pre></div>
-<p><img src="efficiently-query-spatial-data-in-the-bc-data-catalogue_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="kw">st_geometry</span>(districts))</a></code></pre></div>
+<div class="figure">
+<img src="vignette-fig-districts-1.png" alt="plot of chunk districts"><p class="caption">plot of chunk districts</p>
+</div>
 <p>Now that we have the spatial boundaries narrowed by specific school districts we can perform some spatial operations to determine parks in the school districts.</p>
 </div>
 <div id="greenspaces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#greenspaces-data" class="anchor"></a>Greenspaces Data</h2>
-<p>For the purposes of this example, let’s consider <a href="catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da">this greenspace</a> layer in the catalogue. This layer is described here:</p>
+<p>For the purposes of this example, let’s consider <a href="https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da">this greenspace</a> layer in the catalogue. This layer is described here:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>)</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; B.C. Data Catalogue Record:</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt;     Local and Regional Greenspaces </span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; Name: local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da )</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; Sector: Natural Resources</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; Type: Geographic</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; Last Updated: 2018-07-16 </span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; Description:</span></a>
-<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt;     This dataset contains spatial and attribute information for local and regional</span></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt;     greenspaces in British Columbia. Local and regional greenspaces are municipal or</span></a>
-<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt;     regional district lands designated by local government agencies and managed for</span></a>
-<a class="sourceLine" id="cb8-16" title="16"><span class="co">#&gt;     public enjoyment, ecosystem or wildlife values. Spatial boundaries were sourced from</span></a>
-<a class="sourceLine" id="cb8-17" title="17"><span class="co">#&gt;     municipal and regional district web sites, which in some cases provide datasets</span></a>
-<a class="sourceLine" id="cb8-18" title="18"><span class="co">#&gt;     under Open Government Licence, and in other cases, publicize parks and greenspaces</span></a>
-<a class="sourceLine" id="cb8-19" title="19"><span class="co">#&gt;     on web maps or pdf maps. Boundaries were edge-matched to the ParcelMap BC cadastre.</span></a>
-<a class="sourceLine" id="cb8-20" title="20"><span class="co">#&gt;     This spatial layer contains multipart polygons. </span></a>
-<a class="sourceLine" id="cb8-21" title="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-22" title="22"><span class="co">#&gt; Resources: ( 4 )</span></a>
-<a class="sourceLine" id="cb8-23" title="23"><span class="co">#&gt; 1) BC Geographic Warehouse Custom Download</span></a>
-<a class="sourceLine" id="cb8-24" title="24"><span class="co">#&gt;      format: other </span></a>
-<a class="sourceLine" id="cb8-25" title="25"><span class="co">#&gt;      url: https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP </span></a>
-<a class="sourceLine" id="cb8-26" title="26"><span class="co">#&gt;      resource: dac89711-ebf4-46a9-9572-785471a0debc </span></a>
-<a class="sourceLine" id="cb8-27" title="27"><span class="co">#&gt;      available in R via bcdata:  FALSE </span></a>
-<a class="sourceLine" id="cb8-28" title="28"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-29" title="29"><span class="co">#&gt; 2) WFS request (Spatial Data)</span></a>
-<a class="sourceLine" id="cb8-30" title="30"><span class="co">#&gt;      format: wfs </span></a>
-<a class="sourceLine" id="cb8-31" title="31"><span class="co">#&gt;      resource: a8d5b53e-2ecf-4346-ba9c-5dead60ab471 </span></a>
-<a class="sourceLine" id="cb8-32" title="32"><span class="co">#&gt;      available in R via bcdata:  TRUE </span></a>
-<a class="sourceLine" id="cb8-33" title="33"><span class="co">#&gt;      code: bcdc_get_data(record = '6a2fea1b-0cc4-4fc2-8017-eaf755d516da', resource = 'a8d5b53e-2ecf-4346-ba9c-5dead60ab471')</span></a>
-<a class="sourceLine" id="cb8-34" title="34"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-35" title="35"><span class="co">#&gt; 3) KML Network Link</span></a>
-<a class="sourceLine" id="cb8-36" title="36"><span class="co">#&gt;      format: kml </span></a>
-<a class="sourceLine" id="cb8-37" title="37"><span class="co">#&gt;      url: http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP_loader.kml </span></a>
-<a class="sourceLine" id="cb8-38" title="38"><span class="co">#&gt;      resource: a7454e41-017b-42c4-a2dc-74cbc7489199 </span></a>
-<a class="sourceLine" id="cb8-39" title="39"><span class="co">#&gt;      available in R via bcdata:  FALSE </span></a>
-<a class="sourceLine" id="cb8-40" title="40"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-41" title="41"><span class="co">#&gt; 4) LocalRegionalParksAttributeValues</span></a>
-<a class="sourceLine" id="cb8-42" title="42"><span class="co">#&gt;      format: xlsx </span></a>
-<a class="sourceLine" id="cb8-43" title="43"><span class="co">#&gt;      url: https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da/resource/76663191-43b6-4a10-a28d-a9d8a059bacb/download/localregionalparksattributevalues.xlsx </span></a>
-<a class="sourceLine" id="cb8-44" title="44"><span class="co">#&gt;      resource: 76663191-43b6-4a10-a28d-a9d8a059bacb </span></a>
-<a class="sourceLine" id="cb8-45" title="45"><span class="co">#&gt;      available in R via bcdata:  TRUE </span></a>
-<a class="sourceLine" id="cb8-46" title="46"><span class="co">#&gt;      code: bcdc_get_data(record = '6a2fea1b-0cc4-4fc2-8017-eaf755d516da', resource = '76663191-43b6-4a10-a28d-a9d8a059bacb')</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; B.C. Data Catalogue Record: Local and Regional Greenspaces </span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; Name: local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da )</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; Sector: Natural Resources</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; Type: Geographic</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; Last Updated: 2019-09-05 </span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; Description: This dataset contains spatial and attribute information for local and regional</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; greenspaces in British Columbia. Local and regional greenspaces are municipal or</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; regional district lands designated by local government agencies and managed for</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; public enjoyment, ecosystem or wildlife values. Spatial boundaries were sourced from</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; municipal and regional district web sites, which in some cases provide datasets</span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co">#&gt; under Open Government Licence, and in other cases, publicize parks and greenspaces</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="co">#&gt; on web maps or pdf maps. Boundaries were edge-matched to the ParcelMap BC cadastre.</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="co">#&gt; This spatial layer contains multipart polygons. </span></a>
+<a class="sourceLine" id="cb8-19" title="19"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-20" title="20"><span class="co">#&gt; Resources: ( 4 )</span></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co">#&gt; # A tibble: 4 x 8</span></a>
+<a class="sourceLine" id="cb8-22" title="22"><span class="co">#&gt;   name                 url                                                                          id                 format ext   package_id            location      bcdata_available</span></a>
+<a class="sourceLine" id="cb8-23" title="23"><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;                                                                        &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                 &lt;chr&gt;         &lt;lgl&gt;           </span></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="co">#&gt; 1 BC Geographic Wareh… https://catalogue.data.gov.bc.ca/api/ofi/other/WHSE_BASEMAPPING.GBA_LOCAL_R… dac89711-ebf4-46a… other  ""    6a2fea1b-0cc4-4fc2-8… bcgwdatastore FALSE           </span></a>
+<a class="sourceLine" id="cb8-25" title="25"><span class="co">#&gt; 2 WMS getCapabilities… https://openmaps.gov.bc.ca/geo/pub/WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPAC… a8d5b53e-2ecf-434… wms    ""    6a2fea1b-0cc4-4fc2-8… bcgeographic… TRUE            </span></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="co">#&gt; 3 KML Network Link     http://openmaps.gov.bc.ca/kml/geo/layers/WHSE_BASEMAPPING.GBA_LOCAL_REG_GRE… a7454e41-017b-42c… kml    kml   6a2fea1b-0cc4-4fc2-8… bcgeographic… FALSE           </span></a>
+<a class="sourceLine" id="cb8-27" title="27"><span class="co">#&gt; 4 LocalRegionalParksA… https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516… 76663191-43b6-4a1… xlsx   xlsx  6a2fea1b-0cc4-4fc2-8… external      TRUE</span></a></code></pre></div>
 <p>Again we recognize this is <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data, which means we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>)</a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; ● Using collect() on this object will return 8708 features and 19 fields</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; ● Only the first six rows of the record are printed here</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; &lt;U+25CF&gt; Using collect() on this object will return 8707 features and 19 fields</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; --------------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></a>
 <a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></a>
 <a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; bbox:           xmin: 1233608 ymin: 464941.2 xmax: 1236528 ymax: 471352</span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; bbox:           xmin: 1227676 ymin: 451802.2 xmax: 1236544 ymax: 467135.4</span></a>
 <a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; epsg (SRID):    3005</span></a>
 <a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></a>
 <a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt; # A tibble: 6 x 20</span></a>
-<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE</span></a>
-<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt; 1 WHSE…               35 North Sl… Local     Green Space     </span></a>
-<a class="sourceLine" id="cb9-16" title="16"><span class="co">#&gt; 2 WHSE…               36 24M - De… Local     Green Space     </span></a>
-<a class="sourceLine" id="cb9-17" title="17"><span class="co">#&gt; 3 WHSE…               37 Freedom … Local     Park            </span></a>
-<a class="sourceLine" id="cb9-18" title="18"><span class="co">#&gt; 4 WHSE…               38 24N - To… Local     Playground      </span></a>
-<a class="sourceLine" id="cb9-19" title="19"><span class="co">#&gt; 5 WHSE…               39 24P - Gr… Local     Green Space     </span></a>
-<a class="sourceLine" id="cb9-20" title="20"><span class="co">#&gt; 6 WHSE…               40 25A - Gr… Local     Green Space     </span></a>
-<a class="sourceLine" id="cb9-21" title="21"><span class="co">#&gt; # … with 15 more variables: REGIONAL_DISTRICT &lt;chr&gt;, MUNICIPALITY &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb9-22" title="22"><span class="co">#&gt; #   CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb9-23" title="23"><span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;,</span></a>
-<a class="sourceLine" id="cb9-24" title="24"><span class="co">#&gt; #   WEBSITE_URL &lt;chr&gt;, LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb9-25" title="25"><span class="co">#&gt; #   FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb9-26" title="26"><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [m]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY CIVIC_NUMBER CIVIC_NUMBER_SU… STREET_NAME LATITUDE LONGITUDE WHEN_UPDATED WEBSITE_URL</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      </span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt; 1 WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver  Surrey               7634 &lt;NA&gt;             164 St          49.1     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="co">#&gt; 2 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver  Surrey              12586 &lt;NA&gt;             80 Ave          49.1     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="co">#&gt; 3 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver  Surrey              13750 &lt;NA&gt;             88 Ave          49.2     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb9-18" title="18"><span class="co">#&gt; 4 WHSE…               22 Beaver C… Local     Park             Metro Vancouver  Surrey               6722 &lt;NA&gt;             122A St         49.1     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb9-19" title="19"><span class="co">#&gt; 5 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver  Surrey               9314 &lt;NA&gt;             157 St          49.2     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="co">#&gt; 6 WHSE…               24 Bell Est… Local     Park             Metro Vancouver  Surrey               1884 &lt;NA&gt;             137A St         49.0     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb9-21" title="21"><span class="co">#&gt; # … with 6 more variables: LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></a></code></pre></div>
 <p>Since we are interested in only “Park” data we can subset our query:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(PARK_PRIMARY_USE <span class="op">==</span><span class="st"> "Park"</span>)</a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; ● Using collect() on this object will return 4371 features and 19 fields</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; ● Only the first six rows of the record are printed here</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; &lt;U+25CF&gt; Using collect() on this object will return 4373 features and 19 fields</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; --------------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></a>
 <a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></a>
 <a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; bbox:           xmin: 1227897 ymin: 464941.2 xmax: 1238850 ymax: 471178.6</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; bbox:           xmin: 1227676 ymin: 451450.3 xmax: 1234629 ymax: 467135.4</span></a>
 <a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt; epsg (SRID):    3005</span></a>
 <a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></a>
 <a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt; # A tibble: 6 x 20</span></a>
-<a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE</span></a>
-<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt; 1 WHSE…               37 Freedom … Local     Park            </span></a>
-<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt; 2 WHSE…               46 Barnston… Local     Park            </span></a>
-<a class="sourceLine" id="cb10-18" title="18"><span class="co">#&gt; 3 WHSE…               48 North Po… Local     Park            </span></a>
-<a class="sourceLine" id="cb10-19" title="19"><span class="co">#&gt; 4 WHSE…               49 North Su… Local     Park            </span></a>
-<a class="sourceLine" id="cb10-20" title="20"><span class="co">#&gt; 5 WHSE…               50 Northvie… Local     Park            </span></a>
-<a class="sourceLine" id="cb10-21" title="21"><span class="co">#&gt; 6 WHSE…               53 Bridgevi… Local     Park            </span></a>
-<a class="sourceLine" id="cb10-22" title="22"><span class="co">#&gt; # … with 15 more variables: REGIONAL_DISTRICT &lt;chr&gt;, MUNICIPALITY &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-23" title="23"><span class="co">#&gt; #   CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-24" title="24"><span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;,</span></a>
-<a class="sourceLine" id="cb10-25" title="25"><span class="co">#&gt; #   WEBSITE_URL &lt;chr&gt;, LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb10-26" title="26"><span class="co">#&gt; #   FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-27" title="27"><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [m]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY CIVIC_NUMBER CIVIC_NUMBER_SU… STREET_NAME LATITUDE LONGITUDE WHEN_UPDATED WEBSITE_URL</span></a>
+<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      </span></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt; 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver  Surrey              12586 &lt;NA&gt;             80 Ave          49.1     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt; 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver  Surrey              13750 &lt;NA&gt;             88 Ave          49.2     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb10-18" title="18"><span class="co">#&gt; 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver  Surrey               6722 &lt;NA&gt;             122A St         49.1     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb10-19" title="19"><span class="co">#&gt; 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver  Surrey               9314 &lt;NA&gt;             157 St          49.2     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb10-20" title="20"><span class="co">#&gt; 5 WHSE…               24 Bell Est… Local     Park             Metro Vancouver  Surrey               1884 &lt;NA&gt;             137A St         49.0     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb10-21" title="21"><span class="co">#&gt; 6 WHSE…               25 Bell Park Local     Park             Metro Vancouver  Surrey               1782 &lt;NA&gt;             136 St          49.0     -123. 2017-05-15Z  http://www…</span></a>
+<a class="sourceLine" id="cb10-22" title="22"><span class="co">#&gt; # … with 6 more variables: LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></a></code></pre></div>
 <p>Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full dataset. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the <code>districts</code> object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the <code>INTERSECTS</code> function is appropriate and since this is a last tuning step, we can call <code>collect</code> and assign a name to this object. These requests can sometimes take quite a long:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">districts_parks &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(PARK_PRIMARY_USE <span class="op">==</span><span class="st"> "Park"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(<span class="kw"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span>(districts)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(PARK_PRIMARY_USE <span class="op">==</span><span class="st"> "Park"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(<span class="kw"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span>(districts)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/collect.html">collect</a></span>()</a>
 <a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; Warning: The object is too large to perform exact spatial operations using bcdata.</span></a>
 <a class="sourceLine" id="cb11-6" title="6"><span class="co">#&gt;              To simplify the polygon, a bounding box was drawn around the polygon and all</span></a>
 <a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt;              features within the box will be returned. Options include further processing</span></a>
 <a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt;              with on the returned object or simplify the object.</span></a></code></pre></div>
 <p>Plotting both the filtered parks data and the district polygons reveals an important consideration when using <code>bcdata</code>:</p>
-<p><img src="efficiently-query-spatial-data-in-the-bc-data-catalogue_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<div class="figure">
+<img src="vignette-fig-district_parks-1.png" alt="plot of chunk district_parks"><p class="caption">plot of chunk district_parks</p>
+</div>
 <p>In this example, many parks not contained within the school districts are included in the <code>districts_parks</code> object. This is because rather than a full intersection, <code>bcdata</code> draws a bounding box around all the polygons that are doing the intersection (in this case <code>district</code>) and does the intersection based on that bounding box. This is a limitation imposed by the size of the object doing the geometric operation (in this case <code>district</code>) and the limits of the BC Data Catalogue. Drawing the bounding box illustrates this point:</p>
-<p><img src="efficiently-query-spatial-data-in-the-bc-data-catalogue_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<div class="figure">
+<img src="vignette-fig-bbox-1.png" alt="plot of chunk bbox"><p class="caption">plot of chunk bbox</p>
+</div>
 <p>We are left with two options to get around this problem. First, we can simply do some additional processing with the <code>sf</code> package. Specifically we can use a spatial join to assign parks into their respective district:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">districts_parks_join &lt;-<span class="st"> </span>districts_parks <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_join">st_join</a></span>(districts, <span class="dt">left =</span> <span class="ot">FALSE</span>) </a></code></pre></div>
-<p><img src="efficiently-query-spatial-data-in-the-bc-data-catalogue_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">districts_parks_join &lt;-<span class="st"> </span>districts_parks <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw">st_join</span>(districts, <span class="dt">left =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="figure">
+<img src="vignette-fig-dp_join-1.png" alt="plot of chunk dp_join"><p class="caption">plot of chunk dp_join</p>
+</div>
 <p>A second approach is to set an internal option (<code>bcdata.max_geom_pred_size</code>) and increase the threshold of when a bounding box is drawn. Options are set in R like this:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="st">"bcdata.max_geom_pred_size"</span> =<span class="st"> </span>{object size <span class="cf">in</span> bytes})</a></code></pre></div>
-<p>The value of <code>bcdata.max_geom_pred_size</code> is set consertivately so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="st">"bcdata.max_geom_pred_size"</span> =<span class="st"> </span>{object size <span class="cf">in</span> bytes})</a></code></pre></div>
+<p>The value of <code>bcdata.max_geom_pred_size</code> is set conservatively so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests.</p>
 <p>Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">districts_parks_join <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">area =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/geos_measures">st_area</a></span>(geometry)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_geometry">st_set_geometry</a></span>(<span class="ot">NULL</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(SCHOOL_DISTRICT_NAME) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/tidyverse">summarise</a></span>(<span class="dt">total_area =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(area)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(total_area)</a>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">districts_parks_join <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/mutate.html">mutate</a></span>(<span class="dt">area =</span> <span class="kw">st_area</span>(geometry)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw">st_set_geometry</span>(<span class="ot">NULL</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(SCHOOL_DISTRICT_NAME) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total_area =</span> <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(area)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="st">  </span><span class="kw">arrange</span>(total_area)</a>
 <a class="sourceLine" id="cb14-7" title="7"><span class="co">#&gt; # A tibble: 3 x 2</span></a>
 <a class="sourceLine" id="cb14-8" title="8"><span class="co">#&gt;   SCHOOL_DISTRICT_NAME total_area</span></a>
 <a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt;   &lt;chr&gt;                     [m^2]</span></a>
@@ -383,54 +354,102 @@
 <p>There are a couple of other functions in <code>bcdata</code> that are useful to know when working with spatial data from the catalogue. <code>bcdc_describe_feature</code> gives the column names, whether the column is selectable, and the column types in both R and on the remote server:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>)</a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="co">#&gt; # A tibble: 20 x 4</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="co">#&gt;    col_name               selectable remote_col_type         local_col_type</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt;    &lt;chr&gt;                  &lt;lgl&gt;      &lt;chr&gt;                   &lt;chr&gt;         </span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt;  1 id                     FALSE      xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt;  2 LOCAL_REG_GREENSPACE_… FALSE      xsd:decimal             numeric       </span></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt;  3 PARK_NAME              TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt;  4 PARK_TYPE              TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt;  5 PARK_PRIMARY_USE       TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt;  6 REGIONAL_DISTRICT      TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt;  7 MUNICIPALITY           TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-12" title="12"><span class="co">#&gt;  8 CIVIC_NUMBER           TRUE       xsd:decimal             numeric       </span></a>
-<a class="sourceLine" id="cb15-13" title="13"><span class="co">#&gt;  9 CIVIC_NUMBER_SUFFIX    TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-14" title="14"><span class="co">#&gt; 10 STREET_NAME            TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-15" title="15"><span class="co">#&gt; 11 LATITUDE               TRUE       xsd:decimal             numeric       </span></a>
-<a class="sourceLine" id="cb15-16" title="16"><span class="co">#&gt; 12 LONGITUDE              TRUE       xsd:decimal             numeric       </span></a>
-<a class="sourceLine" id="cb15-17" title="17"><span class="co">#&gt; 13 WHEN_UPDATED           TRUE       xsd:date                date          </span></a>
-<a class="sourceLine" id="cb15-18" title="18"><span class="co">#&gt; 14 WEBSITE_URL            TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-19" title="19"><span class="co">#&gt; 15 LICENCE_COMMENTS       TRUE       xsd:string              character     </span></a>
-<a class="sourceLine" id="cb15-20" title="20"><span class="co">#&gt; 16 FEATURE_AREA_SQM       TRUE       xsd:decimal             numeric       </span></a>
-<a class="sourceLine" id="cb15-21" title="21"><span class="co">#&gt; 17 FEATURE_LENGTH_M       TRUE       xsd:decimal             numeric       </span></a>
-<a class="sourceLine" id="cb15-22" title="22"><span class="co">#&gt; 18 OBJECTID               FALSE      xsd:decimal             numeric       </span></a>
-<a class="sourceLine" id="cb15-23" title="23"><span class="co">#&gt; 19 SE_ANNO_CAD_DATA       TRUE       xsd:hexBinary           numeric       </span></a>
-<a class="sourceLine" id="cb15-24" title="24"><span class="co">#&gt; 20 geometry               TRUE       gml:GeometryPropertyTy… sfc geometry</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">#&gt;    col_name                selectable remote_col_type          local_col_type</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt;    &lt;chr&gt;                   &lt;lgl&gt;      &lt;chr&gt;                    &lt;chr&gt;         </span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt;  1 id                      FALSE      xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt;  2 LOCAL_REG_GREENSPACE_ID FALSE      xsd:decimal              numeric       </span></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt;  3 PARK_NAME               TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt;  4 PARK_TYPE               TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt;  5 PARK_PRIMARY_USE        TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt;  6 REGIONAL_DISTRICT       TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt;  7 MUNICIPALITY            TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-12" title="12"><span class="co">#&gt;  8 CIVIC_NUMBER            TRUE       xsd:decimal              numeric       </span></a>
+<a class="sourceLine" id="cb15-13" title="13"><span class="co">#&gt;  9 CIVIC_NUMBER_SUFFIX     TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-14" title="14"><span class="co">#&gt; 10 STREET_NAME             TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-15" title="15"><span class="co">#&gt; 11 LATITUDE                TRUE       xsd:decimal              numeric       </span></a>
+<a class="sourceLine" id="cb15-16" title="16"><span class="co">#&gt; 12 LONGITUDE               TRUE       xsd:decimal              numeric       </span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="co">#&gt; 13 WHEN_UPDATED            TRUE       xsd:date                 date          </span></a>
+<a class="sourceLine" id="cb15-18" title="18"><span class="co">#&gt; 14 WEBSITE_URL             TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-19" title="19"><span class="co">#&gt; 15 LICENCE_COMMENTS        TRUE       xsd:string               character     </span></a>
+<a class="sourceLine" id="cb15-20" title="20"><span class="co">#&gt; 16 FEATURE_AREA_SQM        TRUE       xsd:decimal              numeric       </span></a>
+<a class="sourceLine" id="cb15-21" title="21"><span class="co">#&gt; 17 FEATURE_LENGTH_M        TRUE       xsd:decimal              numeric       </span></a>
+<a class="sourceLine" id="cb15-22" title="22"><span class="co">#&gt; 18 SHAPE                   TRUE       gml:GeometryPropertyType sfc geometry  </span></a>
+<a class="sourceLine" id="cb15-23" title="23"><span class="co">#&gt; 19 OBJECTID                FALSE      xsd:decimal              numeric       </span></a>
+<a class="sourceLine" id="cb15-24" title="24"><span class="co">#&gt; 20 SE_ANNO_CAD_DATA        TRUE       xsd:hexBinary            numeric</span></a></code></pre></div>
 <p>This is a helpful initial step to learn column names and types when you construct your query.</p>
-<p>Another useful function is <code><a href="../reference/show_query.html">show_query()</a></code> which provide information on the request issued to the remote server:</p>
+<p>Another useful function is <code><a href="../reference/show_query.html">show_query()</a></code> which provides information on the request issued to the remote server:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(PARK_PRIMARY_USE <span class="op">==</span><span class="st"> "Park"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(<span class="kw"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span>(districts)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(PARK_PRIMARY_USE <span class="op">==</span><span class="st"> "Park"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(<span class="kw"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span>(districts)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/show_query.html">show_query</a></span>()</a>
 <a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; Warning: The object is too large to perform exact spatial operations using bcdata.</span></a>
 <a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt;              To simplify the polygon, a bounding box was drawn around the polygon and all</span></a>
 <a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt;              features within the box will be returned. Options include further processing</span></a>
 <a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt;              with on the returned object or simplify the object.</span></a>
 <a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; &lt;url&gt;</span></a>
-<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs</span></a>
-<a class="sourceLine" id="cb16-11" title="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; &lt;body&gt;</span></a>
-<a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt;    SERVICE: WFS</span></a>
-<a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt;    VERSION: 2.0.0</span></a>
-<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt;    REQUEST: GetFeature</span></a>
-<a class="sourceLine" id="cb16-16" title="16"><span class="co">#&gt;    outputFormat: application/json</span></a>
-<a class="sourceLine" id="cb16-17" title="17"><span class="co">#&gt;    typeNames: WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP</span></a>
-<a class="sourceLine" id="cb16-18" title="18"><span class="co">#&gt;    SRSNAME: EPSG:3005</span></a>
-<a class="sourceLine" id="cb16-19" title="19"><span class="co">#&gt;    CQL_FILTER: (("PARK_PRIMARY_USE" = 'Park') AND (INTE...</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt; &lt;body&gt;</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="co">#&gt;    SERVICE: WFS</span></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt;    VERSION: 2.0.0</span></a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt;    REQUEST: GetFeature</span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt;    outputFormat: application/json</span></a>
+<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt;    typeNames: WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP</span></a>
+<a class="sourceLine" id="cb16-16" title="16"><span class="co">#&gt;    SRSNAME: EPSG:3005</span></a>
+<a class="sourceLine" id="cb16-17" title="17"><span class="co">#&gt;    CQL_FILTER: (("PARK_PRIMARY_USE" = 'Park') AND (INTERSECTS(SHAPE, POLYGON ((1126991 379215.8, 1528155 379215.8, 1528155 1224041, 1126991 1224041, 1126991 379215.8)))))</span></a>
+<a class="sourceLine" id="cb16-18" title="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb16-19" title="19"><span class="co">#&gt; &lt;full query url&gt;</span></a>
+<a class="sourceLine" id="cb16-20" title="20"><span class="co">#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%28%22PARK_PRIMARY_USE%22%20%3D%20%27Park%27%29%20AND%20%28INTERSECTS%28SHAPE%2C%20POLYGON%20%28%281126991%20379215.8%2C%201528155%20379215.8%2C%201528155%201224041%2C%201126991%201224041%2C%201126991%20379215.8%29%29%29%29%29</span></a></code></pre></div>
 <p>This output is what being created by the dplyr code outlined above.</p>
+</div>
+<div id="using-b-c--geographic-warehouse-bcgw-layer-names" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-b-c--geographic-warehouse-bcgw-layer-names" class="anchor"></a>Using B.C. Geographic Warehouse (BCGW) layer names</h2>
+<p>If you are familiar with the <a href="https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse">B.C. Geographic Warehouse (BCGW)</a>, you may already know the name of a layer that you want from the BCGW. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (as well as all other related functions) supports supplying that name directly. For example, the <a href="https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description">record for the B.C. airports layer</a> shows that the object name is <code>WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW</code>, and we can use that in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Look at the columns available:</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span>(<span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co">#&gt; # A tibble: 42 x 4</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt;    col_name                      selectable remote_col_type local_col_type</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co">#&gt;    &lt;chr&gt;                         &lt;lgl&gt;      &lt;chr&gt;           &lt;chr&gt;         </span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co">#&gt;  1 id                            FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co">#&gt;  2 CUSTODIAN_ORG_DESCRIPTION     FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="co">#&gt;  3 BUSINESS_CATEGORY_CLASS       FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="co">#&gt;  4 BUSINESS_CATEGORY_DESCRIPTION FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-10" title="10"><span class="co">#&gt;  5 OCCUPANT_TYPE_DESCRIPTION     FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-11" title="11"><span class="co">#&gt;  6 SOURCE_DATA_ID                FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-12" title="12"><span class="co">#&gt;  7 SUPPLIED_SOURCE_ID_IND        FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-13" title="13"><span class="co">#&gt;  8 AIRPORT_NAME                  FALSE      xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-14" title="14"><span class="co">#&gt;  9 DESCRIPTION                   TRUE       xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-15" title="15"><span class="co">#&gt; 10 PHYSICAL_ADDRESS              TRUE       xsd:string      character     </span></a>
+<a class="sourceLine" id="cb17-16" title="16"><span class="co">#&gt; # … with 32 more rows</span></a>
+<a class="sourceLine" id="cb17-17" title="17"></a>
+<a class="sourceLine" id="cb17-18" title="18"><span class="co"># Query the data with bcdc_query_geodata and filter + select:</span></a>
+<a class="sourceLine" id="cb17-19" title="19"><span class="kw"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-20" title="20"><span class="st">  </span><span class="kw"><a href="../reference/filter.html">filter</a></span>(DESCRIPTION <span class="op">==</span><span class="st"> "airport"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-21" title="21"><span class="st">  </span><span class="kw"><a href="../reference/select.html">select</a></span>(AIRPORT_NAME, LOCALITY, NUMBER_OF_RUNWAYS)</a>
+<a class="sourceLine" id="cb17-22" title="22"><span class="co">#&gt; Querying 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW' record</span></a>
+<a class="sourceLine" id="cb17-23" title="23"><span class="co">#&gt; &lt;U+25CF&gt; Using collect() on this object will return 37 features and 13 fields</span></a>
+<a class="sourceLine" id="cb17-24" title="24"><span class="co">#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here</span></a>
+<a class="sourceLine" id="cb17-25" title="25"><span class="co">#&gt; --------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb17-26" title="26"><span class="co">#&gt; Simple feature collection with 6 features and 13 fields</span></a>
+<a class="sourceLine" id="cb17-27" title="27"><span class="co">#&gt; geometry type:  POINT</span></a>
+<a class="sourceLine" id="cb17-28" title="28"><span class="co">#&gt; dimension:      XY</span></a>
+<a class="sourceLine" id="cb17-29" title="29"><span class="co">#&gt; bbox:           xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950</span></a>
+<a class="sourceLine" id="cb17-30" title="30"><span class="co">#&gt; epsg (SRID):    3005</span></a>
+<a class="sourceLine" id="cb17-31" title="31"><span class="co">#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</span></a>
+<a class="sourceLine" id="cb17-32" title="32"><span class="co">#&gt; # A tibble: 6 x 14</span></a>
+<a class="sourceLine" id="cb17-33" title="33"><span class="co">#&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID SUPPLIED_SOURCE… AIRPORT_NAME LOCALITY LATITUDE LONGITUDE NUMBER_OF_RUNWA… SEQUENCE_ID</span></a>
+<a class="sourceLine" id="cb17-34" title="34"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb17-35" title="35"><span class="co">#&gt; 1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      455            N                Terrace (No… Terrace      54.5     -129.                2         577</span></a>
+<a class="sourceLine" id="cb17-36" title="36"><span class="co">#&gt; 2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      464            N                Victoria In… North S…     48.6     -123.                3         733</span></a>
+<a class="sourceLine" id="cb17-37" title="37"><span class="co">#&gt; 3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      482            N                Nanaimo Air… Nanaimo      49.1     -124.                1         853</span></a>
+<a class="sourceLine" id="cb17-38" title="38"><span class="co">#&gt; 4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      483            N                Tofino/Long… Tofino       49.1     -126.                3         641</span></a>
+<a class="sourceLine" id="cb17-39" title="39"><span class="co">#&gt; 5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      484            N                Abbotsford … Abbotsf…     49.0     -122.                2        1039</span></a>
+<a class="sourceLine" id="cb17-40" title="40"><span class="co">#&gt; 6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports      487            N                Boundary Ba… Delta        49.1     -123.                2         827</span></a>
+<a class="sourceLine" id="cb17-41" title="41"><span class="co">#&gt; # … with 1 more variable: geometry &lt;POINT [m]&gt;</span></a></code></pre></div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -440,6 +459,7 @@
       <li><a href="#school-district-data">School District Data</a></li>
       <li><a href="#greenspaces-data">Greenspaces Data</a></li>
       <li><a href="#additional-useful-functions">Additional Useful Functions</a></li>
+      <li><a href="#using-b-c--geographic-warehouse-bcgw-layer-names">Using B.C. Geographic Warehouse (BCGW) layer names</a></li>
       </ul>
 </div>
       </div>
@@ -447,17 +467,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

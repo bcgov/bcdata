@@ -18,23 +18,10 @@ addons:
       - libgdal-dev
 
 r:
-  - oldrel
-  - release
   - devel
 
 os:
   - linux
-  - osx
-
-matrix:
-  fast_finish: true
-  allow_failures:
-    - r: devel
-      os: osx
-    - r: release
-      os: osx
-    - r: oldrel
-      os: osx
 
 notifications:
   email:

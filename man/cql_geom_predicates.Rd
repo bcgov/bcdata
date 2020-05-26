@@ -10,10 +10,8 @@
 \alias{WITHIN}
 \alias{CONTAINS}
 \alias{OVERLAPS}
-\alias{RELATE}
 \alias{BBOX}
 \alias{DWITHIN}
-\alias{BEYOND}
 \title{CQL Geometry Predicates}
 \usage{
 EQUALS(geom)
@@ -32,27 +30,26 @@ CONTAINS(geom)
 
 OVERLAPS(geom)
 
-RELATE(geom, pattern)
-
 BBOX(coords, crs = NULL)
 
-DWITHIN(geom, distance, units = c("meters", "feet", "statute miles",
-  "nautical miles", "kilometers"))
-
-BEYOND(geom, distance, units = c("meters", "feet", "statute miles",
-  "nautical miles", "kilometers"))
+DWITHIN(
+  geom,
+  distance,
+  units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")
+)
 }
 \arguments{
-\item{geom}{an sf/sfc/sfg object}
+\item{geom}{an \code{sf}/\code{sfc}/\code{sfg} or \code{bbox} object (from the \code{sf} package)}
 
-\item{pattern}{spatial relationship specified by a DE-9IM matrix pattern.
-A DE-9IM pattern is a string of length 9 specified using the characters
-\code{*TF012}. Example: \code{'1*T***T**'}}
+\item{coords}{the coordinates of the bounding box as four-element numeric
+vector \code{c(xmin, ymin, xmax, ymax)}, a \code{bbox} object from the \code{sf}
+package (the result of running \code{sf::st_bbox()} on an \code{sf} object), or
+an \code{sf} object which then gets converted to a bounding box on the fly.}
 
-\item{coords}{the coordinates of the bounding box.}
-
-\item{crs}{(Optional) A string containing an SRS code
-(For example, 'EPSG:1234'. The default is to use the CRS of the queried layer)}
+\item{crs}{(Optional) A numeric value or string containing an SRS code. If
+\code{coords} is a \code{bbox} object with non-empty crs, it is taken from that.
+(For example, \code{'EPSG:3005'} or just \code{3005}. The default is to use the CRS of
+the queried layer)}
 
 \item{distance}{numeric value for distance tolerance}
 
@@ -60,7 +57,7 @@ A DE-9IM pattern is a string of length 9 specified using the characters
 \code{"feet"}, \code{"meters"}, \code{"statute miles"}, \code{"nautical miles"}, \code{"kilometers"}}
 }
 \value{
-a CQL expression using the bounding box of the geom
+a CQL expression to be passed on to the WFS call
 }
 \description{
 Functions to construct a CQL expression to be used

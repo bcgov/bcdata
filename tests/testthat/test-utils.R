@@ -1,19 +1,26 @@
+# Copyright 2019 Province of British Columbia
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
+
 context("test-utils")
 
 test_that("check_geom_col_names works", {
-  skip_if_net_down()
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "GetFeature",
-    outputFormat = "application/json",
-    typeNames = "bc-airports",
-    CQL_FILTER = "DWITHIN({geom_col}, foobar)")
-
-  ap <- bcdc_get_record("bc-airports")
-  new_query <- specify_geom_name(ap, query_list[["CQL_FILTER"]])
-  expect_equal(as.character(new_query), "DWITHIN(SHAPE, foobar)")
-  expect_is(new_query, "sql")
+  col_df_list <- lapply(gml_types(), function(x) {
+    data.frame(col_name = "SHAPE", remote_col_type = x)
+  })
+  lapply(col_df_list, function(x) {
+    new_query <- specify_geom_name(x, "DWITHIN({geom_col}, foobar)")
+    expect_equal(as.character(new_query), "DWITHIN(SHAPE, foobar)")
+    expect_is(new_query, "sql")
+  })
 })
 
 test_that("get_record_warn_once warns once and only once", {
@@ -24,10 +31,28 @@ test_that("get_record_warn_once warns once and only once", {
 })
 
 test_that("pagination_sort_col works", {
-  expect_equal(pagination_sort_col("76b1b7a3-2112-4444-857a-afccf7b20da8"),
-               "SEQUENCE_ID")
-  expect_equal(pagination_sort_col("2ebb35d8-c82f-4a17-9c96-612ac3532d55"),
-               "OBJECT_ID")
-  expect_equal(pagination_sort_col("634ee4e0-c8f7-4971-b4de-12901b0b4be6"),
+  cols_df <- data.frame(
+    col_name = c("foo", "OBJECTID", "OBJECT_ID", "SEQUENCE_ID", "FEATURE_ID"),
+    stringsAsFactors = FALSE
+  )
+  expect_equal(pagination_sort_col(cols_df),
                "OBJECTID")
+  expect_equal(pagination_sort_col(cols_df[-2, , drop = FALSE]),
+               "OBJECT_ID")
+  expect_equal(pagination_sort_col(cols_df[c(-2, -3), , drop = FALSE]),
+               "SEQUENCE_ID")
+  expect_warning(
+    expect_equal(pagination_sort_col(cols_df[1, , drop = FALSE]),
+               "foo")
+  )
+})
+
+test_that("is_whse_object_name works", {
+  expect_true(is_whse_object_name("BCGW_FOO.BAR_BAZ"))
+  expect_true(is_whse_object_name("BCGW_FOO1.BAR_BAZ"))
+  expect_true(is_whse_object_name("BCGW_FOO6.BAR8_BAZ"))
+  expect_true(is_whse_object_name("BCGW_FOO.BAR9_BAZ"))
+  expect_false(is_whse_object_name("bcgw_foo.bar_baz"))
+  expect_false(is_whse_object_name("foo"))
+  expect_false(is_whse_object_name(structure(list(), class = "bcdc_record")))
 })

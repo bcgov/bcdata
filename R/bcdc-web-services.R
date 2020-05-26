@@ -19,7 +19,7 @@
 #' that the request will take quite a while.
 #'
 #' Note that this function doesn't actually return the data, but rather an
-#' object of class `bcdc_promise``, which includes all of the information
+#' object of class `bcdc_promise`, which includes all of the information
 #' required to retrieve the requested data. In order to get the actual data as
 #' an `sf` object, you need to run [collect()] on the `bcdc_promise`. This
 #' allows further refining the call to `bcdc_query_geodata()` with [filter()]
@@ -28,7 +28,7 @@
 #'
 #' @inheritParams bcdc_get_data
 #' @param crs the epsg code for the coordinate reference system. Defaults to
-#'   `3005` (B.C. Albers). See https://epsgi.io.
+#'   `3005` (B.C. Albers). See https://epsg.io.
 #'
 #' @return A `bcdc_promise` object. This object includes all of the information
 #'   required to retrieve the requested data. In order to get the actual data as
@@ -38,22 +38,21 @@
 #'
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #' # Returns a bcdc_promise, which can be further refined using filter/select:
 #' bcdc_query_geodata("bc-airports", crs = 3857)
 #'
-#' To obtain the actual data as an sf object, collect() must be called:
+#' # To obtain the actual data as an sf object, collect() must be called:
 #' bcdc_query_geodata("bc-airports", crs = 3857) %>%
 #'   filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
 #'   collect()
 #'
 #' bcdc_query_geodata("ground-water-wells") %>%
 #'   filter(OBSERVATION_WELL_NUMBER == 108) %>%
-#'   select(WELL_TAG_NUMBER, WATERSHED_CODE) %>%
+#'   select(WELL_TAG_NUMBER, INTENDED_WATER_USE) %>%
 #'   collect()
 #'
 #' ## A moderately large layer
-
 #' bcdc_query_geodata("bc-environmental-monitoring-locations")
 #' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE")
@@ -61,11 +60,14 @@
 #'
 #' ## A very large layer
 #' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#'
+#' ## Using a BCGW name
+#' bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #' }
 #'
 #' @export
 bcdc_query_geodata <- function(record, crs = 3005) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
   UseMethod("bcdc_query_geodata")
 }
 
@@ -77,6 +79,37 @@ bcdc_query_geodata.default <- function(record, crs = 3005) {
 
 #' @export
 bcdc_query_geodata.character <- function(record, crs = 3005) {
+
+  if (length(record) != 1) {
+    stop("Only one record my be queried at a time.", call. = FALSE)
+  }
+
+  # Fist catch if a user has passed the name of a warehouse object directly,
+  # then can skip all the record parsing and make the API call directly
+  if (is_whse_object_name(record)) {
+    ## Parameters for the API call
+    query_list <- make_query_list(layer_name = record, crs = crs)
+
+    ## Drop any NULLS from the list
+    query_list <- compact(query_list)
+
+    ## GET and parse data to sf object
+    cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+
+    cols_df <- feature_helper(record)
+
+    return(
+      as.bcdc_promise(list(query_list = query_list, cli = cli, record = NULL,
+                           cols_df = cols_df))
+    )
+  }
+
+  if (grepl("/resource/", record)) {
+    #  A full url was passed including record and resource compenents.
+    # Grab the resource id and strip it off the url
+    record <- gsub("/resource/.+", "", record)
+  }
+
   obj <- bcdc_get_record(record)
 
   bcdc_query_geodata(obj, crs)
@@ -90,15 +123,12 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
     )
   }
 
+  layer_name <- basename(dirname(
+    record$resource_df$url[record$resource_df$format == "wms"]
+  ))
+
   ## Parameters for the API call
-  query_list <- list(
-    SERVICE = "WFS",
-    VERSION = "2.0.0",
-    REQUEST = "GetFeature",
-    outputFormat = "application/json",
-    typeNames = record$layer_name,
-    SRSNAME = paste0("EPSG:", crs)
-  )
+  query_list <- make_query_list(layer_name = layer_name, crs = crs)
 
   ## Drop any NULLS from the list
   query_list <- compact(query_list)
@@ -106,7 +136,10 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
 
-  as.bcdc_promise(list(query_list = query_list, cli = cli, obj = record))
+  cols_df <- feature_helper(query_list$typeNames)
+
+  as.bcdc_promise(list(query_list = query_list, cli = cli, record = record,
+                       cols_df = cols_df))
 }
 
 #' Get map from the B.C. Web Service
@@ -115,12 +148,15 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' @inheritParams bcdc_get_data
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
 #' bcdc_preview("points-of-well-diversion-applications")
+#'
+#' # Using BCGW name
+#' bcdc_preview("WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP")
 #' }
 #' @export
-bcdc_preview <- function(record) {
+bcdc_preview <- function(record) { # nocov start
   if (!has_internet()) stop("No access to internet", call. = FALSE)
   UseMethod("bcdc_preview")
 }
@@ -133,33 +169,51 @@ bcdc_preview.default <- function(record) {
 
 #' @export
 bcdc_preview.character <- function(record) {
-  bcdc_preview(bcdc_get_record(record))
+
+  if (is_whse_object_name(record)) {
+    make_wms(record)
+  } else {
+    bcdc_preview(bcdc_get_record(record))
+  }
 }
 
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
 
+  make_wms(record$layer_name)
+
+}
+
+make_wms <- function(x){
   wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
-
   wms_options <- leaflet::WMSTileOptions(format = "image/png",
-                          transparent = TRUE,
-                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
-
+                                         transparent = TRUE,
+                                         attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
   wms_legend <- glue::glue("{wms_url}?request=GetLegendGraphic&
              format=image%2Fpng&
              width=20&
              height=20&
-             layer=pub%3A{record$layer_name}")
-
+             layer=pub%3A{x}")
 
   leaflet::leaflet() %>%
     leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
-                     options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
+                              options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
     leaflet::addWMSTiles(wms_url,
-                layers=glue::glue("pub:{record$layer_name}"),
-                options = wms_options) %>%
+                         layers=glue::glue("pub:{x}"),
+                         options = wms_options) %>%
     leaflet.extras::addWMSLegend(uri = wms_legend) %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
+} # nocov end
 
+
+make_query_list <- function(layer_name, crs) {
+  list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "GetFeature",
+    outputFormat = "application/json",
+    typeNames = layer_name,
+    SRSNAME = paste0("EPSG:", crs)
+  )
 }
 

@@ -14,8 +14,8 @@
 #'
 #' This function retrieves bcdata specific options that can be set. These options can be set
 #' using `option({name of the option} = {value of the option})`. The default options are purposefully
-#' set conversatively to hopefully ensure successful requests. Resetting these options may result in
-#' failed calls to the data catalogue. Options in R are reset everytime R is re-started. See examples for
+#' set conservatively to hopefully ensure successful requests. Resetting these options may result in
+#' failed calls to the data catalogue. Options in R are reset every time R is re-started. See examples for
 #' addition ways to restore your initial state.
 #'
 #' `bcdata.max_geom_pred_size` is the maximum size of an object used for a geometric operation. Objects
@@ -30,7 +30,6 @@
 #' it is advisable to lower the chunk limit. Chunks must be less than 10000.
 #'
 #' @examples
-#' \dontrun{
 #' ## Save initial conditions
 #' original_options <- options()
 #'
@@ -45,8 +44,6 @@
 #' ## Reset initial conditions
 #' options(original_options)
 #'
-#' }
-#'
 #' @export
 
 bcdc_options <- function() {
@@ -54,7 +51,6 @@ bcdc_options <- function() {
     ifelse(is.null(x), NA, as.numeric(x))
   }
 
-  cat_rule("bcdc options")
   dplyr::tribble(
     ~ option, ~ value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
@@ -63,7 +59,7 @@ bcdc_options <- function() {
 }
 
 check_chunk_limit <- function(){
-  chunk_value <- options("bcdata.chunk_limit")$chunk_limit
+  chunk_value <- options("bcdata.chunk_limit")$bcdata.chunk_limit
 
   if(!is.null(chunk_value) && chunk_value >= 10000){
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit"), call. = FALSE)

@@ -13,5 +13,9 @@
 bcdata_env <- new.env(parent = emptyenv())
 
 .onLoad <- function(...) {
- assign("named_get_record_warned", FALSE, envir = bcdata_env)
+ assign("named_get_record_warned", FALSE, envir = bcdata_env) # nocov
 }
+
+# Define bcdc_sf as a subclass of sf so that it works
+# with S4 methods for sf (eg mapview)
+methods::setOldClass(c("bcdc_sf", "sf"))

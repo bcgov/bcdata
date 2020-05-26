@@ -1,0 +1,23 @@
+citHeader("To cite bcdata in publications please use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "bcdata",
+  author   =  c(person(given = "Andy",
+             family = "Teucher",
+             role = c("aut", "cre"),
+             email = "andy.teucher@gov.bc.ca"),
+      person(given = "Sam",
+             family = "Albers",
+             role = c("aut", "ctb"),
+             email = "sam.albers@gov.bc.ca"),
+      person(given = "Stephanie",
+             family = "Hazlitt",
+             role = c("aut", "ctb"),
+             email = "stephanie.hazlitt@gov.bc.ca"),
+      person(given = "Province of British Columbia",
+             role = "cph")),
+  url      = "https://github.com/bcgov/bcdata",
+  year     =  2019,
+  textVersion = NULL
+)

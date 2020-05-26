@@ -4,13 +4,14 @@
 \alias{bcdc_get_data}
 \title{Download and read a resource from a B.C. Data Catalogue record}
 \usage{
-bcdc_get_data(record, resource = NULL, ...)
+bcdc_get_data(record, resource = NULL, verbose = TRUE, ...)
 }
 \arguments{
-\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or ID of a resource (or the URL).
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()}),
+a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+Warehouse (BCGW) name.
 
-It is advised to use the permament ID for a record rather than the
+It is advised to use the permanent ID for a record or the BCGW name rather than the
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
@@ -20,11 +21,15 @@ in your .Rprofile file so the option persists across sessions.}
 \item{resource}{optional argument used when there are multiple data files
 within the same record. See examples.}
 
+\item{verbose}{When more than one resource is available for a record,
+should extra information about those resources be printed to the console?
+Default \code{TRUE}}
+
 \item{...}{arguments passed to other functions. Tabular data is passed to a function to handle
-the import based on the file extension. \code{bcdc_read_functions()} provides details on which functions
+the import based on the file extension. \code{\link[=bcdc_read_functions]{bcdc_read_functions()}} provides details on which functions
 handle the data import. You can then use this information to look at the help pages of those functions.
 See the examples for a workflow that illustrates this process.
-For spatial Web Service data the \code{...} arguments are passed to \code{bcdc_query_geodata()}.}
+For spatial Web Service data the \code{...} arguments are passed to \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}}.}
 }
 \value{
 An object of a type relevant to the resource (usually a tibble or an sf object)
@@ -33,7 +38,7 @@ An object of a type relevant to the resource (usually a tibble or an sf object)
 Download and read a resource from a B.C. Data Catalogue record
 }
 \examples{
-\dontrun{
+\donttest{
 # Using the record and resource ID:
 bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
@@ -43,22 +48,29 @@ bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
 record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
 bcdc_get_data(record)
 
+# Using a BCGW name
+bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+
 ## Example of correcting import problems
 
 ## Some initial problems reading in the data
 bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
 
 ## From bcdc_get_record we realize that the data is in xlsx format
-bcdc_get_record('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+bcdc_get_record('8620ce82-4943-43c4-9932-40730a0255d6')
 
 ## bcdc_read_functions let's us know that bcdata
 ## uses readxl::read_excel to import xlsx files
 bcdc_read_functions()
 
-## If you read the help page for readxl::read_excel,
-## it seems likely that we need to skip the first row:
-bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4', skip = 1)
+## bcdata let's you know that this resource has
+## multiple worksheets
+bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6')
 
+## we can control what is read in from an excel file
+## using arguments from readxl::read_excel
+
+bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Regional Districts')
 }
 
 }

@@ -1,0 +1,103 @@
+on:
+  push: ~
+  pull_request: ~
+  schedule:
+    - cron: '30 4 * * 1'
+
+name: R-CMD-check
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - { os: windows-latest, r: 'release', args: "'--no-manual'"}
+        - { os: macOS-latest,   r: 'release', args: "'--test-dontrun'", sf_args: "--with-proj-lib=/usr/local/lib/"}
+        - { os: macOS-latest,   r: 'devel',   args: "c('--no-manual', '--test-dontrun')", sf_args: "--with-proj-lib=/usr/local/lib/"}
+        - { os: ubuntu-16.04,   r: '3.5',     args: "'--no-manual'"}
+        - { os: ubuntu-16.04,   r: 'oldrel',  args: "'--no-manual'"}
+        - { os: ubuntu-16.04,   r: 'release', args: "'--no-manual'"}
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      CRAN: ${{ matrix.config.cran }}
+      cache-version: v2
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.config.r }}
+
+      - uses: r-lib/actions/setup-pandoc@master
+
+      - uses: r-lib/actions/setup-tinytex@master
+        if: contains(matrix.config.args, 'no-manual') == false
+
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ env.cache-version }}-${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
+          restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-${{ matrix.config.r }}-
+
+      - name: install macOS system dependencies
+        if: runner.os == 'macOS'
+        continue-on-error: true
+        run: |
+          brew install pkg-config gdal udunits
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
+
+          # install spatial dependencies
+          sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt update
+          sudo apt install \
+            libudunits2-dev \
+            libgdal-dev \
+            libgeos-dev \
+            libproj-dev
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
+          install.packages("rcmdcheck")
+        shell: Rscript {0}
+
+      - name: Check
+        run: rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }}, error_on = 'warning', check_dir = 'check')
+        shell: Rscript {0}
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
+
+      - name: Test coverage
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
+        run: |
+          remotes::install_github("r-lib/covr@gh-actions")
+          covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")
+        shell: Rscript {0}

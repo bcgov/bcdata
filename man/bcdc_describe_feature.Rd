@@ -2,27 +2,40 @@
 % Please edit documentation in R/describe-feature.R
 \name{bcdc_describe_feature}
 \alias{bcdc_describe_feature}
-\title{Describe a Web Service feature}
+\title{Describe the attributes of a Web Service feature}
 \usage{
 bcdc_describe_feature(record)
 }
 \arguments{
-\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or ID of a resource (or the URL).
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()}),
+a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+Warehouse (BCGW) name.
 
-It is advised to use the permament ID for a record rather than the
+It is advised to use the permanent ID for a record or the BCGW name rather than the
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
 \code{options("silence_named_get_data_warning" = TRUE)} - which you can set
 in your .Rprofile file so the option persists across sessions.}
 }
+\value{
+\code{bcdc_describe_features} returns a tibble describing the attributes of a B.C. Data Catalogue record.
+The tibble returns the following columns:
+\itemize{
+\item col_name: attributes of the feature
+\item sticky: whether a column can be separated from the record in a Web Service call via the \code{dplyr::select} method
+\item remote_col_type: class of what is return by the web feature service
+\item local_col_type: the column class in R
+}
+}
 \description{
-Describe the columns from a Web Service feature. The column name, whether a column can be
-separated from the record in Web Service (nillable) and the type of column are returned.
-This can be a helpful tool to examine a layer before issuing a query with \code{bcdc_query_geodata}
+Describe the attributes of column of a record accessed through the Web Service.
+This can be a useful tool to examine a layer before issuing a query with \code{bcdc_query_geodata}.
 }
 \examples{
+\donttest{
  bcdc_describe_feature("bc-airports")
+ bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+}
 
 }

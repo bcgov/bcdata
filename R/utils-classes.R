@@ -17,11 +17,18 @@ as.bcdc_promise <- function(res) {
   )
 }
 
-as.bcdc_sf <- function(x, query_list, url) {
+as.bcdc_sf <- function(x, query_list, url, full_url) {
   structure(x,
             class = c("bcdc_sf", setdiff(class(x), "bcdc_sf")),
             query_list = query_list,
-            url = url)
+            url = url, full_url = full_url)
+}
+
+
+as.bcdc_query <- function(x) {
+  structure(x,
+            class = c("bcdc_query", setdiff(class(x), "bcdc_query"))
+  )
 }
 
 
@@ -35,40 +42,51 @@ print.bcdc_promise <- function(x, ...) {
   query_list <- c(x$query_list, COUNT = 6)
   cli <- x$cli
   cc <- cli$post(body = query_list, encode = "form")
-  cc$raise_for_status()
+
+  catch_wfs_error(cc)
 
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
-  name <- paste0("'", x[["obj"]][["name"]], "'")
+
+  if (!is.null(x$query_list$count)) {
+    # head or tail have updated the count
+    number_of_records <- x$query_list$count
+  }
+
   parsed <- bcdc_read_sf(cc$parse("UTF-8"))
   fields <- ncol(parsed) - 1
 
+  # Check if this was called using a whse name directly without going
+  # through a catalogue record so don't have this info
+  name <- ifelse(is_record(x$record),
+                 paste0("'", x[["record"]][["name"]], "'"),
+                 paste0("'", x[["query_list"]][["typeNames"]], "'"))
   cat_line(glue::glue("Querying {col_red(name)} record"))
+
   cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
-                 "and {col_green(fields)} fields"))
-  cat_bullet("Only the first six rows of the record are printed here")
+                        "and {col_green(fields)} fields"))
+  cat_bullet("At most six rows of the record are printed here")
   cat_rule()
   print(parsed)
-
-
+  invisible(x)
 }
 
 #' @export
 print.bcdc_record <- function(x, ...) {
-  cat("B.C. Data Catalogue Record:\n   ", x$title, "\n")
-  cat("\nName:", x$name, "(ID:", x$id, ")")
-  cat("\nPermalink:", paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
-  cat("\nSector:", x$sector)
-  cat("\nLicence:", x$license_title)
-  cat("\nType:", x$type)
-  cat("\nLast Updated:", x$record_last_modified, "\n")
-  cat("\nDescription:\n")
-  cat(paste0("    ", strwrap(x$notes, width = 85), collapse = "\n"), "\n")
+  cat(cli::col_blue(cli::style_bold("B.C. Data Catalogue Record:")), x$title, "\n")
+  cat(cli::col_blue(cli::style_italic("\nName:")), x$name, "(ID:", x$id, ")")
+  cat(cli::col_blue(cli::style_italic("\nPermalink:")), paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
+  cat(cli::col_blue(cli::style_italic("\nSector:")), x$sector)
+  cat(cli::col_blue(cli::style_italic("\nLicence:")), x$license_title)
+  cat(cli::col_blue(cli::style_italic("\nType:")), x$type)
+  cat(cli::col_blue(cli::style_italic("\nLast Updated:")), x$record_last_modified, "\n")
+  cat(cli::col_blue(cli::style_italic("\nDescription:")), paste0(strwrap(x$notes, width = 85), collapse = "\n"), "\n")
 
-  cat("\nResources: (", nrow(x$resource_df), ")\n")
+  cat(cli::col_blue(cli::style_italic("\nResources: (", nrow(bcdc_tidy_resources(x)), ")\n")))
+  print(bcdc_tidy_resources(x))
 
-  for (r in seq_len(nrow(x$resource_df))) {
-    record_print_helper(x$resource_df[r, ], r, print_avail = TRUE)
-  }
+  cat(cli::col_blue("\nYou can access the 'Resources' data frame using bcdc_tidy_resources()\n\n"))
+
+  invisible(x)
 }
 
 record_print_helper <- function(r, n, print_avail = FALSE){
@@ -101,6 +119,14 @@ print.bcdc_recordlist <- function(x, ...) {
   cat("\nTitles:\n")
   x <- purrr::set_names(x, NULL)
   cat(paste(purrr::imap(x[1:n_print], ~ {
+
+    if (!nrow(bcdc_tidy_resources(x[[.y]]))) {
+      return(paste0(.y, ": ",purrr::pluck(.x, "title"),
+                    col_red("\n This record has no resources. bcdata will not be able to access any data."),
+                    "\n ID: ", purrr::pluck(.x, "id"),
+                    "\n Name: ", purrr::pluck(.x, "name")))
+    }
+
     paste0(
       .y, ": ",purrr::pluck(.x, "title"),
       " (",
@@ -112,8 +138,26 @@ print.bcdc_recordlist <- function(x, ...) {
   }), collapse = "\n"), "\n")
   cat("\nAccess a single record by calling bcdc_get_record(ID)
       with the ID from the desired record.")
+  invisible(x)
 }
 
+#' @export
+print.bcdc_query <- function(x, ...) {
+
+  cat_line("<url>")
+  if (length(x$url) > 1) {
+    for(i in seq_along(x$url)){
+      cat_line(glue::glue("Request {i} of {length(x$url)} \n{x$url[i]} \n"))
+    }
+  }
+
+  cat_line("<body>")
+  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
+  cat_line()
+  cat_line("<full query url>")
+  cat_line(x$full_url)
+  invisible(x)
+}
 
 
 # dplyr methods -----------------------------------------------------------
@@ -132,8 +176,9 @@ print.bcdc_recordlist <- function(x, ...) {
 #' If you know `CQL` and want to write a `CQL` query directly, write it enclosed
 #' in quotes, wrapped in the [CQL()] function. e.g., `CQL("ID = '42'")`
 #'
+#' @describeIn filter filter.bcdc_promise
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
 #'     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
 #'     collect()
@@ -147,7 +192,7 @@ filter.bcdc_promise <- function(.data, ...) {
 
   current_cql = cql_translate(...)
   ## Change CQL query on the fly if geom is not GEOMETRY
-  current_cql = specify_geom_name(.data$obj, current_cql)
+  current_cql = specify_geom_name(.data$cols_df, current_cql)
 
   # Add cql filter statement to any existing cql filter statements.
   # ensure .data$query_list$CQL_FILTER is class sql even if NULL, so
@@ -156,7 +201,8 @@ filter.bcdc_promise <- function(.data, ...) {
                                    current_cql,
                                    drop_null = TRUE)
 
-  as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli, obj = .data$obj))
+  as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli,
+                       record = .data$record, cols_df = .data$cols_df))
 }
 
 #' Select columns from Web Service call
@@ -170,11 +216,13 @@ filter.bcdc_promise <- function(.data, ...) {
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
 #'
+#' @describeIn select select.bcdc_promise
+#'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' feature_spec <- bcdc_describe_feature("bc-airports")
 #' ## Columns that can selected:
-#' feature_spec[feature_spec$nillable == TRUE,]
+#' feature_spec[feature_spec$sticky == TRUE,]
 #'
 #' ## Select columns
 #' bcdc_query_geodata("bc-airports") %>%
@@ -185,34 +233,98 @@ filter.bcdc_promise <- function(.data, ...) {
 #'   select(LOCALITY)
 #' }
 #'
+#'
 #'@export
 select.bcdc_promise <- function(.data, ...){
-  dots <- rlang::exprs(...)
 
+  ## Eventually have to migrate to tidyselect::eval_select
+  ## https://community.rstudio.com/t/evaluating-using-rlang-when-supplying-a-vector/44693/10
+  cols_to_select <- tidyselect::vars_select(.data$cols_df$col_name, ...)
+
+  ## id is always added in. web request doesn't like asking for it twice
+  cols_to_select <- remove_id_col(cols_to_select)
   ## Always add back in the geom
-  cols_to_select <- paste(geom_col_name(.data$obj), paste0(dots, collapse = ","), sep = ",")
+  cols_to_select <- paste(geom_col_name(.data$cols_df), paste0(cols_to_select, collapse = ","), sep = ",")
 
   query_list <- c(.data$query_list, propertyName = cols_to_select)
 
-  as.bcdc_promise(list(query_list = query_list, cli = .data$cli, obj = .data$obj))
+  as.bcdc_promise(list(query_list = query_list, cli = .data$cli,
+                       record = .data$record, cols_df = .data$cols_df))
 
+}
+
+#' @importFrom utils head
+#' @export
+head.bcdc_promise <- function(x, n = 6L, ...) {
+  sorting_col <- pagination_sort_col(x$cols_df)
+  x$query_list <- c(
+    x$query_list,
+    count = n,
+    sortBy = sorting_col
+  )
+  x
+}
+
+#' @importFrom utils tail
+#' @export
+tail.bcdc_promise <- function(x, n = 6L, ...) {
+  number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
+  sorting_col <- pagination_sort_col(x$cols_df)
+  x$query_list <- c(
+    x$query_list,
+    count = n,
+    sortBy = sorting_col,
+    startIndex = number_of_records - n
+  )
+  x
+}
+
+
+#' Throw an informative error when attempting mutate on a Web Service call
+#'
+#' The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
+#' this function exists solely to generate an informative error that suggests an alternative
+#' approach to use mutate with bcdata
+#'
+#' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
+#' @param ... One or more unquoted expressions separated by commas. See details.
+#' @describeIn mutate mutate.bcdc_promise
+#' @examples
+#' \dontrun{
+#'
+#' ## Mutate columns
+#' bcdc_query_geodata("bc-airports") %>%
+#'   mutate(LATITUDE * 100)
+#' }
+#'
+#'@export
+mutate.bcdc_promise <- function(.data, ...){
+  dots <- rlang::exprs(...)
+
+  stop(glue::glue(
+    "You must type collect() before using mutate() on a WFS. \nAfter using collect() add this mutate call::
+    mutate({dots}) "), call. = FALSE)
 }
 
 
 #' Force collection of Web Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
-#' This will retrieve an sf object into R.
+#' This will retrieve an sf object into R. The `as_tibble()` function can be used
+#' interchangeably with `collect` which matches `dbplyr` behaviour.
 #'
 #' @param x object of class bcdc_promise
 #' @inheritParams collect
-#' @describeIn collect collect.bcdc_promise
+#' @rdname collect-methods
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_query_geodata("bc-airports") %>%
 #'   collect()
+#'
+#' bcdc_query_geodata("bc-airports") %>%
+#'   as_tibble()
 #' }
 #'
 collect.bcdc_promise <- function(x, ...){
@@ -228,15 +340,18 @@ collect.bcdc_promise <- function(x, ...){
 
   if (number_of_records < 10000) {
     cc <- tryCatch(cli$post(body = query_list, encode = "form"),
-             error = function(e) {
-               stop("The BC data catalogue experienced issues with this request.
+                   error = function(e) {
+                     stop("There was an issue processing this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    status_failed <- cc$status_code >= 300
+    catch_wfs_error(cc)
     url <- cc$url
+    full_url <- cli$url_fetch(query = query_list)
   } else {
+    # tests that cover this are skipped due to large size
+    # nocov start
     message("This record requires pagination to complete the request.")
-    sorting_col <- pagination_sort_col(x$obj$id)
+    sorting_col <- pagination_sort_col(x$cols_df)
 
     query_list <- c(query_list, sortby = sorting_col)
 
@@ -256,27 +371,28 @@ collect.bcdc_promise <- function(x, ...){
 
     tryCatch(cc$post(body = query_list, encode = "form"),
              error = function(e) {
-               stop("The BC data catalogue experienced issues with this request.
+               stop("There was an issue processing this request.
                      Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
 
-    url <- cc$url_fetch(query = query_list)
+    url <- cc$url
+    full_url <- cc$url_fetch(query = query_list)
 
-    status_failed <- any(cc$status_code() >= 300)
-  }
-
-  if (status_failed) {
-    ## TODO: This error message could be more informative
-    stop("The BC data catalogue experienced issues with this request",
-         call. = FALSE
-    )
+    catch_wfs_error(cc)
+    # nocov end
   }
 
   txt <- cc$parse("UTF-8")
 
-  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url)
+  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
+             full_url = full_url)
 
 }
 
+
+#' @inheritParams collect.bcdc_promise
+#' @rdname collect-methods
+#' @export
+as_tibble.bcdc_promise <- collect.bcdc_promise
 
 #' Show SQL and URL used for Web Service request from B.C. Data Catalogue
 #'
@@ -288,7 +404,7 @@ collect.bcdc_promise <- function(x, ...){
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
 #'   show_query()
@@ -296,29 +412,23 @@ collect.bcdc_promise <- function(x, ...){
 #'
 show_query.bcdc_promise <- function(x, ...) {
 
-  x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
-  cql_filter <- x$query_list$CQL_FILTER
-  x$query_list$CQL_FILTER <- NULL
+  y <- list()
+  y$base_url <- x$cli$url
+  y$query_list <- x$query_list
+  y$query_list$CQL_FILTER <- finalize_cql(y$query_list$CQL_FILTER)
+  y$full_url <- x$cli$url_fetch(query = y$query_list)
 
-  url <-  x$cli$url_fetch()
-
-  cat_line("<url>")
-  cat_line(url)
-  cat_line()
-  cat_line("<body>")
-  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
-  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
-
-  invisible(TRUE)
+  as.bcdc_query(y)
 
 }
+
 
 
 #' @describeIn show_query show_query.bcdc_promise
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' air <- bcdc_query_geodata("bc-airports") %>%
 #'   collect()
 #'
@@ -326,30 +436,16 @@ show_query.bcdc_promise <- function(x, ...) {
 #' }
 show_query.bcdc_sf <- function(x, ...) {
 
-  url <- attr(x, "url")
-  query_list <- attributes(x)$query_list
-  cql_filter <- query_list$CQL_FILTER
-  query_list$CQL_FILTER <- NULL
+  y <- list()
+  y$url <- attr(x, "url")
+  y$query_list <- attr(x, "query_list")
+  y$full_url <- attr(x, "full_url")
 
-  url <- paste0(url,"\n")
-
-  cat_line("<url>")
-  for(i in seq_along(url)){
-    cat_line(glue::glue("Request {i} of {length(url)} \n{url[i]} \n"))
-  }
-
-  cat_line("<body>")
-  cat_line(glue::glue("   {names(query_list)}: {query_list}"))
-  cat_line(glue::glue("   CQL_FILTER: {substr(cql_filter, 1, 40)}..."))
-
-
-
-  invisible(TRUE)
-
+  as.bcdc_query(y)
 }
 
 # collapse vector of cql statements into one
 finalize_cql <- function(x, con = cql_dummy_con) {
-  if (is.null(x)) return(NULL)
+  if (is.null(x) || !length(x)) return(NULL)
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
 }

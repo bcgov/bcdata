@@ -10,6 +10,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
+#' @importFrom rlang :=
+
 # Function to translate R code to CQL
 cql_translate <- function(...) {
   ## convert dots to list of quosures
@@ -22,11 +24,28 @@ cql_translate <- function(...) {
   ## predicates and CQL() expressions are evaluated into valid CQL code
   ## so they can be combined with the rest of the query
   dots <- lapply(dots, function(x) {
-    rlang::new_quosure(
-      dbplyr::partial_eval(rlang::get_expr(x), env = rlang::get_env(x)),
-                rlang::get_env(x))
+
+    # make sure all arguments are named in the call so can be modified
+    x <- rlang::call_standardise(x, env = rlang::get_env(x))
+
+    # if an argument to a predicate is a function call, need to tell it to evaluate
+    # locally, as by default all functions are treated as remote and thus
+    # not evaluated. Do this by using `rlang::call2` to wrap the function call in
+    # local()
+    # See ?rlang::partial_eval and https://github.com/bcgov/bcdata/issues/146
+    for (call_arg in rlang::call_args_names(x)) {
+      if (is.call(rlang::call_args(x)[[call_arg]])) {
+        x <- rlang::call_modify(
+          x, !!call_arg := rlang::call2("local", rlang::call_args(x)[[call_arg]])
+        )
+      }
+    }
+
+    rlang::new_quosure(dbplyr::partial_eval(x), rlang::get_env(x))
   })
+
   sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
+
   build_where(sql_where)
 }
 
@@ -57,19 +76,19 @@ cql_scalar <- dbplyr::sql_translator(
   `[` = `[`,
   `[[` = `[[`,
   `$` = `$`,
-  DWITHIN = function(x) DWITHIN(x),
-  EQUALS = function(x) EQUALS(x),
-  DISJOINT = function(x) DISJOINT(x),
-  INTERSECTS = function(x) INTERSECTS(x),
-  TOUCHES = function(x) TOUCHES(x),
-  CROSSES = function(x) CROSSES(x),
-  WITHIN = function(x) WITHIN(x),
-  CONTAINS = function(x) CONTAINS(x),
-  OVERLAPS = function(x) OVERLAPS(x),
-  RELATE = function(x) RELATE(x),
-  DWITHIN = function(x) DWITHIN(x),
-  BEYOND = function(x) BEYOND(x),
-  CQL = function(x) CQL(x)
+  EQUALS = function(geom) EQUALS(geom),
+  DISJOINT = function(geom) DISJOINT(geom),
+  INTERSECTS = function(geom) INTERSECTS(geom),
+  TOUCHES = function(geom) TOUCHES(geom),
+  CROSSES = function(geom) CROSSES(geom),
+  WITHIN = function(geom) WITHIN(geom),
+  CONTAINS = function(geom) CONTAINS(geom),
+  OVERLAPS = function(geom) OVERLAPS(geom),
+  RELATE = function(geom, pattern) RELATE(geom, pattern),
+  DWITHIN = function(geom, distance, units) DWITHIN(geom, distance, units),
+  BEYOND = function(geom, distance, units) BEYOND(geom, distance, units),
+  BBOX = function(coords, crs = NULL) BBOX(coords, crs),
+  CQL = function(...) CQL(...)
 )
 
 # No aggregation functions available in CQL
@@ -134,7 +153,7 @@ sql_escape_string.DummyCQL <- function(con, x) {
 #'
 #' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
 #'
-#' @param ... Character vectors that will be comined into a single CQL statement.
+#' @param ... Character vectors that will be combined into a single CQL statement.
 #'
 #' @return An object of class `c("CQL", "SQL")`
 #' @export

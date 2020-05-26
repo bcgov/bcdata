@@ -7,10 +7,11 @@
 bcdc_query_geodata(record, crs = 3005)
 }
 \arguments{
-\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()})
-or a character string denoting the name or ID of a resource (or the URL).
+\item{record}{either a \code{bcdc_record} object (from the result of \code{bcdc_get_record()}),
+a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
+Warehouse (BCGW) name.
 
-It is advised to use the permament ID for a record rather than the
+It is advised to use the permanent ID for a record or the BCGW name rather than the
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
@@ -18,7 +19,7 @@ session. You can silence these warnings altogether by setting an option:
 in your .Rprofile file so the option persists across sessions.}
 
 \item{crs}{the epsg code for the coordinate reference system. Defaults to
-\code{3005} (B.C. Albers). See https://epsgi.io.}
+\code{3005} (B.C. Albers). See https://epsg.io.}
 }
 \value{
 A \code{bcdc_promise} object. This object includes all of the information
@@ -33,23 +34,27 @@ that the request will take quite a while.
 }
 \details{
 Note that this function doesn't actually return the data, but rather an
-object of class \code{bcdc_promise``, which includes all of the information required to retrieve the requested data. In order to get the actual data as an }sf\code{object, you need to run [collect()] on the}bcdc_promise\code{. This allows further refining the call to }bcdc_query_geodata()\code{with [filter()] and/or [select()] statements before pulling down the actual data as an}sf`
+object of class \code{bcdc_promise}, which includes all of the information
+required to retrieve the requested data. In order to get the actual data as
+an \code{sf} object, you need to run \code{\link[=collect]{collect()}} on the \code{bcdc_promise}. This
+allows further refining the call to \code{bcdc_query_geodata()} with \code{\link[=filter]{filter()}}
+and/or \code{\link[=select]{select()}} statements before pulling down the actual data as an \code{sf}
 object with \code{\link[=collect]{collect()}}. See examples.
 }
 \examples{
 
-\dontrun{
+\donttest{
 # Returns a bcdc_promise, which can be further refined using filter/select:
 bcdc_query_geodata("bc-airports", crs = 3857)
 
-To obtain the actual data as an sf object, collect() must be called:
+# To obtain the actual data as an sf object, collect() must be called:
 bcdc_query_geodata("bc-airports", crs = 3857) \%>\%
   filter(PHYSICAL_ADDRESS == 'Victoria, BC') \%>\%
   collect()
 
 bcdc_query_geodata("ground-water-wells") \%>\%
   filter(OBSERVATION_WELL_NUMBER == 108) \%>\%
-  select(WELL_TAG_NUMBER, WATERSHED_CODE) \%>\%
+  select(WELL_TAG_NUMBER, INTENDED_WATER_USE) \%>\%
   collect()
 
 ## A moderately large layer
@@ -60,6 +65,9 @@ bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
 
 ## A very large layer
 bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+
+## Using a BCGW name
+bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 }
 
 }

@@ -15,16 +15,22 @@ See the License for the specific language governing permissions and limitations 
 
 # bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
-### Version 0.1.0.9999
-
 <!-- badges: start -->
 
 <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Travis build
 status](https://travis-ci.org/bcgov/bcdata.svg?branch=master)](https://travis-ci.org/bcgov/bcdata)
+[![R build
+status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata)
+[![Codecov test
+coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://codecov.io/gh/bcgov/bcdata?branch=master)
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
+Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
+[![cran
+checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org/web/checks/check_results_bcdata.html)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
@@ -54,7 +60,14 @@ guide](https://bcgov.github.io/bcdata/)
 
 ### Installation
 
-You can install `bcdata` directly from this GitHub repository using the
+You can install `bcdata` directly from
+[CRAN](https://cran.r-project.org/package=bcdata):
+
+``` r
+install.packages("bcdata")
+```
+
+To install the development version from GitHub, use the
 [remotes](https://cran.r-project.org/package=remotes) package:
 
 ``` r
@@ -81,11 +94,12 @@ To report bugs/issues/feature requests, please file an
 ### How to Contribute
 
 If you would like to contribute to the package, please see our
-[CONTRIBUTING](CONTRIBUTING.md) guidelines.
+[CONTRIBUTING](https://github.com/bcgov/bcdata/blob/master/CONTRIBUTING.md)
+guidelines.
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+Conduct](https://github.com/bcgov/bcdata/blob/master/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 ### License
 

@@ -13,36 +13,53 @@
 context("Testing bcdc_describe_feature function")
 
 test_that("Test that bcdc_describe feature returns the correct columns",{
+  skip_on_cran()
+  skip_if_net_down()
   airport_feature <- bcdc_describe_feature("bc-airports")
-  expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
+  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type"))
 })
 
 
-test_that("columns and column order are the same as the query",{
+test_that("columns are the same as the query", {
+  skip_on_cran()
+  skip_if_net_down()
   query <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>% ## just to make the query smaller
     collect()
 
   description <- bcdc_describe_feature("regional-districts-legally-defined-administrative-areas-of-bc")
 
-  expect_identical(names(query),
-                   unique(description$col_name)
+  expect_identical(sort(setdiff(names(query), "geometry")),
+                   sort(setdiff(unique(description$col_name), "SHAPE"))
   )
 })
 
-test_that("geometry column is last",{
-  description <- bcdc_describe_feature("regional-districts-legally-defined-administrative-areas-of-bc")
-  expect_identical(description$col_name[nrow(description)], "geometry")
-
-})
-
 test_that("bcdc_describe_feature accepts a bcdc_record object", {
+  skip_on_cran()
+  skip_if_net_down()
   airports <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
   airport_feature <- bcdc_describe_feature(airports)
-  expect_identical(names(airport_feature), c("col_name", "selectable", "remote_col_type","local_col_type"))
+  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type"))
+})
+
+test_that("bcdc_describe_feature accepts BCGW name",{
+  skip_on_cran()
+  skip_if_net_down()
+  airport_feature <- bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type"))
 })
 
 test_that("bcdc_describe_feature fails on unsupported classes", {
+  skip_on_cran()
+  skip_if_net_down()
   expect_error(bcdc_describe_feature(1L))
   expect_error(bcdc_describe_feature(list(a = 1)))
 })
+
+test_that("bcdc_describe_feature fails with non-wfs record", {
+  skip_if_net_down()
+  skip_on_cran()
+  expect_error(bcdc_describe_feature("dba6c78a-1bc1-4d4f-b75c-96b5b0e7fd30"),
+               "No WMS/WFS resource available for this dataset")
+})
+

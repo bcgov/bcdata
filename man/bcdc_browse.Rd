@@ -4,8 +4,11 @@
 \alias{bcdc_browse}
 \title{Load the B.C. Data Catalogue URL into an HTML browser}
 \usage{
-bcdc_browse(query = NULL, browser = getOption("browser"),
-  encodeIfNeeded = FALSE)
+bcdc_browse(
+  query = NULL,
+  browser = getOption("browser"),
+  encodeIfNeeded = FALSE
+)
 }
 \arguments{
 \item{query}{Default (NULL) opens a browser to \code{https://catalogue.data.gov.bc.ca}.
@@ -23,7 +26,7 @@ bcdc_browse will search the data catalogue for that string.}
   }
 
 \item{encodeIfNeeded}{Should the URL be encoded by
-    \code{\link{URLencode}} before passing to the browser?  This is not
+    \code{\link[utils]{URLencode}} before passing to the browser?  This is not
     needed (and might be harmful) if the \code{browser} program/function
     itself does encoding, and can be harmful for \samp{file://} URLs on some
     systems and for \samp{http://} URLs passed to some CGI applications.
@@ -38,7 +41,7 @@ This is a wrapper around utils::browseURL with the URL for the B.C. Data Catalog
 the default
 }
 \examples{
-\dontrun{
+\donttest{
 ## Take me to the B.C. Data Catalogue home page
 bcdc_browse()
 

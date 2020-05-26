@@ -20,13 +20,13 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_search_facets("type")
 #' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
                                   "organization")) {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   facet <- match.arg(facet, several.ok = TRUE)
   query <- paste0("\"", facet, "\"", collapse = ",")
@@ -58,7 +58,7 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 #' @return A character vector of the names of B.C. Data Catalogue records
 #' @export
 bcdc_list <- function() {
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   l_new_ret <- 1
   ret <- character()
@@ -100,7 +100,7 @@ bcdc_list <- function() {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_search("forest")
 #' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
 #' }
@@ -112,7 +112,7 @@ bcdc_search <- function(..., license_id = NULL,
                         organization = NULL,
                         n = 100) {
 
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   # TODO: allow terms to be passed as a vector, and allow use of | for OR
   terms <- paste0(compact(list(...)), collapse = "+")
@@ -167,7 +167,7 @@ bcdc_search <- function(..., license_id = NULL,
 #' @param id the human-readable name, permalink ID, or
 #' URL of the record.
 #'
-#' It is advised to use the permament ID for a record rather than the
+#' It is advised to use the permanent ID for a record rather than the
 #' human-readable name to guard against future name changes of the record.
 #' If you use the human-readable name a warning will be issued once per
 #' session. You can silence these warnings altogether by setting an option:
@@ -178,7 +178,7 @@ bcdc_search <- function(..., license_id = NULL,
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
 #' bcdc_get_record("bc-airports")
 #' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
@@ -186,7 +186,7 @@ bcdc_search <- function(..., license_id = NULL,
 #' }
 bcdc_get_record <- function(id) {
 
-  if(!has_internet()) stop("No access to internet", call. = FALSE)
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   id <- slug_from_url(id)
 
@@ -196,7 +196,7 @@ bcdc_get_record <- function(id) {
   r <- cli$get(query = list(id = id))
 
   if (r$status_code == 404){
-    stop(paste0("'", id, "' is not a valid record id or name in the BC data catalogue"), call. = FALSE)
+    stop(paste0("'", id, "' is not a valid record id or name in the B.C. Data Catalogue"), call. = FALSE)
   }
 
   r$raise_for_status()
@@ -235,4 +235,52 @@ as.bcdc_record <- function(x) {
 as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"
   x
+}
+
+
+#' Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
+#'
+#' Returns a rectangular data frame of all resources contained within a record. This is particularly useful
+#' if you are trying to construct a vector of multiple resources in a record. The data frame also provides
+#' useful information on the formats, availability and types of data available.
+#'
+#' @inheritParams bcdc_get_data
+#'
+#'
+#' @return A data frame containing the metadata for all the resources for a record
+#'
+#' @examples
+#' \donttest{
+#' airports <- bcdc_get_record("bc-airports")
+#' bcdc_tidy_resources(airports)
+#' }
+#'
+#' @export
+bcdc_tidy_resources <- function(record){
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  UseMethod("bcdc_tidy_resources")
+}
+
+
+#' @export
+bcdc_tidy_resources.default <- function(record) {
+  stop("No bcdc_tidy_resources method for an object of class ", class(record),
+       call. = FALSE)
+}
+
+
+#' @export
+bcdc_tidy_resources.character <- function(record){
+
+  if (is_whse_object_name(record)) {
+    stop("No bcdc_tidy_resources method for a BCGW object name", call. = FALSE)
+  }
+
+  bcdc_tidy_resources(bcdc_get_record(record))
+}
+
+
+#' @export
+bcdc_tidy_resources.bcdc_record <- function(record) {
+  record$resource_df
 }
