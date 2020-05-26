@@ -17,27 +17,23 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
-
-<!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -49,6 +45,7 @@
 <meta property="og:title" content="Search the B.C. Data Catalogue — bcdc_search" />
 <meta property="og:description" content="Search the B.C. Data Catalogue" />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
+<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -66,7 +63,7 @@
 
   </head>
 
-  <body data-spy="scroll" data-target="#toc">
+  <body>
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -80,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9999</span>
       </span>
     </div>
 
@@ -108,9 +105,6 @@
     <li>
       <a href="../articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a>
     </li>
-    <li>
-      <a href="../articles/explore-silviculture-data-using-bcdata.html">An Exploration of Silviculture Data with bcdata</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -119,7 +113,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bcgov/bcdata/">
+  <a href="https://github.com/bcgov/bcdata">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -146,16 +140,9 @@
     <p>Search the B.C. Data Catalogue</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_search</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>license_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>download_audience</span> <span class='kw'>=</span> <span class='st'>"Public"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>organization</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>
-)</pre>
+    <pre class="usage"><span class='fu'>bcdc_search</span>(<span class='no'>...</span>, <span class='kw'>license_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>download_audience</span> <span class='kw'>=</span> <span class='st'>"Public"</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>organization</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,87 +189,19 @@
     <p>A list containing the records that match the search</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 302 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 302.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
-#&gt; 
-#&gt; Number of records: 100 (Showing the top 10)
-#&gt; Titles:
-#&gt; 1: RESULTS - Forest Cover Inventory (other, wms)
-#&gt;  ID: 56ac43a7-724a-4f01-b193-d5f9a16ef0a8
-#&gt;  Name: results-forest-cover-inventory
-#&gt; 2: RESULTS - Forest Cover Silviculture (other, wms, kml)
-#&gt;  ID: 258bb088-4113-47b1-b568-ce20bd64e3e3
-#&gt;  Name: results-forest-cover-silviculture
-#&gt; 3: FDU - Forest Licence Reference (other)
-#&gt;  ID: 7e986391-c740-4d1b-9294-7576af2d2998
-#&gt;  Name: fdu-forest-licence-reference
-#&gt; 4: RESULTS - Forest Cover Species (Attribute Only) (other)
-#&gt;  ID: 2db77f8b-765b-488f-9752-f1349cf6ebfc
-#&gt;  Name: results-forest-cover-species-attribute-only
-#&gt; 5: Forest Tenure Managed Licence (other, wms, kml)
-#&gt;  ID: c3e96239-cdc9-4328-ac19-58fba1623ef8
-#&gt;  Name: forest-tenure-managed-licence
-#&gt; 6: Forest Inventory Zones (other, wms, kml)
-#&gt;  ID: 67e95c68-c1ef-4363-b351-0dfead151122
-#&gt;  Name: forest-inventory-zones
-#&gt; 7: Harvested Areas of BC (Consolidated Cutblocks) (other, fgdb, wms, kml, pdf)
-#&gt;  ID: b1b647a6-f271-42e0-9cd0-89ec24bce9f7
-#&gt;  Name: harvested-areas-of-bc-consolidated-cutblocks-
-#&gt; 8: Mixed Forest 1:250,000 GeoBase Land Cover (other)
-#&gt;  ID: 902f5af2-9fce-4579-b48d-8bd7f85d36dd
-#&gt;  Name: mixed-forest-1-250-000-geobase-land-cover
-#&gt; 9: Coniferous Forest 1:250,000 GeoBase Land Cover (other)
-#&gt;  ID: 177b5ef0-8339-4fd7-a40a-93edb3797d07
-#&gt;  Name: coniferous-forest-1-250-000-geobase-land-cover
-#&gt; 10: Broadleaf Forest 1:250,000 GeoBase Land Cover (other)
-#&gt;  ID: 78bb0ee9-96ed-49fb-9c0c-7434b2f24d7e
-#&gt;  Name: broadleaf-forest-1-250-000-geobase-land-cover 
-#&gt; 
-#&gt; Access a single record by calling bcdc_get_record(ID)
-#&gt;       with the ID from the desired record.</div><div class='input'><span class='fu'>bcdc_search</span>(<span class='st'>"regional district"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Geographic"</span>, <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='st'>"fgdb"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 186 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 186.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
-#&gt; 
-#&gt; Number of records: 100 (Showing the top 10)
-#&gt; Titles:
-#&gt; 1: Regional district financial statistics (other)
-#&gt;  ID: 35fd9fe7-e937-4719-82e8-852cc699a113
-#&gt;  Name: regional-district-financial-statistics
-#&gt; 2: Natural Resource (NR) Districts (other, wms)
-#&gt;  ID: 0bc73892-e41f-41d0-8d8e-828c16139337
-#&gt;  Name: natural-resource-nr-district
-#&gt; 3: Regional District Boundaries - Road centreline aligned (other, wms, kml)
-#&gt;  ID: b66ed992-16c9-4527-b363-0ae4827d103b
-#&gt;  Name: regional-district-boundaries-road-centreline-aligned
-#&gt; 4: Regional Districts - Legally Defined Administrative Areas of BC (other, xlsx, wms, kml)
-#&gt;  ID: d1aff64e-dbfe-45a6-af97-582b7f6418b9
-#&gt;  Name: regional-districts-legally-defined-administrative-areas-of-bc
-#&gt; 5: Legally Defined Administrative Areas of BC (other, xlsx)
-#&gt;  ID: 12f0fd64-94d5-422a-832e-6627a2a01702
-#&gt;  Name: legally-defined-administrative-areas-of-bc
-#&gt; 6: BC College Region Boundaries (other, wms, kml)
-#&gt;  ID: 6b8da230-9bc2-4bb4-989e-7d5dad84a4ac
-#&gt;  Name: bc-college-region-boundaries
-#&gt; 7: Communities Affected by Evacuation Orders and Alerts (other, wms, kml)
-#&gt;  ID: 284f6b3f-e1ce-4394-81aa-1a4af9feee56
-#&gt;  Name: communities-affected-by-evacuation-orders-and-alerts
-#&gt; 8: Environmental Emergency Response (EER) District Boundaries (other, wms, kml)
-#&gt;  ID: e87e1db2-d99c-412f-be36-650d84c9540f
-#&gt;  Name: environmental-emergency-response-eer-district-boundaries
-#&gt; 9: Local and Regional Greenspaces (other, wms, kml, xlsx)
-#&gt;  ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da
-#&gt;  Name: local-and-regional-greenspaces
-#&gt; 10: Forest Licensee Operating Areas (other, wms, kml)
-#&gt;  ID: 5a18c401-7c99-48fe-8a1a-b4597072d8b6
-#&gt;  Name: forest-licensee-operating-areas 
-#&gt; 
-#&gt; Access a single record by calling bcdc_get_record(ID)
-#&gt;       with the ID from the desired record.</div><div class='input'><span class='co'># }</span></div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)
+<span class='fu'>bcdc_search</span>(<span class='st'>"regional district"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Geographic"</span>, <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='st'>"fgdb"</span>)
+}</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 
@@ -293,7 +212,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

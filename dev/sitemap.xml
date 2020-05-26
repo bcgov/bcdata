@@ -43,10 +43,7 @@
     <loc>https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html</loc>
   </url>
   <url>
-    <loc>https://bcgov.github.io/bcdata/reference/bcdc_tidy_resources.html</loc>
-  </url>
-  <url>
-    <loc>https://bcgov.github.io/bcdata/reference/collect-methods.html</loc>
+    <loc>https://bcgov.github.io/bcdata/reference/collect.html</loc>
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html</loc>
@@ -55,13 +52,16 @@
     <loc>https://bcgov.github.io/bcdata/reference/filter.html</loc>
   </url>
   <url>
-    <loc>https://bcgov.github.io/bcdata/reference/mutate.html</loc>
+    <loc>https://bcgov.github.io/bcdata/reference/filter.bcdc_promise.html</loc>
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/pipe.html</loc>
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/select.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/reference/select.bcdc_promise.html</loc>
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/show_query.html</loc>
@@ -71,8 +71,5 @@
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html</loc>
-  </url>
-  <url>
-    <loc>https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html</loc>
   </url>
 </urlset>
