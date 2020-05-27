@@ -123,7 +123,8 @@ Let's plot this spatial object and double check we have we what we need:
 ```{r plot-dpg}
 dpg %>%
   ggplot() +
-  geom_sf()
+  geom_sf() +
+  theme_minimal()
 ```
 
 Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.
