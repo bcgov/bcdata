@@ -59,7 +59,7 @@ bcdc_describe_feature.character <- function(record){
 bcdc_describe_feature.bcdc_record <- function(record){
 
   if (!any(wfs_available(record$resource_df))) {
-    stop("No WMS/WFS resource available for this dataset.",
+    stop("No WMS/WFS resource available for this data set.",
          call. = FALSE
     )
   }

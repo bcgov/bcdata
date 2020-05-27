@@ -53,7 +53,7 @@ b$status_code
 b_content <- content(b, as = "text")
 read_sf(b_content)
 
-## Check speed with biggish dataset
+## Check speed with biggish data set
 # wells <- bcdc_query_geodata("bc-environmental-monitoring-locations") %>% collect()
 # saveRDS(wells, "wells.rds")
 wells <- readRDS("wells.rds") %>%
