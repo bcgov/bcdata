@@ -386,7 +386,7 @@ bc_az %>%
   geom_sf()
 ```
 
-![plot of chunk air_zones](vignette-fig-air_zones-1.png)
+<img src="vignette-fig-air_zones-1.png" title="plot of chunk air_zones" alt="plot of chunk air_zones" width="100%" />
 
 **Using B.C. Geographic Warehouse (BCGW) layer names**
 
@@ -496,6 +496,6 @@ my_regional_district  %>%
   geom_sf()
 ```
 
-![plot of chunk regional_districts](vignette-fig-regional_districts-1.png)
+<img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%" />
 
 The vignette [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.

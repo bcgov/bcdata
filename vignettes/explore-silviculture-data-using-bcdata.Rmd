@@ -100,7 +100,7 @@ We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?i
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 #> Querying 'results-forest-cover-silviculture' record
-#> ● Using collect() on this object will return 871108 features and 159 fields
+#> ● Using collect() on this object will return 871319 features and 159 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 159 fields
@@ -203,7 +203,7 @@ dpg %>%
   geom_sf()
 ```
 
-![plot of chunk plot-dpg](vignette-fig-plot-dpg-1.png)
+<img src="vignette-fig-plot-dpg-1.png" title="plot of chunk plot-dpg" alt="plot of chunk plot-dpg" width="100%" />
 
 Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.
 
@@ -251,7 +251,7 @@ trees_dpg %>%
   theme_minimal()
 ```
 
-![plot of chunk map-larch-plantations-dpg](vignette-fig-map-larch-plantations-dpg-1.png)
+<img src="vignette-fig-map-larch-plantations-dpg-1.png" title="plot of chunk map-larch-plantations-dpg" alt="plot of chunk map-larch-plantations-dpg" width="100%" />
 
 
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
@@ -278,7 +278,7 @@ trees_dpg %>%
   theme(legend.position = "none")
 ```
 
-![plot of chunk unnamed-chunk-1](vignette-fig-unnamed-chunk-1-1.png)
+<img src="vignette-fig-unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="100%" />
 
 #### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
 
@@ -319,4 +319,4 @@ trees_bec_dpg %>%
   theme(legend.position = "none")
 ```
 
-![plot of chunk unnamed-chunk-3](vignette-fig-unnamed-chunk-3-1.png)
+<img src="vignette-fig-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%" />
