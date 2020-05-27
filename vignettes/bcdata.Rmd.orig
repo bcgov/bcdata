@@ -1,7 +1,5 @@
 ---
 title: "Get Started with bcdata"
-author: ""
-date: ""
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get Started with bcdata}
@@ -177,21 +175,10 @@ bc_az %>%
   theme_minimal()
 ```
 
-**Using B.C. Geographic Warehouse (BCGW) layer names**
-
-If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse),
-you may already know the name of a layer that you want from the BCGW.
-`bcdc_get_data()` supports supplying that name directly. For example, the
-[record for the B.C. airports layer](https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description)
-shows that the object name is `WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW`, and
-we can use that in `bcdc_get_data()`:
-
-```{r}
-bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
-```
 
 **Note:** The `bcdata` package supports downloading _most_ file types, including zip archives. It will do its best to identify and read data from
 zip files, however if there are multiple data files in the zip, or data files that `bcdata` doesn't know how to import, it will fail.
+
 
 ### `bcdc_query_geodata()`
 
