@@ -40,6 +40,7 @@ knitr::opts_chunk$set(
 
 options(crayon.enabled = FALSE)
 
+library(Cairo)
 library(bcdata)
 library(ggplot2)
 ```
