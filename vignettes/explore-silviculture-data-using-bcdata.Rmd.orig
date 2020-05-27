@@ -1,7 +1,10 @@
 ---
 title: "An Exploration of Silviculture Data with bcdata"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    depth: 2
 vignette: >
   %\VignetteIndexEntry{Explore Silviculture Data with bcdata}
   %\VignetteEngine{knitr::rmarkdown}
@@ -41,10 +44,13 @@ library(sf)
 
 This vignette will demonstrate how you can use `bcdata` to access and explore British Columbia silviculture data.
 
+
+### Silviculture Data
+
 Silviculture data for British Columbia are largely collected and stored through the [Reporting Silviculture Updates and Land Status Tracking System (RESULTS) database](https://www2.gov.bc.ca/gov/content?id=F62992DA5B324446AD5E1B5BFFA404CC)---including information on the management of openings, disturbances, silviculture activities and obligation declarations as required by the [Forest and Range Practices Act](https://www2.gov.bc.ca/gov/content?id=D65006C0326B4E0F838194044C10CA86). [RESULTS data sets are publically available through the B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset?q=RESULTS+silviculture) under the [Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61).
 
 
-## A Silviculture Data Exploration&mdash;Reforestation with Climate Considerations
+### Reforestation with Climate Considerations
 
 [Western larch](https://en.wikipedia.org/wiki/Larix_occidentalis) has been identified as a tree species that will be well-adapted to projected future climates in northern British Columbia.  In 2013, forest policy was developed that allowed foresters to plant western larch outside of its natural range as a climate change adaptation silviculture measure.
 
@@ -160,7 +166,7 @@ trees_dpg %>%
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
 
 
-**What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?**
+#### What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?
 
 ```{r, warning = FALSE}
 trees_dpg %>%
@@ -180,7 +186,7 @@ trees_dpg %>%
   theme(legend.position = "none")
 ```
 
-**What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?**
+#### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
 
 We can download [British Columbia biogeoclimatic (BEC) data](https://catalogue.data.gov.bc.ca/dataset/bec-map) from the B.C. Data Catalogue using `bcdata` and join to our existing `trees_dpg` geospatial dataset using the `st_join` function from the `sf` package. You can learn more about `sf` [here](https://r-spatial.github.io/sf/).
 
