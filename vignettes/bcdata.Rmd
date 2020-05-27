@@ -1,7 +1,5 @@
 ---
 title: "Get Started with bcdata"
-author: ""
-date: ""
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get Started with bcdata}
@@ -341,7 +339,7 @@ bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-
 #> #   Apprenticeship Prog` <lgl>, `Has Career Technical Prog` <lgl>
 ```
 
-Alternatively, you can retrieve the full details of the available resources for a given record as a data frame using `bcdc_tidy_resources():
+Alternatively, you can retrieve the full details of the available resources for a given record as a data frame using `bcdc_tidy_resources()`:
 
 
 ```r
@@ -383,62 +381,20 @@ bc_az <- bcdc_get_data(bc_az_metadata, resource = "c495d082-b586-4df0-9e06-bd6b6
 ## Plot the B.C. Air Zone geospatial data with ggplot()
 bc_az %>%
   ggplot() +
-  geom_sf()
+  geom_sf() +
+  theme_minimal()
 ```
 
 <img src="vignette-fig-air_zones-1.png" title="plot of chunk air_zones" alt="plot of chunk air_zones" width="100%" />
 
-**Using B.C. Geographic Warehouse (BCGW) layer names**
-
-If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse),
-you may already know the name of a layer that you want from the BCGW.
-`bcdc_get_data()` supports supplying that name directly. For example, the
-[record for the B.C. airports layer](https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description)
-shows that the object name is `WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW`, and
-we can use that in `bcdc_get_data()`:
-
-
-```r
-bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
-#> Simple feature collection with 455 features and 41 fields
-#> geometry type:  POINT
-#> dimension:      XY
-#> bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#> CRS:            3005
-#> # A tibble: 455 x 42
-#>    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#>  * <chr> <chr>            <chr>            <chr>            <chr>           
-#>  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#>  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#> # … with 445 more rows, and 37 more variables: SOURCE_DATA_ID <chr>,
-#> #   SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, DESCRIPTION <chr>,
-#> #   PHYSICAL_ADDRESS <chr>, ALIAS_ADDRESS <chr>, STREET_ADDRESS <chr>,
-#> #   POSTAL_CODE <chr>, LOCALITY <chr>, CONTACT_PHONE <chr>,
-#> #   CONTACT_EMAIL <chr>, CONTACT_FAX <chr>, WEBSITE_URL <chr>, IMAGE_URL <chr>,
-#> #   LATITUDE <dbl>, LONGITUDE <dbl>, KEYWORDS <chr>, DATE_UPDATED <date>,
-#> #   SITE_GEOCODED_IND <chr>, AERODROME_STATUS <chr>, AIRCRAFT_ACCESS_IND <chr>,
-#> #   DATA_SOURCE <chr>, DATA_SOURCE_YEAR <chr>, ELEVATION <dbl>,
-#> #   FUEL_AVAILABILITY_IND <chr>, HELICOPTER_ACCESS_IND <chr>, IATA_CODE <chr>,
-#> #   ICAO_CODE <chr>, MAX_RUNWAY_LENGTH <dbl>, NUMBER_OF_RUNWAYS <int>,
-#> #   OIL_AVAILABILITY_IND <chr>, RUNWAY_SURFACE <chr>,
-#> #   SEAPLANE_ACCESS_IND <chr>, TC_LID_CODE <chr>, SEQUENCE_ID <int>,
-#> #   SE_ANNO_CAD_DATA <chr>, geometry <POINT [m]>
-```
 
 **Note:** The `bcdata` package supports downloading _most_ file types, including zip archives. It will do its best to identify and read data from
 zip files, however if there are multiple data files in the zip, or data files that `bcdata` doesn't know how to import, it will fail.
 
+
 ### `bcdc_query_geodata()`
 
-Many geospatial data sets in the B.C. Data Catalogue are available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+Many geospatial data sets in the B.C. Data Catalogue are available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
 
 Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:
 
@@ -493,7 +449,8 @@ my_regional_district <- bcdc_query_geodata(bc_regional_districts_metadata) %>%
 ## Plot the Capital Regional District polygon with ggplot()
 my_regional_district  %>%
   ggplot() +
-  geom_sf()
+  geom_sf() +
+  theme_minimal()
 ```
 
 <img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%" />
