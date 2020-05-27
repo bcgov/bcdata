@@ -31,7 +31,12 @@ knitr::opts_chunk$set(
   comment = "#>",
   warning = FALSE,
   message = FALSE,
-  fig.path = "vignette-fig-"
+  fig.path = "vignette-fig-",
+  out.width = "100%",
+  fig.width = 7,
+  fig.height = 4,
+  dev = "CairoPNG",
+  dpi = 150
 )
 
 library(knitr)
