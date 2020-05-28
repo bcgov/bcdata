@@ -7,7 +7,7 @@ reference:
   - title: "Interacting with the B.C. Data Catalogue"
     desc: >
       Functions to search, browse, list, and explore records and their
-      resources (datasets) in the B.C. Data Catalogue
+      resources (data sets) in the B.C. Data Catalogue
     contents:
       - '`bcdc_browse`'
       - '`bcdc_search`'
@@ -15,9 +15,9 @@ reference:
       - '`bcdc_list`'
       - '`bcdc_get_record`'
       - '`bcdc_tidy_resources`'
-  - title: "Direct downloads of datasets"
+  - title: "Direct downloads of data sets"
     desc: >
-      Directly dowload (or preview) datasets (resources) from the
+      Directly download (or preview) data sets (resources) from the
       B.C. Data Catalogue
     contents:
       - '`bcdc_get_data`'
@@ -25,7 +25,7 @@ reference:
       - '`bcdc_read_functions`'
   - title: "Querying data from a Web Service catalogue record"
     desc: >
-      Issue queries using `select` and `filter` verbs against datasets in the
+      Issue queries using `select` and `filter` verbs against data sets in the
       B.C. Data Catalogue that have Web Services.
     contents:
       - '`bcdc_query_geodata`'

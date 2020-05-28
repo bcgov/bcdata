@@ -23,7 +23,7 @@
 #' on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
 #' if the bcdata catalogue accepts their request.
 #'
-#' `bcdata.chunk_limit` is an option useful when dealing with very large datasets. When requesting large objects
+#' `bcdata.chunk_limit` is an option useful when dealing with very large data sets. When requesting large objects
 #' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
 #' been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
 #' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,

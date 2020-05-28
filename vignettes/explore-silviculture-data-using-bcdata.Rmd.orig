@@ -1,8 +1,10 @@
 ---
 title: "An Exploration of Silviculture Data with bcdata"
-author: "Hardy Griesbauer"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    depth: 2
 vignette: >
   %\VignetteIndexEntry{Explore Silviculture Data with bcdata}
   %\VignetteEngine{knitr::rmarkdown}
@@ -29,9 +31,12 @@ knitr::opts_chunk$set(
   comment = "#>",
   warning = FALSE,
   message = FALSE,
-  fig.height = 5,
+  fig.path = "vignette-fig-",
+  out.width = "100%",
   fig.width = 7,
-  fig.path = "vignette-fig-"
+  fig.height = 4,
+  dev = "CairoPNG",
+  dpi = 150
 )
 
 library(knitr)
@@ -39,15 +44,19 @@ library(bcdata)
 library(dplyr)
 library(ggplot2)
 library(sf)
+library(Cairo)
 ```
 
 
 This vignette will demonstrate how you can use `bcdata` to access and explore British Columbia silviculture data.
 
+
+### Silviculture Data
+
 Silviculture data for British Columbia are largely collected and stored through the [Reporting Silviculture Updates and Land Status Tracking System (RESULTS) database](https://www2.gov.bc.ca/gov/content?id=F62992DA5B324446AD5E1B5BFFA404CC)---including information on the management of openings, disturbances, silviculture activities and obligation declarations as required by the [Forest and Range Practices Act](https://www2.gov.bc.ca/gov/content?id=D65006C0326B4E0F838194044C10CA86). [RESULTS data sets are publically available through the B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset?q=RESULTS+silviculture) under the [Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61).
 
 
-## A Silviculture Data Exploration&mdash;Reforestation with Climate Considerations
+### Reforestation with Climate Considerations
 
 [Western larch](https://en.wikipedia.org/wiki/Larix_occidentalis) has been identified as a tree species that will be well-adapted to projected future climates in northern British Columbia.  In 2013, forest policy was developed that allowed foresters to plant western larch outside of its natural range as a climate change adaptation silviculture measure.
 
@@ -114,7 +123,8 @@ Let's plot this spatial object and double check we have we what we need:
 ```{r plot-dpg}
 dpg %>%
   ggplot() +
-  geom_sf()
+  geom_sf() +
+  theme_minimal()
 ```
 
 Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.

@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2020-05-26"
+date: "2020-05-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -34,16 +34,7 @@ First you need to load the package. We will also load the `sf` and `dplyr` packa
 ```r
 library(bcdata)
 library(sf)
-#> Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 ```
 
 
@@ -176,7 +167,7 @@ Again note here that we have assigned the object a name and added the `collect` 
 plot(st_geometry(districts))
 ```
 
-![plot of chunk districts](vignette-fig-districts-1.png)
+<img src="vignette-fig-districts-1.png" title="plot of chunk districts" alt="plot of chunk districts" width="100%" />
 
 Now that we have the spatial boundaries narrowed by specific school districts we can perform some spatial operations to determine parks in the school districts.
 
@@ -226,24 +217,24 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> geometry type:  POLYGON
+#> geometry type:  MULTIPOLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1228760 ymin: 459819.7 xmax: 1242329 ymax: 469547.6
+#> bbox:           xmin: 1227981 ymin: 451450.3 xmax: 1233820 ymax: 467084.5
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…                1 Guildfor… Local     Civic Facility   Metro Vancouver 
-#> 2 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver 
-#> 3 WHSE…                3 Hartnell… Local     Park             Metro Vancouver 
-#> 4 WHSE…                4 51C - Wa… Local     Trail            Metro Vancouver 
-#> 5 WHSE…                5 52A - Gr… Local     Green Space      Metro Vancouver 
-#> 6 WHSE…                6 52G - De… Local     Green Space      Metro Vancouver 
+#> 1 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
+#> 2 WHSE…               25 Bell Park Local     Park             Metro Vancouver 
+#> 3 WHSE…               26 Ben Stev… Local     Park             Metro Vancouver 
+#> 4 WHSE…               27 Berkshir… Local     Park             Metro Vancouver 
+#> 5 WHSE…               28 Betty Hu… Local     Park             Metro Vancouver 
+#> 6 WHSE…               29 Blackie … Local     Green Space      Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
-#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Since we are interested in only "Park" data we can subset our query:
@@ -257,24 +248,24 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> geometry type:  POLYGON
+#> geometry type:  MULTIPOLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1227676 ymin: 459819.7 xmax: 1242329 ymax: 467135.4
+#> bbox:           xmin: 1228590 ymin: 451450.3 xmax: 1234562 ymax: 467084.5
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver 
-#> 2 WHSE…                3 Hartnell… Local     Park             Metro Vancouver 
-#> 3 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> 4 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> 5 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
-#> 6 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
+#> 1 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
+#> 2 WHSE…               25 Bell Park Local     Park             Metro Vancouver 
+#> 3 WHSE…               26 Ben Stev… Local     Park             Metro Vancouver 
+#> 4 WHSE…               27 Berkshir… Local     Park             Metro Vancouver 
+#> 5 WHSE…               28 Betty Hu… Local     Park             Metro Vancouver 
+#> 6 WHSE…               30 Blumsen … Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
-#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
@@ -285,19 +276,15 @@ districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
   collect()
-#> Warning: The object is too large to perform exact spatial operations using bcdata.
-#>              To simplify the polygon, a bounding box was drawn around the polygon and all
-#>              features within the box will be returned. Options include further processing
-#>              with on the returned object or simplify the object.
 ```
 
 Plotting both the filtered parks data and the district polygons reveals an important consideration when using `bcdata`:
 
-![plot of chunk district_parks](vignette-fig-district_parks-1.png)
+<img src="vignette-fig-district_parks-1.png" title="plot of chunk district_parks" alt="plot of chunk district_parks" width="100%" />
 
 In this example, many parks not contained within the school districts are included in the `districts_parks` object. This is because rather than a full intersection, `bcdata` draws a bounding box around all the polygons that are doing the intersection (in this case `district`) and does the intersection based on that bounding box. This is a limitation imposed by the size of the object doing the geometric operation (in this case `district`) and the limits of the BC Data Catalogue. Drawing the bounding box illustrates this point:
 
-![plot of chunk bbox](vignette-fig-bbox-1.png)
+<img src="vignette-fig-bbox-1.png" title="plot of chunk bbox" alt="plot of chunk bbox" width="100%" />
 
 We are left with two options to get around this problem. First, we can simply do some additional processing with the `sf` package. Specifically we can use a spatial join to assign parks into their respective district:
 
@@ -307,7 +294,7 @@ districts_parks_join <- districts_parks %>%
   st_join(districts, left = FALSE)
 ```
 
-![plot of chunk dp_join](vignette-fig-dp_join-1.png)
+<img src="vignette-fig-dp_join-1.png" title="plot of chunk dp_join" alt="plot of chunk dp_join" width="100%" />
 
 A second approach is to set an internal option (`bcdata.max_geom_pred_size`) and increase the threshold of when a bounding box is drawn. Options are set in R like this:
 
@@ -376,10 +363,6 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
   show_query()
-#> Warning: The object is too large to perform exact spatial operations using bcdata.
-#>              To simplify the polygon, a bounding box was drawn around the polygon and all
-#>              features within the box will be returned. Options include further processing
-#>              with on the returned object or simplify the object.
 #> <url>
 #> <body>
 #>    SERVICE: WFS

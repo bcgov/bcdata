@@ -118,7 +118,7 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
 #' @export
 bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   if (!any(wfs_available(record$resource_df))) {
-    stop("No Web Service resource available for this dataset.",
+    stop("No Web Service resource available for this data set.",
          call. = FALSE
     )
   }
