@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2020-05-27"
+date: "2020-05-28"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -217,24 +217,24 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> geometry type:  MULTIPOLYGON
+#> geometry type:  POLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1227981 ymin: 451450.3 xmax: 1233820 ymax: 467084.5
+#> bbox:           xmin: 1227676 ymin: 461435.1 xmax: 1236544 ymax: 465867.6
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
-#> 2 WHSE…               25 Bell Park Local     Park             Metro Vancouver 
-#> 3 WHSE…               26 Ben Stev… Local     Park             Metro Vancouver 
-#> 4 WHSE…               27 Berkshir… Local     Park             Metro Vancouver 
-#> 5 WHSE…               28 Betty Hu… Local     Park             Metro Vancouver 
-#> 6 WHSE…               29 Blackie … Local     Green Space      Metro Vancouver 
+#> 1 WHSE…               17 55D - Gr… Local     Green Space      Metro Vancouver 
+#> 2 WHSE…               18 55E - Gr… Local     Green Space      Metro Vancouver 
+#> 3 WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver 
+#> 4 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
+#> 5 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
+#> 6 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
-#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
 ```
 
 Since we are interested in only "Park" data we can subset our query:
@@ -250,17 +250,17 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> Simple feature collection with 6 features and 19 fields
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1228590 ymin: 451450.3 xmax: 1234562 ymax: 467084.5
+#> bbox:           xmin: 1227676 ymin: 455032.1 xmax: 1234629 ymax: 467135.4
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               24 Bell Est… Local     Park             Metro Vancouver 
-#> 2 WHSE…               25 Bell Park Local     Park             Metro Vancouver 
-#> 3 WHSE…               26 Ben Stev… Local     Park             Metro Vancouver 
-#> 4 WHSE…               27 Berkshir… Local     Park             Metro Vancouver 
-#> 5 WHSE…               28 Betty Hu… Local     Park             Metro Vancouver 
-#> 6 WHSE…               30 Blumsen … Local     Park             Metro Vancouver 
+#> 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
+#> 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
+#> 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
+#> 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
+#> 5 WHSE…               30 Blumsen … Local     Park             Metro Vancouver 
+#> 6 WHSE…               31 Bob Rutl… Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
