@@ -80,7 +80,7 @@ library(bcdata)
 
 ### Vignettes
 
-  - [Get started with
+  - [Get Started with
     bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
   - [Querying Spatial Data with
     bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
