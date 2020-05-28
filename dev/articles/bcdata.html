@@ -387,7 +387,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; #   Cult` &lt;lgl&gt;, `Has Continuing Ed Prog` &lt;lgl&gt;, `Has Distributed Learn</span>
 <span class="co">#&gt; #   Prog` &lt;lgl&gt;, `Has Career Prep Prog` &lt;lgl&gt;, `Has Coop Prog` &lt;lgl&gt;, `Has</span>
 <span class="co">#&gt; #   Apprenticeship Prog` &lt;lgl&gt;, `Has Career Technical Prog` &lt;lgl&gt;</span></pre></body></html></div>
-<p>Alternatively, you can retrieve the full details of the available resources for a given record as a data frame using `bcdc_tidy_resources():</p>
+<p>Alternatively, you can retrieve the full details of the available resources for a given record as a data frame using <code><a href="../reference/bcdc_tidy_resources.html">bcdc_tidy_resources()</a></code>:</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="co">## Get a data frame of data resources for the `bc-schools-programs-offered-in-schools`</span>
 <span class="co">## catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_tidy_resources.html">bcdc_tidy_resources</a></span>(<span class="st">"b1f27d1c-244a-410e-a361-931fac62a524"</span>)
@@ -420,53 +420,18 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">## Plot the B.C. Air Zone geospatial data with ggplot()</span>
 <span class="no">bc_az</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>() +
-  <span class="fu">geom_sf</span>()</pre></body></html></div>
-<div class="figure">
-<img src="vignette-fig-air_zones-1.png" alt=""><p class="caption">plot of chunk air_zones</p>
-</div>
-<p><strong>Using B.C. Geographic Warehouse (BCGW) layer names</strong></p>
-<p>If you are familiar with the <a href="https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse">B.C. Geographic Warehouse (BCGW)</a>, you may already know the name of a layer that you want from the BCGW. <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> supports supplying that name directly. For example, the <a href="https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description">record for the B.C. airports layer</a> shows that the object name is <code>WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW</code>, and we can use that in <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code>:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span>(<span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)
-<span class="co">#&gt; Simple feature collection with 455 features and 41 fields</span>
-<span class="co">#&gt; geometry type:  POINT</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146</span>
-<span class="co">#&gt; CRS:            3005</span>
-<span class="co">#&gt; # A tibble: 455 x 42</span>
-<span class="co">#&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…</span>
-<span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt;  1 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  2 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  3 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  4 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  5 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  6 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  7 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  8 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt;  9 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt; 10 WHSE… "Ministry of Fo… airTransportati… Air Transportat… BC Airports     </span>
-<span class="co">#&gt; # … with 445 more rows, and 37 more variables: SOURCE_DATA_ID &lt;chr&gt;,</span>
-<span class="co">#&gt; #   SUPPLIED_SOURCE_ID_IND &lt;chr&gt;, AIRPORT_NAME &lt;chr&gt;, DESCRIPTION &lt;chr&gt;,</span>
-<span class="co">#&gt; #   PHYSICAL_ADDRESS &lt;chr&gt;, ALIAS_ADDRESS &lt;chr&gt;, STREET_ADDRESS &lt;chr&gt;,</span>
-<span class="co">#&gt; #   POSTAL_CODE &lt;chr&gt;, LOCALITY &lt;chr&gt;, CONTACT_PHONE &lt;chr&gt;,</span>
-<span class="co">#&gt; #   CONTACT_EMAIL &lt;chr&gt;, CONTACT_FAX &lt;chr&gt;, WEBSITE_URL &lt;chr&gt;, IMAGE_URL &lt;chr&gt;,</span>
-<span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, KEYWORDS &lt;chr&gt;, DATE_UPDATED &lt;date&gt;,</span>
-<span class="co">#&gt; #   SITE_GEOCODED_IND &lt;chr&gt;, AERODROME_STATUS &lt;chr&gt;, AIRCRAFT_ACCESS_IND &lt;chr&gt;,</span>
-<span class="co">#&gt; #   DATA_SOURCE &lt;chr&gt;, DATA_SOURCE_YEAR &lt;chr&gt;, ELEVATION &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   FUEL_AVAILABILITY_IND &lt;chr&gt;, HELICOPTER_ACCESS_IND &lt;chr&gt;, IATA_CODE &lt;chr&gt;,</span>
-<span class="co">#&gt; #   ICAO_CODE &lt;chr&gt;, MAX_RUNWAY_LENGTH &lt;dbl&gt;, NUMBER_OF_RUNWAYS &lt;int&gt;,</span>
-<span class="co">#&gt; #   OIL_AVAILABILITY_IND &lt;chr&gt;, RUNWAY_SURFACE &lt;chr&gt;,</span>
-<span class="co">#&gt; #   SEAPLANE_ACCESS_IND &lt;chr&gt;, TC_LID_CODE &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;,</span>
-<span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POINT [m]&gt;</span></pre></body></html></div>
+  <span class="fu">geom_sf</span>() +
+  <span class="fu">theme_minimal</span>()</pre></body></html></div>
+<p><img src="vignette-fig-air_zones-1.png" title="plot of chunk air_zones" alt="plot of chunk air_zones" width="100%"></p>
 <p><strong>Note:</strong> The <code>bcdata</code> package supports downloading <em>most</em> file types, including zip archives. It will do its best to identify and read data from zip files, however if there are multiple data files in the zip, or data files that <code>bcdata</code> doesn’t know how to import, it will fail.</p>
 </div>
 <div id="bcdc_query_geodata" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bcdc_query_geodata" class="anchor"></a><code>bcdc_query_geodata()</code>
 </h3>
-<p>Many geospatial data sets in the B.C. Data Catalogue are available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. While <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will retrieve the geospatial data for you, sometimes the geospatial file is very large—and slow to download—and/or you may only want <em>some</em> of the data. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> let’s you query catalogue geospatial data available as Web Service using <code>select</code> and <code>filter</code> functions (just like in <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>. The <code>bcdc::collect()</code> function returns the <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> query results as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
+<p>Many geospatial data sets in the B.C. Data Catalogue are available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. While <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will retrieve the geospatial data for you, sometimes the geospatial file is very large—and slow to download—and/or you may only want <em>some</em> of the data. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> let’s you query catalogue geospatial data available as a Web Service using <code>select</code> and <code>filter</code> functions (just like in <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>. The <code>bcdc::collect()</code> function returns the <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> query results as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
 <p>Let’s get the Capital Regional District boundary from the <a href="https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9">B.C. Regional Districts geospatial data</a>—the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co">## Find the B.C. Regional Districts catalogue record</span>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co">## Find the B.C. Regional Districts catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span>(<span class="st">"regional districts administrative areas"</span>, <span class="kw">res_format</span> <span class="kw">=</span> <span class="st">"wms"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">1</span>)
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
 <span class="co">#&gt; </span>
@@ -515,10 +480,9 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">## Plot the Capital Regional District polygon with ggplot()</span>
 <span class="no">my_regional_district</span>  <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>() +
-  <span class="fu">geom_sf</span>()</pre></body></html></div>
-<div class="figure">
-<img src="vignette-fig-regional_districts-1.png" alt=""><p class="caption">plot of chunk regional_districts</p>
-</div>
+  <span class="fu">geom_sf</span>() +
+  <span class="fu">theme_minimal</span>()</pre></body></html></div>
+<p><img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%"></p>
 <p>The vignette <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a> provides a full demonstration on how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata()</a></code> to fine tune a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a> request for geospatial data from the B.C. Data Catalogue.</p>
 </div>
   </div>

@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2020-05-26</h4>
+            <h4 class="date">2020-05-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -127,16 +127,7 @@ See the License for the specific language governing permissions and limitations 
 <p>First you need to load the package. We will also load the <code>sf</code> and <code>dplyr</code> packages to help us work with spatial data. You can learn more about the <code>sf</code> package <a href="https://r-spatial.github.io/sf/">here</a> and <code>dplyr</code> <a href="https://dplyr.tidyverse.org/">here</a>:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">bcdata</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>)
-<span class="co">#&gt; Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)</pre></body></html></div>
 </div>
 <div id="geospatial-data-in-the-b-c--data-catalogue" class="section level2">
 <h2 class="hasAnchor">
@@ -241,9 +232,7 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu"><a href="../reference/collect-methods.html">collect</a></span>()</pre></body></html></div>
 <p>Again note here that we have assigned the object a name and added the <code>collect</code> statement. This step happens when you have selected the data you want and wish to begin working with it in R like a normal <code>sf</code> object. For example, we can now plot these three school districts:</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="no">districts</span>))</pre></body></html></div>
-<div class="figure">
-<img src="vignette-fig-districts-1.png" alt=""><p class="caption">plot of chunk districts</p>
-</div>
+<p><img src="vignette-fig-districts-1.png" title="plot of chunk districts" alt="plot of chunk districts" width="100%"></p>
 <p>Now that we have the spatial boundaries narrowed by specific school districts we can perform some spatial operations to determine parks in the school districts.</p>
 </div>
 <div id="greenspaces-data" class="section level2">
@@ -286,24 +275,24 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; ● At most six rows of the record are printed here</span>
 <span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
-<span class="co">#&gt; geometry type:  POLYGON</span>
+<span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 1228760 ymin: 459819.7 xmax: 1242329 ymax: 469547.6</span>
+<span class="co">#&gt; bbox:           xmin: 1227981 ymin: 451450.3 xmax: 1233820 ymax: 467084.5</span>
 <span class="co">#&gt; CRS:            3005</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
 <span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…</span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE…                1 Guildfor… Local     Civic Facility   Metro Vancouver </span>
-<span class="co">#&gt; 2 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 3 WHSE…                3 Hartnell… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 4 WHSE…                4 51C - Wa… Local     Trail            Metro Vancouver </span>
-<span class="co">#&gt; 5 WHSE…                5 52A - Gr… Local     Green Space      Metro Vancouver </span>
-<span class="co">#&gt; 6 WHSE…                6 52G - De… Local     Green Space      Metro Vancouver </span>
+<span class="co">#&gt; 1 WHSE…               24 Bell Est… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 2 WHSE…               25 Bell Park Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 3 WHSE…               26 Ben Stev… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 4 WHSE…               27 Berkshir… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 5 WHSE…               28 Betty Hu… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 6 WHSE…               29 Blackie … Local     Green Space      Metro Vancouver </span>
 <span class="co">#&gt; # … with 14 more variables: MUNICIPALITY &lt;chr&gt;, CIVIC_NUMBER &lt;int&gt;,</span>
 <span class="co">#&gt; #   CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;, LATITUDE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></pre></body></html></div>
 <p>Since we are interested in only “Park” data we can subset our query:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.html">filter</a></span>(<span class="no">PARK_PRIMARY_USE</span> <span class="kw">==</span> <span class="st">"Park"</span>)
@@ -312,47 +301,37 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; ● At most six rows of the record are printed here</span>
 <span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
-<span class="co">#&gt; geometry type:  POLYGON</span>
+<span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 1227676 ymin: 459819.7 xmax: 1242329 ymax: 467135.4</span>
+<span class="co">#&gt; bbox:           xmin: 1228590 ymin: 451450.3 xmax: 1234562 ymax: 467084.5</span>
 <span class="co">#&gt; CRS:            3005</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
 <span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…</span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 2 WHSE…                3 Hartnell… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 3 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 4 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 5 WHSE…               22 Beaver C… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 6 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 1 WHSE…               24 Bell Est… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 2 WHSE…               25 Bell Park Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 3 WHSE…               26 Ben Stev… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 4 WHSE…               27 Berkshir… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 5 WHSE…               28 Betty Hu… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 6 WHSE…               30 Blumsen … Local     Park             Metro Vancouver </span>
 <span class="co">#&gt; # … with 14 more variables: MUNICIPALITY &lt;chr&gt;, CIVIC_NUMBER &lt;int&gt;,</span>
 <span class="co">#&gt; #   CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;, LATITUDE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></pre></body></html></div>
 <p>Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the <code>districts</code> object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the <code>INTERSECTS</code> function is appropriate and since this is a last tuning step, we can call <code>collect</code> and assign a name to this object. These requests can sometimes take quite a long:</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">districts_parks</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.html">filter</a></span>(<span class="no">PARK_PRIMARY_USE</span> <span class="kw">==</span> <span class="st">"Park"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.html">filter</a></span>(<span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span>(<span class="no">districts</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span>()
-<span class="co">#&gt; Warning: The object is too large to perform exact spatial operations using bcdata.</span>
-<span class="co">#&gt;              To simplify the polygon, a bounding box was drawn around the polygon and all</span>
-<span class="co">#&gt;              features within the box will be returned. Options include further processing</span>
-<span class="co">#&gt;              with on the returned object or simplify the object.</span></pre></body></html></div>
+  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span>()</pre></body></html></div>
 <p>Plotting both the filtered parks data and the district polygons reveals an important consideration when using <code>bcdata</code>:</p>
-<div class="figure">
-<img src="vignette-fig-district_parks-1.png" alt=""><p class="caption">plot of chunk district_parks</p>
-</div>
+<p><img src="vignette-fig-district_parks-1.png" title="plot of chunk district_parks" alt="plot of chunk district_parks" width="100%"></p>
 <p>In this example, many parks not contained within the school districts are included in the <code>districts_parks</code> object. This is because rather than a full intersection, <code>bcdata</code> draws a bounding box around all the polygons that are doing the intersection (in this case <code>district</code>) and does the intersection based on that bounding box. This is a limitation imposed by the size of the object doing the geometric operation (in this case <code>district</code>) and the limits of the BC Data Catalogue. Drawing the bounding box illustrates this point:</p>
-<div class="figure">
-<img src="vignette-fig-bbox-1.png" alt=""><p class="caption">plot of chunk bbox</p>
-</div>
+<p><img src="vignette-fig-bbox-1.png" title="plot of chunk bbox" alt="plot of chunk bbox" width="100%"></p>
 <p>We are left with two options to get around this problem. First, we can simply do some additional processing with the <code>sf</code> package. Specifically we can use a spatial join to assign parks into their respective district:</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">districts_parks_join</span> <span class="kw">&lt;-</span> <span class="no">districts_parks</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_join.html">st_join</a></span>(<span class="no">districts</span>, <span class="kw">left</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<div class="figure">
-<img src="vignette-fig-dp_join-1.png" alt=""><p class="caption">plot of chunk dp_join</p>
-</div>
+<p><img src="vignette-fig-dp_join-1.png" title="plot of chunk dp_join" alt="plot of chunk dp_join" width="100%"></p>
 <p>A second approach is to set an internal option (<code>bcdata.max_geom_pred_size</code>) and increase the threshold of when a bounding box is drawn. Options are set in R like this:</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r">options("bcdata.max_geom_pred_size" = {object size in bytes})</pre></body></html></div>
 <p>The value of <code>bcdata.max_geom_pred_size</code> is set conservatively so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests.</p>
@@ -404,10 +383,6 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu"><a href="../reference/filter.html">filter</a></span>(<span class="no">PARK_PRIMARY_USE</span> <span class="kw">==</span> <span class="st">"Park"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.html">filter</a></span>(<span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span>(<span class="no">districts</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/show_query.html">show_query</a></span>()
-<span class="co">#&gt; Warning: The object is too large to perform exact spatial operations using bcdata.</span>
-<span class="co">#&gt;              To simplify the polygon, a bounding box was drawn around the polygon and all</span>
-<span class="co">#&gt;              features within the box will be returned. Options include further processing</span>
-<span class="co">#&gt;              with on the returned object or simplify the object.</span>
 <span class="co">#&gt; &lt;url&gt;</span>
 <span class="co">#&gt; &lt;body&gt;</span>
 <span class="co">#&gt;    SERVICE: WFS</span>
