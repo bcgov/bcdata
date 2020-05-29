@@ -33,7 +33,7 @@ knitr::opts_chunk$set(
   fig.width = 7,
   fig.height = 4,
   dev = "CairoPNG",
-  dpi = 150
+  dpi = 300
 )
 
 options(crayon.enabled = FALSE)

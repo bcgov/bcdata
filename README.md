@@ -84,7 +84,7 @@ library(bcdata)
     bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
   - [Querying Spatial Data with
     bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
-  - [An Exploration of Silviculture Data with
+  - [Exploring Silviculture Data with
     bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
   - Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (Coming
     Soon\!)
