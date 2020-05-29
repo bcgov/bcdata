@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An Exploration of Silviculture Data with bcdata • bcdata</title>
+<title>Exploring Silviculture Data with bcdata • bcdata</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="An Exploration of Silviculture Data with bcdata">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Exploring Silviculture Data with bcdata">
 <meta property="og:description" content="bcdata">
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png">
 <meta name="robots" content="noindex">
@@ -68,7 +68,7 @@
       <a href="../articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a>
     </li>
     <li>
-      <a href="../articles/explore-silviculture-data-using-bcdata.html">An Exploration of Silviculture Data with bcdata</a>
+      <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
     </li>
   </ul>
 </li>
@@ -96,9 +96,9 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>An Exploration of Silviculture Data with bcdata</h1>
+      <h1 data-toc-skip>Exploring Silviculture Data with bcdata</h1>
             
-            <h4 class="date">2020-05-27</h4>
+            <h4 class="date">2020-05-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/explore-silviculture-data-using-bcdata.Rmd"><code>vignettes/explore-silviculture-data-using-bcdata.Rmd</code></a></small>
       <div class="hidden name"><code>explore-silviculture-data-using-bcdata.Rmd</code></div>
@@ -121,29 +121,32 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
 <p>This vignette will demonstrate how you can use <code>bcdata</code> to access and explore British Columbia silviculture data.</p>
-<div id="silviculture-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#silviculture-data" class="anchor"></a>Silviculture Data</h3>
+<div id="silviculture-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#silviculture-data" class="anchor"></a>Silviculture Data</h2>
 <p>Silviculture data for British Columbia are largely collected and stored through the <a href="https://www2.gov.bc.ca/gov/content?id=F62992DA5B324446AD5E1B5BFFA404CC">Reporting Silviculture Updates and Land Status Tracking System (RESULTS) database</a>—including information on the management of openings, disturbances, silviculture activities and obligation declarations as required by the <a href="https://www2.gov.bc.ca/gov/content?id=D65006C0326B4E0F838194044C10CA86">Forest and Range Practices Act</a>. <a href="https://catalogue.data.gov.bc.ca/dataset?q=RESULTS+silviculture">RESULTS data sets are publically available through the B.C. Data Catalogue</a> under the <a href="https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61">Open Government Licence - British Columbia</a>.</p>
 </div>
-<div id="reforestation-with-climate-considerations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#reforestation-with-climate-considerations" class="anchor"></a>Reforestation with Climate Considerations</h3>
+<div id="reforestation-with-climate-considerations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reforestation-with-climate-considerations" class="anchor"></a>Reforestation with Climate Considerations</h2>
 <p><a href="https://en.wikipedia.org/wiki/Larix_occidentalis">Western larch</a> has been identified as a tree species that will be well-adapted to projected future climates in northern British Columbia. In 2013, forest policy was developed that allowed foresters to plant western larch outside of its natural range as a climate change adaptation silviculture measure.</p>
-<p><strong>How much western larch has been planted in the Prince George Natural Resource District?</strong></p>
+<div id="how-much-western-larch-has-been-planted-in-the-prince-george-natural-resource-district" class="section level4">
+<h4 class="hasAnchor">
+<a href="#how-much-western-larch-has-been-planted-in-the-prince-george-natural-resource-district" class="anchor"></a>How much western larch has been planted in the Prince George Natural Resource District?</h4>
 <p>Let’s use the <code>bcdata</code> package to search, retrieve and explore the RESULTS silviculture data and answer this question.</p>
 </div>
-<div id="getting-started" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting Started</h3>
+</div>
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting Started</h2>
 <p>To start, let’s load the <code>bcdata</code> package. We will also load the <code>dplyr</code> and <code>ggplot2</code> packages to help us work with the data. You can learn more about the <code>dplyr</code> package <a href="https://dplyr.tidyverse.org/">here</a> and the <code>ggplot2</code> package <a href="https://ggplot2.tidyverse.org/">here</a>:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">bcdata</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)</pre></body></html></div>
 </div>
-<div id="getting-the-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-the-data" class="anchor"></a>Getting the Data</h3>
+<div id="getting-the-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-the-data" class="anchor"></a>Getting the Data</h2>
 <p>We can gather the data we need to answer our question using the <a href="https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3">RESULTS - silviculture forest cover dataset</a>. First, let’s take a look at the metadata record using <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Get the metadata using the human-readable record name</span>
 <span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span>(<span class="st">"results-forest-cover-silviculture"</span>)
@@ -177,7 +180,7 @@ See the License for the specific language governing permissions and limitations 
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span>
 <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span>)
 <span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span>
-<span class="co">#&gt; ● Using collect() on this object will return 871319 features and 159 fields</span>
+<span class="co">#&gt; ● Using collect() on this object will return 871550 features and 159 fields</span>
 <span class="co">#&gt; ● At most six rows of the record are printed here</span>
 <span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 159 fields</span>
@@ -243,27 +246,24 @@ See the License for the specific language governing permissions and limitations 
 <p>This query shows that this data set has over 850,000 features and over 150 fields. Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.</p>
 <p>Note that we have only <em>queried</em> the data set so far—the data set would be too large (~1GB) to download efficiently. So, let’s use <code><a href="../reference/filter.html">filter()</a></code> with <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> to refine our query <em>before</em> we collect the data and import it into R.</p>
 </div>
-<div id="refining-a-geospatial-data-query" class="section level3">
-<h3 class="hasAnchor">
-<a href="#refining-a-geospatial-data-query" class="anchor"></a>Refining a Geospatial Data Query</h3>
+<div id="refining-a-geospatial-data-query" class="section level2">
+<h2 class="hasAnchor">
+<a href="#refining-a-geospatial-data-query" class="anchor"></a>Refining a Geospatial Data Query</h2>
 <p>To address our question, we need the treatment data (1) from the Prince George Natural Resource District <em>and</em> (2) that contain western larch.</p>
-<p>First, we can use the <code>bcdata</code> package to preview and then download the spatial boundary for the Prince George Natural Resource District. We can use <code><a href="../reference/bcdc_preview.html">bcdc_preview()</a></code> to interactively view a very simple preview of a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data set from the B.C. Data Catalogue. This is useful to quickly verify that the spatial data is what we are looking for:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/bcdc_preview.html">bcdc_preview</a></span>(<span class="st">"natural-resource-nr-district"</span>)
-<span class="co">#&gt; Error in loadNamespace(name): there is no package called 'webshot'</span></pre></body></html></div>
-<p>Now we can use <code>DPG</code>, the <code>ORG_UNIT</code> for Prince George Natural Resource District, to filter and download the spatial boundary we need:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co">## Create a spatial feature object named dpg</span>
+<p>First, we can use the <code>bcdata</code> package to download the spatial boundary for the Prince George Natural Resource District—<code>DPG</code> is the <code>ORG_UNIT</code> for Prince George Natural Resource District:</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co">## Create a spatial feature object named dpg</span>
 <span class="no">dpg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"natural-resource-nr-district"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.html">filter</a></span>(<span class="no">ORG_UNIT</span><span class="kw">==</span><span class="st">"DPG"</span>) <span class="kw">%&gt;%</span> <span class="co"># filter for Prince George Natural Resource District</span>
   <span class="fu"><a href="../reference/collect-methods.html">collect</a></span>() <span class="co"># and collect the data</span></pre></body></html></div>
 <p>Let’s plot this spatial object and double check we have we what we need:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">dpg</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">dpg</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>() +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>()</pre></body></html></div>
 <p><img src="vignette-fig-plot-dpg-1.png" title="plot of chunk plot-dpg" alt="plot of chunk plot-dpg" width="100%"></p>
 <p>Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.</p>
 <p>We only need to download the treatments that have western larch planted. We can use the <code><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature()</a></code> helper function to examine the column names and types of the layer. In this case, we want to keep rows where the five <code>S_SPECIES_CODE_*</code> columns contain <code>"LW"</code>, the code for western larch.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># Make a vector of tree species we are interested in</span>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># Make a vector of tree species we are interested in</span>
 <span class="co"># (in this case only LW for western larch)</span>
 <span class="no">spp_list</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"LW"</span>)
 
@@ -280,14 +280,14 @@ See the License for the specific language governing permissions and limitations 
   ) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/collect-methods.html">collect</a></span>() <span class="co">#collect/download the data</span></pre></body></html></div>
 </div>
-<div id="exploring-the-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#exploring-the-data" class="anchor"></a>Exploring the Data</h3>
+<div id="exploring-the-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#exploring-the-data" class="anchor"></a>Exploring the Data</h2>
 <p>Let’s look at the dimensions of this now much more manageable data object we have downloaded from the B.C. Data Catalogue:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">trees_dpg</span>)
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">trees_dpg</span>)
 <span class="co">#&gt; [1] 160 160</span></pre></body></html></div>
 <p>We can see there are 160 treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">trees_dpg</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">trees_dpg</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>() +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">dpg</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="fl">NA</span>) + <span class="co">#add the DPG spatial boundary</span>
@@ -297,7 +297,7 @@ See the License for the specific language governing permissions and limitations 
 <div id="what-is-the-size-and-age-distribution-of-larch-plantations-in-the-prince-george-natural-resource-district-in-the-year-2020" class="section level4">
 <h4 class="hasAnchor">
 <a href="#what-is-the-size-and-age-distribution-of-larch-plantations-in-the-prince-george-natural-resource-district-in-the-year-2020" class="anchor"></a>What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?</h4>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">trees_dpg</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">trees_dpg</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/mutate.html">mutate</a></span>(<span class="kw">age</span> <span class="kw">=</span> <span class="fl">2020</span> - <span class="no">REFERENCE_YEAR</span> + <span class="no">S_SPECIES_AGE_1</span>) <span class="kw">%&gt;%</span> <span class="co">#create a plantation age column</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +  <span class="co">#start a plot</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">age</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">FEATURE_AREA_SQM</span>/<span class="fl">10000</span>) + <span class="co">#convert feature area to hectares</span>
@@ -318,7 +318,7 @@ See the License for the specific language governing permissions and limitations 
 <h4 class="hasAnchor">
 <a href="#what-is-the-biogeoclimatic-ecosystem-classification-bec-distribution-of-western-larch-plantations-in-the-prince-george-natural-resource-district" class="anchor"></a>What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?</h4>
 <p>We can download <a href="https://catalogue.data.gov.bc.ca/dataset/bec-map">British Columbia biogeoclimatic (BEC) data</a> from the B.C. Data Catalogue using <code>bcdata</code> and join to our existing <code>trees_dpg</code> geospatial dataset using the <code>st_join</code> function from the <code>sf</code> package. You can learn more about <code>sf</code> <a href="https://r-spatial.github.io/sf/">here</a>.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>) <span class="co">#load the sf package</span>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>) <span class="co">#load the sf package</span>
 
 <span class="co"># Load the BEC data for Prince George Natural Resource District</span>
 <span class="no">bgc_dpg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY"</span>) <span class="kw">%&gt;%</span>
@@ -329,7 +329,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="no">trees_bec_dpg</span> <span class="kw">&lt;-</span> <span class="no">trees_dpg</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_join.html">st_join</a></span>(<span class="no">bgc_dpg</span>[, <span class="st">"MAP_LABEL"</span>]) <span class="co">#join BEC data for each polygon</span></pre></body></html></div>
 <p>Now, we can summarize the area planted with western larch by biogeoclimatic unit:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">trees_bec_dpg</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">trees_bec_dpg</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">MAP_LABEL</span>) <span class="kw">%&gt;%</span> <span class="co"># group polygons by biogeoclimatic unit</span>
   <span class="fu"><a href="https://rdrr.io/pkg/sf/man/tidyverse.html">summarise</a></span>(<span class="kw">Area</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">FEATURE_AREA_SQM</span>)/<span class="fl">10000</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +
@@ -350,7 +350,9 @@ See the License for the specific language governing permissions and limitations 
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 
