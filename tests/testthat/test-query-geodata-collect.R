@@ -99,5 +99,5 @@ test_that("bcdc_sf objects has attributes",{
                      "url", "full_url", "time_downloaded"))
   expect_true(nzchar(attributes(sf_obj)$url))
   expect_true(nzchar(attributes(sf_obj)$full_url))
-  expect_true(nzchar(attributes(sf_obj)$time_downloaded))
+  expect_is(attributes(sf_obj)$time_downloaded, "POSIXt")
 })
