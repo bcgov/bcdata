@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2020-05-28"
+date: "2020-06-02"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -248,9 +248,9 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> geometry type:  MULTIPOLYGON
+#> geometry type:  POLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1227676 ymin: 455032.1 xmax: 1234629 ymax: 467135.4
+#> bbox:           xmin: 1227676 ymin: 461435.1 xmax: 1238850 ymax: 468825.5
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
@@ -259,13 +259,13 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
 #> 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
 #> 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
-#> 5 WHSE…               30 Blumsen … Local     Park             Metro Vancouver 
-#> 6 WHSE…               31 Bob Rutl… Local     Park             Metro Vancouver 
+#> 5 WHSE…               37 Freedom … Local     Park             Metro Vancouver 
+#> 6 WHSE…               46 Barnston… Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
-#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:

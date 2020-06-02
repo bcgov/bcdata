@@ -133,7 +133,7 @@ You can see all valid values for the catalogue search facets using `bcdata::bcdc
 ## Valid values for search facet 'license_id'
 bcdc_search_facets(facet = "license_id")
 #>         facet count                                             display_name
-#> 1  license_id    68                           Statistics Canada Open Licence
+#> 1  license_id    80                           Statistics Canada Open Licence
 #> 2  license_id     1               Queen's Printer Licence - British Columbia
 #> 3  license_id    12                      Open Government Licence – TransLink
 #> 4  license_id    12 Open Government Licence – Municipality of North Cowichan
@@ -144,7 +144,7 @@ bcdc_search_facets(facet = "license_id")
 #> 9  license_id     3                  Open Government Licence - BC Assessment
 #> 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence
 #> 11 license_id    16                           Elections BC Open Data Licence
-#> 12 license_id  1282                                              Access Only
+#> 12 license_id  1291                                              Access Only
 #>    name
 #> 1    21
 #> 2    25
