@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2020-05-28</h4>
+            <h4 class="date">2020-06-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -301,9 +301,9 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; ● At most six rows of the record are printed here</span>
 <span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
-<span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
+<span class="co">#&gt; geometry type:  POLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 1227676 ymin: 455032.1 xmax: 1234629 ymax: 467135.4</span>
+<span class="co">#&gt; bbox:           xmin: 1227676 ymin: 461435.1 xmax: 1238850 ymax: 468825.5</span>
 <span class="co">#&gt; CRS:            3005</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
 <span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…</span>
@@ -312,13 +312,13 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver </span>
 <span class="co">#&gt; 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver </span>
 <span class="co">#&gt; 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 5 WHSE…               30 Blumsen … Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 6 WHSE…               31 Bob Rutl… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 5 WHSE…               37 Freedom … Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 6 WHSE…               46 Barnston… Local     Park             Metro Vancouver </span>
 <span class="co">#&gt; # … with 14 more variables: MUNICIPALITY &lt;chr&gt;, CIVIC_NUMBER &lt;int&gt;,</span>
 <span class="co">#&gt; #   CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;, LATITUDE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></pre></body></html></div>
 <p>Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the <code>districts</code> object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the <code>INTERSECTS</code> function is appropriate and since this is a last tuning step, we can call <code>collect</code> and assign a name to this object. These requests can sometimes take quite a long:</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">districts_parks</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span>(<span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.html">filter</a></span>(<span class="no">PARK_PRIMARY_USE</span> <span class="kw">==</span> <span class="st">"Park"</span>) <span class="kw">%&gt;%</span>
