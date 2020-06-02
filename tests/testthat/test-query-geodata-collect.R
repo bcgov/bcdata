@@ -86,7 +86,7 @@ test_that("collect() returns a bcdc_sf object",{
   expect_s3_class(sf_obj, "bcdc_sf")
 })
 
-test_that("bcdc_sf objects have a url as an attributes",{
+test_that("bcdc_sf objects has attributes",{
   skip_on_cran()
   skip_if_net_down()
   sf_obj <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>%
@@ -94,5 +94,10 @@ test_that("bcdc_sf objects have a url as an attributes",{
     select(LATITUDE) %>%
     collect()
 
+  expect_identical(names(attributes(sf_obj)),
+                   c("names", "row.names", "class", "sf_column", "agr", "query_list",
+                     "url", "full_url", "time_downloaded"))
   expect_true(nzchar(attributes(sf_obj)$url))
+  expect_true(nzchar(attributes(sf_obj)$full_url))
+  expect_is(attributes(sf_obj)$time_downloaded, "POSIXt")
 })
