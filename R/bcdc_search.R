@@ -32,8 +32,7 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
   query <- paste0("\"", facet, "\"", collapse = ",")
   query <- paste0("[", query, "]")
 
-  cli <- bcdc_http_client(paste0(base_url(),
-                                 "action/package_search"))
+  cli <- bcdc_catalogue_client("action/package_search")
 
   r <- cli$get(query = list(facet.field = query, rows = 0))
   r$raise_for_status()
@@ -66,7 +65,7 @@ bcdc_list <- function() {
   limit <- 1000
   while (l_new_ret) {
 
-    cli <- bcdc_http_client(paste0(base_url(), "action/package_list"))
+    cli <- bcdc_catalogue_client("action/package_list")
 
     r <- cli$get(query = list(offset = offset, limit = limit))
     r$raise_for_status()
@@ -138,7 +137,7 @@ bcdc_search <- function(..., license_id = NULL,
 
   query <- gsub("\\s+", "%20", query)
 
-  cli <- bcdc_http_client(paste0(base_url(), "action/package_search"))
+  cli <- bcdc_catalogue_client("action/package_search")
 
   # Use I(query) to treat query as is, so that things like + and :
   # aren't encoded as %2B, %3A etc
@@ -190,8 +189,7 @@ bcdc_get_record <- function(id) {
 
   id <- slug_from_url(id)
 
-  cli <- bcdc_http_client(paste0(base_url(),
-                                 "action/package_show"))
+  cli <- bcdc_catalogue_client("action/package_show")
 
   r <- cli$get(query = list(id = id))
 

@@ -70,8 +70,7 @@ bcdc_describe_feature.bcdc_record <- function(record){
 parse_raw_feature_tbl <- function(query_list){
 
   ## GET and parse data to sf object
-  cli <-
-    bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+  cli <- bcdc_wfs_client()
 
   cc <- cli$post(body = query_list, encode = "form")
 

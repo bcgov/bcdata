@@ -95,4 +95,18 @@ expect_error(bcdc_tidy_resources("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"),
 "No bcdc_tidy_resources method for a BCGW object name")
 })
 
+test_that("bcdc_get_record works with/without authentication", {
+  skip_if_net_down()
+  skip_on_cran()
 
+  key_val <- Sys.getenv("BCDC_KEY")
+  skip_if_not(nzchar(key_val))
+  on.exit(Sys.setenv(BCDC_KEY = key_val))
+
+  expect_message(res <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8'),
+                 "Authorizing with your stored API key")
+  expect_is(res, "bcdc_record")
+
+  Sys.unsetenv("BCDC_KEY")
+  expect_silent(bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8'))
+})
