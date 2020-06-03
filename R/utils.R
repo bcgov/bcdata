@@ -219,7 +219,7 @@ read_from_url <- function(resource, ...){
   if (!reported_format %in% formats_supported()) {
     stop("Reading ", reported_format, " files is not currently supported in bcdata.")
   }
-  auth <- grepl("(catalogue.data.gov.bc.ca)|(pub.data.gov.bc.ca)", file_url)
+  auth <- grepl("(catalogue|pub)\\.data\\.gov\\.bc\\.ca", file_url)
   cli <- bcdc_http_client(file_url, auth = auth)
 
   ## Establish where to download file
