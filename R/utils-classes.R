@@ -21,7 +21,7 @@ as.bcdc_sf <- function(x, query_list, url, full_url) {
   structure(x,
             class = c("bcdc_sf", setdiff(class(x), "bcdc_sf")),
             query_list = query_list,
-            url = url, full_url = full_url)
+            url = url, full_url = full_url, time_downloaded = Sys.time())
 }
 
 
