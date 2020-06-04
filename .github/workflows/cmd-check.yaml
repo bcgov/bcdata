@@ -26,7 +26,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      cache-version: v2
+      cache-version: v3
 
     steps:
       - uses: actions/checkout@v2
