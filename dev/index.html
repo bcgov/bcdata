@@ -153,6 +153,21 @@
 <li>Using bcdata with <a href="https://github.com/bcgov/bcmaps">bcmaps</a> (Coming Soon!)</li>
 </ul>
 </div>
+<div id="bcdc-authentication" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bcdc-authentication" class="anchor"></a>BCDC Authentication</h3>
+<p>If you are an authorized editor of the B.C. Data Catalogue you may want to access records that are not publicly available (e.g., in DRAFT, waiting to be published). This can be done by authenticating with the catalogue with an API key.</p>
+<p><strong><em>Important Note:</em></strong> <em>Your API key is like a password and you must take care to keep it private. Do not share it, and be careful to not include it in any scripts or accidentally commit it to GitHub.</em></p>
+<p>You can log in to the catalogue to obtain your API key, then store it as an environment variable in your <a href="https://rstats.wtf/r-startup.html#renviron"><code>.Renviron</code> file</a>. The environment variable must be called <code>BCDC_KEY</code>, set like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>BCDC_KEY=your<span class="op">-</span>api<span class="op">-</span>key</span></code></pre></div>
+<p>This way, the relevant bcdata functions will read that key and use it to authorize your calls to the catalogue, allowing you to access additional records that you are authorized to see if you were logged into the catalogue web interface. Functions that benefit from this are:</p>
+<ul>
+<li><code><a href="reference/bcdc_search.html">bcdc_search()</a></code></li>
+<li><code><a href="reference/bcdc_list.html">bcdc_list()</a></code></li>
+<li><code><a href="reference/bcdc_get_record.html">bcdc_get_record()</a></code></li>
+<li><code><a href="reference/bcdc_get_data.html">bcdc_get_data()</a></code></li>
+</ul>
+</div>
 <div id="getting-help-or-reporting-an-issue" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-help-or-reporting-an-issue" class="anchor"></a>Getting Help or Reporting an Issue</h3>
