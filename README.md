@@ -91,8 +91,8 @@ library(bcdata)
 
 ### BCDC Authentication
 
-If you are an authorized user of the B.C. Data Catalogue you may want to
-access records/data that are not publicly available (e.g., in DRAFT,
+If you are an authorized editor of the B.C. Data Catalogue you may want
+to access records that are not publicly available (e.g., in DRAFT,
 waiting to be published). This can be done by authenticating with the
 catalogue with an API key.
 
