@@ -94,7 +94,7 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
     query_list <- compact(query_list)
 
     ## GET and parse data to sf object
-    cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+    cli <- bcdc_wfs_client()
 
     cols_df <- feature_helper(record)
 
@@ -134,7 +134,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   query_list <- compact(query_list)
 
   ## GET and parse data to sf object
-  cli <- bcdc_http_client(url = "https://openmaps.gov.bc.ca/geo/pub/wfs")
+  cli <- bcdc_wfs_client()
 
   cols_df <- feature_helper(query_list$typeNames)
 

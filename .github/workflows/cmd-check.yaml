@@ -26,7 +26,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      cache-version: v2
+      cache-version: v3
 
     steps:
       - uses: actions/checkout@v2
@@ -82,6 +82,8 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
           install.packages("rcmdcheck")
+          # Install dev rmarkdown (https://github.com/rstudio/rmarkdown/pull/1832) for R < 3.6
+          if (getRversion() < 3.6) remotes::install_github("rstudio/rmarkdown")
         shell: Rscript {0}
 
       - name: Check

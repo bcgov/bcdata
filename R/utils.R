@@ -10,7 +10,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
+catalogue_base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
+wfs_base_url <- function() "https://openmaps.gov.bc.ca/geo/pub/wfs/"
 
 bcdata_user_agent <- function(){
   "https://github.com/bcgov/bcdata"
@@ -74,11 +75,33 @@ formats_supported <- function(){
   c(bcdc_read_functions()[["format"]], "zip")
 }
 
-bcdc_http_client <- function(url = NULL) {
+bcdc_catalogue_client <- function(endpoint = NULL) {
+  url <- paste0(catalogue_base_url(), endpoint)
+  bcdc_http_client(url, auth = TRUE)
+}
 
-  crul::HttpClient$new(url = url,
-                       headers = list(`User-Agent` = bcdata_user_agent()))
+bcdc_wfs_client <- function(endpoint = NULL) {
+  url <- paste0(wfs_base_url(), endpoint)
+  bcdc_http_client(url, auth = FALSE)
+}
 
+bcdc_http_client <- function(url, auth = FALSE) {
+  headers <- list(
+    `User-Agent` = bcdata_user_agent(),
+    Authorization = if (auth) bcdc_auth() else NULL
+  )
+
+  crul::HttpClient$new(
+    url = url,
+    headers = compact(headers)
+  )
+}
+
+bcdc_auth <- function() {
+  key <- Sys.getenv("BCDC_KEY")
+  if (!nzchar(key)) return(NULL)
+  message("Authorizing with your stored API key")
+  key
 }
 
 ## Check if there is internet
@@ -124,7 +147,6 @@ wfs_to_r_col_type <- function(col){
     TRUE ~ as.character(col)
   )
 }
-
 
 ##from a record
 formats_from_record <- function(x, trim = TRUE){
@@ -197,7 +219,8 @@ read_from_url <- function(resource, ...){
   if (!reported_format %in% formats_supported()) {
     stop("Reading ", reported_format, " files is not currently supported in bcdata.")
   }
-  cli <- bcdc_http_client(file_url)
+  auth <- grepl("(catalogue|pub)\\.data\\.gov\\.bc\\.ca", file_url)
+  cli <- bcdc_http_client(file_url, auth = auth)
 
   ## Establish where to download file
   tmp <- tempfile(tmpdir = unique_temp_dir(),
