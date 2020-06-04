@@ -8,7 +8,9 @@
 * Provide `as_tibble` as an alias for `collect` in line with `dbplyr` behaviour (#166)
 * When reading in excel files, `bcdc_get_data` now outputs a messages indicating the presence and names of any sheets (#190)
 * `bcdc_get_data()` & `bcdc_query_geodata()` will now work with full B.C. data catalogue url including resource (#125, #196)
-* `bcdc_sf` objects now have an `time_downloaded` attribute 
+* `bcdc_sf` objects now have an `time_downloaded` attribute
+* Authorized B.C. Data Catalogue editors can now authenticate with the catalague by setting 
+a `BCDC_KEY` environment variable with their catalogue API token (https://github.com/bcgov/bcdata#bcdc-authentication; #208).
 
 ### BUG FIXES
 * Fix `select`, `filter` and `mutate` roxygen so that bcdata specific documentation to these methods is available
