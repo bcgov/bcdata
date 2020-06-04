@@ -83,6 +83,34 @@ library(bcdata)
 - [Exploring Silviculture Data with bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
 - Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (Coming Soon!)
 
+### BCDC Authentication
+
+If you are an authorized user of the B.C. Data Catalogue you may want to access
+records/data that are not publicly available (e.g., in DRAFT, waiting to be
+published). This can be done by authenticating with the catalogue with an API
+key.
+
+_**Important Note:**_ *Your API key is like a password and you must take care to
+keep it private. Do not share it, and be careful to not include it in any
+scripts or accidentally commit it to GitHub.*
+
+You can log in to the catalogue to obtain your API key, then store it as an
+environment variable in your [`.Renviron` file](https://rstats.wtf/r-startup.html#renviron). 
+The environment variable must be called `BCDC_KEY`, set like this:
+
+```
+BCDC_KEY=your-api-key
+```
+
+This way, the relevant bcdata functions will read that key and use it to
+authorize your calls to the catalogue, allowing you to access additional records
+that you are authorized to see if you were logged into the catalogue web
+interface. Functions that benefit from this are:
+
+- `bcdc_search()`
+- `bcdc_list()`
+- `bcdc_get_record()`
+- `bcdc_get_data()`
 
 ### Getting Help or Reporting an Issue
 
