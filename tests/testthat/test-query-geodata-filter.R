@@ -136,8 +136,9 @@ test_that("large vectors supplied to filter succeeds",{
     filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
     collect()
 
-  expect_silent(bcdc_query_geodata(lines_record) %>%
-    filter(WATERSHED_KEY %in% pori$WATERSHED_KEY))
+  expect_is(bcdc_query_geodata(lines_record) %>%
+    filter(WATERSHED_KEY %in% pori$WATERSHED_KEY),
+    "bcdc_promise")
 
 })
 
@@ -212,9 +213,10 @@ test_that("an intersect with an object less than 5E5 proceeds",{
     st_as_sfc()
 
 
-  expect_silent(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  expect_is(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
     filter(WITHIN(small_districts)) %>%
-    collect())
+    collect(),
+    "bcdc_sf")
 })
 
 test_that("a BCGW name works with filter", {

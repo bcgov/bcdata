@@ -39,7 +39,12 @@ print.bcdc_promise <- function(x, ...) {
 
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
 
-  query_list <- c(x$query_list, COUNT = 6)
+  if (is.null(x$query_list$count)) {
+    query_list <- c(x$query_list, count = 6) ## only add if not there.
+  } else {
+   query_list <- x$query_list
+  }
+
   cli <- x$cli
   cc <- cli$post(body = query_list, encode = "form")
 

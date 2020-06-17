@@ -22,6 +22,10 @@ compact <- function(l) Filter(Negate(is.null), l)
 
 bcdc_number_wfs_records <- function(query_list, client){
 
+  if (!is.null(query_list$count)) {
+    return(query_list$count)
+  }
+
   if(!is.null(query_list$propertyName)){
     query_list$propertyName <- NULL
   }

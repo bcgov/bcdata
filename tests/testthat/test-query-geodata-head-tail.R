@@ -41,3 +41,20 @@ test_that("tail works", {
     tail(arrange(bcdc_get_data(record, resource = resource), .data[[col]]), 3L)[[col]]
   )
 })
+
+
+test_that("head/tail works with a record that would otherwise require pagination",{
+  skip_if_net_down()
+  skip_on_cran()
+  dh <- bcdc_query_geodata('2af1388e-d5f7-46dc-a6e2-f85415ddbd1c') %>%
+    head(3) %>%
+    collect()
+
+  expect_equal(nrow(dh), 3L)
+
+  dt <- bcdc_query_geodata('2af1388e-d5f7-46dc-a6e2-f85415ddbd1c') %>%
+    tail(3) %>%
+    collect()
+
+  expect_equal(nrow(dt), 3L)
+})
