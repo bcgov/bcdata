@@ -148,17 +148,17 @@ See dplyr::collect for details." />
 
     <div class="ref-description">
     <p>See <code>tibble::<a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></code> for details.</p>
-<p>After tuning a query, <code>collect()</code> is used to actually bring the data into memory.
-This will retrieve an sf object into R. The <code>as_tibble()</code> function can be used
+<p>After tuning a query, <code><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect()</a></code> is used to actually bring the data into memory.
+This will retrieve an sf object into R. The <code><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>as_tibble()</a></code> function can be used
 interchangeably with <code>collect</code> which matches <code>dbplyr</code> behaviour.</p>
 <p>See <code>dplyr::<a href='https://dplyr.tidyverse.org/reference/compute.html'>collect</a></code> for details.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for bcdc_promise</span>
-<span class='fu'>collect</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for bcdc_promise</span>
-<span class='fu'>as_tibble</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>as_tibble</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,8 +172,8 @@ interchangeably with <code>collect</code> which matches <code>dbplyr</code> beha
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>collect</span>()</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect</a></span>()</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
@@ -204,8 +204,8 @@ interchangeably with <code>collect</code> which matches <code>dbplyr</code> beha
 #&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
-<span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>as_tibble</span>()</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>as_tibble</a></span>()</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
@@ -235,7 +235,8 @@ interchangeably with <code>collect</code> which matches <code>dbplyr</code> beha
 #&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span></div></span></pre>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

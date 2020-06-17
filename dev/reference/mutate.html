@@ -153,14 +153,14 @@ approach to use mutate with bcdata</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for bcdc_promise</span>
-<span class='fu'>mutate</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/mutate.html'>mutate</a></span>(<span class='kw'>.data</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>object of class <code>bcdc_promise</code> (likely passed from <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>)</p></td>
+      <td><p>object of class <code>bcdc_promise</code> (likely passed from <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>)</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -176,12 +176,13 @@ approach to use mutate with bcdata</p>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 
 <span class='co'>## Mutate columns</span>
-<span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate</span>(<span class='no'>LATITUDE</span> * <span class='fl'>100</span>)
-}</div></pre>
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/mutate.html'>mutate</a></span>(<span class='kw'>LATITUDE</span> <span class='op'>*</span> <span class='fl'>100</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

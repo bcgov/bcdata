@@ -149,35 +149,35 @@ filtering may be needed to achieve exact results." />
 
     <div class="ref-description">
     <p>Functions to construct a CQL expression to be used
-to filter results from <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.
+to filter results from <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.
 See <a href='https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate'>the geoserver CQL documentation for details</a>.
 The sf object is automatically converted in a
 bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 filtering may be needed to achieve exact results.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>EQUALS</span>(<span class='no'>geom</span>)
+    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>EQUALS</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>DISJOINT</span>(<span class='no'>geom</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>DISJOINT</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>INTERSECTS</span>(<span class='no'>geom</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>INTERSECTS</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>TOUCHES</span>(<span class='no'>geom</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>TOUCHES</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>CROSSES</span>(<span class='no'>geom</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>CROSSES</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>WITHIN</span>(<span class='no'>geom</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>WITHIN</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>CONTAINS</span>(<span class='no'>geom</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>CONTAINS</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>OVERLAPS</span>(<span class='no'>geom</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>OVERLAPS</a></span>(<span class='kw'>geom</span>)
 
-<span class='fu'>BBOX</span>(<span class='no'>coords</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>BBOX</a></span>(<span class='kw'>coords</span>, crs = <span class='kw'>NULL</span>)
 
-<span class='fu'>DWITHIN</span>(
-  <span class='no'>geom</span>,
-  <span class='no'>distance</span>,
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"meters"</span>, <span class='st'>"feet"</span>, <span class='st'>"statute miles"</span>, <span class='st'>"nautical miles"</span>, <span class='st'>"kilometers"</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>DWITHIN</a></span>(
+  <span class='kw'>geom</span>,
+  <span class='kw'>distance</span>,
+  units = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"meters"</span>, <span class='st'>"feet"</span>, <span class='st'>"statute miles"</span>, <span class='st'>"nautical miles"</span>, <span class='st'>"kilometers"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>

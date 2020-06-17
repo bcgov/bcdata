@@ -148,10 +148,10 @@ the default" />
 the default</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_browse</span>(
-  <span class='kw'>query</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>browser</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"browser"</span>),
-  <span class='kw'>encodeIfNeeded</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_browse.html'>bcdc_browse</a></span>(
+  query = <span class='kw'>NULL</span>,
+  browser = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"browser"</span>),
+  encodeIfNeeded = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -195,16 +195,16 @@ session is interactive. The URL used is returned as a character string.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## Take me to the B.C. Data Catalogue home page</span>
-<span class='fu'>bcdc_browse</span>()
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_browse.html'>bcdc_browse</a></span>()
 
 <span class='co'>## Take me to the B.C. airports catalogue record</span>
-<span class='fu'>bcdc_browse</span>(<span class='st'>"bc-airports"</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_browse.html'>bcdc_browse</a></span>(<span class='st'>"bc-airports"</span>)
 
 <span class='co'>#' ## Take me to the B.C. airports catalogue record</span>
-<span class='fu'>bcdc_browse</span>(<span class='st'>"76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_browse.html'>bcdc_browse</a></span>(<span class='st'>"76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)
 
 <span class='co'>## Take me to the catalogue search results for 'fish'</span>
-<span class='fu'>bcdc_browse</span>(<span class='st'>"fish"</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_browse.html'>bcdc_browse</a></span>(<span class='st'>"fish"</span>)
 
 <span class='co'># }</span></div></pre>
   </div>

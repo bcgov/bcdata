@@ -146,15 +146,15 @@
     <p>Search the B.C. Data Catalogue</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_search</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>license_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>download_audience</span> <span class='kw'>=</span> <span class='st'>"Public"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sector</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>organization</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>
+    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_search.html'>bcdc_search</a></span>(
+  <span class='kw'>...</span>,
+  license_id = <span class='kw'>NULL</span>,
+  download_audience = <span class='st'>"Public"</span>,
+  type = <span class='kw'>NULL</span>,
+  res_format = <span class='kw'>NULL</span>,
+  sector = <span class='kw'>NULL</span>,
+  organization = <span class='kw'>NULL</span>,
+  n = <span class='fl'>100</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -166,30 +166,30 @@
     </tr>
     <tr>
       <th>license_id</th>
-      <td><p>the type of license (see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("license_id")</a></code>).</p></td>
+      <td><p>the type of license (see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("license_id")</a></code>).</p></td>
     </tr>
     <tr>
       <th>download_audience</th>
       <td><p>download audience
-(see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("download_audience")</a></code>). Default <code>"Public"</code></p></td>
+(see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("download_audience")</a></code>). Default <code>"Public"</code></p></td>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>type of resource (see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("type")</a></code>)</p></td>
+      <td><p>type of resource (see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("type")</a></code>)</p></td>
     </tr>
     <tr>
       <th>res_format</th>
-      <td><p>format of resource (see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("res_format")</a></code>)</p></td>
+      <td><p>format of resource (see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("res_format")</a></code>)</p></td>
     </tr>
     <tr>
       <th>sector</th>
       <td><p>sector of government from which the data comes
-(see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("sector")</a></code>)</p></td>
+(see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("sector")</a></code>)</p></td>
     </tr>
     <tr>
       <th>organization</th>
       <td><p>government organization that manages the data
-(see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("organization")</a></code>)</p></td>
+(see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("organization")</a></code>)</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -203,8 +203,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 301 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 301.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_search.html'>bcdc_search</a></span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 303 matches. Returning the first 100.</span>
+#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 303.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
 #&gt; 
 #&gt; Number of records: 100 (Showing the top 10)
 #&gt; Titles:
@@ -240,7 +240,7 @@
 #&gt;  Name: broadleaf-forest-1-250-000-geobase-land-cover 
 #&gt; 
 #&gt; Access a single record by calling bcdc_get_record(ID)
-#&gt;       with the ID from the desired record.</div><div class='input'><span class='fu'>bcdc_search</span>(<span class='st'>"regional district"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"Geographic"</span>, <span class='kw'>res_format</span> <span class='kw'>=</span> <span class='st'>"fgdb"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 187 matches. Returning the first 100.</span>
+#&gt;       with the ID from the desired record.</div><div class='input'><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_search.html'>bcdc_search</a></span>(<span class='st'>"regional district"</span>, type = <span class='st'>"Geographic"</span>, res_format = <span class='st'>"fgdb"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 187 matches. Returning the first 100.</span>
 #&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 187.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
 #&gt; 
 #&gt; Number of records: 100 (Showing the top 10)
@@ -260,18 +260,18 @@
 #&gt; 5: Legally Defined Administrative Areas of BC (other, xlsx)
 #&gt;  ID: 12f0fd64-94d5-422a-832e-6627a2a01702
 #&gt;  Name: legally-defined-administrative-areas-of-bc
-#&gt; 6: BC College Region Boundaries (other, wms, kml)
-#&gt;  ID: 6b8da230-9bc2-4bb4-989e-7d5dad84a4ac
-#&gt;  Name: bc-college-region-boundaries
-#&gt; 7: Communities Affected by Evacuation Orders and Alerts (other, wms, kml)
-#&gt;  ID: 284f6b3f-e1ce-4394-81aa-1a4af9feee56
-#&gt;  Name: communities-affected-by-evacuation-orders-and-alerts
-#&gt; 8: Environmental Emergency Response (EER) District Boundaries (other, wms, kml)
-#&gt;  ID: e87e1db2-d99c-412f-be36-650d84c9540f
-#&gt;  Name: environmental-emergency-response-eer-district-boundaries
-#&gt; 9: Local and Regional Greenspaces (other, wms, kml, xlsx)
+#&gt; 6: Local and Regional Greenspaces (wms, kml, xlsx, other)
 #&gt;  ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da
 #&gt;  Name: local-and-regional-greenspaces
+#&gt; 7: BC College Region Boundaries (other, wms, kml)
+#&gt;  ID: 6b8da230-9bc2-4bb4-989e-7d5dad84a4ac
+#&gt;  Name: bc-college-region-boundaries
+#&gt; 8: Communities Affected by Evacuation Orders and Alerts (other, wms, kml)
+#&gt;  ID: 284f6b3f-e1ce-4394-81aa-1a4af9feee56
+#&gt;  Name: communities-affected-by-evacuation-orders-and-alerts
+#&gt; 9: Environmental Emergency Response (EER) District Boundaries (wms, kml, other)
+#&gt;  ID: e87e1db2-d99c-412f-be36-650d84c9540f
+#&gt;  Name: environmental-emergency-response-eer-district-boundaries
 #&gt; 10: Forest Licensee Operating Areas (other, wms, kml)
 #&gt;  ID: 5a18c401-7c99-48fe-8a1a-b4597072d8b6
 #&gt;  Name: forest-licensee-operating-areas 
