@@ -64,19 +64,19 @@ test_that("select accept dplyr like column specifications",{
   skip_on_cran()
   layer <-  bcdc_query_geodata(polygon_record)
   wrong_fields <-  c('ADMIN_AREA_NAME', 'dummy_col')
-  correct_fields <-  c('ADMIN_AREA_NAME', 'OIC_YEAR')
+  correct_fields <-  c('ADMIN_AREA_NAME', 'OIC_MO_YEAR')
 
 
   ## Most basic select
-  expect_is(select(layer, ADMIN_AREA_NAME, OIC_YEAR), "bcdc_promise")
-  ## Using a pre-assigned vecotr
+  expect_is(select(layer, ADMIN_AREA_NAME, OIC_MO_YEAR), "bcdc_promise")
+  ## Using a pre-assigned vector
   expect_is(select(layer, correct_fields), "bcdc_promise")
   ## Throws an error when column doesn't exist
   expect_error(select(layer, wrong_fields))
-  expect_is(select(layer, ADMIN_AREA_NAME:OIC_YEAR), "bcdc_promise")
+  expect_is(select(layer, ADMIN_AREA_NAME:OIC_MO_YEAR), "bcdc_promise")
   ## Some weird mix
-  expect_is(select(layer, 'ADMIN_AREA_NAME', OIC_YEAR), "bcdc_promise")
+  expect_is(select(layer, 'ADMIN_AREA_NAME', OIC_MO_YEAR), "bcdc_promise")
   ## Another weird mix
-  expect_is(select(layer, c('ADMIN_AREA_NAME','OIC_YEAR') , OIC_NUMBER), "bcdc_promise")
+  expect_is(select(layer, c('ADMIN_AREA_NAME','OIC_MO_YEAR') , OIC_MO_NUMBER), "bcdc_promise")
   expect_is(select(layer, 1:5), "bcdc_promise")
 })
