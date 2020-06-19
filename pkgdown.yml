@@ -1,9 +1,8 @@
-pandoc: 2.7.2
-pkgdown: 1.4.1
-pkgdown_sha: ~
-articles:
-  bcdata: bcdata.html
-  efficiently-query-spatial-data-in-the-bc-data-catalogue: efficiently-query-spatial-data-in-the-bc-data-catalogue.html
+pandoc: 2.7.3
+pkgdown: 1.5.1.9000
+pkgdown_sha: caf7cc74e008e8d0d6e53eeda93cd3cad3545bf2
+articles: []
+last_built: 2020-06-19T22:22Z
 urls:
   reference: https://bcgov.github.io/bcdata/reference
   article: https://bcgov.github.io/bcdata/articles

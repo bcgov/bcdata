@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -48,7 +52,6 @@ a Web Service. See bcdc_get_record(record)$resources). If the record is greater 
 the response will be paginated. If you are querying layers of this size, expect
 that the request will take quite a while." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -66,7 +69,7 @@ that the request will take quite a while." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -80,7 +83,7 @@ that the request will take quite a while." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -108,6 +111,9 @@ that the request will take quite a while." />
     <li>
       <a href="../articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a>
     </li>
+    <li>
+      <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -116,7 +122,7 @@ that the request will take quite a while." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bcgov/bcdata">
+  <a href="https://github.com/bcgov/bcdata/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -146,14 +152,14 @@ the response will be paginated. If you are querying layers of this size, expect
 that the request will take quite a while.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_query_geodata</span>(<span class='no'>record</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='fl'>3005</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='kw'>record</span>, crs = <span class='fl'>3005</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>record</th>
-      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>),
+      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record()</a></code>),
 a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
 Warehouse (BCGW) name.</p>
 <p>It is advised to use the permanent ID for a record or the BCGW name rather than the
@@ -174,31 +180,30 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 
     <p>A <code>bcdc_promise</code> object. This object includes all of the information
 required to retrieve the requested data. In order to get the actual data as
-an <code>sf</code> object, you need to run <code><a href='collect.html'>collect()</a></code> on the <code>bcdc_promise</code>.</p>
+an <code>sf</code> object, you need to run <code><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect()</a></code> on the <code>bcdc_promise</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that this function doesn't actually return the data, but rather an
 object of class <code>bcdc_promise</code>, which includes all of the information
 required to retrieve the requested data. In order to get the actual data as
-an <code>sf</code> object, you need to run <code><a href='collect.html'>collect()</a></code> on the <code>bcdc_promise</code>. This
-allows further refining the call to <code>bcdc_query_geodata()</code> with <code><a href='filter.html'>filter()</a></code>
-and/or <code><a href='select.html'>select()</a></code> statements before pulling down the actual data as an <code>sf</code>
-object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
+an <code>sf</code> object, you need to run <code><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect()</a></code> on the <code>bcdc_promise</code>. This
+allows further refining the call to <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata()</a></code> with <code><a href='https://bcgov.github.io/bcdata/reference/filter.html'>filter()</a></code>
+and/or <code><a href='https://bcgov.github.io/bcdata/reference/select.html'>select()</a></code> statements before pulling down the actual data as an <code>sf</code>
+object with <code><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect()</a></code>. See examples.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'># Returns a bcdc_promise, which can be further refined using filter/select:</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-airports"</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='fl'>3857</span>)</div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; &lt;U+25CF&gt; Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>41</span><span> fields
-#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here
-#&gt; ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>, crs = <span class='fl'>3857</span>)</div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>41</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: -14313270 ymin: 6176688 xmax: -13728510 ymax: 7259410
-#&gt; epsg (SRID):    3857
-#&gt; proj4string:    +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs
+#&gt; CRS:            3857
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 42</span><span>
 #&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -208,161 +213,151 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>5</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'># … with 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'># To obtain the actual data as an sf object, collect() must be called:</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-airports"</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='fl'>3857</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>PHYSICAL_ADDRESS</span> <span class='kw'>==</span> <span class='st'>'Victoria, BC'</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='collect.html'>collect</a></span>()</div><div class='output co'>#&gt; Simple feature collection with 3 features and 41 fields
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>, crs = <span class='fl'>3857</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/filter.html'>filter</a></span>(<span class='kw'>PHYSICAL_ADDRESS</span> <span class='op'>==</span> <span class='st'>'Victoria, BC'</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect</a></span>()</div><div class='output co'>#&gt; Simple feature collection with 3 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: -13735460 ymin: 6176688 xmax: -13733670 ymax: 6177610
-#&gt; epsg (SRID):    3857
-#&gt; proj4string:    +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs
+#&gt; CRS:            3857
 #&gt; </span><span style='color: #555555;'># A tibble: 3 x 42</span><span>
 #&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
 #&gt; </span><span style='color: #555555;'>1</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>2</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>3</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'># … with 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"ground-water-wells"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>OBSERVATION_WELL_NUMBER</span> <span class='kw'>==</span> <span class='fl'>108</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='select.html'>select</a></span>(<span class='no'>WELL_TAG_NUMBER</span>, <span class='no'>WATERSHED_CODE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='collect.html'>collect</a></span>()</div><div class='output co'>#&gt; Simple feature collection with 1 feature and 9 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 1273428 ymin: 1197388 xmax: 1273428 ymax: 1197388
-#&gt; epsg (SRID):    3005
-#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
-#&gt; </span><span style='color: #555555;'># A tibble: 1 x 10</span><span>
-#&gt;   id    WELL_TAG_NO OBJECTID WELL_ID WELL_TAG_NUMBER WATERSHED_CODE WHEN_CREATED
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0000000227… 59</span><span style='text-decoration: underline;'>363</span><span>477   </span><span style='text-decoration: underline;'>57</span><span>864           </span><span style='text-decoration: underline;'>22</span><span>722 0              2003-08-13Z 
-#&gt; </span><span style='color: #555555;'># … with 3 more variables: WHO_CREATED </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   WELL_LICENCE_GENERAL_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"ground-water-wells"</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/filter.html'>filter</a></span>(<span class='kw'>OBSERVATION_WELL_NUMBER</span> <span class='op'>==</span> <span class='fl'>108</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/select.html'>select</a></span>(<span class='kw'>WELL_TAG_NUMBER</span>, <span class='kw'>INTENDED_WATER_USE</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/collect-methods.html'>collect</a></span>()</div><div class='output co'>#&gt; Simple feature collection with 0 features and 0 fields
+#&gt; bbox:           xmin: NA ymin: NA xmax: NA ymax: NA
+#&gt; CRS:            4326
+#&gt; </span><span style='color: #555555;'># A tibble: 0 x 1</span><span>
+#&gt; </span><span style='color: #555555;'># … with 1 variable: geometry </span><span style='color: #555555;font-style: italic;'>&lt;GEOMETRY [°]&gt;</span><span></div><div class='input'>
 <span class='co'>## A moderately large layer</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-environmental-monitoring-locations"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; &lt;U+25CF&gt; Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37048</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
-#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here
-#&gt; ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-environmental-monitoring-locations"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37438</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1249937 ymin: 625366.3 xmax: 1414392 ymax: 842244.8
-#&gt; epsg (SRID):    3005
-#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; bbox:           xmin: 1358309 ymin: 546591.1 xmax: 1399886 ymax: 662101.4
+#&gt; CRS:            3005
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 36</span><span>
 #&gt;   id    MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0600326                        48 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… 0600327                        48 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… 0600329                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… 0600330                        48 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… 0600331                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… 0600332                        48 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LOCATION_AREA_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MOBILE_LOCATION_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CLOSED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ESTABLISHED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LEGAL_DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MONITORING_LOCN_COMMENT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   MONITORING_LOCATION_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SOURCE_CLASS_NARRATIVE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   WELL_IDENTIFICATION_PLATE_NO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, RESULT_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   PERMIT_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_RELATIONSHIP </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, FEATURE_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-environmental-monitoring-locations"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='filter.html'>filter</a></span>(<span class='no'>PERMIT_RELATIONSHIP</span> <span class='kw'>==</span> <span class='st'>"DISCHARGE"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; &lt;U+25CF&gt; Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>11786</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
-#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here
-#&gt; ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0600112                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… 0600114                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… 0600115                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… 0600116                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… 0600117                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… 0600118                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LOCATION_AREA_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MOBILE_LOCATION_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CLOSED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ESTABLISHED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LEGAL_DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   MONITORING_LOCN_COMMENT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MONITORING_LOCATION_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SOURCE_CLASS_NARRATIVE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WELL_IDENTIFICATION_PLATE_NO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   RESULT_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PERMIT_RELATIONSHIP </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FEATURE_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT</span><span>
+#&gt; </span><span style='color: #555555;'># </span><span style='color: #555555;font-style: italic;'>  [m]&gt;</span><span></div><div class='input'><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-environmental-monitoring-locations"</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/filter.html'>filter</a></span>(<span class='kw'>PERMIT_RELATIONSHIP</span> <span class='op'>==</span> <span class='st'>"DISCHARGE"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>11913</span><span> features and </span><span style='color: #00BB00;'>35</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 857513.8 ymin: 513327.3 xmax: 1071426 ymax: 648672.1
-#&gt; epsg (SRID):    3005
-#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; bbox:           xmin: 1249115 ymin: 495286.5 xmax: 1500113 ymax: 896127.6
+#&gt; CRS:            3005
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 36</span><span>
 #&gt;   id    MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… E100329                        11 </span><span style='color: #BB0000;'>NA</span><span>               2               
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… E100332                        11 </span><span style='color: #BB0000;'>NA</span><span>               2               
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… E100350                        11 </span><span style='color: #BB0000;'>NA</span><span>               1               
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… E100357                        11 </span><span style='color: #BB0000;'>NA</span><span>               2               
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… E100402                        11 </span><span style='color: #BB0000;'>NA</span><span>               4               
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… E100411                        11 </span><span style='color: #BB0000;'>NA</span><span>               1               
-#&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LOCATION_AREA_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MOBILE_LOCATION_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CLOSED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ESTABLISHED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LEGAL_DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MONITORING_LOCN_COMMENT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   MONITORING_LOCATION_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SOURCE_CLASS_NARRATIVE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   WELL_IDENTIFICATION_PLATE_NO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, RESULT_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   PERMIT_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_RELATIONSHIP </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, FEATURE_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0600174                        48 </span><span style='color: #BB0000;'>NA</span><span>               1               
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… E105586                        52 </span><span style='color: #BB0000;'>NA</span><span>               1               
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… E105587                        41 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… E105610                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… E105611                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… E105616                        52 </span><span style='color: #BB0000;'>NA</span><span>               3               
+#&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LOCATION_AREA_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MOBILE_LOCATION_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CLOSED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ESTABLISHED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LEGAL_DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   MONITORING_LOCN_COMMENT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MONITORING_LOCATION_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SOURCE_CLASS_NARRATIVE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WELL_IDENTIFICATION_PLATE_NO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   RESULT_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_RELATIONSHIP </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FEATURE_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT</span><span>
+#&gt; </span><span style='color: #555555;'># </span><span style='color: #555555;font-style: italic;'>  [m]&gt;</span><span></div><div class='input'>
 
 <span class='co'>## A very large layer</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"terrestrial-protected-areas-representation-by-biogeoclimatic-unit"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'terrestrial-protected-areas-representation-by-biogeoclimatic-unit'</span><span> record
-#&gt; &lt;U+25CF&gt; Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>15267</span><span> features and </span><span style='color: #00BB00;'>25</span><span> fields
-#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here
-#&gt; ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"terrestrial-protected-areas-representation-by-biogeoclimatic-unit"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'terrestrial-protected-areas-representation-by-biogeoclimatic-unit'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>15267</span><span> features and </span><span style='color: #00BB00;'>25</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 25 fields
 #&gt; geometry type:  POLYGON
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1084136 ymin: 465827.5 xmax: 1565462 ymax: 749984.1
-#&gt; epsg (SRID):    3005
-#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; bbox:           xmin: 1354541 ymin: 488281 xmax: 1562701 ymax: 935007.8
+#&gt; CRS:            3005
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 26</span><span>
 #&gt;   id    BG_CODE BCAREAPR PRPA_BC NUMPA_BC PCTBCPR PCTPPABC FEATURE_CLASS_S…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… IDF dm…  </span><span style='text-decoration: underline;'>155</span><span>206.   </span><span style='text-decoration: underline;'>5</span><span>097.        9    3.28   0.035</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… IDF dw    </span><span style='text-decoration: underline;'>88</span><span>067.  </span><span style='text-decoration: underline;'>30</span><span>714.        4   34.9    0.216               435
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… IDF dw    </span><span style='text-decoration: underline;'>88</span><span>067.  </span><span style='text-decoration: underline;'>30</span><span>714.        4   34.9    0.216               435
-#&gt; </span><span style='color: #555555;'># … with 18 more variables: ZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   PHASE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NATURAL_DISTURBANCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAP_LABEL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SUBZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHASE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   NATURAL_DISTURBANCE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, FEATURE_AREA </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, FEATURE_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   FEATURE_AREA_SQM </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, FEATURE_LENGTH_M </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POLYGON [m]&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… ESSFmm…   </span><span style='text-decoration: underline;'>26</span><span>926.  </span><span style='text-decoration: underline;'>26</span><span>926.        2   100.     0.189              435
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… ESSFmm…   </span><span style='text-decoration: underline;'>26</span><span>926.  </span><span style='text-decoration: underline;'>26</span><span>926.        2   100.     0.189              435
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… ESSFmwp   </span><span style='text-decoration: underline;'>64</span><span>810.  </span><span style='text-decoration: underline;'>22</span><span>873.       10    35.3    0.160              435
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… ESSFmwp   </span><span style='text-decoration: underline;'>64</span><span>810.  </span><span style='text-decoration: underline;'>22</span><span>873.       10    35.3    0.160              435
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… ESSFmwp   </span><span style='text-decoration: underline;'>64</span><span>810.  </span><span style='text-decoration: underline;'>22</span><span>873.       10    35.3    0.160              435
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… ESSFmwp   </span><span style='text-decoration: underline;'>64</span><span>810.  </span><span style='text-decoration: underline;'>22</span><span>873.       10    35.3    0.160              435
+#&gt; </span><span style='color: #555555;'># … with 18 more variables: ZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   PHASE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NATURAL_DISTURBANCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAP_LABEL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SUBZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHASE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   NATURAL_DISTURBANCE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, FEATURE_AREA </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, FEATURE_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FEATURE_AREA_SQM </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, FEATURE_LENGTH_M </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POLYGON [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Using a BCGW name</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'</span><span> record
-#&gt; &lt;U+25CF&gt; Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>41</span><span> fields
-#&gt; &lt;U+25CF&gt; At most six rows of the record are printed here
-#&gt; ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>41</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
-#&gt; epsg (SRID):    3005
-#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; CRS:            3005
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 42</span><span>
 #&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -372,31 +367,25 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>5</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'># … with 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'># }
-
+#&gt; </span><span style='color: #555555;'># … with 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -407,7 +396,7 @@ object with <code><a href='collect.html'>collect()</a></code>. See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

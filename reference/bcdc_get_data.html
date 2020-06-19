@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,7 +49,6 @@
 <meta property="og:title" content="Download and read a resource from a B.C. Data Catalogue record — bcdc_get_data" />
 <meta property="og:description" content="Download and read a resource from a B.C. Data Catalogue record" />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -105,6 +108,9 @@
     <li>
       <a href="../articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a>
     </li>
+    <li>
+      <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -113,7 +119,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bcgov/bcdata">
+  <a href="https://github.com/bcgov/bcdata/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -140,14 +146,14 @@
     <p>Download and read a resource from a B.C. Data Catalogue record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_get_data</span>(<span class='no'>record</span>, <span class='kw'>resource</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='kw'>record</span>, resource = <span class='kw'>NULL</span>, verbose = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>record</th>
-      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>),
+      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record()</a></code>),
 a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
 Warehouse (BCGW) name.</p>
 <p>It is advised to use the permanent ID for a record or the BCGW name rather than the
@@ -171,10 +177,10 @@ Default <code>TRUE</code></p></td>
     <tr>
       <th>...</th>
       <td><p>arguments passed to other functions. Tabular data is passed to a function to handle
-the import based on the file extension. <code><a href='bcdc_read_functions.html'>bcdc_read_functions()</a></code> provides details on which functions
+the import based on the file extension. <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_read_functions.html'>bcdc_read_functions()</a></code> provides details on which functions
 handle the data import. You can then use this information to look at the help pages of those functions.
 See the examples for a workflow that illustrates this process.
-For spatial Web Service data the <code>...</code> arguments are passed to <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.</p></td>
+For spatial Web Service data the <code>...</code> arguments are passed to <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -185,13 +191,12 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Using the record and resource ID:</span>
-<span class='fu'>bcdc_get_data</span>(<span class='kw'>record</span> <span class='kw'>=</span> <span class='st'>'76b1b7a3-2112-4444-857a-afccf7b20da8'</span>,
-              <span class='kw'>resource</span> <span class='kw'>=</span> <span class='st'>'4d0377d9-e8a1-429b-824f-0ce8f363512c'</span>)</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(record = <span class='st'>'76b1b7a3-2112-4444-857a-afccf7b20da8'</span>,
+              resource = <span class='st'>'4d0377d9-e8a1-429b-824f-0ce8f363512c'</span>)</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#&gt; epsg (SRID):    3005
-#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; CRS:            3005
 #&gt; <span style='color: #555555;'># A tibble: 455 x 42</span><span>
 #&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -205,19 +210,19 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'> 8</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'> 9</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>10</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'># … with 445 more rows, and 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='fu'>bcdc_get_data</span>(<span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+#&gt; </span><span style='color: #555555;'># … with 445 more rows, and 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
 #&gt; <span class='message'>cols(</span>
 #&gt; <span class='message'>  CITY = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
 #&gt; <span class='message'>  NAME = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
@@ -238,8 +243,8 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>10</span><span> OLIVER      Orchard Hill Estate Ci… 3480 FRUITVALE WAY             V0H1T0    
 #&gt; </span><span style='color: #555555;'># … with 347 more rows</span><span></div><div class='input'>
 <span class='co'># Using a `bcdc_record` object obtained from `bcdc_get_record`:</span>
-<span class='no'>record</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span>)
-<span class='fu'>bcdc_get_data</span>(<span class='no'>record</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+<span class='kw'>record</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span>)
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='kw'>record</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
 #&gt; <span class='message'>cols(</span>
 #&gt; <span class='message'>  CITY = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
 #&gt; <span class='message'>  NAME = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
@@ -260,12 +265,11 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>10</span><span> OLIVER      Orchard Hill Estate Ci… 3480 FRUITVALE WAY             V0H1T0    
 #&gt; </span><span style='color: #555555;'># … with 347 more rows</span><span></div><div class='input'>
 <span class='co'># Using a BCGW name</span>
-<span class='fu'>bcdc_get_data</span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#&gt; epsg (SRID):    3005
-#&gt; proj4string:    +proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+#&gt; CRS:            3005
 #&gt; </span><span style='color: #555555;'># A tibble: 455 x 42</span><span>
 #&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -279,69 +283,72 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'> 8</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'> 9</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'>10</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'># … with 445 more rows, and 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 445 more rows, and 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Example of correcting import problems</span>
 
 <span class='co'>## Some initial problems reading in the data</span>
-<span class='fu'>bcdc_get_data</span>(<span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'>New names:</span>
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>This .xlsx resource contains the following sheets: </span>
+#&gt; <span class='message'> 'Population'</span>
+#&gt; <span class='message'> 'Gender &amp; Age Distribution'</span>
+#&gt; <span class='message'> 'Median, Average &amp; Growth Rates'</span>
+#&gt; <span class='message'> 'Households'</span>
+#&gt; <span class='message'> 'Household Size'</span></div><div class='output co'>#&gt; <span class='message'>Defaulting to the 'Population' sheet. See ?bcdc_get_data for examples on how to specify a sheet.</span></div><div class='output co'>#&gt; <span class='message'>New names:</span>
 #&gt; <span class='message'>* `` -&gt; ...2</span>
 #&gt; <span class='message'>* `` -&gt; ...3</span>
 #&gt; <span class='message'>* `` -&gt; ...4</span>
 #&gt; <span class='message'>* `` -&gt; ...5</span>
 #&gt; <span class='message'>* `` -&gt; ...6</span>
-#&gt; <span class='message'>* … and 5 more problems</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 901 x 11</span><span>
+#&gt; <span class='message'>* ...</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 901 x 11</span><span>
 #&gt;    `Regional Distri… ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9  ...10 ...11
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> RD Code           Regi… Gend… Year  Age … 15-19 20-24 25-64 65-84 85+   All …
-#&gt; </span><span style='color: #555555;'> 2</span><span> 1000              East… Male  2018  4876  1708  1814  18244 5581  510   32733
-#&gt; </span><span style='color: #555555;'> 3</span><span> 1000              East… Male  2019  4895  1655  1839  18152 5808  548   32897
-#&gt; </span><span style='color: #555555;'> 4</span><span> 1000              East… Male  2020  4912  1614  1816  18085 6050  570   33047
-#&gt; </span><span style='color: #555555;'> 5</span><span> 1000              East… Male  2021  4938  1585  1841  17914 6326  608   33212
-#&gt; </span><span style='color: #555555;'> 6</span><span> 1000              East… Male  2022  4906  1616  1725  17937 6570  613   33367
-#&gt; </span><span style='color: #555555;'> 7</span><span> 1000              East… Male  2023  4922  1594  1661  17892 6839  602   33510
-#&gt; </span><span style='color: #555555;'> 8</span><span> 1000              East… Male  2024  4929  1593  1600  17802 7078  631   33633
-#&gt; </span><span style='color: #555555;'> 9</span><span> 1000              East… Male  2025  4903  1622  1560  17666 7287  707   33745
-#&gt; </span><span style='color: #555555;'>10</span><span> 1000              East… Male  2026  4853  1680  1534  17518 7569  705   33859
+#&gt; </span><span style='color: #555555;'> 1</span><span> RD Code           Regi… Sex   Year  Age … 15-19 20-24 25-64 65-84 85+   All …
+#&gt; </span><span style='color: #555555;'> 2</span><span> 1000              East… Male  2019  4863  1651  1838  18148 5793  543   32836
+#&gt; </span><span style='color: #555555;'> 3</span><span> 1000              East… Male  2020  4850  1607  1812  18083 6022  562   32936
+#&gt; </span><span style='color: #555555;'> 4</span><span> 1000              East… Male  2021  4850  1569  1819  17918 6295  592   33043
+#&gt; </span><span style='color: #555555;'> 5</span><span> 1000              East… Male  2022  4785  1594  1693  17942 6533  594   33141
+#&gt; </span><span style='color: #555555;'> 6</span><span> 1000              East… Male  2023  4756  1577  1622  17910 6794  579   33238
+#&gt; </span><span style='color: #555555;'> 7</span><span> 1000              East… Male  2024  4731  1574  1561  17848 7023  593   33330
+#&gt; </span><span style='color: #555555;'> 8</span><span> 1000              East… Male  2025  4673  1604  1512  17730 7226  670   33415
+#&gt; </span><span style='color: #555555;'> 9</span><span> 1000              East… Male  2026  4590  1659  1483  17589 7495  668   33484
+#&gt; </span><span style='color: #555555;'>10</span><span> 1000              East… Male  2027  4515  1645  1510  17430 7705  731   33536
 #&gt; </span><span style='color: #555555;'># … with 891 more rows</span><span></div><div class='input'>
 <span class='co'>## From bcdc_get_record we realize that the data is in xlsx format</span>
-<span class='fu'><a href='bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record:</span><span> Local Government Population and Household Projections (2018-2027) 
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record:</span><span> New Homes Registry (2016-2018) 
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Name:</span><span> local-government-population-and-household-projections-2018-2027- (ID: d7e6c8c7-052f-4f06-b178-74c02c243ea4 )</span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Permalink:</span><span> https://catalogue.data.gov.bc.ca/dataset/d7e6c8c7-052f-4f06-b178-74c02c243ea4</span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Name:</span><span> new-homes-registry-2016-2018- (ID: 8620ce82-4943-43c4-9932-40730a0255d6 )</span><span style='color: #0000BB;font-style: italic;'>
+#&gt; Permalink:</span><span> https://catalogue.data.gov.bc.ca/dataset/8620ce82-4943-43c4-9932-40730a0255d6</span><span style='color: #0000BB;font-style: italic;'>
 #&gt; Sector:</span><span> Economy</span><span style='color: #0000BB;font-style: italic;'>
 #&gt; Licence:</span><span> Access Only</span><span style='color: #0000BB;font-style: italic;'>
 #&gt; Type:</span><span> Dataset</span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Last Updated:</span><span> 2019-07-17 
+#&gt; Last Updated:</span><span> 2020-04-23 
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Description:</span><span> This dataset contains population and household projections for 2018-2027 including:
-#&gt; overall population, gender distribution, age distribution, median age, average age,
-#&gt; population growth rates, number of households, average number of people per
-#&gt; household.  
+#&gt; Description:</span><span> This dataset contains information from BC Housing's New Homes Registry.  
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>
 #&gt; Resources: (1)
 #&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
-#&gt;   name      url        id     format ext   package_id  location bcdata_available
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> Populati… https://c… d39bd… xlsx   xlsx  d7e6c8c7-0… catalog… TRUE            
+#&gt;   name    url        id       format ext   package_id  location bcdata_available
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>           
+#&gt; </span><span style='color: #555555;'>1</span><span> New Ho… https://c… 32ff8d7… xlsx   xlsx  8620ce82-4… catalog… TRUE            
 #&gt; </span><span style='color: #0000BB;'>
 #&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()
 #&gt; 
 #&gt; </span><span></div><div class='input'>
 <span class='co'>## bcdc_read_functions let's us know that bcdata</span>
 <span class='co'>## uses readxl::read_excel to import xlsx files</span>
-<span class='fu'><a href='bcdc_read_functions.html'>bcdc_read_functions</a></span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 3</span><span>
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_read_functions.html'>bcdc_read_functions</a></span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 3</span><span>
 #&gt;    format  package fun      
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> kml     sf      read_sf  
@@ -355,35 +362,50 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'> 9</span><span> tsv     readr   read_tsv 
 #&gt; </span><span style='color: #555555;'>10</span><span> xlsx    readxl  read_xlsx
 #&gt; </span><span style='color: #555555;'>11</span><span> xls     readxl  read_xls </div><div class='input'>
-<span class='co'>## If you read the help page for readxl::read_excel,</span>
-<span class='co'>## it seems likely that we need to skip the first row:</span>
-<span class='fu'>bcdc_get_data</span>(<span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 900 x 11</span><span>
-#&gt;    `RD Code` `Regional Distr… Gender  Year `Age 0-14` `15-19` `20-24` `25-64`
-#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>018       </span><span style='text-decoration: underline;'>4</span><span>876    </span><span style='text-decoration: underline;'>1</span><span>708    </span><span style='text-decoration: underline;'>1</span><span>814   </span><span style='text-decoration: underline;'>18</span><span>244
-#&gt; </span><span style='color: #555555;'> 2</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>019       </span><span style='text-decoration: underline;'>4</span><span>895    </span><span style='text-decoration: underline;'>1</span><span>655    </span><span style='text-decoration: underline;'>1</span><span>839   </span><span style='text-decoration: underline;'>18</span><span>152
-#&gt; </span><span style='color: #555555;'> 3</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>020       </span><span style='text-decoration: underline;'>4</span><span>912    </span><span style='text-decoration: underline;'>1</span><span>614    </span><span style='text-decoration: underline;'>1</span><span>816   </span><span style='text-decoration: underline;'>18</span><span>085
-#&gt; </span><span style='color: #555555;'> 4</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>021       </span><span style='text-decoration: underline;'>4</span><span>938    </span><span style='text-decoration: underline;'>1</span><span>585    </span><span style='text-decoration: underline;'>1</span><span>841   </span><span style='text-decoration: underline;'>17</span><span>914
-#&gt; </span><span style='color: #555555;'> 5</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>022       </span><span style='text-decoration: underline;'>4</span><span>906    </span><span style='text-decoration: underline;'>1</span><span>616    </span><span style='text-decoration: underline;'>1</span><span>725   </span><span style='text-decoration: underline;'>17</span><span>937
-#&gt; </span><span style='color: #555555;'> 6</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>023       </span><span style='text-decoration: underline;'>4</span><span>922    </span><span style='text-decoration: underline;'>1</span><span>594    </span><span style='text-decoration: underline;'>1</span><span>661   </span><span style='text-decoration: underline;'>17</span><span>892
-#&gt; </span><span style='color: #555555;'> 7</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>024       </span><span style='text-decoration: underline;'>4</span><span>929    </span><span style='text-decoration: underline;'>1</span><span>593    </span><span style='text-decoration: underline;'>1</span><span>600   </span><span style='text-decoration: underline;'>17</span><span>802
-#&gt; </span><span style='color: #555555;'> 8</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>025       </span><span style='text-decoration: underline;'>4</span><span>903    </span><span style='text-decoration: underline;'>1</span><span>622    </span><span style='text-decoration: underline;'>1</span><span>560   </span><span style='text-decoration: underline;'>17</span><span>666
-#&gt; </span><span style='color: #555555;'> 9</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>026       </span><span style='text-decoration: underline;'>4</span><span>853    </span><span style='text-decoration: underline;'>1</span><span>680    </span><span style='text-decoration: underline;'>1</span><span>534   </span><span style='text-decoration: underline;'>17</span><span>518
-#&gt; </span><span style='color: #555555;'>10</span><span>      </span><span style='text-decoration: underline;'>1</span><span>000 East Kootenay    Male    </span><span style='text-decoration: underline;'>2</span><span>027       </span><span style='text-decoration: underline;'>4</span><span>825    </span><span style='text-decoration: underline;'>1</span><span>658    </span><span style='text-decoration: underline;'>1</span><span>563   </span><span style='text-decoration: underline;'>17</span><span>358
-#&gt; </span><span style='color: #555555;'># … with 890 more rows, and 3 more variables: `65-84` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `85+` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `All
-#&gt; #   Ages` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
-# }
+<span class='co'>## bcdata let's you know that this resource has</span>
+<span class='co'>## multiple worksheets</span>
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>This .xlsx resource contains the following sheets: </span>
+#&gt; <span class='message'> 'Notes'</span>
+#&gt; <span class='message'> 'Regional Districts'</span>
+#&gt; <span class='message'> 'Single Detached'</span>
+#&gt; <span class='message'> 'Multi Unit Homes'</span>
+#&gt; <span class='message'> 'Purpose Built Rental'</span></div><div class='output co'>#&gt; <span class='message'>Defaulting to the 'Notes' sheet. See ?bcdc_get_data for examples on how to specify a sheet.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 0 x 0</span><span></div><div class='input'>
+<span class='co'>## we can control what is read in from an excel file</span>
+<span class='co'>## using arguments from readxl::read_excel</span>
 
+<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span>, sheet = <span class='st'>'Regional Districts'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>This .xlsx resource contains the following sheets: </span>
+#&gt; <span class='message'> 'Notes'</span>
+#&gt; <span class='message'> 'Regional Districts'</span>
+#&gt; <span class='message'> 'Single Detached'</span>
+#&gt; <span class='message'> 'Multi Unit Homes'</span>
+#&gt; <span class='message'> 'Purpose Built Rental'</span></div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `` -&gt; ...2</span>
+#&gt; <span class='message'>* `` -&gt; ...3</span>
+#&gt; <span class='message'>* `` -&gt; ...4</span>
+#&gt; <span class='message'>* `` -&gt; ...5</span>
+#&gt; <span class='message'>* `` -&gt; ...6</span>
+#&gt; <span class='message'>* ...</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 31 x 10</span><span>
+#&gt;    `Registered New Hom… ...2     ...3  ...4 ...5    ...6  ...7 ...8   ...9 ...10
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Regional District    Single…    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> Multi…    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span> Rent…    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> </span><span style='color: #BB0000;'>NA</span><span>                   2016     </span><span style='text-decoration: underline;'>2</span><span>017  </span><span style='text-decoration: underline;'>2</span><span>018 2016    </span><span style='text-decoration: underline;'>2</span><span>017  </span><span style='text-decoration: underline;'>2</span><span>018 2016   </span><span style='text-decoration: underline;'>2</span><span>017  </span><span style='text-decoration: underline;'>2</span><span>018
+#&gt; </span><span style='color: #555555;'> 3</span><span> Alberni-Clayoquot    98        105   111 32        17    11 24        0    35
+#&gt; </span><span style='color: #555555;'> 4</span><span> Bulkley-Nechako      63         51    42 17        10     0 0        19     0
+#&gt; </span><span style='color: #555555;'> 5</span><span> Capital              1123      982   947 1186    </span><span style='text-decoration: underline;'>1</span><span>359  </span><span style='text-decoration: underline;'>2</span><span>085 257    </span><span style='text-decoration: underline;'>1</span><span>658  </span><span style='text-decoration: underline;'>1</span><span>184
+#&gt; </span><span style='color: #555555;'> 6</span><span> Cariboo              113       105   154 8          6     0 0        70    41
+#&gt; </span><span style='color: #555555;'> 7</span><span> Central Coast        0           1     1 0          0     0 0         0     0
+#&gt; </span><span style='color: #555555;'> 8</span><span> Central Kootenay     147       140   171 21        30    18 3        22    15
+#&gt; </span><span style='color: #555555;'> 9</span><span> Central Okanagan     853       889   675 1145     823  </span><span style='text-decoration: underline;'>1</span><span>499 790    </span><span style='text-decoration: underline;'>1</span><span>165   534
+#&gt; </span><span style='color: #555555;'>10</span><span> Columbia-Shuswap     227       285   291 18        90   143 0         0     3
+#&gt; </span><span style='color: #555555;'># … with 21 more rows</span><span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -394,7 +416,7 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
