@@ -1,6 +1,6 @@
 Package: bcdata
 Title: Search and Retrieve Data from the BC Data Catalogue
-Version: 0.1.2.9000
+Version: 0.2.0
 Authors@R: 
     c(person(given = "Andy",
              family = "Teucher",
@@ -15,7 +15,8 @@ Authors@R:
       person(given = "Stephanie",
              family = "Hazlitt",
              role = c("aut", "ctb"),
-             email = "stephanie.hazlitt@gov.bc.ca"),
+             email = "stephanie.hazlitt@gov.bc.ca",
+             comment = c(ORCID = "0000-0002-3161-2304")),
       person(given = "Province of British Columbia",
              role = "cph"))
 Description: Search, query, and download tabular and
