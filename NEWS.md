@@ -1,11 +1,13 @@
-# bcdata (development version)
+# bcdata 0.2.0
+
+### BREAKING CHANGES
+* Rename `selectable` column from `bcdc_describe_feature` to `sticky` and modify corresponding docs and tests (#180).
 
 ### IMPROVEMENTS
 * Add explore-silviculture-data-using-bcdata vignette/article. h/t @hgriesbauer 
-* Geometry predicates can now take a `bbox` object as well as an `sf*` object (#176)
-* Rename `selectable` column from `bcdc_describe_feature` to `sticky` and modify corresponding docs and tests (#180)
 * Add `head` and `tail` methods for `bcdc.promise` objects. Thanks to @hgriesbauer for the suggestion! (#182, #186)
 * Provide `as_tibble` as an alias for `collect` in line with `dbplyr` behaviour (#166)
+* Geometry predicates can now take a `bbox` object as well as an `sf*` object (#176)
 * When reading in excel files, `bcdc_get_data` now outputs a messages indicating the presence and names of any sheets (#190)
 * `bcdc_get_data()` & `bcdc_query_geodata()` will now work with full B.C. data catalogue url including resource (#125, #196)
 * `bcdc_sf` objects now have an `time_downloaded` attribute
