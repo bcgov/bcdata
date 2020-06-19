@@ -1,6 +1,6 @@
 ---
 title: "Exploring Silviculture Data with bcdata"
-date: "2020-06-02"
+date: "2020-06-19"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Exploring Silviculture Data with bcdata}
@@ -97,7 +97,7 @@ We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?i
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 #> Querying 'results-forest-cover-silviculture' record
-#> ● Using collect() on this object will return 872209 features and 159 fields
+#> ● Using collect() on this object will return 873108 features and 159 fields
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 159 fields

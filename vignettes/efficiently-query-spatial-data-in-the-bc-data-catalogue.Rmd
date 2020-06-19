@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2020-06-02"
+date: "2020-06-19"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -184,7 +184,7 @@ bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
 #> Type: Geographic
-#> Last Updated: 2019-12-17 
+#> Last Updated: 2020-06-08 
 #> 
 #> Description: This dataset contains spatial and attribute information for local and regional
 #> greenspaces in British Columbia. Local and regional greenspaces are municipal or
@@ -199,10 +199,10 @@ bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> # A tibble: 4 x 8
 #>   name     url        id      format ext   package_id  location bcdata_available
 #>   <chr>    <chr>      <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
-#> 1 BC Geog… https://c… dac897… other  ""    6a2fea1b-0… bcgwdat… FALSE           
-#> 2 WMS get… https://o… a8d5b5… wms    ""    6a2fea1b-0… bcgeogr… TRUE            
-#> 3 KML Net… http://op… a7454e… kml    "kml" 6a2fea1b-0… bcgeogr… FALSE           
-#> 4 LocalRe… https://c… 766631… xlsx   "xls… 6a2fea1b-0… external TRUE            
+#> 1 WMS get… https://o… a8d5b5… wms    ""    6a2fea1b-0… bcgeogr… TRUE            
+#> 2 KML Net… http://op… a7454e… kml    "kml" 6a2fea1b-0… bcgeogr… FALSE           
+#> 3 LocalRe… https://c… 766631… xlsx   "xls… 6a2fea1b-0… external TRUE            
+#> 4 BC Geog… https://c… 53c6c6… other  ""    6a2fea1b-0… bcgeogr… FALSE           
 #> 
 #> You can access the 'Resources' data frame using bcdc_tidy_resources()
 ```
@@ -219,17 +219,17 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Simple feature collection with 6 features and 19 fields
 #> geometry type:  POLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1227676 ymin: 461435.1 xmax: 1236544 ymax: 465867.6
+#> bbox:           xmin: 1228760 ymin: 459819.7 xmax: 1242329 ymax: 469547.6
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               17 55D - Gr… Local     Green Space      Metro Vancouver 
-#> 2 WHSE…               18 55E - Gr… Local     Green Space      Metro Vancouver 
-#> 3 WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver 
-#> 4 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> 5 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> 6 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
+#> 1 WHSE…                1 Guildfor… Local     Civic Facility   Metro Vancouver 
+#> 2 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver 
+#> 3 WHSE…                3 Hartnell… Local     Park             Metro Vancouver 
+#> 4 WHSE…                4 51C - Wa… Local     Trail            Metro Vancouver 
+#> 5 WHSE…                5 52A - Gr… Local     Green Space      Metro Vancouver 
+#> 6 WHSE…                6 52G - De… Local     Green Space      Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
@@ -248,24 +248,24 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> geometry type:  POLYGON
+#> geometry type:  MULTIPOLYGON
 #> dimension:      XY
-#> bbox:           xmin: 1227676 ymin: 461435.1 xmax: 1238850 ymax: 468825.5
+#> bbox:           xmin: 1228935 ymin: 455032.1 xmax: 1242329 ymax: 467925.7
 #> CRS:            3005
 #> # A tibble: 6 x 20
 #>   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…
 #>   <chr>            <int> <chr>     <chr>     <chr>            <chr>           
-#> 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver 
-#> 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver 
-#> 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver 
-#> 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver 
-#> 5 WHSE…               37 Freedom … Local     Park             Metro Vancouver 
-#> 6 WHSE…               46 Barnston… Local     Park             Metro Vancouver 
+#> 1 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver 
+#> 2 WHSE…                3 Hartnell… Local     Park             Metro Vancouver 
+#> 3 WHSE…               30 Blumsen … Local     Park             Metro Vancouver 
+#> 4 WHSE…               31 Bob Rutl… Local     Park             Metro Vancouver 
+#> 5 WHSE…               32 Bog Park  Local     Park             Metro Vancouver 
+#> 6 WHSE…               33 Bonaccor… Local     Park             Metro Vancouver 
 #> # … with 14 more variables: MUNICIPALITY <chr>, CIVIC_NUMBER <int>,
 #> #   CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>, LATITUDE <dbl>,
 #> #   LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>,
-#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
+#> #   OBJECTID <int>, SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
@@ -374,7 +374,7 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #>    CQL_FILTER: (("PARK_PRIMARY_USE" = 'Park') AND (INTERSECTS(SHAPE, POLYGON ((1126991 379215.8, 1528154 379215.8, 1528154 1224041, 1126991 1224041, 1126991 379215.8)))))
 #> 
 #> <full query url>
-#> https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application%2Fjson&typeNames=WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP&SRSNAME=EPSG%3A3005&CQL_FILTER=%28%28%22PARK_PRIMARY_USE%22%20%3D%20%27Park%27%29%20AND%20%28INTERSECTS%28SHAPE%2C%20POLYGON%20%28%281126991%20379215.8%2C%201528154%20379215.8%2C%201528154%201224041%2C%201126991%201224041%2C%201126991%20379215.8%29%29%29%29%29
+#> https://openmaps.gov.bc.ca/geo/pub/wfs/?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application%2Fjson&typeNames=WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP&SRSNAME=EPSG%3A3005&CQL_FILTER=%28%28%22PARK_PRIMARY_USE%22%20%3D%20%27Park%27%29%20AND%20%28INTERSECTS%28SHAPE%2C%20POLYGON%20%28%281126991%20379215.8%2C%201528154%20379215.8%2C%201528154%201224041%2C%201126991%201224041%2C%201126991%20379215.8%29%29%29%29%29
 ```
 
 This output is what being created by the dplyr code outlined above.
