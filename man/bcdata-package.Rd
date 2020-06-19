@@ -32,7 +32,7 @@ Useful links:
 Authors:
 \itemize{
   \item Sam Albers \email{sam.albers@gov.bc.ca} (\href{https://orcid.org/0000-0002-9270-7884}{ORCID}) [contributor]
-  \item Stephanie Hazlitt \email{stephanie.hazlitt@gov.bc.ca} [contributor]
+  \item Stephanie Hazlitt \email{stephanie.hazlitt@gov.bc.ca} (\href{https://orcid.org/0000-0002-3161-2304}{ORCID}) [contributor]
 }
 
 Other contributors:
