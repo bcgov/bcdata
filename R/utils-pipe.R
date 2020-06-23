@@ -12,7 +12,7 @@
 
 #' Pipe operator
 #'
-#' See \code{dplyr::\link[magrittr]{\%>\%}} for details.
+#' See \code{dplyr::\link[magrittr:pipe]{\%>\%}} for details.
 #'
 #' @name %>%
 #' @rdname pipe
