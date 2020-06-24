@@ -12,7 +12,7 @@
 
 #' Collect
 #'
-#' See \code{dplyr::\link[dplyr]{collect}} for details.
+#' See \code{dplyr::\link[dplyr:compute]{collect}} for details.
 #'
 #' @name collect
 #' @rdname collect-methods
