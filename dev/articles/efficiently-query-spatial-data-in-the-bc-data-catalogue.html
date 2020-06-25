@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -93,12 +93,12 @@
 
       
 
-      </header><div class="row">
+      </header><script src="efficiently-query-spatial-data-in-the-bc-data-catalogue_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2020-06-02</h4>
+            <h4 class="date">2020-06-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -262,7 +262,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Geographic</span>
-<span class="co">#&gt; Last Updated: 2019-12-17 </span>
+<span class="co">#&gt; Last Updated: 2020-06-08 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Description: This dataset contains spatial and attribute information for local and regional</span>
 <span class="co">#&gt; greenspaces in British Columbia. Local and regional greenspaces are municipal or</span>
@@ -277,10 +277,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; # A tibble: 4 x 8</span>
 <span class="co">#&gt;   name     url        id      format ext   package_id  location bcdata_available</span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 BC Geog… https://c… dac897… other  ""    6a2fea1b-0… bcgwdat… FALSE           </span>
-<span class="co">#&gt; 2 WMS get… https://o… a8d5b5… wms    ""    6a2fea1b-0… bcgeogr… TRUE            </span>
-<span class="co">#&gt; 3 KML Net… http://op… a7454e… kml    "kml" 6a2fea1b-0… bcgeogr… FALSE           </span>
-<span class="co">#&gt; 4 LocalRe… https://c… 766631… xlsx   "xls… 6a2fea1b-0… external TRUE            </span>
+<span class="co">#&gt; 1 WMS get… https://o… a8d5b5… wms    ""    6a2fea1b-0… bcgeogr… TRUE            </span>
+<span class="co">#&gt; 2 KML Net… http://op… a7454e… kml    "kml" 6a2fea1b-0… bcgeogr… FALSE           </span>
+<span class="co">#&gt; 3 LocalRe… https://c… 766631… xlsx   "xls… 6a2fea1b-0… external TRUE            </span>
+<span class="co">#&gt; 4 BC Geog… https://c… 53c6c6… other  ""    6a2fea1b-0… bcgeogr… FALSE           </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span>
 </pre></div>
@@ -294,17 +294,17 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
 <span class="co">#&gt; geometry type:  POLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 1227676 ymin: 461435.1 xmax: 1236544 ymax: 465867.6</span>
+<span class="co">#&gt; bbox:           xmin: 1228760 ymin: 459819.7 xmax: 1242329 ymax: 469547.6</span>
 <span class="co">#&gt; CRS:            3005</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
 <span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…</span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE…               17 55D - Gr… Local     Green Space      Metro Vancouver </span>
-<span class="co">#&gt; 2 WHSE…               18 55E - Gr… Local     Green Space      Metro Vancouver </span>
-<span class="co">#&gt; 3 WHSE…               19 55F - Gr… Local     Green Space      Metro Vancouver </span>
-<span class="co">#&gt; 4 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 5 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 6 WHSE…               22 Beaver C… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 1 WHSE…                1 Guildfor… Local     Civic Facility   Metro Vancouver </span>
+<span class="co">#&gt; 2 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 3 WHSE…                3 Hartnell… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 4 WHSE…                4 51C - Wa… Local     Trail            Metro Vancouver </span>
+<span class="co">#&gt; 5 WHSE…                5 52A - Gr… Local     Green Space      Metro Vancouver </span>
+<span class="co">#&gt; 6 WHSE…                6 52G - De… Local     Green Space      Metro Vancouver </span>
 <span class="co">#&gt; # … with 14 more variables: MUNICIPALITY &lt;chr&gt;, CIVIC_NUMBER &lt;int&gt;,</span>
 <span class="co">#&gt; #   CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;, LATITUDE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
@@ -320,24 +320,24 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; ● At most six rows of the record are printed here</span>
 <span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
-<span class="co">#&gt; geometry type:  POLYGON</span>
+<span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
 <span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 1227676 ymin: 461435.1 xmax: 1238850 ymax: 468825.5</span>
+<span class="co">#&gt; bbox:           xmin: 1228935 ymin: 455032.1 xmax: 1242329 ymax: 467925.7</span>
 <span class="co">#&gt; CRS:            3005</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
 <span class="co">#&gt;   id    LOCAL_REG_GREEN… PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI…</span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE…               20 50B - Ut… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 2 WHSE…               21 Bear Cre… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 3 WHSE…               22 Beaver C… Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 4 WHSE…               23 Bel-Air … Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 5 WHSE…               37 Freedom … Local     Park             Metro Vancouver </span>
-<span class="co">#&gt; 6 WHSE…               46 Barnston… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 1 WHSE…                2 Guy Rich… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 2 WHSE…                3 Hartnell… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 3 WHSE…               30 Blumsen … Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 4 WHSE…               31 Bob Rutl… Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 5 WHSE…               32 Bog Park  Local     Park             Metro Vancouver </span>
+<span class="co">#&gt; 6 WHSE…               33 Bonaccor… Local     Park             Metro Vancouver </span>
 <span class="co">#&gt; # … with 14 more variables: MUNICIPALITY &lt;chr&gt;, CIVIC_NUMBER &lt;int&gt;,</span>
 <span class="co">#&gt; #   CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;, LATITUDE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span>
+<span class="co">#&gt; #   OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span>
 </pre></div>
 <p>Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the <code>districts</code> object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the <code>INTERSECTS</code> function is appropriate and since this is a last tuning step, we can call <code>collect</code> and assign a name to this object. These requests can sometimes take quite a long:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
@@ -423,7 +423,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;    CQL_FILTER: (("PARK_PRIMARY_USE" = 'Park') AND (INTERSECTS(SHAPE, POLYGON ((1126991 379215.8, 1528154 379215.8, 1528154 1224041, 1126991 1224041, 1126991 379215.8)))))</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; &lt;full query url&gt;</span>
-<span class="co">#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%28%22PARK_PRIMARY_USE%22%20%3D%20%27Park%27%29%20AND%20%28INTERSECTS%28SHAPE%2C%20POLYGON%20%28%281126991%20379215.8%2C%201528154%20379215.8%2C%201528154%201224041%2C%201126991%201224041%2C%201126991%20379215.8%29%29%29%29%29</span>
+<span class="co">#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs/?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%28%22PARK_PRIMARY_USE%22%20%3D%20%27Park%27%29%20AND%20%28INTERSECTS%28SHAPE%2C%20POLYGON%20%28%281126991%20379215.8%2C%201528154%20379215.8%2C%201528154%201224041%2C%201126991%201224041%2C%201126991%20379215.8%29%29%29%29%29</span>
 </pre></div>
 <p>This output is what being created by the dplyr code outlined above.</p>
 </div>
