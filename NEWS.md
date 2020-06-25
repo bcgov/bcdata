@@ -1,3 +1,8 @@
+# bcdata 0.2.0.9000
+
+### BUG FIXES
+* Remove link for pipe documentation for simplicity.
+
 # bcdata 0.2.0
 
 ### BREAKING CHANGES
