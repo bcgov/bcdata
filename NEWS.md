@@ -2,6 +2,7 @@
 
 ### BUG FIXES
 * Remove link for pipe documentation for simplicity.
+* Fixed bug where using many `as.` functions (e.g., `as.Date()`, `as.character()`, `as.numeric()`) in a filter statement would fail. (#218, #219)
 
 # bcdata 0.2.0
 
