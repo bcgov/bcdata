@@ -10,6 +10,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
+# Ensure these are loaded first so dblplyr::sql_translator
+# can find them
+#' @include cql-geom-predicates.R
+NULL
+
 #' @importFrom rlang :=
 
 # Function to translate R code to CQL
@@ -76,7 +81,8 @@ cql_scalar <- dbplyr::sql_translator(
   between = function(x, left, right) {
     CQL(paste0(x, " BETWEEN ", left, " AND ", right))
   },
-  # Override dbplyr::base_scalar subsetting functions which convert to SQL
+  CQL = CQL,
+  # Override dbplyr::base_scalar functions which convert to SQL
   # operations intended for the backend database, but we want them to operate
   # locally
   `[` = `[`,
