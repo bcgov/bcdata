@@ -61,6 +61,12 @@ build_where <- function(where, con = cql_dummy_con) {
   }
 }
 
+bcdc_identity <- function(f) {
+  function(x, ...) {
+    do.call(f, c(x, list(...)))
+  }
+}
+
 # Define custom translations from R functions to filter functions supported
 # by cql: https://docs.geoserver.org/stable/en/user/filter/function_reference.html
 cql_scalar <- dbplyr::sql_translator(
@@ -89,6 +95,13 @@ cql_scalar <- dbplyr::sql_translator(
   BEYOND = function(geom, distance, units) BEYOND(geom, distance, units),
   BBOX = function(coords, crs = NULL) BBOX(coords, crs),
   CQL = function(...) CQL(...)
+  as.Date = function(x, ...) as.character(as.Date(x, ...)),
+  as.POSIXct = function(x, ...) as.character(as.POSIXct(x, ...)),
+  as.numeric = bcdc_identity("as.numeric"),
+  as.double = bcdc_identity("as.double"),
+  as.integer = bcdc_identity("as.integer"),
+  as.character = bcdc_identity("as.character"),
+  as.logical = function(x, ...) as.character(as.logical(x, ...)),
 )
 
 # No aggregation functions available in CQL
