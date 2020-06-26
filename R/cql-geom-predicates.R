@@ -10,6 +10,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
+#' CQL escaping
+#'
+#' Write a CQL expression to escape its inputs, and return a CQL/SQL object.
+#' Used when writing filter expressions in [bcdc_query_geodata()].
+#'
+#' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
+#'
+#' @param ... Character vectors that will be combined into a single CQL statement.
+#'
+#' @return An object of class `c("CQL", "SQL")`
+#' @export
+#'
+#' @examples
+#' CQL("FOO > 12 & NAME LIKE 'A&'")
+CQL <- function(...) {
+  sql <- dbplyr::sql(...)
+  structure(sql, class = c("CQL", class(sql)))
+}
+
 #' Create CQL filter strings from sf objects
 #'
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
