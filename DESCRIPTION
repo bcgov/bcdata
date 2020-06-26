@@ -61,3 +61,24 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
+Collate: 
+    'bcdata-package.R'
+    'bcdc-web-services.R'
+    'bcdc_browse.R'
+    'bcdc_options.R'
+    'bcdc_search.R'
+    'cql-geom-predicates.R'
+    'cql-translator.R'
+    'describe-feature.R'
+    'get_data.R'
+    'utils-as_tibble.R'
+    'utils-classes.R'
+    'utils-collect.R'
+    'utils-filter.R'
+    'utils-is.R'
+    'utils-mutate.R'
+    'utils-pipe.R'
+    'utils-select.R'
+    'utils-show-query.R'
+    'utils.R'
+    'zzz.R'
