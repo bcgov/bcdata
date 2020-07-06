@@ -22,7 +22,7 @@ After tuning a query, \code{collect()} is used to actually bring the data into m
 This will retrieve an sf object into R. The \code{as_tibble()} function can be used
 interchangeably with \code{collect} which matches \code{dbplyr} behaviour.
 
-See \code{dplyr::\link[dplyr]{collect}} for details.
+See \code{dplyr::\link[dplyr:compute]{collect}} for details.
 }
 \examples{
 \donttest{

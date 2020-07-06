@@ -7,6 +7,6 @@
 lhs \%>\% rhs
 }
 \description{
-See \code{dplyr::\link[dplyr]{\%>\%}} for details.
+Pipe operator
 }
 \keyword{internal}

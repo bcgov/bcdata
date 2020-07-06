@@ -10,6 +10,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
+# Ensure these are loaded first so dblplyr::sql_translator
+# can find them
+#' @include cql-geom-predicates.R
+NULL
+
 #' @importFrom rlang :=
 
 # Function to translate R code to CQL
@@ -61,6 +66,12 @@ build_where <- function(where, con = cql_dummy_con) {
   }
 }
 
+bcdc_identity <- function(f) {
+  function(x, ...) {
+    do.call(f, c(x, list(...)))
+  }
+}
+
 # Define custom translations from R functions to filter functions supported
 # by cql: https://docs.geoserver.org/stable/en/user/filter/function_reference.html
 cql_scalar <- dbplyr::sql_translator(
@@ -70,25 +81,33 @@ cql_scalar <- dbplyr::sql_translator(
   between = function(x, left, right) {
     CQL(paste0(x, " BETWEEN ", left, " AND ", right))
   },
-  # Override dbplyr::base_scalar subsetting functions which convert to SQL
+  CQL = CQL,
+  # Override dbplyr::base_scalar functions which convert to SQL
   # operations intended for the backend database, but we want them to operate
   # locally
   `[` = `[`,
   `[[` = `[[`,
   `$` = `$`,
-  EQUALS = function(geom) EQUALS(geom),
-  DISJOINT = function(geom) DISJOINT(geom),
-  INTERSECTS = function(geom) INTERSECTS(geom),
-  TOUCHES = function(geom) TOUCHES(geom),
-  CROSSES = function(geom) CROSSES(geom),
-  WITHIN = function(geom) WITHIN(geom),
-  CONTAINS = function(geom) CONTAINS(geom),
-  OVERLAPS = function(geom) OVERLAPS(geom),
-  RELATE = function(geom, pattern) RELATE(geom, pattern),
-  DWITHIN = function(geom, distance, units) DWITHIN(geom, distance, units),
-  BEYOND = function(geom, distance, units) BEYOND(geom, distance, units),
-  BBOX = function(coords, crs = NULL) BBOX(coords, crs),
-  CQL = function(...) CQL(...)
+  as.Date = function(x, ...) as.character(as.Date(x, ...)),
+  as.POSIXct = function(x, ...) as.character(as.POSIXct(x, ...)),
+  as.numeric = bcdc_identity("as.numeric"),
+  as.double = bcdc_identity("as.double"),
+  as.integer = bcdc_identity("as.integer"),
+  as.character = bcdc_identity("as.character"),
+  as.logical = function(x, ...) as.character(as.logical(x, ...)),
+  # Geometry predicates
+  EQUALS = EQUALS,
+  DISJOINT = DISJOINT,
+  INTERSECTS = INTERSECTS,
+  TOUCHES = TOUCHES,
+  CROSSES = CROSSES,
+  WITHIN = WITHIN,
+  CONTAINS = CONTAINS,
+  OVERLAPS = OVERLAPS,
+  RELATE = RELATE,
+  DWITHIN = DWITHIN,
+  BEYOND = BEYOND,
+  BBOX = BBOX
 )
 
 # No aggregation functions available in CQL
@@ -145,23 +164,3 @@ sql_escape_ident.DummyCQL <- function(con, x) {
 sql_escape_string.DummyCQL <- function(con, x) {
   dbplyr::sql_quote(x, "'")
 }
-
-#' CQL escaping
-#'
-#' Write a CQL expression to escape its inputs, and return a CQL/SQL object.
-#' Used when writing filter expressions in [bcdc_query_geodata()].
-#'
-#' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
-#'
-#' @param ... Character vectors that will be combined into a single CQL statement.
-#'
-#' @return An object of class `c("CQL", "SQL")`
-#' @export
-#'
-#' @examples
-#' CQL("FOO > 12 & NAME LIKE 'A&'")
-CQL <- function(...) {
-    sql <- dbplyr::sql(...)
-    structure(sql, class = c("CQL", class(sql)))
-}
-
