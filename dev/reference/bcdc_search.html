@@ -146,7 +146,7 @@
     <p>Search the B.C. Data Catalogue</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_search.html'>bcdc_search</a></span>(
+    <pre class="usage"><span class='fu'>bcdc_search</span>(
   <span class='kw'>...</span>,
   license_id = <span class='kw'>NULL</span>,
   download_audience = <span class='st'>"Public"</span>,
@@ -166,30 +166,30 @@
     </tr>
     <tr>
       <th>license_id</th>
-      <td><p>the type of license (see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("license_id")</a></code>).</p></td>
+      <td><p>the type of license (see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("license_id")</a></code>).</p></td>
     </tr>
     <tr>
       <th>download_audience</th>
       <td><p>download audience
-(see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("download_audience")</a></code>). Default <code>"Public"</code></p></td>
+(see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("download_audience")</a></code>). Default <code>"Public"</code></p></td>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>type of resource (see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("type")</a></code>)</p></td>
+      <td><p>type of resource (see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("type")</a></code>)</p></td>
     </tr>
     <tr>
       <th>res_format</th>
-      <td><p>format of resource (see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("res_format")</a></code>)</p></td>
+      <td><p>format of resource (see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("res_format")</a></code>)</p></td>
     </tr>
     <tr>
       <th>sector</th>
       <td><p>sector of government from which the data comes
-(see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("sector")</a></code>)</p></td>
+(see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("sector")</a></code>)</p></td>
     </tr>
     <tr>
       <th>organization</th>
       <td><p>government organization that manages the data
-(see <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_search_facets.html'>bcdc_search_facets("organization")</a></code>)</p></td>
+(see <code><a href='bcdc_search_facets.html'>bcdc_search_facets("organization")</a></code>)</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -203,8 +203,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_search.html'>bcdc_search</a></span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 302 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 302.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
+<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 303 matches. Returning the first 100.</span>
+#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 303.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
 #&gt; 
 #&gt; Number of records: 100 (Showing the top 10)
 #&gt; Titles:
@@ -240,8 +240,8 @@
 #&gt;  Name: broadleaf-forest-1-250-000-geobase-land-cover 
 #&gt; 
 #&gt; Access a single record by calling bcdc_get_record(ID)
-#&gt;       with the ID from the desired record.</div><div class='input'><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_search.html'>bcdc_search</a></span>(<span class='st'>"regional district"</span>, type = <span class='st'>"Geographic"</span>, res_format = <span class='st'>"fgdb"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 187 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 187.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
+#&gt;       with the ID from the desired record.</div><div class='input'><span class='fu'>bcdc_search</span>(<span class='st'>"regional district"</span>, type = <span class='st'>"Geographic"</span>, res_format = <span class='st'>"fgdb"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 188 matches. Returning the first 100.</span>
+#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 188.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
 #&gt; 
 #&gt; Number of records: 100 (Showing the top 10)
 #&gt; Titles:

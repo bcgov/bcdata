@@ -146,14 +146,14 @@
     <p>Get map from the B.C. Web Service</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_preview.html'>bcdc_preview</a></span>(<span class='kw'>record</span>)</pre>
+    <pre class="usage"><span class='fu'>bcdc_preview</span>(<span class='kw'>record</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>record</th>
-      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record()</a></code>),
+      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>),
 a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
 Warehouse (BCGW) name.</p>
 <p>It is advised to use the permanent ID for a record or the BCGW name rather than the
@@ -168,11 +168,11 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_preview.html'>bcdc_preview</a></span>(<span class='st'>"regional-districts-legally-defined-administrative-areas-of-bc"</span>)
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_preview.html'>bcdc_preview</a></span>(<span class='st'>"points-of-well-diversion-applications"</span>)
+<span class='fu'>bcdc_preview</span>(<span class='st'>"regional-districts-legally-defined-administrative-areas-of-bc"</span>)
+<span class='fu'>bcdc_preview</span>(<span class='st'>"points-of-well-diversion-applications"</span>)
 
 <span class='co'># Using BCGW name</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_preview.html'>bcdc_preview</a></span>(<span class='st'>"WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"</span>)
+<span class='fu'>bcdc_preview</span>(<span class='st'>"WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"</span>)
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
