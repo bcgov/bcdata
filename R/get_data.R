@@ -52,6 +52,12 @@
 #' # Using a BCGW name
 #' bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #'
+#' # Using sf's sql querying ability
+#' bcdc_get_data(record = '30aeb5c1-4285-46c8-b60b-15b1a6f4258b',
+#'               resource = '3d72cf36-ab53-4a2a-9988-a883d7488384',
+#'               layer = 'BC_Boundary_Terrestrial_Line',
+#'               query = "SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length < 100")
+#'
 #' ## Example of correcting import problems
 #'
 #' ## Some initial problems reading in the data
