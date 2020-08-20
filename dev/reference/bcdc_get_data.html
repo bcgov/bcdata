@@ -297,10 +297,12 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'># Using sf's sql querying ability</span>
-<span class='fu'>bcdc_get_data</span>(record = <span class='st'>'30aeb5c1-4285-46c8-b60b-15b1a6f4258b'</span>,
-              resource = <span class='st'>'3d72cf36-ab53-4a2a-9988-a883d7488384'</span>,
-              layer = <span class='st'>'BC_Boundary_Terrestrial_Line'</span>,
-              query = <span class='st'>"SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length &lt; 100"</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_sf function from the sf package.</span></div><div class='output co'>#&gt; Simple feature collection with 6106 features and 1 field
+<span class='fu'>bcdc_get_data</span>(
+  record = <span class='st'>'30aeb5c1-4285-46c8-b60b-15b1a6f4258b'</span>,
+  resource = <span class='st'>'3d72cf36-ab53-4a2a-9988-a883d7488384'</span>,
+  layer = <span class='st'>'BC_Boundary_Terrestrial_Line'</span>,
+  query = <span class='st'>"SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length &lt; 100"</span>
+)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_sf function from the sf package.</span></div><div class='output co'>#&gt; Simple feature collection with 6106 features and 1 field
 #&gt; geometry type:  LINESTRING
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 529420.8 ymin: 367780.7 xmax: 1203949 ymax: 1157953
