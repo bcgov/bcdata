@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 catalogue_base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
-wfs_base_url <- function() "https://delivery.openmaps.gov.bc.ca/geo/pub/wfs/"
+wfs_base_url <- function() "https://test.openmaps.gov.bc.ca/geo/pub/wfs/"
 
 bcdata_user_agent <- function(){
   "https://github.com/bcgov/bcdata"
