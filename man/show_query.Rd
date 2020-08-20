@@ -16,7 +16,7 @@
 \description{
 Display Web Service query SQL
 
-See \code{dplyr::\link[dplyr]{show_query}} for details.
+See \code{dplyr::\link[dplyr:explain]{show_query}} for details.
 }
 \section{Methods (by class)}{
 \itemize{

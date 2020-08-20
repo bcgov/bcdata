@@ -17,8 +17,8 @@ jobs:
       matrix:
         config:
         - { os: windows-latest, r: 'release', args: "'--no-manual'"}
-        - { os: macOS-latest,   r: 'release', args: "'--test-dontrun'", sf_args: "--with-proj-lib=/usr/local/lib/"}
-        - { os: macOS-latest,   r: 'devel',   args: "c('--no-manual', '--test-dontrun')", sf_args: "--with-proj-lib=/usr/local/lib/"}
+        - { os: macOS-latest,   r: 'release', args: "'--test-dontrun'"}
+        - { os: macOS-latest,   r: 'devel',   args: "c('--no-manual', '--test-dontrun')"}
         - { os: ubuntu-16.04,   r: '3.5',     args: "'--no-manual'"}
         - { os: ubuntu-16.04,   r: 'oldrel',  args: "'--no-manual'"}
         - { os: ubuntu-16.04,   r: 'release', args: "'--no-manual'"}
@@ -26,7 +26,8 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      cache-version: v3
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      cache-version: v4
 
     steps:
       - uses: actions/checkout@v2
