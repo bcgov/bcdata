@@ -15,9 +15,9 @@ original_options <- options()
 options("silence_named_get_record_warning" = TRUE)
 
 ##### To test on delivery/test versions of w[fm]s server change this option
-# options("bcdata.web_service_host" = "https://delivery.openmaps.gov.bc.ca')
+# options("bcdata.web_service_host" = "https://delivery.openmaps.gov.bc.ca")
 ## OR
-# options("bcdata.web_service_host" = "https://test.openmaps.gov.bc.ca')
+# options("bcdata.web_service_host" = "https://test.openmaps.gov.bc.ca")
 
 
 point_record <- '76b1b7a3-2112-4444-857a-afccf7b20da8'
