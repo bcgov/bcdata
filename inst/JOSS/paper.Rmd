@@ -1,13 +1,13 @@
 ---
 title: 'bcdata: An R package for searching & retrieving data from the B.C. Data Catalogue'
 authors:
-- affiliation: State of Environment Reporting, Ministry of Environment and Climate Change Strategy, British Columbia Provincial Government
+- affiliation: State of Environment Reporting, Ministry of Environment and Climate Change Strategy, Province of British Columbia
   name: Andy Teucher
   orcid: 0000-0002-7840-692X
-- affiliation: Data Science Partnerships, Ministry of Citizens' Services, British Columbia Provincial Government
+- affiliation: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
   name: Sam Albers
   orcid: 0000-0002-9270-7884
-- affiliation: Data Science Partnerships, Ministry of Citizens' Services, British Columbia Provincial Government
+- affiliation: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
   name: Stephanie Hazlitt
   orcid: 0000-0002-3161-2304
 date: "`r Sys.Date()`"
