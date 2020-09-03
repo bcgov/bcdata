@@ -1,13 +1,13 @@
 ---
 title: 'bcdata: An R package for searching & retrieving data from the B.C. Data Catalogue'
 authors:
-- affiliation: State of Environment Reporting, Ministry of Environment and Climate Change Strategy, British Columbia Provincial Government
+- affiliation: State of Environment Reporting, Ministry of Environment and Climate Change Strategy, Province of British Columbia
   name: Andy Teucher
   orcid: 0000-0002-7840-692X
-- affiliation: Data Science Partnerships, Ministry of Citizens' Services, British Columbia Provincial Government
+- affiliation: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
   name: Sam Albers
   orcid: 0000-0002-9270-7884
-- affiliation: Data Science Partnerships, Ministry of Citizens' Services, British Columbia Provincial Government
+- affiliation: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
   name: Stephanie Hazlitt
   orcid: 0000-0002-3161-2304
 date: "2020-09-03"
@@ -28,23 +28,26 @@ tags:
 
 
 # Introduction
-The British Columbia government hosts over 2000 tabular and spatial data sets in the B.C. Data Catalogue (@bcdc).  Most provincial spatial data is available through the B.C. Data Catalogue under an open licence, via a Geoserver Web Feature Service (WFS). WFS is a powerful and flexible service for distributing geographic features over the web, that supports both spatial and non-spatial querying.  The bcdata package for the R programming language (@RCore) wraps this functionality and enables R users to efficiently query and directly read spatial data from the B.C. Data Catalogue into their R session. The bcdata package implements a novel application of dbplyr using a web service backend, where a locally constructed query is processed by a remote server. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This allows for fast and efficient spatial data retrieval using familiar dplyr syntax. The package also provides functionality that enables users to search and retrieve many other types of data and metadata from the B.C. Data Catalogue, thereby connecting British Columbia open data holdings with the vast capabilities of R.
+
+The British Columbia government hosts over 2000 tabular and spatial data sets in the B.C. Data Catalogue (BCDC; @bcdc).  Most provincial spatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). WFS is a powerful and flexible service for distributing geographic features over the web, that supports both spatial and non-spatial querying.  The bcdata package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the BCDC, and one for the WFS.  This allows R users to search, download, and import data from the BCDC, as well as efficiently query and directly read spatial data from the WFS into their R session. The bcdata package implements a novel application of dbplyr (@dbplyr) using a WFS backend, rather than a database backend, where a locally constructed query is processed by a remote server. This allows for fast and efficient spatial data retrieval using familiar dplyr syntax. Through this functionality the bcdata package connects British Columbia open data holdings with the vast capabilities of R.
 
 # Usage 
 
-bcdata connects to the B.C. Data Catalogue through a few key functions:
+bcdata connects to the B.C. Data Catalogue and the Web Feature Service through a few key functions:
 
-- `bcdc_browse()` - Open the catalogue in your default browser
+- `bcdc_browse()` - Open the catalogue in the default browser
 - `bcdc_search()` - Search records in the catalogue
 - `bcdc_search_facets()` - List catalogue facet search options
 - `bcdc_get_record()` - Print a catalogue record
 - `bcdc_tidy_resources()` - Get a data frame of resources for a record
 - `bcdc_get_data()` - Get catalogue data
-- `bcdc_query_geodata()` - Get & query catalogue geospatial data available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
+- `bcdc_query_geodata()` - Get & query catalogue geospatial data available through a [Web Feature Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
+
+ *Placeholder for catalogue features demo*
 
 ### `bcdc_get_data()`
 
-Once you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, permanent ID or the result from `bcdc_get_record()`. `bcdc_get_data` will automatically detect the type of data you are requesting and return the appropriate type. Let's try to access data for scholarships in B.C. schools:
+Once the user has located the B.C. Data Catalogue record with the data they want, `bcdata::bcdc_get_data()` can be used to download and read the data from the record.  Any of the record name, permanent ID or the result from `bcdc_get_record()` can be used to specify the resource. `bcdc_get_data` will automatically detect the type of data being requested and return the appropriate type. Let's try to access data for scholarships in B.C. schools:
 
 
 ```r
@@ -73,21 +76,29 @@ Please choose one option:
 2: AwardsScholarshipsHist.txt
 ```
 
-A catalogue record can have one or multiple data files---or "resources". If there are multiple data resources you will need to specify which resource you want. bcdata gives you option to interactively choose which resource you want but for scripts it is usually better to be explicit using the `resource` argument about which one you would like. In addition, catalogue records are more reliably referred to by their permanent ID so bcdata also suggests supplying that to the `record` argument instead of the English string. We are interested, in this case, in the `.xlsx` file so we choose option 1 or:
+A catalogue record can have one or multiple data files---or "resources". If there are multiple data resources the user will need to specify which resource they want. bcdata gives the user the option to interactively choose which resource they want, but for scripts it is usually better to be explicit using the `resource` argument to specify the desired dataset. In addition, catalogue records are more reliably referred to by their permanent ID so bcdata also suggests supplying that to the `record` argument instead of the English string. We are interested, in this case, in the `.xlsx` file so we choose option 1 or:
 
 
 ```r
 bc_scholarships <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
 ```
 
-```
-## Reading the data using the read_xlsx function from the readxl package.
+The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the WFS. As a simple demonstration we can download the locations of airports in British Columbia:
+
+
+```r
+bc_airports <- bcdc_get_data('bc-airports', resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+
+ggplot(bc_airports) +
+  geom_sf() +
+  theme_minimal()
 ```
 
+![](airports-1.png)<!-- -->
 
 ### `bcdc_query_geodata()`
 
-While `bcdc_get_data()` will also retrieve geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---and/or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This is implemented using a custom dbplyr backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` dplyr backend interfaces with the BC Web Feature Service.
 
 Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and we only need the one polygon, so why not save some time:
 
@@ -95,11 +106,6 @@ Let's get the Capital Regional District boundary from the [B.C. Regional Distric
 ```r
 ## Find the B.C. Regional Districts catalogue record
 bcdc_search("regional districts administrative areas", res_format = "wms", n = 1)
-```
-
-```
-## Found 38 matches. Returning the first 1.
-## To see them all, rerun the search and set the 'n' argument to 38.
 ```
 
 ```
@@ -125,19 +131,19 @@ bcdc_describe_feature(bc_regional_districts_metadata)
 
 ```
 ## # A tibble: 21 x 4
-##    col_name                 sticky remote_col_type local_col_type
-##    <chr>                    <lgl>  <chr>           <chr>         
-##  1 id                       FALSE  xsd:string      character     
-##  2 LGL_ADMIN_AREA_ID        FALSE  xsd:decimal     numeric       
-##  3 ADMIN_AREA_NAME          TRUE   xsd:string      character     
-##  4 ADMIN_AREA_ABBREVIATION  TRUE   xsd:string      character     
-##  5 ADMIN_AREA_BOUNDARY_TYPE TRUE   xsd:string      character     
-##  6 ADMIN_AREA_GROUP_NAME    TRUE   xsd:string      character     
-##  7 CHANGE_REQUESTED_ORG     TRUE   xsd:string      character     
-##  8 UPDATE_TYPE              TRUE   xsd:string      character     
-##  9 WHEN_UPDATED             TRUE   xsd:date        date          
-## 10 MAP_STATUS               TRUE   xsd:string      character     
-## # ... with 11 more rows
+##    col_name             sticky remote_col_type local_col_type
+##    <chr>                <lgl>  <chr>           <chr>         
+##  1 id                   FALSE  xsd:string      character     
+##  2 LGL_ADMIN_AREA_ID    FALSE  xsd:decimal     numeric       
+##  3 ADMIN_AREA_NAME      TRUE   xsd:string      character     
+##  4 ADMIN_AREA_ABBREVIA… TRUE   xsd:string      character     
+##  5 ADMIN_AREA_BOUNDARY… TRUE   xsd:string      character     
+##  6 ADMIN_AREA_GROUP_NA… TRUE   xsd:string      character     
+##  7 CHANGE_REQUESTED_ORG TRUE   xsd:string      character     
+##  8 UPDATE_TYPE          TRUE   xsd:string      character     
+##  9 WHEN_UPDATED         TRUE   xsd:date        date          
+## 10 MAP_STATUS           TRUE   xsd:string      character     
+## # … with 11 more rows
 ```
 
 ```r
