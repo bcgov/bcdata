@@ -21,10 +21,10 @@ output:
     keep_md: yes
 bibliography: paper.bib
 tags:
-- R
-- open data
-- WFS
-- British Columbia
+  - R
+  - open data
+  - WFS
+  - British Columbia
 ---
 
 
