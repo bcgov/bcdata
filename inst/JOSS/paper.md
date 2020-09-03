@@ -1,15 +1,20 @@
 ---
 title: 'bcdata: An R package for searching & retrieving data from the B.C. Data Catalogue'
 authors:
-- affiliation: State of Environment Reporting, Ministry of Environment and Climate Change Strategy, Province of British Columbia
-  name: Andy Teucher
-  orcid: 0000-0002-7840-692X
-- affiliation: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
-  name: Sam Albers
-  orcid: 0000-0002-9270-7884
-- affiliation: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
-  name: Stephanie Hazlitt
-  orcid: 0000-0002-3161-2304
+  - name: Andy Teucher
+    orcid: 0000-0002-7840-692X
+    affiliation: 1
+  - name: Sam Albers
+    orcid: 0000-0002-9270-7884
+    affiliation: 2
+  - name: Stephanie Hazlitt
+    orcid: 0000-0002-3161-2304
+    affiliation: 2
+affiliations:
+  - name: State of Environment Reporting, Ministry of Environment and Climate Change Strategy, Province of British Columbia
+    index: 1
+  - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
+    index: 2
 date: "2020-09-03"
 output:
   html_document:
@@ -98,7 +103,7 @@ ggplot(bc_airports) +
 
 ### `bcdc_query_geodata()`
 
-While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---and/or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This is implemented using a custom dbplyr backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` dplyr backend interfaces with the BC Web Feature Service.
+While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---and/or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This is implemented using a custom dbplyr backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` backend interfaces with the BC Web Feature Service.
 
 To demonstrate, we will query the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
 
@@ -131,18 +136,18 @@ bcdc_describe_feature(bc_regional_districts_metadata)
 
 ```
 ## # A tibble: 21 x 4
-##    col_name             sticky remote_col_type local_col_type
-##    <chr>                <lgl>  <chr>           <chr>         
-##  1 id                   FALSE  xsd:string      character     
-##  2 LGL_ADMIN_AREA_ID    FALSE  xsd:decimal     numeric       
-##  3 ADMIN_AREA_NAME      TRUE   xsd:string      character     
-##  4 ADMIN_AREA_ABBREVIA… TRUE   xsd:string      character     
-##  5 ADMIN_AREA_BOUNDARY… TRUE   xsd:string      character     
-##  6 ADMIN_AREA_GROUP_NA… TRUE   xsd:string      character     
-##  7 CHANGE_REQUESTED_ORG TRUE   xsd:string      character     
-##  8 UPDATE_TYPE          TRUE   xsd:string      character     
-##  9 WHEN_UPDATED         TRUE   xsd:date        date          
-## 10 MAP_STATUS           TRUE   xsd:string      character     
+##    col_name                 sticky remote_col_type local_col_type
+##    <chr>                    <lgl>  <chr>           <chr>         
+##  1 id                       FALSE  xsd:string      character     
+##  2 LGL_ADMIN_AREA_ID        FALSE  xsd:decimal     numeric       
+##  3 ADMIN_AREA_NAME          TRUE   xsd:string      character     
+##  4 ADMIN_AREA_ABBREVIATION  TRUE   xsd:string      character     
+##  5 ADMIN_AREA_BOUNDARY_TYPE TRUE   xsd:string      character     
+##  6 ADMIN_AREA_GROUP_NAME    TRUE   xsd:string      character     
+##  7 CHANGE_REQUESTED_ORG     TRUE   xsd:string      character     
+##  8 UPDATE_TYPE              TRUE   xsd:string      character     
+##  9 WHEN_UPDATED             TRUE   xsd:date        date          
+## 10 MAP_STATUS               TRUE   xsd:string      character     
 ## # … with 11 more rows
 ```
 
