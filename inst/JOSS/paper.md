@@ -1,13 +1,13 @@
 ---
 title: 'bcdata: An R package for searching & retrieving data from the B.C. Data Catalogue'
 authors:
-- affiliation: 1
+- affiliation: State of Environment Reporting, Ministry of Environment and Climate Change Strategy, British Columbia Provincial Government
   name: Andy Teucher
   orcid: 0000-0002-7840-692X
-- affiliation: 2
+- affiliation: Data Science Partnerships, Ministry of Citizens' Services, British Columbia Provincial Government
   name: Sam Albers
   orcid: 0000-0002-9270-7884
-- affiliation: 2
+- affiliation: Data Science Partnerships, Ministry of Citizens' Services, British Columbia Provincial Government
   name: Stephanie Hazlitt
   orcid: 0000-0002-3161-2304
 date: "2020-09-03"
@@ -20,10 +20,6 @@ tags:
 - open data
 - WFS
 - British Columbia
-affiliations:
-  name: State of Environment Reporting, Ministry of Environment and Climate Change
-    Strategy, British Columbia Provincial Government
-  index: 1
 ---
 
 
