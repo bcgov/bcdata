@@ -100,7 +100,7 @@ ggplot(bc_airports) +
 
 While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---and/or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This is implemented using a custom dbplyr backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` dplyr backend interfaces with the BC Web Feature Service.
 
-Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and we only need the one polygon, so why not save some time:
+To demonstrate, we will query the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
 
 
 ```r
