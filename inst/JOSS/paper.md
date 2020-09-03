@@ -16,9 +16,6 @@ affiliations:
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
 date: "2020-09-03"
-output:
-  html_document:
-    keep_md: yes
 bibliography: paper.bib
 tags:
 - R
