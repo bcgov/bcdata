@@ -54,27 +54,46 @@ bcdata connects to the B.C. Data Catalogue through a few key functions:
 
 ### `bcdc_get_data()`
 
-Once you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, permanent ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
+Once you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, permanent ID or the result from `bcdc_get_record()`. `bcdc_get_data` will automatically detect the type of data you are requesting and return the appropriate type. Let's try to access data for scholarships in B.C. schools:
 
-```{r eval = FALSE}
-## Get the data resource for the `bc-highway-cams` catalogue record
-bcdc_get_data("bc-highway-cams")
-
-## OR use the permanent ID, which is better for scripts or non-interactive use
-bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-
-## OR use the result from bcdc_get_record()
-my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-bcdc_get_data(my_record)
+```{r, eval=FALSE}
+bc_scholarships <- bcdc_get_data('bc-schools-district-provincial-scholarships')
 ```
 
-A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want.
+```
+The record you are trying to access appears to have more than one resource.
+ Resources: 
+1) AwardsScholarshipsHist.xlsx
+     format: xlsx 
+     url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.xlsx 
+     resource: 4e872f59-0127-4c21-9f41-52d87af9cfab 
+     code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
+
+2) AwardsScholarshipsHist.txt
+     format: txt 
+     url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.txt 
+     resource: 8a2cd8d3-003d-4b09-8b63-747365582370 
+     code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', resource = '8a2cd8d3-003d-4b09-8b63-747365582370')
+
+--------
+Please choose one option: 
+
+1: AwardsScholarshipsHist.xlsx
+2: AwardsScholarshipsHist.txt
+```
+
+A catalogue record can have one or multiple data files---or "resources". If there are multiple data resources you will need to specify which resource you want. bcdata gives you option to interactively choose which resource you want but for scripts it is usually better to be explicit using the `resource` argument about which one you would like. In addition, catalogue records are more reliably referred to by their permanent ID so bcdata also suggests supplying that to the `record` argument instead of the English string. We are interested, in this case, in the `.xlsx` file so we choose option 1 or:
+
+```{r }
+bc_scholarships <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
+```
+
 
 ### `bcdc_query_geodata()`
 
-While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+While `bcdc_get_data()` will also retrieve geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
 
-Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:
+Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and we only need the one polygon, so why not save some time:
 
 ```{r regional_districts, fig.height = 5, fig.width = 7}
 ## Find the B.C. Regional Districts catalogue record
