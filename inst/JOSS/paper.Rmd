@@ -33,7 +33,7 @@ tags:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 12, fig.path = "")
 ```
 
-```{r packages, warning=FALSE, message=FALSE, echo = FALSE}
+```{r packages, warning=FALSE, message=FALSE, echo=FALSE}
 library(bcdata)
 library(sf)
 library(ggplot2)
@@ -41,11 +41,11 @@ library(ggplot2)
 
 # Introduction
 
-The British Columbia government hosts over 2000 tabular and spatial data sets in the B.C. Data Catalogue (BCDC; @bcdc).  Most provincial spatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). WFS is a powerful and flexible service for distributing geographic features over the web, that supports both spatial and non-spatial querying.  The bcdata package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the BCDC, and one for the WFS.  This allows R users to search, download, and import data from the BCDC, as well as efficiently query and directly read spatial data from the WFS into their R session. The bcdata package implements a novel application of dbplyr (@dbplyr) using a WFS backend, rather than a database backend, where a locally constructed query is processed by a remote server. This allows for fast and efficient spatial data retrieval using familiar dplyr syntax. Through this functionality the bcdata package connects British Columbia open data holdings with the vast capabilities of R.
+The British Columbia government hosts over 3000 tabular and geospatial data sets in the B.C. Data Catalogue (@bcdc).  Most provincial geospatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). A Web Feature Service is a powerful and flexible service for distributing geographic features over the web, supporting both geospatial and non-spatial querying.  The `bcdata` package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the B.C. Data Catalogue and one for the Web Feature Service.  This allows R users to search, download and import data from the B.C. Data Catalogue, as well as efficiently query and directly read spatial data from the Web Feature Service into their R session. The `bcdata` package implements a novel application of `dbplyr` (@dbplyr) using a Web Feature Service backend, rather than a database backend, where a locally constructed query is processed by a remote server. This allows for fast and efficient spatial data retrieval using familiar `dplyr` syntax. Through this functionality the `bcdata` package connects British Columbia government open data holdings with the vast capabilities of R.
 
 # Usage 
 
-bcdata connects to the B.C. Data Catalogue and the Web Feature Service through a few key functions:
+`bcdata` connects to the B.C. Data Catalogue and the Web Feature Service through a few key functions:
 
 - `bcdc_browse()` - Open the catalogue in the default browser
 - `bcdc_search()` - Search records in the catalogue
