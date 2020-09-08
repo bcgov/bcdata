@@ -57,23 +57,25 @@ Once the user has located the B.C. Data Catalogue record with the data they want
 
 
 ```r
-bc_scholarships <- bcdc_get_data('bc-schools-district-provincial-scholarships')
+scholars <- bcdc_get_data('bc-schools-district-provincial-scholarships')
 ```
 
 ```
 The record you are trying to access appears to have more than one resource.
  Resources: 
 1) AwardsScholarshipsHist.xlsx
-     format: xlsx 
-     url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.xlsx 
-     resource: 4e872f59-0127-4c21-9f41-52d87af9cfab 
-     code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
+    format: xlsx 
+    url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.xlsx 
+    resource: 4e872f59-0127-4c21-9f41-52d87af9cfab 
+    code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
+                        resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
 
 2) AwardsScholarshipsHist.txt
-     format: txt 
-     url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.txt 
-     resource: 8a2cd8d3-003d-4b09-8b63-747365582370 
-     code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', resource = '8a2cd8d3-003d-4b09-8b63-747365582370')
+    format: txt 
+    url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.txt 
+    resource: 8a2cd8d3-003d-4b09-8b63-747365582370 
+    code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
+                        resource = '8a2cd8d3-003d-4b09-8b63-747365582370')
 
 --------
 Please choose one option: 
@@ -108,12 +110,12 @@ ggplot(bc_airports) +
 
 While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---and/or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This is implemented using a custom dbplyr backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` backend interfaces with the BC Web Feature Service.
 
-To demonstrate, we will query the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
+To demonstrate, we will query the Northern Health Authority boundary from the [Health Authority Boundaries geospatial data](https://catalogue.data.gov.bc.ca/dataset/7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
 
 
 ```r
-## Find the B.C. Regional Districts catalogue record
-bcdc_search("regional districts administrative areas", res_format = "wms", n = 1)
+## Find the Health Authority Boundaries catalogue record
+bcdc_search('health authority', res_format = "wms", n = 1)
 ```
 
 ```
@@ -121,53 +123,53 @@ bcdc_search("regional districts administrative areas", res_format = "wms", n = 1
 ## 
 ## Number of records: 1
 ## Titles:
-## 1: Regional Districts - Legally Defined Administrative Areas of BC (other, xlsx, wms, kml)
-##  ID: d1aff64e-dbfe-45a6-af97-582b7f6418b9
-##  Name: regional-districts-legally-defined-administrative-areas-of-bc 
+## 1: Health Authority Boundaries (wms, kml, other, shp)
+##  ID: 7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b
+##  Name: health-authority-boundaries 
 ## 
 ## Access a single record by calling bcdc_get_record(ID)
 ##       with the ID from the desired record.
 ```
 
 ```r
-## Get the metadata for the B.C. Regional Districts catalogue record
-bc_rd_record <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
+## Get the metadata for the Health Authority Boundaries catalogue record
+ha_record <- bcdc_get_record("7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b")
 
 ## Have a quick look at the geospatial columns to help with filter or select
-bcdc_describe_feature(bc_rd_record)
+bcdc_describe_feature(ha_record)
 ```
 
 ```
-## # A tibble: 21 x 4
-##    col_name                 sticky remote_col_type local_col_type
-##    <chr>                    <lgl>  <chr>           <chr>         
-##  1 id                       FALSE  xsd:string      character     
-##  2 LGL_ADMIN_AREA_ID        FALSE  xsd:decimal     numeric       
-##  3 ADMIN_AREA_NAME          TRUE   xsd:string      character     
-##  4 ADMIN_AREA_ABBREVIATION  TRUE   xsd:string      character     
-##  5 ADMIN_AREA_BOUNDARY_TYPE TRUE   xsd:string      character     
-##  6 ADMIN_AREA_GROUP_NAME    TRUE   xsd:string      character     
-##  7 CHANGE_REQUESTED_ORG     TRUE   xsd:string      character     
-##  8 UPDATE_TYPE              TRUE   xsd:string      character     
-##  9 WHEN_UPDATED             TRUE   xsd:date        date          
-## 10 MAP_STATUS               TRUE   xsd:string      character     
-## # ... with 11 more rows
+## # A tibble: 11 x 4
+##    col_name            sticky remote_col_type          local_col_type
+##    <chr>               <lgl>  <chr>                    <chr>         
+##  1 id                  FALSE  xsd:string               character     
+##  2 HLTH_HAB_SYSID      FALSE  xsd:decimal              numeric       
+##  3 HLTH_AUTHORITY_CODE TRUE   xsd:string               character     
+##  4 HLTH_AUTHORITY_NAME TRUE   xsd:string               character     
+##  5 HLTH_AUTHORITY_ID   TRUE   xsd:string               character     
+##  6 FEATURE_CODE        TRUE   xsd:string               character     
+##  7 FEATURE_AREA_SQM    TRUE   xsd:decimal              numeric       
+##  8 FEATURE_LENGTH_M    TRUE   xsd:decimal              numeric       
+##  9 SHAPE               TRUE   gml:GeometryPropertyType sfc geometry  
+## 10 OBJECTID            FALSE  xsd:decimal              numeric       
+## 11 SE_ANNO_CAD_DATA    TRUE   xsd:hexBinary            numeric
 ```
 
 ```r
-## Get the Capital Regional District polygon from the B.C. Regional
-## Districts geospatial data
-my_regional_district <- bcdc_query_geodata(bc_rd_record) %>%
-  filter(ADMIN_AREA_NAME == "Capital Regional District") %>%
+## Get the Northern Health polygon from the Health Authority
+## Boundaries geospatial data
+my_ha <- bcdc_query_geodata(ha_record) %>%
+  filter(HLTH_AUTHORITY_NAME == "Northern") %>%
   collect()
 
-## Plot the Capital Regional District polygon with ggplot()
-ggplot(my_regional_district) +
+## Plot the Northern Health polygon with ggplot()
+ggplot(my_ha) +
   geom_sf() +
   theme_minimal()
 ```
 
-![](regional_districts-1.png)<!-- -->
+![](ha-1.png)<!-- -->
 
 # Conclusion
 
