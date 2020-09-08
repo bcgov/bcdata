@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2020-09-03"
+date: "2020-09-08"
 output:
   html_document:
     keep_md: yes
@@ -25,6 +25,7 @@ tags:
   - open data
   - WFS
   - British Columbia
+  - Canada
 ---
 
 
@@ -34,11 +35,11 @@ tags:
 
 # Introduction
 
-The British Columbia government hosts over 2000 tabular and spatial data sets in the B.C. Data Catalogue (BCDC; @bcdc).  Most provincial spatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). WFS is a powerful and flexible service for distributing geographic features over the web, that supports both spatial and non-spatial querying.  The bcdata package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the BCDC, and one for the WFS.  This allows R users to search, download, and import data from the BCDC, as well as efficiently query and directly read spatial data from the WFS into their R session. The bcdata package implements a novel application of dbplyr (@dbplyr) using a WFS backend, rather than a database backend, where a locally constructed query is processed by a remote server. This allows for fast and efficient spatial data retrieval using familiar dplyr syntax. Through this functionality the bcdata package connects British Columbia open data holdings with the vast capabilities of R.
+The British Columbia government hosts over 3000 tabular and geospatial data sets in the B.C. Data Catalogue (@bcdc).  Most provincial geospatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). A Web Feature Service is a powerful and flexible service for distributing geographic features over the web, supporting both geospatial and non-spatial querying.  The `bcdata` package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the B.C. Data Catalogue and one for the Web Feature Service.  This allows R users to search, download and import data from the B.C. Data Catalogue, as well as efficiently query and directly read spatial data from the Web Feature Service into their R session. The `bcdata` package implements a novel application of `dbplyr` (@dbplyr) using a Web Feature Service backend, rather than a database backend, where a locally constructed query is processed by a remote server. This allows for fast and efficient spatial data retrieval using familiar `dplyr` syntax. Through this functionality the `bcdata` package connects British Columbia government open data holdings with the vast capabilities of R.
 
 # Usage 
 
-bcdata connects to the B.C. Data Catalogue and the Web Feature Service through a few key functions:
+`bcdata` connects to the B.C. Data Catalogue and the Web Feature Service through a few key functions:
 
 - `bcdc_browse()` - Open the catalogue in the default browser
 - `bcdc_search()` - Search records in the catalogue
@@ -85,14 +86,16 @@ A catalogue record can have one or multiple data files---or "resources". If ther
 
 
 ```r
-bc_scholarships <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
+scholars <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
+                          resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
 ```
 
 The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the WFS. As a simple demonstration we can download the locations of airports in British Columbia:
 
 
 ```r
-bc_airports <- bcdc_get_data('bc-airports', resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+bc_airports <- bcdc_get_data(record = 'bc-airports',
+                             resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
 
 ggplot(bc_airports) +
   geom_sf() +
@@ -128,10 +131,10 @@ bcdc_search("regional districts administrative areas", res_format = "wms", n = 1
 
 ```r
 ## Get the metadata for the B.C. Regional Districts catalogue record
-bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
+bc_rd_record <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
 
 ## Have a quick look at the geospatial columns to help with filter or select
-bcdc_describe_feature(bc_regional_districts_metadata)
+bcdc_describe_feature(bc_rd_record)
 ```
 
 ```
@@ -148,19 +151,18 @@ bcdc_describe_feature(bc_regional_districts_metadata)
 ##  8 UPDATE_TYPE              TRUE   xsd:string      character     
 ##  9 WHEN_UPDATED             TRUE   xsd:date        date          
 ## 10 MAP_STATUS               TRUE   xsd:string      character     
-## # … with 11 more rows
+## # ... with 11 more rows
 ```
 
 ```r
 ## Get the Capital Regional District polygon from the B.C. Regional
 ## Districts geospatial data
-my_regional_district <- bcdc_query_geodata(bc_regional_districts_metadata) %>%
+my_regional_district <- bcdc_query_geodata(bc_rd_record) %>%
   filter(ADMIN_AREA_NAME == "Capital Regional District") %>%
   collect()
 
 ## Plot the Capital Regional District polygon with ggplot()
-my_regional_district  %>%
-  ggplot() +
+ggplot(my_regional_district) +
   geom_sf() +
   theme_minimal()
 ```
@@ -172,6 +174,6 @@ my_regional_district  %>%
 Connecting the R programming language with the B.C. Data Catalogue creates an API that allows for the usage of cutting edge statistical and plotting capabilities with a vast collection of open and public data. The enables usages in a modern data science context and provides a pathway to generate insights from public data. 
 
 # Acknowledgements
-Author order was determined randomly using the following R code: `set.seed(42); sample(c("Teucher","Hazlitt","Albers"), 3)`
+Author order was determined randomly using the following R code: `set.seed(42); sample(c("Teucher","Hazlitt","Albers"), 3)` because all author contributions are equal.
 
 # References
