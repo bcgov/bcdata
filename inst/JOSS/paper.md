@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2020-09-08"
+date: "2020-09-16"
 output:
   html_document:
     keep_md: yes
@@ -35,7 +35,7 @@ tags:
 
 # Introduction
 
-The British Columbia government hosts over 3000 tabular and geospatial data sets in the B.C. Data Catalogue (@bcdc).  Most provincial geospatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). A Web Feature Service is a powerful and flexible service for distributing geographic features over the web, supporting both geospatial and non-spatial querying.  The `bcdata` package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the B.C. Data Catalogue and one for the Web Feature Service.  This allows R users to search, download and import data from the B.C. Data Catalogue, as well as efficiently query and directly read spatial data from the Web Feature Service into their R session. The `bcdata` package implements a novel application of `dbplyr` (@dbplyr) using a Web Feature Service backend, rather than a database backend, where a locally constructed query is processed by a remote server. This allows for fast and efficient spatial data retrieval using familiar `dplyr` syntax. Through this functionality the `bcdata` package connects British Columbia government open data holdings with the vast capabilities of R.
+The British Columbia government hosts over 2000 tabular and geospatial data sets in the B.C. Data Catalogue (@bcdc).  Most provincial geospatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). A Web Feature Service is a powerful and flexible service for distributing geographic features over the web, supporting both geospatial and non-spatial querying.  The `bcdata` package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the B.C. Data Catalogue and one for the Web Feature Service.  This allows R users to search, download and import metadata and data from the B.C. Data Catalogue, as well as efficiently query and directly read spatial data from the Web Feature Service into their R session. The `bcdata` package implements a novel application of `dbplyr` (@dbplyr) using a Web Feature Service backend&mdash;rather than a database backend&mdash;where a locally constructed query is processed by a remote server. This allows for fast and efficient geospatial data retrieval using familiar `dplyr` syntax. Through this functionality the `bcdata` package connects British Columbia government open data holdings with the vast capabilities of R.
 
 # Usage 
 
@@ -45,7 +45,7 @@ The British Columbia government hosts over 3000 tabular and geospatial data sets
 - `bcdc_search()` - Search records in the catalogue
 - `bcdc_search_facets()` - List catalogue facet search options
 - `bcdc_get_record()` - Print a catalogue record
-- `bcdc_tidy_resources()` - Get a data frame of resources for a record
+- `bcdc_tidy_resources()` - Get a data frame of resources for a catalogue record
 - `bcdc_get_data()` - Get catalogue data
 - `bcdc_query_geodata()` - Get & query catalogue geospatial data available through a [Web Feature Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
 
@@ -53,7 +53,7 @@ The British Columbia government hosts over 3000 tabular and geospatial data sets
 
 ### `bcdc_get_data()`
 
-Once the user has located the B.C. Data Catalogue record with the data they want, `bcdata::bcdc_get_data()` can be used to download and read the data from the record.  Any of the record name, permanent ID or the result from `bcdc_get_record()` can be used to specify the resource. `bcdc_get_data` will automatically detect the type of data being requested and return the appropriate type. Let's try to access data for scholarships in B.C. schools:
+Once the user has located the B.C. Data Catalogue record with the data they want, `bcdata::bcdc_get_data()` can be used to download and read the data from the record.  Any of the record name, permanent ID or the result from `bcdc_get_record()` can be used to specify the data from the record. `bcdc_get_data` will automatically detect the type of data being requested and return the appropriate type. Let's try to access data for scholarships in B.C. schools:
 
 
 ```r
@@ -84,7 +84,7 @@ Please choose one option:
 2: AwardsScholarshipsHist.txt
 ```
 
-A catalogue record can have one or multiple data files---or "resources". If there are multiple data resources the user will need to specify which resource they want. bcdata gives the user the option to interactively choose which resource they want, but for scripts it is usually better to be explicit using the `resource` argument to specify the desired dataset. In addition, catalogue records are more reliably referred to by their permanent ID so bcdata also suggests supplying that to the `record` argument instead of the English string. We are interested, in this case, in the `.xlsx` file so we choose option 1 or:
+A catalogue record can have one or multiple data files---or "resources". If there are multiple data resources the user will need to specify which resource they want. `bcdata` gives the user the option to interactively choose which resource they want, but for scripts it is usually better to be explicit using the `resource` argument to specify the desired data file. In addition, catalogue records are more reliably referred to by their permanent ID, so `bcdata` also suggests supplying that to the `record` argument instead of the English string. We are interested, in this case, in the `.xlsx` file so we choose option 1 or:
 
 
 ```r
