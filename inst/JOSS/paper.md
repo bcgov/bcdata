@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2020-09-18"
+date: "2020-09-21"
 output:
   html_document:
     keep_md: yes
@@ -50,72 +50,34 @@ The British Columbia government hosts over 2000 tabular and geospatial data sets
 - `bcdc_query_geodata()` - Get & query catalogue geospatial data available through a [Web Feature Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
 
 
-### `bcdc_search()` and `bcdc_get_record()`
+## Search Records & Read Metadata
 
-`bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session. Let's search the catalogue for records that contain the word "scholarships":
+`bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session. Let's search the catalogue for records that contain the word "scholarships" restricting our search results to only two:
 
 
 ```r
-bcdc_search('scholarships')
+bcdc_search('scholarships', n = 2)
 ```
 ```
 List of B.C. Data Catalogue Records
 
-Number of records: 7
+Number of records: 2
 Titles:
 1: BC Schools - District & Provincial Scholarships (xlsx, txt)
  ID: 651b60c2-6786-488b-aa96-c4897531a884
  Name: bc-schools-district-provincial-scholarships
 2: BC Arts Council Annual Arts Awards Listing 2009 - 2010 (csv, xls)
  ID: b95fa84f-2328-4adc-aebe-9a214f741fa7
- Name: bc-arts-council-annual-arts-awards-listing-2009-2010
-3: BC Arts Council Annual Arts Awards Listing - Supplemental - 2008 - 2009 (csv, xls)
- ID: 46699ab8-89f8-475e-9116-95265f5a11ee
- Name: bc-arts-council-annual-arts-awards-listing-supplemental-2008-2009
-4: BC Arts Council Annual Arts Awards Listing 2011 - 2012 (csv, xls)
- ID: 4ac34ad0-fd4d-4a9d-b391-5a48a4881edf
- Name: bc-arts-council-annual-arts-awards-listing-2011-2012
-5: BC Arts Council Annual Arts Awards Listing 2010 - 2011 (csv, xls)
- ID: 8355a7b6-ab7d-4047-91fc-b7d8501dbf31
- Name: bc-arts-council-annual-arts-awards-listing-2010-2011
-6: BC Arts Council Annual Arts Awards Listing 2007 - 2008 (csv, xls)
- ID: b76efec8-eb8a-4765-8d8e-c1afbf57e468
- Name: bc-arts-council-annual-arts-awards-listing-2007-2008
-7: BC Arts Council Annual Arts Awards Listing 2008 - 2009 (xls, csv)
- ID: faa493c7-5e79-4587-a33d-eaa782c5a7a4
- Name: bc-arts-council-annual-arts-awards-listing-2008-2009 
+ Name: bc-arts-council-annual-arts-awards-listing-2009-2010 
 
 Access a single record by calling bcdc_get_record(ID)
       with the ID from the desired record.
 ```
 
-The user can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`.
+The user can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. 
 
 
-```r
-bcdc_get_record('bc-schools-district-provincial-scholarships')
-```
-
-```
-B.C. Data Catalogue Record: BC Schools - District & Provincial Scholarships 
-
-Name: bc-schools-district-provincial-scholarships (ID: 651b60c2-6786-488b-aa96-c4897531a884 )
-Permalink: https://catalogue.data.gov.bc.ca/dataset/651b60c2-6786-488b-aa96-c4897531a884
-Sector: Education
-Licence: Open Government Licence - British Columbia
-Type: Dataset
-Last Updated: 2017-02-02 
-
-Description: Disbursement of District and Provincial Scholarships to 2011/2012, including counts
-by male and female students. 
-
-Resources: (2)
-
-You can access the 'Resources' data frame using bcdc_tidy_resources()
-```
-
-
-### `bcdc_get_data()`
+## Get Data
 
 Once the user has located the B.C. Data Catalogue record with the data they want, `bcdata::bcdc_get_data()` can be used to download and read the data from the record.  Any of the record name, permanent ID or the result from `bcdc_get_record()` can be used to specify the data record. `bcdc_get_data` will automatically detect the type of data being requested and return the appropriate type. Let's try to access data for scholarships in B.C. school record:
 
@@ -172,30 +134,12 @@ ggplot(bc_airports) +
 
 ![](airports-1.png)<!-- -->
 
-### `bcdc_query_geodata()`
+## Query & Read Geospatial Data
 
 While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This is implemented using a custom `dbplyr` backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` backend interfaces with the B.C. Data Catalogue Web Feature Service.
 
 To demonstrate, we will query the Northern Health Authority boundary from the [Health Authority Boundaries geospatial data](https://catalogue.data.gov.bc.ca/dataset/7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
 
-
-```r
-## Find the Health Authority Boundaries catalogue record
-bcdc_search('health authority', res_format = "wms", n = 1)
-```
-
-```
-## List of B.C. Data Catalogue Records
-## 
-## Number of records: 1
-## Titles:
-## 1: Health Authority Boundaries (wms, kml, other, shp)
-##  ID: 7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b
-##  Name: health-authority-boundaries 
-## 
-## Access a single record by calling bcdc_get_record(ID)
-##       with the ID from the desired record.
-```
 
 ```r
 ## Get the metadata for the Health Authority Boundaries catalogue record
