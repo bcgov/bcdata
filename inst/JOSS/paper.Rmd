@@ -83,7 +83,7 @@ Access a single record by calling bcdc_get_record(ID)
       with the ID from the desired record.
 ```
 
-The user can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. A catalogue record can have one or multiple data files---or "resources". The user can use the `bcdc_tidy_resources()` function to return a data frame listing all of the resources and corresponding resource IDs for a catalogue record.
+The user can retrieve the metadata for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. A catalogue record can have one or multiple data files---or "resources". The user can use the `bcdc_tidy_resources()` function to return a data frame listing all of the data resources and corresponding resource IDs for a catalogue record.
 
 ```{r eval=FALSE}
 bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
