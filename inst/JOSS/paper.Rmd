@@ -30,7 +30,12 @@ tags:
 
 
 ```{r options, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 12, fig.path = "")
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, 
+                      message = FALSE, fig.width = 8, 
+                      fig.height = 12, fig.path = "")
+options(tibble.width = 60)
+options(width = 60)
+library(dplyr)
 ```
 
 ```{r packages, warning=FALSE, message=FALSE, echo=FALSE}
@@ -81,8 +86,14 @@ Access a single record by calling bcdc_get_record(ID)
 
 The user can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. A catalogue record can have one or multiple data files---or "resources". The user can use the `bcdc_tidy_resources()` function to return a data frame listing all of the resources and corresponding resource IDs for a catalogue record.
 
-```{r}
+```{r eval=FALSE}
 bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
+```
+
+```{r echo=FALSE}
+res <- bcdc_tidy_resources("bc-schools-district-provincial-scholarships") %>% 
+  select(name, id, format, bcdata_available, everything())
+res
 ```
 
 
@@ -93,7 +104,7 @@ Once the user has located the B.C. Data Catalogue record with the data they want
 
 Let's try to access data for scholarships in B.C. school record:
 
-```{r, eval=FALSE}
+```{r eval=FALSE, cache=TRUE}
 scholars <- bcdc_get_data('bc-schools-district-provincial-scholarships')
 ```
 
@@ -123,15 +134,27 @@ Please choose one option:
 
 Since there are multiple data resources in the record, the user will need to specify which data resource they want. `bcdata` gives the user the option to interactively choose a resource, however for scripts it is usually better to be explicit and specify the desired data resource using the `resource` argument. We are interested, in this case, in the `.xlsx` file so we choose option 1 or:
 
-```{r}
+```{r eval=FALSE}
 scholars <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
                           resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
-str(scholars)
+head(scholars)
+```
+
+```{r echo=FALSE}
+scholars <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
+                          resource = '4e872f59-0127-4c21-9f41-52d87af9cfab') %>% 
+  select(`SCHOOL_YEAR_ISSUED`,        
+         `Sub Pop Code`,              
+         `Num Prov Scholarships 1000`,
+         `Num Prov Scholarships 2000`,
+         `Num District Scholarships`, 
+         everything())
+head(scholars)
 ```
 
 The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the Web Feature Service. As a simple demonstration we can download the locations of airports in British Columbia:
 
-```{r airports, fig.height = 5, fig.width = 7}
+```{r airports, fig.height = 5, fig.width = 7, cache=TRUE}
 bc_airports <- bcdc_get_data(record = 'bc-airports',
                              resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
 
@@ -146,7 +169,7 @@ While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial 
 
 To demonstrate, we will query the Northern Health Authority boundary from the [Health Authority Boundaries geospatial data](https://catalogue.data.gov.bc.ca/dataset/7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
 
-```{r ha, fig.height = 5, fig.width = 7}
+```{r ha, fig.height = 5, fig.width = 7, cache=TRUE}
 ## Get the metadata for the Health Authority Boundaries catalogue record
 ha_record <- bcdc_get_record("7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b")
 

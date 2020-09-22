@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2020-09-21"
+date: "2020-09-22"
 output:
   html_document:
     keep_md: yes
@@ -81,12 +81,14 @@ The user can retrieve the _metadata_ for a single catalogue record by using the 
 bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
 ```
 
+
 ```
 ## # A tibble: 2 x 8
-##   name    url         id      format ext   package_id  location bcdata_available
-##   <chr>   <chr>       <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
-## 1 Awards… http://www… 4e872f… xlsx   xlsx  651b60c2-6… external TRUE            
-## 2 Awards… http://www… 8a2cd8… txt    txt   651b60c2-6… external TRUE
+##   name  id    format bcdata_available url   ext   package_id
+##   <chr> <chr> <chr>  <lgl>            <chr> <chr> <chr>     
+## 1 Awar… 4e87… xlsx   TRUE             http… xlsx  651b60c2-…
+## 2 Awar… 8a2c… txt    TRUE             http… txt   651b60c2-…
+## # … with 1 more variable: location <chr>
 ```
 
 
@@ -132,20 +134,24 @@ Since there are multiple data resources in the record, the user will need to spe
 ```r
 scholars <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
                           resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
-str(scholars)
+head(scholars)
 ```
 
+
 ```
-## tibble [5,367 × 9] (S3: tbl_df/tbl/data.frame)
-##  $ Data Level                : chr [1:5367] "PROVINCE LEVEL" "PROVINCE LEVEL" "PROVINCE LEVEL" "PROVINCE LEVEL" ...
-##  $ Public Or Independent     : chr [1:5367] "PROVINCE - Total" "PROVINCE - Total" "PROVINCE - Total" "PROVINCE - Total" ...
-##  $ District Number           : chr [1:5367] NA NA NA NA ...
-##  $ District Name             : chr [1:5367] NA NA NA NA ...
-##  $ SCHOOL_YEAR_ISSUED        : chr [1:5367] "1996/1997" "1996/1997" "1996/1997" "1997/1998" ...
-##  $ Sub Pop Code              : chr [1:5367] "ALL STUDENTS" "FEMALE" "MALE" "ALL STUDENTS" ...
-##  $ Num Prov Scholarships 1000: chr [1:5367] "3509" "1921" "1588" "3748" ...
-##  $ Num Prov Scholarships 2000: chr [1:5367] "20" "7" "13" "20" ...
-##  $ Num District Scholarships : chr [1:5367] "474" "266" "208" "503" ...
+## # A tibble: 6 x 9
+##   SCHOOL_YEAR_ISS… `Sub Pop Code` `Num Prov Schol…
+##   <chr>            <chr>          <chr>           
+## 1 1996/1997        ALL STUDENTS   3509            
+## 2 1996/1997        FEMALE         1921            
+## 3 1996/1997        MALE           1588            
+## 4 1997/1998        ALL STUDENTS   3748            
+## 5 1997/1998        FEMALE         2094            
+## 6 1997/1998        MALE           1654            
+## # … with 6 more variables: `Num Prov Scholarships
+## #   2000` <chr>, `Num District Scholarships` <chr>, `Data
+## #   Level` <chr>, `Public Or Independent` <chr>, `District
+## #   Number` <chr>, `District Name` <chr>
 ```
 
 The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the Web Feature Service. As a simple demonstration we can download the locations of airports in British Columbia:
