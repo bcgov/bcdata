@@ -132,6 +132,20 @@ Since there are multiple data resources in the record, the user will need to spe
 ```r
 scholars <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
                           resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
+str(scholars)
+```
+
+```
+## tibble [5,367 × 9] (S3: tbl_df/tbl/data.frame)
+##  $ Data Level                : chr [1:5367] "PROVINCE LEVEL" "PROVINCE LEVEL" "PROVINCE LEVEL" "PROVINCE LEVEL" ...
+##  $ Public Or Independent     : chr [1:5367] "PROVINCE - Total" "PROVINCE - Total" "PROVINCE - Total" "PROVINCE - Total" ...
+##  $ District Number           : chr [1:5367] NA NA NA NA ...
+##  $ District Name             : chr [1:5367] NA NA NA NA ...
+##  $ SCHOOL_YEAR_ISSUED        : chr [1:5367] "1996/1997" "1996/1997" "1996/1997" "1997/1998" ...
+##  $ Sub Pop Code              : chr [1:5367] "ALL STUDENTS" "FEMALE" "MALE" "ALL STUDENTS" ...
+##  $ Num Prov Scholarships 1000: chr [1:5367] "3509" "1921" "1588" "3748" ...
+##  $ Num Prov Scholarships 2000: chr [1:5367] "20" "7" "13" "20" ...
+##  $ Num District Scholarships : chr [1:5367] "474" "266" "208" "503" ...
 ```
 
 The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the Web Feature Service. As a simple demonstration we can download the locations of airports in British Columbia:
@@ -197,7 +211,7 @@ ggplot(my_ha) +
 
 # Conclusion
 
-Connecting British Columbia government's vast collection of data holdings in the the B.C. Data Catalogue with the R programming language enables the use of cutting edge statistical and plotting capabilities in a modern data science context, and provides a pathway to generate important insights from open and public data.
+The `bcdata` R package connects R users with British Columbia government's vast collection of data holdings in the the B.C. Data Catalogue through an efficient and familiar interface. This enables the use of cutting edge statistical and plotting capabilities in a modern data science context, and provides a pathway to generate important insights from open and public data.
 
 # Acknowledgements
 Author order was determined randomly using the following R code: `set.seed(42); sample(c("Teucher","Hazlitt","Albers"), 3)` because all author contributions are equal.
