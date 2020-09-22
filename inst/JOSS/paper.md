@@ -140,16 +140,15 @@ head(scholars)
 
 ```
 ## # A tibble: 6 x 9
-##   SCHOOL_YEAR_ISS… `Sub Pop Code` `Num Prov Schol…
-##   <chr>            <chr>          <chr>           
-## 1 1996/1997        ALL STUDENTS   3509            
-## 2 1996/1997        FEMALE         1921            
-## 3 1996/1997        MALE           1588            
-## 4 1997/1998        ALL STUDENTS   3748            
-## 5 1997/1998        FEMALE         2094            
-## 6 1997/1998        MALE           1654            
-## # … with 6 more variables: `Num Prov Scholarships
-## #   2000` <chr>, `Num District Scholarships` <chr>, `Data
+##   SCHOOL_YEAR_ISS… `Sub Pop Code` `Num Prov Schol… `Num Prov Schol…
+##   <chr>            <chr>          <chr>            <chr>           
+## 1 1996/1997        ALL STUDENTS   3509             20              
+## 2 1996/1997        FEMALE         1921             7               
+## 3 1996/1997        MALE           1588             13              
+## 4 1997/1998        ALL STUDENTS   3748             20              
+## 5 1997/1998        FEMALE         2094             11              
+## 6 1997/1998        MALE           1654             9               
+## # … with 5 more variables: `Num District Scholarships` <chr>, `Data
 ## #   Level` <chr>, `Public Or Independent` <chr>, `District
 ## #   Number` <chr>, `District Name` <chr>
 ```

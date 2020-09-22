@@ -33,12 +33,10 @@ tags:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, 
                       message = FALSE, fig.width = 8, 
                       fig.height = 12, fig.path = "")
-options(tibble.width = 60)
-options(width = 60)
-library(dplyr)
 ```
 
 ```{r packages, warning=FALSE, message=FALSE, echo=FALSE}
+library(dplyr)
 library(bcdata)
 library(sf)
 library(ggplot2)
@@ -93,7 +91,7 @@ bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
 ```{r echo=FALSE}
 res <- bcdc_tidy_resources("bc-schools-district-provincial-scholarships") %>% 
   select(name, id, format, bcdata_available, everything())
-res
+print(res, width = 60)
 ```
 
 
@@ -149,7 +147,7 @@ scholars <- bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884',
          `Num Prov Scholarships 2000`,
          `Num District Scholarships`, 
          everything())
-head(scholars)
+print(head(scholars), width = 70)
 ```
 
 The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the Web Feature Service. As a simple demonstration we can download the locations of airports in British Columbia:
