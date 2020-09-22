@@ -32,7 +32,8 @@ tags:
 ```{r options, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, 
                       message = FALSE, fig.width = 8, 
-                      fig.height = 12, fig.path = "")
+                      fig.height = 12, fig.path = "",
+                      comment = NA)
 ```
 
 ```{r packages, warning=FALSE, message=FALSE, echo=FALSE}

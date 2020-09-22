@@ -83,12 +83,12 @@ bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
 
 
 ```
-## # A tibble: 2 x 8
-##   name  id    format bcdata_available url   ext   package_id
-##   <chr> <chr> <chr>  <lgl>            <chr> <chr> <chr>     
-## 1 Awar… 4e87… xlsx   TRUE             http… xlsx  651b60c2-…
-## 2 Awar… 8a2c… txt    TRUE             http… txt   651b60c2-…
-## # … with 1 more variable: location <chr>
+# A tibble: 2 x 8
+  name  id    format bcdata_available url   ext   package_id
+  <chr> <chr> <chr>  <lgl>            <chr> <chr> <chr>     
+1 Awar~ 4e87~ xlsx   TRUE             http~ xlsx  651b60c2-~
+2 Awar~ 8a2c~ txt    TRUE             http~ txt   651b60c2-~
+# ... with 1 more variable: location <chr>
 ```
 
 
@@ -139,18 +139,18 @@ head(scholars)
 
 
 ```
-## # A tibble: 6 x 9
-##   SCHOOL_YEAR_ISS… `Sub Pop Code` `Num Prov Schol… `Num Prov Schol…
-##   <chr>            <chr>          <chr>            <chr>           
-## 1 1996/1997        ALL STUDENTS   3509             20              
-## 2 1996/1997        FEMALE         1921             7               
-## 3 1996/1997        MALE           1588             13              
-## 4 1997/1998        ALL STUDENTS   3748             20              
-## 5 1997/1998        FEMALE         2094             11              
-## 6 1997/1998        MALE           1654             9               
-## # … with 5 more variables: `Num District Scholarships` <chr>, `Data
-## #   Level` <chr>, `Public Or Independent` <chr>, `District
-## #   Number` <chr>, `District Name` <chr>
+# A tibble: 6 x 9
+  SCHOOL_YEAR_ISS~ `Sub Pop Code` `Num Prov Schol~ `Num Prov Schol~
+  <chr>            <chr>          <chr>            <chr>           
+1 1996/1997        ALL STUDENTS   3509             20              
+2 1996/1997        FEMALE         1921             7               
+3 1996/1997        MALE           1588             13              
+4 1997/1998        ALL STUDENTS   3748             20              
+5 1997/1998        FEMALE         2094             11              
+6 1997/1998        MALE           1654             9               
+# ... with 5 more variables: `Num District Scholarships` <chr>, `Data
+#   Level` <chr>, `Public Or Independent` <chr>, `District
+#   Number` <chr>, `District Name` <chr>
 ```
 
 The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the Web Feature Service. As a simple demonstration we can download the locations of airports in British Columbia:
@@ -183,20 +183,20 @@ bcdc_describe_feature(ha_record)
 ```
 
 ```
-## # A tibble: 11 x 4
-##    col_name            sticky remote_col_type          local_col_type
-##    <chr>               <lgl>  <chr>                    <chr>         
-##  1 id                  FALSE  xsd:string               character     
-##  2 HLTH_HAB_SYSID      FALSE  xsd:decimal              numeric       
-##  3 HLTH_AUTHORITY_CODE TRUE   xsd:string               character     
-##  4 HLTH_AUTHORITY_NAME TRUE   xsd:string               character     
-##  5 HLTH_AUTHORITY_ID   TRUE   xsd:string               character     
-##  6 FEATURE_CODE        TRUE   xsd:string               character     
-##  7 FEATURE_AREA_SQM    TRUE   xsd:decimal              numeric       
-##  8 FEATURE_LENGTH_M    TRUE   xsd:decimal              numeric       
-##  9 SHAPE               TRUE   gml:GeometryPropertyType sfc geometry  
-## 10 OBJECTID            FALSE  xsd:decimal              numeric       
-## 11 SE_ANNO_CAD_DATA    TRUE   xsd:hexBinary            numeric
+# A tibble: 11 x 4
+   col_name            sticky remote_col_type          local_col_type
+   <chr>               <lgl>  <chr>                    <chr>         
+ 1 id                  FALSE  xsd:string               character     
+ 2 HLTH_HAB_SYSID      FALSE  xsd:decimal              numeric       
+ 3 HLTH_AUTHORITY_CODE TRUE   xsd:string               character     
+ 4 HLTH_AUTHORITY_NAME TRUE   xsd:string               character     
+ 5 HLTH_AUTHORITY_ID   TRUE   xsd:string               character     
+ 6 FEATURE_CODE        TRUE   xsd:string               character     
+ 7 FEATURE_AREA_SQM    TRUE   xsd:decimal              numeric       
+ 8 FEATURE_LENGTH_M    TRUE   xsd:decimal              numeric       
+ 9 SHAPE               TRUE   gml:GeometryPropertyType sfc geometry  
+10 OBJECTID            FALSE  xsd:decimal              numeric       
+11 SE_ANNO_CAD_DATA    TRUE   xsd:hexBinary            numeric       
 ```
 
 ```r
