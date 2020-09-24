@@ -65,11 +65,11 @@ print.bcdc_promise <- function(x, ...) {
   name <- ifelse(is_record(x$record),
                  paste0("'", x[["record"]][["name"]], "'"),
                  paste0("'", x[["query_list"]][["typeNames"]], "'"))
-  cat_line(glue::glue("Querying {col_red(name)} record"))
+  cat_line_wrap(glue::glue("Querying {col_red(name)} record"))
 
-  cat_bullet(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
-                        "and {col_green(fields)} fields"))
-  cat_bullet("At most six rows of the record are printed here")
+  cat_bullet(strwrap(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
+                        "and {col_green(fields)} fields")))
+  cat_bullet(strwrap("At most six rows of the record are printed here"))
   cat_rule()
   print(parsed)
   invisible(x)
@@ -77,71 +77,70 @@ print.bcdc_promise <- function(x, ...) {
 
 #' @export
 print.bcdc_record <- function(x, ...) {
-  cat(cli::col_blue(cli::style_bold("B.C. Data Catalogue Record:")), x$title, "\n")
-  cat(cli::col_blue(cli::style_italic("\nName:")), x$name, "(ID:", x$id, ")")
-  cat(cli::col_blue(cli::style_italic("\nPermalink:")), paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
-  cat(cli::col_blue(cli::style_italic("\nSector:")), x$sector)
-  cat(cli::col_blue(cli::style_italic("\nLicence:")), x$license_title)
-  cat(cli::col_blue(cli::style_italic("\nType:")), x$type)
-  cat(cli::col_blue(cli::style_italic("\nLast Updated:")), x$record_last_modified, "\n")
-  cat(cli::col_blue(cli::style_italic("\nDescription:")), paste0(strwrap(x$notes, width = 85), collapse = "\n"), "\n")
+  cat_line_wrap(cli::col_blue(cli::style_bold("B.C. Data Catalogue Record: ")), x$title)
+  cat_line_wrap(cli::col_blue(cli::style_italic("Name: ")), x$name, " (ID: ", x$id, ")")
+  cat_line_wrap(cli::col_blue(cli::style_italic("Permalink: ")), paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
+  cat_line_wrap(cli::col_blue(cli::style_italic("Sector: ")), x$sector)
+  cat_line_wrap(cli::col_blue(cli::style_italic("Licence: ")), x$license_title)
+  cat_line_wrap(cli::col_blue(cli::style_italic("Type: ")), x$type)
+  cat_line_wrap(cli::col_blue(cli::style_italic("Last Updated: ")), x$record_last_modified)
+  cat_line_wrap(cli::col_blue(cli::style_italic("Description: ")), x$notes)
 
-  cat(cli::col_blue(cli::style_italic("\nResources: (", nrow(bcdc_tidy_resources(x)), ")\n")))
+  cat_line_wrap(cli::col_blue(cli::style_italic("Resources: (", nrow(bcdc_tidy_resources(x)), ")")))
   print(bcdc_tidy_resources(x))
 
-  cat(cli::col_blue("\nYou can access the 'Resources' data frame using bcdc_tidy_resources()\n\n"))
+  cat_line_wrap(cli::col_blue("You can access the 'Resources' data frame using bcdc_tidy_resources()"))
 
   invisible(x)
 }
 
-record_print_helper <- function(r, n, print_avail = FALSE){
-  cat(n, ") ", clean_wfs(r$name), "\n", sep = "")
-  #cat("    description:", r$description, "\n")
-  cat("     format:", clean_wfs(formats_from_resource(r)), "\n")
-  if (r$format != "wms") cat("     url:", r$url, "\n")
-  cat("     resource:", r$id, "\n")
+record_print_helper <- function(r, n, print_avail = FALSE) {
+  cat_line_wrap(n, ") ", clean_wfs(r$name))
+  #cat_line_wrap("    description:", r$description)
+  cat_line_wrap("format: ", clean_wfs(formats_from_resource(r)), indent = 3)
+  if (r$format != "wms") cat_line_wrap("url: ", r$url, indent = 3)
+  cat_line_wrap("resource: ", r$id, indent = 3)
   if (print_avail) {
-    cat("     available in R via bcdata: ",
+    cat_line_wrap("available in R via bcdata: ",
         if (r$format == "zip") {
           "Will attempt - unknown format (zipped)"
         } else {
           r$bcdata_available
-        }, "\n")
+        })
   }
   if (r$bcdata_available)
-    cat("     code: bcdc_get_data(record = '", r$package_id,
-        "', resource = '",r$id,"')\n", sep = "")
-  cat("\n")
+    cat_line_wrap("code: ", "bcdc_get_data(record = '", r$package_id,
+        "', resource = '",r$id,"')", indent = 3)
+  cat_line()
 }
 
 #' @export
 print.bcdc_recordlist <- function(x, ...) {
-  cat("List of B.C. Data Catalogue Records\n")
+  cat_line_wrap("List of B.C. Data Catalogue Records")
   len <- length(x)
   n_print <- min(10, len)
-  cat("\nNumber of records:", len)
-  if (n_print < len) cat(" (Showing the top 10)")
-  cat("\nTitles:\n")
+  cat_line_wrap("Number of records: ", len)
+  if (n_print < len) cat_line(" (Showing the top 10)")
+  cat_line_wrap("Titles:")
   x <- purrr::set_names(x, NULL)
-  cat(paste(purrr::imap(x[1:n_print], ~ {
+
+  purrr::imap(x[1:n_print], ~ {
 
     if (!nrow(bcdc_tidy_resources(x[[.y]]))) {
-      return(paste0(.y, ": ",purrr::pluck(.x, "title"),
-                    col_red("\n This record has no resources. bcdata will not be able to access any data."),
-                    "\n ID: ", purrr::pluck(.x, "id"),
-                    "\n Name: ", purrr::pluck(.x, "name")))
+      cat_line_wrap(.y, ": ",purrr::pluck(.x, "title"))
+      cat_line_wrap("This record has no resources. bcdata will not be able to access any data.", col = "red")
+    } else {
+      cat_line_wrap(.y, ": ",purrr::pluck(.x, "title"),
+                    " (", paste0(unique(formats_from_record(.x)), collapse = ", "),
+                    ")")
     }
 
-    paste0(
-      .y, ": ",purrr::pluck(.x, "title"),
-      " (",
-      paste0(unique(formats_from_record(.x)), collapse = ", "),
-      ")",
-      "\n ID: ", purrr::pluck(.x, "id"),
-      "\n Name: ", purrr::pluck(.x, "name")
-    )
-  }), collapse = "\n"), "\n")
-  cat("\nAccess a single record by calling bcdc_get_record(ID)
+    cat_line_wrap("ID: ", purrr::pluck(.x, "id"), indent = 1, exdent = 2)
+    cat_line_wrap("Name: ", purrr::pluck(.x, "name"), indent = 1, exdent = 2)
+  })
+
+  cat_line()
+  cat_line_wrap("Access a single record by calling `bcdc_get_record(ID)`
       with the ID from the desired record.")
   invisible(x)
 }
@@ -151,16 +150,16 @@ print.bcdc_query <- function(x, ...) {
 
   cat_line("<url>")
   if (length(x$url) > 1) {
-    for(i in seq_along(x$url)){
-      cat_line(glue::glue("Request {i} of {length(x$url)} \n{x$url[i]} \n"))
+    for (i in seq_along(x$url)) {
+      cat_line_wrap(glue::glue("Request {i} of {length(x$url)} \n{x$url[i]}"))
     }
   }
 
   cat_line("<body>")
-  cat_line(glue::glue("   {names(x$query_list)}: {x$query_list}"))
+  cat_line_wrap(glue::glue("   {names(x$query_list)}: {x$query_list}"))
   cat_line()
   cat_line("<full query url>")
-  cat_line(x$full_url)
+  cat_line_wrap(x$full_url)
   invisible(x)
 }
 
@@ -453,4 +452,9 @@ show_query.bcdc_sf <- function(x, ...) {
 finalize_cql <- function(x, con = cql_dummy_con) {
   if (is.null(x) || !length(x)) return(NULL)
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
+}
+
+cat_line_wrap <- function(..., indent = 0, exdent = 1, col = NULL, background_col = NULL, file = stdout()) {
+  txt <- strwrap(paste0(..., collapse = ""), indent = indent, exdent = exdent)
+  cat_line(txt, col = col, background_col = background_col, file = file)
 }
