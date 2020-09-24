@@ -88,12 +88,6 @@ This can be a useful tool to examine a layer before issuing a query with bcdc_qu
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -180,7 +174,8 @@ The tibble returns the following columns:</p><ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
- <span class='fu'>bcdc_describe_feature</span>(<span class='st'>"bc-airports"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 42 x 4</span><span>
+ <span class='fu'>bcdc_describe_feature</span>(<span class='st'>"bc-airports"</span>)
+</div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 42 x 4</span><span>
 #&gt;    col_name                      sticky remote_col_type local_col_type
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #555555;'> 1</span><span> id                            FALSE  xsd:string      character     
@@ -193,7 +188,8 @@ The tibble returns the following columns:</p><ul>
 #&gt; </span><span style='color: #555555;'> 8</span><span> AIRPORT_NAME                  FALSE  xsd:string      character     
 #&gt; </span><span style='color: #555555;'> 9</span><span> DESCRIPTION                   TRUE   xsd:string      character     
 #&gt; </span><span style='color: #555555;'>10</span><span> PHYSICAL_ADDRESS              TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'> <span class='fu'>bcdc_describe_feature</span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 42 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'> <span class='fu'>bcdc_describe_feature</span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 42 x 4</span><span>
 #&gt;    col_name                      sticky remote_col_type local_col_type
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #555555;'> 1</span><span> id                            FALSE  xsd:string      character     
@@ -207,6 +203,7 @@ The tibble returns the following columns:</p><ul>
 #&gt; </span><span style='color: #555555;'> 9</span><span> DESCRIPTION                   TRUE   xsd:string      character     
 #&gt; </span><span style='color: #555555;'>10</span><span> PHYSICAL_ADDRESS              TRUE   xsd:string      character     
 #&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'><span class='co'># }</span>
+
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -223,7 +220,7 @@ The tibble returns the following columns:</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

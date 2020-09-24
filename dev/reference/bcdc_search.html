@@ -87,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -203,10 +197,11 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 303 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 303.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
-#&gt; 
-#&gt; Number of records: 100 (Showing the top 10)
+<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)
+</div><div class='output co'>#&gt; <span class='message'>Found 305 matches. Returning the first 100.</span>
+#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 305.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
+#&gt; Number of records: 100
+#&gt;  (Showing the top 10)
 #&gt; Titles:
 #&gt; 1: RESULTS - Forest Cover Inventory (other, wms)
 #&gt;  ID: 56ac43a7-724a-4f01-b193-d5f9a16ef0a8
@@ -226,7 +221,8 @@
 #&gt; 6: Forest Inventory Zones (other, wms, kml)
 #&gt;  ID: 67e95c68-c1ef-4363-b351-0dfead151122
 #&gt;  Name: forest-inventory-zones
-#&gt; 7: Harvested Areas of BC (Consolidated Cutblocks) (other, fgdb, wms, kml, pdf)
+#&gt; 7: Harvested Areas of BC (Consolidated Cutblocks) (other, fgdb, wms,
+#&gt;  kml, pdf)
 #&gt;  ID: b1b647a6-f271-42e0-9cd0-89ec24bce9f7
 #&gt;  Name: harvested-areas-of-bc-consolidated-cutblocks-
 #&gt; 8: Mixed Forest 1:250,000 GeoBase Land Cover (other)
@@ -237,47 +233,52 @@
 #&gt;  Name: coniferous-forest-1-250-000-geobase-land-cover
 #&gt; 10: Broadleaf Forest 1:250,000 GeoBase Land Cover (other)
 #&gt;  ID: 78bb0ee9-96ed-49fb-9c0c-7434b2f24d7e
-#&gt;  Name: broadleaf-forest-1-250-000-geobase-land-cover 
+#&gt;  Name: broadleaf-forest-1-250-000-geobase-land-cover
 #&gt; 
-#&gt; Access a single record by calling bcdc_get_record(ID)
-#&gt;       with the ID from the desired record.</div><div class='input'><span class='fu'>bcdc_search</span>(<span class='st'>"regional district"</span>, type = <span class='st'>"Geographic"</span>, res_format = <span class='st'>"fgdb"</span>)</div><div class='output co'>#&gt; <span class='message'>Found 188 matches. Returning the first 100.</span>
-#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 188.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
-#&gt; 
-#&gt; Number of records: 100 (Showing the top 10)
+#&gt; Access a single record by calling `bcdc_get_record(ID)` with the ID
+#&gt;  from the desired record.</div><div class='input'><span class='fu'>bcdc_search</span>(<span class='st'>"regional district"</span>, type = <span class='st'>"Geographic"</span>, res_format = <span class='st'>"fgdb"</span>)
+</div><div class='output co'>#&gt; <span class='message'>Found 190 matches. Returning the first 100.</span>
+#&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 190.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
+#&gt; Number of records: 100
+#&gt;  (Showing the top 10)
 #&gt; Titles:
-#&gt; 1: Regional district financial statistics (other)
+#&gt; 1: Recreation Sites and Trails BC District Boundaries (fgdb, other)
+#&gt;  ID: 0ad49841-a25b-4be4-b98c-9e817e94cc48
+#&gt;  Name: recreation-sites-and-trails-bc-district-boundaries
+#&gt; 2: Regional district financial statistics (other)
 #&gt;  ID: 35fd9fe7-e937-4719-82e8-852cc699a113
 #&gt;  Name: regional-district-financial-statistics
-#&gt; 2: Natural Resource (NR) Districts (other, wms)
+#&gt; 3: Natural Resource (NR) Districts (other, wms)
 #&gt;  ID: 0bc73892-e41f-41d0-8d8e-828c16139337
 #&gt;  Name: natural-resource-nr-district
-#&gt; 3: Regional District Boundaries - Road centreline aligned (other, wms, kml)
+#&gt; 4: Regional District Boundaries - Road centreline aligned (other, wms,
+#&gt;  kml)
 #&gt;  ID: b66ed992-16c9-4527-b363-0ae4827d103b
 #&gt;  Name: regional-district-boundaries-road-centreline-aligned
-#&gt; 4: Regional Districts - Legally Defined Administrative Areas of BC (other, xlsx, wms, kml)
+#&gt; 5: Regional Districts - Legally Defined Administrative Areas of BC
+#&gt;  (other, xlsx, wms, kml)
 #&gt;  ID: d1aff64e-dbfe-45a6-af97-582b7f6418b9
 #&gt;  Name: regional-districts-legally-defined-administrative-areas-of-bc
-#&gt; 5: Legally Defined Administrative Areas of BC (other, xlsx)
+#&gt; 6: Legally Defined Administrative Areas of BC (other, xlsx)
 #&gt;  ID: 12f0fd64-94d5-422a-832e-6627a2a01702
 #&gt;  Name: legally-defined-administrative-areas-of-bc
-#&gt; 6: Local and Regional Greenspaces (wms, kml, xlsx, other)
+#&gt; 7: Recreation Sites and Trail BC Region Boundaries (fgdb, other)
+#&gt;  ID: 919f236a-e40f-4f07-a459-f976f02b6e11
+#&gt;  Name: recreation-sites-and-trail-bc-region-boundaries
+#&gt; 8: Local and Regional Greenspaces (wms, kml, xlsx, other)
 #&gt;  ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da
 #&gt;  Name: local-and-regional-greenspaces
-#&gt; 7: BC College Region Boundaries (other, wms, kml)
+#&gt; 9: BC College Region Boundaries (other, wms, kml)
 #&gt;  ID: 6b8da230-9bc2-4bb4-989e-7d5dad84a4ac
 #&gt;  Name: bc-college-region-boundaries
-#&gt; 8: Communities Affected by Evacuation Orders and Alerts (other, wms, kml)
+#&gt; 10: Communities Affected by Evacuation Orders and Alerts (other, wms,
+#&gt;  kml)
 #&gt;  ID: 284f6b3f-e1ce-4394-81aa-1a4af9feee56
 #&gt;  Name: communities-affected-by-evacuation-orders-and-alerts
-#&gt; 9: Environmental Emergency Response (EER) District Boundaries (wms, kml, other)
-#&gt;  ID: e87e1db2-d99c-412f-be36-650d84c9540f
-#&gt;  Name: environmental-emergency-response-eer-district-boundaries
-#&gt; 10: Forest Licensee Operating Areas (other, wms, kml)
-#&gt;  ID: 5a18c401-7c99-48fe-8a1a-b4597072d8b6
-#&gt;  Name: forest-licensee-operating-areas 
 #&gt; 
-#&gt; Access a single record by calling bcdc_get_record(ID)
-#&gt;       with the ID from the desired record.</div><div class='input'><span class='co'># }</span></div></pre>
+#&gt; Access a single record by calling `bcdc_get_record(ID)` with the ID
+#&gt;  from the desired record.</div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -293,7 +294,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

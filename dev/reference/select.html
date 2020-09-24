@@ -92,12 +92,6 @@ See dplyr::select for details." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -183,7 +177,8 @@ of issuing the Web Service call.</p>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='kw'>feature_spec</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_describe_feature.html'>bcdc_describe_feature</a></span>(<span class='st'>"bc-airports"</span>)
 <span class='co'>## Columns that can selected:</span>
-<span class='kw'>feature_spec</span>[<span class='kw'>feature_spec</span><span class='op'>$</span><span class='kw'>sticky</span> <span class='op'>==</span> <span class='fl'>TRUE</span>,]</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 33 x 4</span><span>
+<span class='kw'>feature_spec</span>[<span class='kw'>feature_spec</span><span class='op'>$</span><span class='kw'>sticky</span> <span class='op'>==</span> <span class='fl'>TRUE</span>,]
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 33 x 4</span><span>
 #&gt;    col_name         sticky remote_col_type local_col_type
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #555555;'> 1</span><span> DESCRIPTION      TRUE   xsd:string      character     
@@ -199,8 +194,10 @@ of issuing the Web Service call.</p>
 #&gt; </span><span style='color: #555555;'># … with 23 more rows</span><span></div><div class='input'>
 <span class='co'>## Select columns</span>
 <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'>select</span>(<span class='kw'>DESCRIPTION</span>, <span class='kw'>PHYSICAL_ADDRESS</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>11</span><span> fields
+  <span class='fu'>select</span>(<span class='kw'>DESCRIPTION</span>, <span class='kw'>PHYSICAL_ADDRESS</span>)
+</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; ● features and </span><span style='color: #00BB00;'>11</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 11 fields
@@ -222,8 +219,10 @@ of issuing the Web Service call.</p>
 #&gt; </span><span style='color: #555555;'>#   SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Select "sticky" columns</span>
 <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'>select</span>(<span class='kw'>LOCALITY</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>10</span><span> fields
+  <span class='fu'>select</span>(<span class='kw'>LOCALITY</span>)
+</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; ● features and </span><span style='color: #00BB00;'>10</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 10 fields
@@ -243,6 +242,7 @@ of issuing the Web Service call.</p>
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span>
 
+
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -259,7 +259,7 @@ of issuing the Web Service call.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -88,12 +88,6 @@ See dplyr::show_query for details." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -175,15 +169,13 @@ See dplyr::show_query for details." />
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-environmental-monitoring-locations"</span>) <span class='op'>%&gt;%</span>
   <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span>(<span class='kw'>PERMIT_RELATIONSHIP</span> <span class='op'>==</span> <span class='st'>"DISCHARGE"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'>show_query</span>()</div><div class='output co'>#&gt; &lt;url&gt;
+  <span class='fu'>show_query</span>()
+</div><div class='output co'>#&gt; &lt;url&gt;
 #&gt; &lt;body&gt;
-#&gt;    SERVICE: WFS
-#&gt;    VERSION: 2.0.0
-#&gt;    REQUEST: GetFeature
-#&gt;    outputFormat: application/json
-#&gt;    typeNames: WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW
-#&gt;    SRSNAME: EPSG:3005
-#&gt;    CQL_FILTER: ("PERMIT_RELATIONSHIP" = 'DISCHARGE')
+#&gt; SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature outputFormat:
+#&gt;  application/json typeNames:
+#&gt;  WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW SRSNAME:
+#&gt;  EPSG:3005 CQL_FILTER: ("PERMIT_RELATIONSHIP" = 'DISCHARGE')
 #&gt; 
 #&gt; &lt;full query url&gt;
 #&gt; https://openmaps.gov.bc.ca/geo/pub/wfs/?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%22PERMIT_RELATIONSHIP%22%20%3D%20%27DISCHARGE%27%29</div><div class='input'>  <span class='co'># }</span>
@@ -192,17 +184,16 @@ See dplyr::show_query for details." />
 <span class='kw'>air</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
   <span class='fu'><a href='as_tibble.html'>collect</a></span>()
 
-<span class='fu'>show_query</span>(<span class='kw'>air</span>)</div><div class='output co'>#&gt; &lt;url&gt;
+<span class='fu'>show_query</span>(<span class='kw'>air</span>)
+</div><div class='output co'>#&gt; &lt;url&gt;
 #&gt; &lt;body&gt;
-#&gt;    SERVICE: WFS
-#&gt;    VERSION: 2.0.0
-#&gt;    REQUEST: GetFeature
-#&gt;    outputFormat: application/json
-#&gt;    typeNames: WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW
-#&gt;    SRSNAME: EPSG:3005
+#&gt; SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature outputFormat:
+#&gt;  application/json typeNames:
+#&gt;  WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW SRSNAME: EPSG:3005
 #&gt; 
 #&gt; &lt;full query url&gt;
-#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs/?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005</div><div class='input'><span class='co'># }</span></div></pre>
+#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs/?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005</div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -218,7 +209,7 @@ See dplyr::show_query for details." />
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
