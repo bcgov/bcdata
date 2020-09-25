@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2020-09-22"
+date: "2020-09-24"
 output:
   html_document:
     keep_md: yes
@@ -105,21 +105,29 @@ scholars <- bcdc_get_data('bc-schools-district-provincial-scholarships')
 ```
 
 ```
-The record you are trying to access appears to have more than one resource.
+The record you are trying to access appears to have more 
+ than one resource.
+ 
  Resources: 
 1) AwardsScholarshipsHist.xlsx
     format: xlsx 
-    url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.xlsx 
-    resource: 4e872f59-0127-4c21-9f41-52d87af9cfab 
-    code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
-                        resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
+    url: 
+     http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.xlsx 
+    resource: 
+     4e872f59-0127-4c21-9f41-52d87af9cfab 
+    code: 
+     bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
+                   resource = '4e872f59-0127-4c21-9f41-52d87af9cfab')
 
 2) AwardsScholarshipsHist.txt
     format: txt 
-    url: http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.txt 
-    resource: 8a2cd8d3-003d-4b09-8b63-747365582370 
-    code: bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
-                        resource = '8a2cd8d3-003d-4b09-8b63-747365582370')
+    url: 
+     http://www.bced.gov.bc.ca/reporting/odefiles/AwardsScholarshipsHist.txt 
+    resource: 
+     8a2cd8d3-003d-4b09-8b63-747365582370 
+    code: 
+     bcdc_get_data(record = '651b60c2-6786-488b-aa96-c4897531a884', 
+                   resource = '8a2cd8d3-003d-4b09-8b63-747365582370')
 
 --------
 Please choose one option: 
