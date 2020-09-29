@@ -449,7 +449,7 @@ show_query.bcdc_sf <- function(x, ...) {
 }
 
 # collapse vector of cql statements into one
-finalize_cql <- function(x, con = cql_dummy_con) {
+finalize_cql <- function(x, con = wfs_con) {
   if (is.null(x) || !length(x)) return(NULL)
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
 }
