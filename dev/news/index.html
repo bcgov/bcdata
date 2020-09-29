@@ -146,6 +146,13 @@
 <li>Fixed bug where using many <code>as.</code> functions (e.g., <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>, <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>) in a filter statement would fail. (<a href='https://github.com/bcgov/bcdata/issues/218'>#218</a>, <a href='https://github.com/bcgov/bcdata/issues/219'>#219</a>)</li>
 </ul>
 </div>
+<div id="maintenance" class="section level3">
+<h3 class="hasAnchor">
+<a href="#maintenance" class="anchor"></a>MAINTENANCE</h3>
+<ul>
+<li>Updated internal SQL translation to use <code>DBI</code> S4 generics (<code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html">DBI::dbQuoteIdentifier()</a></code> is now used instead of <code>dbplyr::sql_escape_ident()</code> and <code><a href="https://dbi.r-dbi.org/reference/dbQuoteString.html">DBI::dbQuoteString()</a></code> instead of <code>dbplyr::sql_escape_string()</code>), to comply with upcoming <code>dbplyr</code> 2.0 release (<a href='https://github.com/bcgov/bcdata/issues/225'>#225</a>, <a href='https://github.com/bcgov/bcdata/issues/225'>#225</a>; <a href="https://github.com/tidyverse/dbplyr/issues/385" class="uri">https://github.com/tidyverse/dbplyr/issues/385</a>)</li>
+</ul>
+</div>
 </div>
     <div id="bcdata-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
