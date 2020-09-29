@@ -130,6 +130,15 @@ cql_agg <- dbplyr::sql_translator(
   max        = no_agg("max")
 )
 
+#' wfsConnection class
+#'
+#' @import methods
+#' @import DBI
+#' @export
+#' @keywords internal
+setClass("wfsConnection",
+         contains = "DBIConnection"
+)
 
 # A dummy connection object to ensure the correct sql_translate is used
 wfs_con <- structure(
@@ -164,3 +173,21 @@ sql_escape_ident.wfsConnection <- function(conn, x) {
 sql_escape_string.wfsConnection <- function(conn, x) {
   dbplyr::sql_quote(x, "'")
 }
+
+# Make sure that identities (LHS of relations) are escaped with double quotes
+
+#' @keywords internal
+#' @rdname wfsConnection-class
+#' @exportMethod dbQuoteIdentifier
+#' @export
+setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
+          sql_escape_ident.wfsConnection)
+
+# Make sure that strings (RHS of relations) are escaped with single quotes
+
+#' @keywords internal
+#' @rdname wfsConnection-class
+#' @exportMethod dbQuoteString
+#' @export
+setMethod("dbQuoteString", c("wfsConnection", "ANY"),
+          sql_escape_string.wfsConnection)
