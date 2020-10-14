@@ -52,7 +52,7 @@ bcdc_query_geodata("bc-airports", crs = 3857) \%>\%
   filter(PHYSICAL_ADDRESS == 'Victoria, BC') \%>\%
   collect()
 
-bcdc_query_geodata("ground-water-wells") \%>\%
+bcdc_query_geodata("groundwater-wells") \%>\%
   filter(OBSERVATION_WELL_NUMBER == 108) \%>\%
   select(WELL_TAG_NUMBER, INTENDED_WATER_USE) \%>\%
   collect()
