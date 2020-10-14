@@ -140,7 +140,7 @@
     <p>Show a single B.C. Data Catalogue record</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_get_record</span>(<span class='kw'>id</span>)</pre>
+    <pre class="usage"><span class='fu'>bcdc_get_record</span><span class='op'>(</span><span class='va'>id</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,7 +164,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bcdc_get_record</span>(<span class='st'>"https://catalogue.data.gov.bc.ca/dataset/bc-airports"</span>)
+<span class='fu'>bcdc_get_record</span><span class='op'>(</span><span class='st'>"https://catalogue.data.gov.bc.ca/dataset/bc-airports"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record: </span><span>BC Airports
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Name: </span><span>bc-airports (ID:
 #&gt;  76b1b7a3-2112-4444-857a-afccf7b20da8)
@@ -173,7 +173,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Sector: </span><span>Natural Resources
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Licence: </span><span>Open Government Licence - British Columbia
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Type: </span><span>Geographic
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2019-12-17
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2020-09-30
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Description: </span><span>BC Airports identifies locations where
 #&gt;  aircraft may take-off and land. No guarantee is given that an
 #&gt;  identified point will be maintained to sufficient standards for
@@ -188,7 +188,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 #&gt; </span><span style='color: #555555;'>3</span><span> WMS get… https://o… 4d0377… wms    </span><span style='color: #555555;'>""</span><span>    76b1b7a3-2… bcgeogr… TRUE            
 #&gt; </span><span style='color: #555555;'>4</span><span> KML Net… http://op… 5b9f22… kml    </span><span style='color: #555555;'>"</span><span>kml</span><span style='color: #555555;'>"</span><span> 76b1b7a3-2… bcgeogr… FALSE           
 #&gt; </span><span style='color: #0000BB;'>You can access the 'Resources' data frame using
-#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'><span class='fu'>bcdc_get_record</span>(<span class='st'>"bc-airports"</span>)
+#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'><span class='fu'>bcdc_get_record</span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record: </span><span>BC Airports
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Name: </span><span>bc-airports (ID:
 #&gt;  76b1b7a3-2112-4444-857a-afccf7b20da8)
@@ -197,7 +197,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Sector: </span><span>Natural Resources
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Licence: </span><span>Open Government Licence - British Columbia
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Type: </span><span>Geographic
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2019-12-17
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2020-09-30
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Description: </span><span>BC Airports identifies locations where
 #&gt;  aircraft may take-off and land. No guarantee is given that an
 #&gt;  identified point will be maintained to sufficient standards for
@@ -212,7 +212,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 #&gt; </span><span style='color: #555555;'>3</span><span> WMS get… https://o… 4d0377… wms    </span><span style='color: #555555;'>""</span><span>    76b1b7a3-2… bcgeogr… TRUE            
 #&gt; </span><span style='color: #555555;'>4</span><span> KML Net… http://op… 5b9f22… kml    </span><span style='color: #555555;'>"</span><span>kml</span><span style='color: #555555;'>"</span><span> 76b1b7a3-2… bcgeogr… FALSE           
 #&gt; </span><span style='color: #0000BB;'>You can access the 'Resources' data frame using
-#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'><span class='fu'>bcdc_get_record</span>(<span class='st'>"https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)
+#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'><span class='fu'>bcdc_get_record</span><span class='op'>(</span><span class='st'>"https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record: </span><span>BC Airports
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Name: </span><span>bc-airports (ID:
 #&gt;  76b1b7a3-2112-4444-857a-afccf7b20da8)
@@ -221,7 +221,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Sector: </span><span>Natural Resources
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Licence: </span><span>Open Government Licence - British Columbia
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Type: </span><span>Geographic
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2019-12-17
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2020-09-30
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Description: </span><span>BC Airports identifies locations where
 #&gt;  aircraft may take-off and land. No guarantee is given that an
 #&gt;  identified point will be maintained to sufficient standards for
@@ -236,7 +236,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 #&gt; </span><span style='color: #555555;'>3</span><span> WMS get… https://o… 4d0377… wms    </span><span style='color: #555555;'>""</span><span>    76b1b7a3-2… bcgeogr… TRUE            
 #&gt; </span><span style='color: #555555;'>4</span><span> KML Net… http://op… 5b9f22… kml    </span><span style='color: #555555;'>"</span><span>kml</span><span style='color: #555555;'>"</span><span> 76b1b7a3-2… bcgeogr… FALSE           
 #&gt; </span><span style='color: #0000BB;'>You can access the 'Resources' data frame using
-#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'><span class='fu'>bcdc_get_record</span>(<span class='st'>"76b1b7a3-2112-4444-857a-afccf7b20da8"</span>)
+#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'><span class='fu'>bcdc_get_record</span><span class='op'>(</span><span class='st'>"76b1b7a3-2112-4444-857a-afccf7b20da8"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record: </span><span>BC Airports
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Name: </span><span>bc-airports (ID:
 #&gt;  76b1b7a3-2112-4444-857a-afccf7b20da8)
@@ -245,7 +245,7 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Sector: </span><span>Natural Resources
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Licence: </span><span>Open Government Licence - British Columbia
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Type: </span><span>Geographic
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2019-12-17
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2020-09-30
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Description: </span><span>BC Airports identifies locations where
 #&gt;  aircraft may take-off and land. No guarantee is given that an
 #&gt;  identified point will be maintained to sufficient standards for

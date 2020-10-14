@@ -142,7 +142,7 @@ This can be a useful tool to examine a layer before issuing a query with bcdc_qu
 This can be a useful tool to examine a layer before issuing a query with <code>bcdc_query_geodata</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_describe_feature</span>(<span class='kw'>record</span>)</pre>
+    <pre class="usage"><span class='fu'>bcdc_describe_feature</span><span class='op'>(</span><span class='va'>record</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,7 +174,7 @@ The tibble returns the following columns:</p><ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
- <span class='fu'>bcdc_describe_feature</span>(<span class='st'>"bc-airports"</span>)
+ <span class='fu'>bcdc_describe_feature</span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 42 x 4</span><span>
 #&gt;    col_name                      sticky remote_col_type local_col_type
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
@@ -188,7 +188,7 @@ The tibble returns the following columns:</p><ul>
 #&gt; </span><span style='color: #555555;'> 8</span><span> AIRPORT_NAME                  FALSE  xsd:string      character     
 #&gt; </span><span style='color: #555555;'> 9</span><span> DESCRIPTION                   TRUE   xsd:string      character     
 #&gt; </span><span style='color: #555555;'>10</span><span> PHYSICAL_ADDRESS              TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'> <span class='fu'>bcdc_describe_feature</span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)
+#&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'> <span class='fu'>bcdc_describe_feature</span><span class='op'>(</span><span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 42 x 4</span><span>
 #&gt;    col_name                      sticky remote_col_type local_col_type
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         

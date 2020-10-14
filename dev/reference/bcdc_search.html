@@ -140,16 +140,16 @@
     <p>Search the B.C. Data Catalogue</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_search</span>(
-  <span class='kw'>...</span>,
-  license_id = <span class='kw'>NULL</span>,
-  download_audience = <span class='st'>"Public"</span>,
-  type = <span class='kw'>NULL</span>,
-  res_format = <span class='kw'>NULL</span>,
-  sector = <span class='kw'>NULL</span>,
-  organization = <span class='kw'>NULL</span>,
-  n = <span class='fl'>100</span>
-)</pre>
+    <pre class="usage"><span class='fu'>bcdc_search</span><span class='op'>(</span>
+  <span class='va'>...</span>,
+  license_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  download_audience <span class='op'>=</span> <span class='st'>"Public"</span>,
+  type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  res_format <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sector <span class='op'>=</span> <span class='cn'>NULL</span>,
+  organization <span class='op'>=</span> <span class='cn'>NULL</span>,
+  n <span class='op'>=</span> <span class='fl'>100</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,7 +197,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>bcdc_search</span>(<span class='st'>"forest"</span>)
+<span class='fu'>bcdc_search</span><span class='op'>(</span><span class='st'>"forest"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Found 305 matches. Returning the first 100.</span>
 #&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 305.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
 #&gt; Number of records: 100
@@ -236,7 +236,7 @@
 #&gt;  Name: broadleaf-forest-1-250-000-geobase-land-cover
 #&gt; 
 #&gt; Access a single record by calling `bcdc_get_record(ID)` with the ID
-#&gt;  from the desired record.</div><div class='input'><span class='fu'>bcdc_search</span>(<span class='st'>"regional district"</span>, type = <span class='st'>"Geographic"</span>, res_format = <span class='st'>"fgdb"</span>)
+#&gt;  from the desired record.</div><div class='input'><span class='fu'>bcdc_search</span><span class='op'>(</span><span class='st'>"regional district"</span>, type <span class='op'>=</span> <span class='st'>"Geographic"</span>, res_format <span class='op'>=</span> <span class='st'>"fgdb"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Found 190 matches. Returning the first 100.</span>
 #&gt; <span class='message'>To see them all, rerun the search and set the 'n' argument to 190.</span></div><div class='output co'>#&gt; List of B.C. Data Catalogue Records
 #&gt; Number of records: 100
@@ -273,10 +273,10 @@
 #&gt;  kml)
 #&gt;  ID: 284f6b3f-e1ce-4394-81aa-1a4af9feee56
 #&gt;  Name: communities-affected-by-evacuation-orders-and-alerts
-#&gt; 10: Environmental Emergency Response (EER) District Boundaries (wms,
-#&gt;  kml, other)
-#&gt;  ID: e87e1db2-d99c-412f-be36-650d84c9540f
-#&gt;  Name: environmental-emergency-response-eer-district-boundaries
+#&gt; 10: Recreation Sites and Trail BC Region Boundaries (fgdb, other, wms,
+#&gt;  kml)
+#&gt;  ID: 919f236a-e40f-4f07-a459-f976f02b6e11
+#&gt;  Name: recreation-sites-and-trail-bc-region-boundaries
 #&gt; 
 #&gt; Access a single record by calling `bcdc_get_record(ID)` with the ID
 #&gt;  from the desired record.</div><div class='input'><span class='co'># }</span>

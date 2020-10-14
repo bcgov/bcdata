@@ -146,7 +146,7 @@ the response will be paginated. If you are querying layers of this size, expect
 that the request will take quite a while.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_query_geodata</span>(<span class='kw'>record</span>, crs = <span class='fl'>3005</span>)</pre>
+    <pre class="usage"><span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='va'>record</span>, crs <span class='op'>=</span> <span class='fl'>3005</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,7 +189,7 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
     <pre class="examples"><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'># Returns a bcdc_promise, which can be further refined using filter/select:</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-airports"</span>, crs = <span class='fl'>3857</span>)
+<span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-airports"</span>, crs <span class='op'>=</span> <span class='fl'>3857</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-airports'</span><span> record
 #&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
 #&gt; ● features and </span><span style='color: #00BB00;'>41</span><span> fields
@@ -223,9 +223,9 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'># To obtain the actual data as an sf object, collect() must be called:</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-airports"</span>, crs = <span class='fl'>3857</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span>(<span class='kw'>PHYSICAL_ADDRESS</span> <span class='op'>==</span> <span class='st'>'Victoria, BC'</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='as_tibble.html'>collect</a></span>()
+<span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-airports"</span>, crs <span class='op'>=</span> <span class='fl'>3857</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span><span class='op'>(</span><span class='va'>PHYSICAL_ADDRESS</span> <span class='op'>==</span> <span class='st'>'Victoria, BC'</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='as_tibble.html'>collect</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 3 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
@@ -250,51 +250,51 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"ground-water-wells"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span>(<span class='kw'>OBSERVATION_WELL_NUMBER</span> <span class='op'>==</span> <span class='fl'>108</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='select.bcdc_promise.html'>select</a></span>(<span class='kw'>WELL_TAG_NUMBER</span>, <span class='kw'>INTENDED_WATER_USE</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='as_tibble.html'>collect</a></span>()
+<span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"groundwater-wells"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span><span class='op'>(</span><span class='va'>OBSERVATION_WELL_NUMBER</span> <span class='op'>==</span> <span class='fl'>108</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='select.bcdc_promise.html'>select</a></span><span class='op'>(</span><span class='va'>WELL_TAG_NUMBER</span>, <span class='va'>INTENDED_WATER_USE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='as_tibble.html'>collect</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 0 features and 0 fields
 #&gt; bbox:           xmin: NA ymin: NA xmax: NA ymax: NA
 #&gt; geographic CRS: WGS 84
 #&gt; </span><span style='color: #555555;'># A tibble: 0 x 1</span><span>
 #&gt; </span><span style='color: #555555;'># … with 1 variable: geometry </span><span style='color: #555555;font-style: italic;'>&lt;GEOMETRY [°]&gt;</span><span></div><div class='input'>
 <span class='co'>## A moderately large layer</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-environmental-monitoring-locations"</span>)
+<span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-environmental-monitoring-locations"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37551</span><span>
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37583</span><span>
 #&gt; ● features and </span><span style='color: #00BB00;'>35</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1158608 ymin: 429426.6 xmax: 1234872 ymax: 486777.8
+#&gt; bbox:           xmin: 934697.9 ymin: 394024.7 xmax: 1456672 ymax: 618312.6
 #&gt; projected CRS:  NAD83 / BC Albers
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 36</span><span>
 #&gt;   id    MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 1180006                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… 1180007                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… 1180008                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… 1189001                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… 1189002                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… 1189003                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 1401166                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… 1401209                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… 1401210                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… 1401377                        52 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… 1401378                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… 1401409                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
 #&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   LOCATION_AREA_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MOBILE_LOCATION_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CLOSED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ESTABLISHED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, ESTABLISHED_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LEGAL_DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   MONITORING_LOCN_COMMENT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MONITORING_LOCATION_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SOURCE_CLASS_NARRATIVE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WELL_IDENTIFICATION_PLATE_NO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   FIRST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, LAST_SAMPLE_DATE </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, SAMPLE_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   RESULT_COUNT </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PERMIT_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PERMIT_RELATIONSHIP </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   FEATURE_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT</span><span>
-#&gt; </span><span style='color: #555555;'># </span><span style='color: #555555;font-style: italic;'>  [m]&gt;</span><span></div><div class='input'><span class='fu'>bcdc_query_geodata</span>(<span class='st'>"bc-environmental-monitoring-locations"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span>(<span class='kw'>PERMIT_RELATIONSHIP</span> <span class='op'>==</span> <span class='st'>"DISCHARGE"</span>)
+#&gt; </span><span style='color: #555555;'># </span><span style='color: #555555;font-style: italic;'>  [m]&gt;</span><span></div><div class='input'><span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-environmental-monitoring-locations"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span><span class='op'>(</span><span class='va'>PERMIT_RELATIONSHIP</span> <span class='op'>==</span> <span class='st'>"DISCHARGE"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>11957</span><span>
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>11965</span><span>
 #&gt; ● features and </span><span style='color: #00BB00;'>35</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
@@ -326,7 +326,7 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; </span><span style='color: #555555;'># </span><span style='color: #555555;font-style: italic;'>  [m]&gt;</span><span></div><div class='input'>
 
 <span class='co'>## A very large layer</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"terrestrial-protected-areas-representation-by-biogeoclimatic-unit"</span>)
+<span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"terrestrial-protected-areas-representation-by-biogeoclimatic-unit"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying
 #&gt;  </span><span style='color: #BB0000;'>'terrestrial-protected-areas-representation-by-biogeoclimatic-unit'</span><span>
 #&gt;  record
@@ -355,7 +355,7 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; </span><span style='color: #555555;'>#   FEATURE_AREA_SQM </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, FEATURE_LENGTH_M </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, OBJECTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POLYGON [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Using a BCGW name</span>
-<span class='fu'>bcdc_query_geodata</span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)
+<span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'</span><span> record
 #&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
 #&gt; ● features and </span><span style='color: #00BB00;'>41</span><span> fields

@@ -147,7 +147,7 @@ approach to use mutate with bcdata</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for bcdc_promise</span>
-<span class='fu'>mutate</span>(<span class='kw'>.data</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>mutate</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,12 +170,12 @@ approach to use mutate with bcdata</p>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='co'>## Mutate columns</span>
-<span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'>mutate</span>(<span class='kw'>LATITUDE</span> <span class='op'>*</span> <span class='fl'>100</span>)
-}
+<span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span><span class='va'>LATITUDE</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
