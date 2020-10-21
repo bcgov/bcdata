@@ -36,7 +36,7 @@
 #'
 #' ## Take me to the B.C. airports catalogue record
 #' try(
-#'  bcdc_browse("bc-airports")\
+#'  bcdc_browse("bc-airports")
 #' )
 #'
 #' ## Take me to the B.C. airports catalogue record
