@@ -30,16 +30,24 @@
 #' @examples
 #' \donttest{
 #' ## Take me to the B.C. Data Catalogue home page
-#' bcdc_browse()
+#' try(
+#'   bcdc_browse()
+#' )
 #'
 #' ## Take me to the B.C. airports catalogue record
-#' bcdc_browse("bc-airports")
+#' try(
+#'  bcdc_browse("bc-airports")\
+#' )
 #'
-#'#' ## Take me to the B.C. airports catalogue record
-#' bcdc_browse("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' ## Take me to the B.C. airports catalogue record
+#' try(
+#'   bcdc_browse("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' )
 #'
 #' ## Take me to the catalogue search results for 'fish'
-#' bcdc_browse("fish")
+#' try(
+#'  bcdc_browse("fish")
+#' )
 #'
 #' }
 bcdc_browse <- function(query = NULL, browser = getOption("browser"),
