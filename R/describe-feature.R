@@ -28,8 +28,13 @@
 #'
 #' @examples
 #' \donttest{
-#'  bcdc_describe_feature("bc-airports")
-#'  bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+#' try(
+#'   bcdc_describe_feature("bc-airports")
+#' )
+#'
+#' try(
+#'   bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+#' )
 #' }
 #'
 #' @export
