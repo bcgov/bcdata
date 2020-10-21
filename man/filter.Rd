@@ -30,13 +30,17 @@ See \code{dplyr::\link[dplyr]{filter}} for details.
 
 \examples{
 \donttest{
+try(
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") \%>\%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") \%>\%
     collect()
+)
 
-ret1 <- bcdc_query_geodata("fire-perimeters-historical") \%>\%
-  filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
-  collect()
+try(
+  ret1 <- bcdc_query_geodata("fire-perimeters-historical") \%>\%
+    filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
+    collect()
+)
   }
 }
 \keyword{internal}

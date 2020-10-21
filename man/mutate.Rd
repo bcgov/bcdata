@@ -28,8 +28,10 @@ See \code{dplyr::\link[dplyr]{mutate}} for details.
 \dontrun{
 
 ## Mutate columns
-bcdc_query_geodata("bc-airports") \%>\%
-  mutate(LATITUDE * 100)
+try(
+  bcdc_query_geodata("bc-airports") \%>\%
+    mutate(LATITUDE * 100)
+)
 }
 
 }

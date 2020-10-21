@@ -25,9 +25,20 @@ Show a single B.C. Data Catalogue record
 }
 \examples{
 \donttest{
-bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
-bcdc_get_record("bc-airports")
-bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
-bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+try(
+  bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
+)
+
+try(
+  bcdc_get_record("bc-airports")
+)
+
+try(
+  bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+)
+
+try(
+  bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+)
 }
 }

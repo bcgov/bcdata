@@ -28,17 +28,26 @@ See \code{dplyr::\link[dplyr]{select}} for details.
 
 \examples{
 \donttest{
-feature_spec <- bcdc_describe_feature("bc-airports")
-## Columns that can selected:
-feature_spec[feature_spec$sticky == TRUE,]
+try(
+  feature_spec <- bcdc_describe_feature("bc-airports")
+)
+
+try(
+  ## Columns that can selected:
+  feature_spec[feature_spec$sticky == TRUE,]
+)
 
 ## Select columns
-bcdc_query_geodata("bc-airports") \%>\%
-  select(DESCRIPTION, PHYSICAL_ADDRESS)
+try(
+  bcdc_query_geodata("bc-airports") \%>\%
+    select(DESCRIPTION, PHYSICAL_ADDRESS)
+)
 
 ## Select "sticky" columns
-bcdc_query_geodata("bc-airports") \%>\%
-  select(LOCALITY)
+try(
+  bcdc_query_geodata("bc-airports") \%>\%
+    select(LOCALITY)
+)
 }
 
 

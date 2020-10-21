@@ -28,8 +28,13 @@ useful information on the formats, availability and types of data available.
 }
 \examples{
 \donttest{
-airports <- bcdc_get_record("bc-airports")
-bcdc_tidy_resources(airports)
+try(
+  airports <- bcdc_get_record("bc-airports")
+)
+
+try(
+  bcdc_tidy_resources(airports)
+)
 }
 
 }

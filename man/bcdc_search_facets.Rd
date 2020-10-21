@@ -22,6 +22,8 @@ Get the valid values for a facet (that you can use in \code{\link[=bcdc_search]{
 }
 \examples{
 \donttest{
-bcdc_search_facets("type")
+try(
+  bcdc_search_facets("type")
+)
 }
 }

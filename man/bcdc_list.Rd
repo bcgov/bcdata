@@ -12,3 +12,10 @@ A character vector of the names of B.C. Data Catalogue records
 \description{
 Return a full list of the names of B.C. Data Catalogue records
 }
+\examples{
+\donttest{
+try(
+  bcdc_list()
+)
+}
+}

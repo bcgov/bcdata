@@ -27,16 +27,22 @@ See \code{dplyr::\link[dplyr:explain]{show_query}} for details.
 
 \examples{
 \donttest{
-bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
-  filter(PERMIT_RELATIONSHIP == "DISCHARGE") \%>\%
-  show_query()
+try(
+  bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
+    filter(PERMIT_RELATIONSHIP == "DISCHARGE") \%>\%
+    show_query()
+)
   }
 
 \donttest{
-air <- bcdc_query_geodata("bc-airports") \%>\%
-  collect()
+try(
+  air <- bcdc_query_geodata("bc-airports") \%>\%
+    collect()
+)
 
-show_query(air)
+try(
+  show_query(air)
+)
 }
 }
 \keyword{internal}

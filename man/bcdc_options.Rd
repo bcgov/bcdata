@@ -26,18 +26,29 @@ requested. On faster internet connections, a bigger chunk limit could be useful 
 it is advisable to lower the chunk limit. Chunks must be less than 10000.
 }
 \examples{
+\donttest{
 ## Save initial conditions
-original_options <- options()
+try(
+  original_options <- options()
+)
 
 ## See initial options
-bcdc_options()
+try(
+  bcdc_options()
+)
 
-options(bcdata.max_geom_pred_size = 1E6)
+try(
+  options(bcdata.max_geom_pred_size = 1E6)
+)
 
 ## See updated options
-bcdc_options()
+try(
+  bcdc_options()
+)
 
 ## Reset initial conditions
-options(original_options)
-
+try(
+ options(original_options)
+)
+}
 }
