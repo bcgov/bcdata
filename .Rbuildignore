@@ -18,3 +18,4 @@
 ^\.github$
 ^COMPLIANCE.yaml$
 ^\.github/workflows/pr-commands\.yaml$
+^depends\.Rds$
