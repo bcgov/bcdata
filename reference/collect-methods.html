@@ -170,32 +170,37 @@ interchangeably with <code>collect</code> which matches <code>dbplyr</code> beha
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>collect</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : There was an issue sending this WFS request
-#&gt; <span style='color: #BB0000;'>▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span><span>
-#&gt; Request:
-#&gt;   URL: https://openmaps.gov.bc.ca/geo/pub/wfs/
-#&gt;   POST fields:
-#&gt;     SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005
-#&gt;   Content-Type: application/x-www-form-urlencoded
-#&gt;   Accept-Encoding: gzip, deflate
-#&gt;   Accept: application/json, text/xml, application/xml, */*
-#&gt;   User-Agent: https://github.com/bcgov/bcdata
-#&gt; Response:
-#&gt;   status: HTTP/1.1 400 
-#&gt;   date: Thu, 22 Oct 2020 20:35:23 GMT
-#&gt;   server: Apache
-#&gt;   x-frame-options: allow-from (null)
-#&gt;   x-control-flow-delay-ms: 0
-#&gt;   content-type: application/xml
-#&gt;   set-cookie: GS_FLOW_CONTROL=GS_CFLOW_6d23bbc1:1755204ad8d:-6baf
-#&gt;   access-control-allow-origin: (null)
-#&gt;   access-control-allow-credentials: true
-#&gt;   access-control-allow-methods: POST, GET, OPTIONS, HEAD
-#&gt;   access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept
-#&gt;   access-control-max-age: 1000
-#&gt;   connection: close
-#&gt;   transfer-encoding: chunked
-#&gt; </div><div class='input'>
+</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
+#&gt; geometry type:  POINT
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
+#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; <span style='color: #555555;'># A tibble: 455 x 42</span><span>
+#&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
+#&gt;  </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #555555;'> 1</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 2</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 3</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 4</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 5</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 7</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 8</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'> 9</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'>10</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #555555;'># … with 445 more rows, and 37 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ALIAS_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, STREET_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   POSTAL_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_PHONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   CONTACT_EMAIL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CONTACT_FAX </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WEBSITE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IMAGE_URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   LATITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LONGITUDE </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, KEYWORDS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATE_UPDATED </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SITE_GEOCODED_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AERODROME_STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, AIRCRAFT_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   DATA_SOURCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATA_SOURCE_YEAR </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ELEVATION </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   FUEL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, HELICOPTER_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, IATA_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>as_tibble</span><span class='op'>(</span><span class='op'>)</span>
