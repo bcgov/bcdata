@@ -40,31 +40,45 @@
 #'
 #' \donttest{
 #' # Returns a bcdc_promise, which can be further refined using filter/select:
-#' bcdc_query_geodata("bc-airports", crs = 3857)
+#' try(
+#'   bcdc_query_geodata("bc-airports", crs = 3857)
+#' )
 #'
 #' # To obtain the actual data as an sf object, collect() must be called:
-#' bcdc_query_geodata("bc-airports", crs = 3857) %>%
-#'   filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
-#'   collect()
+#' try(
+#'   bcdc_query_geodata("bc-airports", crs = 3857) %>%
+#'     filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
+#'     collect()
+#' )
 #'
-#' bcdc_query_geodata("groundwater-wells") %>%
-#'   filter(OBSERVATION_WELL_NUMBER == 108) %>%
-#'   select(WELL_TAG_NUMBER, INTENDED_WATER_USE) %>%
-#'   collect()
+#' try(
+#'   bcdc_query_geodata("groundwater-wells") %>%
+#'     filter(OBSERVATION_WELL_NUMBER == "108") %>%
+#'     select(WELL_TAG_NUMBER, INTENDED_WATER_USE) %>%
+#'     collect()
+#' )
 #'
 #' ## A moderately large layer
-#' bcdc_query_geodata("bc-environmental-monitoring-locations")
-#' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
-#'   filter(PERMIT_RELATIONSHIP == "DISCHARGE")
+#' try(
+#'   bcdc_query_geodata("bc-environmental-monitoring-locations")
+#' )
+#'
+#' try(
+#'   bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
+#'     filter(PERMIT_RELATIONSHIP == "DISCHARGE")
+#' )
 #'
 #'
 #' ## A very large layer
-#' bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#' try(
+#'   bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#' )
 #'
 #' ## Using a BCGW name
-#' bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+#' try(
+#'   bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+#' )
 #' }
-#'
 #' @export
 bcdc_query_geodata <- function(record, crs = 3005) {
   if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
@@ -149,11 +163,18 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #'
 #' @examples
 #' \donttest{
-#' bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
-#' bcdc_preview("points-of-well-diversion-applications")
+#' try(
+#'   bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
+#' )
+#'
+#' try(
+#'   bcdc_preview("points-of-well-diversion-applications")
+#' )
 #'
 #' # Using BCGW name
-#' bcdc_preview("WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP")
+#' try(
+#'   bcdc_preview("WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP")
+#' )
 #' }
 #' @export
 bcdc_preview <- function(record) { # nocov start

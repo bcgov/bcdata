@@ -7,7 +7,8 @@
 ### MAINTENANCE
 * Updated internal SQL translation to use `DBI` S4 generics (`DBI::dbQuoteIdentifier()` is now used instead of 
   `dbplyr::sql_escape_ident()` and `DBI::dbQuoteString()` instead of `dbplyr::sql_escape_string()`), to comply 
-  with upcoming `dbplyr` 2.0 release (#225, #225; https://github.com/tidyverse/dbplyr/issues/385) 
+  with upcoming `dbplyr` 2.0 release (#225, #225; https://github.com/tidyverse/dbplyr/issues/385)
+* Wrapped all examples that call web resources in `try()` to avoid spurious check failures (#229).
 
 # bcdata 0.2.0
 

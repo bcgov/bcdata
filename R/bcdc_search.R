@@ -21,7 +21,9 @@
 #'
 #' @examples
 #' \donttest{
-#' bcdc_search_facets("type")
+#' try(
+#'   bcdc_search_facets("type")
+#' )
 #' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
@@ -56,6 +58,12 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 #'
 #' @return A character vector of the names of B.C. Data Catalogue records
 #' @export
+#' @examples
+#' \donttest{
+#' try(
+#'   bcdc_list()
+#' )
+#' }
 bcdc_list <- function() {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
@@ -100,8 +108,13 @@ bcdc_list <- function() {
 #'
 #' @examples
 #' \donttest{
-#' bcdc_search("forest")
-#' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+#' try(
+#'   bcdc_search("forest")
+#' )
+#'
+#' try(
+#'   bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+#' )
 #' }
 bcdc_search <- function(..., license_id = NULL,
                         download_audience = "Public",
@@ -178,10 +191,21 @@ bcdc_search <- function(..., license_id = NULL,
 #'
 #' @examples
 #' \donttest{
-#' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
-#' bcdc_get_record("bc-airports")
-#' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
-#' bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' try(
+#'   bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
+#' )
+#'
+#' try(
+#'   bcdc_get_record("bc-airports")
+#' )
+#'
+#' try(
+#'   bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' )
+#'
+#' try(
+#'   bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' )
 #' }
 bcdc_get_record <- function(id) {
 
@@ -249,8 +273,13 @@ as.bcdc_recordlist <- function(x) {
 #'
 #' @examples
 #' \donttest{
-#' airports <- bcdc_get_record("bc-airports")
-#' bcdc_tidy_resources(airports)
+#' try(
+#'   airports <- bcdc_get_record("bc-airports")
+#' )
+#'
+#' try(
+#'   bcdc_tidy_resources(airports)
+#' )
 #' }
 #'
 #' @export

@@ -48,8 +48,10 @@ CQL <- function(...) {
 #'
 #' @examples
 #' \donttest{
-#' airports <- bcdc_query_geodata("bc-airports") %>% collect()
-#' bcdc_cql_string(airports, "DWITHIN")
+#' try({
+#'   airports <- bcdc_query_geodata("bc-airports") %>% collect()
+#'   bcdc_cql_string(airports, "DWITHIN")
+#' })
 #' }
 #'
 #' @noRd

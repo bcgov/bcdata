@@ -26,11 +26,15 @@ See \code{dplyr::\link[dplyr:compute]{collect}} for details.
 }
 \examples{
 \donttest{
-bcdc_query_geodata("bc-airports") \%>\%
-  collect()
+try(
+  bcdc_query_geodata("bc-airports") \%>\%
+    collect()
+)
 
-bcdc_query_geodata("bc-airports") \%>\%
-  as_tibble()
+try(
+  bcdc_query_geodata("bc-airports") \%>\%
+    as_tibble()
+)
 }
 
 }

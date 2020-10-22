@@ -43,7 +43,12 @@ Search the B.C. Data Catalogue
 }
 \examples{
 \donttest{
-bcdc_search("forest")
-bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+try(
+  bcdc_search("forest")
+)
+
+try(
+  bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+)
 }
 }
