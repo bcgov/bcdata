@@ -1,4 +1,4 @@
-# bcdata 0.2.0.9000
+# bcdata 0.2.1
 
 ### BUG FIXES
 * Remove link for pipe documentation for simplicity.
