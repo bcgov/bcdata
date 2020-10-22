@@ -150,6 +150,9 @@ wfs_con <- structure(
 #' @keywords internal
 #' @importFrom dplyr sql_translate_env
 #' @export
+# TODO: After dbplyr 2.0 I think this will be sql_translation, with
+# generic from dbplyr rather than dplyr
+# (https://dbplyr.tidyverse.org/dev/articles/backend-2.html)
 sql_translate_env.wfsConnection <- function(conn) {
   dbplyr::sql_variant(
     cql_scalar,
@@ -159,6 +162,7 @@ sql_translate_env.wfsConnection <- function(conn) {
 }
 
 # Make sure that identities (LHS of relations) are escaped with double quotes
+# TODO: After dbplyr 2.0 I think we can remove these and move the body into dbQuoteIdentifier
 #' @keywords internal
 #' @importFrom dplyr sql_escape_ident
 #' @export
@@ -167,6 +171,7 @@ sql_escape_ident.wfsConnection <- function(conn, x) {
 }
 
 # Make sure that strings (RHS of relations) are escaped with single quotes
+# TODO: After dbplyr 2.0 I think we can remove these and move the body into dbQuoteString
 #' @keywords internal
 #' @importFrom dplyr sql_escape_string
 #' @export
