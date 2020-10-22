@@ -202,54 +202,61 @@ of issuing the Web Service call.</p>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>select</span><span class='op'>(</span><span class='va'>DESCRIPTION</span>, <span class='va'>PHYSICAL_ADDRESS</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
-#&gt; ● features and </span><span style='color: #00BB00;'>11</span><span> fields
-#&gt; ● At most six rows of the record are printed here
-#&gt; ────────────────────────────────────────────────────────────────────────────────
-#&gt; Simple feature collection with 6 features and 11 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
-#&gt; projected CRS:  NAD83 / BC Albers
-#&gt; </span><span style='color: #555555;'># A tibble: 6 x 12</span><span>
-#&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'># … with 7 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error: There was an issue sending this WFS request</span>
+#&gt; <span class='error'></span><span style='color: #BB0000;'>▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span><span></span>
+#&gt; <span class='error'>Request:</span>
+#&gt; <span class='error'>  URL: https://openmaps.gov.bc.ca/geo/pub/wfs/</span>
+#&gt; <span class='error'>  POST fields:</span>
+#&gt; <span class='error'>    SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005&amp;propertyName=SHAPE%2CDESCRIPTION%2CPHYSICAL_ADDRESS&amp;count=6</span>
+#&gt; <span class='error'>  Content-Type: application/x-www-form-urlencoded</span>
+#&gt; <span class='error'>  Accept-Encoding: gzip, deflate</span>
+#&gt; <span class='error'>  Accept: application/json, text/xml, application/xml, */*</span>
+#&gt; <span class='error'>  User-Agent: https://github.com/bcgov/bcdata</span>
+#&gt; <span class='error'>Response:</span>
+#&gt; <span class='error'>  status: HTTP/1.1 400 </span>
+#&gt; <span class='error'>  date: Thu, 22 Oct 2020 23:07:37 GMT</span>
+#&gt; <span class='error'>  server: Apache</span>
+#&gt; <span class='error'>  x-frame-options: allow-from (null)</span>
+#&gt; <span class='error'>  x-control-flow-delay-ms: 0</span>
+#&gt; <span class='error'>  content-type: application/xml</span>
+#&gt; <span class='error'>  set-cookie: GS_FLOW_CONTROL=GS_CFLOW_-935aa15:175528d26ff:6c06</span>
+#&gt; <span class='error'>  access-control-allow-origin: (null)</span>
+#&gt; <span class='error'>  access-control-allow-credentials: true</span>
+#&gt; <span class='error'>  access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
+#&gt; <span class='error'>  access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
+#&gt; <span class='error'>  access-control-max-age: 1000</span>
+#&gt; <span class='error'>  connection: close</span>
+#&gt; <span class='error'>  transfer-encoding: chunked</span></div><div class='input'>
 <span class='co'>## Select "sticky" columns</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>select</span><span class='op'>(</span><span class='va'>LOCALITY</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
-#&gt; ● features and </span><span style='color: #00BB00;'>10</span><span> fields
-#&gt; ● At most six rows of the record are printed here
-#&gt; ────────────────────────────────────────────────────────────────────────────────
-#&gt; Simple feature collection with 6 features and 10 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
-#&gt; projected CRS:  NAD83 / BC Albers
-#&gt; </span><span style='color: #555555;'># A tibble: 6 x 11</span><span>
-#&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #555555;'># … with 6 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span>
+</div><div class='output co'>#&gt; <span class='error'>Error: There was an issue sending this WFS request</span>
+#&gt; <span class='error'></span><span style='color: #BB0000;'>▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span><span></span>
+#&gt; <span class='error'>Request:</span>
+#&gt; <span class='error'>  URL: https://openmaps.gov.bc.ca/geo/pub/wfs/</span>
+#&gt; <span class='error'>  POST fields:</span>
+#&gt; <span class='error'>    SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005&amp;propertyName=SHAPE%2CLOCALITY&amp;count=6</span>
+#&gt; <span class='error'>  Content-Type: application/x-www-form-urlencoded</span>
+#&gt; <span class='error'>  Accept-Encoding: gzip, deflate</span>
+#&gt; <span class='error'>  Accept: application/json, text/xml, application/xml, */*</span>
+#&gt; <span class='error'>  User-Agent: https://github.com/bcgov/bcdata</span>
+#&gt; <span class='error'>Response:</span>
+#&gt; <span class='error'>  status: HTTP/1.1 400 </span>
+#&gt; <span class='error'>  date: Thu, 22 Oct 2020 23:07:49 GMT</span>
+#&gt; <span class='error'>  server: Apache</span>
+#&gt; <span class='error'>  x-frame-options: allow-from (null)</span>
+#&gt; <span class='error'>  x-control-flow-delay-ms: 0</span>
+#&gt; <span class='error'>  content-type: application/xml</span>
+#&gt; <span class='error'>  set-cookie: GS_FLOW_CONTROL=GS_CFLOW_6d23bbc1:175527df36c:3a32</span>
+#&gt; <span class='error'>  access-control-allow-origin: (null)</span>
+#&gt; <span class='error'>  access-control-allow-credentials: true</span>
+#&gt; <span class='error'>  access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
+#&gt; <span class='error'>  access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
+#&gt; <span class='error'>  access-control-max-age: 1000</span>
+#&gt; <span class='error'>  connection: close</span>
+#&gt; <span class='error'>  transfer-encoding: chunked</span></div><div class='input'><span class='co'># }</span>
 
 
 </div></span></pre>
