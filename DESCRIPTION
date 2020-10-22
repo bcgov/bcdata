@@ -28,7 +28,7 @@ Description: Search, query, and download tabular and
     government Web Feature Service ('WFS') using 'dplyr' syntax.
 License: Apache License (== 2.0)
 URL: https://bcgov.github.io/bcdata/,
-    https://catalogue.data.gov.bc.ca/, https://github.com/bcgov/bcdata
+    https://catalogue.data.gov.bc.ca/, https://github.com/bcgov/bcdata/
 BugReports: https://github.com/bcgov/bcdata/issues
 Imports:
     cli,
