@@ -187,19 +187,37 @@ See dplyr::show_query for details." />
   <span class='va'>air</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='as_tibble.html'>collect</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
-
+</div><div class='output co'>#&gt; Error : There was an issue sending this WFS request
+#&gt; <span style='color: #BB0000;'>▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span><span>
+#&gt; Request:
+#&gt;   URL: https://openmaps.gov.bc.ca/geo/pub/wfs/
+#&gt;   POST fields:
+#&gt;     resultType=hits&amp;SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005
+#&gt;   Content-Type: application/x-www-form-urlencoded
+#&gt;   Accept-Encoding: gzip, deflate
+#&gt;   Accept: application/json, text/xml, application/xml, */*
+#&gt;   User-Agent: https://github.com/bcgov/bcdata
+#&gt; Response:
+#&gt;   status: HTTP/1.1 400 
+#&gt;   date: Thu, 22 Oct 2020 20:36:05 GMT
+#&gt;   server: Apache
+#&gt;   x-frame-options: allow-from (null)
+#&gt;   x-control-flow-delay-ms: 0
+#&gt;   content-type: application/xml
+#&gt;   set-cookie: GS_FLOW_CONTROL=GS_CFLOW_-60e76474:1755204dd7c:-789e
+#&gt;   access-control-allow-origin: (null)
+#&gt;   access-control-allow-credentials: true
+#&gt;   access-control-allow-methods: POST, GET, OPTIONS, HEAD
+#&gt;   access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept
+#&gt;   access-control-max-age: 1000
+#&gt;   connection: close
+#&gt;   transfer-encoding: chunked
+#&gt; </div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>show_query</span><span class='op'>(</span><span class='va'>air</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;url&gt;
-#&gt; &lt;body&gt;
-#&gt; SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature outputFormat:
-#&gt;  application/json typeNames:
-#&gt;  WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW SRSNAME: EPSG:3005
-#&gt; 
-#&gt; &lt;full query url&gt;
-#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs/?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005</div><div class='input'><span class='co'># }</span>
-</div></pre>
+</div><div class='output co'>#&gt; Error in show_query(air) : object 'air' not found</div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
