@@ -23,7 +23,7 @@
 * When reading in excel files, `bcdc_get_data` now outputs a messages indicating the presence and names of any sheets (#190)
 * `bcdc_get_data()` & `bcdc_query_geodata()` will now work with full B.C. data catalogue url including resource (#125, #196)
 * `bcdc_sf` objects now have an `time_downloaded` attribute
-* Authorized B.C. Data Catalogue editors can now authenticate with the catalague by setting 
+* Authorized B.C. Data Catalogue editors can now authenticate with the catalogue by setting 
 a `BCDC_KEY` environment variable with their catalogue API token (https://github.com/bcgov/bcdata#bcdc-authentication; #208).
 
 ### BUG FIXES
@@ -48,7 +48,7 @@ a `BCDC_KEY` environment variable with their catalogue API token (https://github
 * Now precompiling vignettes so that queries are submitted locally and no actually requests are made from CRAN (#151)
 * Fix `NOTE: Namespace in Imports field not imported from: ‘methods’` error on CRAN (#145)
 * Fixed a bug where functions nested inside geometry predicates were not evaluated (#146, #154)
-* Fixed a bug where `DWITHIN` wasn't working because `units` needed to be unqoted (#154)
+* Fixed a bug where `DWITHIN` wasn't working because `units` needed to be unquoted (#154)
 * Fixed a bug where `BBOX()` used in a `filter()` statement combined with `bcdc_query_geodata()` did not work (#135, #137, #131)
 * Fixed a bug where layer names with a number in them would not work in `bcdc_query_geodata()` (#126, #127)
 
@@ -63,7 +63,7 @@ a `BCDC_KEY` environment variable with their catalogue API token (https://github
 * Better and more informative error message when experiencing http failures occur (#121)
 * Added print methods for `show_query`
 * Change examples to donttest
-* Added verbose argument to `bcdc_get_record` to enable supressing console writing
+* Added verbose argument to `bcdc_get_record` to enable suppressing console writing
 
 # bcdata 0.1.0
 
