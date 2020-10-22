@@ -85,19 +85,13 @@ filtering may be needed to achieve exact results." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -149,36 +143,36 @@ filtering may be needed to achieve exact results." />
 
     <div class="ref-description">
     <p>Functions to construct a CQL expression to be used
-to filter results from <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.
+to filter results from <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.
 See <a href='https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate'>the geoserver CQL documentation for details</a>.
 The sf object is automatically converted in a
 bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
 filtering may be needed to achieve exact results.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>EQUALS</a></span>(<span class='kw'>geom</span>)
+    <pre class="usage"><span class='fu'>EQUALS</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>DISJOINT</a></span>(<span class='kw'>geom</span>)
+<span class='fu'>DISJOINT</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>INTERSECTS</a></span>(<span class='kw'>geom</span>)
+<span class='fu'>INTERSECTS</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>TOUCHES</a></span>(<span class='kw'>geom</span>)
+<span class='fu'>TOUCHES</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>CROSSES</a></span>(<span class='kw'>geom</span>)
+<span class='fu'>CROSSES</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>WITHIN</a></span>(<span class='kw'>geom</span>)
+<span class='fu'>WITHIN</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>CONTAINS</a></span>(<span class='kw'>geom</span>)
+<span class='fu'>CONTAINS</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>OVERLAPS</a></span>(<span class='kw'>geom</span>)
+<span class='fu'>OVERLAPS</span><span class='op'>(</span><span class='va'>geom</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>BBOX</a></span>(<span class='kw'>coords</span>, crs = <span class='kw'>NULL</span>)
+<span class='fu'>BBOX</span><span class='op'>(</span><span class='va'>coords</span>, crs <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/cql_geom_predicates.html'>DWITHIN</a></span>(
-  <span class='kw'>geom</span>,
-  <span class='kw'>distance</span>,
-  units = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"meters"</span>, <span class='st'>"feet"</span>, <span class='st'>"statute miles"</span>, <span class='st'>"nautical miles"</span>, <span class='st'>"kilometers"</span>)
-)</pre>
+<span class='fu'>DWITHIN</span><span class='op'>(</span>
+  <span class='va'>geom</span>,
+  <span class='va'>distance</span>,
+  units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"meters"</span>, <span class='st'>"feet"</span>, <span class='st'>"statute miles"</span>, <span class='st'>"nautical miles"</span>, <span class='st'>"kilometers"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,7 +185,7 @@ filtering may be needed to achieve exact results.</p>
       <th>coords</th>
       <td><p>the coordinates of the bounding box as four-element numeric
 vector <code><a href='https://rdrr.io/r/base/c.html'>c(xmin, ymin, xmax, ymax)</a></code>, a <code>bbox</code> object from the <code>sf</code>
-package (the result of running <code><a href='https://rdrr.io/pkg/sf/man/st_bbox.html'>sf::st_bbox()</a></code> on an <code>sf</code> object), or
+package (the result of running <code><a href='https://r-spatial.github.io/sf/reference/st_bbox.html'>sf::st_bbox()</a></code> on an <code>sf</code> object), or
 an <code>sf</code> object which then gets converted to a bounding box on the fly.</p></td>
     </tr>
     <tr>
@@ -231,7 +225,7 @@ the queried layer)</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

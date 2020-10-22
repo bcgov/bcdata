@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get map from the B.C. Web Service — bcdc_preview • bcdata</title>
+<title>wfsConnection class — wfsConnection-class • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Get map from the B.C. Web Service — bcdc_preview" />
-<meta property="og:description" content="Get map from the B.C. Web Service" />
+<meta property="og:title" content="wfsConnection class — wfsConnection-class" />
+<meta property="og:description" content="wfsConnection class" />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
 
@@ -131,51 +131,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get map from the B.C. Web Service</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc-web-services.R'><code>R/bcdc-web-services.R</code></a></small>
-    <div class="hidden name"><code>bcdc_preview.Rd</code></div>
+    <h1>wfsConnection class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/cql-translator.R'><code>R/cql-translator.R</code></a></small>
+    <div class="hidden name"><code>wfsConnection-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get map from the B.C. Web Service</p>
+    <p>wfsConnection class</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='va'>record</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S4 method for wfsConnection,ANY</span>
+<span class='fu'>dbQuoteIdentifier</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>x</span><span class='op'>)</span>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>record</th>
-      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>),
-a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
-Warehouse (BCGW) name.</p>
-<p>It is advised to use the permanent ID for a record or the BCGW name rather than the
-human-readable name to guard against future name changes of the record.
-If you use the human-readable name a warning will be issued once per
-session. You can silence these warnings altogether by setting an option:
-<code><a href='https://rdrr.io/r/base/options.html'>options("silence_named_get_data_warning" = TRUE)</a></code> - which you can set
-in your .Rprofile file so the option persists across sessions.</p></td>
-    </tr>
-    </table>
+<span class='co'># S4 method for wfsConnection,ANY</span>
+<span class='fu'>dbQuoteString</span><span class='op'>(</span><span class='va'>conn</span>, <span class='va'>x</span><span class='op'>)</span></pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"regional-districts-legally-defined-administrative-areas-of-bc"</span><span class='op'>)</span>
-<span class='op'>)</span>
 
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"points-of-well-diversion-applications"</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='co'># Using BCGW name</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"</span><span class='op'>)</span>
-<span class='op'>)</span>
-<span class='co'># }</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

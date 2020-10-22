@@ -84,19 +84,13 @@ addition ways to restore your initial state." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -154,7 +148,7 @@ failed calls to the data catalogue. Options in R are reset every time R is re-st
 addition ways to restore your initial state.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_options.html'>bcdc_options</a></span>()</pre>
+    <pre class="usage"><span class='fu'>bcdc_options</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -170,25 +164,39 @@ requested. On faster internet connections, a bigger chunk limit could be useful 
 it is advisable to lower the chunk limit. Chunks must be less than 10000.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Save initial conditions</span>
-<span class='kw'>original_options</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## Save initial conditions</span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='va'>original_options</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'>## See initial options</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_options.html'>bcdc_options</a></span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 3</span><span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_options</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 3</span><span>
 #&gt;   option                    value default
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> bcdata.max_geom_pred_size </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='text-decoration: underline;'>500</span><span>000
 #&gt; </span><span style='color: #555555;'>2</span><span> bcdata.chunk_limit        </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='text-decoration: underline;'>1</span><span>000</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(bcdata.max_geom_pred_size = <span class='fl'>1E6</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>bcdata.max_geom_pred_size <span class='op'>=</span> <span class='fl'>1E6</span><span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'>## See updated options</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_options.html'>bcdc_options</a></span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 3</span><span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_options</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 3</span><span>
 #&gt;   option                      value default
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> bcdata.max_geom_pred_size 1</span><span style='text-decoration: underline;'>000</span><span>000  </span><span style='text-decoration: underline;'>500</span><span>000
 #&gt; </span><span style='color: #555555;'>2</span><span> bcdata.chunk_limit             </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='text-decoration: underline;'>1</span><span>000</div><div class='input'>
 <span class='co'>## Reset initial conditions</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(<span class='kw'>original_options</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+ <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='va'>original_options</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -205,7 +213,7 @@ it is advisable to lower the chunk limit. Chunks must be less than 10000.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

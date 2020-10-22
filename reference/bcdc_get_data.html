@@ -80,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -146,14 +140,14 @@
     <p>Download and read a resource from a B.C. Data Catalogue record</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='kw'>record</span>, resource = <span class='kw'>NULL</span>, verbose = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='va'>record</span>, resource <span class='op'>=</span> <span class='cn'>NULL</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>record</th>
-      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record()</a></code>),
+      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>),
 a character string denoting the name or ID of a resource (or the URL) or a BC Geographic
 Warehouse (BCGW) name.</p>
 <p>It is advised to use the permanent ID for a record or the BCGW name rather than the
@@ -177,10 +171,10 @@ Default <code>TRUE</code></p></td>
     <tr>
       <th>...</th>
       <td><p>arguments passed to other functions. Tabular data is passed to a function to handle
-the import based on the file extension. <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_read_functions.html'>bcdc_read_functions()</a></code> provides details on which functions
+the import based on the file extension. <code><a href='bcdc_read_functions.html'>bcdc_read_functions()</a></code> provides details on which functions
 handle the data import. You can then use this information to look at the help pages of those functions.
 See the examples for a workflow that illustrates this process.
-For spatial Web Service data the <code>...</code> arguments are passed to <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.</p></td>
+For spatial Web Service data the <code>...</code> arguments are passed to <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -191,12 +185,15 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Using the record and resource ID:</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(record = <span class='st'>'76b1b7a3-2112-4444-857a-afccf7b20da8'</span>,
-              resource = <span class='st'>'4d0377d9-e8a1-429b-824f-0ce8f363512c'</span>)</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_get_data</span><span class='op'>(</span>record <span class='op'>=</span> <span class='st'>'76b1b7a3-2112-4444-857a-afccf7b20da8'</span>,
+                resource <span class='op'>=</span> <span class='st'>'4d0377d9-e8a1-429b-824f-0ce8f363512c'</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#&gt; CRS:            3005
+#&gt; projected CRS:  NAD83 / BC Albers
 #&gt; <span style='color: #555555;'># A tibble: 455 x 42</span><span>
 #&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -222,7 +219,12 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>#   ICAO_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAX_RUNWAY_LENGTH </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, NUMBER_OF_RUNWAYS </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+#&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
 #&gt; <span class='message'>cols(</span>
 #&gt; <span class='message'>  CITY = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
 #&gt; <span class='message'>  NAME = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
@@ -243,8 +245,15 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>10</span><span> OLIVER      Orchard Hill Estate Ci… 3480 FRUITVALE WAY             V0H1T0    
 #&gt; </span><span style='color: #555555;'># … with 347 more rows</span><span></div><div class='input'>
 <span class='co'># Using a `bcdc_record` object obtained from `bcdc_get_record`:</span>
-<span class='kw'>record</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span>)
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='kw'>record</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='va'>record</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_get_record.html'>bcdc_get_record</a></span><span class='op'>(</span><span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='va'>record</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
 #&gt; <span class='message'>cols(</span>
 #&gt; <span class='message'>  CITY = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
 #&gt; <span class='message'>  NAME = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
@@ -265,11 +274,14 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>10</span><span> OLIVER      Orchard Hill Estate Ci… 3480 FRUITVALE WAY             V0H1T0    
 #&gt; </span><span style='color: #555555;'># … with 347 more rows</span><span></div><div class='input'>
 <span class='co'># Using a BCGW name</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span>)</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#&gt; CRS:            3005
+#&gt; projected CRS:  NAD83 / BC Albers
 #&gt; </span><span style='color: #555555;'># A tibble: 455 x 42</span><span>
 #&gt;    id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -296,10 +308,41 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>#   OIL_AVAILABILITY_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, RUNWAY_SURFACE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SEAPLANE_ACCESS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, TC_LID_CODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SE_ANNO_CAD_DATA </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
+<span class='co'># Using sf's sql querying ability</span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_get_data</span><span class='op'>(</span>
+    record <span class='op'>=</span> <span class='st'>'30aeb5c1-4285-46c8-b60b-15b1a6f4258b'</span>,
+    resource <span class='op'>=</span> <span class='st'>'3d72cf36-ab53-4a2a-9988-a883d7488384'</span>,
+    layer <span class='op'>=</span> <span class='st'>'BC_Boundary_Terrestrial_Line'</span>,
+    query <span class='op'>=</span> <span class='st'>"SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length &lt; 100"</span>
+  <span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_sf function from the sf package.</span></div><div class='output co'>#&gt; Simple feature collection with 6106 features and 1 field
+#&gt; geometry type:  LINESTRING
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 529420.8 ymin: 367780.7 xmax: 1203949 ymax: 1157953
+#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; </span><span style='color: #555555;'># A tibble: 6,106 x 2</span><span>
+#&gt;    SHAPE_Length                                                             geom
+#&gt;           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>                                                 </span><span style='color: #555555;font-style: italic;'>&lt;LINESTRING [m]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>         79.2 (1183654 367787.5, 1183637 367780.7, 1183633 367785.6, 1183637 …
+#&gt; </span><span style='color: #555555;'> 2</span><span>         92.8 (1178975 369462.2, 1178962 369460.6, 1178956 369464.4, 1178958 …
+#&gt; </span><span style='color: #555555;'> 3</span><span>         71.0 (1178340 369486.6, 1178335 369481.4, 1178324 369485.9, 1178321 …
+#&gt; </span><span style='color: #555555;'> 4</span><span>         80.2 (1182295 369909.3, 1182289 369909.1, 1182284 369914, 1182285 36…
+#&gt; </span><span style='color: #555555;'> 5</span><span>         90.7 (1177992 370787.7, 1177986 370785.4, 1177979 370787.2, 1177977 …
+#&gt; </span><span style='color: #555555;'> 6</span><span>         94.3 (1178597 370831.9, 1178591 370831.7, 1178585 370833.4, 1178582 …
+#&gt; </span><span style='color: #555555;'> 7</span><span>         75.3 (1178008 371008.1, 1178002 371005.8, 1177998 371010.8, 1177996 …
+#&gt; </span><span style='color: #555555;'> 8</span><span>         77.4 (1178022 371104.5, 1178017 371100.4, 1178011 371105.1, 1178007 …
+#&gt; </span><span style='color: #555555;'> 9</span><span>         76.7 (1176492 371248.6, 1176485 371248.3, 1176478 371250, 1176475 37…
+#&gt; </span><span style='color: #555555;'>10</span><span>         87.2 (1178786 371574.1, 1178778 371572.7, 1178773 371576.5, 1178772 …
+#&gt; </span><span style='color: #555555;'># … with 6,096 more rows</span><span></div><div class='input'>
 <span class='co'>## Example of correcting import problems</span>
 
 <span class='co'>## Some initial problems reading in the data</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>This .xlsx resource contains the following sheets: </span>
 #&gt; <span class='message'> 'Population'</span>
 #&gt; <span class='message'> 'Gender &amp; Age Distribution'</span>
@@ -326,29 +369,34 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>10</span><span> 1000              East… Male  2027  4515  1645  1510  17430 7705  731   33536
 #&gt; </span><span style='color: #555555;'># … with 891 more rows</span><span></div><div class='input'>
 <span class='co'>## From bcdc_get_record we realize that the data is in xlsx format</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_record.html'>bcdc_get_record</a></span>(<span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record:</span><span> New Homes Registry (2016-2018) 
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Name:</span><span> new-homes-registry-2016-2018- (ID: 8620ce82-4943-43c4-9932-40730a0255d6 )</span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Permalink:</span><span> https://catalogue.data.gov.bc.ca/dataset/8620ce82-4943-43c4-9932-40730a0255d6</span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Sector:</span><span> Economy</span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Licence:</span><span> Access Only</span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Type:</span><span> Dataset</span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Last Updated:</span><span> 2020-04-23 
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Description:</span><span> This dataset contains information from BC Housing's New Homes Registry.  
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>
-#&gt; Resources: (1)
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+ <span class='fu'><a href='bcdc_get_record.html'>bcdc_get_record</a></span><span class='op'>(</span><span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #0000BB;font-weight: bold;'>B.C. Data Catalogue Record: </span><span>New Homes Registry
+#&gt;  (2016-2018)
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Name: </span><span>new-homes-registry-2016-2018- (ID:
+#&gt;  8620ce82-4943-43c4-9932-40730a0255d6)
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Permalink:
+#&gt;  </span><span>https://catalogue.data.gov.bc.ca/dataset/8620ce82-4943-43c4-9932-40730a0255d6
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Sector: </span><span>Economy
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Licence: </span><span>Access Only
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Type: </span><span>Dataset
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2020-04-23
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Description: </span><span>This dataset contains information from
+#&gt;  BC Housing's New Homes Registry. 
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Resources: (1)</span><span>
 #&gt; </span><span style='color: #555555;'># A tibble: 1 x 8</span><span>
 #&gt;   name    url        id       format ext   package_id  location bcdata_available
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>           
 #&gt; </span><span style='color: #555555;'>1</span><span> New Ho… https://c… 32ff8d7… xlsx   xlsx  8620ce82-4… catalog… TRUE            
-#&gt; </span><span style='color: #0000BB;'>
-#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()
-#&gt; 
-#&gt; </span><span></div><div class='input'>
+#&gt; </span><span style='color: #0000BB;'>You can access the 'Resources' data frame using
+#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'>
 <span class='co'>## bcdc_read_functions let's us know that bcdata</span>
 <span class='co'>## uses readxl::read_excel to import xlsx files</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_read_functions.html'>bcdc_read_functions</a></span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 3</span><span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+ <span class='fu'><a href='bcdc_read_functions.html'>bcdc_read_functions</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 11 x 3</span><span>
 #&gt;    format  package fun      
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'> 1</span><span> kml     sf      read_sf  
@@ -364,7 +412,10 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'>11</span><span> xls     readxl  read_xls </div><div class='input'>
 <span class='co'>## bcdata let's you know that this resource has</span>
 <span class='co'>## multiple worksheets</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+ <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>This .xlsx resource contains the following sheets: </span>
 #&gt; <span class='message'> 'Notes'</span>
 #&gt; <span class='message'> 'Regional Districts'</span>
@@ -373,8 +424,10 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; <span class='message'> 'Purpose Built Rental'</span></div><div class='output co'>#&gt; <span class='message'>Defaulting to the 'Notes' sheet. See ?bcdc_get_data for examples on how to specify a sheet.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 0 x 0</span><span></div><div class='input'>
 <span class='co'>## we can control what is read in from an excel file</span>
 <span class='co'>## using arguments from readxl::read_excel</span>
-
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_get_data.html'>bcdc_get_data</a></span>(<span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span>, sheet = <span class='st'>'Regional Districts'</span>)</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>'8620ce82-4943-43c4-9932-40730a0255d6'</span>, sheet <span class='op'>=</span> <span class='st'>'Regional Districts'</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_xlsx function from the readxl package.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>This .xlsx resource contains the following sheets: </span>
 #&gt; <span class='message'> 'Notes'</span>
 #&gt; <span class='message'> 'Regional Districts'</span>
@@ -400,6 +453,7 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #555555;'> 9</span><span> Central Okanagan     853       889   675 1145     823  </span><span style='text-decoration: underline;'>1</span><span>499 790    </span><span style='text-decoration: underline;'>1</span><span>165   534
 #&gt; </span><span style='color: #555555;'>10</span><span> Columbia-Shuswap     227       285   291 18        90   143 0         0     3
 #&gt; </span><span style='color: #555555;'># … with 21 more rows</span><span></div><div class='input'><span class='co'># }</span>
+
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -416,7 +470,7 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

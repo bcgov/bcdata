@@ -85,19 +85,13 @@ See dplyr::select for details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -149,7 +143,7 @@ See dplyr::select for details." />
 
     <div class="ref-description">
     <p>Similar to a <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> call, this allows you to select which columns you want the Web Service to return.
-A key difference between <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> and <code><a href='https://bcgov.github.io/bcdata/reference/select.html'>bcdata::select</a></code> is the presence of "sticky" columns that are
+A key difference between <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> and <code>bcdata::select</code> is the presence of "sticky" columns that are
 returned regardless of what columns are selected. If any of these "sticky" columns are selected
 only "sticky" columns are return. <code>bcdc_describe_feature</code> is one way to tell if columns are sticky in advance
 of issuing the Web Service call.</p>
@@ -157,14 +151,14 @@ of issuing the Web Service call.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for bcdc_promise</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/select.html'>select</a></span>(<span class='kw'>.data</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>select</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>object of class <code>bcdc_promise</code> (likely passed from <code><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>)</p></td>
+      <td><p>object of class <code>bcdc_promise</code> (likely passed from <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>)</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -181,9 +175,15 @@ of issuing the Web Service call.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'>feature_spec</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_describe_feature.html'>bcdc_describe_feature</a></span>(<span class='st'>"bc-airports"</span>)
-<span class='co'>## Columns that can selected:</span>
-<span class='kw'>feature_spec</span>[<span class='kw'>feature_spec</span><span class='op'>$</span><span class='kw'>sticky</span> <span class='op'>==</span> <span class='fl'>TRUE</span>,]</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 33 x 4</span><span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='va'>feature_spec</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_describe_feature.html'>bcdc_describe_feature</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='co'>## Columns that can selected:</span>
+  <span class='va'>feature_spec</span><span class='op'>[</span><span class='va'>feature_spec</span><span class='op'>$</span><span class='va'>sticky</span> <span class='op'>==</span> <span class='cn'>TRUE</span>,<span class='op'>]</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 33 x 4</span><span>
 #&gt;    col_name         sticky remote_col_type local_col_type
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
 #&gt; </span><span style='color: #555555;'> 1</span><span> DESCRIPTION      TRUE   xsd:string      character     
@@ -198,16 +198,20 @@ of issuing the Web Service call.</p>
 #&gt; </span><span style='color: #555555;'>10</span><span> WEBSITE_URL      TRUE   xsd:string      character     
 #&gt; </span><span style='color: #555555;'># … with 23 more rows</span><span></div><div class='input'>
 <span class='co'>## Select columns</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/select.html'>select</a></span>(<span class='kw'>DESCRIPTION</span>, <span class='kw'>PHYSICAL_ADDRESS</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>11</span><span> fields
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>DESCRIPTION</span>, <span class='va'>PHYSICAL_ADDRESS</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; ● features and </span><span style='color: #00BB00;'>11</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 11 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
-#&gt; CRS:            3005
+#&gt; projected CRS:  NAD83 / BC Albers
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 12</span><span>
 #&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -221,16 +225,20 @@ of issuing the Web Service call.</p>
 #&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHYSICAL_ADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Select "sticky" columns</span>
-<span class='fu'><a href='https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.html'>bcdc_query_geodata</a></span>(<span class='st'>"bc-airports"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://bcgov.github.io/bcdata/reference/select.html'>select</a></span>(<span class='kw'>LOCALITY</span>)</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span> features and </span><span style='color: #00BB00;'>10</span><span> fields
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
+  <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>LOCALITY</span><span class='op'>)</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; ● features and </span><span style='color: #00BB00;'>10</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 10 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
-#&gt; CRS:            3005
+#&gt; projected CRS:  NAD83 / BC Albers
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 11</span><span>
 #&gt;   id    CUSTODIAN_ORG_D… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -242,6 +250,7 @@ of issuing the Web Service call.</p>
 #&gt; </span><span style='color: #555555;'>6</span><span> WHSE… </span><span style='color: #555555;'>"</span><span>Ministry of Fo… airTransportati… Air Transportat… BC Airports     
 #&gt; </span><span style='color: #555555;'># … with 6 more variables: SOURCE_DATA_ID </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUPPLIED_SOURCE_ID_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   AIRPORT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCALITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SEQUENCE_ID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span>
+
 
 </div></span></pre>
   </div>
@@ -259,7 +268,7 @@ of issuing the Web Service call.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
