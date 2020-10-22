@@ -63,7 +63,6 @@ test_that("operators work with different remote geom col names",{
 })
 
 test_that("Different combinations of predicates work", {
-  skip_on_cran()
   the_bbox <- st_sfc(st_polygon(
     list(structure(c(1670288.515, 1719022.009,
                      1719022.009, 1670288.515, 1670288.515, 667643.77, 667643.77,
@@ -266,6 +265,8 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
 })
 
 test_that("works with dates", {
+  skip_if_net_down()
+  skip_on_cran()
   expect_is(bcdc_query_geodata('historical-orders-and-alerts') %>%
               filter(EVENT_START_DATE < "2017-05-01") %>%
               collect(), "bcdc_sf")
@@ -286,6 +287,8 @@ test_that("works with dates", {
 })
 
 test_that("works with various as.x functions", {
+  skip_if_net_down()
+  skip_on_cran()
   expect_is(
     bcdc_query_geodata(point_record) %>%
       filter(NUMBER_OF_RUNWAYS == as.numeric("3")) %>%

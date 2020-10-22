@@ -13,6 +13,8 @@
 context("testing that mutate method fails")
 
 test_that("mutate fails on a bcdata promise object",{
+  skip_on_cran()
+  skip_if_net_down()
   expect_error(
     bcdc_query_geodata("bc-airports") %>%
       select(LATITUDE) %>%
