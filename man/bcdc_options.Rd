@@ -24,6 +24,12 @@ from the catalogue, the request is broken up into smaller chunks which are then 
 been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
 requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
 it is advisable to lower the chunk limit. Chunks must be less than 10000.
+
+\code{bcdata.cache_path} is the location on your computer where results from web requests are cached. The default
+is set by \code{\link[rappdirs:user_cache_dir]{rappdirs::user_cache_dir()}} via \code{\link[=bcdc_cache_path]{bcdc_cache_path()}}.
+
+\code{bcdata.cache_timeout} is the time, in seconds, that the cache is maintained. Default is
+3600 seconds (one hour).
 }
 \examples{
 \donttest{

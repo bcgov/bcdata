@@ -386,6 +386,27 @@ collect_bcdc_promise_ <- function(x, ...){
 
 }
 
+#' Retrieve Default Cache timeout
+#'
+#' Retrieves the length of time that a cache of [collect()]ed
+#' web resources is kept. Default is 1 hour (3600 secons).
+#'
+#' @export
+bcdc_cache_timeout <- function() {
+  getOption("bcdata.cache_timeout", 3600)
+}
+
+#' Retrieve Default Cache Path
+#'
+#' Retrieves the default path used to cache the result of web requests. Makes
+#' use of the \code{rappdirs} package to use cache folders
+#' defined by each operating system
+#'
+#' @export
+bcdc_cache_path <- function() {
+  getOption("bcdata.cache_path", rappdirs::user_cache_dir("bcdata"))
+}
+
 #' Force collection of Web Service request from B.C. Data
 #' Catalogue
 #'
@@ -428,8 +449,8 @@ collect_bcdc_promise_ <- function(x, ...){
 #'
 collect.bcdc_promise <- memoise(
   collect_bcdc_promise_,
-  ~ timeout(getOption("bcdc_cache_timeout", 3600)), # 1 hour
-  cache = cache_filesystem(rappdirs::user_cache_dir("bcdata"))
+  ~ timeout(bcdc_cache_timeout()), # 1 hour
+  cache = cache_filesystem(bcdc_cache_path())
 )
 
 #' Forget (clear) the cache of objects returned by

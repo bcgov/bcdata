@@ -29,6 +29,12 @@
 #' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
 #' it is advisable to lower the chunk limit. Chunks must be less than 10000.
 #'
+#' `bcdata.cache_path` is the location on your computer where results from web requests are cached. The default
+#' is set by [rappdirs::user_cache_dir()] via [bcdc_cache_path()].
+#'
+#' `bcdata.cache_timeout` is the time, in seconds, that the cache is maintained. Default is
+#' 3600 seconds (one hour).
+#'
 #' @examples
 #' \donttest{
 #' ## Save initial conditions
@@ -64,8 +70,10 @@ bcdc_options <- function() {
 
   dplyr::tribble(
     ~ option, ~ value, ~default,
-    "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
-    "bcdata.chunk_limit",null_to_na(getOption("bcdata.chunk_limit")), 1000
+    "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), as.character(5E5),
+    "bcdata.chunk_limit",null_to_na(getOption("bcdata.chunk_limit")), as.character(1000),
+    "bcdata.cache_path",null_to_na(getOption("bcdata.cache_path")), rappdirs::user_cache_dir("bcdata"),
+    "bcdata.cache_timeout",null_to_na(getOption("bcdata.cache_timeout")), as.character(3600)
   )
 }
 
