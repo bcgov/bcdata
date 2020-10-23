@@ -325,32 +325,7 @@ mutate.bcdc_promise <- function(.data, ...){
     mutate({dots}) "), call. = FALSE)
 }
 
-
-#' Force collection of Web Service request from B.C. Data Catalogue
-#'
-#' After tuning a query, `collect()` is used to actually bring the data into memory.
-#' This will retrieve an sf object into R. The `as_tibble()` function can be used
-#' interchangeably with `collect` which matches `dbplyr` behaviour.
-#'
-#' @param x object of class bcdc_promise
-#' @inheritParams collect
-#' @rdname collect-methods
-#' @export
-#'
-#' @examples
-#' \donttest{
-#' try(
-#'   bcdc_query_geodata("bc-airports") %>%
-#'     collect()
-#' )
-#'
-#' try(
-#'   bcdc_query_geodata("bc-airports") %>%
-#'     as_tibble()
-#' )
-#' }
-#'
-collect.bcdc_promise <- function(x, ...){
+collect_bcdc_promise_ <- function(x, ...){
   check_chunk_limit()
 
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
@@ -410,6 +385,33 @@ collect.bcdc_promise <- function(x, ...){
              full_url = full_url)
 
 }
+
+#' Force collection of Web Service request from B.C. Data Catalogue
+#'
+#' After tuning a query, `collect()` is used to actually bring the data into memory.
+#' This will retrieve an sf object into R. The `as_tibble()` function can be used
+#' interchangeably with `collect` which matches `dbplyr` behaviour.
+#'
+#' @param x object of class bcdc_promise
+#' @importFrom memoise memoise
+#' @inheritParams collect
+#' @rdname collect-methods
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     collect()
+#' )
+#'
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     as_tibble()
+#' )
+#' }
+#'
+collect.bcdc_promise <- memoise(collect_bcdc_promise_)
 
 
 #' @inheritParams collect.bcdc_promise
