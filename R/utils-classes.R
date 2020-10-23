@@ -429,7 +429,7 @@ collect_bcdc_promise_ <- function(x, ...){
 collect.bcdc_promise <- memoise(
   collect_bcdc_promise_,
   ~ timeout(getOption("bcdc_cache_timeout", 3600)), # 1 hour
-  cache = cache_filesystem(rappdirs::user_data_dir("bcdata"))
+  cache = cache_filesystem(rappdirs::user_cache_dir("bcdata"))
 )
 
 #' Forget (clear) the cache of objects returned by
