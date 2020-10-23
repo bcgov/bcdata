@@ -386,14 +386,29 @@ collect_bcdc_promise_ <- function(x, ...){
 
 }
 
-#' Force collection of Web Service request from B.C. Data Catalogue
+#' Force collection of Web Service request from B.C. Data
+#' Catalogue
 #'
-#' After tuning a query, `collect()` is used to actually bring the data into memory.
-#' This will retrieve an sf object into R. The `as_tibble()` function can be used
-#' interchangeably with `collect` which matches `dbplyr` behaviour.
+#' After tuning a query, `collect()` is used to actually
+#' bring the data into memory. This will retrieve an sf
+#' object into R. The `as_tibble()` function can be used
+#' interchangeably with `collect` which matches `dbplyr`
+#' behaviour.
+#'
+#' The result of `collect()`-ing a query will be cached to
+#' avoid repeatedly requesting the same data from the
+#' server. The duration of the caching can be customized
+#' by setting the option `bcdc_cache_timeout` to a
+#' different value (in seconds). The default is one hour
+#' (3600 seconds).
+#'
+#' The cache can be cleared by running [bcdc_forget()].
+#' Note this will clear the cache for all `collect()`
+#' calls in the previous time frame specified in the
+#' `bcdc_cache_timeout` option.
 #'
 #' @param x object of class bcdc_promise
-#' @importFrom memoise memoise
+#' @import memoise
 #' @inheritParams collect
 #' @rdname collect-methods
 #' @export
@@ -411,8 +426,21 @@ collect_bcdc_promise_ <- function(x, ...){
 #' )
 #' }
 #'
-collect.bcdc_promise <- memoise(collect_bcdc_promise_)
+collect.bcdc_promise <- memoise(
+  collect_bcdc_promise_,
+  ~ timeout(getOption("bcdc_cache_timeout", 3600)), # 1 hour
+  cache = cache_filesystem(rappdirs::user_data_dir("bcdata"))
+)
 
+#' Forget (clear) the cache of objects returned by
+#' [collect()]
+#'
+#' @return `TRUE` if the cache existed previously and was
+#'   successfully cleared, otherwise `FALSE`.
+#' @export
+bcdc_forget <- function() {
+  memoise::forget(collect.bcdc_promise)
+}
 
 #' @inheritParams collect.bcdc_promise
 #' @rdname collect-methods
