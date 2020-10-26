@@ -82,7 +82,7 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
-          install.packages(c("rcmdcheck, "withr"))
+          install.packages(c("rcmdcheck", "withr"))
         shell: Rscript {0}
 
       - name: install dev version of dbplyr to test for upcoming 2.0 release
