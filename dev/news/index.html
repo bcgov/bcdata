@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -134,9 +134,14 @@
       <small>Source: <a href='https://github.com/bcgov/bcdata/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="bcdata-0209000" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0.9000">
-<a href="#bcdata-0209000" class="anchor"></a>bcdata 0.2.0.9000<small> Unreleased </small>
+    <div id="bcdata-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#bcdata-development-version" class="anchor"></a>bcdata (development version)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="bcdata-021" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.1">
+<a href="#bcdata-021" class="anchor"></a>bcdata 0.2.1<small> 2020-10-25 </small>
 </h1>
 <div id="bug-fixes" class="section level3">
 <h3 class="hasAnchor">
@@ -179,7 +184,7 @@
 <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> &amp; <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> will now work with full B.C. data catalogue url including resource (<a href='https://github.com/bcgov/bcdata/issues/125'>#125</a>, <a href='https://github.com/bcgov/bcdata/issues/196'>#196</a>)</li>
 <li>
 <code>bcdc_sf</code> objects now have an <code>time_downloaded</code> attribute</li>
-<li>Authorized B.C. Data Catalogue editors can now authenticate with the catalague by setting a <code>BCDC_KEY</code> environment variable with their catalogue API token (<a href="https://github.com/bcgov/bcdata#bcdc-authentication" class="uri">https://github.com/bcgov/bcdata#bcdc-authentication</a>; <a href='https://github.com/bcgov/bcdata/issues/208'>#208</a>).</li>
+<li>Authorized B.C. Data Catalogue editors can now authenticate with the catalogue by setting a <code>BCDC_KEY</code> environment variable with their catalogue API token (<a href="https://github.com/bcgov/bcdata#bcdc-authentication" class="uri">https://github.com/bcgov/bcdata#bcdc-authentication</a>; <a href='https://github.com/bcgov/bcdata/issues/208'>#208</a>).</li>
 </ul>
 </div>
 <div id="bug-fixes-1" class="section level3">
@@ -222,7 +227,7 @@
 <li>Now precompiling vignettes so that queries are submitted locally and no actually requests are made from CRAN (<a href='https://github.com/bcgov/bcdata/issues/151'>#151</a>)</li>
 <li>Fix <code>NOTE: Namespace in Imports field not imported from: ‘methods’</code> error on CRAN (<a href='https://github.com/bcgov/bcdata/issues/145'>#145</a>)</li>
 <li>Fixed a bug where functions nested inside geometry predicates were not evaluated (<a href='https://github.com/bcgov/bcdata/issues/146'>#146</a>, <a href='https://github.com/bcgov/bcdata/issues/154'>#154</a>)</li>
-<li>Fixed a bug where <code>DWITHIN</code> wasn’t working because <code>units</code> needed to be unqoted (<a href='https://github.com/bcgov/bcdata/issues/154'>#154</a>)</li>
+<li>Fixed a bug where <code>DWITHIN</code> wasn’t working because <code>units</code> needed to be unquoted (<a href='https://github.com/bcgov/bcdata/issues/154'>#154</a>)</li>
 <li>Fixed a bug where <code><a href="../reference/cql_geom_predicates.html">BBOX()</a></code> used in a <code><a href="../reference/filter.bcdc_promise.html">filter()</a></code> statement combined with <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> did not work (<a href='https://github.com/bcgov/bcdata/issues/135'>#135</a>, <a href='https://github.com/bcgov/bcdata/issues/137'>#137</a>, <a href='https://github.com/bcgov/bcdata/issues/131'>#131</a>)</li>
 <li>Fixed a bug where layer names with a number in them would not work in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (<a href='https://github.com/bcgov/bcdata/issues/126'>#126</a>, <a href='https://github.com/bcgov/bcdata/issues/127'>#127</a>)</li>
 </ul>
@@ -242,7 +247,7 @@
 <li>Added print methods for <code>show_query</code>
 </li>
 <li>Change examples to donttest</li>
-<li>Added verbose argument to <code>bcdc_get_record</code> to enable supressing console writing</li>
+<li>Added verbose argument to <code>bcdc_get_record</code> to enable suppressing console writing</li>
 </ul>
 </div>
     <div id="bcdata-010" class="section level1">
