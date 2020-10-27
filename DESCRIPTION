@@ -66,6 +66,7 @@ Collate:
     'bcdata-package.R'
     'bcdc-web-services.R'
     'bcdc_browse.R'
+    'bcdc_cded.R'
     'bcdc_options.R'
     'bcdc_search.R'
     'cql-geom-predicates.R'
