@@ -82,7 +82,7 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
-          install.packages(c("rcmdcheck", "withr"))
+          install.packages("rcmdcheck")
         shell: Rscript {0}
 
       - name: install dev version of dbplyr to test for upcoming 2.0 release
@@ -94,11 +94,8 @@ jobs:
 
       - name: Check
         run: |
-          withr::with_options(
-            list(bcdata.cache_path = file.path(Sys.getenv("GITHUB_WORKSPACE"), "bcdata_cache")),
-            rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }},
-                                 error_on = 'warning', check_dir = 'check')
-          )
+          cat(paste0('options(bcdata.cache_path = "', file.path(Sys.getenv("GITHUB_WORKSPACE"), "bcdata_cache"), '")\n'), file = "~/.Rprofile", append = TRUE)
+          rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }}, error_on = 'warning', check_dir = 'check')
         shell: Rscript {0}
 
       - name: Upload check results

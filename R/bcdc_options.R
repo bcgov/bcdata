@@ -10,30 +10,49 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Retrieve options used in bcdata, their value if set and the default value.
+#' Retrieve options used in bcdata, their value if set and
+#' the default value.
 #'
-#' This function retrieves bcdata specific options that can be set. These options can be set
-#' using `option({name of the option} = {value of the option})`. The default options are purposefully
-#' set conservatively to hopefully ensure successful requests. Resetting these options may result in
-#' failed calls to the data catalogue. Options in R are reset every time R is re-started. See examples for
-#' addition ways to restore your initial state.
+#' This function retrieves bcdata specific options that
+#' can be set. These options can be set using
+#' `option({name of the option} = {value of the option})`.
+#' The default options are purposefully set conservatively
+#' to hopefully ensure successful requests. Resetting
+#' these options may result in failed calls to the data
+#' catalogue. Options in R are reset every time R is
+#' re-started. See examples for addition ways to restore
+#' your initial state.
 #'
-#' `bcdata.max_geom_pred_size` is the maximum size of an object used for a geometric operation. Objects
-#' that are bigger than this value will have a bounding box drawn and apply the geometric operation
-#' on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
-#' if the bcdata catalogue accepts their request.
+#' `bcdata.max_geom_pred_size` is the maximum size of an
+#' object used for a geometric operation. Objects that are
+#' bigger than this value will have a bounding box drawn
+#' and apply the geometric operation on that simpler
+#' polygon. Users can try to increase the maximum
+#' geometric predicate size and see if the bcdata
+#' catalogue accepts their request.
 #'
-#' `bcdata.chunk_limit` is an option useful when dealing with very large data sets. When requesting large objects
-#' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
-#' been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
-#' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
-#' it is advisable to lower the chunk limit. Chunks must be less than 10000.
+#' `bcdata.chunk_limit` is an option useful when dealing
+#' with very large data sets. When requesting large
+#' objects from the catalogue, the request is broken up
+#' into smaller chunks which are then recombined after
+#' they've been downloaded. bcdata does this all for you
+#' but using this option you can set the size of the chunk
+#' requested. On faster internet connections, a bigger
+#' chunk limit could be useful while on slower
+#' connections, it is advisable to lower the chunk limit.
+#' Chunks must be less than 10000.
 #'
-#' `bcdata.cache_path` is the location on your computer where results from web requests are cached. The default
-#' is set by [rappdirs::user_cache_dir()] via [bcdc_cache_path()].
+#' `bcdata.cache_path` is the location on your computer
+#' where results from web requests are cached. The default
+#' is set by [rappdirs::user_cache_dir()] via
+#' [bcdc_cache_path()]. This option can only be set before
+#' the package is loaded (e.g., by setting it in your
+#' .Rprofile file).
 #'
-#' `bcdata.cache_timeout` is the time, in seconds, that the cache is maintained. Default is
-#' 3600 seconds (one hour).
+#' `bcdata.cache_timeout` is the time, in seconds, that
+#' the cache is maintained. Default is 3600 seconds (one
+#' hour).  This option can only be set before the package
+#' is loaded (e.g., by setting it in your .Rprofile file).
 #'
 #' @examples
 #' \donttest{

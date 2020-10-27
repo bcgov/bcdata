@@ -381,8 +381,15 @@ collect_bcdc_promise_ <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
+  ret <- as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
              full_url = full_url)
+
+  if (getOption("bcdata.cache_verbose", FALSE)) {
+    message("caching for ", bcdc_cache_timeout(),
+            " seconds at ", bcdc_cache_path())
+  }
+
+  ret
 
 }
 
