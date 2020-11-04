@@ -27,8 +27,7 @@ coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](htt
 Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
 [![cran
 checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org/web/checks/check_results_bcdata.html)
-[![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![img](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
@@ -62,19 +61,15 @@ guide](https://bcgov.github.io/bcdata/)
 You can install `bcdata` directly from
 [CRAN](https://cran.r-project.org/package=bcdata):
 
-``` r
-install.packages("bcdata")
-```
+    install.packages("bcdata")
 
 To install the development version from GitHub, use the
 [remotes](https://cran.r-project.org/package=remotes) package:
 
-``` r
-install.packages("remotes")
+    install.packages("remotes")
 
-remotes::install_github("bcgov/bcdata")
-library(bcdata)
-```
+    remotes::install_github("bcgov/bcdata")
+    library(bcdata)
 
 ### Vignettes
 
@@ -138,7 +133,7 @@ Licensed under the Apache License, Version 2.0 (the “License”); you may
 not use this file except in compliance with the License. You may obtain
 a copy of the License at
 
-<http://www.apache.org/licenses/LICENSE-2.0>
+<a href="http://www.apache.org/licenses/LICENSE-2.0" class="uri">http://www.apache.org/licenses/LICENSE-2.0</a>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an “AS IS” BASIS,
