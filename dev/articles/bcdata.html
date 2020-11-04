@@ -87,8 +87,7 @@
 
       
 
-      </header><script src="bcdata_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="bcdata_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="bcdata_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="bcdata_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get Started with bcdata</h1>
@@ -117,25 +116,25 @@ See the License for the specific language governing permissions and limitations 
 <p>The <code>bcdata</code> <a href="https://www.r-project.org/">R</a> package contains functions for searching &amp; retrieving data from the <a href="https://catalogue.data.gov.bc.ca">B.C. Data Catalogue</a>.</p>
 <p>The <a href="https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5">B.C. Data Catalogue</a> is the place to find British Columbia Government data, applications and web services. Much of the data are released under the <a href="https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc">Open Government Licence — British Columbia</a>, as well as numerous other <a href="https://catalogue.data.gov.bc.ca/dataset?download_audience=Public">licences</a>.</p>
 <p>You can install <code>bcdata</code> directly from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bcdata"</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bcdata"</span><span class="op">)</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span></code></pre></div>
 <div id="bcdc_browse" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bcdc_browse" class="anchor"></a><code>bcdc_browse()</code>
 </h3>
 <p><code><a href="../reference/bcdc_browse.html">bcdata::bcdc_browse()</a></code> let’s you access the <a href="https://catalogue.data.gov.bc.ca">B.C. Data Catalogue web interface</a> directly from R—opening the catalogue search page in your default browser:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co">## Take me to the B.C. Data Catalogue home page</span>
-<span class="fu"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Take me to the B.C. Data Catalogue home page</span>
+<span class="fu"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>If you know the catalogue “human-readable” record name or permanent ID you can open directly to the record web page:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co">## Take me to the B.C. Winery Locations catalogue record using the record name</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Take me to the B.C. Winery Locations catalogue record using the record name</span>
 <span class="fu"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span><span class="op">(</span><span class="st">"bc-winery-locations"</span><span class="op">)</span>
 
 <span class="co">## Take me to the B.C. Winery Locations catalogue record using the record permanent ID</span>
-<span class="fu"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span><span class="op">(</span><span class="st">"1d21922b-ec4f-42e5-8f6b-bf320a286157"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span><span class="op">(</span><span class="st">"1d21922b-ec4f-42e5-8f6b-bf320a286157"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="bcdc_search" class="section level3">
 <h3 class="hasAnchor">
@@ -143,8 +142,8 @@ See the License for the specific language governing permissions and limitations 
 </h3>
 <p><code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> let’s you search records in the B.C. Data Catalogue, returning the search results in your R session.</p>
 <p>Let’s search the catalogue for records that contain the word “recycling”:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co">## Give me the catalogue search results for 'recycling'</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Give me the catalogue search results for 'recycling'</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span><span class="op">)</span>
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
 <span class="co">#&gt; </span>
@@ -167,10 +166,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  Name: ministry-of-transportation-mot-surface-type </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Access a single record by calling bcdc_get_record(ID)</span>
-<span class="co">#&gt;       with the ID from the desired record.</span></pre></div>
+<span class="co">#&gt;       with the ID from the desired record.</span></code></pre></div>
 <p>You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search <em>facets</em> <code>license_id</code>, <code>download_audience</code>, <code>type</code>, <code>res_format</code>, <code>sector</code>, and <code>organization</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co">## Give me the first catalogue search result for 'recycling'</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Give me the first catalogue search result for 'recycling'</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
 <span class="co">#&gt; </span>
@@ -195,10 +194,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  Name: bc-first-tire-recycling-data-1991-2006 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Access a single record by calling bcdc_get_record(ID)</span>
-<span class="co">#&gt;       with the ID from the desired record.</span></pre></div>
+<span class="co">#&gt;       with the ID from the desired record.</span></code></pre></div>
 <p>You can see all valid values for the catalogue search facets using <code><a href="../reference/bcdc_search_facets.html">bcdata::bcdc_search_facets()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co">## Valid values for search facet 'license_id'</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Valid values for search facet 'license_id'</span>
 <span class="fu"><a href="../reference/bcdc_search_facets.html">bcdc_search_facets</a></span><span class="op">(</span>facet <span class="op">=</span> <span class="st">"license_id"</span><span class="op">)</span>
 <span class="co">#&gt;         facet count                                             display_name</span>
 <span class="co">#&gt; 1  license_id    84                           Statistics Canada Open Licence</span>
@@ -223,10 +222,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 8    47</span>
 <span class="co">#&gt; 9    45</span>
 <span class="co">#&gt; 10   42</span>
-<span class="co">#&gt; 11   22</span></pre></div>
+<span class="co">#&gt; 11   22</span></code></pre></div>
 <p>Finally, you can retrieve the <em>metadata</em> for a single catalogue record by using the record name or permanent ID with <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations—like scripts—to guard against future name changes of a record:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co">## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`</span>
 <span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"a29ad492-29a2-44b9-8693-d27a8cc8e686"</span><span class="op">)</span>
 <span class="co">#&gt; B.C. Data Catalogue Record: BC FIRST Tire Recycling Data 1991-2006 </span>
 <span class="co">#&gt; </span>
@@ -250,15 +249,15 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;lgl&gt;           </span>
 <span class="co">#&gt; 1 BC FIRS… https://c… ed24cc… csv    csv   a29ad492-2… catalog… TRUE            </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></pre></div>
+<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
 </div>
 <div id="bcdc_get_data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bcdc_get_data" class="anchor"></a><code>bcdc_get_data()</code>
 </h3>
 <p>Once you have located the B.C. Data Catalogue record with the data you want, you can use <code><a href="../reference/bcdc_get_data.html">bcdata::bcdc_get_data()</a></code> to download and read the data from the record. You can use the record name, permanent ID or the result from <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. Let’s look at the B.C. Highway Web Cameras data:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="co">## Get the data resource for the `bc-highway-cams` catalogue record</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Get the data resource for the `bc-highway-cams` catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"bc-highway-cams"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 884 x 19</span>
 <span class="co">#&gt;    links_bchighway… links_imageDisp… links_imageThum… links_replayThe…    id</span>
@@ -323,10 +322,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; #   credit &lt;chr&gt;, orientation &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   imageStats_updatePeriodMean &lt;chr&gt;, imageStats_updatePeriodStdDev &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   fetchMean &lt;dbl&gt;</span></pre></div>
+<span class="co">#&gt; #   fetchMean &lt;dbl&gt;</span></code></pre></div>
 <p>A catalogue record can have one or multiple data files—or “resources”. If there is only one resource, <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will return that resource by default, as in the above <code>bc-highway-cams</code> example. If there are multiple data resources you will need to specify which resource you want. Let’s look at a catalogue record that contains multiple data resources—BC Schools - Programs Offered in Schools:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co">## Get the record ID for the `bc-schools-programs-offered-in-schools` catalogue record</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Get the record ID for the `bc-schools-programs-offered-in-schools` catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"school programs"</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
 <span class="co">#&gt; </span>
@@ -362,10 +361,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 1 Progra… http://www… a393f8… txt    txt   b1f27d1c-2… external TRUE            </span>
 <span class="co">#&gt; 2 Progra… http://www… 1e3409… xlsx   xlsx  b1f27d1c-2… external TRUE            </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></pre></div>
+<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
 <p>We see there are two data files or resources available in this record, so we need to tell <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> which one we want. When used interactively, <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will prompt you with the list of available resources through <code>bcdata</code> and ask you to select the resource you want. The resource ID for each data set is available <em>in</em> the metadata record ☝️:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="co">## Get the txt data resource from the `bc-schools-programs-offered-in-schools`</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Get the txt data resource from the `bc-schools-programs-offered-in-schools`</span>
 <span class="co">## catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"b1f27d1c-244a-410e-a361-931fac62a524"</span>, resource <span class="op">=</span> <span class="st">'a393f8cf-51ec-42c6-8449-4cea4c75385c'</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 16,152 x 24</span>
@@ -389,21 +388,21 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; #   Services` &lt;lgl&gt;, `Has Other Appr Aborig Prog` &lt;lgl&gt;, `Has Aborig Lang And</span>
 <span class="co">#&gt; #   Cult` &lt;lgl&gt;, `Has Continuing Ed Prog` &lt;lgl&gt;, `Has Distributed Learn</span>
 <span class="co">#&gt; #   Prog` &lt;lgl&gt;, `Has Career Prep Prog` &lt;lgl&gt;, `Has Coop Prog` &lt;lgl&gt;, `Has</span>
-<span class="co">#&gt; #   Apprenticeship Prog` &lt;lgl&gt;, `Has Career Technical Prog` &lt;lgl&gt;</span></pre></div>
+<span class="co">#&gt; #   Apprenticeship Prog` &lt;lgl&gt;, `Has Career Technical Prog` &lt;lgl&gt;</span></code></pre></div>
 <p>Alternatively, you can retrieve the full details of the available resources for a given record as a data frame using <code><a href="../reference/bcdc_tidy_resources.html">bcdc_tidy_resources()</a></code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="co">## Get a data frame of data resources for the `bc-schools-programs-offered-in-schools`</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Get a data frame of data resources for the `bc-schools-programs-offered-in-schools`</span>
 <span class="co">## catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_tidy_resources.html">bcdc_tidy_resources</a></span><span class="op">(</span><span class="st">"b1f27d1c-244a-410e-a361-931fac62a524"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name    url         id      format ext   package_id  location bcdata_available</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;lgl&gt;           </span>
 <span class="co">#&gt; 1 Progra… http://www… a393f8… txt    txt   b1f27d1c-2… external TRUE            </span>
-<span class="co">#&gt; 2 Progra… http://www… 1e3409… xlsx   xlsx  b1f27d1c-2… external TRUE</span></pre></div>
+<span class="co">#&gt; 2 Progra… http://www… 1e3409… xlsx   xlsx  b1f27d1c-2… external TRUE</span></code></pre></div>
 <p><code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will also detect if the data resource is a geospatial file, and automatically reads and returns it as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
 <p>Let’s get the air zones for British Columbia:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="co">## Find the B.C. Air Zones catalogue record</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Find the B.C. Air Zones catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"air zones"</span>, res_format <span class="op">=</span> <span class="st">"geojson"</span><span class="op">)</span>
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
 <span class="co">#&gt; </span>
@@ -426,7 +425,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="va">bc_az</span> <span class="op">%&gt;%</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-air_zones-1.png" title="plot of chunk air_zones" alt="plot of chunk air_zones" width="100%"></p>
 <p><strong>Note:</strong> The <code>bcdata</code> package supports downloading <em>most</em> file types, including zip archives. It will do its best to identify and read data from zip files, however if there are multiple data files in the zip, or data files that <code>bcdata</code> doesn’t know how to import, it will fail.</p>
 </div>
@@ -436,8 +435,8 @@ See the License for the specific language governing permissions and limitations 
 </h3>
 <p>Many geospatial data sets in the B.C. Data Catalogue are available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. While <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will retrieve the geospatial data for you, sometimes the geospatial file is very large—and slow to download—and/or you may only want <em>some</em> of the data. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> let’s you query catalogue geospatial data available as a Web Service using <code>select</code> and <code>filter</code> functions (just like in <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>. The <code>bcdc::collect()</code> function returns the <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> query results as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
 <p>Let’s get the Capital Regional District boundary from the <a href="https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9">B.C. Regional Districts geospatial data</a>—the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="co">## Find the B.C. Regional Districts catalogue record</span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Find the B.C. Regional Districts catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"regional districts administrative areas"</span>, res_format <span class="op">=</span> <span class="st">"wms"</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
 <span class="co">#&gt; </span>
@@ -480,7 +479,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="va">my_regional_district</span>  <span class="op">%&gt;%</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%"></p>
 <p>The vignette <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a> provides a full demonstration on how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata()</a></code> to fine tune a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a> request for geospatial data from the B.C. Data Catalogue.</p>
 </div>
