@@ -46,9 +46,16 @@ cql_translate <- function(...) {
       }
     }
 
-    rlang::new_quosure(dbplyr::partial_eval(x), rlang::get_env(x))
+    x <- rlang::new_quosure(dbplyr::partial_eval(x), rlang::get_env(x))
+
+    # not sure if this is necessary if roll own version of dbplyr::translate_sql
+    if (rlang::call_name(x) %in% c(cql_geom_predicate_list(), "CQL")) {
+      x <- rlang::eval_tidy(x, env = rlang::get_env(x))
+    }
+    x
   })
 
+  # Replace this with own version
   sql_where <- dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE)
 
   build_where(sql_where)
@@ -146,14 +153,19 @@ wfs_con <- structure(
   class = c("wfsConnection", "DBIConnection")
 )
 
+# Tell dbplyr to use new generics
+#' @importFrom dbplyr dbplyr_edition
+#' @export
+dbplyr_edition.wfsConnection <- function(con) 2L
+
 # Custom sql_translator using cql variants defined above
 #' @keywords internal
-#' @importFrom dplyr sql_translate_env
+#' @importFrom dbplyr sql_translation
 #' @export
 # TODO: After dbplyr 2.0 I think this will be sql_translation, with
 # generic from dbplyr rather than dplyr
 # (https://dbplyr.tidyverse.org/dev/articles/backend-2.html)
-sql_translate_env.wfsConnection <- function(conn) {
+sql_translation.wfsConnection <- function(conn) {
   dbplyr::sql_variant(
     cql_scalar,
     cql_agg,
@@ -164,18 +176,18 @@ sql_translate_env.wfsConnection <- function(conn) {
 # Make sure that identities (LHS of relations) are escaped with double quotes
 # TODO: After dbplyr 2.0 I think we can remove these and move the body into dbQuoteIdentifier
 #' @keywords internal
-#' @importFrom dplyr sql_escape_ident
+# #' @importFrom dplyr sql_escape_ident
 #' @export
-sql_escape_ident.wfsConnection <- function(conn, x) {
+sql_escape_ident_wfsConnection <- function(conn, x) {
   dbplyr::sql_quote(x, "\"")
 }
 
 # Make sure that strings (RHS of relations) are escaped with single quotes
 # TODO: After dbplyr 2.0 I think we can remove these and move the body into dbQuoteString
 #' @keywords internal
-#' @importFrom dplyr sql_escape_string
+# #' @importFrom dplyr sql_escape_string
 #' @export
-sql_escape_string.wfsConnection <- function(conn, x) {
+sql_escape_string_wfsConnection <- function(conn, x) {
   dbplyr::sql_quote(x, "'")
 }
 
@@ -185,8 +197,15 @@ sql_escape_string.wfsConnection <- function(conn, x) {
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteIdentifier
 #' @export
-setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
-          sql_escape_ident.wfsConnection)
+setMethod("dbQuoteIdentifier", signature("wfsConnection", "character"),
+          sql_escape_ident_wfsConnection)
+
+#' @keywords internal
+#' @rdname wfsConnection-class
+#' @exportMethod dbQuoteIdentifier
+#' @export
+setMethod("dbQuoteIdentifier", signature("wfsConnection", "SQL"),
+          sql_escape_ident_wfsConnection)
 
 # Make sure that strings (RHS of relations) are escaped with single quotes
 
@@ -194,5 +213,13 @@ setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteString
 #' @export
-setMethod("dbQuoteString", c("wfsConnection", "ANY"),
-          sql_escape_string.wfsConnection)
+setMethod("dbQuoteString", signature("wfsConnection", "character"),
+          sql_escape_string_wfsConnection)
+
+#' @keywords internal
+#' @rdname wfsConnection-class
+#' @exportMethod dbQuoteString
+#' @export
+setMethod("dbQuoteString", signature("wfsConnection", "SQL"),
+          sql_escape_string_wfsConnection
+          )

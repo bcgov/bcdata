@@ -3,13 +3,19 @@
 \docType{class}
 \name{wfsConnection-class}
 \alias{wfsConnection-class}
-\alias{dbQuoteIdentifier,wfsConnection,ANY-method}
-\alias{dbQuoteString,wfsConnection,ANY-method}
+\alias{dbQuoteIdentifier,wfsConnection,character-method}
+\alias{dbQuoteIdentifier,wfsConnection,SQL-method}
+\alias{dbQuoteString,wfsConnection,character-method}
+\alias{dbQuoteString,wfsConnection,SQL-method}
 \title{wfsConnection class}
 \usage{
-\S4method{dbQuoteIdentifier}{wfsConnection,ANY}(conn, x)
+\S4method{dbQuoteIdentifier}{wfsConnection,character}(conn, x)
 
-\S4method{dbQuoteString}{wfsConnection,ANY}(conn, x)
+\S4method{dbQuoteIdentifier}{wfsConnection,SQL}(conn, x)
+
+\S4method{dbQuoteString}{wfsConnection,character}(conn, x)
+
+\S4method{dbQuoteString}{wfsConnection,SQL}(conn, x)
 }
 \description{
 wfsConnection class

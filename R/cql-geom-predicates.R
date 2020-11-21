@@ -125,7 +125,9 @@ sf_text <- function(x) {
     x <- sf::st_union(x)
   }
 
-  sf::st_as_text(x)
+  ret <- unclass(sf::st_as_text(x))
+  attributes(ret) <- NULL
+  ret
 }
 
 # Separate functions for all CQL geometry predicates
