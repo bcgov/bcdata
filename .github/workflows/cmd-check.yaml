@@ -18,16 +18,16 @@ jobs:
         config:
         - { os: windows-latest, r: 'release', args: "'--no-manual'"}
         - { os: macOS-latest,   r: 'release', args: "'--test-dontrun'"}
-        - { os: macOS-latest,   r: 'devel',   args: "c('--no-manual', '--test-dontrun')"}
-        - { os: ubuntu-16.04,   r: '3.5',     args: "'--no-manual'"}
-        - { os: ubuntu-16.04,   r: 'oldrel',  args: "'--no-manual'"}
-        - { os: ubuntu-16.04,   r: 'release', args: "'--no-manual'"}
+        - { os: ubuntu-latest,   r: '3.5',     args: "'--no-manual'"}
+        - { os: ubuntu-latest,   r: 'oldrel',  args: "'--no-manual'"}
+        - { os: ubuntu-latest,   r: 'release', args: "'--no-manual'"}
+        - { os: ubuntu-latest,   r: 'devel',   args: "c('--no-manual', '--test-dontrun')"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      cache-version: v4
+      cache-version: v5
 
     steps:
       - uses: actions/checkout@v2
@@ -83,8 +83,6 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE, configure.args = c('sf' = '${{ matrix.config.sf_args }}'))
           install.packages("rcmdcheck")
-          # Install dev rmarkdown (https://github.com/rstudio/rmarkdown/pull/1832) for R < 3.6
-          if (getRversion() < 3.6) remotes::install_github("rstudio/rmarkdown")
         shell: Rscript {0}
 
       - name: Check

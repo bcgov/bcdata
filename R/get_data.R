@@ -162,14 +162,15 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
   # nocov start
 
   if (interactive() && verbose) {
-    cat("The record you are trying to access appears to have more than one resource.")
-    cat("\n Resources: \n")
+    cat_line_wrap("The record you are trying to access appears to have more than one resource.")
+    cat_line()
+    cat_line("Resources:")
 
     for (r in seq_len(nrow(resource_df))) {
       record_print_helper(resource_df[r, ], r)
     }
 
-    cat("--------\n")
+    cat_line("--------")
   }
 
   choices <- clean_wfs(resource_df$name)
@@ -185,8 +186,8 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
 
   if (name_choice == "WFS request (Spatial Data)") {
     ## todo
-    # cat("To directly access this record in the future please use this command:\n")
-    # cat(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"),"\n")
+    # cat_line_wrap("To directly access this record in the future please use this command:")
+    # cat_line_wrap(glue::glue("bcdc_get_data('{x}', resource = '{id_choice}')"))
     query <- bcdc_query_geodata(record = record_id, ...)
     return(collect(query))
   } else {
