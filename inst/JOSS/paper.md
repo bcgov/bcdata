@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2020-09-22"
+date: "2020-11-30"
 output:
   html_document:
     keep_md: yes
@@ -32,6 +32,10 @@ tags:
 
 
 
+
+# Statement of need
+
+`bcdata` is an R package that enables programmatic access, using the R programming language, to data sets housed in the British Columbia (B.C.) Data Catalogue. The package connects the diverse array of mapping, modeling and data processing capabilities of the R ecosystem to the hundreds of open-licensed data sets publicly available in the B.C. Data Catalogue.
 
 # Introduction
 
@@ -86,9 +90,9 @@ bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
 # A tibble: 2 x 8
   name  id    format bcdata_available url   ext   package_id
   <chr> <chr> <chr>  <lgl>            <chr> <chr> <chr>     
-1 Awar… 4e87… xlsx   TRUE             http… xlsx  651b60c2-…
-2 Awar… 8a2c… txt    TRUE             http… txt   651b60c2-…
-# … with 1 more variable: location <chr>
+1 Awar~ 4e87~ xlsx   TRUE             http~ xlsx  651b60c2-~
+2 Awar~ 8a2c~ txt    TRUE             http~ txt   651b60c2-~
+# ... with 1 more variable: location <chr>
 ```
 
 
@@ -140,7 +144,7 @@ head(scholars)
 
 ```
 # A tibble: 6 x 9
-  SCHOOL_YEAR_ISS… `Sub Pop Code` `Num Prov Schol… `Num Prov Schol…
+  SCHOOL_YEAR_ISS~ `Sub Pop Code` `Num Prov Schol~ `Num Prov Schol~
   <chr>            <chr>          <chr>            <chr>           
 1 1996/1997        ALL STUDENTS   3509             20              
 2 1996/1997        FEMALE         1921             7               
@@ -148,7 +152,7 @@ head(scholars)
 4 1997/1998        ALL STUDENTS   3748             20              
 5 1997/1998        FEMALE         2094             11              
 6 1997/1998        MALE           1654             9               
-# … with 5 more variables: `Num District Scholarships` <chr>, `Data
+# ... with 5 more variables: `Num District Scholarships` <chr>, `Data
 #   Level` <chr>, `Public Or Independent` <chr>, `District
 #   Number` <chr>, `District Name` <chr>
 ```
