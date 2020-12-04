@@ -386,9 +386,8 @@ collect.bcdc_promise <- function(x, ...){
       offset_param = "startIndex",
       limit = number_of_records,
       limit_chunk = getOption("bcdata.chunk-limit", default = 1000),
-      progress = TRUE
+      progress = interactive()
     )
-
 
     message("Retrieving data")
 
