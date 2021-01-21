@@ -54,6 +54,34 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
 }
 
+#' Retrieve all metadata of all data within a group
+#'
+#' Access a tibble of record id's by providing the group name. Groups can be view
+#' here: https://catalogue.data.gov.bc.ca/group
+#'
+#' @param group Name of the group
+#' @export
+#' @examples
+#' \donttest{
+#' bcdc_group('environmental-reporting-bc')
+#' }
+
+bcdc_group <- function(group) {
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+
+  cli <- bcdc_catalogue_client("action/group_show")
+
+  r <- cli$get(query = list(id = group, include_datasets = 'true'))
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  stopifnot(res$success)
+
+  d <- tibble::as_tibble(res$result$packages)
+  as.bcdc_group(d, description = res$result$description)
+
+}
+
 #' Return a full list of the names of B.C. Data Catalogue records
 #'
 #' @return A character vector of the names of B.C. Data Catalogue records
@@ -257,6 +285,12 @@ as.bcdc_record <- function(x) {
 as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"
   x
+}
+
+as.bcdc_group <- function(x, description) {
+  structure(x,
+            class = c("bcdc_group", setdiff(class(x), "bcdc_group")),
+            description = description)
 }
 
 
