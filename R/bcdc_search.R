@@ -54,10 +54,25 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
 }
 
+#' List of all groups within the B.C. Data Catalogue
+#'
+#' Returns a tibble of all current groups within the B.C. Data Catalogue.
+#'
+#' @export
+#' @examples
+#' \donttest{
+#' bcdc_list_groups()
+#' }
+#'
+bcdc_list_groups <- function() {
+  bcdc_search_facets("groups")
+}
+
 #' Retrieve all metadata of all data within a group
 #'
-#' Access a tibble of record id's by providing the group name. Groups can be view
-#' here: https://catalogue.data.gov.bc.ca/group
+#' Returns a tibble of records by providing the group name. Groups can be view
+#' here: https://catalogue.data.gov.bc.ca/group or accessed directly from R using
+#' [bcdc_list_groups](`bcdc_list_groups`)
 #'
 #' @param group Name of the group
 #' @export

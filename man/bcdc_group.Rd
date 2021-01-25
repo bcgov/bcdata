@@ -10,8 +10,9 @@ bcdc_group(group)
 \item{group}{Name of the group}
 }
 \description{
-Access a tibble of record id's by providing the group name. Groups can be view
-here: https://catalogue.data.gov.bc.ca/group
+Returns a tibble of records by providing the group name. Groups can be view
+here: https://catalogue.data.gov.bc.ca/group or accessed directly from R using
+\href{`bcdc_list_groups`}{bcdc_list_groups}
 }
 \examples{
 \donttest{
