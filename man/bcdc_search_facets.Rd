@@ -6,13 +6,13 @@
 \usage{
 bcdc_search_facets(
   facet = c("license_id", "download_audience", "type", "res_format", "sector",
-    "organization")
+    "organization", "groups")
 )
 }
 \arguments{
 \item{facet}{the facet(s) for which to retrieve valid values. Can be one or
 more of:
-\verb{"license_id", "download_audience", "type", "res_format", "sector", "organization"}}
+\verb{"license_id", "download_audience", "type", "res_format", "sector", "organization", "groups"}}
 }
 \value{
 A data frame of values for the selected facet
