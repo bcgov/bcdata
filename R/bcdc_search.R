@@ -64,9 +64,7 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 #' bcdc_list_groups()
 #' }
 #'
-bcdc_list_groups <- function() {
-  bcdc_search_facets("groups")
-}
+bcdc_list_groups <- function() bcdc_search_facets("groups")
 
 #' Retrieve all metadata of all data within a group
 #'
@@ -78,10 +76,10 @@ bcdc_list_groups <- function() {
 #' @export
 #' @examples
 #' \donttest{
-#' bcdc_group('environmental-reporting-bc')
+#' bcdc_list_group_records('environmental-reporting-bc')
 #' }
 
-bcdc_group <- function(group) {
+bcdc_list_group_records <- function(group) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   cli <- bcdc_catalogue_client("action/group_show")
