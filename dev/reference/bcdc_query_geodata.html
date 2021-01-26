@@ -56,6 +56,8 @@ that the request will take quite a while." />
 
 <meta name="robots" content="noindex">
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -117,7 +119,7 @@ that the request will take quite a while." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/bcgov/bcdata/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -274,31 +276,31 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; </span><span style='color: #555555;'># A tibble: 1 x 6</span><span>
 #&gt;   id    GW_WW_SYSID WELL_TAG_NUMBER INTENDED_WATER_… OBJECTID
 #&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE…       </span><span style='text-decoration: underline;'>22</span><span>686           </span><span style='text-decoration: underline;'>22</span><span>722 Not Applicable   26</span><span style='text-decoration: underline;'>593</span><span>089
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE…       </span><span style='text-decoration: underline;'>22</span><span>686           </span><span style='text-decoration: underline;'>22</span><span>722 Not Applicable   30</span><span style='text-decoration: underline;'>930</span><span>698
 #&gt; </span><span style='color: #555555;'># … with 1 more variable: geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## A moderately large layer</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-environmental-monitoring-locations"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37709</span><span>
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37757</span><span>
 #&gt; ● features and </span><span style='color: #00BB00;'>35</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1358309 ymin: 546591.1 xmax: 1399886 ymax: 662101.4
+#&gt; bbox:           xmin: 1234837 ymin: 589110.5 xmax: 1391227 ymax: 890862.9
 #&gt; projected CRS:  NAD83 / BC Albers
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 36</span><span>
 #&gt;   id    MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0600112                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… 0600114                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… 0600115                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… 0600116                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… 0600117                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… 0600118                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… 0601041                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… 0601042                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… 0601043                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… 0601045                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… 0601046                        48 </span><span style='color: #BB0000;'>NA</span><span>               1               
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… 0601047                        48 </span><span style='color: #BB0000;'>NA</span><span>               1               
 #&gt; </span><span style='color: #555555;'># … with 31 more variables: ECO_REGION_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, GEOREFERENCE_SOURCE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   LOCATION_PURPOSE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, LOCATION_TYPE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, OFFICE_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SOURCE_CLASS_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WATERSHED_CD </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, CALC_STATISTICS_IND </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
@@ -316,7 +318,7 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
     <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span><span class='op'>(</span><span class='va'>PERMIT_RELATIONSHIP</span> <span class='op'>==</span> <span class='st'>"DISCHARGE"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>11992</span><span>
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>12004</span><span>
 #&gt; ● features and </span><span style='color: #00BB00;'>35</span><span> fields
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
@@ -361,17 +363,17 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; Simple feature collection with 6 features and 25 fields
 #&gt; geometry type:  POLYGON
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 1140096 ymin: 1422900 xmax: 1212000 ymax: 1514342
+#&gt; bbox:           xmin: 1219714 ymin: 556735 xmax: 1562701 ymax: 935007.8
 #&gt; projected CRS:  NAD83 / BC Albers
 #&gt; </span><span style='color: #555555;'># A tibble: 6 x 26</span><span>
 #&gt;   id    BG_CODE BCAREAPR PRPA_BC NUMPA_BC PCTBCPR PCTPPABC FEATURE_CLASS_S…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… BWBSwk…  </span><span style='text-decoration: underline;'>150</span><span>599.   </span><span style='text-decoration: underline;'>1</span><span>686.        3    1.12   0.011</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… BWBSwk…  </span><span style='text-decoration: underline;'>150</span><span>599.   </span><span style='text-decoration: underline;'>1</span><span>686.        3    1.12   0.011</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… BWBSwk…  </span><span style='text-decoration: underline;'>150</span><span>599.   </span><span style='text-decoration: underline;'>1</span><span>686.        3    1.12   0.011</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… BWBSwk…  </span><span style='text-decoration: underline;'>150</span><span>599.   </span><span style='text-decoration: underline;'>1</span><span>686.        3    1.12   0.011</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… BWBSwk…  </span><span style='text-decoration: underline;'>150</span><span>599.   </span><span style='text-decoration: underline;'>1</span><span>686.        3    1.12   0.011</span><span style='text-decoration: underline;'>8</span><span>              435
-#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… BWBSwk…  </span><span style='text-decoration: underline;'>150</span><span>599.   </span><span style='text-decoration: underline;'>1</span><span>686.        3    1.12   0.011</span><span style='text-decoration: underline;'>8</span><span>              435
+#&gt; </span><span style='color: #555555;'>1</span><span> WHSE… ESSFmm…   </span><span style='text-decoration: underline;'>26</span><span>926.  </span><span style='text-decoration: underline;'>26</span><span>926.        2   100.     0.189              435
+#&gt; </span><span style='color: #555555;'>2</span><span> WHSE… ESSFmm…   </span><span style='text-decoration: underline;'>26</span><span>926.  </span><span style='text-decoration: underline;'>26</span><span>926.        2   100.     0.189              435
+#&gt; </span><span style='color: #555555;'>3</span><span> WHSE… ESSFmw…  </span><span style='text-decoration: underline;'>109</span><span>644.  </span><span style='text-decoration: underline;'>21</span><span>122.        8    19.3    0.148              435
+#&gt; </span><span style='color: #555555;'>4</span><span> WHSE… ESSFmw…  </span><span style='text-decoration: underline;'>109</span><span>644.  </span><span style='text-decoration: underline;'>21</span><span>122.        8    19.3    0.148              435
+#&gt; </span><span style='color: #555555;'>5</span><span> WHSE… ESSFmw…  </span><span style='text-decoration: underline;'>109</span><span>644.  </span><span style='text-decoration: underline;'>21</span><span>122.        8    19.3    0.148              435
+#&gt; </span><span style='color: #555555;'>6</span><span> WHSE… ESSFmw…  </span><span style='text-decoration: underline;'>109</span><span>644.  </span><span style='text-decoration: underline;'>21</span><span>122.        8    19.3    0.148              435
 #&gt; </span><span style='color: #555555;'># … with 18 more variables: ZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBZONE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   PHASE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NATURAL_DISTURBANCE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, MAP_LABEL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   SUBZONE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, VARIANT_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PHASE_NAME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
