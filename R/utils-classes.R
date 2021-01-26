@@ -146,6 +146,24 @@ print.bcdc_recordlist <- function(x, ...) {
 }
 
 #' @export
+print.bcdc_group <- function(x, ...) {
+
+  cat_line_wrap(cli::col_blue(
+    cli::style_italic(
+      "Group Description: "
+    )
+  ), unique(attr(x, "description")))
+
+
+
+  cat_line_wrap(cli::col_blue(
+    cli::style_italic("Number of datasets: ")), nrow(x))
+
+  print(tibble::as_tibble(x))
+}
+
+
+#' @export
 print.bcdc_query <- function(x, ...) {
 
   cat_line("<url>")

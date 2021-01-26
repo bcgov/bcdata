@@ -14,7 +14,7 @@
 #'
 #' @param facet the facet(s) for which to retrieve valid values. Can be one or
 #' more of:
-#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization"`
+#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization", "groups"`
 #'
 #' @return A data frame of values for the selected facet
 #' @export
@@ -27,7 +27,7 @@
 #' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
-                                  "organization")) {
+                                  "organization", "groups")) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   facet <- match.arg(facet, several.ok = TRUE)
@@ -51,6 +51,47 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
   )
 
   dplyr::bind_rows(facet_dfs)
+
+}
+
+#' List of all groups within the B.C. Data Catalogue
+#'
+#' Returns a tibble of all current groups within the B.C. Data Catalogue.
+#'
+#' @export
+#' @examples
+#' \donttest{
+#' bcdc_list_groups()
+#' }
+#'
+bcdc_list_groups <- function() bcdc_search_facets("groups")
+
+#' Retrieve all metadata of all data within a group
+#'
+#' Returns a tibble of records by providing the group name. Groups can be view
+#' here: https://catalogue.data.gov.bc.ca/group or accessed directly from R using
+#' [bcdc_list_groups](`bcdc_list_groups`)
+#'
+#' @param group Name of the group
+#' @export
+#' @examples
+#' \donttest{
+#' bcdc_list_group_records('environmental-reporting-bc')
+#' }
+
+bcdc_list_group_records <- function(group) {
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+
+  cli <- bcdc_catalogue_client("action/group_show")
+
+  r <- cli$get(query = list(id = group, include_datasets = 'true'))
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  stopifnot(res$success)
+
+  d <- tibble::as_tibble(res$result$packages)
+  as.bcdc_group(d, description = res$result$description)
 
 }
 
@@ -257,6 +298,12 @@ as.bcdc_record <- function(x) {
 as.bcdc_recordlist <- function(x) {
   class(x) <- "bcdc_recordlist"
   x
+}
+
+as.bcdc_group <- function(x, description) {
+  structure(x,
+            class = c("bcdc_group", setdiff(class(x), "bcdc_group")),
+            description = description)
 }
 
 

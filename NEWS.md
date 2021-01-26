@@ -1,4 +1,6 @@
 # bcdata (development version)
+### IMPROVEMENTS
+* Added `bcdc_list_groups` and `bcdc_list_group_records` to provide the ability to query on the group endpoint of the catalogue API. #234
 
 # bcdata 0.2.1
 

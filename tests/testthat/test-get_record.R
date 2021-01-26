@@ -38,6 +38,23 @@ test_that("bcdc_search_facets works", {
   expect_error(bcdc_search_facets("foo"), "'arg' should be one of")
 })
 
+
+test_that("bcdc_list_group_records works", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  expect_s3_class(bcdc_list_group_records('environmental-reporting-bc'), "bcdc_group")
+  expect_s3_class(bcdc_list_group_records('environmental-reporting-bc'), "tbl_df")
+
+})
+
+test_that("bcdc_list_groups", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  expect_s3_class(bcdc_list_groups(), "data.frame")
+})
+
 test_that("bcdc_list works", {
   skip_on_cran()
   skip_if_net_down()

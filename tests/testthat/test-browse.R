@@ -12,7 +12,7 @@
 
 context("confirm browsing ability")
 
-test_that("bcdc_get_geodata returns an sf object for a valid id", {
+test_that("bcdc_browse returns the correct url", {
   skip_if_net_down()
   skip_on_cran()
   forest_url <- bcdc_browse("forest")
