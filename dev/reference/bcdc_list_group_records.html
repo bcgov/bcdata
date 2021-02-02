@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve all metadata of all data within a group — bcdc_list_group_records • bcdata</title>
+<title>Retrieve group information for B.C. Data Catalogue — bcdc_list_groups • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Retrieve all metadata of all data within a group — bcdc_list_group_records" />
-<meta property="og:description" content="Returns a tibble of records by providing the group name. Groups can be view
-here: https://catalogue.data.gov.bc.ca/group or accessed directly from R using
-bcdc_list_groups" />
+<meta property="og:title" content="Retrieve group information for B.C. Data Catalogue — bcdc_list_groups" />
+<meta property="og:description" content="Returns a tibble of groups or records. Groups can be viewed here:
+https://catalogue.data.gov.bc.ca/group or accessed directly from R using bcdc_list_groups" />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
 
@@ -135,18 +134,19 @@ bcdc_list_groups" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve all metadata of all data within a group</h1>
+    <h1>Retrieve group information for B.C. Data Catalogue</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc_search.R'><code>R/bcdc_search.R</code></a></small>
     <div class="hidden name"><code>bcdc_list_group_records.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns a tibble of records by providing the group name. Groups can be view
-here: https://catalogue.data.gov.bc.ca/group or accessed directly from R using
-<a href='`bcdc_list_groups`'>bcdc_list_groups</a></p>
+    <p>Returns a tibble of groups or records. Groups can be viewed here:
+https://catalogue.data.gov.bc.ca/group or accessed directly from R using <code>bcdc_list_groups</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_list_group_records</span><span class='op'>(</span><span class='va'>group</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bcdc_list_groups</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'>bcdc_list_group_records</span><span class='op'>(</span><span class='va'>group</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,6 +157,12 @@ here: https://catalogue.data.gov.bc.ca/group or accessed directly from R using
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>bcdc_list_groups</code>:</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
