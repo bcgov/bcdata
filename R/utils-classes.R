@@ -343,32 +343,7 @@ mutate.bcdc_promise <- function(.data, ...){
     mutate({dots}) "), call. = FALSE)
 }
 
-
-#' Force collection of Web Service request from B.C. Data Catalogue
-#'
-#' After tuning a query, `collect()` is used to actually bring the data into memory.
-#' This will retrieve an sf object into R. The `as_tibble()` function can be used
-#' interchangeably with `collect` which matches `dbplyr` behaviour.
-#'
-#' @param x object of class bcdc_promise
-#' @inheritParams collect
-#' @rdname collect-methods
-#' @export
-#'
-#' @examples
-#' \donttest{
-#' try(
-#'   bcdc_query_geodata("bc-airports") %>%
-#'     collect()
-#' )
-#'
-#' try(
-#'   bcdc_query_geodata("bc-airports") %>%
-#'     as_tibble()
-#' )
-#' }
-#'
-collect.bcdc_promise <- function(x, ...){
+collect_bcdc_promise_ <- function(x, ...){
   check_chunk_limit()
 
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
@@ -423,11 +398,94 @@ collect.bcdc_promise <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
+  ret <- as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
              full_url = full_url)
+
+  if (getOption("bcdata.cache_verbose", FALSE)) {
+    message("caching for ", bcdc_cache_timeout(),
+            " seconds at ", bcdc_cache_path())
+  }
+
+  ret
 
 }
 
+#' Retrieve Default Cache timeout
+#'
+#' Retrieves the length of time that a cache of [collect()]ed
+#' web resources is kept. Default is 1 hour (3600 secons).
+#'
+#' @export
+bcdc_cache_timeout <- function() {
+  getOption("bcdata.cache_timeout", 3600)
+}
+
+#' Retrieve Default Cache Path
+#'
+#' Retrieves the default path used to cache the result of web requests. Makes
+#' use of the \code{rappdirs} package to use cache folders
+#' defined by each operating system
+#'
+#' @export
+bcdc_cache_path <- function() {
+  getOption("bcdata.cache_path", rappdirs::user_cache_dir("bcdata"))
+}
+
+#' Force collection of Web Service request from B.C. Data
+#' Catalogue
+#'
+#' After tuning a query, `collect()` is used to actually
+#' bring the data into memory. This will retrieve an sf
+#' object into R. The `as_tibble()` function can be used
+#' interchangeably with `collect` which matches `dbplyr`
+#' behaviour.
+#'
+#' The result of `collect()`-ing a query will be cached to
+#' avoid repeatedly requesting the same data from the
+#' server. The duration of the caching can be customized
+#' by setting the option `bcdc_cache_timeout` to a
+#' different value (in seconds). The default is one hour
+#' (3600 seconds).
+#'
+#' The cache can be cleared by running [bcdc_forget()].
+#' Note this will clear the cache for all `collect()`
+#' calls in the previous time frame specified in the
+#' `bcdc_cache_timeout` option.
+#'
+#' @param x object of class bcdc_promise
+#' @import memoise
+#' @inheritParams collect
+#' @rdname collect-methods
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     collect()
+#' )
+#'
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     as_tibble()
+#' )
+#' }
+#'
+collect.bcdc_promise <- memoise(
+  collect_bcdc_promise_,
+  ~ timeout(bcdc_cache_timeout()), # 1 hour
+  cache = cache_filesystem(bcdc_cache_path())
+)
+
+#' Forget (clear) the cache of objects returned by
+#' [collect()]
+#'
+#' @return `TRUE` if the cache existed previously and was
+#'   successfully cleared, otherwise `FALSE`.
+#' @export
+bcdc_forget <- function() {
+  memoise::forget(collect.bcdc_promise)
+}
 
 #' @inheritParams collect.bcdc_promise
 #' @rdname collect-methods

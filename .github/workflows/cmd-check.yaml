@@ -93,7 +93,9 @@ jobs:
         shell: Rscript {0}
 
       - name: Check
-        run: rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }}, error_on = 'warning', check_dir = 'check')
+        run: |
+          cat(paste0('options(bcdata.cache_path = "', file.path(Sys.getenv("GITHUB_WORKSPACE"), "bcdata_cache"), '")\n'), file = "~/.Rprofile", append = TRUE)
+          rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }}, error_on = 'warning', check_dir = 'check')
         shell: Rscript {0}
 
       - name: Upload check results

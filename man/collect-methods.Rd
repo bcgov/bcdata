@@ -18,11 +18,26 @@
 \description{
 See \code{tibble::\link[tibble]{as_tibble}} for details.
 
-After tuning a query, \code{collect()} is used to actually bring the data into memory.
-This will retrieve an sf object into R. The \code{as_tibble()} function can be used
-interchangeably with \code{collect} which matches \code{dbplyr} behaviour.
+After tuning a query, \code{collect()} is used to actually
+bring the data into memory. This will retrieve an sf
+object into R. The \code{as_tibble()} function can be used
+interchangeably with \code{collect} which matches \code{dbplyr}
+behaviour.
 
 See \code{dplyr::\link[dplyr:compute]{collect}} for details.
+}
+\details{
+The result of \code{collect()}-ing a query will be cached to
+avoid repeatedly requesting the same data from the
+server. The duration of the caching can be customized
+by setting the option \code{bcdc_cache_timeout} to a
+different value (in seconds). The default is one hour
+(3600 seconds).
+
+The cache can be cleared by running \code{\link[=bcdc_forget]{bcdc_forget()}}.
+Note this will clear the cache for all \code{collect()}
+calls in the previous time frame specified in the
+\code{bcdc_cache_timeout} option.
 }
 \examples{
 \donttest{
