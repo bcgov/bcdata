@@ -389,8 +389,6 @@ collect.bcdc_promise <- function(x, ...){
     url <- cc$url
     full_url <- cli$url_fetch(query = query_list)
   } else {
-    # tests that cover this are skipped due to large size
-    # nocov start
     message("This record requires pagination to complete the request.")
     sorting_col <- pagination_sort_col(x$cols_df)
 
@@ -399,7 +397,7 @@ collect.bcdc_promise <- function(x, ...){
     # Create pagination client
     cc <- crul::Paginator$new(
       client = cli,
-      by = "query_params",
+      by = "limit_offset",
       limit_param = "count",
       offset_param = "startIndex",
       limit = number_of_records,
@@ -418,7 +416,6 @@ collect.bcdc_promise <- function(x, ...){
     full_url <- cc$url_fetch(query = query_list)
 
     catch_wfs_error(cc)
-    # nocov end
   }
 
   txt <- cc$parse("UTF-8")
