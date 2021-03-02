@@ -403,7 +403,7 @@ collect.bcdc_promise <- function(x, ...){
       limit_param = "count",
       offset_param = "startIndex",
       limit = number_of_records,
-      chunk = getOption("bcdata.chunk-limit", default = 1000),
+      chunk = getOption("bcdata.chunk_limit", default = 1000),
       progress = interactive()
     )
 
