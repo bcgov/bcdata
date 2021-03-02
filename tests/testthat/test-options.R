@@ -19,12 +19,8 @@ test_that("bcdc_options() returns a tibble",{
 
 
 test_that("bcdata.chunk_limit",{
-  original_value <- options(bcdata.chunk_limit = 10000)
+  withr::local_options(list(bcdata.chunk_limit = 10000))
   expect_error(check_chunk_limit())
-
-  ## cleaning up. not sure if this is required but likely not a bad practice.
-  options(bcdata.chunk_limit = original_value$bcdata.chunk_limit)
-
 })
 
 test_that("bcdata.single_download_limit", {

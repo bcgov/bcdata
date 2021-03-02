@@ -55,7 +55,8 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    withr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
