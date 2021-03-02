@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -72,7 +74,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bcgov/bcdata/">
+  <a href="https://github.com/bcgov/bcdata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -92,9 +94,9 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2020-06-19</h4>
+            <h4 data-toc-skip class="date">2020-06-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd" class="external-link"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
 
     </div>
@@ -114,25 +116,25 @@ Unless required by applicable law or agreed to in writing, software distributed 
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
-<p>This vignette illustrates how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata</a></code> to request and query <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data from the <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a>. To illustrate, we will request and merge two spatial data sets from the catalogue—school district and greenspaces spatial data—and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.</p>
+<p>This vignette illustrates how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata</a></code> to request and query <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E" class="external-link">Web Service-enabled</a> geospatial data from the <a href="https://catalogue.data.gov.bc.ca/dataset" class="external-link">B.C. Data Catalogue</a>. To illustrate, we will request and merge two spatial data sets from the catalogue—school district and greenspaces spatial data—and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.</p>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h2>
-<p>First you need to load the package. We will also load the <code>sf</code> and <code>dplyr</code> packages to help us work with spatial data. You can learn more about the <code>sf</code> package <a href="https://r-spatial.github.io/sf/">here</a> and <code>dplyr</code> <a href="https://dplyr.tidyverse.org/">here</a>:</p>
+<p>First you need to load the package. We will also load the <code>sf</code> and <code>dplyr</code> packages to help us work with spatial data. You can learn more about the <code>sf</code> package <a href="https://r-spatial.github.io/sf/" class="external-link">here</a> and <code>dplyr</code> <a href="https://dplyr.tidyverse.org/" class="external-link">here</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="geospatial-data-in-the-b-c--data-catalogue" class="section level2">
 <h2 class="hasAnchor">
 <a href="#geospatial-data-in-the-b-c--data-catalogue" class="anchor"></a>Geospatial Data in the B.C. Data Catalogue</h2>
-<p>The <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a> provides many data sets with spatial information through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. Technically speaking, this means if we have an internet connection we can issue <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> requests to the catalogue and seamlessly import the response data into R as an <code>sf</code> objects. The <code>bcdata</code> package provides a means to a) choose which layer you want and b) use <code>dplyr</code> verbs to specifically tailor your request. A <code>dbplyr</code> backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the <code>collect</code> function. This approach mimics the <code>dplyr</code> verb translation to <code>SQL</code> seen for many database types. A good introduction to principles of <code>dbplyr</code> is available <a href="https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html">here</a>.</p>
+<p>The <a href="https://catalogue.data.gov.bc.ca/dataset" class="external-link">B.C. Data Catalogue</a> provides many data sets with spatial information through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E" class="external-link">Web Service</a>. Technically speaking, this means if we have an internet connection we can issue <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" class="external-link">HTTP</a> requests to the catalogue and seamlessly import the response data into R as an <code>sf</code> objects. The <code>bcdata</code> package provides a means to a) choose which layer you want and b) use <code>dplyr</code> verbs to specifically tailor your request. A <code>dbplyr</code> backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the <code>collect</code> function. This approach mimics the <code>dplyr</code> verb translation to <code>SQL</code> seen for many database types. A good introduction to principles of <code>dbplyr</code> is available <a href="https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html" class="external-link">here</a>.</p>
 </div>
 <div id="school-district-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#school-district-data" class="anchor"></a>School District Data</h2>
-<p>Our first step is to extract the <a href="https://catalog.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b">school district polygons</a> from the B.C. Data Catalogue. This layer is described using this command:</p>
+<p>Our first step is to extract the <a href="https://catalog.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b" class="external-link">school district polygons</a> from the B.C. Data Catalogue. This layer is described using this command:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span>
 <span class="co">#&gt; B.C. Data Catalogue Record: School Districts of BC </span>
@@ -159,7 +161,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 3 KML Net… http://op… 7493e7… kml    "kml" 78ec5279-4… bcgeogr… FALSE           </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
-<p>This data is the boundary of each school district. The key information in this metadata is that the layer is a <code>**WFS request (Spatial Data)**</code>—which means it is available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. From this we know we can make use of <code>bcdc_query_geodata</code>.</p>
+<p>This data is the boundary of each school district. The key information in this metadata is that the layer is a <code>**WFS request (Spatial Data)**</code>—which means it is available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E" class="external-link">Web Service</a>. From this we know we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
@@ -185,7 +187,7 @@ See the License for the specific language governing permissions and limitations 
 <p>This is the initial query to the data in the catalogue. What has been returned is <em>not</em> the actual data but rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also receive instruction that using <code><a href="../reference/as_tibble.html">collect()</a></code> will retrieve a given number of features and fields present for this query. Lastly, there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the catalogue for only those polygons just like we would in a typical <code>dplyr</code> workflow:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
 <span class="co">#&gt; ● Using collect() on this object will return 3 features and 9 fields</span>
 <span class="co">#&gt; ● At most six rows of the record are printed here</span>
@@ -206,7 +208,7 @@ See the License for the specific language governing permissions and limitations 
 <p>To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. During an actual analysis, it is possible that you may need to initially collect more data than you want to determine value to subset by. For example, there is currently no way to ask the catalogue for all possible unique values of <code>SCHOOL_DISTRICT_NAME</code>. Is that case the data will need to be brought into R and unique values will need to be determined there.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/select.bcdc_promise.html">select</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
 <span class="co">#&gt; ● Using collect() on this object will return 3 features and 5 fields</span>
@@ -227,19 +229,19 @@ See the License for the specific language governing permissions and limitations 
 <p>Note that in the <code>select</code> statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn’t select. This is because within each data set in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don’t want those columns after you <code>collect</code> the data, which we will take care of right now, you can drop them:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/select.bcdc_promise.html">select</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Again note here that we have assigned the object a name and added the <code>collect</code> statement. This step happens when you have selected the data you want and wish to begin working with it in R like a normal <code>sf</code> object. For example, we can now plot these three school districts:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-districts-1.png" title="plot of chunk districts" alt="plot of chunk districts" width="100%"></p>
 <p>Now that we have the spatial boundaries narrowed by specific school districts we can perform some spatial operations to determine parks in the school districts.</p>
 </div>
 <div id="greenspaces-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#greenspaces-data" class="anchor"></a>Greenspaces Data</h2>
-<p>For the purposes of this example, let’s consider <a href="https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da">this greenspace</a> layer in the catalogue. This layer is described here:</p>
+<p>For the purposes of this example, let’s consider <a href="https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da" class="external-link">this greenspace</a> layer in the catalogue. This layer is described here:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
 <span class="co">#&gt; B.C. Data Catalogue Record: Local and Regional Greenspaces </span>
@@ -270,7 +272,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 4 BC Geog… https://c… 53c6c6… other  ""    6a2fea1b-0… bcgeogr… FALSE           </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
-<p>Again we recognize this is <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data, which means we can make use of <code>bcdc_query_geodata</code>.</p>
+<p>Again we recognize this is <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E" class="external-link">Web Service-enabled</a> geospatial data, which means we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span>
@@ -336,7 +338,7 @@ See the License for the specific language governing permissions and limitations 
 <p>We are left with two options to get around this problem. First, we can simply do some additional processing with the <code>sf</code> package. Specifically we can use a spatial join to assign parks into their respective district:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts_parks_join</span> <span class="op">&lt;-</span> <span class="va">districts_parks</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></span><span class="op">(</span><span class="va">districts</span>, left <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join</a></span><span class="op">(</span><span class="va">districts</span>, left <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-dp_join-1.png" title="plot of chunk dp_join" alt="plot of chunk dp_join" width="100%"></p>
 <p>A second approach is to set an internal option (<code>bcdata.max_geom_pred_size</code>) and increase the threshold of when a bounding box is drawn. Options are set in R like this:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">options</span>(<span class="st">"bcdata.max_geom_pred_size"</span> =<span class="st"> </span>{object size <span class="cf">in</span> bytes})</span></code></pre></div>
@@ -344,11 +346,11 @@ See the License for the specific language governing permissions and limitations 
 <p>Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts_parks_join</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/mutate.bcdc_promise.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_set_geometry</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>total_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">total_area</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/mutate.bcdc_promise.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html" class="external-link">st_area</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_set_geometry</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html" class="external-link">summarise</a></span><span class="op">(</span>total_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">total_area</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;   SCHOOL_DISTRICT_NAME total_area</span>
 <span class="co">#&gt;   &lt;chr&gt;                     [m^2]</span>
@@ -409,7 +411,7 @@ See the License for the specific language governing permissions and limitations 
 <div id="using-b-c--geographic-warehouse-bcgw-layer-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-b-c--geographic-warehouse-bcgw-layer-names" class="anchor"></a>Using B.C. Geographic Warehouse (BCGW) layer names</h2>
-<p>If you are familiar with the <a href="https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse">B.C. Geographic Warehouse (BCGW)</a>, you may already know the name of a layer that you want from the BCGW. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (as well as all other related functions) supports supplying that name directly. For example, the <a href="https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description">record for the B.C. airports layer</a> shows that the object name is <code>WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW</code>, and we can use that in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
+<p>If you are familiar with the <a href="https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse" class="external-link">B.C. Geographic Warehouse (BCGW)</a>, you may already know the name of a layer that you want from the BCGW. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (as well as all other related functions) supports supplying that name directly. For example, the <a href="https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description" class="external-link">record for the B.C. airports layer</a> shows that the object name is <code>WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW</code>, and we can use that in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Look at the columns available:</span>
 <span class="fu"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span>
@@ -467,11 +469,13 @@ See the License for the specific language governing permissions and limitations 
 
 
       <footer><div class="copyright">
-  <p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
+  <p></p>
+<p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
@@ -479,6 +483,8 @@ See the License for the specific language governing permissions and limitations 
 
   
 
+
+  
 
   </body>
 </html>

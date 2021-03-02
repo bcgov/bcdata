@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -72,7 +74,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bcgov/bcdata/">
+  <a href="https://github.com/bcgov/bcdata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -93,7 +95,7 @@
       <h1 data-toc-skip>Get Started with bcdata</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/bcdata.Rmd"><code>vignettes/bcdata.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/bcdata.Rmd" class="external-link"><code>vignettes/bcdata.Rmd</code></a></small>
       <div class="hidden name"><code>bcdata.Rmd</code></div>
 
     </div>
@@ -113,18 +115,18 @@ Unless required by applicable law or agreed to in writing, software distributed 
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
-<p>The <code>bcdata</code> <a href="https://www.r-project.org/">R</a> package contains functions for searching &amp; retrieving data from the <a href="https://catalogue.data.gov.bc.ca">B.C. Data Catalogue</a>.</p>
-<p>The <a href="https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5">B.C. Data Catalogue</a> is the place to find British Columbia Government data, applications and web services. Much of the data are released under the <a href="https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc">Open Government Licence — British Columbia</a>, as well as numerous other <a href="https://catalogue.data.gov.bc.ca/dataset?download_audience=Public">licences</a>.</p>
+<p>The <code>bcdata</code> <a href="https://www.r-project.org/" class="external-link">R</a> package contains functions for searching &amp; retrieving data from the <a href="https://catalogue.data.gov.bc.ca" class="external-link">B.C. Data Catalogue</a>.</p>
+<p>The <a href="https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5" class="external-link">B.C. Data Catalogue</a> is the place to find British Columbia Government data, applications and web services. Much of the data are released under the <a href="https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc" class="external-link">Open Government Licence — British Columbia</a>, as well as numerous other <a href="https://catalogue.data.gov.bc.ca/dataset?download_audience=Public" class="external-link">licences</a>.</p>
 <p>You can install <code>bcdata</code> directly from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bcdata"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"bcdata"</span><span class="op">)</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span></code></pre></div>
 <div id="bcdc_browse" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bcdc_browse" class="anchor"></a><code>bcdc_browse()</code>
 </h3>
-<p><code><a href="../reference/bcdc_browse.html">bcdata::bcdc_browse()</a></code> let’s you access the <a href="https://catalogue.data.gov.bc.ca">B.C. Data Catalogue web interface</a> directly from R—opening the catalogue search page in your default browser:</p>
+<p><code><a href="../reference/bcdc_browse.html">bcdata::bcdc_browse()</a></code> let’s you access the <a href="https://catalogue.data.gov.bc.ca" class="external-link">B.C. Data Catalogue web interface</a> directly from R—opening the catalogue search page in your default browser:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Take me to the B.C. Data Catalogue home page</span>
 <span class="fu"><a href="../reference/bcdc_browse.html">bcdc_browse</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -399,7 +401,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;lgl&gt;           </span>
 <span class="co">#&gt; 1 Progra… http://www… a393f8… txt    txt   b1f27d1c-2… external TRUE            </span>
 <span class="co">#&gt; 2 Progra… http://www… 1e3409… xlsx   xlsx  b1f27d1c-2… external TRUE</span></code></pre></div>
-<p><code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will also detect if the data resource is a geospatial file, and automatically reads and returns it as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
+<p><code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will also detect if the data resource is a geospatial file, and automatically reads and returns it as an <a href="https://r-spatial.github.io/sf/" class="external-link"><code>sf</code> object</a> in your R session.</p>
 <p>Let’s get the air zones for British Columbia:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Find the B.C. Air Zones catalogue record</span>
@@ -433,8 +435,8 @@ See the License for the specific language governing permissions and limitations 
 <h3 class="hasAnchor">
 <a href="#bcdc_query_geodata" class="anchor"></a><code>bcdc_query_geodata()</code>
 </h3>
-<p>Many geospatial data sets in the B.C. Data Catalogue are available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. While <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will retrieve the geospatial data for you, sometimes the geospatial file is very large—and slow to download—and/or you may only want <em>some</em> of the data. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> let’s you query catalogue geospatial data available as a Web Service using <code>select</code> and <code>filter</code> functions (just like in <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>. The <code>bcdc::collect()</code> function returns the <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> query results as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
-<p>Let’s get the Capital Regional District boundary from the <a href="https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9">B.C. Regional Districts geospatial data</a>—the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:</p>
+<p>Many geospatial data sets in the B.C. Data Catalogue are available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E" class="external-link">Web Service</a>. While <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will retrieve the geospatial data for you, sometimes the geospatial file is very large—and slow to download—and/or you may only want <em>some</em> of the data. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> let’s you query catalogue geospatial data available as a Web Service using <code>select</code> and <code>filter</code> functions (just like in <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a>. The <code>bcdc::collect()</code> function returns the <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> query results as an <a href="https://r-spatial.github.io/sf/" class="external-link"><code>sf</code> object</a> in your R session.</p>
+<p>Let’s get the Capital Regional District boundary from the <a href="https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9" class="external-link">B.C. Regional Districts geospatial data</a>—the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Find the B.C. Regional Districts catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"regional districts administrative areas"</span>, res_format <span class="op">=</span> <span class="st">"wms"</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
@@ -481,7 +483,7 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%"></p>
-<p>The vignette <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a> provides a full demonstration on how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata()</a></code> to fine tune a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a> request for geospatial data from the B.C. Data Catalogue.</p>
+<p>The vignette <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a> provides a full demonstration on how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata()</a></code> to fine tune a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E" class="external-link">Web Service</a> request for geospatial data from the B.C. Data Catalogue.</p>
 </div>
   </div>
 
@@ -494,11 +496,13 @@ See the License for the specific language governing permissions and limitations 
 
 
       <footer><div class="copyright">
-  <p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
+  <p></p>
+<p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
@@ -506,6 +510,8 @@ See the License for the specific language governing permissions and limitations 
 
   
 
+
+  
 
   </body>
 </html>

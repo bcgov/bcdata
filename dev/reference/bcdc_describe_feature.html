@@ -67,9 +67,15 @@ This can be a useful tool to examine a layer before issuing a query with bcdc_qu
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -179,37 +185,37 @@ The tibble returns the following columns:</p><ul>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_describe_feature</span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 42 x 4</span><span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 42 x 4</span><span>
 #&gt;    col_name                      sticky remote_col_type local_col_type
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
-#&gt; </span><span style='color: #555555;'> 1</span><span> id                            FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 2</span><span> CUSTODIAN_ORG_DESCRIPTION     FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 3</span><span> BUSINESS_CATEGORY_CLASS       FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 4</span><span> BUSINESS_CATEGORY_DESCRIPTION FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 5</span><span> OCCUPANT_TYPE_DESCRIPTION     FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 6</span><span> SOURCE_DATA_ID                FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 7</span><span> SUPPLIED_SOURCE_ID_IND        FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 8</span><span> AIRPORT_NAME                  FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 9</span><span> DESCRIPTION                   TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'>10</span><span> PHYSICAL_ADDRESS              TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> id                            FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> CUSTODIAN_ORG_DESCRIPTION     FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> BUSINESS_CATEGORY_CLASS       FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> BUSINESS_CATEGORY_DESCRIPTION FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> OCCUPANT_TYPE_DESCRIPTION     FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> SOURCE_DATA_ID                FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> SUPPLIED_SOURCE_ID_IND        FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> AIRPORT_NAME                  FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> DESCRIPTION                   TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> PHYSICAL_ADDRESS              TRUE   xsd:string      character     
+#&gt; </span><span style='color: #949494;'># … with 32 more rows</span><span></div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_describe_feature</span><span class='op'>(</span><span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 42 x 4</span><span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 42 x 4</span><span>
 #&gt;    col_name                      sticky remote_col_type local_col_type
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
-#&gt; </span><span style='color: #555555;'> 1</span><span> id                            FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 2</span><span> CUSTODIAN_ORG_DESCRIPTION     FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 3</span><span> BUSINESS_CATEGORY_CLASS       FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 4</span><span> BUSINESS_CATEGORY_DESCRIPTION FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 5</span><span> OCCUPANT_TYPE_DESCRIPTION     FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 6</span><span> SOURCE_DATA_ID                FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 7</span><span> SUPPLIED_SOURCE_ID_IND        FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 8</span><span> AIRPORT_NAME                  FALSE  xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 9</span><span> DESCRIPTION                   TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'>10</span><span> PHYSICAL_ADDRESS              TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'># … with 32 more rows</span><span></div><div class='input'><span class='co'># }</span>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> id                            FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> CUSTODIAN_ORG_DESCRIPTION     FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> BUSINESS_CATEGORY_CLASS       FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> BUSINESS_CATEGORY_DESCRIPTION FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> OCCUPANT_TYPE_DESCRIPTION     FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> SOURCE_DATA_ID                FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> SUPPLIED_SOURCE_ID_IND        FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> AIRPORT_NAME                  FALSE  xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> DESCRIPTION                   TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> PHYSICAL_ADDRESS              TRUE   xsd:string      character     
+#&gt; </span><span style='color: #949494;'># … with 32 more rows</span><span></div><div class='input'><span class='co'># }</span>
 
 </div></span></pre>
   </div>
@@ -223,11 +229,11 @@ The tibble returns the following columns:</p><ul>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
+  <p><p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
 </div>
 
       </footer>
@@ -235,6 +241,8 @@ The tibble returns the following columns:</p><ul>
 
   
 
+
+  
 
   </body>
 </html>
