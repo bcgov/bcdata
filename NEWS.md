@@ -1,6 +1,7 @@
 # bcdata (development version)
 ### IMPROVEMENTS
 * Added `bcdc_list_groups` and `bcdc_list_group_records` to provide the ability to query on the group endpoint of the catalogue API. #234
+* Fixed bug in `collect.bcdc_promise` where the wrong parameter name in `crul::Paginator$new()` resulted in an error in paginated wfs requests (#250, thanks @meztez)
 
 # bcdata 0.2.1
 
