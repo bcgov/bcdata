@@ -151,6 +151,7 @@
 <a href="#improvements" class="anchor"></a>IMPROVEMENTS</h3>
 <ul>
 <li>Added <code>bcdc_list_groups</code> and <code>bcdc_list_group_records</code> to provide the ability to query on the group endpoint of the catalogue API. <a href='https://github.com/bcgov/bcdata/issues/234'>#234</a></li>
+<li>Fixed bug in <code>collect.bcdc_promise</code> where the wrong parameter name in <code>crul::Paginator$new()</code> resulted in an error in paginated wfs requests (<a href='https://github.com/bcgov/bcdata/issues/250'>#250</a>, thanks <a href='https://github.com/meztez'>@meztez</a>)</li>
 </ul>
 </div>
 </div>
