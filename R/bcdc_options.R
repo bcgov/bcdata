@@ -25,9 +25,14 @@
 #'
 #' `bcdata.chunk_limit` is an option useful when dealing with very large data sets. When requesting large objects
 #' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
-#' been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
+#' been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
 #' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
 #' it is advisable to lower the chunk limit. Chunks must be less than 10000.
+#'
+#' `bcdata.single_download_limit` is the maximum number of records an object can be before forcing a paginated download
+#' (see entry for `bcdata.chunk_limit` for details on pagination).
+#' Tweaking this option in conjunction with `bcdata.chunk_limit` can often resolve failures in large and complex downloads.
+#' The default is 10000 records.
 #'
 #' @examples
 #' \donttest{
@@ -65,7 +70,8 @@ bcdc_options <- function() {
   dplyr::tribble(
     ~ option, ~ value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
-    "bcdata.chunk_limit",null_to_na(getOption("bcdata.chunk_limit")), 1000
+    "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), 1000,
+    "bcdata.single_download_limit", null_to_na(getOption("bcdata.single_download_limit")), 10000
   )
 }
 

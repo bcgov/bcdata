@@ -34,7 +34,7 @@ Imports:
     cli,
     methods,
     DBI,
-    crul (>= 0.7.4),
+    crul (>= 1.1.0),
     dbplyr (>= 1.3.0),
     dplyr (>= 0.8.1),
     tibble,
@@ -55,7 +55,8 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    withr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
