@@ -1,11 +1,11 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1.9000
-pkgdown_sha: 9c95f00d2505ddd83c4722e019202370715d3a3d
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
   bcdata: bcdata.html
   efficiently-query-spatial-data-in-the-bc-data-catalogue: efficiently-query-spatial-data-in-the-bc-data-catalogue.html
   explore-silviculture-data-using-bcdata: explore-silviculture-data-using-bcdata.html
-last_built: 2021-03-04T21:26Z
+last_built: 2021-03-10T22:37Z
 urls:
   reference: https://bcgov.github.io/bcdata/reference
   article: https://bcgov.github.io/bcdata/articles

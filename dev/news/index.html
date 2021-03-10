@@ -52,8 +52,6 @@
 
 <meta name="robots" content="noindex">
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -65,15 +63,9 @@
 
 
 
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -94,6 +86,12 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -172,15 +170,15 @@
 <a href="#bug-fixes-1" class="anchor"></a>BUG FIXES</h3>
 <ul>
 <li>Remove link for pipe documentation for simplicity.</li>
-<li>Fixed bug where using many <code>as.</code> functions (e.g., <code><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date()</a></code>, <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>, <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code>) in a filter statement would fail. (<a href='https://github.com/bcgov/bcdata/issues/218'>#218</a>, <a href='https://github.com/bcgov/bcdata/issues/219'>#219</a>)</li>
+<li>Fixed bug where using many <code>as.</code> functions (e.g., <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code>, <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>, <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>) in a filter statement would fail. (<a href='https://github.com/bcgov/bcdata/issues/218'>#218</a>, <a href='https://github.com/bcgov/bcdata/issues/219'>#219</a>)</li>
 </ul>
 </div>
 <div id="maintenance" class="section level3">
 <h3 class="hasAnchor">
 <a href="#maintenance" class="anchor"></a>MAINTENANCE</h3>
 <ul>
-<li>Updated internal SQL translation to use <code>DBI</code> S4 generics (<code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html" class="external-link">DBI::dbQuoteIdentifier()</a></code> is now used instead of <code>dbplyr::sql_escape_ident()</code> and <code><a href="https://dbi.r-dbi.org/reference/dbQuoteString.html" class="external-link">DBI::dbQuoteString()</a></code> instead of <code>dbplyr::sql_escape_string()</code>), to comply with upcoming <code>dbplyr</code> 2.0 release (<a href='https://github.com/bcgov/bcdata/issues/225'>#225</a>, <a href='https://github.com/bcgov/bcdata/issues/225'>#225</a>; https://github.com/tidyverse/dbplyr/issues/385)</li>
-<li>Wrapped all examples that call web resources in <code><a href="https://rdrr.io/r/base/try.html" class="external-link">try()</a></code> to avoid spurious check failures (<a href='https://github.com/bcgov/bcdata/issues/229'>#229</a>).</li>
+<li>Updated internal SQL translation to use <code>DBI</code> S4 generics (<code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html">DBI::dbQuoteIdentifier()</a></code> is now used instead of <code>dbplyr::sql_escape_ident()</code> and <code><a href="https://dbi.r-dbi.org/reference/dbQuoteString.html">DBI::dbQuoteString()</a></code> instead of <code>dbplyr::sql_escape_string()</code>), to comply with upcoming <code>dbplyr</code> 2.0 release (<a href='https://github.com/bcgov/bcdata/issues/225'>#225</a>, <a href='https://github.com/bcgov/bcdata/issues/225'>#225</a>; <a href="https://github.com/tidyverse/dbplyr/issues/385" class="uri">https://github.com/tidyverse/dbplyr/issues/385</a>)</li>
+<li>Wrapped all examples that call web resources in <code><a href="https://rdrr.io/r/base/try.html">try()</a></code> to avoid spurious check failures (<a href='https://github.com/bcgov/bcdata/issues/229'>#229</a>).</li>
 </ul>
 </div>
 </div>
@@ -208,7 +206,7 @@
 <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> &amp; <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> will now work with full B.C. data catalogue url including resource (<a href='https://github.com/bcgov/bcdata/issues/125'>#125</a>, <a href='https://github.com/bcgov/bcdata/issues/196'>#196</a>)</li>
 <li>
 <code>bcdc_sf</code> objects now have an <code>time_downloaded</code> attribute</li>
-<li>Authorized B.C. Data Catalogue editors can now authenticate with the catalogue by setting a <code>BCDC_KEY</code> environment variable with their catalogue API token (https://github.com/bcgov/bcdata#bcdc-authentication; <a href='https://github.com/bcgov/bcdata/issues/208'>#208</a>).</li>
+<li>Authorized B.C. Data Catalogue editors can now authenticate with the catalogue by setting a <code>BCDC_KEY</code> environment variable with their catalogue API token (<a href="https://github.com/bcgov/bcdata#bcdc-authentication" class="uri">https://github.com/bcgov/bcdata#bcdc-authentication</a>; <a href='https://github.com/bcgov/bcdata/issues/208'>#208</a>).</li>
 </ul>
 </div>
 <div id="bug-fixes-2" class="section level3">
@@ -233,7 +231,7 @@
 <li>More reliable detection of layer name for a wfs call in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (<a href='https://github.com/bcgov/bcdata/issues/129'>#129</a>, <a href='https://github.com/bcgov/bcdata/issues/138'>#138</a>, <a href='https://github.com/bcgov/bcdata/issues/139'>#139</a>)</li>
 <li>Add <code>mutate</code> method for bcdc_promise that only fails and suggest an alternative approach. (PR<a href='https://github.com/bcgov/bcdata/issues/134'>#134</a>)</li>
 <li>Add back in querying vignette</li>
-<li>Using <code>tidyselect</code> so that <code>select.bcdc_promise</code> behaviour is typical of <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">dplyr::select</a></code> ($140, <a href='https://github.com/bcgov/bcdata/issues/138'>#138</a>)</li>
+<li>Using <code>tidyselect</code> so that <code>select.bcdc_promise</code> behaviour is typical of <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select</a></code> ($140, <a href='https://github.com/bcgov/bcdata/issues/138'>#138</a>)</li>
 <li>Using GitHub actions for CI.</li>
 </ul>
 </div>
@@ -295,11 +293,11 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p></p>
+  <p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -307,8 +305,6 @@
 
   
 
-
-  
 
   </body>
 </html>
