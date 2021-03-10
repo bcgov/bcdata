@@ -61,15 +61,19 @@ guide](https://bcgov.github.io/bcdata/)
 You can install `bcdata` directly from
 [CRAN](https://cran.r-project.org/package=bcdata):
 
-    install.packages("bcdata")
+``` r
+install.packages("bcdata")
+```
 
 To install the development version from GitHub, use the
 [remotes](https://cran.r-project.org/package=remotes) package:
 
-    install.packages("remotes")
+``` r
+install.packages("remotes")
 
-    remotes::install_github("bcgov/bcdata")
-    library(bcdata)
+remotes::install_github("bcgov/bcdata")
+library(bcdata)
+```
 
 ### Vignettes
 
@@ -133,7 +137,7 @@ Licensed under the Apache License, Version 2.0 (the “License”); you may
 not use this file except in compliance with the License. You may obtain
 a copy of the License at
 
-<a href="http://www.apache.org/licenses/LICENSE-2.0" class="uri">http://www.apache.org/licenses/LICENSE-2.0</a>
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an “AS IS” BASIS,
