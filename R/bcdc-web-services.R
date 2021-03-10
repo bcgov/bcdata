@@ -14,9 +14,10 @@
 #' Query data from the B.C. Web Service
 #'
 #' Queries features from the B.C. Web Service. The data must be available as
-#' a Web Service. See `bcdc_get_record(record)$resources`). If the record is greater than 10000 rows,
-#' the response will be paginated. If you are querying layers of this size, expect
-#' that the request will take quite a while.
+#' a Web Service. See `bcdc_get_record(record)$resources`). The response will
+#' be paginated if the number of features is above the number set by the
+#' `bcdata.single_download_limit` option. Please see [bcdc_options()] for defaults
+#' and more information.
 #'
 #' Note that this function doesn't actually return the data, but rather an
 #' object of class `bcdc_promise`, which includes all of the information

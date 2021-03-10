@@ -28,9 +28,10 @@ an \code{sf} object, you need to run \code{\link[=collect]{collect()}} on the \c
 }
 \description{
 Queries features from the B.C. Web Service. The data must be available as
-a Web Service. See \code{bcdc_get_record(record)$resources}). If the record is greater than 10000 rows,
-the response will be paginated. If you are querying layers of this size, expect
-that the request will take quite a while.
+a Web Service. See \code{bcdc_get_record(record)$resources}). The response will
+be paginated if the number of features is above the number set by the
+\code{bcdata.single_download_limit} option. Please see \code{\link[=bcdc_options]{bcdc_options()}} for defaults
+and more information.
 }
 \details{
 Note that this function doesn't actually return the data, but rather an
