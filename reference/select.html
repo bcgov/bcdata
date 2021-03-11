@@ -85,13 +85,19 @@ See dplyr::select for details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -119,7 +125,7 @@ See dplyr::select for details." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/bcgov/bcdata/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -183,80 +189,73 @@ of issuing the Web Service call.</p>
   <span class='co'>## Columns that can selected:</span>
   <span class='va'>feature_spec</span><span class='op'>[</span><span class='va'>feature_spec</span><span class='op'>$</span><span class='va'>sticky</span> <span class='op'>==</span> <span class='cn'>TRUE</span>,<span class='op'>]</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 33 x 4</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 33 x 4</span><span>
 #&gt;    col_name         sticky remote_col_type local_col_type
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         
-#&gt; </span><span style='color: #555555;'> 1</span><span> DESCRIPTION      TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 2</span><span> PHYSICAL_ADDRESS TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 3</span><span> ALIAS_ADDRESS    TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 4</span><span> STREET_ADDRESS   TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 5</span><span> POSTAL_CODE      TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 6</span><span> LOCALITY         TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 7</span><span> CONTACT_PHONE    TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 8</span><span> CONTACT_EMAIL    TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'> 9</span><span> CONTACT_FAX      TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'>10</span><span> WEBSITE_URL      TRUE   xsd:string      character     
-#&gt; </span><span style='color: #555555;'># … with 23 more rows</span><span></div><div class='input'>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> DESCRIPTION      TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> PHYSICAL_ADDRESS TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ALIAS_ADDRESS    TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> STREET_ADDRESS   TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> POSTAL_CODE      TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> LOCALITY         TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CONTACT_PHONE    TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> CONTACT_EMAIL    TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> CONTACT_FAX      TRUE   xsd:string      character     
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> WEBSITE_URL      TRUE   xsd:string      character     
+#&gt; </span><span style='color: #949494;'># … with 23 more rows</span><span></div><div class='input'>
 <span class='co'>## Select columns</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>select</span><span class='op'>(</span><span class='va'>DESCRIPTION</span>, <span class='va'>PHYSICAL_ADDRESS</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: There was an issue sending this WFS request</span>
-#&gt; <span class='error'></span><span style='color: #BB0000;'>▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span><span></span>
-#&gt; <span class='error'>Request:</span>
-#&gt; <span class='error'>  URL: https://openmaps.gov.bc.ca/geo/pub/wfs/</span>
-#&gt; <span class='error'>  POST fields:</span>
-#&gt; <span class='error'>    SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005&amp;propertyName=SHAPE%2CDESCRIPTION%2CPHYSICAL_ADDRESS&amp;count=6</span>
-#&gt; <span class='error'>  Content-Type: application/x-www-form-urlencoded</span>
-#&gt; <span class='error'>  Accept-Encoding: gzip, deflate</span>
-#&gt; <span class='error'>  Accept: application/json, text/xml, application/xml, */*</span>
-#&gt; <span class='error'>  User-Agent: https://github.com/bcgov/bcdata</span>
-#&gt; <span class='error'>Response:</span>
-#&gt; <span class='error'>  status: HTTP/1.1 400 </span>
-#&gt; <span class='error'>  date: Thu, 22 Oct 2020 23:07:37 GMT</span>
-#&gt; <span class='error'>  server: Apache</span>
-#&gt; <span class='error'>  x-frame-options: allow-from (null)</span>
-#&gt; <span class='error'>  x-control-flow-delay-ms: 0</span>
-#&gt; <span class='error'>  content-type: application/xml</span>
-#&gt; <span class='error'>  set-cookie: GS_FLOW_CONTROL=GS_CFLOW_-935aa15:175528d26ff:6c06</span>
-#&gt; <span class='error'>  access-control-allow-origin: (null)</span>
-#&gt; <span class='error'>  access-control-allow-credentials: true</span>
-#&gt; <span class='error'>  access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
-#&gt; <span class='error'>  access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
-#&gt; <span class='error'>  access-control-max-age: 1000</span>
-#&gt; <span class='error'>  connection: close</span>
-#&gt; <span class='error'>  transfer-encoding: chunked</span></div><div class='input'>
+</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; ● features and </span><span style='color: #00BB00;'>11</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ────────────────────────────────────────────────────────────────────────────────
+#&gt; Simple feature collection with 6 features and 11 fields
+#&gt; geometry type:  POINT
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
+#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; </span><span style='color: #949494;'># A tibble: 6 x 12</span><span>
+#&gt;   id       CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #949494;'># … with 7 more variables: SOURCE_DATA_ID &lt;chr&gt;, SUPPLIED_SOURCE_ID_IND &lt;chr&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   AIRPORT_NAME &lt;chr&gt;, DESCRIPTION &lt;chr&gt;, PHYSICAL_ADDRESS &lt;chr&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Select "sticky" columns</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>select</span><span class='op'>(</span><span class='va'>LOCALITY</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: There was an issue sending this WFS request</span>
-#&gt; <span class='error'></span><span style='color: #BB0000;'>▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span><span></span>
-#&gt; <span class='error'>Request:</span>
-#&gt; <span class='error'>  URL: https://openmaps.gov.bc.ca/geo/pub/wfs/</span>
-#&gt; <span class='error'>  POST fields:</span>
-#&gt; <span class='error'>    SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005&amp;propertyName=SHAPE%2CLOCALITY&amp;count=6</span>
-#&gt; <span class='error'>  Content-Type: application/x-www-form-urlencoded</span>
-#&gt; <span class='error'>  Accept-Encoding: gzip, deflate</span>
-#&gt; <span class='error'>  Accept: application/json, text/xml, application/xml, */*</span>
-#&gt; <span class='error'>  User-Agent: https://github.com/bcgov/bcdata</span>
-#&gt; <span class='error'>Response:</span>
-#&gt; <span class='error'>  status: HTTP/1.1 400 </span>
-#&gt; <span class='error'>  date: Thu, 22 Oct 2020 23:07:49 GMT</span>
-#&gt; <span class='error'>  server: Apache</span>
-#&gt; <span class='error'>  x-frame-options: allow-from (null)</span>
-#&gt; <span class='error'>  x-control-flow-delay-ms: 0</span>
-#&gt; <span class='error'>  content-type: application/xml</span>
-#&gt; <span class='error'>  set-cookie: GS_FLOW_CONTROL=GS_CFLOW_6d23bbc1:175527df36c:3a32</span>
-#&gt; <span class='error'>  access-control-allow-origin: (null)</span>
-#&gt; <span class='error'>  access-control-allow-credentials: true</span>
-#&gt; <span class='error'>  access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
-#&gt; <span class='error'>  access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
-#&gt; <span class='error'>  access-control-max-age: 1000</span>
-#&gt; <span class='error'>  connection: close</span>
-#&gt; <span class='error'>  transfer-encoding: chunked</span></div><div class='input'><span class='co'># }</span>
+</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
+#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; ● features and </span><span style='color: #00BB00;'>10</span><span> fields
+#&gt; ● At most six rows of the record are printed here
+#&gt; ────────────────────────────────────────────────────────────────────────────────
+#&gt; Simple feature collection with 6 features and 10 fields
+#&gt; geometry type:  POINT
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
+#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; </span><span style='color: #949494;'># A tibble: 6 x 11</span><span>
+#&gt;   id       CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; </span><span style='color: #949494;'># … with 6 more variables: SOURCE_DATA_ID &lt;chr&gt;, SUPPLIED_SOURCE_ID_IND &lt;chr&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   AIRPORT_NAME &lt;chr&gt;, LOCALITY &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span>
 
 
 </div></span></pre>
@@ -275,7 +274,7 @@ of issuing the Web Service call.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -84,13 +84,19 @@ addition ways to restore your initial state." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
 <li>
@@ -118,7 +124,7 @@ addition ways to restore your initial state." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/bcgov/bcdata/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -159,9 +165,13 @@ on that simpler polygon. Users can try to increase the maximum geometric predica
 if the bcdata catalogue accepts their request.</p>
 <p><code>bcdata.chunk_limit</code> is an option useful when dealing with very large data sets. When requesting large objects
 from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
-been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
+been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
 requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
 it is advisable to lower the chunk limit. Chunks must be less than 10000.</p>
+<p><code>bcdata.single_download_limit</code> is the maximum number of records an object can be before forcing a paginated download
+(see entry for <code>bcdata.chunk_limit</code> for details on pagination).
+Tweaking this option in conjunction with <code>bcdata.chunk_limit</code> can often resolve failures in large and complex downloads.
+The default is 10000 records.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
@@ -174,11 +184,12 @@ it is advisable to lower the chunk limit. Chunks must be less than 10000.</p>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_options</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 3</span><span>
-#&gt;   option                    value default
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> bcdata.max_geom_pred_size </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='text-decoration: underline;'>500</span><span>000
-#&gt; </span><span style='color: #555555;'>2</span><span> bcdata.chunk_limit        </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='text-decoration: underline;'>1</span><span>000</div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 3 x 3</span><span>
+#&gt;   option                       value default
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                        </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> bcdata.max_geom_pred_size    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='text-decoration: underline;'>500</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> bcdata.chunk_limit           </span><span style='color: #BB0000;'>NA</span><span>       </span><span style='text-decoration: underline;'>1</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> bcdata.single_download_limit </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='text-decoration: underline;'>10</span><span>000</div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>bcdata.max_geom_pred_size <span class='op'>=</span> <span class='fl'>1E6</span><span class='op'>)</span>
 <span class='op'>)</span>
@@ -187,11 +198,12 @@ it is advisable to lower the chunk limit. Chunks must be less than 10000.</p>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_options</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 3</span><span>
-#&gt;   option                      value default
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> bcdata.max_geom_pred_size 1</span><span style='text-decoration: underline;'>000</span><span>000  </span><span style='text-decoration: underline;'>500</span><span>000
-#&gt; </span><span style='color: #555555;'>2</span><span> bcdata.chunk_limit             </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='text-decoration: underline;'>1</span><span>000</div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 3</span><span>
+#&gt;   option                         value default
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> bcdata.max_geom_pred_size    1</span><span style='text-decoration: underline;'>000</span><span>000  </span><span style='text-decoration: underline;'>500</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> bcdata.chunk_limit                </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='text-decoration: underline;'>1</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> bcdata.single_download_limit      </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='text-decoration: underline;'>10</span><span>000</div><div class='input'>
 <span class='co'>## Reset initial conditions</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
  <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='va'>original_options</span><span class='op'>)</span>
@@ -213,7 +225,7 @@ it is advisable to lower the chunk limit. Chunks must be less than 10000.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

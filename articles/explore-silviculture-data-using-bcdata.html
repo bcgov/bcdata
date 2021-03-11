@@ -38,12 +38,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
@@ -72,7 +78,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/bcgov/bcdata/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -86,8 +92,7 @@
 
       
 
-      </header><script src="explore-silviculture-data-using-bcdata_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="explore-silviculture-data-using-bcdata_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="explore-silviculture-data-using-bcdata_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="explore-silviculture-data-using-bcdata_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Exploring Silviculture Data with bcdata</h1>
@@ -134,17 +139,17 @@ See the License for the specific language governing permissions and limitations 
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h2>
 <p>To start, let’s load the <code>bcdata</code> package. We will also load the <code>dplyr</code> and <code>ggplot2</code> packages to help us work with the data. You can learn more about the <code>dplyr</code> package <a href="https://dplyr.tidyverse.org/">here</a> and the <code>ggplot2</code> package <a href="https://ggplot2.tidyverse.org/">here</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="getting-the-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-the-data" class="anchor"></a>Getting the Data</h2>
 <p>We can gather the data we need to answer our question using the <a href="https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3">RESULTS - silviculture forest cover dataset</a>. First, let’s take a look at the metadata record using <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># Get the metadata using the human-readable record name</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get the metadata using the human-readable record name</span>
 <span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"results-forest-cover-silviculture"</span><span class="op">)</span>
 <span class="co">#&gt; B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture </span>
 <span class="co">#&gt; </span>
@@ -171,10 +176,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 2 WMS get… https://o… 57670a… wms    ""    258bb088-4… bcgeogr… TRUE            </span>
 <span class="co">#&gt; 3 KML Net… https://o… d45a82… kml    "kml" 258bb088-4… bcgeogr… FALSE           </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></pre></div>
+<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
 <p>We see that this is a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data set—the list of data resources includes <code>WMS getCapabilities request</code>—so we can query and retrieve this geospatial data set using <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co"># Query the data using the permanent ID of the record to guard against name changes</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span>
 <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span>
 <span class="co">#&gt; ● Using collect() on this object will return 873108 features and 159 fields</span>
@@ -239,7 +244,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; #   S3_TOTAL_STEMS_PER_HA &lt;int&gt;, S3_TOTAL_WELL_SPACED_STEMS_HA &lt;int&gt;,</span>
 <span class="co">#&gt; #   S3_WELL_SPACED_STEMS_PER_HA &lt;int&gt;, S3_FREE_GROWING_STEMS_PER_HA &lt;int&gt;,</span>
 <span class="co">#&gt; #   S3_CROWN_CLOSURE_PERCENT &lt;int&gt;, S3_BASAL_AREA &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S3_SPECIES_CODE_1 &lt;chr&gt;, …</span></pre></div>
+<span class="co">#&gt; #   S3_SPECIES_CODE_1 &lt;chr&gt;, …</span></code></pre></div>
 <p>This query shows that this data set has over 850,000 features and over 150 fields. Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.</p>
 <p>Note that we have only <em>queried</em> the data set so far—the data set would be too large (~1GB) to download efficiently. So, let’s use <code><a href="../reference/filter.bcdc_promise.html">filter()</a></code> with <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> to refine our query <em>before</em> we collect the data and import it into R.</p>
 </div>
@@ -248,22 +253,22 @@ See the License for the specific language governing permissions and limitations 
 <a href="#refining-a-geospatial-data-query" class="anchor"></a>Refining a Geospatial Data Query</h2>
 <p>To address our question, we need the treatment data (1) from the Prince George Natural Resource District <em>and</em> (2) that contain western larch.</p>
 <p>First, we can use the <code>bcdata</code> package to download the spatial boundary for the Prince George Natural Resource District—<code>DPG</code> is the <code>ORG_UNIT</code> for Prince George Natural Resource District:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co">## Create a spatial feature object named dpg</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Create a spatial feature object named dpg</span>
 <span class="va">dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"natural-resource-nr-district"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">ORG_UNIT</span><span class="op">==</span><span class="st">"DPG"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># filter for Prince George Natural Resource District</span>
-  <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># and collect the data</span></pre></div>
+  <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># and collect the data</span></code></pre></div>
 <p>Let’s plot this spatial object and double check we have we what we need:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">dpg</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dpg</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-plot-dpg-1.png" title="plot of chunk plot-dpg" alt="plot of chunk plot-dpg" width="100%"></p>
 <p>Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.</p>
 <p>We only need to download the treatments that have western larch planted. We can use the <code><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature()</a></code> helper function to examine the column names and types of the layer. In this case, we want to keep rows where the five <code>S_SPECIES_CODE_*</code> columns contain <code>"LW"</code>, the code for western larch.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co"># Make a vector of tree species we are interested in</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Make a vector of tree species we are interested in</span>
 <span class="co"># (in this case only LW for western larch)</span>
 <span class="va">spp_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LW"</span><span class="op">)</span>
 
@@ -278,29 +283,29 @@ See the License for the specific language governing permissions and limitations 
       <span class="va">S_SPECIES_CODE_4</span> <span class="op">%in%</span> <span class="va">spp_list</span> <span class="op">|</span>
       <span class="va">S_SPECIES_CODE_5</span> <span class="op">%in%</span> <span class="va">spp_list</span>
   <span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#collect/download the data</span></pre></div>
+  <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#collect/download the data</span></code></pre></div>
 </div>
 <div id="exploring-the-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exploring-the-data" class="anchor"></a>Exploring the Data</h2>
 <p>Let’s look at the dimensions of this now much more manageable data object we have downloaded from the B.C. Data Catalogue:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">trees_dpg</span><span class="op">)</span>
-<span class="co">#&gt; [1] 160 160</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">trees_dpg</span><span class="op">)</span>
+<span class="co">#&gt; [1] 160 160</span></code></pre></div>
 <p>We can see there are 160 treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dpg</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> <span class="co">#add the DPG spatial boundary</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-map-larch-plantations-dpg-1.png" title="plot of chunk map-larch-plantations-dpg" alt="plot of chunk map-larch-plantations-dpg" width="100%"></p>
 <p>We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question—how much western larch has been planted in the Prince George Natural Resource District?</p>
 <div id="what-is-the-size-and-age-distribution-of-larch-plantations-in-the-prince-george-natural-resource-district-in-the-year-2020" class="section level4">
 <h4 class="hasAnchor">
 <a href="#what-is-the-size-and-age-distribution-of-larch-plantations-in-the-prince-george-natural-resource-district-in-the-year-2020" class="anchor"></a>What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?</h4>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/mutate.bcdc_promise.html">mutate</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">2020</span> <span class="op">-</span> <span class="va">REFERENCE_YEAR</span> <span class="op">+</span> <span class="va">S_SPECIES_AGE_1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#create a plantation age column</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>  <span class="co">#start a plot</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">FEATURE_AREA_SQM</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op">+</span> <span class="co">#convert feature area to hectares</span>
@@ -314,15 +319,15 @@ See the License for the specific language governing permissions and limitations 
                         <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,
                         <span class="st">" using the bcdata R package"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="100%"></p>
 </div>
 <div id="what-is-the-biogeoclimatic-ecosystem-classification-bec-distribution-of-western-larch-plantations-in-the-prince-george-natural-resource-district" class="section level4">
 <h4 class="hasAnchor">
 <a href="#what-is-the-biogeoclimatic-ecosystem-classification-bec-distribution-of-western-larch-plantations-in-the-prince-george-natural-resource-district" class="anchor"></a>What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?</h4>
 <p>We can download <a href="https://catalogue.data.gov.bc.ca/dataset/bec-map">British Columbia biogeoclimatic (BEC) data</a> from the B.C. Data Catalogue using <code>bcdata</code> and join to our existing <code>trees_dpg</code> geospatial dataset using the <code>st_join</code> function from the <code>sf</code> package. You can learn more about <code>sf</code> <a href="https://r-spatial.github.io/sf/">here</a>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span> <span class="co">#load the sf package</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span> <span class="co">#load the sf package</span>
 
 <span class="co"># Load the BEC data for Prince George Natural Resource District</span>
 <span class="va">bgc_dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY"</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -331,10 +336,10 @@ See the License for the specific language governing permissions and limitations 
 
 <span class="co"># Join the BEC data with our tress_dpg geospatial data set</span>
 <span class="va">trees_bec_dpg</span> <span class="op">&lt;-</span> <span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></span><span class="op">(</span><span class="va">bgc_dpg</span><span class="op">[</span>, <span class="st">"MAP_LABEL"</span><span class="op">]</span><span class="op">)</span> <span class="co">#join BEC data for each polygon</span></pre></div>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></span><span class="op">(</span><span class="va">bgc_dpg</span><span class="op">[</span>, <span class="st">"MAP_LABEL"</span><span class="op">]</span><span class="op">)</span> <span class="co">#join BEC data for each polygon</span></code></pre></div>
 <p>Now, we can summarize the area planted with western larch by biogeoclimatic unit:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="va">trees_bec_dpg</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trees_bec_dpg</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">MAP_LABEL</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># group polygons by biogeoclimatic unit</span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>Area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">FEATURE_AREA_SQM</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
@@ -347,7 +352,7 @@ See the License for the specific language governing permissions and limitations 
                         <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,
                         <span class="st">" using the bcdata R package"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%"></p>
 </div>
 </div>
@@ -368,7 +373,7 @@ See the License for the specific language governing permissions and limitations 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
