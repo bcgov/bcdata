@@ -87,13 +87,6 @@ jobs:
           install.packages("rcmdcheck")
         shell: Rscript {0}
 
-      - name: install dev version of dbplyr to test for upcoming 2.0 release
-        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
-        run: |
-          # (https://twitter.com/hadleywickham/status/1310667392448684038)
-          remotes::install_github("tidyverse/dbplyr")
-        shell: Rscript {0}
-
       - name: Check
         run: rcmdcheck::rcmdcheck(args = ${{ matrix.config.args }}, error_on = 'warning', check_dir = 'check')
         shell: Rscript {0}
