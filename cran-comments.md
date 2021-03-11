@@ -1,8 +1,10 @@
-## CRAN check issues
+### IMPROVEMENTS
+* Added `bcdc_list_groups` and `bcdc_list_group_records` to provide the ability to query on the group endpoint of the catalogue API. #234
+* Added new option `bcdata.single_download_limit` to enable setting the maximum number of records an object can be before forcing a paginated download (#252)
 
-* Fixed an issue where failures in examples that called a web resource would cause a check failure
-(https://www.stats.ox.ac.uk/pub/bdr/donttest/bcdata.out). Now all examples that call a web resource are 
-wrapped in try() so if the examples fail they will not trigger a check error.
+### BUG FIXES
+* Fixed bug in `collect.bcdc_promise` where the wrong parameter name in `crul::Paginator$new()` resulted in an error in paginated wfs requests (#250, thanks @meztez)
+* Fixed a bug where the name of `bcdata.chunk_limit` option had a typo, so that it was not actually used properly (#252)
 
 ## Test environments
 * local macOS install (macOS Mojave 10.14.6), R 4.0.2

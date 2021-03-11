@@ -1,4 +1,4 @@
-# bcdata (development version)
+# bcdata 0.2.2
 ### IMPROVEMENTS
 * Added `bcdc_list_groups` and `bcdc_list_group_records` to provide the ability to query on the group endpoint of the catalogue API. #234
 * Added new option `bcdata.single_download_limit` to enable setting the maximum number of records an object can be before forcing a paginated download (#252)
