@@ -41,7 +41,7 @@ test_that("operators work with different remote geom col names",{
 
   ## LOCAL
   crd <- bcdc_query_geodata(polygon_record) %>%
-    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
+    filter(ADMIN_AREA_NAME == "Capital Regional District") %>%
     collect()
 
   ## REMOTE "GEOMETRY"
@@ -250,7 +250,7 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
                      crs = 3005)
 
   qry <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
-    filter(BBOX(st_bbox(the_geom, crs = st_crs(the_geom)$epsg))) %>%
+    filter(BBOX(st_bbox(the_geom, crs = st_crs(the_geom)))) %>%
     show_query()
 
   expect_equal(as.character(qry$query_list$CQL_FILTER),
@@ -260,8 +260,8 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
     filter(DWITHIN(st_buffer(the_geom, 10000, nQuadSegs = 2), 100, "meters")) %>%
     show_query()
 
-  expect_equal(as.character(qry2$query_list$CQL_FILTER),
-               "(DWITHIN(SHAPE, MULTIPOLYGON (((1174434 368738, 1171505 361666.9, 1164434 358738, 1157363 361666.9, 1154434 368738, 1157363 375809.1, 1164434 378738, 1171505 375809.1, 1174434 368738)), ((1213023 412959, 1210094 405887.9, 1203023 402959, 1195952 405887.9, 1193023 412959, 1195952 420030.1, 1203023 422959, 1210094 420030.1, 1213023 412959))), 100, meters))")
+  expect_match(as.character(qry2$query_list$CQL_FILTER),
+               "\\(DWITHIN\\(SHAPE, MULTIPOLYGON \\(\\(\\([0-9. ,()]+\\)\\)\\), 100, meters\\)\\)")
 })
 
 test_that("works with dates", {
