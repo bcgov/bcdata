@@ -24,6 +24,7 @@ test_that("bcdata.chunk_limit",{
 })
 
 test_that("bcdata.single_download_limit", {
+  skip_on_cran()
   withr::local_options(list(bcdata.single_download_limit = 1))
   expect_message(
     bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource =
