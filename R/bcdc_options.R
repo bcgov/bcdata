@@ -77,9 +77,10 @@ bcdc_options <- function() {
 
 check_chunk_limit <- function(){
   chunk_value <- options("bcdata.chunk_limit")$bcdata.chunk_limit
+  chunk_limit <- options("bcdata.single_download_limit")
 
-  if(!is.null(chunk_value) && chunk_value >= 10000){
-    stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit"), call. = FALSE)
+  if(!is.null(chunk_value) && chunk_value >= chunk_limit){
+    stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
   }
 }
 
