@@ -34,6 +34,12 @@ test_that("bcdata.single_download_limit", {
 
 })
 
+test_that("bcdata.single_download_limit can be changes",{
+  lt <- withr::local_options(list(bcdata.single_download_limit = 13),
+                       getOption("bcdata.single_download_limit"))
+  expect_equal(lt$bcdata.single_download_limit, 13)
+})
+
 test_that("bcdc_single_download_limit returns a number",{
   skip_on_cran()
   skip_if_net_down()
