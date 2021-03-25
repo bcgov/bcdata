@@ -82,3 +82,23 @@ check_chunk_limit <- function(){
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit"), call. = FALSE)
   }
 }
+
+
+bcdc_single_download_limit <- function() {
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
+  cli <- bcdata:::bcdc_http_client(url, auth = FALSE)
+
+  cc <- cli$get(query = list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "Getcapabilities"
+  ))
+
+  res <- cc$parse("UTF-8")
+  doc <- xml2::read_xml(res)
+
+  constraints <- xml2::xml_find_all(doc, ".//ows:Constraint")
+  count_defaults <- constraints[which(xml2::xml_attrs(constraints) %in% "CountDefault")]
+  xml2::xml_double(count_defaults)
+}

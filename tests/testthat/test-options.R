@@ -33,3 +33,10 @@ test_that("bcdata.single_download_limit", {
   )
 
 })
+
+test_that("bcdc_single_download_limit returns a number",{
+  skip_on_cran()
+  skip_if_net_down()
+  lt <- bcdc_get_single_download_limit()
+  expect_type(lt, "double")
+})
