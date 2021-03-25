@@ -10,7 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-bcdata_env <- new.env(parent = emptyenv())
+._bcdataenv_ <- new.env(parent = emptyenv())
 
 .onLoad <- function(...) {
   assign("named_get_record_warned", FALSE, envir = bcdata_env) # nocov
