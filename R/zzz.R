@@ -13,7 +13,7 @@
 ._bcdataenv_ <- new.env(parent = emptyenv())
 
 .onLoad <- function(...) {
-  assign("named_get_record_warned", FALSE, envir = bcdata_env) # nocov
+  assign("named_get_record_warned", FALSE, envir = ._bcdataenv_) # nocov
 
   options("bcdata.single_download_limit" = bcdc_single_download_limit())
 
