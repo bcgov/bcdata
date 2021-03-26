@@ -61,6 +61,7 @@
 #' )
 #' }
 #' @export
+#'
 
 bcdc_options <- function() {
   null_to_na <- function(x) {
@@ -71,13 +72,16 @@ bcdc_options <- function() {
     ~ option, ~ value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
     "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), 1000,
-    "bcdata.single_download_limit", null_to_na(getOption("bcdata.single_download_limit")), 10000
+    "bcdata.single_download_limit",
+    null_to_na(getOption("bcdata.single_download_limit",
+                         default = ._bcdataenv_$bcdata_dl_limit)), 10000
   )
 }
 
+
 check_chunk_limit <- function(){
-  chunk_value <- options("bcdata.chunk_limit")$bcdata.chunk_limit
-  chunk_limit <- options("bcdata.single_download_limit")
+  chunk_value <- getOption("bcdata.chunk_limit")
+  chunk_limit <- getOption("bcdata.single_download_limit", default = ._bcdataenv_$bcdata_dl_limit)
 
   if(!is.null(chunk_value) && chunk_value >= chunk_limit){
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
@@ -86,9 +90,6 @@ check_chunk_limit <- function(){
 
 
 bcdc_single_download_limit <- function() {
-  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
-  url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
-  cli <- bcdata:::bcdc_http_client(url, auth = FALSE)
   if (has_internet()) {
     url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
     cli <- bcdata:::bcdc_http_client(url, auth = FALSE)
