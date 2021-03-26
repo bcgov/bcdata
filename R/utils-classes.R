@@ -379,7 +379,7 @@ collect.bcdc_promise <- function(x, ...){
   ## Determine total number of records for pagination purposes
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
-  if (number_of_records < getOption("bcdata.single_download_limit", default = 10000)) {
+  if (number_of_records < getOption("bcdata.single_download_limit", default = ._bcdataenv_$bcdata_dl_limit)) {
     cc <- tryCatch(cli$post(body = query_list, encode = "form"),
                    error = function(e) {
                      stop("There was an issue processing this request.
