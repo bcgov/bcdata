@@ -16,7 +16,7 @@ test_that("Test that bcdc_describe feature returns the correct columns",{
   skip_on_cran()
   skip_if_net_down()
   airport_feature <- bcdc_describe_feature("bc-airports")
-  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type"))
+  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type", "column_comments"))
 })
 
 
@@ -39,14 +39,14 @@ test_that("bcdc_describe_feature accepts a bcdc_record object", {
   skip_if_net_down()
   airports <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
   airport_feature <- bcdc_describe_feature(airports)
-  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type"))
+  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type", "column_comments"))
 })
 
 test_that("bcdc_describe_feature accepts BCGW name",{
   skip_on_cran()
   skip_if_net_down()
   airport_feature <- bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
-  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type"))
+  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type", "column_comments"))
 })
 
 test_that("bcdc_describe_feature fails on unsupported classes", {

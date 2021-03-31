@@ -22,6 +22,7 @@
 #'   - sticky: whether a column can be separated from the record in a Web Service call via the `dplyr::select` method
 #'   - remote_col_type: class of what is return by the web feature service
 #'   - local_col_type: the column class in R
+#'   - column_comments: additional metadata specific to that column
 #'
 #' @inheritParams bcdc_query_geodata
 #' @export
@@ -53,7 +54,16 @@ bcdc_describe_feature.default <- function(record) {
 bcdc_describe_feature.character <- function(record){
 
   if (is_whse_object_name(record)) {
-    return(feature_helper(record))
+    bgc <- bcdc_get_capabilities()
+    cat_record <- bcdc_get_record(bgc$cat_url[grepl(record, bgc$whse_name)])
+
+    return(
+      dplyr::left_join(
+        feature_helper(record),
+         cat_record$details[,c("column_comments", "column_name")],
+         by = c("col_name" = "column_name")
+       )
+      )
   }
 
   bcdc_describe_feature(bcdc_get_record(record))
@@ -69,7 +79,13 @@ bcdc_describe_feature.bcdc_record <- function(record){
     )
   }
 
-  feature_helper(record$layer_name)
+  dplyr::left_join(
+    feature_helper(record$layer_name),
+    record$details[,c("column_comments", "column_name")],
+    by = c("col_name" = "column_name")
+  )
+
+
 }
 
 parse_raw_feature_tbl <- function(query_list){
@@ -110,15 +126,11 @@ feature_helper <- function(whse_name){
   xml_df <- parse_raw_feature_tbl(query_list)
   geom_type <- attr(xml_df, "geom_type")
 
-  ## Identify geometry column and move to last
-  # xml_df[xml_df$type == geom_type, "name"] <- "geometry"
-  # xml_df <- dplyr::bind_rows(xml_df[xml_df$name != "geometry",],
-  #                            xml_df[xml_df$name == "geometry",])
 
   ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
-
   xml_df <- xml_df[, c("name", "nillable", "type")]
+
   ## Add the id_row back into the front
   xml_df <- dplyr::bind_rows(id_row, xml_df)
   colnames(xml_df) <- c("col_name", "sticky", "remote_col_type")
