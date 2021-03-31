@@ -69,6 +69,7 @@ Collate:
     'bcdc_browse.R'
     'bcdc_options.R'
     'bcdc_search.R'
+    'cli.R'
     'cql-geom-predicates.R'
     'cql-translator.R'
     'describe-feature.R'
