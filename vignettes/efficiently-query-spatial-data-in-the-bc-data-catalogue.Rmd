@@ -263,6 +263,11 @@ districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
   collect()
+#> The object is too large to perform exact spatial operations using bcdata.
+#> Object size: 948576 bytes
+#> BC Data Threshold: 5e+05 bytes
+#> Exceedance: 448576 bytes
+#> See ?bcdc_size_check for more details
 ```
 
 Plotting both the filtered parks data and the district polygons reveals an important consideration when using `bcdata`:
@@ -416,14 +421,14 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 x 12
-#>   id       CUSTODIAN_ORG_DESC~ BUSINESS_CATEGOR~ BUSINESS_CATEGO~ OCCUPANT_TYPE_D~ SOURCE_DATA_ID
-#>   <chr>    <chr>               <chr>             <chr>            <chr>            <chr>         
-#> 1 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      455           
-#> 2 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      464           
-#> 3 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      482           
-#> 4 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      483           
-#> 5 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      484           
-#> 6 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      487           
+#>   id       CUSTODIAN_ORG_DESCR~ BUSINESS_CATEGO~ BUSINESS_CATEGO~ OCCUPANT_TYPE_D~ SOURCE_DATA_ID
+#>   <chr>    <chr>                <chr>            <chr>            <chr>            <chr>         
+#> 1 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      455           
+#> 2 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      464           
+#> 3 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      482           
+#> 4 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      483           
+#> 5 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      484           
+#> 6 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      487           
 #> # ... with 6 more variables: SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, LOCALITY <chr>,
 #> #   NUMBER_OF_RUNWAYS <int>, SEQUENCE_ID <int>, geometry <POINT [m]>
 ```
