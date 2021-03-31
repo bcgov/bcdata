@@ -14,7 +14,7 @@
 
 .onLoad <- function(...) {
   ._bcdataenv_$named_get_record_warned <- FALSE # nocov
-  ._bcdataenv_$bcdata_dl_limit <- bcdc_single_download_limit() # nocov
+  ._bcdataenv_$get_capabilities_xml <- bcdc_get_capabilities_xml() # nocov
 
 }
 
