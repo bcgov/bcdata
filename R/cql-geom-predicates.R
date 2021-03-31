@@ -105,17 +105,7 @@ cql_geom_predicate_list <- function() {
 
 sf_text <- function(x) {
 
-  if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
-    stop(paste(deparse(substitute(x)), "is not a valid sf object"),
-         call. = FALSE)
-  }
-
-  ## If too big here, drawing bounding
-  if (utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)) {
-    warning("The object is too large to perform exact spatial operations using bcdata.
-             To simplify the polygon, a bounding box was drawn around the polygon and all
-             features within the box will be returned. Options include further processing
-             with on the returned object or simplify the object.", call. = FALSE)
+  if (bcdc_size_check(x)) {
     x <- sf::st_bbox(x)
   }
 
@@ -126,6 +116,58 @@ sf_text <- function(x) {
   }
 
   sf::st_as_text(x)
+}
+
+
+#' Check spatial objects for WFS spatial operations
+#'
+#' Check a spatial object to see if it exceeds the current set value of
+#' 'bcdata.max_geom_pred_size' option. If the object does exceed the size
+#' threshold a bounding box was drawn around the polygon and all features
+#' within the box will be returned. Further options include:
+#' - Try adjusting the value of the 'bcdata.max_geom_pred_size' option
+#' - Simplify the spatial object to reduce its size
+#' - Further processing on the returned object
+#'
+#' @param x object of class sf, sfc or sfg
+#'
+#' @return a logical indicating whether the option value was exceeded
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' try({
+#'   airports <- bcdc_query_geodata("bc-airports") %>% collect()
+#'   bcdc_size_check(airports)
+#' })
+#' }
+bcdc_size_check <- function(x) {
+  if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
+    stop(paste(deparse(substitute(x)), "is not a valid sf object"),
+         call. = FALSE)
+  }
+
+  if (inherits(x, "bbox")) {
+    obj_size <- utils::object.size(x)
+  } else {
+    obj_size <- utils::object.size(sf::st_geometry(x))
+  }
+
+  option_size <- getOption("bcdata.max_geom_pred_size", 5E5)
+
+  ## If too big here, drawing bounding
+  if (obj_size > option_size) {
+
+    message(bold_blue("The object is too large to perform exact spatial operations using bcdata."))
+    message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
+    message(bold_blue(glue::glue("BC Data Threshold: {option_size} bytes")))
+    message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
+    message(bold_blue("See ?bcdc_size_check for more details"))
+
+    return(invisible(TRUE))
+  }
+
+  invisible(FALSE)
 }
 
 # Separate functions for all CQL geometry predicates
