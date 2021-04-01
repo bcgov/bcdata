@@ -63,3 +63,15 @@ test_that("bcdc_describe_feature fails with non-wfs record", {
                "No WMS/WFS resource available for this data set")
 })
 
+test_that("bcdc_get_wfs_records works", {
+  skip_if_net_down()
+  skip_on_cran()
+
+  wfs_records <- bcdc_get_wfs_records()
+
+  expect_equal(names(wfs_records), c("whse_name", "title", "cat_url"))
+  expect_true(nrow(wfs_records) > 0L)
+  lapply(wfs_records, function(x) {
+    expect_true(any(nzchar(x, keepNA = TRUE)) & any(!is.na(x)))
+  })
+})
