@@ -1,6 +1,10 @@
 # bcdata 0.2.2.9000
 ### IMPROVEMENTS
 - Setting the `bcdata.single_download_limit` limit dynamically from the getCapabilities endpoint. 
+- Better documentation and information surrounding the `bcdata.max_geom_pred_size` option. #243 
+- Add new function `bcdc_check_geom_size` so users can check prior to submitting a WFS request with `filter` to see 
+if the request will require a bounding box conversion.
+
 
 # bcdata 0.2.2
 ### IMPROVEMENTS

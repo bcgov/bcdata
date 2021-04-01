@@ -125,7 +125,7 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
 
-```{r}
+```{r, message=TRUE}
 districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
@@ -139,10 +139,16 @@ plot(st_geometry(districts))
 plot(st_geometry(districts_parks), add = TRUE, col = "green")
 ```
 
-In this example, many parks not contained within the school districts are included in the `districts_parks` object. This is because rather than a full intersection, `bcdata` draws a bounding box around all the polygons that are doing the intersection (in this case `district`) and does the intersection based on that bounding box. This is a limitation imposed by the size of the object doing the geometric operation (in this case `district`) and the limits of the BC Data Catalogue. Drawing the bounding box illustrates this point:
+In this example, many parks not contained within the school districts are included in the `districts_parks` object. This is because rather than a full intersection, `bcdata` draws a bounding box around all the polygons that are doing the intersection (in this case `district`) and does the intersection based on that bounding box. This behaviour is imposed by the Web Feature Server but controlled via the `bcdata.max_geom_pred_size` option (See `?bcdc_options` for default values). Using this example, you can check to see if the size of the `districts` object exceeded the current value of `bcdata.max_geom_pred_size`:
+
+```{r check, message=TRUE}
+bcdc_check_geom_size(districts)
+```
+
+Drawing the bounding box illustrates this point:
 
 ```{r bbox, echo=FALSE}
-bounding_box <- st_as_sfc((st_bbox(districts)))
+bounding_box <- st_as_sfc(st_bbox(districts))
 
 plot(st_geometry(districts))
 plot(st_geometry(districts_parks), add = TRUE, col = "green")
