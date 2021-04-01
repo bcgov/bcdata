@@ -15,31 +15,40 @@
 
 # Precompile vignettes
 
+precompile <- function(vignette_to_run = NULL) {
+  orig_files <- file.path(list.files(path = "vignettes/", pattern = "*\\.Rmd\\.orig", full.names = TRUE))
 
-library(knitr)
-library(tools)
-library(purrr)
+  if (!is.null(vignette_to_run)) {
+    orig_files <- orig_files[basename(orig_files) %in% vignette_to_run]
 
-# Convert *.orig to *.Rmd -------------------------------------------------
+    if (is_empty(orig_files)) stop("Not a vignette!")
+  }
 
-orig_files <- file.path(list.files(path = "vignettes/", pattern = "*\\.Rmd\\.orig", full.names = TRUE))
+  # Convert *.orig to *.Rmd -------------------------------------------------
+  purrr::walk(orig_files, ~knitr::knit(.x, tools::file_path_sans_ext(.x)))
 
-walk(orig_files, ~knit(.x, file_path_sans_ext(.x)))
+  # Move .png files into correct directory so they render -------------------
+  images <- file.path(list.files(".", pattern = 'vignette-fig.*\\.png$'))
+  success <- file.copy(from = images,
+                       to = file.path("vignettes", images),
+                       overwrite = TRUE)
 
-
-# Move .png files into correct directory so they render -------------------
-
-images <- file.path(list.files(".", pattern = 'vignette-fig.*\\.png$'))
-
-success <- file.copy(from = images,
-                     to = file.path("vignettes", images),
-                     overwrite = TRUE)
-
-
-# Clean up if successful --------------------------------------------------
-
-if (!all(success)) {
-  stop("Image files were not successfully transferred to vignettes directory")
-} else {
-  unlink(images)
+  # Clean up if successful --------------------------------------------------
+  if (!all(success)) {
+    stop("Image files were not successfully transferred to vignettes directory")
+  } else {
+    unlink(images)
+  }
 }
+
+## Run all vignettes
+precompile()
+
+
+
+
+
+
+
+
+
