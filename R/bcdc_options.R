@@ -121,7 +121,7 @@ bcdc_get_wfs_records <- function() {
   features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
 
   tibble::tibble(
-    whse_name = xml2::xml_text(xml2::xml_find_first(features, "./d1:Name")),
+    whse_name = gsub("^pub:", "", xml2::xml_text(xml2::xml_find_first(features, "./d1:Name"))),
     title = xml2::xml_text(xml2::xml_find_first(features, "./d1:Title")),
     cat_url = xml2::xml_attr(xml2::xml_find_first(features, "./d1:MetadataURL"), "href")
   )
