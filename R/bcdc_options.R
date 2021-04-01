@@ -18,10 +18,11 @@
 #' failed calls to the data catalogue. Options in R are reset every time R is re-started. See examples for
 #' addition ways to restore your initial state.
 #'
-#' `bcdata.max_geom_pred_size` is the maximum size of an object used for a geometric operation. Objects
+#' `bcdata.max_geom_pred_size` is the maximum size of an object used for a geometric operation in bytes. Objects
 #' that are bigger than this value will have a bounding box drawn and apply the geometric operation
-#' on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
-#' if the bcdata catalogue accepts their request.
+#' on that simpler polygon. The [bcdc_check_geom_size] function can be used to assess whether a given spatial object
+#' exceed the value of this option. Users can iteratively try to increase the maximum geometric predicate size and see
+#' if the bcdata catalogue accepts the request.
 #'
 #' `bcdata.chunk_limit` is an option useful when dealing with very large data sets. When requesting large objects
 #' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've

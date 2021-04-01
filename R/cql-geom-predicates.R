@@ -165,7 +165,7 @@ bcdc_check_geom_size <- function(x) {
 
     message(bold_blue("The object is too large to perform exact spatial operations using bcdata."))
     message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
-    message(bold_blue(glue::glue("BC Data Threshold: {option_size} bytes")))
+    message(bold_blue(glue::glue("BC Data Threshold: {formatC(option_size, format = 'd')} bytes")))
     message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
     message(bold_blue("See ?bcdc_check_geom_size for more details"))
 
