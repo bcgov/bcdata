@@ -196,7 +196,7 @@ test_that("an intersect with an object greater than 5E5 bytes automatically gets
 
   expect_true(utils::object.size(regions) > 5E5)
 
-  expect_warning(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  expect_message(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
     filter(WITHIN(regions)) %>%
       collect())
 })
