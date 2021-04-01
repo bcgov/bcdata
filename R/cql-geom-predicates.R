@@ -159,27 +159,22 @@ bcdc_check_geom_size <- function(x) {
          call. = FALSE)
   }
 
-  if (inherits(x, "bbox")) {
-    return(invisible(TRUE))
-  } else {
-    obj_size <- utils::object.size(sf::st_geometry(x))
-  }
+  if (inherits(x, "bbox")) return(invisible(TRUE))
+
+  obj_size <- utils::object.size(sf::st_geometry(x))
 
   option_size <- getOption("bcdata.max_geom_pred_size", 5E5)
 
-  ## If too big here, drawing bounding
-  if (obj_size > option_size) {
+  ## If size ok, return TRUE
+  if (obj_size < option_size) return(invisible(TRUE))
 
-    message(bold_blue(glue::glue("The object is too large to perform exact spatial operations using bcdata.")))
-    message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
-    message(bold_blue(glue::glue("BC Data Threshold: {formatC(option_size, format = 'd')} bytes")))
-    message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
-    message(bold_blue("See ?bcdc_check_geom_size for more details"))
+  message(bold_blue(glue::glue("The object is too large to perform exact spatial operations using bcdata.")))
+  message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
+  message(bold_blue(glue::glue("BC Data Threshold: {formatC(option_size, format = 'd')} bytes")))
+  message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
+  message(bold_blue("See ?bcdc_check_geom_size for more details"))
 
-    return(invisible(FALSE))
-  }
-
-  invisible(TRUE)
+  invisible(FALSE)
 }
 
 # Separate functions for all CQL geometry predicates
