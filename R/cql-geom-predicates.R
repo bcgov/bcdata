@@ -106,6 +106,11 @@ cql_geom_predicate_list <- function() {
 sf_text <- function(x) {
 
   if (!bcdc_check_geom_size(x)) {
+    message(
+      bold_red(
+        "A bounding box was drawn around the object and all features within the box will be returned."
+        )
+      )
     x <- sf::st_bbox(x)
   }
 
@@ -163,7 +168,7 @@ bcdc_check_geom_size <- function(x) {
   ## If too big here, drawing bounding
   if (obj_size > option_size) {
 
-    message(bold_blue("The object is too large to perform exact spatial operations using bcdata."))
+    message(bold_blue(glue::glue("The object is too large to perform exact spatial operations using bcdata.")))
     message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
     message(bold_blue(glue::glue("BC Data Threshold: {formatC(option_size, format = 'd')} bytes")))
     message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))

@@ -14,3 +14,7 @@
 bold_blue <- function(...) {
   cli::col_blue(cli::style_bold(...))
 }
+
+bold_red <- function(...) {
+  cli::col_red(cli::style_bold(...))
+}
