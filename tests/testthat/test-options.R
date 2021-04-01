@@ -34,7 +34,7 @@ test_that("bcdata.single_download_limit", {
 
 })
 
-test_that("bcdata.single_download_limit can be changes",{
+test_that("bcdata.single_download_limit can be changed",{
   withr::local_options(list(bcdata.single_download_limit = 13))
   expect_equal(getOption("bcdata.single_download_limit"), 13)
 })

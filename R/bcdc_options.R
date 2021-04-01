@@ -88,7 +88,7 @@ check_chunk_limit <- function(){
   }
 }
 
-bcdc_get_capabilities_xml <- function() {
+bcdc_get_wfs_records_xml <- function() {
   if (has_internet()) {
     url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
     cli <- bcdata:::bcdc_http_client(url, auth = FALSE)
@@ -108,7 +108,7 @@ bcdc_get_capabilities_xml <- function() {
   }
 }
 
-bcdc_get_capabilities <- function() {
+bcdc_get_wfs_records <- function() {
   doc <- ._bcdataenv_$get_capabilities_xml
 
   features <- xml2::xml_child(doc, 4)
