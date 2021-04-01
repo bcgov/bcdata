@@ -122,8 +122,8 @@ sf_text <- function(x) {
 #' Check spatial objects for WFS spatial operations
 #'
 #' Check a spatial object to see if it exceeds the current set value of
-#' 'bcdata.max_geom_pred_size' option. If the object does exceed the size
-#' threshold a bounding box was drawn around the polygon and all features
+#' 'bcdata.max_geom_pred_size' option, which controls how the object is treated when used inside a spatial predicate function in [filter.bcdc_promise()]. If the object does exceed the size
+#' threshold a bounding box is drawn around it and all features
 #' within the box will be returned. Further options include:
 #' - Try adjusting the value of the 'bcdata.max_geom_pred_size' option
 #' - Simplify the spatial object to reduce its size
