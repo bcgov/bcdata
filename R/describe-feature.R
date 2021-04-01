@@ -54,7 +54,7 @@ bcdc_describe_feature.default <- function(record) {
 bcdc_describe_feature.character <- function(record){
 
   if (is_whse_object_name(record)) {
-    bgc <- bcdc_get_capabilities()
+    bgc <- bcdc_get_wfs_records()
     cat_record <- bcdc_get_record(bgc$cat_url[grepl(record, bgc$whse_name)])
 
     return(
