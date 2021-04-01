@@ -111,6 +111,12 @@ bcdc_get_wfs_records_xml <- function() {
 bcdc_get_wfs_records <- function() {
   doc <- ._bcdataenv_$get_capabilities_xml
 
+  if (is.null(doc)) {
+    # Try again to get the xml
+    doc <- ._bcdataenv_$get_capabilities_xml <- suppressMessages(bcdc_get_wfs_records_xml())
+    if (is.null(doc)) stop("No access to internet", call. = FALSE)
+  }
+
   # d1 is the default xml namespace (see xml2::xml_ns(doc))
   features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
 
