@@ -105,7 +105,7 @@ cql_geom_predicate_list <- function() {
 
 sf_text <- function(x) {
 
-  if (bcdc_check_geom_size(x)) {
+  if (!bcdc_check_geom_size(x)) {
     x <- sf::st_bbox(x)
   }
 
@@ -131,7 +131,9 @@ sf_text <- function(x) {
 #'
 #' @param x object of class sf, sfc or sfg
 #'
-#' @return a logical indicating whether the option value was exceeded
+#' @return invisibly return logical indicating whether the check pass. If the return
+#' value is TRUE, the object will not need a bounding box drawn. If the return value is
+#' FALSE, the check will fails and a bounding box will be drawn.
 #' @export
 #'
 #' @examples
@@ -148,7 +150,7 @@ bcdc_check_geom_size <- function(x) {
   }
 
   if (inherits(x, "bbox")) {
-    obj_size <- utils::object.size(x)
+    return(invisible(TRUE))
   } else {
     obj_size <- utils::object.size(sf::st_geometry(x))
   }
@@ -164,10 +166,10 @@ bcdc_check_geom_size <- function(x) {
     message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
     message(bold_blue("See ?bcdc_check_geom_size for more details"))
 
-    return(invisible(TRUE))
+    return(invisible(FALSE))
   }
 
-  invisible(FALSE)
+  invisible(TRUE)
 }
 
 # Separate functions for all CQL geometry predicates
