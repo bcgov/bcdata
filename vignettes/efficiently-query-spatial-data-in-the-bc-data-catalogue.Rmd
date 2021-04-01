@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2021-03-31"
+date: "2021-04-01"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -265,9 +265,10 @@ districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>
   collect()
 #> The object is too large to perform exact spatial operations using bcdata.
 #> Object size: 948576 bytes
-#> BC Data Threshold: 5e+05 bytes
+#> BC Data Threshold: 500000 bytes
 #> Exceedance: 448576 bytes
-#> See ?bcdc_size_check for more details
+#> See ?bcdc_check_geom_size for more details
+#> A bounding box was drawn around the object passed to INTERSECTS and all features within the box will be returned.
 ```
 
 Plotting both the filtered parks data and the district polygons reveals an important consideration when using `bcdata`:
@@ -278,12 +279,12 @@ In this example, many parks not contained within the school districts are includ
 
 
 ```r
-bcdc_size_check(districts)
+bcdc_check_geom_size(districts)
 #> The object is too large to perform exact spatial operations using bcdata.
 #> Object size: 948576 bytes
-#> BC Data Threshold: 5e+05 bytes
+#> BC Data Threshold: 500000 bytes
 #> Exceedance: 448576 bytes
-#> See ?bcdc_size_check for more details
+#> See ?bcdc_check_geom_size for more details
 ```
 
 Drawing the bounding box illustrates this point:
@@ -330,29 +331,29 @@ There are a couple of other functions in `bcdata` that are useful to know when w
 
 ```r
 bcdc_describe_feature("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
-#> # A tibble: 20 x 5
-#>    col_name      sticky remote_col_type    local_col_type column_comments                        
-#>    <chr>         <lgl>  <chr>              <chr>          <chr>                                  
-#>  1 id            FALSE  xsd:string         character      <NA>                                   
-#>  2 LOCAL_REG_GR~ FALSE  xsd:decimal        numeric        LOCAL_REG_GREENSPACE_ID is a system-ge~
-#>  3 PARK_NAME     TRUE   xsd:string         character      PARK NAME is the name of the park, e.g~
-#>  4 PARK_TYPE     TRUE   xsd:string         character      PARK_TYPE is the type of park, e.g., L~
-#>  5 PARK_PRIMARY~ TRUE   xsd:string         character      PARK PRIMARY USE defines the primary u~
-#>  6 REGIONAL_DIS~ TRUE   xsd:string         character      REGIONAL_DISTRICT is the name of the r~
-#>  7 MUNICIPALITY  TRUE   xsd:string         character      MUNICIPALITY is the name of the munici~
-#>  8 CIVIC_NUMBER  TRUE   xsd:decimal        numeric        CIVIC_NUMBER is the street number or n~
-#>  9 CIVIC_NUMBER~ TRUE   xsd:string         character      CIVIC_NUMBER_SUFFIX is the letter or f~
-#> 10 STREET_NAME   TRUE   xsd:string         character      STREET_NAME is the name of the street ~
-#> 11 LATITUDE      TRUE   xsd:decimal        numeric        LATITUDE is the geographic coordinate,~
-#> 12 LONGITUDE     TRUE   xsd:decimal        numeric        LONGITUDE is the geographic coordinate~
-#> 13 WHEN_UPDATED  TRUE   xsd:date           date           WHEN_UPDATED is the date and time the ~
-#> 14 WEBSITE_URL   TRUE   xsd:string         character      WEBSITE_URL contains a link to the hom~
-#> 15 LICENCE_COMM~ TRUE   xsd:string         character      LICENCE_COMMENTS describes the source ~
-#> 16 FEATURE_AREA~ TRUE   xsd:decimal        numeric        FEATURE_AREA_SQM is the system calcula~
-#> 17 FEATURE_LENG~ TRUE   xsd:decimal        numeric        FEATURE_LENGTH_M is the system calcula~
-#> 18 SHAPE         TRUE   gml:GeometryPrope~ sfc geometry   SHAPE is the column used to reference ~
-#> 19 OBJECTID      FALSE  xsd:decimal        numeric        OBJECTID is a column required by spati~
-#> 20 SE_ANNO_CAD_~ TRUE   xsd:hexBinary      numeric        SE_ANNO_CAD_DATA is a binary column us~
+#> # A tibble: 20 x 4
+#>    col_name                sticky remote_col_type          local_col_type
+#>    <chr>                   <lgl>  <chr>                    <chr>         
+#>  1 id                      FALSE  xsd:string               character     
+#>  2 LOCAL_REG_GREENSPACE_ID FALSE  xsd:decimal              numeric       
+#>  3 PARK_NAME               TRUE   xsd:string               character     
+#>  4 PARK_TYPE               TRUE   xsd:string               character     
+#>  5 PARK_PRIMARY_USE        TRUE   xsd:string               character     
+#>  6 REGIONAL_DISTRICT       TRUE   xsd:string               character     
+#>  7 MUNICIPALITY            TRUE   xsd:string               character     
+#>  8 CIVIC_NUMBER            TRUE   xsd:decimal              numeric       
+#>  9 CIVIC_NUMBER_SUFFIX     TRUE   xsd:string               character     
+#> 10 STREET_NAME             TRUE   xsd:string               character     
+#> 11 LATITUDE                TRUE   xsd:decimal              numeric       
+#> 12 LONGITUDE               TRUE   xsd:decimal              numeric       
+#> 13 WHEN_UPDATED            TRUE   xsd:date                 date          
+#> 14 WEBSITE_URL             TRUE   xsd:string               character     
+#> 15 LICENCE_COMMENTS        TRUE   xsd:string               character     
+#> 16 FEATURE_AREA_SQM        TRUE   xsd:decimal              numeric       
+#> 17 FEATURE_LENGTH_M        TRUE   xsd:decimal              numeric       
+#> 18 SHAPE                   TRUE   gml:GeometryPropertyType sfc geometry  
+#> 19 OBJECTID                FALSE  xsd:decimal              numeric       
+#> 20 SE_ANNO_CAD_DATA        TRUE   xsd:hexBinary            numeric
 ```
 
 This is a helpful initial step to learn column names and types when you construct your query.
@@ -421,14 +422,14 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 x 12
-#>   id       CUSTODIAN_ORG_DESCR~ BUSINESS_CATEGO~ BUSINESS_CATEGO~ OCCUPANT_TYPE_D~ SOURCE_DATA_ID
-#>   <chr>    <chr>                <chr>            <chr>            <chr>            <chr>         
-#> 1 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      455           
-#> 2 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      464           
-#> 3 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      482           
-#> 4 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      483           
-#> 5 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      484           
-#> 6 WHSE_IM~ "Ministry of Forest~ airTransportati~ Air Transportat~ BC Airports      487           
+#>   id       CUSTODIAN_ORG_DESC~ BUSINESS_CATEGOR~ BUSINESS_CATEGO~ OCCUPANT_TYPE_D~ SOURCE_DATA_ID
+#>   <chr>    <chr>               <chr>             <chr>            <chr>            <chr>         
+#> 1 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      455           
+#> 2 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      464           
+#> 3 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      482           
+#> 4 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      483           
+#> 5 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      484           
+#> 6 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      487           
 #> # ... with 6 more variables: SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, LOCALITY <chr>,
 #> #   NUMBER_OF_RUNWAYS <int>, SEQUENCE_ID <int>, geometry <POINT [m]>
 ```
