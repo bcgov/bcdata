@@ -74,7 +74,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
   # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
   if (!geometry_predicates == "BBOX") {
-    x <- sf_text(x)
+    x <- sf_text(x, geometry_predicates)
   }
 
   cql_args <-
@@ -103,12 +103,14 @@ cql_geom_predicate_list <- function() {
     "DWITHIN", "BEYOND", "BBOX")
 }
 
-sf_text <- function(x) {
+sf_text <- function(x, pred) {
 
   if (!bcdc_check_geom_size(x)) {
     message(
       bold_red(
-        "A bounding box was drawn around the object and all features within the box will be returned."
+        glue::glue(
+          "A bounding box was drawn around the object passed to {pred} and all features within the box will be returned."
+          )
         )
       )
     x <- sf::st_bbox(x)
