@@ -142,7 +142,7 @@ plot(st_geometry(districts_parks), add = TRUE, col = "green")
 In this example, many parks not contained within the school districts are included in the `districts_parks` object. This is because rather than a full intersection, `bcdata` draws a bounding box around all the polygons that are doing the intersection (in this case `district`) and does the intersection based on that bounding box. This behaviour is imposed by the Web Feature Server but controlled via the `bcdata.max_geom_pred_size` option (See `?bcdc_options` for default values). Using this example, you can check to see if the size of the `districts` object exceeded the current value of `bcdata.max_geom_pred_size`:
 
 ```{r check, message=TRUE}
-bcdc_size_check(districts)
+bcdc_check_geom_size(districts)
 ```
 
 Drawing the bounding box illustrates this point:

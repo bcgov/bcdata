@@ -18,20 +18,20 @@ if (has_internet() && identical(Sys.getenv("NOT_CRAN"), "true")) {
     collect()
 }
 
-test_that("bcdc_size_check outputs message with low threshold",{
+test_that("bcdc_check_geom_size outputs message with low threshold",{
   skip_on_cran()
   skip_if_net_down()
 
   withr::local_options(list(bcdata.max_geom_pred_size = 1))
-  expect_message(bcdc_size_check(local))
+  expect_message(bcdc_check_geom_size(local))
 })
 
-test_that("bcdc_size_check is silent with high threshold",{
+test_that("bcdc_check_geom_size is silent with high threshold",{
   skip_on_cran()
   skip_if_net_down()
 
   withr::local_options(list(bcdata.max_geom_pred_size = 1E10))
-  expect_false(bcdc_size_check(local))
+  expect_false(bcdc_check_geom_size(local))
 })
 
 

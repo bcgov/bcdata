@@ -105,7 +105,7 @@ cql_geom_predicate_list <- function() {
 
 sf_text <- function(x) {
 
-  if (bcdc_size_check(x)) {
+  if (bcdc_check_geom_size(x)) {
     x <- sf::st_bbox(x)
   }
 
@@ -138,10 +138,10 @@ sf_text <- function(x) {
 #' \donttest{
 #' try({
 #'   airports <- bcdc_query_geodata("bc-airports") %>% collect()
-#'   bcdc_size_check(airports)
+#'   bcdc_check_geom_size(airports)
 #' })
 #' }
-bcdc_size_check <- function(x) {
+bcdc_check_geom_size <- function(x) {
   if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
     stop(paste(deparse(substitute(x)), "is not a valid sf object"),
          call. = FALSE)
@@ -162,7 +162,7 @@ bcdc_size_check <- function(x) {
     message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
     message(bold_blue(glue::glue("BC Data Threshold: {option_size} bytes")))
     message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
-    message(bold_blue("See ?bcdc_size_check for more details"))
+    message(bold_blue("See ?bcdc_check_geom_size for more details"))
 
     return(invisible(TRUE))
   }
