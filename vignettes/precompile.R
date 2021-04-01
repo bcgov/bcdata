@@ -44,6 +44,9 @@ precompile <- function(vignette_to_run = NULL) {
 ## Run all vignettes
 precompile()
 
+## Or just one
+#precompile("bcdata.Rmd.orig")
+
 
 
 
