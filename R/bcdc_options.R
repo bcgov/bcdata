@@ -125,9 +125,8 @@ bcdc_single_download_limit <- function() {
   doc <- ._bcdataenv_$get_capabilities_xml
 
   if (inherits(doc, "xml_document")) {
-    constraints <- xml2::xml_find_all(doc, ".//ows:Constraint")
-    count_defaults <- constraints[which(xml2::xml_attrs(constraints) %in% "CountDefault")]
-    xml2::xml_double(count_defaults)
+    count_defaults <- xml2::xml_find_first(doc, ".//ows:Constraint[@name='CountDefault']")
+    xml2::xml_integer(count_defaults)
   } else {
     message("No access to internet")
     10000L
