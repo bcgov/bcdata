@@ -104,7 +104,7 @@ bcdc_get_capabilities_xml <- function() {
 
   } else {
     message("No access to internet")
-    invisible(FALSE)
+    invisible(NULL)
   }
 }
 
@@ -124,11 +124,12 @@ bcdc_get_capabilities <- function() {
 bcdc_single_download_limit <- function() {
   doc <- ._bcdataenv_$get_capabilities_xml
 
-  if (inherits(doc, "xml_document")) {
-    count_defaults <- xml2::xml_find_first(doc, ".//ows:Constraint[@name='CountDefault']")
-    xml2::xml_integer(count_defaults)
-  } else {
+  if(is.null(doc)) {
     message("No access to internet")
-    10000L
+    return(10000L)
   }
+
+  count_defaults <- xml2::xml_find_first(doc, ".//ows:Constraint[@name='CountDefault']")
+  xml2::xml_integer(count_defaults)
+
 }
