@@ -56,14 +56,7 @@ bcdc_describe_feature.character <- function(record){
   if (is_whse_object_name(record)) {
     bgc <- bcdc_get_wfs_records()
     cat_record <- bcdc_get_record(bgc$cat_url[grepl(record, bgc$whse_name)])
-
-    return(
-      dplyr::left_join(
-        feature_helper(record),
-         cat_record$details[,c("column_comments", "column_name")],
-         by = c("col_name" = "column_name")
-       )
-      )
+    return(obj_desc_join(record, cat_record$details))
   }
 
   bcdc_describe_feature(bcdc_get_record(record))
@@ -78,13 +71,7 @@ bcdc_describe_feature.bcdc_record <- function(record){
          call. = FALSE
     )
   }
-
-  dplyr::left_join(
-    feature_helper(record$layer_name),
-    record$details[,c("column_comments", "column_name")],
-    by = c("col_name" = "column_name")
-  )
-
+  obj_desc_join(record$layer_name, record$details)
 
 }
 
@@ -141,4 +128,10 @@ feature_helper <- function(whse_name){
 
 
 
-
+obj_desc_join <- function(x, y) {
+  dplyr::left_join(
+    feature_helper(x),
+    y[,c("column_comments", "column_name")],
+    by = c("col_name" = "column_name")
+  )
+}
