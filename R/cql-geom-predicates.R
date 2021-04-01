@@ -129,6 +129,9 @@ sf_text <- function(x) {
 #' - Simplify the spatial object to reduce its size
 #' - Further processing on the returned object
 #'
+#' @details See the [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
+#' for more details.
+#'
 #' @param x object of class sf, sfc or sfg
 #'
 #' @return invisibly return logical indicating whether the check pass. If the return

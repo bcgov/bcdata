@@ -10,7 +10,9 @@ bcdc_check_geom_size(x)
 \item{x}{object of class sf, sfc or sfg}
 }
 \value{
-a logical indicating whether the option value was exceeded
+invisibly return logical indicating whether the check pass. If the return
+value is TRUE, the object will not need a bounding box drawn. If the return value is
+FALSE, the check will fails and a bounding box will be drawn.
 }
 \description{
 Check a spatial object to see if it exceeds the current set value of
@@ -22,6 +24,10 @@ within the box will be returned. Further options include:
 \item Simplify the spatial object to reduce its size
 \item Further processing on the returned object
 }
+}
+\details{
+See the \href{https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html}{Querying Spatial Data with bcdata}
+for more details.
 }
 \examples{
 \donttest{
