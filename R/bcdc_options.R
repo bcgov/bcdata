@@ -91,7 +91,7 @@ check_chunk_limit <- function(){
 bcdc_get_wfs_records_xml <- function() {
   if (has_internet()) {
     url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
-    cli <- bcdata:::bcdc_http_client(url, auth = FALSE)
+    cli <- bcdc_http_client(url, auth = FALSE)
 
     cc <- cli$get(query = list(
       SERVICE = "WFS",
@@ -111,25 +111,26 @@ bcdc_get_wfs_records_xml <- function() {
 bcdc_get_wfs_records <- function() {
   doc <- ._bcdataenv_$get_capabilities_xml
 
-  features <- xml2::xml_child(doc, 4)
-  feature_list <- xml2::as_list(features)
-  purrr::map_dfr(feature_list, ~ {
-    list(whse_name = .x$Name[[1]] %||% NA_character_,
-         title = .x$Title[[1]] %||% NA_character_,
-         cat_url = attr(.x$MetadataURL, "href") %||% NA_character_)
-  })
-}
+  # d1 is the default xml namespace (see xml2::xml_ns(doc))
+  features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
 
+  tibble::tibble(
+    whse_name = xml2::xml_text(xml2::xml_find_first(features, "./d1:Name")),
+    title = xml2::xml_text(xml2::xml_find_first(features, "./d1:Title")),
+    cat_url = xml2::xml_attr(xml2::xml_find_first(features, "./d1:MetadataURL"), "href")
+  )
+}
 
 bcdc_single_download_limit <- function() {
   doc <- ._bcdataenv_$get_capabilities_xml
 
-  if(is.null(doc)) {
+  if (is.null(doc)) {
     message("No access to internet")
     return(10000L)
   }
 
-  count_defaults <- xml2::xml_find_first(doc, ".//ows:Constraint[@name='CountDefault']")
+  count_default_xpath <- "./ows:OperationsMetadata/ows:Operation[@name='GetFeature']/ows:Constraint[@name='CountDefault']"
+  # Looking globally also works but is slower: ".//ows:Constraint[@name='CountDefault']"
+  count_defaults <- xml2::xml_find_first(doc, count_default_xpath)
   xml2::xml_integer(count_defaults)
-
 }
