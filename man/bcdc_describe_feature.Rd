@@ -26,6 +26,7 @@ The tibble returns the following columns:
 \item sticky: whether a column can be separated from the record in a Web Service call via the \code{dplyr::select} method
 \item remote_col_type: class of what is return by the web feature service
 \item local_col_type: the column class in R
+\item column_comments: additional metadata specific to that column
 }
 }
 \description{

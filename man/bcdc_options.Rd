@@ -14,7 +14,7 @@ failed calls to the data catalogue. Options in R are reset every time R is re-st
 addition ways to restore your initial state.
 }
 \details{
-\code{bcdata.max_geom_pred_size} is the maximum size of an object used for a geometric operation in bytes. Objects
+\code{bcdata.max_geom_pred_size} is the maximum size in bytes of an object used for a geometric operation. Objects
 that are bigger than this value will have a bounding box drawn and apply the geometric operation
 on that simpler polygon. The \link{bcdc_check_geom_size} function can be used to assess whether a given spatial object
 exceed the value of this option. Users can iteratively try to increase the maximum geometric predicate size and see
