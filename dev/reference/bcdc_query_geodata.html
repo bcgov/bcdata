@@ -282,7 +282,7 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; </span><span style='color: #949494;'># A tibble: 1 x 6</span><span>
 #&gt;   id                       GW_WW_SYSID WELL_TAG_NUMBER INTENDED_WATER_… OBJECTID
 #&gt; </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                          </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_WATER_MANAGEMENT.G…       </span><span style='text-decoration: underline;'>22</span><span>688           </span><span style='text-decoration: underline;'>22</span><span>722 Not Applicable   36</span><span style='text-decoration: underline;'>341</span><span>531
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_WATER_MANAGEMENT.G…       </span><span style='text-decoration: underline;'>22</span><span>688           </span><span style='text-decoration: underline;'>22</span><span>722 Not Applicable   36</span><span style='text-decoration: underline;'>694</span><span>812
 #&gt; </span><span style='color: #949494;'># … with 1 more variable: geometry &lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## A moderately large layer</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
@@ -296,17 +296,17 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; Geometry type: POINT
 #&gt; Dimension:     XY
-#&gt; Bounding box:  xmin: 1358309 ymin: 546591.1 xmax: 1399886 ymax: 662101.4
+#&gt; Bounding box:  xmin: 1158608 ymin: 429426.6 xmax: 1234872 ymax: 486777.8
 #&gt; Projected CRS: NAD83 / BC Albers
 #&gt; </span><span style='color: #949494;'># A tibble: 6 x 36</span><span>
 #&gt;   id         MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_ENVI… 0600112                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_ENVI… 0600114                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_ENVI… 0600115                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_ENVI… 0600116                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_ENVI… 0600117                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_ENVI… 0600118                        31 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_ENVI… 1180006                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_ENVI… 1180007                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_ENVI… 1180008                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_ENVI… 1189001                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_ENVI… 1189002                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_ENVI… 1189003                        79 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
 #&gt; </span><span style='color: #949494;'># … with 31 more variables: ECO_REGION_CD &lt;chr&gt;, GEOREFERENCE_SOURCE_CD &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   LOCATION_PURPOSE_CD &lt;chr&gt;, LOCATION_TYPE_CD &lt;chr&gt;, OFFICE_CD &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   SOURCE_CLASS_CD &lt;chr&gt;, WATERSHED_CD &lt;chr&gt;, CALC_STATISTICS_IND &lt;chr&gt;,</span><span>
@@ -369,21 +369,21 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; Simple feature collection with 6 features and 25 fields
 #&gt; Geometry type: POLYGON
 #&gt; Dimension:     XY
-#&gt; Bounding box:  xmin: 1068760 ymin: 359772.6 xmax: 1562701 ymax: 935007.8
+#&gt; Bounding box:  xmin: 1498927 ymin: 685887.5 xmax: 1634862 ymax: 746387.5
 #&gt; Projected CRS: NAD83 / BC Albers
 #&gt; </span><span style='color: #949494;'># A tibble: 6 x 26</span><span>
 #&gt;   id         BG_CODE BCAREAPR PRPA_BC NUMPA_BC PCTBCPR PCTPPABC FEATURE_CLASS_S…
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_LAND… CDF mm   </span><span style='text-decoration: underline;'>247</span><span>856.  </span><span style='text-decoration: underline;'>10</span><span>610.       64    4.28   0.080</span><span style='text-decoration: underline;'>0</span><span>              435
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_LAND… ESSFmm…   </span><span style='text-decoration: underline;'>26</span><span>926.  </span><span style='text-decoration: underline;'>26</span><span>926.        2  100.     0.203               435
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_LAND… ESSFmm…   </span><span style='text-decoration: underline;'>26</span><span>926.  </span><span style='text-decoration: underline;'>26</span><span>926.        2  100.     0.203               435
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_LAND… ESSFmwp   </span><span style='text-decoration: underline;'>64</span><span>810.  </span><span style='text-decoration: underline;'>22</span><span>873.       10   35.3    0.172               435
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_LAND… ESSFmwp   </span><span style='text-decoration: underline;'>64</span><span>810.  </span><span style='text-decoration: underline;'>22</span><span>873.       10   35.3    0.172               435
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_LAND… ESSFmwp   </span><span style='text-decoration: underline;'>64</span><span>810.  </span><span style='text-decoration: underline;'>22</span><span>873.       10   35.3    0.172               435
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_LAND… IMA un  1</span><span style='text-decoration: underline;'>218</span><span>006. </span><span style='text-decoration: underline;'>345</span><span>596.       56    28.4     2.61              435
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_LAND… IMA un  1</span><span style='text-decoration: underline;'>218</span><span>006. </span><span style='text-decoration: underline;'>345</span><span>596.       56    28.4     2.61              435
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_LAND… IMA un  1</span><span style='text-decoration: underline;'>218</span><span>006. </span><span style='text-decoration: underline;'>345</span><span>596.       56    28.4     2.61              435
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_LAND… IMA un  1</span><span style='text-decoration: underline;'>218</span><span>006. </span><span style='text-decoration: underline;'>345</span><span>596.       56    28.4     2.61              435
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_LAND… IMA un  1</span><span style='text-decoration: underline;'>218</span><span>006. </span><span style='text-decoration: underline;'>345</span><span>596.       56    28.4     2.61              435
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_LAND… IMA un  1</span><span style='text-decoration: underline;'>218</span><span>006. </span><span style='text-decoration: underline;'>345</span><span>596.       56    28.4     2.61              435
 #&gt; </span><span style='color: #949494;'># … with 18 more variables: ZONE &lt;chr&gt;, SUBZONE &lt;chr&gt;, VARIANT &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   PHASE &lt;chr&gt;, NATURAL_DISTURBANCE &lt;chr&gt;, MAP_LABEL &lt;chr&gt;, ZONE_NAME &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   SUBZONE_NAME &lt;chr&gt;, VARIANT_NAME &lt;chr&gt;, PHASE_NAME &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   NATURAL_DISTURBANCE_NAME &lt;chr&gt;, FEATURE_AREA &lt;dbl&gt;, FEATURE_LENGTH &lt;int&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   NATURAL_DISTURBANCE_NAME &lt;chr&gt;, FEATURE_AREA &lt;int&gt;, FEATURE_LENGTH &lt;int&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## Using a BCGW name</span>
