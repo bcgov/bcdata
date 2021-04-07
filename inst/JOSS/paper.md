@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2020-11-30"
+date: "2021-04-07"
 output:
   html_document:
     keep_md: yes
@@ -40,6 +40,10 @@ tags:
 # Introduction
 
 The British Columbia government hosts over 2000 tabular and geospatial data sets in the B.C. Data Catalogue (@bcdc).  Most provincial geospatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) (WFS). A Web Feature Service is a powerful and flexible service for distributing geographic features over the web, supporting both geospatial and non-spatial querying.  The `bcdata` package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the B.C. Data Catalogue and one for the Web Feature Service.  This allows R users to search, download and import metadata and data from the B.C. Data Catalogue, as well as efficiently query and directly read geospatial data from the Web Feature Service into their R session. The `bcdata` package implements a novel application of `dbplyr` (@dbplyr) using a Web Feature Service backend---rather than a database backend---where a locally constructed query is processed by a remote server. This allows for fast and efficient geospatial data retrieval using familiar `dplyr` syntax. Through this functionality the `bcdata` package connects British Columbia government open data holdings with the vast capabilities of R.
+
+# Related work
+
+Open data, and geospatial data science are currently popular topics in the R community. Packages related to `bcdata` include [ckanr](https://docs.ropensci.org/ckanr/) (@ckanr) for interacting with [CKAN](https://ckan.org/) instances, and [ows4R](https://github.com/eblondel/ows4R) (@ows4r) which provides a low-level [R6](https://CRAN.R-project.org/package=R6) interface to OWS/WFS servers. `bcdata` seamlessly unifies these operations for B.C. public data holdings, and provides a user-friendly interface using a functional programming style that is familiar to users of the popular `tidyverse` tools. There are many packages available for other jurisdictions' data portals (e.g., [opendatatoronto](https://sharlagelfand.github.io/opendatatoronto/), [opendataes](https://ropenspain.github.io/opendataes/index.html)) however as far as the authors are aware, no other packages provide the `dplyr` like interface to large spatial datasets via WFS.
 
 # Usage 
 
@@ -90,9 +94,9 @@ bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
 # A tibble: 2 x 8
   name  id    format bcdata_available url   ext   package_id
   <chr> <chr> <chr>  <lgl>            <chr> <chr> <chr>     
-1 Awar~ 4e87~ xlsx   TRUE             http~ xlsx  651b60c2-~
-2 Awar~ 8a2c~ txt    TRUE             http~ txt   651b60c2-~
-# ... with 1 more variable: location <chr>
+1 Awar… 4e87… xlsx   TRUE             http… xlsx  651b60c2-…
+2 Awar… 8a2c… txt    TRUE             http… txt   651b60c2-…
+# … with 1 more variable: location <chr>
 ```
 
 
@@ -152,17 +156,17 @@ head(scholars)
 
 ```
 # A tibble: 6 x 9
-  SCHOOL_YEAR_ISS~ `Sub Pop Code` `Num Prov Schol~ `Num Prov Schol~
-  <chr>            <chr>          <chr>            <chr>           
-1 1996/1997        ALL STUDENTS   3509             20              
-2 1996/1997        FEMALE         1921             7               
-3 1996/1997        MALE           1588             13              
-4 1997/1998        ALL STUDENTS   3748             20              
-5 1997/1998        FEMALE         2094             11              
-6 1997/1998        MALE           1654             9               
-# ... with 5 more variables: `Num District Scholarships` <chr>, `Data
-#   Level` <chr>, `Public Or Independent` <chr>, `District
-#   Number` <chr>, `District Name` <chr>
+  SCHOOL_YEAR_ISSU… `Sub Pop Code` `Num Prov Schola… `Num Prov Schola…
+  <chr>             <chr>          <chr>             <chr>            
+1 1996/1997         ALL STUDENTS   3509              20               
+2 1996/1997         FEMALE         1921              7                
+3 1996/1997         MALE           1588              13               
+4 1997/1998         ALL STUDENTS   3748              20               
+5 1997/1998         FEMALE         2094              11               
+6 1997/1998         MALE           1654              9                
+# … with 5 more variables: Num District Scholarships <chr>,
+#   Data Level <chr>, Public Or Independent <chr>,
+#   District Number <chr>, District Name <chr>
 ```
 
 The `bcdc_get_data()` function can be used to download geospatial data, including that which is available from the Web Feature Service. As a simple demonstration we can download the locations of airports in British Columbia:
@@ -181,7 +185,7 @@ ggplot(bc_airports) +
 
 ## Query & Read Geospatial Data
 
-While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result. This is implemented using a custom `dbplyr` backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` backend interfaces with the B.C. Data Catalogue Web Feature Service.
+While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in the R session. The query is processed on the server, filtering the data to only those records and fields the use has specified. The filtered data is only downloaded, and loaded into R as an ‘sf’ object, once the query is complete and the user requests the final result, thus substantially reducing the size of the data being downloaded. This functionality is implemented using a custom `dbplyr` backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` backend interfaces with the B.C. Data Catalogue Web Feature Service.
 
 To demonstrate, we will query the Northern Health Authority boundary from the [Health Authority Boundaries geospatial data](https://catalogue.data.gov.bc.ca/dataset/7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
 
@@ -212,19 +216,69 @@ bcdc_describe_feature(ha_record)
 ```
 
 ```r
+## Naively download the whole data object, then filter it
+system.time(
+  all_ha <- bcdc_get_data(ha_record, resource = "93b79a3c-2da4-4fd4-b953-2f5c690db430")
+)
+```
+
+```
+   user  system elapsed 
+  2.619   0.397   8.212 
+```
+
+```r
+object.size(all_ha)
+```
+
+```
+10417576 bytes
+```
+
+```r
+n_ha <- filter(all_ha, HLTH_AUTHORITY_NAME == "Northern")
+
 ## Get the Northern Health polygon from the Health Authority
 ## Boundaries geospatial data
-my_ha <- bcdc_query_geodata(ha_record) %>%
+system.time({
+  n_ha2 <- bcdc_query_geodata(ha_record) %>%
   filter(HLTH_AUTHORITY_NAME == "Northern") %>%
   collect()
+})
+```
 
+```
+   user  system elapsed 
+  1.107   0.160   3.711 
+```
+
+```r
+object.size(n_ha2)
+```
+
+```
+3365368 bytes
+```
+
+```r
+# Check the two final objects are the same
+all.equal(n_ha, n_ha2, check.attributes = FALSE)
+```
+
+```
+[1] TRUE
+```
+
+```r
 ## Plot the Northern Health polygon with ggplot()
-ggplot(my_ha) +
+ggplot(n_ha2) +
   geom_sf() +
   theme_minimal()
 ```
 
 ![](ha-1.png)<!-- -->
+
+This demonstrates the efficiency of the filter-first, then download approach: The size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 68% smaller than downloading the entire dataset using `bcdcd_get_data()` and filtering locally.
 
 # Conclusion
 
