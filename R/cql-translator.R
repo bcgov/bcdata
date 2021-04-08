@@ -107,7 +107,10 @@ cql_scalar <- dbplyr::sql_translator(
   RELATE = RELATE,
   DWITHIN = DWITHIN,
   BEYOND = BEYOND,
-  BBOX = BBOX
+  BBOX = BBOX,
+  grepl = function(pattern, x) {
+    CQL(paste0(x, " like '%", pattern, "%'"))
+  }
 )
 
 # No aggregation functions available in CQL
