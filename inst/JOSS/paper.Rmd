@@ -197,7 +197,7 @@ bcdc_describe_feature(ha_record)
 system.time(
   all_ha <- bcdc_get_data(ha_record, resource = "93b79a3c-2da4-4fd4-b953-2f5c690db430")
 )
-object.size(all_ha)
+format(object.size(all_ha), units = "Mb")
 n_ha <- filter(all_ha, HLTH_AUTHORITY_NAME == "Northern")
 
 ## Get the Northern Health polygon from the Health Authority
@@ -207,7 +207,7 @@ system.time({
   filter(HLTH_AUTHORITY_NAME == "Northern") %>%
   collect()
 })
-object.size(n_ha2)
+format(object.size(n_ha2), units = "Mb")
 
 # Check the two final objects are the same
 all.equal(n_ha, n_ha2, check.attributes = FALSE)
