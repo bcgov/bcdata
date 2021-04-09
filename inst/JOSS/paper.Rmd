@@ -186,39 +186,44 @@ While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial 
 
 To demonstrate, we will query the Northern Health Authority boundary from the [Health Authority Boundaries geospatial data](https://catalogue.data.gov.bc.ca/dataset/7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b)---the whole file takes 30-60 seconds to download and we only need the one polygon, so the request can be narrowed:
 
-```{r ha, fig.height = 5, fig.width = 7, cache=TRUE}
-## Get the metadata for the Health Authority Boundaries catalogue record
-ha_record <- bcdc_get_record("7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b")
+```{r sp_eco, fig.height = 5, fig.width = 7, cache=TRUE}
+## Get the metadata for the Species and Ecosystems at Risk Occurrences catalogue record
+sp_eco_record <- bcdc_get_record("0e035e55-f257-458f-9a96-80c01c69d389")
 
 ## Have a quick look at the geospatial columns to help with filter or select
-bcdc_describe_feature(ha_record)
+bcdc_describe_feature(sp_eco_record)
 
-## Naively download the whole data object, then filter it
+## Naively download the whole data object, then filter it for the 
+## occurrences of Vancouver Island Marmot (Marmota vancouverensis)
 system.time(
-  all_ha <- bcdc_get_data(ha_record, resource = "93b79a3c-2da4-4fd4-b953-2f5c690db430")
+  all_sp_eco <- bcdc_get_data(sp_eco_record, resource = "f851316c-f065-47b1-a982-bcbc347164e8")
 )
-format(object.size(all_ha), units = "Mb")
-n_ha <- filter(all_ha, HLTH_AUTHORITY_NAME == "Northern")
 
-## Get the Northern Health polygon from the Health Authority
-## Boundaries geospatial data
+format(object.size(all_sp_eco), units = "Mb")
+
+marmots <- filter(all_sp_eco, SCI_NAME == "Marmota vancouverensis") %>% 
+  arrange(OCCR_ID)
+
+## Get only the occurrences of Vancouver Island Marmot (Marmota vancouverensis), 
+## using filter() before collect() to perform the filtering on the server.
 system.time({
-  n_ha2 <- bcdc_query_geodata(ha_record) %>%
-  filter(HLTH_AUTHORITY_NAME == "Northern") %>%
-  collect()
+  marmots2 <- bcdc_query_geodata(sp_eco_record) %>%
+    filter(SCI_NAME == "Marmota vancouverensis") %>%
+    collect() %>% 
+    arrange(OCCR_ID)
 })
-format(object.size(n_ha2), units = "Mb")
+
+format(object.size(marmots2), units = "Mb")
 
 # Check the two final objects are the same
-all.equal(n_ha, n_ha2, check.attributes = FALSE)
+all.equal(marmots, marmots2, check.attributes = FALSE)
 
-## Plot the Northern Health polygon with ggplot()
-ggplot(n_ha2) +
-  geom_sf() +
-  theme_minimal()
+## Plot the Marmot occurrences with ggplot()
+ggplot(marmots2) +
+  geom_sf(fill = "darkgreen")
 ```
 
-This demonstrates the efficiency of the filter-first, then download approach: The size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is `r paste0(format((1 - as.numeric(object.size(n_ha2)) / as.numeric(object.size(all_ha))) * 100, digits = 1), "%")` smaller than downloading the entire dataset using `bcdcd_get_data()` and filtering locally.
+This demonstrates the efficiency of the filter-first, then download approach: The size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is `r paste0(format((1 - as.numeric(object.size(marmots2)) / as.numeric(object.size(all_sp_eco))) * 100, digits = 1), "%")` smaller than downloading the entire dataset using `bcdcd_get_data()` and filtering locally.
 
 # Conclusion
 

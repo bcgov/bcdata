@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2021-04-07"
+date: "2021-04-09"
 output:
   html_document:
     keep_md: yes
@@ -43,7 +43,7 @@ The British Columbia government hosts over 2000 tabular and geospatial data sets
 
 # Related work
 
-Open data, and geospatial data science are currently popular topics in the R community. Packages related to `bcdata` include [ckanr](https://docs.ropensci.org/ckanr/) (@ckanr) for interacting with [CKAN](https://ckan.org/) instances, and [ows4R](https://github.com/eblondel/ows4R) (@ows4r) which provides a low-level [R6](https://CRAN.R-project.org/package=R6) interface to OWS/WFS servers. `bcdata` seamlessly unifies these operations for B.C. public data holdings, and provides a user-friendly interface using a functional programming style that is familiar to users of the popular `tidyverse` tools. There are many packages available for other jurisdictions' data portals (e.g., [opendatatoronto](https://sharlagelfand.github.io/opendatatoronto/), [opendataes](https://ropenspain.github.io/opendataes/index.html)) however as far as the authors are aware, no other packages provide the `dplyr` like interface to large spatial datasets via WFS.
+Open data, and geospatial data science are currently popular topics in the R community. Packages related to `bcdata` include [ckanr](https://docs.ropensci.org/ckanr/) (@ckanr) for interacting with [CKAN](https://ckan.org/) instances, and [ows4R](https://github.com/eblondel/ows4R) (@ows4r) which provides a low-level [R6](https://CRAN.R-project.org/package=R6) interface to OWS/WFS servers. `bcdata` seamlessly unifies these operations for B.C. public data holdings, and provides a user-friendly interface using a functional programming style that is familiar to users of the popular `tidyverse` tools. There are many packages available for other jurisdictions' data portals (e.g., [opendatatoronto](https://sharlagelfand.github.io/opendatatoronto/), [opendataes](https://ropenspain.github.io/opendataes/index.html)) however as far as the authors are aware, no other packages provide the `dplyr` like syntax to large spatial datasets via WFS.
 
 # Usage 
 
@@ -191,94 +191,96 @@ To demonstrate, we will query the Northern Health Authority boundary from the [H
 
 
 ```r
-## Get the metadata for the Health Authority Boundaries catalogue record
-ha_record <- bcdc_get_record("7bc6018f-bb4f-4e5d-845e-c529e3d1ac3b")
+## Get the metadata for the Species and Ecosystems at Risk Occurrences catalogue record
+sp_eco_record <- bcdc_get_record("0e035e55-f257-458f-9a96-80c01c69d389")
 
 ## Have a quick look at the geospatial columns to help with filter or select
-bcdc_describe_feature(ha_record)
+bcdc_describe_feature(sp_eco_record)
 ```
 
 ```
-# A tibble: 11 x 4
-   col_name            sticky remote_col_type          local_col_type
-   <chr>               <lgl>  <chr>                    <chr>         
- 1 id                  FALSE  xsd:string               character     
- 2 HLTH_HAB_SYSID      FALSE  xsd:decimal              numeric       
- 3 HLTH_AUTHORITY_CODE TRUE   xsd:string               character     
- 4 HLTH_AUTHORITY_NAME TRUE   xsd:string               character     
- 5 HLTH_AUTHORITY_ID   TRUE   xsd:string               character     
- 6 FEATURE_CODE        TRUE   xsd:string               character     
- 7 FEATURE_AREA_SQM    TRUE   xsd:decimal              numeric       
- 8 FEATURE_LENGTH_M    TRUE   xsd:decimal              numeric       
- 9 SHAPE               TRUE   gml:GeometryPropertyType sfc geometry  
-10 OBJECTID            FALSE  xsd:decimal              numeric       
-11 SE_ANNO_CAD_DATA    TRUE   xsd:hexBinary            numeric       
+# A tibble: 59 x 4
+   col_name        sticky remote_col_type local_col_type
+   <chr>           <lgl>  <chr>           <chr>         
+ 1 id              FALSE  xsd:string      character     
+ 2 OCCR_AREA_SP_ID FALSE  xsd:decimal     numeric       
+ 3 FEATURE_CODE    TRUE   xsd:string      character     
+ 4 SHAPE_ID        FALSE  xsd:decimal     numeric       
+ 5 OCCR_ID         FALSE  xsd:decimal     numeric       
+ 6 SCI_NAME_F      TRUE   xsd:string      character     
+ 7 SCI_NAME        FALSE  xsd:string      character     
+ 8 ENG_NAME_F      TRUE   xsd:string      character     
+ 9 ENG_NAME        TRUE   xsd:string      character     
+10 EL_TYPE         FALSE  xsd:string      character     
+# … with 49 more rows
 ```
 
 ```r
-## Naively download the whole data object, then filter it
+## Naively download the whole data object, then filter it for the 
+## occurrences of Vancouver Island Marmot (Marmota vancouverensis)
 system.time(
-  all_ha <- bcdc_get_data(ha_record, resource = "93b79a3c-2da4-4fd4-b953-2f5c690db430")
+  all_sp_eco <- bcdc_get_data(sp_eco_record, resource = "f851316c-f065-47b1-a982-bcbc347164e8")
 )
 ```
 
 ```
    user  system elapsed 
-  2.619   0.397   8.212 
+ 33.421   8.034  64.801 
 ```
 
 ```r
-object.size(all_ha)
+format(object.size(all_sp_eco), units = "Mb")
 ```
 
 ```
-10417576 bytes
+[1] "104.2 Mb"
 ```
 
 ```r
-n_ha <- filter(all_ha, HLTH_AUTHORITY_NAME == "Northern")
+marmots <- filter(all_sp_eco, SCI_NAME == "Marmota vancouverensis") %>% 
+  arrange(OCCR_ID)
 
-## Get the Northern Health polygon from the Health Authority
-## Boundaries geospatial data
+## Get only the occurrences of Vancouver Island Marmot (Marmota vancouverensis), 
+## using filter() before collect() to perform the filtering on the server.
 system.time({
-  n_ha2 <- bcdc_query_geodata(ha_record) %>%
-  filter(HLTH_AUTHORITY_NAME == "Northern") %>%
-  collect()
+  marmots2 <- bcdc_query_geodata(sp_eco_record) %>%
+    filter(SCI_NAME == "Marmota vancouverensis") %>%
+    collect() %>% 
+    arrange(OCCR_ID)
 })
 ```
 
 ```
    user  system elapsed 
-  1.107   0.160   3.711 
+  0.260   0.013   1.058 
 ```
 
 ```r
-object.size(n_ha2)
+format(object.size(marmots2), units = "Mb")
 ```
 
 ```
-3365368 bytes
+[1] "0.1 Mb"
 ```
 
 ```r
 # Check the two final objects are the same
-all.equal(n_ha, n_ha2, check.attributes = FALSE)
+all.equal(marmots, marmots2, check.attributes = FALSE)
 ```
 
 ```
-[1] TRUE
+[1] "Component \"id\": 14 string mismatches"
 ```
 
 ```r
-## Plot the Northern Health polygon with ggplot()
-ggplot(n_ha2) +
-  geom_sf() +
-  theme_minimal()
+## Plot the Marmot occurrences with ggplot()
+ggplot(marmots2) +
+  geom_sf(fill = "darkgreen")
 ```
 
-![](ha-1.png)<!-- -->
+![](sp_eco-1.png)<!-- -->
 
-This demonstrates the efficiency of the filter-first, then download approach: The size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 68% smaller than downloading the entire dataset using `bcdcd_get_data()` and filtering locally.
+This demonstrates the efficiency of the filter-first, then download approach: The size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 100% smaller than downloading the entire dataset using `bcdcd_get_data()` and filtering locally.
 
 # Conclusion
 
