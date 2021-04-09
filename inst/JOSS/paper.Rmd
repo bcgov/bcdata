@@ -178,8 +178,7 @@ bc_airports <- bcdc_get_data(record = 'bc-airports',
                              resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
 
 ggplot(bc_airports) +
-  geom_sf() +
-  theme_minimal()
+  geom_sf()
 ```
 
 ## Query & Read Geospatial Data
