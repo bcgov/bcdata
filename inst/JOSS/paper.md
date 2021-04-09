@@ -225,7 +225,7 @@ system.time(
 
 ```
    user  system elapsed 
- 33.421   8.034  64.801 
+ 35.294  11.259 104.085 
 ```
 
 ```r
@@ -252,7 +252,7 @@ system.time({
 
 ```
    user  system elapsed 
-  0.260   0.013   1.058 
+  0.316   0.015   1.377 
 ```
 
 ```r
@@ -264,18 +264,18 @@ format(object.size(marmots2), units = "Mb")
 ```
 
 ```r
-# Check the two final objects are the same
-all.equal(marmots, marmots2, check.attributes = FALSE)
+# Check the two final objects are the same 
+all.equal(st_geometry(marmots), st_geometry(marmots2))
 ```
 
 ```
-[1] "Component \"id\": 14 string mismatches"
+[1] TRUE
 ```
 
 ```r
 ## Plot the Marmot occurrences with ggplot()
 ggplot(marmots2) +
-  geom_sf(fill = "darkgreen")
+  geom_sf(aes(fill = RANK_DESC))
 ```
 
 ![](sp_eco-1.png)<!-- -->

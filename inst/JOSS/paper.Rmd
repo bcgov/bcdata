@@ -42,6 +42,8 @@ library(bcdata)
 library(sf)
 library(ggplot2)
 
+theme_set(theme_minimal())
+
 Sys.unsetenv("BCDC_KEY")
 ```
 
@@ -215,12 +217,12 @@ system.time({
 
 format(object.size(marmots2), units = "Mb")
 
-# Check the two final objects are the same
-all.equal(marmots, marmots2, check.attributes = FALSE)
+# Check the two final objects are the same 
+all.equal(st_geometry(marmots), st_geometry(marmots2))
 
 ## Plot the Marmot occurrences with ggplot()
 ggplot(marmots2) +
-  geom_sf(fill = "darkgreen")
+  geom_sf(aes(fill = RANK_DESC))
 ```
 
 This demonstrates the efficiency of the filter-first, then download approach: The size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is `r paste0(format((1 - as.numeric(object.size(marmots2)) / as.numeric(object.size(all_sp_eco))) * 100, digits = 1), "%")` smaller than downloading the entire dataset using `bcdcd_get_data()` and filtering locally.
