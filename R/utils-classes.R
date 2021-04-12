@@ -396,7 +396,7 @@ collect.bcdc_promise <- function(x, ...){
     full_url <- cli$url_fetch(query = query_list)
   } else {
     chunk <- getOption("bcdata.chunk_limit", default = 1000)
-    message(glue::glue("This record requires {ceiling(number_of_records/chunk)} paginated requests to complete."))
+    message(glue::glue("This object has {number_of_records} records and requires {ceiling(number_of_records/chunk)} paginated requests to complete."))
     sorting_col <- pagination_sort_col(x$cols_df)
 
     query_list <- c(query_list, sortby = sorting_col)
