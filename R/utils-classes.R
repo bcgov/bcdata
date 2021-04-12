@@ -73,7 +73,7 @@ print.bcdc_promise <- function(x, ...) {
 
   cat_bullet(strwrap(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
                         "and {col_green(fields)} fields")))
-  if (paginate) cat_bullet(strwrap(glue::glue("Accessing this record will make {col_green(ceiling(number_of_records/cl))} separate requests to the WFS. ",
+  if (paginate) cat_bullet(strwrap(glue::glue("Accessing this record requires pagination and will make {col_green(ceiling(number_of_records/cl))} separate requests to the WFS. ",
                                               "See ?bcdc_options")))
   cat_bullet(strwrap("At most six rows of the record are printed here"))
   cat_rule()
