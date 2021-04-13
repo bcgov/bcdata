@@ -21,7 +21,7 @@ precompile <- function(vignette_to_run = NULL) {
   if (!is.null(vignette_to_run)) {
     orig_files <- orig_files[basename(orig_files) %in% vignette_to_run]
 
-    if (is_empty(orig_files)) stop("Not a vignette!")
+    if (rlang::is_empty(orig_files)) stop("Not a vignette!")
   }
 
   # Convert *.orig to *.Rmd -------------------------------------------------

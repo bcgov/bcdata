@@ -36,6 +36,11 @@ knitr::opts_chunk$set(
   dpi = 400
 )
 
+options(
+   crayon.enabled = FALSE,
+   width = 100
+   )
+
 library(knitr)
 library(bcdata)
 library(dplyr)
