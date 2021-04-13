@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2021-04-12"
+date: "2021-04-13"
 output:
   html_document:
     keep_md: yes
@@ -35,16 +35,16 @@ tags:
 
 # Statement of Need
 
-`bcdata` is an R package that connects publicly available metadata and data sets in the British Columbia (B.C.) Data Catalogue to the diverse array of mapping, modeling and data processing capabilities of the R ecosystem. `bcdata` enables the efficient retrieval of British Columbia's geospatial data, and supports repeatable and reproducible analysis of hundreds of open-licensed British Columbia public sector data sets. By enabling programmatic access to the B.C. Data Catalogue using tidy data principles (@tidydata) and familiar R `tidyverse` syntax (@tidyverse), `bcdata` helps both novice and experienced R users find and use British Columbia government public and open data holdings.
+`bcdata` is an R package that connects publicly available metadata and data sets in the British Columbia (B.C.) Data Catalogue (@bcdc) to the diverse array of mapping, modeling and data processing capabilities of the R ecosystem. `bcdata` enables the efficient retrieval of British Columbia's geospatial data, and supports repeatable and reproducible analysis of hundreds of open-licensed British Columbia public sector data sets. By enabling programmatic access to the B.C. Data Catalogue using familiar R `dplyr` syntax (@dplyr), `bcdata` helps both novice and experienced R users find and use British Columbia government public and open data holdings.
 
 
 # Introduction
 
-The British Columbia government hosts over 2000 tabular and geospatial data sets in the B.C. Data Catalogue (@bcdc).  Most provincial geospatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service). A Web Feature Service is a powerful and flexible service for distributing geographic features over the web, supporting both geospatial and non-spatial querying.  The `bcdata` package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the B.C. Data Catalogue and one for the Web Feature Service.  This allows R users to search, download and import metadata and data from the B.C. Data Catalogue, as well as efficiently query and directly read geospatial data from the Web Feature Service into their R session. The `bcdata` package implements a novel application of `dbplyr` (@dbplyr) using a Web Feature Service backend---rather than a database backend---where a locally constructed query is processed by a remote server. This allows for fast and efficient geospatial data retrieval using familiar `dplyr` syntax. Through this functionality the `bcdata` package connects British Columbia government public data holdings in the B.C. Data Catalogue with the vast capabilities of R.
+The British Columbia government hosts over 2000 tabular and geospatial data sets in the B.C. Data Catalogue. Most provincial geospatial data is available through the B.C. Data Catalogue under an open licence, via a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service). A Web Feature Service is a powerful and flexible service for distributing geographic features over the web, supporting both geospatial and non-spatial querying.  The `bcdata` package for the R programming language (@RCore) wraps two distinct but complimentary web APIs - one for the B.C. Data Catalogue and one for the Web Feature Service.  This allows R users to search, download and import metadata and data from the B.C. Data Catalogue, as well as efficiently query and directly read geospatial data from the Web Feature Service into their R session. The `bcdata` package implements a novel application of `dbplyr` (@dbplyr) using a Web Feature Service backend---rather than a database backend---where a locally constructed query is processed by a remote server. This allows for fast and efficient geospatial data retrieval while using `dplyr` syntax. Through this functionality the `bcdata` package connects British Columbia government public data holdings in the B.C. Data Catalogue with the vast capabilities of R.
 
 # Related Work
 
-Open data and geospatial data science are currently popular topics in the R community. Packages related to `bcdata` include [`ckanr`](https://docs.ropensci.org/ckanr/) (@ckanr) for interacting with [CKAN](https://ckan.org/) instances, and [`ows4R`](https://github.com/eblondel/ows4R) (@ows4r) which provides a low-level [R6](https://CRAN.R-project.org/package=R6) interface to Open Geospatial Consortium Web-Services. `bcdata` seamlessly unifies these operations for B.C. public data holdings, and provides a user-friendly interface using a functional programming style that is familiar to users of the popular `tidyverse` tools. There are many packages available for other jurisdictional data portals (e.g., [opendatatoronto](https://sharlagelfand.github.io/opendatatoronto/), [opendataes](https://ropenspain.github.io/opendataes/index.html)) however as far as the authors are aware, no other packages provide the `dplyr` like syntax to large geospatial data sets via a Web Feature Service.
+Open data and geospatial data science are currently popular topics in the R community. Packages related to `bcdata` include [`ckanr`](https://docs.ropensci.org/ckanr/) (@ckanr) for interacting with [CKAN](https://ckan.org/) instances, and [`ows4R`](https://github.com/eblondel/ows4R) (@ows4r) which provides a low-level [R6](https://CRAN.R-project.org/package=R6) interface to Open Geospatial Consortium Web Services. `bcdata` seamlessly unifies these operations for B.C. public data holdings, and provides a user-friendly interface using a functional programming style that is familiar to users of the popular `tidyverse` tools (@tidyverse). There are many packages available for other jurisdictional data portals (e.g., [opendatatoronto](https://sharlagelfand.github.io/opendatatoronto/), [opendataes](https://ropenspain.github.io/opendataes/index.html)) however as far as the authors are aware, no other packages provide the `dplyr` like syntax to large geospatial data sets via a Web Feature Service.
 
 # Usage 
 
@@ -280,7 +280,7 @@ ggplot(marmots2) +
 
 ![](sp_eco-1.png)<!-- -->
 
-This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 100% smaller than downloading the entire data set using `bcdcd_get_data()` and filtering locally.
+This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 100% smaller than downloading the entire data set using `bcdc_get_data()` and filtering locally.
 
 # Conclusion
 
