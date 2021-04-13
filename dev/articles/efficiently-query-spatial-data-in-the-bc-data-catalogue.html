@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2021-04-01</h4>
+            <h4 class="date">2021-04-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -143,66 +143,65 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span>
 <span class="co">#&gt; B.C. Data Catalogue Record: School Districts of BC</span>
 <span class="co">#&gt; Name: school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b)</span>
-<span class="co">#&gt; Permalink:</span>
-<span class="co">#&gt;  https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b</span>
+<span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b</span>
 <span class="co">#&gt; Sector: Education</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Geographic</span>
 <span class="co">#&gt; Last Updated: 2020-11-03</span>
-<span class="co">#&gt; Description: The School Districts dataset contains the spatial representation</span>
-<span class="co">#&gt;  (polygon) of the current extent of the administrative areas defined under section</span>
-<span class="co">#&gt;  176(1) of the School Act for the purposes of preservation and promotion of the</span>
-<span class="co">#&gt;  fundamental principle of local autonomy and control of public education at the public</span>
-<span class="co">#&gt;  and governmental levels through locally elected school boards.</span>
+<span class="co">#&gt; Description: The School Districts dataset contains the spatial representation (polygon)</span>
+<span class="co">#&gt;  of the current extent of the administrative areas defined under section 176(1) of the</span>
+<span class="co">#&gt;  School Act for the purposes of preservation and promotion of the fundamental principle</span>
+<span class="co">#&gt;  of local autonomy and control of public education at the public and governmental levels</span>
+<span class="co">#&gt;  through locally elected school boards.</span>
 <span class="co">#&gt; Resources: (3)</span>
 <span class="co">#&gt; # A tibble: 3 x 8</span>
-<span class="co">#&gt;   name       url                id         format ext   package_id     location  bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;     &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 BC Geogra~ https://catalogue~ 529507c4-~ other  ""    78ec5279-4534~ bcgeogra~ FALSE           </span>
-<span class="co">#&gt; 2 WMS getCa~ https://openmaps.~ 57d8843b-~ wms    ""    78ec5279-4534~ bcgeogra~ TRUE            </span>
-<span class="co">#&gt; 3 KML Netwo~ http://openmaps.g~ 7493e749-~ kml    "kml" 78ec5279-4534~ bcgeogra~ FALSE           </span>
+<span class="co">#&gt;   name        url                  id        format ext   package_id     location   bcdata_available</span>
+<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;lgl&gt;           </span>
+<span class="co">#&gt; 1 BC Geograp… https://catalogue.d… 529507c4… other  ""    78ec5279-4534… bcgeograp… FALSE           </span>
+<span class="co">#&gt; 2 WMS getCap… https://openmaps.go… 57d8843b… wms    ""    78ec5279-4534… bcgeograp… TRUE            </span>
+<span class="co">#&gt; 3 KML Networ… http://openmaps.gov… 7493e749… kml    "kml" 78ec5279-4534… bcgeograp… FALSE           </span>
 <span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
 <p>This data is the boundary of each school district. The key information in this metadata is that the layer is a <code>**WFS request (Spatial Data)**</code>—which means it is available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. From this we know we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
-<span class="co">#&gt; * Using collect() on this object will return 59 features and 9 fields</span>
-<span class="co">#&gt; * At most six rows of the record are printed here</span>
-<span class="co">#&gt; -------------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; ● Using collect() on this object will return 59 features and 9 fields</span>
+<span class="co">#&gt; ● At most six rows of the record are printed here</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 9 fields</span>
 <span class="co">#&gt; Geometry type: POLYGON</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 956376 ymin: 475108.4 xmax: 1635228 ymax: 901924.4</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
 <span class="co">#&gt; # A tibble: 6 x 10</span>
-<span class="co">#&gt;   id              ADMIN_AREA_SID SCHOOL_DISTRICT_~ SCHOOL_DISTRICT~ FEATURE_CODE FEATURE_AREA_SQM</span>
-<span class="co">#&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;                        &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 WHSE_TANTALIS.~            300 Arrow Lakes                     10 FH10000300        7392472526.</span>
-<span class="co">#&gt; 2 WHSE_TANTALIS.~            301 Revelstoke                      19 FH10000300        9416076465.</span>
-<span class="co">#&gt; 3 WHSE_TANTALIS.~            302 Kootenay-Columbia               20 FH10000300        3072672101.</span>
-<span class="co">#&gt; 4 WHSE_TANTALIS.~            303 Vernon                          22 FH10000300        5588468673.</span>
-<span class="co">#&gt; 5 WHSE_TANTALIS.~            304 Central Okanagan                23 FH10000300        2916757936.</span>
-<span class="co">#&gt; 6 WHSE_TANTALIS.~            305 Cariboo-Chilcotin               27 FH10000300       61213520885.</span>
-<span class="co">#&gt; # ... with 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span>
+<span class="co">#&gt;   id                 ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;                        &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 WHSE_TANTALIS.TA_…            300 Arrow Lakes                     10 FH10000300        7392472526.</span>
+<span class="co">#&gt; 2 WHSE_TANTALIS.TA_…            301 Revelstoke                      19 FH10000300        9416076465.</span>
+<span class="co">#&gt; 3 WHSE_TANTALIS.TA_…            302 Kootenay-Columb…                20 FH10000300        3072672101.</span>
+<span class="co">#&gt; 4 WHSE_TANTALIS.TA_…            303 Vernon                          22 FH10000300        5588468673.</span>
+<span class="co">#&gt; 5 WHSE_TANTALIS.TA_…            304 Central Okanagan                23 FH10000300        2916757936.</span>
+<span class="co">#&gt; 6 WHSE_TANTALIS.TA_…            305 Cariboo-Chilcot…                27 FH10000300       61213520885.</span>
+<span class="co">#&gt; # … with 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span>
 <span class="co">#&gt; #   geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
 <p>This is the initial query to the data in the catalogue. What has been returned is <em>not</em> the actual data but rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also receive instruction that using <code><a href="../reference/as_tibble.html">collect()</a></code> will retrieve a given number of features and fields present for this query. Lastly, there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the catalogue for only those polygons just like we would in a typical <code>dplyr</code> workflow:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
-<span class="co">#&gt; * Using collect() on this object will return 1 features and 9 fields</span>
-<span class="co">#&gt; * At most six rows of the record are printed here</span>
-<span class="co">#&gt; -------------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; ● Using collect() on this object will return 1 features and 9 fields</span>
+<span class="co">#&gt; ● At most six rows of the record are printed here</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 1 feature and 9 fields</span>
 <span class="co">#&gt; Geometry type: POLYGON</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
 <span class="co">#&gt; # A tibble: 1 x 10</span>
-<span class="co">#&gt;   id              ADMIN_AREA_SID SCHOOL_DISTRICT_~ SCHOOL_DISTRICT~ FEATURE_CODE FEATURE_AREA_SQM</span>
-<span class="co">#&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;                        &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 WHSE_TANTALIS.~            328 Prince George                   57 FH10000300       51888780641.</span>
-<span class="co">#&gt; # ... with 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span>
+<span class="co">#&gt;   id                 ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;                        &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 WHSE_TANTALIS.TA_…            328 Prince George                   57 FH10000300       51888780641.</span>
+<span class="co">#&gt; # … with 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span>
 <span class="co">#&gt; #   geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
 <p>To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. During an actual analysis, it is possible that you may need to initially collect more data than you want to determine value to subset by. For example, there is currently no way to ask the catalogue for all possible unique values of <code>SCHOOL_DISTRICT_NAME</code>. Is that case the data will need to be brought into R and unique values will need to be determined there.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -210,18 +209,18 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/select.bcdc_promise.html">select</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
-<span class="co">#&gt; * Using collect() on this object will return 1 features and 5 fields</span>
-<span class="co">#&gt; * At most six rows of the record are printed here</span>
-<span class="co">#&gt; -------------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; ● Using collect() on this object will return 1 features and 5 fields</span>
+<span class="co">#&gt; ● At most six rows of the record are printed here</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 1 feature and 5 fields</span>
 <span class="co">#&gt; Geometry type: POLYGON</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
 <span class="co">#&gt; # A tibble: 1 x 6</span>
-<span class="co">#&gt;   id       ADMIN_AREA_SID SCHOOL_DISTRICT_~ SCHOOL_DISTRICT~ OBJECTID                    geometry</span>
-<span class="co">#&gt;   &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;                        &lt;int&gt;    &lt;int&gt;               &lt;POLYGON [m]&gt;</span>
-<span class="co">#&gt; 1 WHSE_TA~            328 Prince George                   57      562 ((1137478 1221549, 1137399~</span></code></pre></div>
+<span class="co">#&gt;   id         ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT… OBJECTID                      geometry</span>
+<span class="co">#&gt;   &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;                       &lt;int&gt;    &lt;int&gt;                 &lt;POLYGON [m]&gt;</span>
+<span class="co">#&gt; 1 WHSE_TANT…            328 Prince George                  57      562 ((1137478 1221549, 1137399 1…</span></code></pre></div>
 <p>Note that in the <code>select</code> statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn’t select. This is because within each data set in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don’t want those columns after you <code>collect</code> the data, which we will take care of right now, you can drop them:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -242,51 +241,50 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
 <span class="co">#&gt; B.C. Data Catalogue Record: Local and Regional Greenspaces</span>
 <span class="co">#&gt; Name: local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da)</span>
-<span class="co">#&gt; Permalink:</span>
-<span class="co">#&gt;  https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da</span>
+<span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da</span>
 <span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Geographic</span>
 <span class="co">#&gt; Last Updated: 2020-11-25</span>
 <span class="co">#&gt; Description: This dataset contains spatial and attribute information for local and</span>
-<span class="co">#&gt;  regional greenspaces in British Columbia. Local and regional greenspaces are</span>
-<span class="co">#&gt;  municipal or regional district lands designated by local government agencies and</span>
-<span class="co">#&gt;  managed for public enjoyment, ecosystem or wildlife values. Spatial boundaries were</span>
-<span class="co">#&gt;  sourced from municipal and regional district web sites, which in some cases provide</span>
-<span class="co">#&gt;  datasets under Open Government Licence, and in other cases, publicize parks and</span>
-<span class="co">#&gt;  greenspaces on web maps or pdf maps. Boundaries were edge-matched to the ParcelMap BC</span>
-<span class="co">#&gt;  cadastre.  This spatial layer contains multipart polygons.</span>
+<span class="co">#&gt;  regional greenspaces in British Columbia. Local and regional greenspaces are municipal</span>
+<span class="co">#&gt;  or regional district lands designated by local government agencies and managed for</span>
+<span class="co">#&gt;  public enjoyment, ecosystem or wildlife values. Spatial boundaries were sourced from</span>
+<span class="co">#&gt;  municipal and regional district web sites, which in some cases provide datasets under</span>
+<span class="co">#&gt;  Open Government Licence, and in other cases, publicize parks and greenspaces on web maps</span>
+<span class="co">#&gt;  or pdf maps. Boundaries were edge-matched to the ParcelMap BC cadastre.  This spatial</span>
+<span class="co">#&gt;  layer contains multipart polygons.</span>
 <span class="co">#&gt; Resources: (4)</span>
 <span class="co">#&gt; # A tibble: 4 x 8</span>
-<span class="co">#&gt;   name       url                id         format ext    package_id    location  bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;     &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 WMS getCa~ https://openmaps.~ a8d5b53e-~ wms    ""     6a2fea1b-0cc~ bcgeogra~ TRUE            </span>
-<span class="co">#&gt; 2 KML Netwo~ http://openmaps.g~ a7454e41-~ kml    "kml"  6a2fea1b-0cc~ bcgeogra~ FALSE           </span>
-<span class="co">#&gt; 3 LocalRegi~ https://catalogue~ 76663191-~ xlsx   "xlsx" 6a2fea1b-0cc~ external  TRUE            </span>
-<span class="co">#&gt; 4 BC Geogra~ https://catalogue~ 53c6c6bd-~ other  ""     6a2fea1b-0cc~ bcgeogra~ FALSE           </span>
+<span class="co">#&gt;   name        url                  id        format ext   package_id     location   bcdata_available</span>
+<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;lgl&gt;           </span>
+<span class="co">#&gt; 1 WMS getCap… https://openmaps.go… a8d5b53e… wms    ""    6a2fea1b-0cc4… bcgeograp… TRUE            </span>
+<span class="co">#&gt; 2 KML Networ… http://openmaps.gov… a7454e41… kml    "kml" 6a2fea1b-0cc4… bcgeograp… FALSE           </span>
+<span class="co">#&gt; 3 LocalRegio… https://catalogue.d… 76663191… xlsx   "xls… 6a2fea1b-0cc4… external   TRUE            </span>
+<span class="co">#&gt; 4 BC Geograp… https://catalogue.d… 53c6c6bd… other  ""    6a2fea1b-0cc4… bcgeograp… FALSE           </span>
 <span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
 <p>Again we recognize this is <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data, which means we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span>
-<span class="co">#&gt; * Using collect() on this object will return 8708 features and 19 fields</span>
-<span class="co">#&gt; * At most six rows of the record are printed here</span>
-<span class="co">#&gt; -------------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; ● Using collect() on this object will return 8708 features and 19 fields</span>
+<span class="co">#&gt; ● At most six rows of the record are printed here</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
 <span class="co">#&gt; Geometry type: POLYGON</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 1228153 ymin: 453419.9 xmax: 1240644 ymax: 467184.1</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
-<span class="co">#&gt;   id        LOCAL_REG_GREENS~ PARK_NAME  PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI~ MUNICIPALITY</span>
-<span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
-<span class="co">#&gt; 1 WHSE_BAS~                59 Hazelnut ~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 2 WHSE_BAS~                60 Hazelwood~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 3 WHSE_BAS~                61 Hemlock P~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 4 WHSE_BAS~                62 Heritage ~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 5 WHSE_BAS~                63 Heron Park Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 6 WHSE_BAS~                64 Hillcrest~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; # ... with 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span>
+<span class="co">#&gt;   id          LOCAL_REG_GREENS… PARK_NAME   PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY</span>
+<span class="co">#&gt;   &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
+<span class="co">#&gt; 1 WHSE_BASEM…                59 Hazelnut M… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 2 WHSE_BASEM…                60 Hazelwood … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 3 WHSE_BASEM…                61 Hemlock Pa… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 4 WHSE_BASEM…                62 Heritage W… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 5 WHSE_BASEM…                63 Heron Park  Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 6 WHSE_BASEM…                64 Hillcrest … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; # … with 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span>
 <span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
@@ -295,24 +293,24 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">PARK_PRIMARY_USE</span> <span class="op">==</span> <span class="st">"Park"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span>
-<span class="co">#&gt; * Using collect() on this object will return 4373 features and 19 fields</span>
-<span class="co">#&gt; * At most six rows of the record are printed here</span>
-<span class="co">#&gt; -------------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; ● Using collect() on this object will return 4373 features and 19 fields</span>
+<span class="co">#&gt; ● At most six rows of the record are printed here</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
 <span class="co">#&gt; Geometry type: POLYGON</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 1228153 ymin: 453419.9 xmax: 1240644 ymax: 467184.1</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
 <span class="co">#&gt; # A tibble: 6 x 20</span>
-<span class="co">#&gt;   id        LOCAL_REG_GREENS~ PARK_NAME  PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI~ MUNICIPALITY</span>
-<span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
-<span class="co">#&gt; 1 WHSE_BAS~                59 Hazelnut ~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 2 WHSE_BAS~                60 Hazelwood~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 3 WHSE_BAS~                61 Hemlock P~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 4 WHSE_BAS~                62 Heritage ~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 5 WHSE_BAS~                63 Heron Park Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; 6 WHSE_BAS~                64 Hillcrest~ Local     Park             Metro Vancouver  Surrey      </span>
-<span class="co">#&gt; # ... with 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span>
+<span class="co">#&gt;   id          LOCAL_REG_GREENS… PARK_NAME   PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY</span>
+<span class="co">#&gt;   &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
+<span class="co">#&gt; 1 WHSE_BASEM…                59 Hazelnut M… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 2 WHSE_BASEM…                60 Hazelwood … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 3 WHSE_BASEM…                61 Hemlock Pa… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 4 WHSE_BASEM…                62 Heritage W… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 5 WHSE_BASEM…                63 Heron Park  Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 6 WHSE_BASEM…                64 Hillcrest … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; # … with 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
 <span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span>
 <span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
@@ -323,9 +321,9 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; The object is too large to perform exact spatial operations using bcdata.</span>
-<span class="co">#&gt; Object size: 948576 bytes</span>
+<span class="co">#&gt; Object size: 948544 bytes</span>
 <span class="co">#&gt; BC Data Threshold: 500000 bytes</span>
-<span class="co">#&gt; Exceedance: 448576 bytes</span>
+<span class="co">#&gt; Exceedance: 448544 bytes</span>
 <span class="co">#&gt; See ?bcdc_check_geom_size for more details</span>
 <span class="co">#&gt; A bounding box was drawn around the object passed to INTERSECTS and all features within the box will be returned.</span></code></pre></div>
 <p>Plotting both the filtered parks data and the district polygons reveals an important consideration when using <code>bcdata</code>:</p>
@@ -334,9 +332,9 @@ See the License for the specific language governing permissions and limitations 
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_check_geom_size.html">bcdc_check_geom_size</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span>
 <span class="co">#&gt; The object is too large to perform exact spatial operations using bcdata.</span>
-<span class="co">#&gt; Object size: 948576 bytes</span>
+<span class="co">#&gt; Object size: 948544 bytes</span>
 <span class="co">#&gt; BC Data Threshold: 500000 bytes</span>
-<span class="co">#&gt; Exceedance: 448576 bytes</span>
+<span class="co">#&gt; Exceedance: 448544 bytes</span>
 <span class="co">#&gt; See ?bcdc_check_geom_size for more details</span></code></pre></div>
 <p>Drawing the bounding box illustrates this point:</p>
 <p><img src="vignette-fig-bbox-1.png" title="plot of chunk bbox" alt="plot of chunk bbox" width="100%"></p>
@@ -367,29 +365,29 @@ See the License for the specific language governing permissions and limitations 
 <p>There are a couple of other functions in <code>bcdata</code> that are useful to know when working with spatial data from the catalogue. <code>bcdc_describe_feature</code> gives the column names, whether the column is selectable, and the column types in both R and on the remote server:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 20 x 4</span>
-<span class="co">#&gt;    col_name                sticky remote_col_type          local_col_type</span>
-<span class="co">#&gt;    &lt;chr&gt;                   &lt;lgl&gt;  &lt;chr&gt;                    &lt;chr&gt;         </span>
-<span class="co">#&gt;  1 id                      FALSE  xsd:string               character     </span>
-<span class="co">#&gt;  2 LOCAL_REG_GREENSPACE_ID FALSE  xsd:decimal              numeric       </span>
-<span class="co">#&gt;  3 PARK_NAME               TRUE   xsd:string               character     </span>
-<span class="co">#&gt;  4 PARK_TYPE               TRUE   xsd:string               character     </span>
-<span class="co">#&gt;  5 PARK_PRIMARY_USE        TRUE   xsd:string               character     </span>
-<span class="co">#&gt;  6 REGIONAL_DISTRICT       TRUE   xsd:string               character     </span>
-<span class="co">#&gt;  7 MUNICIPALITY            TRUE   xsd:string               character     </span>
-<span class="co">#&gt;  8 CIVIC_NUMBER            TRUE   xsd:decimal              numeric       </span>
-<span class="co">#&gt;  9 CIVIC_NUMBER_SUFFIX     TRUE   xsd:string               character     </span>
-<span class="co">#&gt; 10 STREET_NAME             TRUE   xsd:string               character     </span>
-<span class="co">#&gt; 11 LATITUDE                TRUE   xsd:decimal              numeric       </span>
-<span class="co">#&gt; 12 LONGITUDE               TRUE   xsd:decimal              numeric       </span>
-<span class="co">#&gt; 13 WHEN_UPDATED            TRUE   xsd:date                 date          </span>
-<span class="co">#&gt; 14 WEBSITE_URL             TRUE   xsd:string               character     </span>
-<span class="co">#&gt; 15 LICENCE_COMMENTS        TRUE   xsd:string               character     </span>
-<span class="co">#&gt; 16 FEATURE_AREA_SQM        TRUE   xsd:decimal              numeric       </span>
-<span class="co">#&gt; 17 FEATURE_LENGTH_M        TRUE   xsd:decimal              numeric       </span>
-<span class="co">#&gt; 18 SHAPE                   TRUE   gml:GeometryPropertyType sfc geometry  </span>
-<span class="co">#&gt; 19 OBJECTID                FALSE  xsd:decimal              numeric       </span>
-<span class="co">#&gt; 20 SE_ANNO_CAD_DATA        TRUE   xsd:hexBinary            numeric</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 20 x 5</span>
+<span class="co">#&gt;    col_name      sticky remote_col_type    local_col_type column_comments                           </span>
+<span class="co">#&gt;    &lt;chr&gt;         &lt;lgl&gt;  &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;                                     </span>
+<span class="co">#&gt;  1 id            FALSE  xsd:string         character      &lt;NA&gt;                                      </span>
+<span class="co">#&gt;  2 LOCAL_REG_GR… FALSE  xsd:decimal        numeric        LOCAL_REG_GREENSPACE_ID is a system-gener…</span>
+<span class="co">#&gt;  3 PARK_NAME     TRUE   xsd:string         character      PARK NAME is the name of the park, e.g., …</span>
+<span class="co">#&gt;  4 PARK_TYPE     TRUE   xsd:string         character      PARK_TYPE is the type of park, e.g., Loca…</span>
+<span class="co">#&gt;  5 PARK_PRIMARY… TRUE   xsd:string         character      PARK PRIMARY USE defines the primary use …</span>
+<span class="co">#&gt;  6 REGIONAL_DIS… TRUE   xsd:string         character      REGIONAL_DISTRICT is the name of the regi…</span>
+<span class="co">#&gt;  7 MUNICIPALITY  TRUE   xsd:string         character      MUNICIPALITY is the name of the municipal…</span>
+<span class="co">#&gt;  8 CIVIC_NUMBER  TRUE   xsd:decimal        numeric        CIVIC_NUMBER is the street number or near…</span>
+<span class="co">#&gt;  9 CIVIC_NUMBER… TRUE   xsd:string         character      CIVIC_NUMBER_SUFFIX is the letter or frac…</span>
+<span class="co">#&gt; 10 STREET_NAME   TRUE   xsd:string         character      STREET_NAME is the name of the street or …</span>
+<span class="co">#&gt; 11 LATITUDE      TRUE   xsd:decimal        numeric        LATITUDE is the geographic coordinate, in…</span>
+<span class="co">#&gt; 12 LONGITUDE     TRUE   xsd:decimal        numeric        LONGITUDE is the geographic coordinate, i…</span>
+<span class="co">#&gt; 13 WHEN_UPDATED  TRUE   xsd:date           date           WHEN_UPDATED is the date and time the rec…</span>
+<span class="co">#&gt; 14 WEBSITE_URL   TRUE   xsd:string         character      WEBSITE_URL contains a link to the home p…</span>
+<span class="co">#&gt; 15 LICENCE_COMM… TRUE   xsd:string         character      LICENCE_COMMENTS describes the source of …</span>
+<span class="co">#&gt; 16 FEATURE_AREA… TRUE   xsd:decimal        numeric        FEATURE_AREA_SQM is the system calculated…</span>
+<span class="co">#&gt; 17 FEATURE_LENG… TRUE   xsd:decimal        numeric        FEATURE_LENGTH_M is the system calculated…</span>
+<span class="co">#&gt; 18 SHAPE         TRUE   gml:GeometryPrope… sfc geometry   SHAPE is the column used to reference the…</span>
+<span class="co">#&gt; 19 OBJECTID      FALSE  xsd:decimal        numeric        OBJECTID is a column required by spatial …</span>
+<span class="co">#&gt; 20 SE_ANNO_CAD_… TRUE   xsd:hexBinary      numeric        SE_ANNO_CAD_DATA is a binary column used …</span></code></pre></div>
 <p>This is a helpful initial step to learn column names and types when you construct your query.</p>
 <p>Another useful function is <code><a href="../reference/show_query.bcdc_promise.html">show_query()</a></code> which provides information on the request issued to the remote server:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -399,10 +397,10 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu"><a href="../reference/show_query.bcdc_promise.html">show_query</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; &lt;url&gt;</span>
 <span class="co">#&gt; &lt;body&gt;</span>
-<span class="co">#&gt; SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature outputFormat: application/json</span>
-<span class="co">#&gt;  typeNames: WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP SRSNAME: EPSG:3005</span>
-<span class="co">#&gt;  CQL_FILTER: (("PARK_PRIMARY_USE" = 'Park') AND (INTERSECTS(SHAPE, POLYGON ((1126789</span>
-<span class="co">#&gt;  821142.1, 1528155 821142.1, 1528155 1224202, 1126789 1224202, 1126789 821142.1)))))</span>
+<span class="co">#&gt; SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature outputFormat: application/json typeNames:</span>
+<span class="co">#&gt;  WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP SRSNAME: EPSG:3005 CQL_FILTER:</span>
+<span class="co">#&gt;  (("PARK_PRIMARY_USE" = 'Park') AND (INTERSECTS(SHAPE, POLYGON ((1126789 821142.1,</span>
+<span class="co">#&gt;  1528155 821142.1, 1528155 1224202, 1126789 1224202, 1126789 821142.1)))))</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; &lt;full query url&gt;</span>
 <span class="co">#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs/?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%28%22PARK_PRIMARY_USE%22%20%3D%20%27Park%27%29%20AND%20%28INTERSECTS%28SHAPE%2C%20POLYGON%20%28%281126789%20821142.1%2C%201528155%20821142.1%2C%201528155%201224202%2C%201126789%201224202%2C%201126789%20821142.1%29%29%29%29%29</span></code></pre></div>
@@ -415,44 +413,44 @@ See the License for the specific language governing permissions and limitations 
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Look at the columns available:</span>
 <span class="fu"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 42 x 4</span>
-<span class="co">#&gt;    col_name                      sticky remote_col_type local_col_type</span>
-<span class="co">#&gt;    &lt;chr&gt;                         &lt;lgl&gt;  &lt;chr&gt;           &lt;chr&gt;         </span>
-<span class="co">#&gt;  1 id                            FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  2 CUSTODIAN_ORG_DESCRIPTION     FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  3 BUSINESS_CATEGORY_CLASS       FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  4 BUSINESS_CATEGORY_DESCRIPTION FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  5 OCCUPANT_TYPE_DESCRIPTION     FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  6 SOURCE_DATA_ID                FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  7 SUPPLIED_SOURCE_ID_IND        FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  8 AIRPORT_NAME                  FALSE  xsd:string      character     </span>
-<span class="co">#&gt;  9 DESCRIPTION                   TRUE   xsd:string      character     </span>
-<span class="co">#&gt; 10 PHYSICAL_ADDRESS              TRUE   xsd:string      character     </span>
-<span class="co">#&gt; # ... with 32 more rows</span>
+<span class="co">#&gt; # A tibble: 42 x 5</span>
+<span class="co">#&gt;    col_name         sticky remote_col_type local_col_type column_comments                           </span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;lgl&gt;  &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;                                     </span>
+<span class="co">#&gt;  1 id               FALSE  xsd:string      character      &lt;NA&gt;                                      </span>
+<span class="co">#&gt;  2 CUSTODIAN_ORG_D… FALSE  xsd:string      character      CUSTODIAN_ORG_DESCRIPTION contains the na…</span>
+<span class="co">#&gt;  3 BUSINESS_CATEGO… FALSE  xsd:string      character      BUSINESS_CATEGORY_CLASS designates the ca…</span>
+<span class="co">#&gt;  4 BUSINESS_CATEGO… FALSE  xsd:string      character      BUSINESS_CATEGORY_DESCRIPTION describes t…</span>
+<span class="co">#&gt;  5 OCCUPANT_TYPE_D… FALSE  xsd:string      character      OCCUPANT_TYPE_DESCRIPTION contains the de…</span>
+<span class="co">#&gt;  6 SOURCE_DATA_ID   FALSE  xsd:string      character      SOURCE_DATA_ID is a unique occupant id ei…</span>
+<span class="co">#&gt;  7 SUPPLIED_SOURCE… FALSE  xsd:string      character      SUPPLIED_SOURCE_ID_IND is an indicator of…</span>
+<span class="co">#&gt;  8 AIRPORT_NAME     FALSE  xsd:string      character      AIRPORT_NAME is a business name that can …</span>
+<span class="co">#&gt;  9 DESCRIPTION      TRUE   xsd:string      character      DESCRIPTION describes the Occupant in mor…</span>
+<span class="co">#&gt; 10 PHYSICAL_ADDRESS TRUE   xsd:string      character      PHYSICAL_ADDRESS contains the civic or no…</span>
+<span class="co">#&gt; # … with 32 more rows</span>
 
 <span class="co"># Query the data with bcdc_query_geodata and filter + select:</span>
 <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">DESCRIPTION</span> <span class="op">==</span> <span class="st">"airport"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/select.bcdc_promise.html">select</a></span><span class="op">(</span><span class="va">AIRPORT_NAME</span>, <span class="va">LOCALITY</span>, <span class="va">NUMBER_OF_RUNWAYS</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW' record</span>
-<span class="co">#&gt; * Using collect() on this object will return 37 features and 11 fields</span>
-<span class="co">#&gt; * At most six rows of the record are printed here</span>
-<span class="co">#&gt; -------------------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; ● Using collect() on this object will return 37 features and 11 fields</span>
+<span class="co">#&gt; ● At most six rows of the record are printed here</span>
+<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 11 fields</span>
 <span class="co">#&gt; Geometry type: POINT</span>
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
 <span class="co">#&gt; # A tibble: 6 x 12</span>
-<span class="co">#&gt;   id       CUSTODIAN_ORG_DESC~ BUSINESS_CATEGOR~ BUSINESS_CATEGO~ OCCUPANT_TYPE_D~ SOURCE_DATA_ID</span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;             &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;         </span>
-<span class="co">#&gt; 1 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      455           </span>
-<span class="co">#&gt; 2 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      464           </span>
-<span class="co">#&gt; 3 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      482           </span>
-<span class="co">#&gt; 4 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      483           </span>
-<span class="co">#&gt; 5 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      484           </span>
-<span class="co">#&gt; 6 WHSE_IM~ "Ministry of Fores~ airTransportation Air Transportat~ BC Airports      487           </span>
-<span class="co">#&gt; # ... with 6 more variables: SUPPLIED_SOURCE_ID_IND &lt;chr&gt;, AIRPORT_NAME &lt;chr&gt;, LOCALITY &lt;chr&gt;,</span>
+<span class="co">#&gt;   id        CUSTODIAN_ORG_DESCRI… BUSINESS_CATEGOR… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID</span>
+<span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;             &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;         </span>
+<span class="co">#&gt; 1 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      455           </span>
+<span class="co">#&gt; 2 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      464           </span>
+<span class="co">#&gt; 3 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      482           </span>
+<span class="co">#&gt; 4 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      483           </span>
+<span class="co">#&gt; 5 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      484           </span>
+<span class="co">#&gt; 6 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      487           </span>
+<span class="co">#&gt; # … with 6 more variables: SUPPLIED_SOURCE_ID_IND &lt;chr&gt;, AIRPORT_NAME &lt;chr&gt;, LOCALITY &lt;chr&gt;,</span>
 <span class="co">#&gt; #   NUMBER_OF_RUNWAYS &lt;int&gt;, SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span></code></pre></div>
 </div>
   </div>
