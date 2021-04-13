@@ -39,7 +39,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install XQuartz on macOS
         if: runner.os == 'macOS'
-        run: brew cask install xquartz
+        run: brew install xquartz
       - name: Install dependencies
         run: Rscript -e 'install.packages(c("devtools", "tools", "knitr", "purrr", "Cairo"))'
       - name: Install pr version of bcdata and pkg dependencies
