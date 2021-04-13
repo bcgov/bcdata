@@ -60,7 +60,7 @@ test_that("bcdc_describe_feature fails with non-wfs record", {
   skip_if_net_down()
   skip_on_cran()
   expect_error(bcdc_describe_feature("dba6c78a-1bc1-4d4f-b75c-96b5b0e7fd30"),
-               "No WMS/WFS resource available for this data set")
+               "No WFS resource available for this data set")
 })
 
 test_that("bcdc_get_wfs_records works", {
