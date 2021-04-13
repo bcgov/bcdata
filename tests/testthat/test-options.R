@@ -29,7 +29,7 @@ test_that("bcdata.single_download_limit", {
   expect_message(
     bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8', resource =
                     '4d0377d9-e8a1-429b-824f-0ce8f363512c'),
-    "pagination"
+    "paginated"
   )
 
 })
