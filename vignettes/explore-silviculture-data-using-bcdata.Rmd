@@ -1,6 +1,6 @@
 ---
 title: "Exploring Silviculture Data with bcdata"
-date: "2020-06-19"
+date: "2021-04-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Exploring Silviculture Data with bcdata}
@@ -62,58 +62,57 @@ We can gather the data we need to answer our question using the [RESULTS - silvi
 ```r
 # Get the metadata using the human-readable record name
 bcdc_get_record("results-forest-cover-silviculture")
-#> B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture 
-#> 
-#> Name: results-forest-cover-silviculture (ID: 258bb088-4113-47b1-b568-ce20bd64e3e3 )
-#> Permalink: https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3
+#> B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture
+#> Name: results-forest-cover-silviculture (ID:
+#>  258bb088-4113-47b1-b568-ce20bd64e3e3)
+#> Permalink:
+#>  https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3
 #> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
 #> Type: Geographic
-#> Last Updated: 2020-05-25 
-#> 
-#> Description: RESULTS opening's forest cover poylgons with silviculture component provided.
-#> Current forest cover subimssion into RESULTS must contain attribute and map
-#> information.  However, there are historical forest cover polygon infomration where
-#> maps are not available.  Forest Cover is provided at three critical milestones of at
-#> harvesting, at regeneration, and at free growing.  This is a part o fthe
-#> Silviculture and Land Status Tracking dataset, which includes tracking achievement
-#> of silviculture obligations on Crown Land 
-#> 
-#> Resources: (3)
-#> # A tibble: 3 x 8
-#>   name     url        id      format ext   package_id  location bcdata_available
-#>   <chr>    <chr>      <chr>   <chr>  <chr> <chr>       <chr>    <lgl>           
-#> 1 BC Geog… https://c… 92f845… other  ""    258bb088-4… bcgeogr… FALSE           
-#> 2 WMS get… https://o… 57670a… wms    ""    258bb088-4… bcgeogr… TRUE            
-#> 3 KML Net… https://o… d45a82… kml    "kml" 258bb088-4… bcgeogr… FALSE           
-#> 
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
+#> Description: RESULTS opening's forest cover poylgons with silviculture
+#>  component provided.  Current forest cover subimssion into RESULTS must
+#>  contain attribute and map information.  However, there are historical
+#>  forest cover polygon infomration where maps are not available.  Forest
+#>  Cover is provided at three critical milestones of at harvesting, at
+#>  regeneration, and at free growing.  This is a part o fthe Silviculture
+#>  and Land Status Tracking dataset, which includes tracking achievement
+#>  of silviculture obligations on Crown Land
+#> Available Resources (1):
+#>  1. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('258bb088-4113-47b1-b568-ce20bd64e3e3')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('258bb088-4113-47b1-b568-ce20bd64e3e3')
 ```
 
-We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data set&mdash;the list of data resources includes `WMS getCapabilities request`&mdash;so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
+We see that this is a [Web Feature Service-enabled](https://en.wikipedia.org/wiki/Web_Feature_Service) geospatial data set--the list of data resources includes `WMS getCapabilities request`--so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
 
 
 ```r
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 #> Querying 'results-forest-cover-silviculture' record
-#> ● Using collect() on this object will return 873108 features and 159 fields
+#> ● Using collect() on this object will return 888963 features and 159
+#> ● fields
+#> ● Accessing this record requires pagination and will make 889 separate
+#> ● requests to the WFS. See ?bcdc_options
 #> ● At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 159 fields
-#> geometry type:  MULTIPOLYGON
-#> dimension:      XY
-#> bbox:           xmin: 1147890 ymin: 676633.7 xmax: 1411085 ymax: 1083545
-#> CRS:            3005
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 1184167 ymin: 676633.7 xmax: 1411085 ymax: 1083545
+#> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 x 160
-#>   id    FOREST_COVER_ID STOCKING_STANDA… OPENING_ID STANDARDS_UNIT_…
-#>   <chr>           <int>            <int>      <int> <chr>           
-#> 1 WHSE…         3994018          1805957    1486231 2               
-#> 2 WHSE…         3994007               NA    1248495 <NA>            
-#> 3 WHSE…         3993995          2263260    1728926 1               
-#> 4 WHSE…         3994067               NA    1120935 <NA>            
-#> 5 WHSE…         3994009          1404558    1248495 A               
-#> 6 WHSE…         3994057          1211894    1120935 B               
+#>   id               FOREST_COVER_ID STOCKING_STANDAR… OPENING_ID STANDARDS_UNIT_…
+#>   <chr>                      <int>             <int>      <int> <chr>           
+#> 1 WHSE_FOREST_VEG…         3994018           1805957    1486231 2               
+#> 2 WHSE_FOREST_VEG…         3994007                NA    1248495 <NA>            
+#> 3 WHSE_FOREST_VEG…         3994067                NA    1120935 <NA>            
+#> 4 WHSE_FOREST_VEG…         3994009           1404558    1248495 A               
+#> 5 WHSE_FOREST_VEG…         3994057           1211894    1120935 B               
+#> 6 WHSE_FOREST_VEG…         3994063                NA    1120935 <NA>            
 #> # … with 155 more variables: SILV_POLYGON_NUMBER <chr>,
 #> #   SILV_POLYGON_AREA <dbl>, SILV_POLYGON_NET_AREA <dbl>,
 #> #   SILV_NON_MAPPED_AREA <int>, STOCKING_STATUS_CODE <chr>,
@@ -225,10 +224,10 @@ Let's look at the dimensions of this now much more manageable data object we hav
 
 ```r
 dim(trees_dpg)
-#> [1] 160 160
+#> [1] 156 160
 ```
 
-We can see there are 160 treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:
+We can see there are 156 treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:
 
 
 ```r
