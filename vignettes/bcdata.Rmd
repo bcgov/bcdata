@@ -153,19 +153,16 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 #> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
 #> Type: Dataset
-#> Last Updated: 2018-07-12
 #> Description: Financial Incentives for Recycling Scrap Tires (FIRST) collection and
 #>  recycling data (tonnes) from 1991 to 2006. In 2007 [Tire Stewardship
 #>  BC](http://www.tsbc.ca/), a not for profit society, launched the new scrap tire
 #>  recycling program replacing the government-run program that had been in place since
 #>  1991. Tire Stewardship BC collection and recycling data is available
 #>  [here](https://catalogue.data.gov.bc.ca/dataset/f791329b-c2dc-4f82-9993-209780f2a1c6).
-#> Resources: (1)
-#> # A tibble: 1 x 8
-#>   name        url                  id         format ext   package_id     location  bcdata_available
-#>   <chr>       <chr>                <chr>      <chr>  <chr> <chr>          <chr>     <lgl>           
-#> 1 BC FIRST T… https://catalogue.d… ed24cca3-… csv    csv   a29ad492-29a2… catalogu… TRUE            
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
+#> Available Resources (1):
+#>  1. BC FIRST Tire Recycling Data 1991-2006 (csv)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('a29ad492-29a2-44b9-8693-d27a8cc8e686')
 ```
 
 ### `bcdc_get_data()`
@@ -260,17 +257,14 @@ bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
 #> Sector: Education
 #> Licence: Open Government Licence - British Columbia
 #> Type: Dataset
-#> Last Updated: 2017-02-02
 #> Description: BC Schools English Language Learners, French Immersion, Francophone, Career
 #>  Preparation, Aboriginal Support Services, Aboriginal Language and Culture, Continuing
 #>  Education and Career Technical Programs offered in BC schools up to 2013/2014.
-#> Resources: (2)
-#> # A tibble: 2 x 8
-#>   name       url                  id          format ext   package_id      location bcdata_available
-#>   <chr>      <chr>                <chr>       <chr>  <chr> <chr>           <chr>    <lgl>           
-#> 1 ProgramsO… http://www.bced.gov… a393f8cf-5… txt    txt   b1f27d1c-244a-… external TRUE            
-#> 2 ProgramsO… http://www.bced.gov… 1e34098e-7… xlsx   xlsx  b1f27d1c-244a-… external TRUE            
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
+#> Available Resources (2):
+#>  1. ProgramsOfferedinSchools.txt (txt)
+#>  2. ProgramsOfferedinSchools.xlsx (xlsx)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('b1f27d1c-244a-410e-a361-931fac62a524')
 ```
 
 We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The resource ID for each data set is available _in_ the metadata record ☝️:
@@ -356,7 +350,7 @@ zip files, however if there are multiple data files in the zip, or data files th
 
 ### `bcdc_query_geodata()`
 
-Many geospatial data sets in the B.C. Data Catalogue are available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+Many geospatial data sets in the B.C. Data Catalogue are available through a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
 
 Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:
 
@@ -377,6 +371,10 @@ bcdc_search("regional districts administrative areas", res_format = "wms", n = 1
 
 ## Get the metadata for the B.C. Regional Districts catalogue record
 bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
+
+## We can see in the search results, and in the metadata record, that this record has a `"wms"`
+## resource format, indicating that it is available as a Web Feature Service and thus
+## we can query it using `bcdc_query_geodata()`
 
 ## Have a quick look at the geospatial columns to help with filter or select
 bcdc_describe_feature(bc_regional_districts_metadata)
@@ -410,4 +408,4 @@ my_regional_district  %>%
 
 <img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%" />
 
-The vignette [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.
+The vignette [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Feature Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.

@@ -89,13 +89,21 @@ print.bcdc_record <- function(x, ...) {
   cat_line_wrap(cli::col_blue(cli::style_italic("Sector: ")), x$sector)
   cat_line_wrap(cli::col_blue(cli::style_italic("Licence: ")), x$license_title)
   cat_line_wrap(cli::col_blue(cli::style_italic("Type: ")), x$type)
-  cat_line_wrap(cli::col_blue(cli::style_italic("Last Updated: ")), x$record_last_modified)
   cat_line_wrap(cli::col_blue(cli::style_italic("Description: ")), x$notes)
 
-  cat_line_wrap(cli::col_blue(cli::style_italic("Resources: (", nrow(bcdc_tidy_resources(x)), ")")))
-  print(bcdc_tidy_resources(x))
 
-  cat_line_wrap(cli::col_blue("You can access the 'Resources' data frame using bcdc_tidy_resources()"))
+  tidy_resources <- bcdc_tidy_resources(x)
+  avail_res <- tidy_resources[tidy_resources$bcdata_available, , drop = FALSE]
+  cat_line_wrap(cli::col_blue(cli::style_italic("Available Resources (", nrow(avail_res), "):")))
+  cli::cat_line(" ", seq_len(nrow(avail_res)), ". ", avail_res$name, " (", avail_res$format, ")")
+
+  cat_line_wrap(cli::col_blue(cli::style_italic("Access the full 'Resources' data frame using: ")),
+                cli::col_red("bcdc_tidy_resources('", x$id, "')"))
+
+  if ("wms" %in% formats_from_record(x)) {
+    cat_line_wrap(cli::col_blue(cli::style_italic("Query and filter this data using: ")),
+                  cli::col_red("bcdc_query_geodata('", x$id, "')"))
+  }
 
   invisible(x)
 }
@@ -191,10 +199,12 @@ print.bcdc_query <- function(x, ...) {
 # dplyr methods -----------------------------------------------------------
 
 
-#' Filter a query from Web Service call
+#' Filter a query from bcdc_query_geodata()
 #'
-#' Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
-#' full sf object is not read into memory until `collect()` has been called.
+#' Filter a query from Web Feature Service using dplyr
+#' methods. This filtering is accomplished lazily so that
+#' the full sf object is not read into memory until
+#' `collect()` has been called.
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... Logical predicates with which to filter the results. Multiple
@@ -237,13 +247,13 @@ filter.bcdc_promise <- function(.data, ...) {
                        record = .data$record, cols_df = .data$cols_df))
 }
 
-#' Select columns from Web Service call
+#' Select columns from bcdc_query_geodata() call
 #'
-#' Similar to a `dplyr::select` call, this allows you to select which columns you want the Web Service to return.
+#' Similar to a `dplyr::select` call, this allows you to select which columns you want the Web Feature Service to return.
 #' A key difference between `dplyr::select` and `bcdata::select` is the presence of "sticky" columns that are
 #' returned regardless of what columns are selected. If any of these "sticky" columns are selected
 #' only "sticky" columns are return. `bcdc_describe_feature` is one way to tell if columns are sticky in advance
-#' of issuing the Web Service call.
+#' of issuing the Web Feature Service call.
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
@@ -321,7 +331,7 @@ tail.bcdc_promise <- function(x, n = 6L, ...) {
 }
 
 
-#' Throw an informative error when attempting mutate on a Web Service call
+#' Throw an informative error when attempting mutate on a `bcdc_promise` object
 #'
 #' The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
 #' this function exists solely to generate an informative error that suggests an alternative
@@ -350,13 +360,13 @@ mutate.bcdc_promise <- function(.data, ...){
 }
 
 
-#' Force collection of Web Service request from B.C. Data Catalogue
+#' Force collection of Web Feature Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
 #' This will retrieve an sf object into R. The `as_tibble()` function can be used
 #' interchangeably with `collect` which matches `dbplyr` behaviour.
 #'
-#' @param x object of class bcdc_promise
+#' @param x object of class `bcdc_promise`
 #' @inheritParams collect
 #' @rdname collect-methods
 #' @export
@@ -438,9 +448,9 @@ collect.bcdc_promise <- function(x, ...){
 #' @export
 as_tibble.bcdc_promise <- collect.bcdc_promise
 
-#' Show SQL and URL used for Web Service request from B.C. Data Catalogue
+#' Show SQL and URL used for Web Feature Service request from B.C. Data Catalogue
 #'
-#' Display Web Service query SQL
+#' Display Web Feature Service query CQL
 #'
 #' @param x object of class bcdc_promise or bcdc_sf
 #' @inheritParams show_query

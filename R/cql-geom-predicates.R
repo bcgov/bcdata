@@ -34,7 +34,7 @@ CQL <- function(...) {
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
 #' filter strings which can then be supplied to filter.bcdc_promise.
 #' The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
+#' bounding box to reduce the complexity of the Web Feature Service call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
 #'
 #'
@@ -185,7 +185,7 @@ bcdc_check_geom_size <- function(x) {
 #' to filter results from [bcdc_query_geodata()].
 #' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
 #' The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
+#' bounding box to reduce the complexity of the Web Feature Service call. Subsequent in-memory
 #' filtering may be needed to achieve exact results.
 #'
 #' @param geom an `sf`/`sfc`/`sfg` or `bbox` object (from the `sf` package)

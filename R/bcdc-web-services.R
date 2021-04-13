@@ -11,13 +11,17 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 
-#' Query data from the B.C. Web Service
+#' Query data from the B.C. Web Feature Service
 #'
-#' Queries features from the B.C. Web Service. The data must be available as
-#' a Web Service. See `bcdc_get_record(record)$resources`). The response will
-#' be paginated if the number of features is above the number set by the
-#' `bcdata.single_download_limit` option. Please see [bcdc_options()] for defaults
-#' and more information.
+#' Queries features from the B.C. Web Feature Service. See
+#' [bcdc_tidy_resources()] - if a resource has a value of
+#' `"wms"` in the `format` column it is available as a Web
+#' Feature Service, and you can query and download it
+#' using `bcdc_query_geodata()`. The response will be
+#' paginated if the number of features is above the number
+#' set by the `bcdata.single_download_limit` option.
+#' Please see [bcdc_options()] for defaults and more
+#' information.
 #'
 #' Note that this function doesn't actually return the data, but rather an
 #' object of class `bcdc_promise`, which includes all of the information
@@ -133,7 +137,7 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
 #' @export
 bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   if (!any(wfs_available(record$resource_df))) {
-    stop("No Web Service resource available for this data set.",
+    stop("No Web Feature Service resource available for this data set.",
          call. = FALSE
     )
   }
@@ -157,7 +161,11 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
                        cols_df = cols_df))
 }
 
-#' Get map from the B.C. Web Service
+#' Get preview map from the B.C. Web Map Service
+#'
+#' Note this does not return the actual map features, rather
+#' opens an image preview of the layer in a
+#' [Leaflet](https://rstudio.github.io/leaflet/) map window
 #'
 #'
 #' @inheritParams bcdc_get_data

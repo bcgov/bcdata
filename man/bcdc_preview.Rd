@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_preview}
 \alias{bcdc_preview}
-\title{Get map from the B.C. Web Service}
+\title{Get preview map from the B.C. Web Map Service}
 \usage{
 bcdc_preview(record)
 }
@@ -19,7 +19,9 @@ session. You can silence these warnings altogether by setting an option:
 in your .Rprofile file so the option persists across sessions.}
 }
 \description{
-Get map from the B.C. Web Service
+Note this does not return the actual map features, rather
+opens an image preview of the layer in a
+\href{https://rstudio.github.io/leaflet/}{Leaflet} map window
 }
 \examples{
 \donttest{

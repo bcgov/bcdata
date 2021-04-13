@@ -10,16 +10,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Describe the attributes of a Web Service feature
+#' Describe the attributes of a Web Feature Service
 #'
-#' Describe the attributes of column of a record accessed through the Web Service.
+#' Describe the attributes of column of a record accessed through the Web Feature Service.
 #' This can be a useful tool to examine a layer before issuing a query with `bcdc_query_geodata`.
 #'
 #' @return
-#' `bcdc_describe_features` returns a tibble describing the attributes of a B.C. Data Catalogue record.
+#' `bcdc_describe_feature` returns a tibble describing the attributes of a B.C. Data Catalogue record.
 #' The tibble returns the following columns:
 #'   - col_name: attributes of the feature
-#'   - sticky: whether a column can be separated from the record in a Web Service call via the `dplyr::select` method
+#'   - sticky: whether a column can be separated from the record in a Web Feature Service call via the `dplyr::select` method
 #'   - remote_col_type: class of what is return by the web feature service
 #'   - local_col_type: the column class in R
 #'   - column_comments: additional metadata specific to that column
@@ -67,7 +67,7 @@ bcdc_describe_feature.character <- function(record){
 bcdc_describe_feature.bcdc_record <- function(record){
 
   if (!any(wfs_available(record$resource_df))) {
-    stop("No WMS/WFS resource available for this data set.",
+    stop("No WFS resource available for this data set.",
          call. = FALSE
     )
   }

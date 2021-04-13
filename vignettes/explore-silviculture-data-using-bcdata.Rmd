@@ -68,7 +68,6 @@ bcdc_get_record("results-forest-cover-silviculture")
 #> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
 #> Type: Geographic
-#> Last Updated: 2021-04-13
 #> Description: RESULTS opening's forest cover poylgons with silviculture component
 #>  provided.  Current forest cover subimssion into RESULTS must contain attribute and map
 #>  information.  However, there are historical forest cover polygon infomration where maps
@@ -76,17 +75,15 @@ bcdc_get_record("results-forest-cover-silviculture")
 #>  harvesting, at regeneration, and at free growing.  This is a part o fthe Silviculture
 #>  and Land Status Tracking dataset, which includes tracking achievement of silviculture
 #>  obligations on Crown Land
-#> Resources: (3)
-#> # A tibble: 3 x 8
-#>   name        url                  id        format ext   package_id     location   bcdata_available
-#>   <chr>       <chr>                <chr>     <chr>  <chr> <chr>          <chr>      <lgl>           
-#> 1 BC Geograp… https://catalogue.d… 92f84516… other  ""    258bb088-4113… bcgeograp… FALSE           
-#> 2 WMS getCap… https://openmaps.go… 57670a0d… wms    ""    258bb088-4113… bcgeograp… TRUE            
-#> 3 KML Networ… https://openmaps.go… d45a82ed… kml    "kml" 258bb088-4113… bcgeograp… FALSE           
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
+#> Available Resources (1):
+#>  1. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('258bb088-4113-47b1-b568-ce20bd64e3e3')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('258bb088-4113-47b1-b568-ce20bd64e3e3')
 ```
 
-We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data set&mdash;the list of data resources includes `WMS getCapabilities request`&mdash;so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
+We see that this is a [Web Feature Service-enabled](https://en.wikipedia.org/wiki/Web_Feature_Service) geospatial data set--the list of data resources includes `WMS getCapabilities request`--so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
 
 
 ```r

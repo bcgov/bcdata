@@ -25,7 +25,7 @@ See the License for the specific language governing permissions and limitations 
 
 
 
-This vignette illustrates how to use `bcdata::bcdc_query_geodata` to request and query [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset). To illustrate, we will request and merge two spatial data sets from the catalogue---school district and greenspaces spatial data---and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.
+This vignette illustrates how to use `bcdata::bcdc_query_geodata` to request and query geospatial data that has an associated [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset). To illustrate, we will request and merge two spatial data sets from the catalogue---school district and greenspaces spatial data---and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.
 
 ## Getting Started
 First you need to load the package. We will also load the `sf` and `dplyr` packages to help us work with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/) and `dplyr` [here](https://dplyr.tidyverse.org/):
@@ -39,7 +39,7 @@ library(dplyr)
 
 
 ## Geospatial Data in the B.C. Data Catalogue
-The [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides many data sets with spatial information through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). Technically speaking, this means if we have an internet connection we can issue [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) requests to the catalogue and seamlessly import the response data into R as an `sf` objects. The `bcdata` package provides a means to a) choose which layer you want and b) use `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the `collect` function. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to principles of `dbplyr` is available [here](https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html).
+The [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides many data sets with spatial information through a [Web Feature Service (WFS)](https://en.wikipedia.org/wiki/Web_Feature_Service). Technically speaking, this means if we have an internet connection we can issue [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) requests to the catalogue and seamlessly import the response data into R as an `sf` objects. The `bcdata` package provides a means to a) choose which layer you want and b) use `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the `collect` function. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to principles of `dbplyr` is available [here](https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html).
 
 ## School District Data
 Our first step is to extract the [school district polygons](https://catalog.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b) from the B.C. Data Catalogue. This layer is described using this command:
@@ -53,23 +53,20 @@ bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> Sector: Education
 #> Licence: Open Government Licence - British Columbia
 #> Type: Geographic
-#> Last Updated: 2020-11-03
 #> Description: The School Districts dataset contains the spatial representation (polygon)
 #>  of the current extent of the administrative areas defined under section 176(1) of the
 #>  School Act for the purposes of preservation and promotion of the fundamental principle
 #>  of local autonomy and control of public education at the public and governmental levels
 #>  through locally elected school boards.
-#> Resources: (3)
-#> # A tibble: 3 x 8
-#>   name        url                  id        format ext   package_id     location   bcdata_available
-#>   <chr>       <chr>                <chr>     <chr>  <chr> <chr>          <chr>      <lgl>           
-#> 1 BC Geograp… https://catalogue.d… 529507c4… other  ""    78ec5279-4534… bcgeograp… FALSE           
-#> 2 WMS getCap… https://openmaps.go… 57d8843b… wms    ""    78ec5279-4534… bcgeograp… TRUE            
-#> 3 KML Networ… http://openmaps.gov… 7493e749… kml    "kml" 78ec5279-4534… bcgeograp… FALSE           
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
+#> Available Resources (1):
+#>  1. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('78ec5279-4534-49a1-97e8-9d315936f08b')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('78ec5279-4534-49a1-97e8-9d315936f08b')
 ```
 
-This data is the boundary of each school district. The key information in this metadata is that the layer is a `**WFS request (Spatial Data)**`---which means it is available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). From this we know we can make use of `bcdc_query_geodata`.
+This data is the boundary of each school district. The key information in this metadata is that the layer has a resource in `"wms"` format ---which means it is available through a Web Feature Service. From this we know we can make use of `bcdc_query_geodata`.
 
 
 ```r
@@ -174,7 +171,6 @@ bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
 #> Type: Geographic
-#> Last Updated: 2020-11-25
 #> Description: This dataset contains spatial and attribute information for local and
 #>  regional greenspaces in British Columbia. Local and regional greenspaces are municipal
 #>  or regional district lands designated by local government agencies and managed for
@@ -183,18 +179,16 @@ bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #>  Open Government Licence, and in other cases, publicize parks and greenspaces on web maps
 #>  or pdf maps. Boundaries were edge-matched to the ParcelMap BC cadastre.  This spatial
 #>  layer contains multipart polygons.
-#> Resources: (4)
-#> # A tibble: 4 x 8
-#>   name        url                  id        format ext   package_id     location   bcdata_available
-#>   <chr>       <chr>                <chr>     <chr>  <chr> <chr>          <chr>      <lgl>           
-#> 1 WMS getCap… https://openmaps.go… a8d5b53e… wms    ""    6a2fea1b-0cc4… bcgeograp… TRUE            
-#> 2 KML Networ… http://openmaps.gov… a7454e41… kml    "kml" 6a2fea1b-0cc4… bcgeograp… FALSE           
-#> 3 LocalRegio… https://catalogue.d… 76663191… xlsx   "xls… 6a2fea1b-0cc4… external   TRUE            
-#> 4 BC Geograp… https://catalogue.d… 53c6c6bd… other  ""    6a2fea1b-0cc4… bcgeograp… FALSE           
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
+#> Available Resources (2):
+#>  1. WMS getCapabilities request (wms)
+#>  2. LocalRegionalParksAttributeValues (xlsx)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('6a2fea1b-0cc4-4fc2-8017-eaf755d516da')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('6a2fea1b-0cc4-4fc2-8017-eaf755d516da')
 ```
 
-Again we recognize this is [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data, which means we can make use of `bcdc_query_geodata`.
+Again we recognize this is [WFS-enabled](https://en.wikipedia.org/wiki/Web_Feature_Service) geospatial data, which means we can make use of `bcdc_query_geodata`.
 
 
 ```r
@@ -305,7 +299,7 @@ A second approach is to set an internal option (`bcdata.max_geom_pred_size`) and
 options("bcdata.max_geom_pred_size" = {object size in bytes})
 ```
 
-The value of `bcdata.max_geom_pred_size` is set conservatively so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests.
+The value of `bcdata.max_geom_pred_size` is set conservatively so that requests to the Web Feature Service are more consistently successful. Increasing this value may result in invalid requests.
 
 Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:
 
@@ -420,14 +414,14 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 x 12
-#>   id        CUSTODIAN_ORG_DESCRI… BUSINESS_CATEGOR… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID
-#>   <chr>     <chr>                 <chr>             <chr>            <chr>            <chr>         
-#> 1 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      455           
-#> 2 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      464           
-#> 3 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      482           
-#> 4 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      483           
-#> 5 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      484           
-#> 6 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      487           
+#>   id         CUSTODIAN_ORG_DESCRI… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID
+#>   <chr>      <chr>                 <chr>            <chr>            <chr>            <chr>         
+#> 1 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      455           
+#> 2 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      464           
+#> 3 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      482           
+#> 4 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      483           
+#> 5 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      484           
+#> 6 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      487           
 #> # … with 6 more variables: SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>, LOCALITY <chr>,
 #> #   NUMBER_OF_RUNWAYS <int>, SEQUENCE_ID <int>, geometry <POINT [m]>
 ```

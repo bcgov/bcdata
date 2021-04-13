@@ -13,7 +13,7 @@
 \method{as_tibble}{bcdc_promise}(x, ...)
 }
 \arguments{
-\item{x}{object of class bcdc_promise}
+\item{x}{object of class \code{bcdc_promise}}
 }
 \description{
 See \code{tibble::\link[tibble]{as_tibble}} for details.

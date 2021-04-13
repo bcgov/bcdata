@@ -40,8 +40,8 @@ Catalogue](https://catalogue.data.gov.bc.ca).
 -   `bcdc_tidy_resources()` - Get a data frame of resources for a record
 -   `bcdc_get_data()` - Get catalogue data
 -   `bcdc_query_geodata()` - Get & query catalogue geospatial data
-    available through a [Web
-    Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
+    available through a [Web Feature
+    Service](https://en.wikipedia.org/wiki/Web_Feature_Service)
 
 **Note:** The `bcdata` package supports downloading *most* file types,
 including zip archives. It will do its best to identify and read data

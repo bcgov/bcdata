@@ -29,7 +29,7 @@ Default \code{TRUE}}
 the import based on the file extension. \code{\link[=bcdc_read_functions]{bcdc_read_functions()}} provides details on which functions
 handle the data import. You can then use this information to look at the help pages of those functions.
 See the examples for a workflow that illustrates this process.
-For spatial Web Service data the \code{...} arguments are passed to \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}}.}
+For spatial Web Feature Service data the \code{...} arguments are passed to \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}}.}
 }
 \value{
 An object of a type relevant to the resource (usually a tibble or an sf object)
