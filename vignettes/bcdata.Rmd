@@ -106,7 +106,6 @@ bcdc_search("recycling", n = 1)
 #> Access a single record by calling `bcdc_get_record(ID)` with the ID from the desired
 #>  record.
 
-
 ## Give me the catalogue search results for 'recycling' where the
 ## data is tabular and licenced under Open Government Licence – British Columbia
 bcdc_search("recycling", type = "Dataset", license_id = "2")
@@ -117,7 +116,6 @@ bcdc_search("recycling", type = "Dataset", license_id = "2")
 #>  ID: a29ad492-29a2-44b9-8693-d27a8cc8e686
 #>  Name: bc-first-tire-recycling-data-1991-2006
 #> 
-
 #> Access a single record by calling `bcdc_get_record(ID)` with the ID from the desired
 #>  record.
 ```
@@ -155,20 +153,16 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 #> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
 #> Type: Dataset
-#> Last Updated: 2018-07-12
 #> Description: Financial Incentives for Recycling Scrap Tires (FIRST) collection and
 #>  recycling data (tonnes) from 1991 to 2006. In 2007 [Tire Stewardship
 #>  BC](http://www.tsbc.ca/), a not for profit society, launched the new scrap tire
 #>  recycling program replacing the government-run program that had been in place since
 #>  1991. Tire Stewardship BC collection and recycling data is available
 #>  [here](https://catalogue.data.gov.bc.ca/dataset/f791329b-c2dc-4f82-9993-209780f2a1c6).
-#> Resources: (1)
-#> # A tibble: 1 x 8
-#>   name        url                  id         format ext   package_id     location  bcdata_available
-#>   <chr>       <chr>                <chr>      <chr>  <chr> <chr>          <chr>     <lgl>           
-#> 1 BC FIRST T… https://catalogue.d… ed24cca3-… csv    csv   a29ad492-29a2… catalogu… TRUE            
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
-
+#> Available Resources (1):
+#>  1. BC FIRST Tire Recycling Data 1991-2006 (csv)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('a29ad492-29a2-44b9-8693-d27a8cc8e686')
 ```
 
 ### `bcdc_get_data()`
@@ -197,7 +191,6 @@ bcdc_get_data("bc-highway-cams")
 #> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, updatePeriodMean <dbl>,
 #> #   updatePeriodStdDev <dbl>
 
-
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 #> # A tibble: 894 x 17
@@ -217,7 +210,6 @@ bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
 #> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, updatePeriodMean <dbl>,
 #> #   updatePeriodStdDev <dbl>
-
 
 ## OR use the result from bcdc_get_record()
 my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
@@ -265,17 +257,14 @@ bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
 #> Sector: Education
 #> Licence: Open Government Licence - British Columbia
 #> Type: Dataset
-#> Last Updated: 2017-02-02
 #> Description: BC Schools English Language Learners, French Immersion, Francophone, Career
 #>  Preparation, Aboriginal Support Services, Aboriginal Language and Culture, Continuing
 #>  Education and Career Technical Programs offered in BC schools up to 2013/2014.
-#> Resources: (2)
-#> # A tibble: 2 x 8
-#>   name       url                  id          format ext   package_id      location bcdata_available
-#>   <chr>      <chr>                <chr>       <chr>  <chr> <chr>           <chr>    <lgl>           
-#> 1 ProgramsO… http://www.bced.gov… a393f8cf-5… txt    txt   b1f27d1c-244a-… external TRUE            
-#> 2 ProgramsO… http://www.bced.gov… 1e34098e-7… xlsx   xlsx  b1f27d1c-244a-… external TRUE            
-#> You can access the 'Resources' data frame using bcdc_tidy_resources()
+#> Available Resources (2):
+#>  1. ProgramsOfferedinSchools.txt (txt)
+#>  2. ProgramsOfferedinSchools.xlsx (xlsx)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('b1f27d1c-244a-410e-a361-931fac62a524')
 ```
 
 We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The resource ID for each data set is available _in_ the metadata record ☝️:

@@ -63,3 +63,232 @@ We can gather the data we need to answer our question using the [RESULTS - silvi
 # Get the metadata using the human-readable record name
 bcdc_get_record("results-forest-cover-silviculture")
 #> B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture
+#> Name: results-forest-cover-silviculture (ID: 258bb088-4113-47b1-b568-ce20bd64e3e3)
+#> Permalink: https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3
+#> Sector: Natural Resources
+#> Licence: Open Government Licence - British Columbia
+#> Type: Geographic
+#> Description: RESULTS opening's forest cover poylgons with silviculture component
+#>  provided.  Current forest cover subimssion into RESULTS must contain attribute and map
+#>  information.  However, there are historical forest cover polygon infomration where maps
+#>  are not available.  Forest Cover is provided at three critical milestones of at
+#>  harvesting, at regeneration, and at free growing.  This is a part o fthe Silviculture
+#>  and Land Status Tracking dataset, which includes tracking achievement of silviculture
+#>  obligations on Crown Land
+#> Available Resources (1):
+#>  1. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('258bb088-4113-47b1-b568-ce20bd64e3e3')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('258bb088-4113-47b1-b568-ce20bd64e3e3')
+```
+
+We see that this is a [Web Feature Service-enabled](https://en.wikipedia.org/wiki/Web_Feature_Service) geospatial data set--the list of data resources includes `WMS getCapabilities request`--so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
+
+
+```r
+# Query the data using the permanent ID of the record to guard against name changes
+bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
+#> Querying 'results-forest-cover-silviculture' record
+#> ● Using collect() on this object will return 888963 features and 159 fields
+#> ● Accessing this record requires pagination and will make 889 separate requests to the WFS.
+#> ● See ?bcdc_options
+#> ● At most six rows of the record are printed here
+#> ────────────────────────────────────────────────────────────────────────────────────────────────────
+#> Simple feature collection with 6 features and 159 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 1184167 ymin: 676633.7 xmax: 1411085 ymax: 1083545
+#> Projected CRS: NAD83 / BC Albers
+#> # A tibble: 6 x 160
+#>   id                 FOREST_COVER_ID STOCKING_STANDARD… OPENING_ID STANDARDS_UNIT_… SILV_POLYGON_NU…
+#>   <chr>                        <int>              <int>      <int> <chr>            <chr>           
+#> 1 WHSE_FOREST_VEGET…         3994018            1805957    1486231 2                2               
+#> 2 WHSE_FOREST_VEGET…         3994007                 NA    1248495 <NA>             91              
+#> 3 WHSE_FOREST_VEGET…         3994067                 NA    1120935 <NA>             86              
+#> 4 WHSE_FOREST_VEGET…         3994009            1404558    1248495 A                AA              
+#> 5 WHSE_FOREST_VEGET…         3994057            1211894    1120935 B                2B              
+#> 6 WHSE_FOREST_VEGET…         3994063                 NA    1120935 <NA>             82              
+#> # … with 154 more variables: SILV_POLYGON_AREA <dbl>, SILV_POLYGON_NET_AREA <dbl>,
+#> #   SILV_NON_MAPPED_AREA <int>, STOCKING_STATUS_CODE <chr>, STOCKING_TYPE_CODE <chr>,
+#> #   STOCKING_CLASS_CODE <chr>, SILV_RESERVE_CODE <chr>, SILV_RESERVE_OBJECTIVE_CODE <chr>,
+#> #   TREE_COVER_PATTERN_CODE <chr>, REENTRY_YEAR <chr>, REFERENCE_YEAR <int>, SITE_INDEX <int>,
+#> #   SITE_INDEX_SOURCE_CODE <chr>, BGC_ZONE_CODE <chr>, BGC_SUBZONE_CODE <chr>, BGC_VARIANT <chr>,
+#> #   BGC_PHASE <chr>, BEC_SITE_SERIES <chr>, BEC_SITE_TYPE <chr>, BEC_SERAL <chr>,
+#> #   IS_SILV_IMPLIED_IND <chr>, FOREST_COVER_SILV_TYPE <chr>, S_FOREST_COVER_LAYER_ID <int>,
+#> #   S_TOTAL_STEMS_PER_HA <chr>, S_TOTAL_WELL_SPACED_STEMS_HA <int>,
+#> #   S_WELL_SPACED_STEMS_PER_HA <int>, S_FREE_GROWING_STEMS_PER_HA <int>,
+#> #   S_CROWN_CLOSURE_PERCENT <chr>, S_BASAL_AREA <chr>, S_SPECIES_CODE_1 <chr>,
+#> #   S_SPECIES_PERCENT_1 <int>, S_SPECIES_AGE_1 <int>, S_SPECIES_HEIGHT_1 <dbl>,
+#> #   S_SPECIES_CODE_2 <chr>, S_SPECIES_PERCENT_2 <int>, S_SPECIES_AGE_2 <chr>,
+#> #   S_SPECIES_HEIGHT_2 <chr>, S_SPECIES_CODE_3 <chr>, S_SPECIES_PERCENT_3 <int>,
+#> #   S_SPECIES_CODE_4 <chr>, S_SPECIES_PERCENT_4 <chr>, S_SPECIES_CODE_5 <chr>,
+#> #   S_SPECIES_PERCENT_5 <chr>, S_MORE_SPECIES_EXIST_IND <chr>, S_SILV_LABEL <chr>,
+#> #   S1_FOREST_COVER_LAYER_ID <int>, S1_TOTAL_STEMS_PER_HA <int>,
+#> #   S1_TOTAL_WELL_SPACED_STEMS_HA <int>, S1_WELL_SPACED_STEMS_PER_HA <int>,
+#> #   S1_FREE_GROWING_STEMS_PER_HA <int>, S1_CROWN_CLOSURE_PERCENT <int>, S1_BASAL_AREA <chr>,
+#> #   S1_SPECIES_CODE_1 <chr>, S1_SPECIES_PERCENT_1 <int>, S1_SPECIES_AGE_1 <int>,
+#> #   S1_SPECIES_HEIGHT_1 <int>, S1_SPECIES_CODE_2 <chr>, S1_SPECIES_PERCENT_2 <chr>,
+#> #   S1_SPECIES_AGE_2 <chr>, S1_SPECIES_HEIGHT_2 <chr>, S1_SPECIES_CODE_3 <chr>,
+#> #   S1_SPECIES_PERCENT_3 <chr>, S1_SPECIES_CODE_4 <chr>, S1_SPECIES_PERCENT_4 <chr>,
+#> #   S1_SPECIES_CODE_5 <chr>, S1_SPECIES_PERCENT_5 <chr>, S1_MORE_SPECIES_EXIST_IND <chr>,
+#> #   S1_SILV_LABEL <chr>, S2_FOREST_COVER_LAYER_ID <int>, S2_TOTAL_STEMS_PER_HA <int>,
+#> #   S2_TOTAL_WELL_SPACED_STEMS_HA <int>, S2_WELL_SPACED_STEMS_PER_HA <int>,
+#> #   S2_FREE_GROWING_STEMS_PER_HA <int>, S2_CROWN_CLOSURE_PERCENT <int>, S2_BASAL_AREA <chr>,
+#> #   S2_SPECIES_CODE_1 <chr>, S2_SPECIES_PERCENT_1 <int>, S2_SPECIES_AGE_1 <int>,
+#> #   S2_SPECIES_HEIGHT_1 <int>, S2_SPECIES_CODE_2 <chr>, S2_SPECIES_PERCENT_2 <chr>,
+#> #   S2_SPECIES_AGE_2 <chr>, S2_SPECIES_HEIGHT_2 <chr>, S2_SPECIES_CODE_3 <chr>,
+#> #   S2_SPECIES_PERCENT_3 <chr>, S2_SPECIES_CODE_4 <chr>, S2_SPECIES_PERCENT_4 <chr>,
+#> #   S2_SPECIES_CODE_5 <chr>, S2_SPECIES_PERCENT_5 <chr>, S2_MORE_SPECIES_EXIST_IND <chr>,
+#> #   S2_SILV_LABEL <chr>, S3_FOREST_COVER_LAYER_ID <int>, S3_TOTAL_STEMS_PER_HA <int>,
+#> #   S3_TOTAL_WELL_SPACED_STEMS_HA <int>, S3_WELL_SPACED_STEMS_PER_HA <int>,
+#> #   S3_FREE_GROWING_STEMS_PER_HA <int>, S3_CROWN_CLOSURE_PERCENT <int>, S3_BASAL_AREA <chr>,
+#> #   S3_SPECIES_CODE_1 <chr>, S3_SPECIES_PERCENT_1 <int>, …
+```
+
+This query shows that this data set has over 850,000 features and over 150 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
+
+Note that we have only _queried_ the data set so far---the data set would be too large (~1GB) to download efficiently.  So, let's use `filter()` with `bcdc_query_geodata()` to refine our query _before_ we collect the data and import it into R.
+
+
+## Refining a Geospatial Data Query
+
+To address our question, we need the treatment data (1) from the Prince George Natural Resource District _and_ (2) that contain western larch.
+
+First, we can use the `bcdata` package to download the spatial boundary for the Prince George Natural Resource District&mdash;`DPG` is the `ORG_UNIT` for Prince George Natural Resource District:
+
+
+```r
+## Create a spatial feature object named dpg
+dpg <- bcdc_query_geodata("natural-resource-nr-district") %>%
+  filter(ORG_UNIT=="DPG") %>% # filter for Prince George Natural Resource District
+  collect() # and collect the data
+```
+
+Let's plot this spatial object and double check we have we what we need:
+
+
+```r
+dpg %>%
+  ggplot() +
+  geom_sf() +
+  theme_minimal()
+```
+
+<img src="vignette-fig-plot-dpg-1.png" title="plot of chunk plot-dpg" alt="plot of chunk plot-dpg" width="100%" />
+
+Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.
+
+We only need to download the treatments that have western larch planted. We can use the `bcdc_describe_feature()` helper function to examine the column names and types of the layer. In this case, we want to keep rows where the five `S_SPECIES_CODE_*` columns contain `"LW"`, the code for western larch.
+
+
+```r
+# Make a vector of tree species we are interested in
+# (in this case only LW for western larch)
+spp_list = c("LW")
+
+# Query and filter the data layer
+trees_dpg <-
+  bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3") %>%
+  filter(INTERSECTS(dpg)) %>% #filter for records that are within the DPG boundary
+  filter(
+      S_SPECIES_CODE_1 %in% spp_list |  #filter for LW records
+      S_SPECIES_CODE_2 %in% spp_list |
+      S_SPECIES_CODE_3 %in% spp_list |
+      S_SPECIES_CODE_4 %in% spp_list |
+      S_SPECIES_CODE_5 %in% spp_list
+  ) %>%
+  collect() #collect/download the data
+```
+
+
+## Exploring the Data
+
+Let's look at the dimensions of this now much more manageable data object we have downloaded from the B.C. Data Catalogue:
+
+
+```r
+dim(trees_dpg)
+#> [1] 156 160
+```
+
+We can see there are 156 treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:
+
+
+```r
+trees_dpg %>%
+  ggplot() +
+  geom_sf() +
+  geom_sf(data = dpg, fill = NA) + #add the DPG spatial boundary
+  theme_minimal()
+```
+
+<img src="vignette-fig-map-larch-plantations-dpg-1.png" title="plot of chunk map-larch-plantations-dpg" alt="plot of chunk map-larch-plantations-dpg" width="100%" />
+
+
+We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
+
+
+#### What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?
+
+
+```r
+trees_dpg %>%
+  mutate(age = 2020 - REFERENCE_YEAR + S_SPECIES_AGE_1) %>% #create a plantation age column
+  ggplot() +  #start a plot
+  aes(x = age, y = FEATURE_AREA_SQM/10000) + #convert feature area to hectares
+  geom_bar(stat = "sum") +
+  scale_x_continuous(name = "Stand Age (years)",
+                     limits = c(2, 30),
+                     breaks = seq(from = 5, to = 30, by = 5)) +
+  labs(y = "Sum Treatment Unit Area (ha)",
+       title = "Area Planted with Western Larch by Stand Age\nin Prince George Natural Resource District",
+       caption = paste0("Data sourced from the B.C. Data Catalogue\n on ",
+                        Sys.Date(),
+                        " using the bcdata R package")) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+<img src="vignette-fig-unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="100%" />
+
+#### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
+
+We can download [British Columbia biogeoclimatic (BEC) data](https://catalogue.data.gov.bc.ca/dataset/bec-map) from the B.C. Data Catalogue using `bcdata` and join to our existing `trees_dpg` geospatial dataset using the `st_join` function from the `sf` package. You can learn more about `sf` [here](https://r-spatial.github.io/sf/).
+
+
+
+```r
+library(sf) #load the sf package
+
+# Load the BEC data for Prince George Natural Resource District
+bgc_dpg <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") %>%
+  filter(BBOX(dpg, crs = `EPSG:3005`)) %>% #note filtering with a BoundingBox
+  collect()
+
+# Join the BEC data with our tress_dpg geospatial data set
+trees_bec_dpg <- trees_dpg %>%
+  st_join(bgc_dpg[, "MAP_LABEL"]) #join BEC data for each polygon
+```
+
+Now, we can summarize the area planted with western larch by biogeoclimatic unit:
+
+
+```r
+trees_bec_dpg %>%
+  group_by(MAP_LABEL) %>% # group polygons by biogeoclimatic unit
+  summarise(Area = sum(FEATURE_AREA_SQM)/10000) %>%
+  ggplot() +
+  aes(x = MAP_LABEL, y = Area) +
+  geom_col() +
+  labs(y = "Sum Treatment Unit Area (ha)",
+       x = "Biogeoclimatic Unit",
+       title = "Area Planted with Western Larch by Biogeoclimatic Unit\nin Prince George Natural Resource District",
+       caption = paste0("Data sourced from the B.C. Data Catalogue\n on ",
+                        Sys.Date(),
+                        " using the bcdata R package")) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+<img src="vignette-fig-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%" />
