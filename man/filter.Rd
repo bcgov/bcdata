@@ -3,7 +3,7 @@
 \name{filter.bcdc_promise}
 \alias{filter.bcdc_promise}
 \alias{filter}
-\title{Filter a query from Web Service call}
+\title{Filter a query from bcdc_query_geodata()}
 \usage{
 \method{filter}{bcdc_promise}(.data, ...)
 }
@@ -18,8 +18,10 @@ If you know \code{CQL} and want to write a \code{CQL} query directly, write it e
 in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("ID = '42'")}}
 }
 \description{
-Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
-full sf object is not read into memory until \code{collect()} has been called.
+Filter a query from Web Feature Service using dplyr
+methods. This filtering is accomplished lazily so that
+the full sf object is not read into memory until
+\code{collect()} has been called.
 
 See \code{dplyr::\link[dplyr]{filter}} for details.
 }
@@ -30,13 +32,17 @@ See \code{dplyr::\link[dplyr]{filter}} for details.
 
 \examples{
 \donttest{
+try(
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") \%>\%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") \%>\%
     collect()
+)
 
-ret1 <- bcdc_query_geodata("fire-perimeters-historical") \%>\%
-  filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
-  collect()
+try(
+  ret1 <- bcdc_query_geodata("fire-perimeters-historical") \%>\%
+    filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
+    collect()
+)
   }
 }
 \keyword{internal}

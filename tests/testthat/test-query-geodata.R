@@ -64,5 +64,5 @@ test_that("bcdc_query_geodata fails when no wfs available", {
   skip_if_net_down()
   skip_on_cran()
   expect_error(bcdc_query_geodata("dba6c78a-1bc1-4d4f-b75c-96b5b0e7fd30"),
-               "No Web Service resource available")
+               "No Web Feature Service resource available")
 })

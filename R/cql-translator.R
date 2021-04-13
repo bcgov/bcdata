@@ -49,14 +49,14 @@ cql_translate <- function(...) {
     rlang::new_quosure(dbplyr::partial_eval(x), rlang::get_env(x))
   })
 
-  sql_where <- dbplyr::translate_sql_(dots, con = cql_dummy_con, window = FALSE)
+  sql_where <- dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE)
 
   build_where(sql_where)
 }
 
 # Builds a complete WHERE clause from a vector of WHERE statements
 # Modified from dbplyr:::sql_clause_where
-build_where <- function(where, con = cql_dummy_con) {
+build_where <- function(where, con = wfs_con) {
   if (length(where) > 0L) {
     where_paren <- dbplyr::escape(where, parens = TRUE, con = con)
     dbplyr::build_sql(
@@ -130,18 +130,30 @@ cql_agg <- dbplyr::sql_translator(
   max        = no_agg("max")
 )
 
+#' wfsConnection class
+#'
+#' @import methods
+#' @import DBI
+#' @export
+#' @keywords internal
+setClass("wfsConnection",
+         contains = "DBIConnection"
+)
 
 # A dummy connection object to ensure the correct sql_translate is used
-cql_dummy_con <- structure(
+wfs_con <- structure(
   list(),
-  class = c("DummyCQL", "DBITestConnection", "DBIConnection")
+  class = c("wfsConnection", "DBIConnection")
 )
 
 # Custom sql_translator using cql variants defined above
 #' @keywords internal
 #' @importFrom dplyr sql_translate_env
 #' @export
-sql_translate_env.DummyCQL <- function(con) {
+# TODO: After dbplyr 2.0 I think this will be sql_translation, with
+# generic from dbplyr rather than dplyr
+# (https://dbplyr.tidyverse.org/dev/articles/backend-2.html)
+sql_translate_env.wfsConnection <- function(conn) {
   dbplyr::sql_variant(
     cql_scalar,
     cql_agg,
@@ -150,17 +162,37 @@ sql_translate_env.DummyCQL <- function(con) {
 }
 
 # Make sure that identities (LHS of relations) are escaped with double quotes
+# TODO: After dbplyr 2.0 I think we can remove these and move the body into dbQuoteIdentifier
 #' @keywords internal
 #' @importFrom dplyr sql_escape_ident
 #' @export
-sql_escape_ident.DummyCQL <- function(con, x) {
+sql_escape_ident.wfsConnection <- function(conn, x) {
   dbplyr::sql_quote(x, "\"")
 }
 
 # Make sure that strings (RHS of relations) are escaped with single quotes
+# TODO: After dbplyr 2.0 I think we can remove these and move the body into dbQuoteString
 #' @keywords internal
 #' @importFrom dplyr sql_escape_string
 #' @export
-sql_escape_string.DummyCQL <- function(con, x) {
+sql_escape_string.wfsConnection <- function(conn, x) {
   dbplyr::sql_quote(x, "'")
 }
+
+# Make sure that identities (LHS of relations) are escaped with double quotes
+
+#' @keywords internal
+#' @rdname wfsConnection-class
+#' @exportMethod dbQuoteIdentifier
+#' @export
+setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
+          sql_escape_ident.wfsConnection)
+
+# Make sure that strings (RHS of relations) are escaped with single quotes
+
+#' @keywords internal
+#' @rdname wfsConnection-class
+#' @exportMethod dbQuoteString
+#' @export
+setMethod("dbQuoteString", c("wfsConnection", "ANY"),
+          sql_escape_string.wfsConnection)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_query_geodata}
 \alias{bcdc_query_geodata}
-\title{Query data from the B.C. Web Service}
+\title{Query data from the B.C. Web Feature Service}
 \usage{
 bcdc_query_geodata(record, crs = 3005)
 }
@@ -27,10 +27,15 @@ required to retrieve the requested data. In order to get the actual data as
 an \code{sf} object, you need to run \code{\link[=collect]{collect()}} on the \code{bcdc_promise}.
 }
 \description{
-Queries features from the B.C. Web Service. The data must be available as
-a Web Service. See \code{bcdc_get_record(record)$resources}). If the record is greater than 10000 rows,
-the response will be paginated. If you are querying layers of this size, expect
-that the request will take quite a while.
+Queries features from the B.C. Web Feature Service. See
+\code{\link[=bcdc_tidy_resources]{bcdc_tidy_resources()}} - if a resource has a value of
+\code{"wms"} in the \code{format} column it is available as a Web
+Feature Service, and you can query and download it
+using \code{bcdc_query_geodata()}. The response will be
+paginated if the number of features is above the number
+set by the \code{bcdata.single_download_limit} option.
+Please see \code{\link[=bcdc_options]{bcdc_options()}} for defaults and more
+information.
 }
 \details{
 Note that this function doesn't actually return the data, but rather an
@@ -45,29 +50,43 @@ object with \code{\link[=collect]{collect()}}. See examples.
 
 \donttest{
 # Returns a bcdc_promise, which can be further refined using filter/select:
-bcdc_query_geodata("bc-airports", crs = 3857)
+try(
+  bcdc_query_geodata("bc-airports", crs = 3857)
+)
 
 # To obtain the actual data as an sf object, collect() must be called:
-bcdc_query_geodata("bc-airports", crs = 3857) \%>\%
-  filter(PHYSICAL_ADDRESS == 'Victoria, BC') \%>\%
-  collect()
+try(
+  bcdc_query_geodata("bc-airports", crs = 3857) \%>\%
+    filter(PHYSICAL_ADDRESS == 'Victoria, BC') \%>\%
+    collect()
+)
 
-bcdc_query_geodata("ground-water-wells") \%>\%
-  filter(OBSERVATION_WELL_NUMBER == 108) \%>\%
-  select(WELL_TAG_NUMBER, INTENDED_WATER_USE) \%>\%
-  collect()
+try(
+  bcdc_query_geodata("groundwater-wells") \%>\%
+    filter(OBSERVATION_WELL_NUMBER == "108") \%>\%
+    select(WELL_TAG_NUMBER, INTENDED_WATER_USE) \%>\%
+    collect()
+)
 
 ## A moderately large layer
-bcdc_query_geodata("bc-environmental-monitoring-locations")
-bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
-  filter(PERMIT_RELATIONSHIP == "DISCHARGE")
+try(
+  bcdc_query_geodata("bc-environmental-monitoring-locations")
+)
+
+try(
+  bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
+    filter(PERMIT_RELATIONSHIP == "DISCHARGE")
+)
 
 
 ## A very large layer
-bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+try(
+  bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+)
 
 ## Using a BCGW name
-bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+try(
+  bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+)
 }
-
 }

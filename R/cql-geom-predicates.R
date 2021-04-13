@@ -34,7 +34,7 @@ CQL <- function(...) {
 #' Convenience wrapper to convert sf objects and geometric operations into CQL
 #' filter strings which can then be supplied to filter.bcdc_promise.
 #' The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
+#' bounding box to reduce the complexity of the Web Feature Service call. Subsequent in-memory
 #' filtering may be need to achieve exact results.
 #'
 #'
@@ -48,8 +48,10 @@ CQL <- function(...) {
 #'
 #' @examples
 #' \donttest{
-#' airports <- bcdc_query_geodata("bc-airports") %>% collect()
-#' bcdc_cql_string(airports, "DWITHIN")
+#' try({
+#'   airports <- bcdc_query_geodata("bc-airports") %>% collect()
+#'   bcdc_cql_string(airports, "DWITHIN")
+#' })
 #' }
 #'
 #' @noRd
@@ -72,7 +74,7 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
   # Only convert x to bbox if not using BBOX CQL function
   # because it doesn't take a geom
   if (!geometry_predicates == "BBOX") {
-    x <- sf_text(x)
+    x <- sf_text(x, geometry_predicates)
   }
 
   cql_args <-
@@ -101,19 +103,16 @@ cql_geom_predicate_list <- function() {
     "DWITHIN", "BEYOND", "BBOX")
 }
 
-sf_text <- function(x) {
+sf_text <- function(x, pred) {
 
-  if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
-    stop(paste(deparse(substitute(x)), "is not a valid sf object"),
-         call. = FALSE)
-  }
-
-  ## If too big here, drawing bounding
-  if (utils::object.size(x) > getOption("bcdata.max_geom_pred_size", 5E5)) {
-    warning("The object is too large to perform exact spatial operations using bcdata.
-             To simplify the polygon, a bounding box was drawn around the polygon and all
-             features within the box will be returned. Options include further processing
-             with on the returned object or simplify the object.", call. = FALSE)
+  if (!bcdc_check_geom_size(x)) {
+    message(
+      bold_red(
+        glue::glue(
+          "A bounding box was drawn around the object passed to {pred} and all features within the box will be returned."
+          )
+        )
+      )
     x <- sf::st_bbox(x)
   }
 
@@ -126,6 +125,58 @@ sf_text <- function(x) {
   sf::st_as_text(x)
 }
 
+
+#' Check spatial objects for WFS spatial operations
+#'
+#' Check a spatial object to see if it exceeds the current set value of
+#' 'bcdata.max_geom_pred_size' option, which controls how the object is treated when used inside a spatial predicate function in [filter.bcdc_promise()]. If the object does exceed the size
+#' threshold a bounding box is drawn around it and all features
+#' within the box will be returned. Further options include:
+#' - Try adjusting the value of the 'bcdata.max_geom_pred_size' option
+#' - Simplify the spatial object to reduce its size
+#' - Further processing on the returned object
+#'
+#' @details See the [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
+#' for more details.
+#'
+#' @param x object of class sf, sfc or sfg
+#'
+#' @return invisibly return logical indicating whether the check pass. If the return
+#' value is TRUE, the object will not need a bounding box drawn. If the return value is
+#' FALSE, the check will fails and a bounding box will be drawn.
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' try({
+#'   airports <- bcdc_query_geodata("bc-airports") %>% collect()
+#'   bcdc_check_geom_size(airports)
+#' })
+#' }
+bcdc_check_geom_size <- function(x) {
+  if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
+    stop(paste(deparse(substitute(x)), "is not a valid sf object"),
+         call. = FALSE)
+  }
+
+  if (inherits(x, "bbox")) return(invisible(TRUE))
+
+  obj_size <- utils::object.size(sf::st_geometry(x))
+
+  option_size <- getOption("bcdata.max_geom_pred_size", 5E5)
+
+  ## If size ok, return TRUE
+  if (obj_size < option_size) return(invisible(TRUE))
+
+  message(bold_blue(glue::glue("The object is too large to perform exact spatial operations using bcdata.")))
+  message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
+  message(bold_blue(glue::glue("BC Data Threshold: {formatC(option_size, format = 'd')} bytes")))
+  message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
+  message(bold_blue("See ?bcdc_check_geom_size for more details"))
+
+  invisible(FALSE)
+}
+
 # Separate functions for all CQL geometry predicates
 
 #' CQL Geometry Predicates
@@ -134,7 +185,7 @@ sf_text <- function(x) {
 #' to filter results from [bcdc_query_geodata()].
 #' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
 #' The sf object is automatically converted in a
-#' bounding box to reduce the complexity of the Web Service call. Subsequent in-memory
+#' bounding box to reduce the complexity of the Web Feature Service call. Subsequent in-memory
 #' filtering may be needed to achieve exact results.
 #'
 #' @param geom an `sf`/`sfc`/`sfg` or `bbox` object (from the `sf` package)

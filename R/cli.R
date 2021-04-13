@@ -1,4 +1,4 @@
-# Copyright 2019 Province of British Columbia
+# Copyright 2021 Province of British Columbia
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -10,14 +10,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("confirm browsing ability")
 
-test_that("bcdc_browse returns the correct url", {
-  skip_if_net_down()
-  skip_on_cran()
-  forest_url <- bcdc_browse("forest")
-  expect_identical(forest_url, "https://catalogue.data.gov.bc.ca/dataset?q=forest")
-  catalogue_url <- bcdc_browse()
-  expect_identical(catalogue_url, "https://catalogue.data.gov.bc.ca")
+bold_blue <- function(...) {
+  cli::col_blue(cli::style_bold(...))
+}
 
-})
+bold_red <- function(...) {
+  cli::col_red(cli::style_bold(...))
+}

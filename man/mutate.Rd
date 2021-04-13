@@ -3,7 +3,7 @@
 \name{mutate.bcdc_promise}
 \alias{mutate.bcdc_promise}
 \alias{mutate}
-\title{Throw an informative error when attempting mutate on a Web Service call}
+\title{Throw an informative error when attempting mutate on a \code{bcdc_promise} object}
 \usage{
 \method{mutate}{bcdc_promise}(.data, ...)
 }
@@ -28,8 +28,10 @@ See \code{dplyr::\link[dplyr]{mutate}} for details.
 \dontrun{
 
 ## Mutate columns
-bcdc_query_geodata("bc-airports") \%>\%
-  mutate(LATITUDE * 100)
+try(
+  bcdc_query_geodata("bc-airports") \%>\%
+    mutate(LATITUDE * 100)
+)
 }
 
 }

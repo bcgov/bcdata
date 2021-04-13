@@ -13,36 +13,35 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
 
-# bcdata <a href='https://bcgov.github.io/bcdata'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# bcdata <a href='https://bcgov.github.io/bcdata/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
-<a id="devex-badge" rel="Delivery" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/delivery.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a>
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![R build
 status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata)
 [![Codecov test
 coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://codecov.io/gh/bcgov/bcdata?branch=master)
-
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
 [![cran
 checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org/web/checks/check_results_bcdata.html)
+[![img](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
 Catalogue](https://catalogue.data.gov.bc.ca).
 
-  - `bcdc_browse()` - Open the catalogue in your default browser
-  - `bcdc_search()` - Search records in the catalogue
-  - `bcdc_search_facets()` - List catalogue facet search options
-  - `bcdc_get_record()` - Print a catalogue record
-  - `bcdc_tidy_resources()` - Get a data frame of resources for a record
-  - `bcdc_get_data()` - Get catalogue data
-  - `bcdc_query_geodata()` - Get & query catalogue geospatial data
-    available through a [Web
-    Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E)
+-   `bcdc_browse()` - Open the catalogue in your default browser
+-   `bcdc_search()` - Search records in the catalogue
+-   `bcdc_search_facets()` - List catalogue facet search options
+-   `bcdc_get_record()` - Print a catalogue record
+-   `bcdc_tidy_resources()` - Get a data frame of resources for a record
+-   `bcdc_get_data()` - Get catalogue data
+-   `bcdc_query_geodata()` - Get & query catalogue geospatial data
+    available through a [Web Feature
+    Service](https://en.wikipedia.org/wiki/Web_Feature_Service)
 
 **Note:** The `bcdata` package supports downloading *most* file types,
 including zip archives. It will do its best to identify and read data
@@ -78,14 +77,14 @@ library(bcdata)
 
 ### Vignettes
 
-  - [Get Started with
+-   [Get Started with
     bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
-  - [Querying Spatial Data with
+-   [Querying Spatial Data with
     bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
-  - [Exploring Silviculture Data with
+-   [Exploring Silviculture Data with
     bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
-  - Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (Coming
-    Soon\!)
+-   Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (Coming
+    Soon!)
 
 ### BCDC Authentication
 
@@ -110,10 +109,10 @@ authorize your calls to the catalogue, allowing you to access additional
 records that you are authorized to see if you were logged into the
 catalogue web interface. Functions that benefit from this are:
 
-  - `bcdc_search()`
-  - `bcdc_list()`
-  - `bcdc_get_record()`
-  - `bcdc_get_data()`
+-   `bcdc_search()`
+-   `bcdc_list()`
+-   `bcdc_get_record()`
+-   `bcdc_get_data()`
 
 ### Getting Help or Reporting an Issue
 
@@ -146,7 +145,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
------
+------------------------------------------------------------------------
 
 *This project was created using the
 [bcgovr](https://github.com/bcgov/bcgovr) package.*

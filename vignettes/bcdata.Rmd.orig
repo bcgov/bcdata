@@ -36,7 +36,10 @@ knitr::opts_chunk$set(
   dpi = 400
 )
 
-options(crayon.enabled = FALSE)
+options(
+   crayon.enabled = FALSE,
+   width = 100
+   )
 
 library(Cairo)
 library(bcdata)
@@ -182,7 +185,7 @@ zip files, however if there are multiple data files in the zip, or data files th
 
 ### `bcdc_query_geodata()`
 
-Many geospatial data sets in the B.C. Data Catalogue are available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
+Many geospatial data sets in the B.C. Data Catalogue are available through a [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service). While `bcdc_get_data()` will retrieve the geospatial data for you, sometimes the geospatial file is very large---and slow to download---and/or you may only want _some_ of the data. `bcdc_query_geodata()` let's you query catalogue geospatial data available as a Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
 
 Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:
 
@@ -192,6 +195,10 @@ bcdc_search("regional districts administrative areas", res_format = "wms", n = 1
 
 ## Get the metadata for the B.C. Regional Districts catalogue record
 bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7f6418b9")
+
+## We can see in the search results, and in the metadata record, that this record has a `"wms"`
+## resource format, indicating that it is available as a Web Feature Service and thus
+## we can query it using `bcdc_query_geodata()`
 
 ## Have a quick look at the geospatial columns to help with filter or select
 bcdc_describe_feature(bc_regional_districts_metadata)
@@ -209,4 +216,4 @@ my_regional_district  %>%
   theme_minimal()
 ```
 
-The vignette [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.
+The vignette [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Feature Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.

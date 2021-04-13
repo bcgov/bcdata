@@ -14,18 +14,20 @@
 #'
 #' @param facet the facet(s) for which to retrieve valid values. Can be one or
 #' more of:
-#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization"`
+#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization", "groups"`
 #'
 #' @return A data frame of values for the selected facet
 #' @export
 #'
 #' @examples
 #' \donttest{
-#' bcdc_search_facets("type")
+#' try(
+#'   bcdc_search_facets("type")
+#' )
 #' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
                                   "type", "res_format", "sector",
-                                  "organization")) {
+                                  "organization", "groups")) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   facet <- match.arg(facet, several.ok = TRUE)
@@ -52,10 +54,49 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
 }
 
+#' @export
+#' @describeIn bcdc_list_group_records
+#'
+bcdc_list_groups <- function() bcdc_search_facets("groups")
+
+#' Retrieve group information for B.C. Data Catalogue
+#'
+#' Returns a tibble of groups or records. Groups can be viewed here:
+#' https://catalogue.data.gov.bc.ca/group or accessed directly from R using `bcdc_list_groups`
+#'
+#' @param group Name of the group
+#' @export
+#' @examples
+#' \donttest{
+#' bcdc_list_group_records('environmental-reporting-bc')
+#' }
+
+bcdc_list_group_records <- function(group) {
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+
+  cli <- bcdc_catalogue_client("action/group_show")
+
+  r <- cli$get(query = list(id = group, include_datasets = 'true'))
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  stopifnot(res$success)
+
+  d <- tibble::as_tibble(res$result$packages)
+  as.bcdc_group(d, description = res$result$description)
+
+}
+
 #' Return a full list of the names of B.C. Data Catalogue records
 #'
 #' @return A character vector of the names of B.C. Data Catalogue records
 #' @export
+#' @examples
+#' \donttest{
+#' try(
+#'   bcdc_list()
+#' )
+#' }
 bcdc_list <- function() {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
@@ -100,8 +141,13 @@ bcdc_list <- function() {
 #'
 #' @examples
 #' \donttest{
-#' bcdc_search("forest")
-#' bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+#' try(
+#'   bcdc_search("forest")
+#' )
+#'
+#' try(
+#'   bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+#' )
 #' }
 bcdc_search <- function(..., license_id = NULL,
                         download_audience = "Public",
@@ -178,10 +224,21 @@ bcdc_search <- function(..., license_id = NULL,
 #'
 #' @examples
 #' \donttest{
-#' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
-#' bcdc_get_record("bc-airports")
-#' bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
-#' bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' try(
+#'   bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
+#' )
+#'
+#' try(
+#'   bcdc_get_record("bc-airports")
+#' )
+#'
+#' try(
+#'   bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' )
+#'
+#' try(
+#'   bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' )
 #' }
 bcdc_get_record <- function(id) {
 
@@ -235,6 +292,12 @@ as.bcdc_recordlist <- function(x) {
   x
 }
 
+as.bcdc_group <- function(x, description) {
+  structure(x,
+            class = c("bcdc_group", setdiff(class(x), "bcdc_group")),
+            description = description)
+}
+
 
 #' Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
 #'
@@ -249,8 +312,13 @@ as.bcdc_recordlist <- function(x) {
 #'
 #' @examples
 #' \donttest{
-#' airports <- bcdc_get_record("bc-airports")
-#' bcdc_tidy_resources(airports)
+#' try(
+#'   airports <- bcdc_get_record("bc-airports")
+#' )
+#'
+#' try(
+#'   bcdc_tidy_resources(airports)
+#' )
 #' }
 #'
 #' @export

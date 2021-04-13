@@ -50,7 +50,11 @@ print.bcdc_promise <- function(x, ...) {
 
   catch_wfs_error(cc)
 
+  ## pagination printing
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
+  sdl <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
+  cl <- getOption("bcdata.chunk_limit", default = 1000)
+  paginate <- number_of_records > sdl
 
   if (!is.null(x$query_list$count)) {
     # head or tail have updated the count
@@ -69,6 +73,8 @@ print.bcdc_promise <- function(x, ...) {
 
   cat_bullet(strwrap(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
                         "and {col_green(fields)} fields")))
+  if (paginate) cat_bullet(strwrap(glue::glue("Accessing this record requires pagination and will make {col_green(ceiling(number_of_records/cl))} separate requests to the WFS. ",
+                                              "See ?bcdc_options")))
   cat_bullet(strwrap("At most six rows of the record are printed here"))
   cat_rule()
   print(parsed)
@@ -83,13 +89,21 @@ print.bcdc_record <- function(x, ...) {
   cat_line_wrap(cli::col_blue(cli::style_italic("Sector: ")), x$sector)
   cat_line_wrap(cli::col_blue(cli::style_italic("Licence: ")), x$license_title)
   cat_line_wrap(cli::col_blue(cli::style_italic("Type: ")), x$type)
-  cat_line_wrap(cli::col_blue(cli::style_italic("Last Updated: ")), x$record_last_modified)
   cat_line_wrap(cli::col_blue(cli::style_italic("Description: ")), x$notes)
 
-  cat_line_wrap(cli::col_blue(cli::style_italic("Resources: (", nrow(bcdc_tidy_resources(x)), ")")))
-  print(bcdc_tidy_resources(x))
 
-  cat_line_wrap(cli::col_blue("You can access the 'Resources' data frame using bcdc_tidy_resources()"))
+  tidy_resources <- bcdc_tidy_resources(x)
+  avail_res <- tidy_resources[tidy_resources$bcdata_available, , drop = FALSE]
+  cat_line_wrap(cli::col_blue(cli::style_italic("Available Resources (", nrow(avail_res), "):")))
+  cli::cat_line(" ", seq_len(nrow(avail_res)), ". ", avail_res$name, " (", avail_res$format, ")")
+
+  cat_line_wrap(cli::col_blue(cli::style_italic("Access the full 'Resources' data frame using: ")),
+                cli::col_red("bcdc_tidy_resources('", x$id, "')"))
+
+  if ("wms" %in% formats_from_record(x)) {
+    cat_line_wrap(cli::col_blue(cli::style_italic("Query and filter this data using: ")),
+                  cli::col_red("bcdc_query_geodata('", x$id, "')"))
+  }
 
   invisible(x)
 }
@@ -146,6 +160,24 @@ print.bcdc_recordlist <- function(x, ...) {
 }
 
 #' @export
+print.bcdc_group <- function(x, ...) {
+
+  cat_line_wrap(cli::col_blue(
+    cli::style_italic(
+      "Group Description: "
+    )
+  ), unique(attr(x, "description")))
+
+
+
+  cat_line_wrap(cli::col_blue(
+    cli::style_italic("Number of datasets: ")), nrow(x))
+
+  print(tibble::as_tibble(x))
+}
+
+
+#' @export
 print.bcdc_query <- function(x, ...) {
 
   cat_line("<url>")
@@ -167,10 +199,12 @@ print.bcdc_query <- function(x, ...) {
 # dplyr methods -----------------------------------------------------------
 
 
-#' Filter a query from Web Service call
+#' Filter a query from bcdc_query_geodata()
 #'
-#' Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
-#' full sf object is not read into memory until `collect()` has been called.
+#' Filter a query from Web Feature Service using dplyr
+#' methods. This filtering is accomplished lazily so that
+#' the full sf object is not read into memory until
+#' `collect()` has been called.
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... Logical predicates with which to filter the results. Multiple
@@ -183,13 +217,17 @@ print.bcdc_query <- function(x, ...) {
 #' @describeIn filter filter.bcdc_promise
 #' @examples
 #' \donttest{
+#' try(
 #'   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
 #'     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
 #'     collect()
+#' )
 #'
-#' ret1 <- bcdc_query_geodata("fire-perimeters-historical") %>%
-#'   filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
-#'   collect()
+#' try(
+#'   ret1 <- bcdc_query_geodata("fire-perimeters-historical") %>%
+#'     filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
+#'     collect()
+#' )
 #'   }
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
@@ -209,13 +247,13 @@ filter.bcdc_promise <- function(.data, ...) {
                        record = .data$record, cols_df = .data$cols_df))
 }
 
-#' Select columns from Web Service call
+#' Select columns from bcdc_query_geodata() call
 #'
-#' Similar to a `dplyr::select` call, this allows you to select which columns you want the Web Service to return.
+#' Similar to a `dplyr::select` call, this allows you to select which columns you want the Web Feature Service to return.
 #' A key difference between `dplyr::select` and `bcdata::select` is the presence of "sticky" columns that are
 #' returned regardless of what columns are selected. If any of these "sticky" columns are selected
 #' only "sticky" columns are return. `bcdc_describe_feature` is one way to tell if columns are sticky in advance
-#' of issuing the Web Service call.
+#' of issuing the Web Feature Service call.
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
@@ -224,17 +262,26 @@ filter.bcdc_promise <- function(.data, ...) {
 #'
 #' @examples
 #' \donttest{
-#' feature_spec <- bcdc_describe_feature("bc-airports")
-#' ## Columns that can selected:
-#' feature_spec[feature_spec$sticky == TRUE,]
+#' try(
+#'   feature_spec <- bcdc_describe_feature("bc-airports")
+#' )
+#'
+#' try(
+#'   ## Columns that can selected:
+#'   feature_spec[feature_spec$sticky == TRUE,]
+#' )
 #'
 #' ## Select columns
-#' bcdc_query_geodata("bc-airports") %>%
-#'   select(DESCRIPTION, PHYSICAL_ADDRESS)
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     select(DESCRIPTION, PHYSICAL_ADDRESS)
+#' )
 #'
 #' ## Select "sticky" columns
-#' bcdc_query_geodata("bc-airports") %>%
-#'   select(LOCALITY)
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     select(LOCALITY)
+#' )
 #' }
 #'
 #'
@@ -284,7 +331,7 @@ tail.bcdc_promise <- function(x, n = 6L, ...) {
 }
 
 
-#' Throw an informative error when attempting mutate on a Web Service call
+#' Throw an informative error when attempting mutate on a `bcdc_promise` object
 #'
 #' The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
 #' this function exists solely to generate an informative error that suggests an alternative
@@ -297,8 +344,10 @@ tail.bcdc_promise <- function(x, n = 6L, ...) {
 #' \dontrun{
 #'
 #' ## Mutate columns
-#' bcdc_query_geodata("bc-airports") %>%
-#'   mutate(LATITUDE * 100)
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     mutate(LATITUDE * 100)
+#' )
 #' }
 #'
 #'@export
@@ -311,24 +360,28 @@ mutate.bcdc_promise <- function(.data, ...){
 }
 
 
-#' Force collection of Web Service request from B.C. Data Catalogue
+#' Force collection of Web Feature Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
 #' This will retrieve an sf object into R. The `as_tibble()` function can be used
 #' interchangeably with `collect` which matches `dbplyr` behaviour.
 #'
-#' @param x object of class bcdc_promise
+#' @param x object of class `bcdc_promise`
 #' @inheritParams collect
 #' @rdname collect-methods
 #' @export
 #'
 #' @examples
 #' \donttest{
-#' bcdc_query_geodata("bc-airports") %>%
-#'   collect()
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     collect()
+#' )
 #'
-#' bcdc_query_geodata("bc-airports") %>%
-#'   as_tibble()
+#' try(
+#'   bcdc_query_geodata("bc-airports") %>%
+#'     as_tibble()
+#' )
 #' }
 #'
 collect.bcdc_promise <- function(x, ...){
@@ -342,7 +395,7 @@ collect.bcdc_promise <- function(x, ...){
   ## Determine total number of records for pagination purposes
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
 
-  if (number_of_records < 10000) {
+  if (number_of_records < getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())) {
     cc <- tryCatch(cli$post(body = query_list, encode = "form"),
                    error = function(e) {
                      stop("There was an issue processing this request.
@@ -352,9 +405,8 @@ collect.bcdc_promise <- function(x, ...){
     url <- cc$url
     full_url <- cli$url_fetch(query = query_list)
   } else {
-    # tests that cover this are skipped due to large size
-    # nocov start
-    message("This record requires pagination to complete the request.")
+    chunk <- getOption("bcdata.chunk_limit", default = 1000)
+    message(glue::glue("This object has {number_of_records} records and requires {ceiling(number_of_records/chunk)} paginated requests to complete."))
     sorting_col <- pagination_sort_col(x$cols_df)
 
     query_list <- c(query_list, sortby = sorting_col)
@@ -362,14 +414,13 @@ collect.bcdc_promise <- function(x, ...){
     # Create pagination client
     cc <- crul::Paginator$new(
       client = cli,
-      by = "query_params",
+      by = "limit_offset",
       limit_param = "count",
       offset_param = "startIndex",
       limit = number_of_records,
-      limit_chunk = getOption("bcdata.chunk-limit", default = 1000),
-      progress = TRUE
+      chunk = chunk,
+      progress = interactive()
     )
-
 
     message("Retrieving data")
 
@@ -382,7 +433,6 @@ collect.bcdc_promise <- function(x, ...){
     full_url <- cc$url_fetch(query = query_list)
 
     catch_wfs_error(cc)
-    # nocov end
   }
 
   txt <- cc$parse("UTF-8")
@@ -398,9 +448,9 @@ collect.bcdc_promise <- function(x, ...){
 #' @export
 as_tibble.bcdc_promise <- collect.bcdc_promise
 
-#' Show SQL and URL used for Web Service request from B.C. Data Catalogue
+#' Show SQL and URL used for Web Feature Service request from B.C. Data Catalogue
 #'
-#' Display Web Service query SQL
+#' Display Web Feature Service query CQL
 #'
 #' @param x object of class bcdc_promise or bcdc_sf
 #' @inheritParams show_query
@@ -409,9 +459,11 @@ as_tibble.bcdc_promise <- collect.bcdc_promise
 #' @export
 #' @examples
 #' \donttest{
-#' bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
-#'   filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
-#'   show_query()
+#' try(
+#'   bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
+#'     filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
+#'     show_query()
+#' )
 #'   }
 #'
 show_query.bcdc_promise <- function(x, ...) {
@@ -433,10 +485,14 @@ show_query.bcdc_promise <- function(x, ...) {
 #' @export
 #' @examples
 #' \donttest{
-#' air <- bcdc_query_geodata("bc-airports") %>%
-#'   collect()
+#' try(
+#'   air <- bcdc_query_geodata("bc-airports") %>%
+#'     collect()
+#' )
 #'
-#' show_query(air)
+#' try(
+#'   show_query(air)
+#' )
 #' }
 show_query.bcdc_sf <- function(x, ...) {
 
@@ -449,7 +505,7 @@ show_query.bcdc_sf <- function(x, ...) {
 }
 
 # collapse vector of cql statements into one
-finalize_cql <- function(x, con = cql_dummy_con) {
+finalize_cql <- function(x, con = wfs_con) {
   if (is.null(x) || !length(x)) return(NULL)
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
 }

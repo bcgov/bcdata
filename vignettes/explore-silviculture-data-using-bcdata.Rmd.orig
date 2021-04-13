@@ -36,6 +36,11 @@ knitr::opts_chunk$set(
   dpi = 400
 )
 
+options(
+   crayon.enabled = FALSE,
+   width = 100
+   )
+
 library(knitr)
 library(bcdata)
 library(dplyr)
@@ -82,7 +87,7 @@ We can gather the data we need to answer our question using the [RESULTS - silvi
 bcdc_get_record("results-forest-cover-silviculture")
 ```
 
-We see that this is a [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data set&mdash;the list of data resources includes `WMS getCapabilities request`&mdash;so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
+We see that this is a [Web Feature Service-enabled](https://en.wikipedia.org/wiki/Web_Feature_Service) geospatial data set--the list of data resources includes `WMS getCapabilities request`--so we can query and retrieve this geospatial data set using `bcdc_query_geodata()`:
 
 ```{r examine-silv-layer}
 # Query the data using the permanent ID of the record to guard against name changes

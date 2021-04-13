@@ -41,7 +41,7 @@ test_that("operators work with different remote geom col names",{
 
   ## LOCAL
   crd <- bcdc_query_geodata(polygon_record) %>%
-    filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
+    filter(ADMIN_AREA_NAME == "Capital Regional District") %>%
     collect()
 
   ## REMOTE "GEOMETRY"
@@ -63,7 +63,6 @@ test_that("operators work with different remote geom col names",{
 })
 
 test_that("Different combinations of predicates work", {
-  skip_on_cran()
   the_bbox <- st_sfc(st_polygon(
     list(structure(c(1670288.515, 1719022.009,
                      1719022.009, 1670288.515, 1670288.515, 667643.77, 667643.77,
@@ -197,7 +196,7 @@ test_that("an intersect with an object greater than 5E5 bytes automatically gets
 
   expect_true(utils::object.size(regions) > 5E5)
 
-  expect_warning(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  expect_message(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
     filter(WITHIN(regions)) %>%
       collect())
 })
@@ -251,7 +250,7 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
                      crs = 3005)
 
   qry <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
-    filter(BBOX(st_bbox(the_geom, crs = st_crs(the_geom)$epsg))) %>%
+    filter(BBOX(st_bbox(the_geom, crs = st_crs(the_geom)))) %>%
     show_query()
 
   expect_equal(as.character(qry$query_list$CQL_FILTER),
@@ -261,11 +260,13 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
     filter(DWITHIN(st_buffer(the_geom, 10000, nQuadSegs = 2), 100, "meters")) %>%
     show_query()
 
-  expect_equal(as.character(qry2$query_list$CQL_FILTER),
-               "(DWITHIN(SHAPE, MULTIPOLYGON (((1174434 368738, 1171505 361666.9, 1164434 358738, 1157363 361666.9, 1154434 368738, 1157363 375809.1, 1164434 378738, 1171505 375809.1, 1174434 368738)), ((1213023 412959, 1210094 405887.9, 1203023 402959, 1195952 405887.9, 1193023 412959, 1195952 420030.1, 1203023 422959, 1210094 420030.1, 1213023 412959))), 100, meters))")
+  expect_match(as.character(qry2$query_list$CQL_FILTER),
+               "\\(DWITHIN\\(SHAPE, MULTIPOLYGON \\(\\(\\([0-9. ,()]+\\)\\)\\), 100, meters\\)\\)")
 })
 
 test_that("works with dates", {
+  skip_if_net_down()
+  skip_on_cran()
   expect_is(bcdc_query_geodata('historical-orders-and-alerts') %>%
               filter(EVENT_START_DATE < "2017-05-01") %>%
               collect(), "bcdc_sf")
@@ -286,6 +287,8 @@ test_that("works with dates", {
 })
 
 test_that("works with various as.x functions", {
+  skip_if_net_down()
+  skip_on_cran()
   expect_is(
     bcdc_query_geodata(point_record) %>%
       filter(NUMBER_OF_RUNWAYS == as.numeric("3")) %>%

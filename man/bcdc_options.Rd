@@ -14,30 +14,47 @@ failed calls to the data catalogue. Options in R are reset every time R is re-st
 addition ways to restore your initial state.
 }
 \details{
-\code{bcdata.max_geom_pred_size} is the maximum size of an object used for a geometric operation. Objects
+\code{bcdata.max_geom_pred_size} is the maximum size in bytes of an object used for a geometric operation. Objects
 that are bigger than this value will have a bounding box drawn and apply the geometric operation
-on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
-if the bcdata catalogue accepts their request.
+on that simpler polygon. The \link{bcdc_check_geom_size} function can be used to assess whether a given spatial object
+exceed the value of this option. Users can iteratively try to increase the maximum geometric predicate size and see
+if the bcdata catalogue accepts the request.
 
 \code{bcdata.chunk_limit} is an option useful when dealing with very large data sets. When requesting large objects
 from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
-been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
+been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
 requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
 it is advisable to lower the chunk limit. Chunks must be less than 10000.
+
+\code{bcdata.single_download_limit} is the maximum number of records an object can be before forcing a paginated download
+(see entry for \code{bcdata.chunk_limit} for details on pagination).
+Tweaking this option in conjunction with \code{bcdata.chunk_limit} can often resolve failures in large and complex downloads.
+The default is 10000 records.
 }
 \examples{
+\donttest{
 ## Save initial conditions
-original_options <- options()
+try(
+  original_options <- options()
+)
 
 ## See initial options
-bcdc_options()
+try(
+  bcdc_options()
+)
 
-options(bcdata.max_geom_pred_size = 1E6)
+try(
+  options(bcdata.max_geom_pred_size = 1E6)
+)
 
 ## See updated options
-bcdc_options()
+try(
+  bcdc_options()
+)
 
 ## Reset initial conditions
-options(original_options)
-
+try(
+ options(original_options)
+)
+}
 }

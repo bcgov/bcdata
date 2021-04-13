@@ -29,7 +29,7 @@
 #' the import based on the file extension. [bcdc_read_functions()] provides details on which functions
 #' handle the data import. You can then use this information to look at the help pages of those functions.
 #' See the examples for a workflow that illustrates this process.
-#' For spatial Web Service data the `...` arguments are passed to [bcdc_query_geodata()].
+#' For spatial Web Feature Service data the `...` arguments are passed to [bcdc_query_geodata()].
 #' @param verbose When more than one resource is available for a record,
 #' should extra information about those resources be printed to the console?
 #' Default `TRUE`
@@ -41,45 +41,68 @@
 #' @examples
 #' \donttest{
 #' # Using the record and resource ID:
-#' bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
-#'               resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
-#' bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#' try(
+#'   bcdc_get_data(record = '76b1b7a3-2112-4444-857a-afccf7b20da8',
+#'                 resource = '4d0377d9-e8a1-429b-824f-0ce8f363512c')
+#' )
+#'
+#' try(
+#'   bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#' )
 #'
 #' # Using a `bcdc_record` object obtained from `bcdc_get_record`:
-#' record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
-#' bcdc_get_data(record)
+#' try(
+#'   record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#' )
+#'
+#' try(
+#'   bcdc_get_data(record)
+#' )
 #'
 #' # Using a BCGW name
-#' bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+#' try(
+#'   bcdc_get_data("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+#' )
 #'
 #' # Using sf's sql querying ability
-#' bcdc_get_data(
-#'   record = '30aeb5c1-4285-46c8-b60b-15b1a6f4258b',
-#'   resource = '3d72cf36-ab53-4a2a-9988-a883d7488384',
-#'   layer = 'BC_Boundary_Terrestrial_Line',
-#'   query = "SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length < 100"
+#' try(
+#'   bcdc_get_data(
+#'     record = '30aeb5c1-4285-46c8-b60b-15b1a6f4258b',
+#'     resource = '3d72cf36-ab53-4a2a-9988-a883d7488384',
+#'     layer = 'BC_Boundary_Terrestrial_Line',
+#'     query = "SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length < 100"
+#'   )
 #' )
 #'
 #' ## Example of correcting import problems
 #'
 #' ## Some initial problems reading in the data
-#' bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+#' try(
+#'   bcdc_get_data('d7e6c8c7-052f-4f06-b178-74c02c243ea4')
+#' )
 #'
 #' ## From bcdc_get_record we realize that the data is in xlsx format
-#' bcdc_get_record('8620ce82-4943-43c4-9932-40730a0255d6')
+#' try(
+#'  bcdc_get_record('8620ce82-4943-43c4-9932-40730a0255d6')
+#' )
 #'
 #' ## bcdc_read_functions let's us know that bcdata
 #' ## uses readxl::read_excel to import xlsx files
-#' bcdc_read_functions()
+#' try(
+#'  bcdc_read_functions()
+#' )
 #'
 #' ## bcdata let's you know that this resource has
 #' ## multiple worksheets
-#' bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6')
+#' try(
+#'  bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6')
+#' )
 #'
 #' ## we can control what is read in from an excel file
 #' ## using arguments from readxl::read_excel
-#'
-#' bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Regional Districts')
+#' try(
+#'   bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Regional Districts')
+#' )
 #' }
 #'
 #' @export

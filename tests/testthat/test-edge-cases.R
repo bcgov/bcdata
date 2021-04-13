@@ -1,6 +1,6 @@
 context("Edge cases and catalogue peculiarities")
 
-test_that("recods with wms but inconsistent layer_name, object_name fieldds work", {
+test_that("recods with wms but inconsistent layer_name, object_name fields work", {
   skip_if_net_down()
   skip_on_cran()
     # https://github.com/bcgov/bcdata/issues/138

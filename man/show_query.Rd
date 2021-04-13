@@ -4,7 +4,7 @@
 \alias{show_query.bcdc_promise}
 \alias{show_query.bcdc_sf}
 \alias{show_query}
-\title{Show SQL and URL used for Web Service request from B.C. Data Catalogue}
+\title{Show SQL and URL used for Web Feature Service request from B.C. Data Catalogue}
 \usage{
 \method{show_query}{bcdc_promise}(x, ...)
 
@@ -14,7 +14,7 @@
 \item{x}{object of class bcdc_promise or bcdc_sf}
 }
 \description{
-Display Web Service query SQL
+Display Web Feature Service query CQL
 
 See \code{dplyr::\link[dplyr:explain]{show_query}} for details.
 }
@@ -27,16 +27,22 @@ See \code{dplyr::\link[dplyr:explain]{show_query}} for details.
 
 \examples{
 \donttest{
-bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
-  filter(PERMIT_RELATIONSHIP == "DISCHARGE") \%>\%
-  show_query()
+try(
+  bcdc_query_geodata("bc-environmental-monitoring-locations") \%>\%
+    filter(PERMIT_RELATIONSHIP == "DISCHARGE") \%>\%
+    show_query()
+)
   }
 
 \donttest{
-air <- bcdc_query_geodata("bc-airports") \%>\%
-  collect()
+try(
+  air <- bcdc_query_geodata("bc-airports") \%>\%
+    collect()
+)
 
-show_query(air)
+try(
+  show_query(air)
+)
 }
 }
 \keyword{internal}

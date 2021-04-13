@@ -210,10 +210,10 @@ gml_types <- function(x) {
 
 get_record_warn_once <- function(...) {
   silence <- isTRUE(getOption("silence_named_get_record_warning"))
-  warned <- bcdata_env$named_get_record_warned
+  warned <- ._bcdataenv_$named_get_record_warned
   if (!silence && !warned) {
     warning(..., call. = FALSE)
-    assign("named_get_record_warned", TRUE, envir = bcdata_env)
+    assign("named_get_record_warned", TRUE, envir = ._bcdataenv_)
   }
 }
 
@@ -268,16 +268,22 @@ read_from_url <- function(resource, ...){
            })
 }
 
+
 resource_to_tibble <- function(x){
   dplyr::tibble(
-    name = purrr::map_chr(x, "name"),
-    url = purrr::map_chr(x, "url"),
-    id = purrr::map_chr(x, "id"),
-    format = purrr::map_chr(x, "format"),
+    name = safe_map_chr(x, "name"),
+    url = safe_map_chr(x, "url"),
+    id = safe_map_chr(x, "id"),
+    format = safe_map_chr(x, "format"),
     ext = purrr::map_chr(x, safe_file_ext),
-    package_id = purrr::map_chr(x, "package_id"),
-    location = simplify_string(purrr::map_chr(x, "resource_storage_location"))
+    package_id = safe_map_chr(x, "package_id"),
+    location = simplify_string(safe_map_chr(x, "resource_storage_location"))
   )
+}
+
+#' @importFrom rlang "%||%"
+safe_map_chr <- function(x, name) {
+  purrr::map_chr(x, ~ .x[[name]] %||% NA_character_)
 }
 
 simplify_string <- function(x) {

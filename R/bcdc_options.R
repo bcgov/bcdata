@@ -18,33 +18,51 @@
 #' failed calls to the data catalogue. Options in R are reset every time R is re-started. See examples for
 #' addition ways to restore your initial state.
 #'
-#' `bcdata.max_geom_pred_size` is the maximum size of an object used for a geometric operation. Objects
+#' `bcdata.max_geom_pred_size` is the maximum size in bytes of an object used for a geometric operation. Objects
 #' that are bigger than this value will have a bounding box drawn and apply the geometric operation
-#' on that simpler polygon. Users can try to increase the maximum geometric predicate size and see
-#' if the bcdata catalogue accepts their request.
+#' on that simpler polygon. The [bcdc_check_geom_size] function can be used to assess whether a given spatial object
+#' exceed the value of this option. Users can iteratively try to increase the maximum geometric predicate size and see
+#' if the bcdata catalogue accepts the request.
 #'
 #' `bcdata.chunk_limit` is an option useful when dealing with very large data sets. When requesting large objects
 #' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
-#' been downloaded. bcdata does this all for you but using this option you can set the size of the chunk
+#' been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
 #' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
 #' it is advisable to lower the chunk limit. Chunks must be less than 10000.
 #'
+#' `bcdata.single_download_limit` is the maximum number of records an object can be before forcing a paginated download
+#' (see entry for `bcdata.chunk_limit` for details on pagination).
+#' Tweaking this option in conjunction with `bcdata.chunk_limit` can often resolve failures in large and complex downloads.
+#' The default is 10000 records.
+#'
 #' @examples
+#' \donttest{
 #' ## Save initial conditions
-#' original_options <- options()
+#' try(
+#'   original_options <- options()
+#' )
 #'
 #' ## See initial options
-#' bcdc_options()
+#' try(
+#'   bcdc_options()
+#' )
 #'
-#' options(bcdata.max_geom_pred_size = 1E6)
+#' try(
+#'   options(bcdata.max_geom_pred_size = 1E6)
+#' )
 #'
 #' ## See updated options
-#' bcdc_options()
+#' try(
+#'   bcdc_options()
+#' )
 #'
 #' ## Reset initial conditions
-#' options(original_options)
-#'
+#' try(
+#'  options(original_options)
+#' )
+#' }
 #' @export
+#'
 
 bcdc_options <- function() {
   null_to_na <- function(x) {
@@ -54,14 +72,72 @@ bcdc_options <- function() {
   dplyr::tribble(
     ~ option, ~ value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
-    "bcdata.chunk_limit",null_to_na(getOption("bcdata.chunk_limit")), 1000
+    "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), 1000,
+    "bcdata.single_download_limit",
+    null_to_na(getOption("bcdata.single_download_limit",
+                         default = bcdc_single_download_limit())), 10000
   )
 }
 
-check_chunk_limit <- function(){
-  chunk_value <- options("bcdata.chunk_limit")$bcdata.chunk_limit
 
-  if(!is.null(chunk_value) && chunk_value >= 10000){
-    stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit"), call. = FALSE)
+check_chunk_limit <- function(){
+  chunk_value <- getOption("bcdata.chunk_limit")
+  chunk_limit <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
+
+  if(!is.null(chunk_value) && chunk_value >= chunk_limit){
+    stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
   }
+}
+
+bcdc_get_wfs_records_xml <- function() {
+  if (has_internet()) {
+    url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
+    cli <- bcdc_http_client(url, auth = FALSE)
+
+    cc <- cli$get(query = list(
+      SERVICE = "WFS",
+      VERSION = "2.0.0",
+      REQUEST = "Getcapabilities"
+    ))
+
+    res <- cc$parse("UTF-8")
+    xml2::read_xml(res)
+
+  } else {
+    message("No access to internet")
+    invisible(NULL)
+  }
+}
+
+bcdc_get_wfs_records <- function() {
+  doc <- ._bcdataenv_$get_capabilities_xml
+
+  if (is.null(doc)) {
+    # Try again to get the xml
+    doc <- ._bcdataenv_$get_capabilities_xml <- suppressMessages(bcdc_get_wfs_records_xml())
+    if (is.null(doc)) stop("No access to internet", call. = FALSE)
+  }
+
+  # d1 is the default xml namespace (see xml2::xml_ns(doc))
+  features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
+
+  tibble::tibble(
+    whse_name = gsub("^pub:", "", xml2::xml_text(xml2::xml_find_first(features, "./d1:Name"))),
+    title = xml2::xml_text(xml2::xml_find_first(features, "./d1:Title")),
+    cat_url = xml2::xml_attr(xml2::xml_find_first(features, "./d1:MetadataURL"), "href")
+  )
+}
+
+bcdc_single_download_limit <- function() {
+  doc <- ._bcdataenv_$get_capabilities_xml
+
+  if (is.null(doc)) {
+    message("No access to internet")
+    return(10000L)
+  }
+
+  count_default_xpath <- "./ows:OperationsMetadata/ows:Operation[@name='GetFeature']/ows:Constraint[@name='CountDefault']"
+  # Looking globally also works but is slower: ".//ows:Constraint[@name='CountDefault']"
+  count_defaults <- xml2::xml_find_first(doc, count_default_xpath)
+  xml2::xml_integer(count_defaults)
 }
