@@ -92,10 +92,15 @@ print.bcdc_record <- function(x, ...) {
   cat_line_wrap(cli::col_blue(cli::style_italic("Last Updated: ")), x$record_last_modified)
   cat_line_wrap(cli::col_blue(cli::style_italic("Description: ")), x$notes)
 
-  cat_line_wrap(cli::col_blue(cli::style_italic("Resources: (", nrow(bcdc_tidy_resources(x)), ")")))
-  print(bcdc_tidy_resources(x))
+  tidy_resources <- bcdc_tidy_resources(x)
+  cat_line_wrap(cli::col_blue(cli::style_italic("Resources (", nrow(tidy_resources), "):")))
+  print(tidy_resources)
 
-  cat_line_wrap(cli::col_blue("You can access the 'Resources' data frame using bcdc_tidy_resources()"))
+  if ("wms" %in% formats_from_record(x)) {
+    cat_bullet(cli::col_blue("You can query and filter this data using:\n   "),  cli::col_red("bcdc_query_geodata('", x$id, "')"))
+  }
+
+  cat_bullet(cli::col_blue("You can access the 'Resources' data frame using:\n   "), cli::col_red("bcdc_tidy_resources('", x$id, "')"))
 
   invisible(x)
 }
