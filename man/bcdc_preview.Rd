@@ -20,7 +20,8 @@ in your .Rprofile file so the option persists across sessions.}
 }
 \description{
 Note this does not return the actual map features, rather
-opens an image preview of the layer in \code{\link[mapview:mapview]{mapview::mapview()}}
+opens an image preview of the layer in a
+\href{https://rstudio.github.io/leaflet/}{Leaflet} map window
 }
 \examples{
 \donttest{
