@@ -3,7 +3,7 @@
 \name{mutate.bcdc_promise}
 \alias{mutate.bcdc_promise}
 \alias{mutate}
-\title{Throw an informative error when attempting mutate on a Web Service call}
+\title{Throw an informative error when attempting mutate on a \code{bcdc_promise} object}
 \usage{
 \method{mutate}{bcdc_promise}(.data, ...)
 }

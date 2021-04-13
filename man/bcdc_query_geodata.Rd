@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcdc-web-services.R
 \name{bcdc_query_geodata}
 \alias{bcdc_query_geodata}
-\title{Query data from the B.C. Web Service}
+\title{Query data from the B.C. Web Feature Service}
 \usage{
 bcdc_query_geodata(record, crs = 3005)
 }
@@ -27,11 +27,15 @@ required to retrieve the requested data. In order to get the actual data as
 an \code{sf} object, you need to run \code{\link[=collect]{collect()}} on the \code{bcdc_promise}.
 }
 \description{
-Queries features from the B.C. Web Service. The data must be available as
-a Web Service. See \code{bcdc_get_record(record)$resources}). The response will
-be paginated if the number of features is above the number set by the
-\code{bcdata.single_download_limit} option. Please see \code{\link[=bcdc_options]{bcdc_options()}} for defaults
-and more information.
+Queries features from the B.C. Web Feature Service. See
+\code{\link[=bcdc_tidy_resources]{bcdc_tidy_resources()}} - if a resource has a value of
+\code{"wms"} in the \code{format} column it is available as a Web
+Feature Service, and you can query and download it
+using \code{bcdc_query_geodata()}. The response will be
+paginated if the number of features is above the number
+set by the \code{bcdata.single_download_limit} option.
+Please see \code{\link[=bcdc_options]{bcdc_options()}} for defaults and more
+information.
 }
 \details{
 Note that this function doesn't actually return the data, but rather an

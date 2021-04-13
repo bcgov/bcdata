@@ -3,7 +3,7 @@
 \name{select.bcdc_promise}
 \alias{select.bcdc_promise}
 \alias{select}
-\title{Select columns from Web Service call}
+\title{Select columns from bcdc_query_geodata() call}
 \usage{
 \method{select}{bcdc_promise}(.data, ...)
 }
@@ -13,11 +13,11 @@
 \item{...}{One or more unquoted expressions separated by commas. See details.}
 }
 \description{
-Similar to a \code{dplyr::select} call, this allows you to select which columns you want the Web Service to return.
+Similar to a \code{dplyr::select} call, this allows you to select which columns you want the Web Feature Service to return.
 A key difference between \code{dplyr::select} and \code{bcdata::select} is the presence of "sticky" columns that are
 returned regardless of what columns are selected. If any of these "sticky" columns are selected
 only "sticky" columns are return. \code{bcdc_describe_feature} is one way to tell if columns are sticky in advance
-of issuing the Web Service call.
+of issuing the Web Feature Service call.
 
 See \code{dplyr::\link[dplyr]{select}} for details.
 }
