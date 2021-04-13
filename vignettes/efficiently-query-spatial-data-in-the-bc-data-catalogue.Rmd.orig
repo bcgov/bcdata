@@ -43,7 +43,7 @@ library(Cairo)
 ```
 
 
-This vignette illustrates how to use `bcdata::bcdc_query_geodata` to request and query [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset). To illustrate, we will request and merge two spatial data sets from the catalogue---school district and greenspaces spatial data---and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.
+This vignette illustrates how to use `bcdata::bcdc_query_geodata` to request and query geospatial data that has an associated [Web Feature Service](https://en.wikipedia.org/wiki/Web_Feature_Service) from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset). To illustrate, we will request and merge two spatial data sets from the catalogue---school district and greenspaces spatial data---and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.
 
 ## Getting Started
 First you need to load the package. We will also load the `sf` and `dplyr` packages to help us work with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/) and `dplyr` [here](https://dplyr.tidyverse.org/):
@@ -56,7 +56,7 @@ library(dplyr)
 
 
 ## Geospatial Data in the B.C. Data Catalogue
-The [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides many data sets with spatial information through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). Technically speaking, this means if we have an internet connection we can issue [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) requests to the catalogue and seamlessly import the response data into R as an `sf` objects. The `bcdata` package provides a means to a) choose which layer you want and b) use `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the `collect` function. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to principles of `dbplyr` is available [here](https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html).
+The [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides many data sets with spatial information through a [Web Feature Service (WFS)](https://en.wikipedia.org/wiki/Web_Feature_Service). Technically speaking, this means if we have an internet connection we can issue [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) requests to the catalogue and seamlessly import the response data into R as an `sf` objects. The `bcdata` package provides a means to a) choose which layer you want and b) use `dplyr` verbs to specifically tailor your request.  A `dbplyr` backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the `collect` function. This approach mimics the `dplyr` verb translation to `SQL` seen for many database types. A good introduction to principles of `dbplyr` is available [here](https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html).
 
 ## School District Data
 Our first step is to extract the [school district polygons](https://catalog.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b) from the B.C. Data Catalogue. This layer is described using this command:
@@ -65,7 +65,7 @@ Our first step is to extract the [school district polygons](https://catalog.data
 bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
 ```
 
-This data is the boundary of each school district. The key information in this metadata is that the layer is a `**WFS request (Spatial Data)**`---which means it is available through a [Web Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E). From this we know we can make use of `bcdc_query_geodata`.
+This data is the boundary of each school district. The key information in this metadata is that the layer has a resource in `"wms"` format ---which means it is available through a Web Feature Service. From this we know we can make use of `bcdc_query_geodata`.
 
 ```{r}
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
@@ -110,7 +110,7 @@ For the purposes of this example, let's consider [this greenspace](https://catal
 bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 ```
 
-Again we recognize this is [Web Service-enabled](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) geospatial data, which means we can make use of `bcdc_query_geodata`.
+Again we recognize this is [WFS-enabled](https://en.wikipedia.org/wiki/Web_Feature_Service) geospatial data, which means we can make use of `bcdc_query_geodata`.
 
 ```{r}
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
@@ -172,7 +172,7 @@ A second approach is to set an internal option (`bcdata.max_geom_pred_size`) and
 options("bcdata.max_geom_pred_size" = {object size in bytes})
 ```
 
-The value of `bcdata.max_geom_pred_size` is set conservatively so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests.
+The value of `bcdata.max_geom_pred_size` is set conservatively so that requests to the Web Feature Service are more consistently successful. Increasing this value may result in invalid requests.
 
 Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:
 
