@@ -49,7 +49,7 @@ Sys.unsetenv("BCDC_KEY")
 
 # Statement of Need
 
-`bcdata` is an R package that connects publicly available metadata and data sets in the British Columbia (B.C.) Data Catalogue to the diverse array of mapping, modeling and data processing capabilities of the R ecosystem. `bcdata` enables the efficient retrieval of British Columbia's geospatial data, and supports repeatable and reproducible analysis of hundreds of open-licensed British Columbia public sector data sets. By enabling programmatic access to the B.C. Data Catalogue using tidy data principles (@tidydata) and familiar R `tidyverse` syntax (@tidyverse), `bcdata` helps both novice and experienced R users find and use British Columbia government public and open data holdings.
+`bcdata` is an R package that connects publicly available metadata and data sets in the British Columbia (B.C.) Data Catalogue to the diverse array of mapping, modeling and data processing capabilities of the R ecosystem. `bcdata` enables the efficient retrieval of British Columbia's geospatial data, and supports repeatable and reproducible analysis of hundreds of open-licensed British Columbia public sector data sets. By enabling programmatic access to the B.C. Data Catalogue using familiar R `dplyr` syntax (@tidyverse), `bcdata` helps both novice and experienced R users find and use British Columbia government public and open data holdings.
 
 
 # Introduction
