@@ -225,7 +225,7 @@ ggplot(marmots2) +
   geom_sf(aes(fill = RANK_DESC))
 ```
 
-This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is `r paste0(format((1 - as.numeric(object.size(marmots2)) / as.numeric(object.size(all_sp_eco))) * 100, digits = 1), "%")` smaller than downloading the entire data set using `bcdcd_get_data()` and filtering locally.
+This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is `r paste0(format((1 - as.numeric(object.size(marmots2)) / as.numeric(object.size(all_sp_eco))) * 100, digits = 1), "%")` smaller than downloading the entire data set using `bcdc_get_data()` and filtering locally.
 
 # Conclusion
 
