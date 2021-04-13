@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Query data from the B.C. Web Service — bcdc_query_geodata • bcdata</title>
+<title>Query data from the B.C. Web Feature Service — bcdc_query_geodata • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,12 +46,16 @@
 
 
 
-<meta property="og:title" content="Query data from the B.C. Web Service — bcdc_query_geodata" />
-<meta property="og:description" content="Queries features from the B.C. Web Service. The data must be available as
-a Web Service. See bcdc_get_record(record)$resources). The response will
-be paginated if the number of features is above the number set by the
-bcdata.single_download_limit option. Please see bcdc_options() for defaults
-and more information." />
+<meta property="og:title" content="Query data from the B.C. Web Feature Service — bcdc_query_geodata" />
+<meta property="og:description" content="Queries features from the B.C. Web Feature Service. See
+bcdc_tidy_resources() - if a resource has a value of
+&quot;wms&quot; in the format column it is available as a Web
+Feature Service, and you can query and download it
+using bcdc_query_geodata(). The response will be
+paginated if the number of features is above the number
+set by the bcdata.single_download_limit option.
+Please see bcdc_options() for defaults and more
+information." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
 
@@ -141,17 +145,21 @@ and more information." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Query data from the B.C. Web Service</h1>
+    <h1>Query data from the B.C. Web Feature Service</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc-web-services.R'><code>R/bcdc-web-services.R</code></a></small>
     <div class="hidden name"><code>bcdc_query_geodata.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Queries features from the B.C. Web Service. The data must be available as
-a Web Service. See <code>bcdc_get_record(record)$resources</code>). The response will
-be paginated if the number of features is above the number set by the
-<code>bcdata.single_download_limit</code> option. Please see <code><a href='bcdc_options.html'>bcdc_options()</a></code> for defaults
-and more information.</p>
+    <p>Queries features from the B.C. Web Feature Service. See
+<code><a href='bcdc_tidy_resources.html'>bcdc_tidy_resources()</a></code> - if a resource has a value of
+<code>"wms"</code> in the <code>format</code> column it is available as a Web
+Feature Service, and you can query and download it
+using <code>bcdc_query_geodata()</code>. The response will be
+paginated if the number of features is above the number
+set by the <code>bcdata.single_download_limit</code> option.
+Please see <code><a href='bcdc_options.html'>bcdc_options()</a></code> for defaults and more
+information.</p>
     </div>
 
     <pre class="usage"><span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='va'>record</span>, crs <span class='op'>=</span> <span class='fl'>3005</span><span class='op'>)</span></pre>

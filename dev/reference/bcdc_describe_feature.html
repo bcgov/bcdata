@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Describe the attributes of a Web Service feature — bcdc_describe_feature • bcdata</title>
+<title>Describe the attributes of a Web Feature Service — bcdc_describe_feature • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Describe the attributes of a Web Service feature — bcdc_describe_feature" />
-<meta property="og:description" content="Describe the attributes of column of a record accessed through the Web Service.
+<meta property="og:title" content="Describe the attributes of a Web Feature Service — bcdc_describe_feature" />
+<meta property="og:description" content="Describe the attributes of column of a record accessed through the Web Feature Service.
 This can be a useful tool to examine a layer before issuing a query with bcdc_query_geodata." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
@@ -138,13 +138,13 @@ This can be a useful tool to examine a layer before issuing a query with bcdc_qu
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Describe the attributes of a Web Service feature</h1>
+    <h1>Describe the attributes of a Web Feature Service</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/describe-feature.R'><code>R/describe-feature.R</code></a></small>
     <div class="hidden name"><code>bcdc_describe_feature.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Describe the attributes of column of a record accessed through the Web Service.
+    <p>Describe the attributes of column of a record accessed through the Web Feature Service.
 This can be a useful tool to examine a layer before issuing a query with <code>bcdc_query_geodata</code>.</p>
     </div>
 
@@ -169,10 +169,10 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>bcdc_describe_features</code> returns a tibble describing the attributes of a B.C. Data Catalogue record.
+    <p><code>bcdc_describe_feature</code> returns a tibble describing the attributes of a B.C. Data Catalogue record.
 The tibble returns the following columns:</p><ul>
 <li><p>col_name: attributes of the feature</p></li>
-<li><p>sticky: whether a column can be separated from the record in a Web Service call via the <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> method</p></li>
+<li><p>sticky: whether a column can be separated from the record in a Web Feature Service call via the <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> method</p></li>
 <li><p>remote_col_type: class of what is return by the web feature service</p></li>
 <li><p>local_col_type: the column class in R</p></li>
 <li><p>column_comments: additional metadata specific to that column</p></li>

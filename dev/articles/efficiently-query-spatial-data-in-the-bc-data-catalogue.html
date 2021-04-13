@@ -120,7 +120,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
-<p>This vignette illustrates how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata</a></code> to request and query <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data from the <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a>. To illustrate, we will request and merge two spatial data sets from the catalogue—school district and greenspaces spatial data—and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.</p>
+<p>This vignette illustrates how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata</a></code> to request and query geospatial data that has an associated <a href="https://en.wikipedia.org/wiki/Web_Feature_Service">Web Feature Service</a> from the <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a>. To illustrate, we will request and merge two spatial data sets from the catalogue—school district and greenspaces spatial data—and then examine the amount of park space contained within the boundaries of the Greater Victoria, Prince George and Kamloops/Thompson British Columbia school districts.</p>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h2>
@@ -133,7 +133,7 @@ See the License for the specific language governing permissions and limitations 
 <div id="geospatial-data-in-the-b-c--data-catalogue" class="section level2">
 <h2 class="hasAnchor">
 <a href="#geospatial-data-in-the-b-c--data-catalogue" class="anchor"></a>Geospatial Data in the B.C. Data Catalogue</h2>
-<p>The <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a> provides many data sets with spatial information through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. Technically speaking, this means if we have an internet connection we can issue <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> requests to the catalogue and seamlessly import the response data into R as an <code>sf</code> objects. The <code>bcdata</code> package provides a means to a) choose which layer you want and b) use <code>dplyr</code> verbs to specifically tailor your request. A <code>dbplyr</code> backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the <code>collect</code> function. This approach mimics the <code>dplyr</code> verb translation to <code>SQL</code> seen for many database types. A good introduction to principles of <code>dbplyr</code> is available <a href="https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html">here</a>.</p>
+<p>The <a href="https://catalogue.data.gov.bc.ca/dataset">B.C. Data Catalogue</a> provides many data sets with spatial information through a <a href="https://en.wikipedia.org/wiki/Web_Feature_Service">Web Feature Service (WFS)</a>. Technically speaking, this means if we have an internet connection we can issue <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> requests to the catalogue and seamlessly import the response data into R as an <code>sf</code> objects. The <code>bcdata</code> package provides a means to a) choose which layer you want and b) use <code>dplyr</code> verbs to specifically tailor your request. A <code>dbplyr</code> backend is implemented so that requests are executed lazily meaning results are not transferred over the web until the user specifically calls the <code>collect</code> function. This approach mimics the <code>dplyr</code> verb translation to <code>SQL</code> seen for many database types. A good introduction to principles of <code>dbplyr</code> is available <a href="https://cran.r-project.org/package=dbplyr/vignettes/dbplyr.html">here</a>.</p>
 </div>
 <div id="school-district-data" class="section level2">
 <h2 class="hasAnchor">
@@ -147,21 +147,18 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Sector: Education</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Geographic</span>
-<span class="co">#&gt; Last Updated: 2020-11-03</span>
 <span class="co">#&gt; Description: The School Districts dataset contains the spatial representation (polygon)</span>
 <span class="co">#&gt;  of the current extent of the administrative areas defined under section 176(1) of the</span>
 <span class="co">#&gt;  School Act for the purposes of preservation and promotion of the fundamental principle</span>
 <span class="co">#&gt;  of local autonomy and control of public education at the public and governmental levels</span>
 <span class="co">#&gt;  through locally elected school boards.</span>
-<span class="co">#&gt; Resources: (3)</span>
-<span class="co">#&gt; # A tibble: 3 x 8</span>
-<span class="co">#&gt;   name        url                  id        format ext   package_id     location   bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 BC Geograp… https://catalogue.d… 529507c4… other  ""    78ec5279-4534… bcgeograp… FALSE           </span>
-<span class="co">#&gt; 2 WMS getCap… https://openmaps.go… 57d8843b… wms    ""    78ec5279-4534… bcgeograp… TRUE            </span>
-<span class="co">#&gt; 3 KML Networ… http://openmaps.gov… 7493e749… kml    "kml" 78ec5279-4534… bcgeograp… FALSE           </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
-<p>This data is the boundary of each school district. The key information in this metadata is that the layer is a <code>**WFS request (Spatial Data)**</code>—which means it is available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. From this we know we can make use of <code>bcdc_query_geodata</code>.</p>
+<span class="co">#&gt; Available Resources (1):</span>
+<span class="co">#&gt;  1. WMS getCapabilities request (wms)</span>
+<span class="co">#&gt; Access the full 'Resources' data frame using:</span>
+<span class="co">#&gt;  bcdc_tidy_resources('78ec5279-4534-49a1-97e8-9d315936f08b')</span>
+<span class="co">#&gt; Query and filter this data using:</span>
+<span class="co">#&gt;  bcdc_query_geodata('78ec5279-4534-49a1-97e8-9d315936f08b')</span></code></pre></div>
+<p>This data is the boundary of each school district. The key information in this metadata is that the layer has a resource in <code>"wms"</code> format —which means it is available through a Web Feature Service. From this we know we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
@@ -245,7 +242,6 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Geographic</span>
-<span class="co">#&gt; Last Updated: 2020-11-25</span>
 <span class="co">#&gt; Description: This dataset contains spatial and attribute information for local and</span>
 <span class="co">#&gt;  regional greenspaces in British Columbia. Local and regional greenspaces are municipal</span>
 <span class="co">#&gt;  or regional district lands designated by local government agencies and managed for</span>
@@ -254,16 +250,14 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  Open Government Licence, and in other cases, publicize parks and greenspaces on web maps</span>
 <span class="co">#&gt;  or pdf maps. Boundaries were edge-matched to the ParcelMap BC cadastre.  This spatial</span>
 <span class="co">#&gt;  layer contains multipart polygons.</span>
-<span class="co">#&gt; Resources: (4)</span>
-<span class="co">#&gt; # A tibble: 4 x 8</span>
-<span class="co">#&gt;   name        url                  id        format ext   package_id     location   bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 WMS getCap… https://openmaps.go… a8d5b53e… wms    ""    6a2fea1b-0cc4… bcgeograp… TRUE            </span>
-<span class="co">#&gt; 2 KML Networ… http://openmaps.gov… a7454e41… kml    "kml" 6a2fea1b-0cc4… bcgeograp… FALSE           </span>
-<span class="co">#&gt; 3 LocalRegio… https://catalogue.d… 76663191… xlsx   "xls… 6a2fea1b-0cc4… external   TRUE            </span>
-<span class="co">#&gt; 4 BC Geograp… https://catalogue.d… 53c6c6bd… other  ""    6a2fea1b-0cc4… bcgeograp… FALSE           </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
-<p>Again we recognize this is <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data, which means we can make use of <code>bcdc_query_geodata</code>.</p>
+<span class="co">#&gt; Available Resources (2):</span>
+<span class="co">#&gt;  1. WMS getCapabilities request (wms)</span>
+<span class="co">#&gt;  2. LocalRegionalParksAttributeValues (xlsx)</span>
+<span class="co">#&gt; Access the full 'Resources' data frame using:</span>
+<span class="co">#&gt;  bcdc_tidy_resources('6a2fea1b-0cc4-4fc2-8017-eaf755d516da')</span>
+<span class="co">#&gt; Query and filter this data using:</span>
+<span class="co">#&gt;  bcdc_query_geodata('6a2fea1b-0cc4-4fc2-8017-eaf755d516da')</span></code></pre></div>
+<p>Again we recognize this is <a href="https://en.wikipedia.org/wiki/Web_Feature_Service">WFS-enabled</a> geospatial data, which means we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span>
@@ -345,7 +339,7 @@ See the License for the specific language governing permissions and limitations 
 <p><img src="vignette-fig-dp_join-1.png" title="plot of chunk dp_join" alt="plot of chunk dp_join" width="100%"></p>
 <p>A second approach is to set an internal option (<code>bcdata.max_geom_pred_size</code>) and increase the threshold of when a bounding box is drawn. Options are set in R like this:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">options</span>(<span class="st">"bcdata.max_geom_pred_size"</span> =<span class="st"> </span>{object size <span class="cf">in</span> bytes})</span></code></pre></div>
-<p>The value of <code>bcdata.max_geom_pred_size</code> is set conservatively so that requests to the Web Service are more consistently successful. Increasing this value may result in invalid requests.</p>
+<p>The value of <code>bcdata.max_geom_pred_size</code> is set conservatively so that requests to the Web Feature Service are more consistently successful. Increasing this value may result in invalid requests.</p>
 <p>Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts_parks_join</span> <span class="op">%&gt;%</span>
@@ -442,14 +436,14 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
 <span class="co">#&gt; # A tibble: 6 x 12</span>
-<span class="co">#&gt;   id        CUSTODIAN_ORG_DESCRI… BUSINESS_CATEGOR… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID</span>
-<span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;             &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;         </span>
-<span class="co">#&gt; 1 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      455           </span>
-<span class="co">#&gt; 2 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      464           </span>
-<span class="co">#&gt; 3 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      482           </span>
-<span class="co">#&gt; 4 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      483           </span>
-<span class="co">#&gt; 5 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      484           </span>
-<span class="co">#&gt; 6 WHSE_IMA… "Ministry of Forest,… airTransportation Air Transportat… BC Airports      487           </span>
+<span class="co">#&gt;   id         CUSTODIAN_ORG_DESCRI… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D… SOURCE_DATA_ID</span>
+<span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                 &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;         </span>
+<span class="co">#&gt; 1 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      455           </span>
+<span class="co">#&gt; 2 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      464           </span>
+<span class="co">#&gt; 3 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      482           </span>
+<span class="co">#&gt; 4 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      483           </span>
+<span class="co">#&gt; 5 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      484           </span>
+<span class="co">#&gt; 6 WHSE_IMAG… "Ministry of Forest,… airTransportati… Air Transportat… BC Airports      487           </span>
 <span class="co">#&gt; # … with 6 more variables: SUPPLIED_SOURCE_ID_IND &lt;chr&gt;, AIRPORT_NAME &lt;chr&gt;, LOCALITY &lt;chr&gt;,</span>
 <span class="co">#&gt; #   NUMBER_OF_RUNWAYS &lt;int&gt;, SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span></code></pre></div>
 </div>

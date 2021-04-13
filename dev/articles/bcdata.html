@@ -222,19 +222,16 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Dataset</span>
-<span class="co">#&gt; Last Updated: 2018-07-12</span>
 <span class="co">#&gt; Description: Financial Incentives for Recycling Scrap Tires (FIRST) collection and</span>
 <span class="co">#&gt;  recycling data (tonnes) from 1991 to 2006. In 2007 [Tire Stewardship</span>
 <span class="co">#&gt;  BC](http://www.tsbc.ca/), a not for profit society, launched the new scrap tire</span>
 <span class="co">#&gt;  recycling program replacing the government-run program that had been in place since</span>
 <span class="co">#&gt;  1991. Tire Stewardship BC collection and recycling data is available</span>
 <span class="co">#&gt;  [here](https://catalogue.data.gov.bc.ca/dataset/f791329b-c2dc-4f82-9993-209780f2a1c6).</span>
-<span class="co">#&gt; Resources: (1)</span>
-<span class="co">#&gt; # A tibble: 1 x 8</span>
-<span class="co">#&gt;   name        url                  id         format ext   package_id     location  bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;     &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 BC FIRST T… https://catalogue.d… ed24cca3-… csv    csv   a29ad492-29a2… catalogu… TRUE            </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
+<span class="co">#&gt; Available Resources (1):</span>
+<span class="co">#&gt;  1. BC FIRST Tire Recycling Data 1991-2006 (csv)</span>
+<span class="co">#&gt; Access the full 'Resources' data frame using:</span>
+<span class="co">#&gt;  bcdc_tidy_resources('a29ad492-29a2-44b9-8693-d27a8cc8e686')</span></code></pre></div>
 </div>
 <div id="bcdc_get_data" class="section level3">
 <h3 class="hasAnchor">
@@ -324,17 +321,14 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Sector: Education</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Dataset</span>
-<span class="co">#&gt; Last Updated: 2017-02-02</span>
 <span class="co">#&gt; Description: BC Schools English Language Learners, French Immersion, Francophone, Career</span>
 <span class="co">#&gt;  Preparation, Aboriginal Support Services, Aboriginal Language and Culture, Continuing</span>
 <span class="co">#&gt;  Education and Career Technical Programs offered in BC schools up to 2013/2014.</span>
-<span class="co">#&gt; Resources: (2)</span>
-<span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name       url                  id          format ext   package_id      location bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;    &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 ProgramsO… http://www.bced.gov… a393f8cf-5… txt    txt   b1f27d1c-244a-… external TRUE            </span>
-<span class="co">#&gt; 2 ProgramsO… http://www.bced.gov… 1e34098e-7… xlsx   xlsx  b1f27d1c-244a-… external TRUE            </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
+<span class="co">#&gt; Available Resources (2):</span>
+<span class="co">#&gt;  1. ProgramsOfferedinSchools.txt (txt)</span>
+<span class="co">#&gt;  2. ProgramsOfferedinSchools.xlsx (xlsx)</span>
+<span class="co">#&gt; Access the full 'Resources' data frame using:</span>
+<span class="co">#&gt;  bcdc_tidy_resources('b1f27d1c-244a-410e-a361-931fac62a524')</span></code></pre></div>
 <p>We see there are two data files or resources available in this record, so we need to tell <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> which one we want. When used interactively, <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will prompt you with the list of available resources through <code>bcdata</code> and ask you to select the resource you want. The resource ID for each data set is available <em>in</em> the metadata record ☝️:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Get the txt data resource from the `bc-schools-programs-offered-in-schools`</span>
@@ -403,7 +397,7 @@ See the License for the specific language governing permissions and limitations 
 <h3 class="hasAnchor">
 <a href="#bcdc_query_geodata" class="anchor"></a><code>bcdc_query_geodata()</code>
 </h3>
-<p>Many geospatial data sets in the B.C. Data Catalogue are available through a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a>. While <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will retrieve the geospatial data for you, sometimes the geospatial file is very large—and slow to download—and/or you may only want <em>some</em> of the data. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> let’s you query catalogue geospatial data available as a Web Service using <code>select</code> and <code>filter</code> functions (just like in <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>. The <code>bcdc::collect()</code> function returns the <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> query results as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
+<p>Many geospatial data sets in the B.C. Data Catalogue are available through a <a href="https://en.wikipedia.org/wiki/Web_Feature_Service">Web Feature Service</a>. While <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will retrieve the geospatial data for you, sometimes the geospatial file is very large—and slow to download—and/or you may only want <em>some</em> of the data. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> let’s you query catalogue geospatial data available as a Web Feature Service using <code>select</code> and <code>filter</code> functions (just like in <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>. The <code>bcdc::collect()</code> function returns the <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> query results as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
 <p>Let’s get the Capital Regional District boundary from the <a href="https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9">B.C. Regional Districts geospatial data</a>—the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Find the B.C. Regional Districts catalogue record</span>
@@ -421,6 +415,10 @@ See the License for the specific language governing permissions and limitations 
 
 <span class="co">## Get the metadata for the B.C. Regional Districts catalogue record</span>
 <span class="va">bc_regional_districts_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"d1aff64e-dbfe-45a6-af97-582b7f6418b9"</span><span class="op">)</span>
+
+<span class="co">## We can see in the search results, and in the metadata record, that this record has a `"wms"`</span>
+<span class="co">## resource format, indicating that it is available as a Web Feature Service and thus</span>
+<span class="co">## we can query it using `bcdc_query_geodata()`</span>
 
 <span class="co">## Have a quick look at the geospatial columns to help with filter or select</span>
 <span class="fu"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span><span class="op">(</span><span class="va">bc_regional_districts_metadata</span><span class="op">)</span>
@@ -451,7 +449,7 @@ See the License for the specific language governing permissions and limitations 
   <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%"></p>
-<p>The vignette <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a> provides a full demonstration on how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata()</a></code> to fine tune a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service</a> request for geospatial data from the B.C. Data Catalogue.</p>
+<p>The vignette <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a> provides a full demonstration on how to use <code><a href="../reference/bcdc_query_geodata.html">bcdata::bcdc_query_geodata()</a></code> to fine tune a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Feature Service</a> request for geospatial data from the B.C. Data Catalogue.</p>
 </div>
   </div>
 

@@ -158,7 +158,6 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
 <span class="co">#&gt; Type: Geographic</span>
-<span class="co">#&gt; Last Updated: 2021-04-13</span>
 <span class="co">#&gt; Description: RESULTS opening's forest cover poylgons with silviculture component</span>
 <span class="co">#&gt;  provided.  Current forest cover subimssion into RESULTS must contain attribute and map</span>
 <span class="co">#&gt;  information.  However, there are historical forest cover polygon infomration where maps</span>
@@ -166,15 +165,13 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  harvesting, at regeneration, and at free growing.  This is a part o fthe Silviculture</span>
 <span class="co">#&gt;  and Land Status Tracking dataset, which includes tracking achievement of silviculture</span>
 <span class="co">#&gt;  obligations on Crown Land</span>
-<span class="co">#&gt; Resources: (3)</span>
-<span class="co">#&gt; # A tibble: 3 x 8</span>
-<span class="co">#&gt;   name        url                  id        format ext   package_id     location   bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 BC Geograp… https://catalogue.d… 92f84516… other  ""    258bb088-4113… bcgeograp… FALSE           </span>
-<span class="co">#&gt; 2 WMS getCap… https://openmaps.go… 57670a0d… wms    ""    258bb088-4113… bcgeograp… TRUE            </span>
-<span class="co">#&gt; 3 KML Networ… https://openmaps.go… d45a82ed… kml    "kml" 258bb088-4113… bcgeograp… FALSE           </span>
-<span class="co">#&gt; You can access the 'Resources' data frame using bcdc_tidy_resources()</span></code></pre></div>
-<p>We see that this is a <a href="https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E">Web Service-enabled</a> geospatial data set—the list of data resources includes <code>WMS getCapabilities request</code>—so we can query and retrieve this geospatial data set using <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
+<span class="co">#&gt; Available Resources (1):</span>
+<span class="co">#&gt;  1. WMS getCapabilities request (wms)</span>
+<span class="co">#&gt; Access the full 'Resources' data frame using:</span>
+<span class="co">#&gt;  bcdc_tidy_resources('258bb088-4113-47b1-b568-ce20bd64e3e3')</span>
+<span class="co">#&gt; Query and filter this data using:</span>
+<span class="co">#&gt;  bcdc_query_geodata('258bb088-4113-47b1-b568-ce20bd64e3e3')</span></code></pre></div>
+<p>We see that this is a <a href="https://en.wikipedia.org/wiki/Web_Feature_Service">Web Feature Service-enabled</a> geospatial data set–the list of data resources includes <code>WMS getCapabilities request</code>–so we can query and retrieve this geospatial data set using <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span>
 <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span>

@@ -148,11 +148,13 @@
 <h3 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>IMPROVEMENTS</h3>
 <ul>
-<li>Setting the <code>bcdata.single_download_limit</code> limit dynamically from the getCapabilities endpoint.</li>
+<li>Setting the <code>bcdata.single_download_limit</code> limit dynamically from the getCapabilities endpoint. <a href='https://github.com/bcgov/bcdata/issues/256'>#256</a></li>
 <li>
-<code>bcdc_describe_feature</code> now joins a object description column to the returned object to provide more information about a field directly in R. <a href='https://github.com/bcgov/bcdata/issues/241'>#241</a></li>
-<li>Better documentation and information surrounding the <code>bcdata.max_geom_pred_size</code> option. <a href='https://github.com/bcgov/bcdata/issues/243'>#243</a></li>
-<li>Add new function <code>bcdc_check_geom_size</code> so users can check prior to submitting a WFS request with <code>filter</code> to see if the request will require a bounding box conversion.</li>
+<code>bcdc_describe_feature</code> now joins an object description column to the returned object to provide more information about a field directly in R. <a href='https://github.com/bcgov/bcdata/issues/241'>#241</a>, <a href='https://github.com/bcgov/bcdata/issues/259'>#259</a></li>
+<li>Better documentation and information surrounding the <code>bcdata.max_geom_pred_size</code> option. <a href='https://github.com/bcgov/bcdata/issues/243'>#243</a>, <a href='https://github.com/bcgov/bcdata/issues/258'>#258</a></li>
+<li>Add new function <code>bcdc_check_geom_size</code> so users can check prior to submitting a WFS request with <code>filter</code> to see if the request will require a bounding box conversion. <a href='https://github.com/bcgov/bcdata/issues/243'>#243</a>, <a href='https://github.com/bcgov/bcdata/issues/258'>#258</a></li>
+<li>Better documentation and messaging about when and why paginated requests are required by <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>. <a href='https://github.com/bcgov/bcdata/issues/240'>#240</a>, <a href='https://github.com/bcgov/bcdata/issues/264'>#264</a></li>
+<li>Better documentation and print method for what records are suitable for use with <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>. <a href='https://github.com/bcgov/bcdata/issues/265'>#265</a>, <a href='https://github.com/bcgov/bcdata/issues/267'>#267</a></li>
 </ul>
 </div>
 </div>

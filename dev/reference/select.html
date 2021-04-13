@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select columns from Web Service call — select.bcdc_promise • bcdata</title>
+<title>Select columns from bcdc_query_geodata() call — select.bcdc_promise • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,12 +46,12 @@
 
 
 
-<meta property="og:title" content="Select columns from Web Service call — select.bcdc_promise" />
-<meta property="og:description" content="Similar to a dplyr::select call, this allows you to select which columns you want the Web Service to return.
+<meta property="og:title" content="Select columns from bcdc_query_geodata() call — select.bcdc_promise" />
+<meta property="og:description" content="Similar to a dplyr::select call, this allows you to select which columns you want the Web Feature Service to return.
 A key difference between dplyr::select and bcdata::select is the presence of &quot;sticky&quot; columns that are
 returned regardless of what columns are selected. If any of these &quot;sticky&quot; columns are selected
 only &quot;sticky&quot; columns are return. bcdc_describe_feature is one way to tell if columns are sticky in advance
-of issuing the Web Service call.
+of issuing the Web Feature Service call.
 See dplyr::select for details." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
@@ -142,17 +142,17 @@ See dplyr::select for details." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select columns from Web Service call</h1>
+    <h1>Select columns from bcdc_query_geodata() call</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/utils-classes.R'><code>R/utils-classes.R</code></a>, <a href='https://github.com/bcgov/bcdata/blob/master/R/utils-select.R'><code>R/utils-select.R</code></a></small>
     <div class="hidden name"><code>select.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Similar to a <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> call, this allows you to select which columns you want the Web Service to return.
+    <p>Similar to a <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> call, this allows you to select which columns you want the Web Feature Service to return.
 A key difference between <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> and <code>bcdata::select</code> is the presence of "sticky" columns that are
 returned regardless of what columns are selected. If any of these "sticky" columns are selected
 only "sticky" columns are return. <code>bcdc_describe_feature</code> is one way to tell if columns are sticky in advance
-of issuing the Web Service call.</p>
+of issuing the Web Feature Service call.</p>
 <p>See <code>dplyr::<a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></code> for details.</p>
     </div>
 
