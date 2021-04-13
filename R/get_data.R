@@ -29,7 +29,7 @@
 #' the import based on the file extension. [bcdc_read_functions()] provides details on which functions
 #' handle the data import. You can then use this information to look at the help pages of those functions.
 #' See the examples for a workflow that illustrates this process.
-#' For spatial Web Service data the `...` arguments are passed to [bcdc_query_geodata()].
+#' For spatial Web Feature Service data the `...` arguments are passed to [bcdc_query_geodata()].
 #' @param verbose When more than one resource is available for a record,
 #' should extra information about those resources be printed to the console?
 #' Default `TRUE`

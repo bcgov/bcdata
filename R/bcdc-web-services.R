@@ -161,7 +161,10 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
                        cols_df = cols_df))
 }
 
-#' Get map from the B.C. Web Service
+#' Get preview map from the B.C. Web Map Service
+#'
+#' Note this does not return the actual map features, rather
+#' opens an image preview of the layer in [mapview::mapview()]
 #'
 #'
 #' @inheritParams bcdc_get_data

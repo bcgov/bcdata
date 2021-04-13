@@ -25,10 +25,10 @@ reference:
       - '`bcdc_get_data`'
       - '`bcdc_preview`'
       - '`bcdc_read_functions`'
-  - title: "Querying data from a Web Service catalogue record"
+  - title: "Querying data from a Web Feature Service catalogue record"
     desc: >
       Issue queries using `select` and `filter` verbs against data sets in the
-      B.C. Data Catalogue that have Web Services.
+      B.C. Data Catalogue that have a Web Feature Service.
     contents:
       - '`bcdc_query_geodata`'
       - '`bcdc_describe_feature`'

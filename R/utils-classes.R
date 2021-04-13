@@ -191,10 +191,12 @@ print.bcdc_query <- function(x, ...) {
 # dplyr methods -----------------------------------------------------------
 
 
-#' Filter a query from Web Service call
+#' Filter a query from bcdc_query_geodata()
 #'
-#' Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
-#' full sf object is not read into memory until `collect()` has been called.
+#' Filter a query from Web Feature Service using dplyr
+#' methods. This filtering is accomplished lazily so that
+#' the full sf object is not read into memory until
+#' `collect()` has been called.
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... Logical predicates with which to filter the results. Multiple
@@ -237,13 +239,13 @@ filter.bcdc_promise <- function(.data, ...) {
                        record = .data$record, cols_df = .data$cols_df))
 }
 
-#' Select columns from Web Service call
+#' Select columns from bcdc_query_geodata() call
 #'
-#' Similar to a `dplyr::select` call, this allows you to select which columns you want the Web Service to return.
+#' Similar to a `dplyr::select` call, this allows you to select which columns you want the Web Feature Service to return.
 #' A key difference between `dplyr::select` and `bcdata::select` is the presence of "sticky" columns that are
 #' returned regardless of what columns are selected. If any of these "sticky" columns are selected
 #' only "sticky" columns are return. `bcdc_describe_feature` is one way to tell if columns are sticky in advance
-#' of issuing the Web Service call.
+#' of issuing the Web Feature Service call.
 #'
 #' @param .data object of class `bcdc_promise` (likely passed from [bcdc_query_geodata()])
 #' @param ... One or more unquoted expressions separated by commas. See details.
@@ -321,7 +323,7 @@ tail.bcdc_promise <- function(x, n = 6L, ...) {
 }
 
 
-#' Throw an informative error when attempting mutate on a Web Service call
+#' Throw an informative error when attempting mutate on a `bcdc_promise` object
 #'
 #' The CQL syntax to generate WFS calls does not current allow arithmetic operations. Therefore
 #' this function exists solely to generate an informative error that suggests an alternative
@@ -350,13 +352,13 @@ mutate.bcdc_promise <- function(.data, ...){
 }
 
 
-#' Force collection of Web Service request from B.C. Data Catalogue
+#' Force collection of Web Feature Service request from B.C. Data Catalogue
 #'
 #' After tuning a query, `collect()` is used to actually bring the data into memory.
 #' This will retrieve an sf object into R. The `as_tibble()` function can be used
 #' interchangeably with `collect` which matches `dbplyr` behaviour.
 #'
-#' @param x object of class bcdc_promise
+#' @param x object of class `bcdc_promise`
 #' @inheritParams collect
 #' @rdname collect-methods
 #' @export
@@ -438,9 +440,9 @@ collect.bcdc_promise <- function(x, ...){
 #' @export
 as_tibble.bcdc_promise <- collect.bcdc_promise
 
-#' Show SQL and URL used for Web Service request from B.C. Data Catalogue
+#' Show SQL and URL used for Web Feature Service request from B.C. Data Catalogue
 #'
-#' Display Web Service query SQL
+#' Display Web Feature Service query CQL
 #'
 #' @param x object of class bcdc_promise or bcdc_sf
 #' @inheritParams show_query
