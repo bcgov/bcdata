@@ -225,7 +225,7 @@ system.time(
 
 ```
    user  system elapsed 
- 30.975   9.317 188.187 
+ 39.472  17.307  83.024 
 ```
 
 ```r
@@ -233,7 +233,7 @@ format(object.size(all_sp_eco), units = "Mb")
 ```
 
 ```
-[1] "104.2 Mb"
+[1] "104.3 Mb"
 ```
 
 ```r
@@ -252,7 +252,7 @@ system.time({
 
 ```
    user  system elapsed 
-  0.267   0.013   1.801 
+  0.327   0.025   1.532 
 ```
 
 ```r
@@ -280,7 +280,7 @@ ggplot(marmots2) +
 
 ![](sp_eco-1.png)<!-- -->
 
-This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 100% smaller than downloading the entire data set using `bcdc_get_data()` and filtering locally.
+This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 1081 times smaller than downloading the entire data set using `bcdc_get_data()` and filtering locally.
 
 # Conclusion
 
