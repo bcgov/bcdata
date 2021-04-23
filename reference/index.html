@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -225,7 +225,7 @@
         <td>
           <p><code><a href="bcdc_preview.html">bcdc_preview()</a></code> </p>
         </td>
-        <td><p>Get map from the B.C. Web Service</p></td>
+        <td><p>Get preview map from the B.C. Web Map Service</p></td>
       </tr><tr>
         
         <td>
@@ -236,8 +236,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-querying-data-from-a-web-service-catalogue-record" class="hasAnchor"><a href="#section-querying-data-from-a-web-service-catalogue-record" class="anchor"></a>Querying data from a Web Service catalogue record</h2>
-          <p class="section-desc"><p>Issue queries using <code>select</code> and <code>filter</code> verbs against data sets in the B.C. Data Catalogue that have Web Services.</p></p>
+          <h2 id="section-querying-data-from-a-web-feature-service-catalogue-record" class="hasAnchor"><a href="#section-querying-data-from-a-web-feature-service-catalogue-record" class="anchor"></a>Querying data from a Web Feature Service catalogue record</h2>
+          <p class="section-desc"><p>Issue queries using <code>select</code> and <code>filter</code> verbs against data sets in the B.C. Data Catalogue that have a Web Feature Service.</p></p>
         </th>
       </tr>
       
@@ -250,31 +250,31 @@
         <td>
           <p><code><a href="bcdc_query_geodata.html">bcdc_query_geodata()</a></code> </p>
         </td>
-        <td><p>Query data from the B.C. Web Service</p></td>
+        <td><p>Query data from the B.C. Web Feature Service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="bcdc_describe_feature.html">bcdc_describe_feature()</a></code> </p>
         </td>
-        <td><p>Describe the attributes of a Web Service feature</p></td>
+        <td><p>Describe the attributes of a Web Feature Service</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="filter.html">filter(<i>&lt;bcdc_promise&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Filter a query from Web Service call</p></td>
+        <td><p>Filter a query from bcdc_query_geodata()</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="select.html">select(<i>&lt;bcdc_promise&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Select columns from Web Service call</p></td>
+        <td><p>Select columns from bcdc_query_geodata() call</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="mutate.html">mutate(<i>&lt;bcdc_promise&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Throw an informative error when attempting mutate on a Web Service call</p></td>
+        <td><p>Throw an informative error when attempting mutate on a <code>bcdc_promise</code> object</p></td>
       </tr><tr>
         
         <td>

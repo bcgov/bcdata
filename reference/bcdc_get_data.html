@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -180,7 +180,7 @@ Default <code>TRUE</code></p></td>
 the import based on the file extension. <code><a href='bcdc_read_functions.html'>bcdc_read_functions()</a></code> provides details on which functions
 handle the data import. You can then use this information to look at the help pages of those functions.
 See the examples for a workflow that illustrates this process.
-For spatial Web Service data the <code>...</code> arguments are passed to <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.</p></td>
+For spatial Web Feature Service data the <code>...</code> arguments are passed to <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -196,10 +196,10 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
                 resource <span class='op'>=</span> <span class='st'>'4d0377d9-e8a1-429b-824f-0ce8f363512c'</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; Geometry type: POINT
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
+#&gt; Projected CRS: NAD83 / BC Albers
 #&gt; <span style='color: #949494;'># A tibble: 455 x 42</span><span>
 #&gt;    id      CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -284,10 +284,10 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
   <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 455 features and 41 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
-#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; Geometry type: POINT
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
+#&gt; Projected CRS: NAD83 / BC Albers
 #&gt; </span><span style='color: #949494;'># A tibble: 455 x 42</span><span>
 #&gt;    id      CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -324,10 +324,10 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
   <span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_sf function from the sf package.</span></div><div class='output co'>#&gt; Simple feature collection with 6106 features and 1 field
-#&gt; geometry type:  LINESTRING
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 529420.8 ymin: 367780.7 xmax: 1203949 ymax: 1157953
-#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; Geometry type: LINESTRING
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 529420.8 ymin: 367780.7 xmax: 1203949 ymax: 1157953
+#&gt; Projected CRS: NAD83 / BC Albers
 #&gt; </span><span style='color: #949494;'># A tibble: 6,106 x 2</span><span>
 #&gt;    SHAPE_Length                                                             geom
 #&gt;           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>                                                 </span><span style='color: #949494;font-style: italic;'>&lt;LINESTRING [m]&gt;</span><span>
@@ -387,16 +387,12 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Sector: </span><span>Economy
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Licence: </span><span>Access Only
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Type: </span><span>Dataset
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>Last Updated: </span><span>2021-03-10
 #&gt; </span><span style='color: #0000BB;font-style: italic;'>Description: </span><span>This dataset contains information from
 #&gt;  BC Housing's New Homes Registry. 
-#&gt; </span><span style='color: #0000BB;font-style: italic;'>Resources: (1)</span><span>
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 8</span><span>
-#&gt;   name    url        id       format ext   package_id  location bcdata_available
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> New Ho… https://c… 2972091… xlsx   xlsx  8620ce82-4… catalog… TRUE            
-#&gt; </span><span style='color: #0000BB;'>You can access the 'Resources' data frame using
-#&gt;  bcdc_tidy_resources()</span><span></div><div class='input'>
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Available Resources (1):</span><span>
+#&gt;  1. New Homes Registrations 2016-2020 (xlsx)
+#&gt; </span><span style='color: #0000BB;font-style: italic;'>Access the full 'Resources' data frame using:
+#&gt;  </span><span style='color: #BB0000;'>bcdc_tidy_resources('8620ce82-4943-43c4-9932-40730a0255d6')</span><span></div><div class='input'>
 <span class='co'>## bcdc_read_functions let's us know that bcdata</span>
 <span class='co'>## uses readxl::read_excel to import xlsx files</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
@@ -444,7 +440,7 @@ For spatial Web Service data the <code>...</code> arguments are passed to <code>
 #&gt;   Error: Sheet 'Regional Districts' not found
 #&gt; 
 #&gt; The file can be found here:
-#&gt;   '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpmwpAZC/bcdata_74d63b4d392/file74d74ae4961.xlsx'
+#&gt;   '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpBcAO5C/bcdata_75b24fe63ca/file75b394975bf.xlsx'
 #&gt; if you would like to try to read it manually.
 #&gt; </div><div class='input'><span class='co'># }</span>
 

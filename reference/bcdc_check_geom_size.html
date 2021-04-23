@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CQL escaping — CQL • bcdata</title>
+<title>Check spatial objects for WFS spatial operations — bcdc_check_geom_size • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,16 @@
 
 
 
-<meta property="og:title" content="CQL escaping — CQL" />
-<meta property="og:description" content="Write a CQL expression to escape its inputs, and return a CQL/SQL object.
-Used when writing filter expressions in bcdc_query_geodata()." />
+<meta property="og:title" content="Check spatial objects for WFS spatial operations — bcdc_check_geom_size" />
+<meta property="og:description" content="Check a spatial object to see if it exceeds the current set value of
+'bcdata.max_geom_pred_size' option, which controls how the object is treated when used inside a spatial predicate function in filter.bcdc_promise(). If the object does exceed the size
+threshold a bounding box is drawn around it and all features
+within the box will be returned. Further options include:
+Try adjusting the value of the 'bcdata.max_geom_pred_size' option
+Simplify the spatial object to reduce its size
+Further processing on the returned object
+
+" />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
 
@@ -138,37 +145,52 @@ Used when writing filter expressions in bcdc_query_geodata()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CQL escaping</h1>
+    <h1>Check spatial objects for WFS spatial operations</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/cql-geom-predicates.R'><code>R/cql-geom-predicates.R</code></a></small>
-    <div class="hidden name"><code>CQL.Rd</code></div>
+    <div class="hidden name"><code>bcdc_check_geom_size.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Write a CQL expression to escape its inputs, and return a CQL/SQL object.
-Used when writing filter expressions in <code><a href='bcdc_query_geodata.html'>bcdc_query_geodata()</a></code>.</p>
+    <p>Check a spatial object to see if it exceeds the current set value of
+'bcdata.max_geom_pred_size' option, which controls how the object is treated when used inside a spatial predicate function in <code><a href='filter.bcdc_promise.html'>filter.bcdc_promise()</a></code>. If the object does exceed the size
+threshold a bounding box is drawn around it and all features
+within the box will be returned. Further options include:</p><ul>
+<li><p>Try adjusting the value of the 'bcdata.max_geom_pred_size' option</p></li>
+<li><p>Simplify the spatial object to reduce its size</p></li>
+<li><p>Further processing on the returned object</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>CQL</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bcdc_check_geom_size</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Character vectors that will be combined into a single CQL statement.</p></td>
+      <th>x</th>
+      <td><p>object of class sf, sfc or sfg</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://rdrr.io/r/base/c.html'>c("CQL", "SQL")</a></code></p>
+    <p>invisibly return logical indicating whether the check pass. If the return
+value is TRUE, the object will not need a bounding box drawn. If the return value is
+FALSE, the check will fails and a bounding box will be drawn.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See <a href='https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html'>the CQL/ECQL for Geoserver website</a>.</p>
+    <p>See the <a href='https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html'>Querying Spatial Data with bcdata</a>
+for more details.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>CQL</span><span class='op'>(</span><span class='st'>"FOO &gt; 12 &amp; NAME LIKE 'A&amp;'"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;SQL&gt; FOO &gt; 12 &amp; NAME LIKE 'A&amp;'</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='va'>airports</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='as_tibble.html'>collect</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>bcdc_check_geom_size</span><span class='op'>(</span><span class='va'>airports</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

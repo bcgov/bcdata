@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select columns from Web Service call — select.bcdc_promise • bcdata</title>
+<title>Select columns from bcdc_query_geodata() call — select.bcdc_promise • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,12 +46,12 @@
 
 
 
-<meta property="og:title" content="Select columns from Web Service call — select.bcdc_promise" />
-<meta property="og:description" content="Similar to a dplyr::select call, this allows you to select which columns you want the Web Service to return.
+<meta property="og:title" content="Select columns from bcdc_query_geodata() call — select.bcdc_promise" />
+<meta property="og:description" content="Similar to a dplyr::select call, this allows you to select which columns you want the Web Feature Service to return.
 A key difference between dplyr::select and bcdata::select is the presence of &quot;sticky&quot; columns that are
 returned regardless of what columns are selected. If any of these &quot;sticky&quot; columns are selected
 only &quot;sticky&quot; columns are return. bcdc_describe_feature is one way to tell if columns are sticky in advance
-of issuing the Web Service call.
+of issuing the Web Feature Service call.
 See dplyr::select for details." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
@@ -85,7 +85,7 @@ See dplyr::select for details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -142,17 +142,17 @@ See dplyr::select for details." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select columns from Web Service call</h1>
+    <h1>Select columns from bcdc_query_geodata() call</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/utils-classes.R'><code>R/utils-classes.R</code></a>, <a href='https://github.com/bcgov/bcdata/blob/master/R/utils-select.R'><code>R/utils-select.R</code></a></small>
     <div class="hidden name"><code>select.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Similar to a <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> call, this allows you to select which columns you want the Web Service to return.
+    <p>Similar to a <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> call, this allows you to select which columns you want the Web Feature Service to return.
 A key difference between <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select</a></code> and <code>bcdata::select</code> is the presence of "sticky" columns that are
 returned regardless of what columns are selected. If any of these "sticky" columns are selected
 only "sticky" columns are return. <code>bcdc_describe_feature</code> is one way to tell if columns are sticky in advance
-of issuing the Web Service call.</p>
+of issuing the Web Feature Service call.</p>
 <p>See <code>dplyr::<a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></code> for details.</p>
     </div>
 
@@ -189,19 +189,19 @@ of issuing the Web Service call.</p>
   <span class='co'>## Columns that can selected:</span>
   <span class='va'>feature_spec</span><span class='op'>[</span><span class='va'>feature_spec</span><span class='op'>$</span><span class='va'>sticky</span> <span class='op'>==</span> <span class='cn'>TRUE</span>,<span class='op'>]</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 33 x 4</span><span>
-#&gt;    col_name         sticky remote_col_type local_col_type
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> DESCRIPTION      TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> PHYSICAL_ADDRESS TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ALIAS_ADDRESS    TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> STREET_ADDRESS   TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> POSTAL_CODE      TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> LOCALITY         TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CONTACT_PHONE    TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> CONTACT_EMAIL    TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> CONTACT_FAX      TRUE   xsd:string      character     
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> WEBSITE_URL      TRUE   xsd:string      character     
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 33 x 5</span><span>
+#&gt;    col_name   sticky remote_col_type local_col_type column_comments             
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> DESCRIPTI… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>DESCRIPTION describes the …
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> PHYSICAL_… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>PHYSICAL_ADDRESS contains …
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ALIAS_ADD… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>ALIAS_ADDRESS contains an …
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> STREET_AD… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>STREET_ADDRESS is a free f…
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> POSTAL_CO… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>POSTAL_CODE is the Canadia…
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> LOCALITY   TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>LOCALITY is the name of th…
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CONTACT_P… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>CONTACT PHONE contains the…
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> CONTACT_E… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>CONTACT_EMAIL contains the…
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> CONTACT_F… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>CONTACT FAX contains the g…
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> WEBSITE_U… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>WEBSITE_URL contains the l…
 #&gt; </span><span style='color: #949494;'># … with 23 more rows</span><span></div><div class='input'>
 <span class='co'>## Select columns</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
@@ -214,10 +214,10 @@ of issuing the Web Service call.</p>
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 11 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
-#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; Geometry type: POINT
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
+#&gt; Projected CRS: NAD83 / BC Albers
 #&gt; </span><span style='color: #949494;'># A tibble: 6 x 12</span><span>
 #&gt;   id       CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -241,10 +241,10 @@ of issuing the Web Service call.</p>
 #&gt; ● At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 10 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
-#&gt; projected CRS:  NAD83 / BC Albers
+#&gt; Geometry type: POINT
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
+#&gt; Projected CRS: NAD83 / BC Albers
 #&gt; </span><span style='color: #949494;'># A tibble: 6 x 11</span><span>
 #&gt;   id       CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           

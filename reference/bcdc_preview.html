@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get map from the B.C. Web Service — bcdc_preview • bcdata</title>
+<title>Get preview map from the B.C. Web Map Service — bcdc_preview • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Get map from the B.C. Web Service — bcdc_preview" />
-<meta property="og:description" content="Get map from the B.C. Web Service" />
+<meta property="og:title" content="Get preview map from the B.C. Web Map Service — bcdc_preview" />
+<meta property="og:description" content="Note this does not return the actual map features, rather
+opens an image preview of the layer in a
+Leaflet map window" />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
 
@@ -80,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -137,13 +139,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get map from the B.C. Web Service</h1>
+    <h1>Get preview map from the B.C. Web Map Service</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc-web-services.R'><code>R/bcdc-web-services.R</code></a></small>
     <div class="hidden name"><code>bcdc_preview.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get map from the B.C. Web Service</p>
+    <p>Note this does not return the actual map features, rather
+opens an image preview of the layer in a
+<a href='https://rstudio.github.io/leaflet/'>Leaflet</a> map window</p>
     </div>
 
     <pre class="usage"><span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='va'>record</span><span class='op'>)</span></pre>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter a query from Web Service call — filter.bcdc_promise • bcdata</title>
+<title>Filter a query from bcdc_query_geodata() — filter.bcdc_promise • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,11 @@
 
 
 
-<meta property="og:title" content="Filter a query from Web Service call — filter.bcdc_promise" />
-<meta property="og:description" content="Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
-full sf object is not read into memory until collect() has been called.
+<meta property="og:title" content="Filter a query from bcdc_query_geodata() — filter.bcdc_promise" />
+<meta property="og:description" content="Filter a query from Web Feature Service using dplyr
+methods. This filtering is accomplished lazily so that
+the full sf object is not read into memory until
+collect() has been called.
 See dplyr::filter for details." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
@@ -82,7 +84,7 @@ See dplyr::filter for details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -139,14 +141,16 @@ See dplyr::filter for details." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter a query from Web Service call</h1>
+    <h1>Filter a query from bcdc_query_geodata()</h1>
     <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/utils-classes.R'><code>R/utils-classes.R</code></a>, <a href='https://github.com/bcgov/bcdata/blob/master/R/utils-filter.R'><code>R/utils-filter.R</code></a></small>
     <div class="hidden name"><code>filter.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Filter a query from Web Service using dplyr methods. This filtering is accomplished lazily so that the
-full sf object is not read into memory until <code><a href='as_tibble.html'>collect()</a></code> has been called.</p>
+    <p>Filter a query from Web Feature Service using dplyr
+methods. This filtering is accomplished lazily so that
+the full sf object is not read into memory until
+<code><a href='as_tibble.html'>collect()</a></code> has been called.</p>
 <p>See <code>dplyr::<a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></code> for details.</p>
     </div>
 
