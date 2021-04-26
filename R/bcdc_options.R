@@ -112,7 +112,6 @@ bcdc_get_wfs_records_xml <- function() {
     ._bcdataenv_$get_capabilities_xml <- ret
     return(ret)
   } else {
-    message("Unable to access wfs record listing")
     invisible(NULL)
   }
 }
@@ -136,6 +135,7 @@ bcdc_single_download_limit <- function() {
   doc <- bcdc_get_wfs_records_xml()
 
   if (is.null(doc)) {
+    message("Unable to access wfs record listing, using default download limit of 10000")
     return(10000L)
   }
 
