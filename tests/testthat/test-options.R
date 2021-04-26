@@ -24,6 +24,7 @@ test_that("bcdata.chunk_limit",{
 })
 
 test_that("bcdata.single_download_limit", {
+  skip_if_net_down()
   skip_on_cran()
   withr::local_options(list(bcdata.single_download_limit = 1))
   expect_message(

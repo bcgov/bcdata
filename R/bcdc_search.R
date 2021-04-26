@@ -68,7 +68,9 @@ bcdc_list_groups <- function() bcdc_search_facets("groups")
 #' @export
 #' @examples
 #' \donttest{
-#' bcdc_list_group_records('environmental-reporting-bc')
+#' try(
+#'   bcdc_list_group_records('environmental-reporting-bc')
+#' )
 #' }
 
 bcdc_list_group_records <- function(group) {
