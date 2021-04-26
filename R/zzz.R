@@ -14,7 +14,7 @@
 
 .onLoad <- function(...) {
   ._bcdataenv_$named_get_record_warned <- FALSE # nocov
-  ._bcdataenv_$get_capabilities_xml <- bcdc_get_wfs_records_xml() # nocov
+  ._bcdataenv_$get_capabilities_xml <- NULL # nocov
 
 }
 
