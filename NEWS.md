@@ -1,6 +1,6 @@
 # bcdata (development version)
 
-* Code in `.onLoad()` that sent a request to the wfs getCapabilities endpoint could cause the package to fail to load. This was moved into a function that makes the request the first time it's required, and stores the result for the remainder of the session (#271)
+* Code in `.onLoad()` that sent a request to the wfs getCapabilities endpoint could cause the package to fail to load. This was moved into an internal function `bcdc_get_capabilities()` that makes the request the first time it's required, and stores the result for the remainder of the session (#271)
 
 # bcdata 0.2.3
 
