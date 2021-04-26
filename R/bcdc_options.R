@@ -89,7 +89,7 @@ check_chunk_limit <- function(){
   }
 }
 
-bcdc_get_wfs_records_xml <- function() {
+bcdc_get_capabilites <- function() {
   current_xml <- ._bcdataenv_$get_capabilities_xml
   if (!is.null(current_xml) && inherits(current_xml, "xml_document")) {
     # Already retrieved and stored this session
@@ -117,7 +117,7 @@ bcdc_get_wfs_records_xml <- function() {
 }
 
 bcdc_get_wfs_records <- function() {
-  doc <- bcdc_get_wfs_records_xml()
+  doc <- bcdc_get_capabilites()
 
   if (is.null(doc)) stop("Unable to access wfs record listing", call. = FALSE)
 
@@ -132,7 +132,7 @@ bcdc_get_wfs_records <- function() {
 }
 
 bcdc_single_download_limit <- function() {
-  doc <- bcdc_get_wfs_records_xml()
+  doc <- bcdc_get_capabilites()
 
   if (is.null(doc)) {
     message("Unable to access wfs record listing, using default download limit of 10000")
