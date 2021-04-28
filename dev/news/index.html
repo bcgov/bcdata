@@ -146,6 +146,7 @@
 </h1>
 <ul>
 <li>Code in <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> that sent a request to the wfs getCapabilities endpoint could cause the package to fail to load. This was moved into an internal function <code>bcdc_get_capabilities()</code> that makes the request the first time it’s required, and stores the result for the remainder of the session (<a href='https://github.com/bcgov/bcdata/issues/271'>#271</a>)</li>
+<li>testthat is now used conditionally to only run tests if the testthat package is installed.</li>
 </ul>
 </div>
     <div id="bcdata-023" class="section level1">

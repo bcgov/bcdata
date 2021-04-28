@@ -209,9 +209,9 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
   <span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-airports"</span>, crs <span class='op'>=</span> <span class='fl'>3857</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
-#&gt; ● features and </span><span style='color: #00BB00;'>41</span><span> fields
-#&gt; ● At most six rows of the record are printed here
+#&gt; • Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; • features and </span><span style='color: #00BB00;'>41</span><span> fields
+#&gt; • At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 41 fields
 #&gt; Geometry type: POINT
@@ -290,38 +290,38 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; </span><span style='color: #949494;'># A tibble: 1 x 6</span><span>
 #&gt;   id                       GW_WW_SYSID WELL_TAG_NUMBER INTENDED_WATER_… OBJECTID
 #&gt; </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                          </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_WATER_MANAGEMENT.G…       </span><span style='text-decoration: underline;'>22</span><span>688           </span><span style='text-decoration: underline;'>22</span><span>722 Not Applicable   38</span><span style='text-decoration: underline;'>463</span><span>822
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_WATER_MANAGEMENT.G…       </span><span style='text-decoration: underline;'>22</span><span>688           </span><span style='text-decoration: underline;'>22</span><span>722 Not Applicable   38</span><span style='text-decoration: underline;'>581</span><span>648
 #&gt; </span><span style='color: #949494;'># … with 1 more variable: geometry &lt;POINT [m]&gt;</span><span></div><div class='input'>
 <span class='co'>## A moderately large layer</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-environmental-monitoring-locations"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37891</span><span>
-#&gt; ● features and </span><span style='color: #00BB00;'>35</span><span> fields
-#&gt; ● Accessing this record requires pagination and will make </span><span style='color: #00BB00;'>38</span><span>
-#&gt; ● separate requests to the WFS. See ?bcdc_options
-#&gt; ● At most six rows of the record are printed here
+#&gt; • Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>37891</span><span>
+#&gt; • features and </span><span style='color: #00BB00;'>35</span><span> fields
+#&gt; • Accessing this record requires pagination and will make </span><span style='color: #00BB00;'>38</span><span>
+#&gt; • separate requests to the WFS. See ?bcdc_options
+#&gt; • At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; Geometry type: POINT
 #&gt; Dimension:     XY
-#&gt; Bounding box:  xmin: 934697.9 ymin: 394024.7 xmax: 1456672 ymax: 618312.6
+#&gt; Bounding box:  xmin: 1295778 ymin: 471695.5 xmax: 1329132 ymax: 493509.3
 #&gt; Projected CRS: NAD83 / BC Albers
 #&gt; </span><span style='color: #949494;'># A tibble: 6 x 36</span><span>
 #&gt;   id         MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_ENVI… 1401166                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_ENVI… 1401209                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_ENVI… 1401210                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_ENVI… 1401377                        52 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_ENVI… 1401378                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_ENVI… 1401409                        67 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_ENVI… 0300043                        20 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_ENVI… 0300044                        20 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_ENVI… 0300045                        20 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_ENVI… 0300046                        20 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_ENVI… 0300047                        20 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_ENVI… 0300048                        20 </span><span style='color: #BB0000;'>NA</span><span>               </span><span style='color: #BB0000;'>NA</span><span>              
 #&gt; </span><span style='color: #949494;'># … with 31 more variables: ECO_REGION_CD &lt;chr&gt;, GEOREFERENCE_SOURCE_CD &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   LOCATION_PURPOSE_CD &lt;chr&gt;, LOCATION_TYPE_CD &lt;chr&gt;, OFFICE_CD &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   SOURCE_CLASS_CD &lt;chr&gt;, WATERSHED_CD &lt;chr&gt;, CALC_STATISTICS_IND &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   LOCATION_AREA_IND &lt;chr&gt;, MOBILE_LOCATION_IND &lt;chr&gt;, CLOSED_DATE &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   DESCRIPTION &lt;chr&gt;, ELEVATION &lt;int&gt;, ESTABLISHED_DATE &lt;date&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   DESCRIPTION &lt;chr&gt;, ELEVATION &lt;chr&gt;, ESTABLISHED_DATE &lt;date&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, LEGAL_DESCRIPTION &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   MONITORING_LOCN_COMMENT &lt;chr&gt;, MONITORING_LOCATION_NAME &lt;chr&gt;,</span><span>
 #&gt; </span><span style='color: #949494;'>#   SOURCE_CLASS_NARRATIVE &lt;chr&gt;, WELL_IDENTIFICATION_PLATE_NO &lt;chr&gt;,</span><span>
@@ -334,11 +334,11 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
     <span class='fu'><a href='filter.bcdc_promise.html'>filter</a></span><span class='op'>(</span><span class='va'>PERMIT_RELATIONSHIP</span> <span class='op'>==</span> <span class='st'>"DISCHARGE"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>12062</span><span>
-#&gt; ● features and </span><span style='color: #00BB00;'>35</span><span> fields
-#&gt; ● Accessing this record requires pagination and will make </span><span style='color: #00BB00;'>13</span><span>
-#&gt; ● separate requests to the WFS. See ?bcdc_options
-#&gt; ● At most six rows of the record are printed here
+#&gt; • Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>12062</span><span>
+#&gt; • features and </span><span style='color: #00BB00;'>35</span><span> fields
+#&gt; • Accessing this record requires pagination and will make </span><span style='color: #00BB00;'>13</span><span>
+#&gt; • separate requests to the WFS. See ?bcdc_options
+#&gt; • At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; Geometry type: POINT
@@ -374,11 +374,11 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 </div><div class='output co'>#&gt; Querying
 #&gt;  </span><span style='color: #BB0000;'>'terrestrial-protected-areas-representation-by-biogeoclimatic-unit'</span><span>
 #&gt;  record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>15267</span><span>
-#&gt; ● features and </span><span style='color: #00BB00;'>25</span><span> fields
-#&gt; ● Accessing this record requires pagination and will make </span><span style='color: #00BB00;'>16</span><span>
-#&gt; ● separate requests to the WFS. See ?bcdc_options
-#&gt; ● At most six rows of the record are printed here
+#&gt; • Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>15267</span><span>
+#&gt; • features and </span><span style='color: #00BB00;'>25</span><span> fields
+#&gt; • Accessing this record requires pagination and will make </span><span style='color: #00BB00;'>16</span><span>
+#&gt; • separate requests to the WFS. See ?bcdc_options
+#&gt; • At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 25 fields
 #&gt; Geometry type: POLYGON
@@ -405,9 +405,9 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
   <span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'</span><span> record
-#&gt; ● Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
-#&gt; ● features and </span><span style='color: #00BB00;'>41</span><span> fields
-#&gt; ● At most six rows of the record are printed here
+#&gt; • Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
+#&gt; • features and </span><span style='color: #00BB00;'>41</span><span> fields
+#&gt; • At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 41 fields
 #&gt; Geometry type: POINT
