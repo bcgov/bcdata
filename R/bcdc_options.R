@@ -84,7 +84,7 @@ check_chunk_limit <- function(){
   chunk_value <- getOption("bcdata.chunk_limit")
   chunk_limit <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
 
-  if (!is.null(chunk_value) && chunk_value >= chunk_limit){
+  if (!is.null(chunk_value) && chunk_value >= chunk_limit) {
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
   }
 }
@@ -97,23 +97,31 @@ bcdc_get_capabilities <- function() {
   }
 
   if (has_internet()) {
-    url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
+    url <- "http://openmaps.gov.bc.ca/geo/pub/ows"
     cli <- bcdc_http_client(url, auth = FALSE)
 
-    cc <- cli$get(query = list(
+
+    cc <- try(cli$get(query = list(
       SERVICE = "WFS",
       VERSION = "2.0.0",
       REQUEST = "Getcapabilities"
-    ))
+    )))
+
+    if (inherits(cc, "try-error")) {
+      return(NULL)
+    }
+
+    cc$raise_for_status()
 
     res <- cc$parse("UTF-8")
     ret <- xml2::read_xml(res)
     # store it and return it
     ._bcdataenv_$get_capabilities_xml <- ret
     return(ret)
-  } else {
-    invisible(NULL)
   }
+
+  invisible(NULL)
+
 }
 
 bcdc_get_wfs_records <- function() {

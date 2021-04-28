@@ -100,7 +100,7 @@ bcdc_wfs_client <- function(endpoint = NULL) {
   bcdc_http_client(url, auth = FALSE)
 }
 
-bcdc_http_client <- function(url, auth = FALSE) {
+bcdc_http_client <- function(url, auth = FALSE, ...) {
   headers <- list(
     `User-Agent` = bcdata_user_agent(),
     Authorization = if (auth) bcdc_auth() else NULL
@@ -108,7 +108,8 @@ bcdc_http_client <- function(url, auth = FALSE) {
 
   crul::HttpClient$new(
     url = url,
-    headers = compact(headers)
+    headers = compact(headers),
+    opts = list(...)
   )
 }
 
