@@ -97,23 +97,32 @@ bcdc_get_capabilities <- function() {
   }
 
   if (has_internet()) {
-    url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
+    url <- "http://openmaps.gov.bc.ca/geo/pub/ows"
     cli <- bcdc_http_client(url, auth = FALSE)
 
-    cc <- cli$get(query = list(
+
+    cc <- try(cli$get(query = list(
       SERVICE = "WFS",
       VERSION = "2.0.0",
       REQUEST = "Getcapabilities"
-    ))
+    )))
+
+    if (inherits(cc, "try-error")) {
+      message("Unable to connect to server")
+      return(NULL)
+    }
+
+    cc$raise_for_status()
 
     res <- cc$parse("UTF-8")
     ret <- xml2::read_xml(res)
     # store it and return it
     ._bcdataenv_$get_capabilities_xml <- ret
     return(ret)
-  } else {
-    invisible(NULL)
   }
+
+  invisible(NULL)
+
 }
 
 bcdc_get_wfs_records <- function() {
