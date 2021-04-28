@@ -84,7 +84,7 @@ check_chunk_limit <- function(){
   chunk_value <- getOption("bcdata.chunk_limit")
   chunk_limit <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
 
-  if (!is.null(chunk_value) && chunk_value >= chunk_limit){
+  if (!is.null(chunk_value) && chunk_value >= chunk_limit) {
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
   }
 }
@@ -108,7 +108,6 @@ bcdc_get_capabilities <- function() {
     )))
 
     if (inherits(cc, "try-error")) {
-      message("Unable to connect to server")
       return(NULL)
     }
 
