@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
       </span>
     </div>
 
@@ -140,9 +140,18 @@
       <small>Source: <a href='https://github.com/bcgov/bcdata/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="bcdata-024" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.4">
+<a href="#bcdata-024" class="anchor"></a>bcdata 0.2.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>Code in <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> that sent a request to the wfs getCapabilities endpoint could cause the package to fail to load. This was moved into an internal function <code>bcdc_get_capabilities()</code> that makes the request the first time it’s required, and stores the result for the remainder of the session (<a href='https://github.com/bcgov/bcdata/issues/271'>#271</a>)</li>
+<li>testthat is now used conditionally to only run tests if the testthat package is installed.</li>
+</ul>
+</div>
     <div id="bcdata-023" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.3">
-<a href="#bcdata-023" class="anchor"></a>bcdata 0.2.3<small> Unreleased </small>
+<a href="#bcdata-023" class="anchor"></a>bcdata 0.2.3<small> 2021-04-24 </small>
 </h1>
 <div id="improvements" class="section level3">
 <h3 class="hasAnchor">
