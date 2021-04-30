@@ -1,6 +1,6 @@
 ### CRAN check issues
 
-* This release comes only a few days after the last release however it is required to fix two important issues:
+This release comes only a few days after the last release however it is required to fix two important issues:
  - code added to .onLoad() in the last release (0.2.3) was accessing internet resources, and if it failed it would cause a package load failure. This code has been moved to an internal function and is only run when it is required. It fails gracefully with an informative error, and will not cause errors or warnings in R CMD check.
  - testthat is in Suggests, but was previously used unconditionally to run package tests. testthat is now called conditionally and will not run package tests unless it is installed.
 
