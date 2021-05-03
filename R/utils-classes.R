@@ -341,7 +341,7 @@ tail.bcdc_promise <- function(x, n = 6L, ...) {
 #' @param ... One or more unquoted expressions separated by commas. See details.
 #' @describeIn mutate mutate.bcdc_promise
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' ## Mutate columns
 #' try(
