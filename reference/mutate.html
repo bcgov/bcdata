@@ -176,14 +176,16 @@ approach to use mutate with bcdata</p>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 
 <span class='co'>## Mutate columns</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>mutate</span><span class='op'>(</span><span class='va'>LATITUDE</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span>
 <span class='op'>)</span>
-<span class='op'>}</span>
+</div><div class='output co'>#&gt; Error : You must type collect() before using mutate() on a WFS. 
+#&gt; After using collect() add this mutate call::
+#&gt;     mutate(LATITUDE * 100) </div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>
