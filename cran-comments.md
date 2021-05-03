@@ -1,6 +1,8 @@
+This is a resubmission of bcdata 0.2.4. The previous submission failed incoming checks. I have identified the likely issue of a test that was accessing internet resources causing a timeout, which I have now fixed.
+
 ### CRAN check issues
 
-This patch release comes only a few days after the last release however it is required to fix two important issues:
+This patch release comes only a week after the last release however it is required to fix two important issues:
  - code added to .onLoad() in the last release (0.2.3) was accessing internet resources, and if it failed it would cause a package load failure. This code has been moved to an internal function and is only run when it is required. It fails gracefully with an informative error, and will not cause errors or warnings in R CMD check.
  - testthat is in Suggests, but was previously used unconditionally to run package tests. testthat is now called conditionally and will not run package tests unless it is installed.
 
@@ -9,10 +11,10 @@ This patch release comes only a few days after the last release however it is re
 * local macOS install (macOS Mojave 10.14.6), R 4.0.4
 * local Windows 10 install, R 4.0.5
 * ubuntu 18.04 (on github actions), R 4.0.5, 3.6.3, R 3.5
-* ubuntu 18.04 (on github actions), R-devel (2021-04-26 r80229)
+* ubuntu 18.04 (on github actions), R-devel (2021-05-01 r80254)
 * Windows Server 2019 (on github actions), R 4.0.5
 * macOS Catalina 10.15 (on github actions), R 4.0.5
-* win-builder (devel: R version 4.1.0 alpha (2021-04-28 r80240))
+* win-builder (R-devel: R version 4.1.0 alpha (2021-05-01 r80254))
 
 ## R CMD check results
 
