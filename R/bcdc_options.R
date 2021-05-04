@@ -84,39 +84,50 @@ check_chunk_limit <- function(){
   chunk_value <- getOption("bcdata.chunk_limit")
   chunk_limit <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
 
-  if(!is.null(chunk_value) && chunk_value >= chunk_limit){
+  if (!is.null(chunk_value) && chunk_value >= chunk_limit) {
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
   }
 }
 
-bcdc_get_wfs_records_xml <- function() {
+bcdc_get_capabilities <- function() {
+  current_xml <- ._bcdataenv_$get_capabilities_xml
+  if (!is.null(current_xml) && inherits(current_xml, "xml_document")) {
+    # Already retrieved and stored this session
+    return(current_xml)
+  }
+
   if (has_internet()) {
-    url <- "http://openmaps.gov.bc.ca/geo/pub/ows?service=WFS&version=2.0.0&request=Getcapabilities"
+    url <- "http://openmaps.gov.bc.ca/geo/pub/ows"
     cli <- bcdc_http_client(url, auth = FALSE)
 
-    cc <- cli$get(query = list(
+
+    cc <- try(cli$get(query = list(
       SERVICE = "WFS",
       VERSION = "2.0.0",
       REQUEST = "Getcapabilities"
-    ))
+    )))
+
+    if (inherits(cc, "try-error")) {
+      return(NULL)
+    }
+
+    cc$raise_for_status()
 
     res <- cc$parse("UTF-8")
-    xml2::read_xml(res)
-
-  } else {
-    message("No access to internet")
-    invisible(NULL)
+    ret <- xml2::read_xml(res)
+    # store it and return it
+    ._bcdataenv_$get_capabilities_xml <- ret
+    return(ret)
   }
+
+  invisible(NULL)
+
 }
 
 bcdc_get_wfs_records <- function() {
-  doc <- ._bcdataenv_$get_capabilities_xml
+  doc <- bcdc_get_capabilities()
 
-  if (is.null(doc)) {
-    # Try again to get the xml
-    doc <- ._bcdataenv_$get_capabilities_xml <- suppressMessages(bcdc_get_wfs_records_xml())
-    if (is.null(doc)) stop("No access to internet", call. = FALSE)
-  }
+  if (is.null(doc)) stop("Unable to access wfs record listing", call. = FALSE)
 
   # d1 is the default xml namespace (see xml2::xml_ns(doc))
   features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
@@ -129,10 +140,10 @@ bcdc_get_wfs_records <- function() {
 }
 
 bcdc_single_download_limit <- function() {
-  doc <- ._bcdataenv_$get_capabilities_xml
+  doc <- bcdc_get_capabilities()
 
   if (is.null(doc)) {
-    message("No access to internet")
+    message("Unable to access wfs record listing, using default download limit of 10000")
     return(10000L)
   }
 

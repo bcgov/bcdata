@@ -13,17 +13,22 @@
 context("testing options")
 
 test_that("bcdc_options() returns a tibble",{
+  skip_if_net_down()
+  skip_on_cran()
   opts <- bcdc_options()
   expect_s3_class(opts, "tbl_df")
 })
 
 
 test_that("bcdata.chunk_limit",{
+  skip_if_net_down()
+  skip_on_cran()
   withr::local_options(list(bcdata.chunk_limit = 10000))
   expect_error(check_chunk_limit())
 })
 
 test_that("bcdata.single_download_limit", {
+  skip_if_net_down()
   skip_on_cran()
   withr::local_options(list(bcdata.single_download_limit = 1))
   expect_message(
@@ -35,6 +40,8 @@ test_that("bcdata.single_download_limit", {
 })
 
 test_that("bcdata.single_download_limit can be changed",{
+  skip_if_net_down()
+  skip_on_cran()
   withr::local_options(list(bcdata.single_download_limit = 13))
   expect_equal(getOption("bcdata.single_download_limit"), 13)
 })

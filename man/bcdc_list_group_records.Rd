@@ -23,6 +23,8 @@ https://catalogue.data.gov.bc.ca/group or accessed directly from R using \code{b
 
 \examples{
 \donttest{
-bcdc_list_group_records('environmental-reporting-bc')
+try(
+  bcdc_list_group_records('environmental-reporting-bc')
+)
 }
 }

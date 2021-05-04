@@ -25,7 +25,7 @@ See \code{dplyr::\link[dplyr]{mutate}} for details.
 }}
 
 \examples{
-\dontrun{
+\donttest{
 
 ## Mutate columns
 try(

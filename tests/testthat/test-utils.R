@@ -56,3 +56,18 @@ test_that("is_whse_object_name works", {
   expect_false(is_whse_object_name("foo"))
   expect_false(is_whse_object_name(structure(list(), class = "bcdc_record")))
 })
+
+test_that("bcdc_get_capabilities works", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  old_get_caps <- ._bcdataenv_$get_capabilities_xml
+
+  on.exit(
+    ._bcdataenv_$get_capabilities_xml <- old_get_caps
+  )
+
+  ._bcdataenv_$get_capabilities_xml <- NULL
+  expect_is(bcdc_get_capabilities(), "xml_document")
+  expect_equal(bcdc_get_capabilities(), ._bcdataenv_$get_capabilities_xml)
+})
