@@ -1,13 +1,13 @@
 ---
 title: 'bcdata: An R package for searching & retrieving data from the B.C. Data Catalogue'
 authors:
-  - name: Andy Teucher
+  - name: Andrew C. Teucher
     orcid: 0000-0002-7840-692X
     affiliation: 1
-  - name: Sam Albers
+  - name: Sam J. Albers
     orcid: 0000-0002-9270-7884
     affiliation: 2
-  - name: Stephanie Hazlitt
+  - name: Stephanie L. Hazlitt
     orcid: 0000-0002-3161-2304
     affiliation: 2
 affiliations:
