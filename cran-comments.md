@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a resubmission of bcdata 0.2.4 as the previous submission failed incoming checks. I have identified the test that was accessing internet resources and causing a timeout, which I have now fixed. To the best of my knowledge this issue is now resolved.
+This is a resubmission of bcdata 0.2.4 as the previous submission failed incoming checks. I have identified the test that was accessing internet resources and likely causing a timeout, which I have now fixed. To the best of my knowledge this issue is now resolved.
 
 ### CRAN check issues
 
@@ -13,7 +13,7 @@ This patch release comes only a week after the last release however it is requir
 * local macOS install (macOS Mojave 10.14.6), R 4.0.4
 * local Windows 10 install, R 4.0.5
 * ubuntu 18.04 (on github actions), R 4.0.5, 3.6.3, R 3.5
-* ubuntu 18.04 (on github actions), R-devel (2021-05-01 r80254)
+* ubuntu 18.04 (on github actions), R-devel (2021-05-03 r80259)
 * Windows Server 2019 (on github actions), R 4.0.5
 * macOS Catalina 10.15 (on github actions), R 4.0.5
 * win-builder (R-devel: R version 4.1.0 alpha (2021-05-01 r80254))
