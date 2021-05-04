@@ -1,12 +1,13 @@
 ## Resubmission
 
-This is a resubmission of bcdata 0.2.4 as the previous submission failed incoming checks. I have identified the test that was accessing internet resources and likely causing a timeout, which I have now fixed. To the best of my knowledge this issue is now resolved.
+This is a resubmission of bcdata 0.2.4 as the previous submission failed incoming checks. I have identified the test that was accessing internet resources and likely causing a timeout, which I have now fixed. To the best of my knowledge this issue is now resolved. This fix should also resolve the FAIL on the 'r-devel-windows-ix86+x86_64' CRAN check.
 
 ### CRAN check issues
 
 This patch release comes only a week after the last release however it is required to fix two important issues:
  - code added to .onLoad() in the last release (0.2.3) was accessing internet resources, and if it failed it would cause a package load failure. This code has been moved to an internal function and is only run when it is required. It fails gracefully with an informative error, and will not cause errors or warnings in R CMD check.
  - testthat is in Suggests, but was previously used unconditionally to run package tests. testthat is now called conditionally and will not run package tests unless it is installed.
+ - The fix in the tests mentioned above resolves the FAIL on the 'r-devel-windows-ix86+x86_64' CRAN check.
 
 ## Test environments
 
