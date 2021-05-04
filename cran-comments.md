@@ -1,4 +1,6 @@
-This is a resubmission of bcdata 0.2.4. The previous submission failed incoming checks. I have identified the likely issue of a test that was accessing internet resources causing a timeout, which I have now fixed.
+## Resubmission
+
+This is a resubmission of bcdata 0.2.4 as the previous submission failed incoming checks. I have identified the test that was accessing internet resources and causing a timeout, which I have now fixed. To the best of my knowledge this issue is now resolved.
 
 ### CRAN check issues
 
