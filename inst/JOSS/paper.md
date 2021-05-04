@@ -1,13 +1,13 @@
 ---
 title: 'bcdata: An R package for searching & retrieving data from the B.C. Data Catalogue'
 authors:
-  - name: Andy Teucher
+  - name: Andrew C. Teucher
     orcid: 0000-0002-7840-692X
     affiliation: 1
-  - name: Sam Albers
+  - name: Sam J. Albers
     orcid: 0000-0002-9270-7884
     affiliation: 2
-  - name: Stephanie Hazlitt
+  - name: Stephanie L. Hazlitt
     orcid: 0000-0002-3161-2304
     affiliation: 2
 affiliations:
@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2021-04-13"
+date: "2021-05-04"
 output:
   html_document:
     keep_md: yes
@@ -225,7 +225,7 @@ system.time(
 
 ```
    user  system elapsed 
- 39.472  17.307  83.024 
+ 38.078  18.129 126.624 
 ```
 
 ```r
@@ -233,7 +233,7 @@ format(object.size(all_sp_eco), units = "Mb")
 ```
 
 ```
-[1] "104.3 Mb"
+[1] "107.8 Mb"
 ```
 
 ```r
@@ -252,7 +252,7 @@ system.time({
 
 ```
    user  system elapsed 
-  0.327   0.025   1.532 
+  0.315   0.034   1.246 
 ```
 
 ```r
@@ -280,7 +280,7 @@ ggplot(marmots2) +
 
 ![](sp_eco-1.png)<!-- -->
 
-This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 1081 times smaller than downloading the entire data set using `bcdc_get_data()` and filtering locally.
+This demonstrates the efficiency of the filter-first then download approach: the size of the object downloaded by using `bcdc_query_geodata()` with `filter()` is 1118 times smaller than downloading the entire data set using `bcdc_get_data()` and filtering locally.
 
 # Conclusion
 
