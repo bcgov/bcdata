@@ -15,7 +15,7 @@ affiliations:
     index: 1
   - name: Data Science Partnerships, Ministry of Citizens' Services, Province of British Columbia
     index: 2
-date: "2021-05-04"
+date: "2021-05-05"
 output:
   html_document:
     keep_md: yes
@@ -61,7 +61,7 @@ Open data and geospatial data science are currently popular topics in the R comm
 
 ## Search Records & Read Metadata
 
-`bcdc_search()` let's you search records in the B.C. Data Catalogue, returning the search results in your R session. Let's search the catalogue for records that contain the word "scholarships", restricting our search results to only two:
+`bcdc_search()` lets you search records in the B.C. Data Catalogue, returning the search results in your R session. Let's search the catalogue for records that contain the word "scholarships", restricting our search results to only two:
 
 
 ```r
@@ -185,7 +185,7 @@ ggplot(bc_airports) +
 
 ## Query & Read Geospatial Data
 
-While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) (@sf) in the R session. The query is processed on the server, filtering the data to only those records and fields the user has specified. Once the query is complete and the user requests the final result, then only the filtered data is downloaded and loaded into R as an ‘sf’ object, substantially reducing the size of the data being downloaded. This functionality is implemented using a custom `dbplyr` backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` backend interfaces with the B.C. Data Catalogue Web Feature Service.
+While `bcdc_get_data()` will retrieve geospatial data, sometimes the geospatial file is very large---and slow to download---or the user may only want _some_ of the data. `bcdc_query_geodata()` allows the user to query catalogue geospatial data available from the Web Feature Service using `select` and `filter` functions (just like in [`dplyr`](https://dplyr.tidyverse.org/), @dplyr). The `bcdc::collect()` function returns the `bcdc_query_geodata()` query results as an [`sf` object](https://r-spatial.github.io/sf/) (@sf) in the R session. The query is processed on the server, filtering the data to only those records and fields the user has specified. Once the query is complete and the user requests the final result, only then is the filtered data downloaded and loaded into R as an ‘sf’ object, substantially reducing the size of the data being downloaded. This functionality is implemented using a custom `dbplyr` backend---while other `dbplyr` backends interface with various databases (e.g., SQLite, PostgreSQL), the `bcdata` backend interfaces with the B.C. Data Catalogue Web Feature Service.
 
 To demonstrate, we will query the Vancouver Island Marmot location polygons from the publicly-available [Species and Ecosystems at Risk Occurrences geospatial data](https://catalogue.data.gov.bc.ca/dataset/0e035e55-f257-458f-9a96-80c01c69d389)---the whole file takes over 100 seconds to download and we only need the marmot polygons, so the request can be narrowed:
 
