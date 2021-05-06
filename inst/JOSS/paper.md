@@ -95,9 +95,9 @@ bcdc_tidy_resources("bc-schools-district-provincial-scholarships")
 # A tibble: 2 x 8
   name  id    format bcdata_available url   ext   package_id
   <chr> <chr> <chr>  <lgl>            <chr> <chr> <chr>     
-1 Awar… 4e87… xlsx   TRUE             http… xlsx  651b60c2-…
-2 Awar… 8a2c… txt    TRUE             http… txt   651b60c2-…
-# … with 1 more variable: location <chr>
+1 Awar~ 4e87~ xlsx   TRUE             http~ xlsx  651b60c2-~
+2 Awar~ 8a2c~ txt    TRUE             http~ txt   651b60c2-~
+# ... with 1 more variable: location <chr>
 ```
 
 
@@ -157,7 +157,7 @@ head(scholars)
 
 ```
 # A tibble: 6 x 9
-  SCHOOL_YEAR_ISSU… `Sub Pop Code` `Num Prov Schola… `Num Prov Schola…
+  SCHOOL_YEAR_ISSU~ `Sub Pop Code` `Num Prov Schola~ `Num Prov Schola~
   <chr>             <chr>          <chr>             <chr>            
 1 1996/1997         ALL STUDENTS   3509              20               
 2 1996/1997         FEMALE         1921              7                
@@ -165,7 +165,7 @@ head(scholars)
 4 1997/1998         ALL STUDENTS   3748              20               
 5 1997/1998         FEMALE         2094              11               
 6 1997/1998         MALE           1654              9                
-# … with 5 more variables: Num District Scholarships <chr>,
+# ... with 5 more variables: Num District Scholarships <chr>,
 #   Data Level <chr>, Public Or Independent <chr>,
 #   District Number <chr>, District Name <chr>
 ```
@@ -203,16 +203,16 @@ bcdc_describe_feature(sp_eco_record)
    col_name   sticky remote_col_type local_col_type column_comments             
    <chr>      <lgl>  <chr>           <chr>          <chr>                       
  1 id         FALSE  xsd:string      character       <NA>                       
- 2 OCCR_AREA… FALSE  xsd:decimal     numeric        "Primary unique numeric ide…
- 3 FEATURE_C… TRUE   xsd:string      character      "A standard numeric code to…
- 4 SHAPE_ID   FALSE  xsd:decimal     numeric        "Shape ID is the unique ide…
- 5 OCCR_ID    FALSE  xsd:decimal     numeric        "Occurrence ID is the Eleme…
- 6 SCI_NAME_F TRUE   xsd:string      character      "Scientific Name Formatted …
- 7 SCI_NAME   FALSE  xsd:string      character      "Scientific Name in the sci…
- 8 ENG_NAME_F TRUE   xsd:string      character      "English Name formatted is …
- 9 ENG_NAME   TRUE   xsd:string      character      "English Name is the Common…
-10 EL_TYPE    FALSE  xsd:string      character      "Element Type identifies th…
-# … with 49 more rows
+ 2 OCCR_AREA~ FALSE  xsd:decimal     numeric        "Primary unique numeric ide~
+ 3 FEATURE_C~ TRUE   xsd:string      character      "A standard numeric code to~
+ 4 SHAPE_ID   FALSE  xsd:decimal     numeric        "Shape ID is the unique ide~
+ 5 OCCR_ID    FALSE  xsd:decimal     numeric        "Occurrence ID is the Eleme~
+ 6 SCI_NAME_F TRUE   xsd:string      character      "Scientific Name Formatted ~
+ 7 SCI_NAME   FALSE  xsd:string      character      "Scientific Name in the sci~
+ 8 ENG_NAME_F TRUE   xsd:string      character      "English Name formatted is ~
+ 9 ENG_NAME   TRUE   xsd:string      character      "English Name is the Common~
+10 EL_TYPE    FALSE  xsd:string      character      "Element Type identifies th~
+# ... with 49 more rows
 ```
 
 ```r
@@ -225,7 +225,7 @@ system.time(
 
 ```
    user  system elapsed 
- 38.078  18.129 126.624 
+  66.75    4.67  161.59 
 ```
 
 ```r
@@ -252,7 +252,7 @@ system.time({
 
 ```
    user  system elapsed 
-  0.315   0.034   1.246 
+   0.22    0.06    0.89 
 ```
 
 ```r
