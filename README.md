@@ -134,7 +134,7 @@ By participating in this project you agree to abide by its terms.
 
     To cite bcdata in publications please use:
 
-      Teucher et al., (2021). bcdata: An R package for searching &;
+      Teucher et al., (2021). bcdata: An R package for searching and
       retrieving data from the B.C. Data Catalogue. Journal of Open Source
       Software, 6(61), 2927, https://doi.org/10.21105/joss.02927
 
@@ -148,7 +148,7 @@ By participating in this project you agree to abide by its terms.
         number = {61},
         pages = {2927},
         author = {Andrew C. Teucher and Sam J. Albers and Stephanie L. Hazlitt},
-        title = {bcdata: An R package for searching &amp; retrieving data from the B.C. Data Catalogue},
+        title = {bcdata: An R package for searching and retrieving data from the B.C. Data Catalogue},
         journal = {Journal of Open Source Software},
       }
 
