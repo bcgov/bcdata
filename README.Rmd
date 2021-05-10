@@ -32,12 +32,16 @@ library(bcdata)
 
 # bcdata <a href='https://bcgov.github.io/bcdata/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
+
+
 <!-- badges: start -->
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![R build status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata)
 [![Codecov test coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://codecov.io/gh/bcgov/bcdata?branch=master)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata) [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata) [![cran checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org/web/checks/check_results_bcdata.html)
 [![img](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02927/status.svg)](https://doi.org/10.21105/joss.02927)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4737824.svg)](https://doi.org/10.5281/zenodo.4737824)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
@@ -79,7 +83,6 @@ library(bcdata)
 - [Get Started with bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
 - [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
 - [Exploring Silviculture Data with bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
-- Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (Coming Soon!)
 
 ### BCDC Authentication
 
@@ -120,6 +123,11 @@ If you would like to contribute to the package, please see our
 [CONTRIBUTING](https://github.com/bcgov/bcdata/blob/master/CONTRIBUTING.md) guidelines.
 
 Please note that this project is released with a [Contributor Code of Conduct](https://github.com/bcgov/bcdata/blob/master/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+### Citation
+```{r, echo=FALSE, comment=""}
+citation("bcdata")
+```
 
 
 ### License
