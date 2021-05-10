@@ -28,6 +28,8 @@ Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://
 [![cran
 checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org/web/checks/check_results_bcdata.html)
 [![img](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02927/status.svg)](https://doi.org/10.21105/joss.02927)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4737824.svg)](https://doi.org/10.5281/zenodo.4737824)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
@@ -83,8 +85,6 @@ library(bcdata)
     bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
 -   [Exploring Silviculture Data with
     bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
--   Using bcdata with [bcmaps](https://github.com/bcgov/bcmaps) (Coming
-    Soon!)
 
 ### BCDC Authentication
 
@@ -128,6 +128,29 @@ guidelines.
 Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/bcgov/bcdata/blob/master/CODE_OF_CONDUCT.md).
 By participating in this project you agree to abide by its terms.
+
+### Citation
+
+
+    To cite bcdata in publications please use:
+
+      Teucher et al., (2021). bcdata: An R package for searching &amp;
+      retrieving data from the B.C. Data Catalogue. Journal of Open Source
+      Software, 6(61), 2927, https://doi.org/10.21105/joss.02927
+
+    A BibTeX entry for LaTeX users is
+
+      @Article{,
+        doi = {10.21105/joss.02927},
+        year = {2021},
+        publisher = {The Open Journal},
+        volume = {6},
+        number = {61},
+        pages = {2927},
+        author = {Andrew C. Teucher and Sam J. Albers and Stephanie L. Hazlitt},
+        title = {bcdata: An R package for searching &amp; retrieving data from the B.C. Data Catalogue},
+        journal = {Journal of Open Source Software},
+      }
 
 ### License
 
