@@ -6,6 +6,7 @@
 ^bcdata\.Rproj$
 ^\.Rproj\.user$
 ^inst/sticker$
+^inst/JOSS$
 
 ^_pkgdown\.yml$
 ^docs$
