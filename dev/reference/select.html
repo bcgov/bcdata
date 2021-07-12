@@ -189,28 +189,28 @@ of issuing the Web Feature Service call.</p>
   <span class='co'>## Columns that can selected:</span>
   <span class='va'>feature_spec</span><span class='op'>[</span><span class='va'>feature_spec</span><span class='op'>$</span><span class='va'>sticky</span> <span class='op'>==</span> <span class='cn'>TRUE</span>,<span class='op'>]</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 33 x 5</span><span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 33 x 5</span>
 #&gt;    col_name   sticky remote_col_type local_col_type column_comments             
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                       
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> DESCRIPTI… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>DESCRIPTION describes the …
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> PHYSICAL_… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>PHYSICAL_ADDRESS contains …
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ALIAS_ADD… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>ALIAS_ADDRESS contains an …
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> STREET_AD… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>STREET_ADDRESS is a free f…
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> POSTAL_CO… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>POSTAL_CODE is the Canadia…
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> LOCALITY   TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>LOCALITY is the name of th…
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> CONTACT_P… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>CONTACT PHONE contains the…
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> CONTACT_E… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>CONTACT_EMAIL contains the…
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> CONTACT_F… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>CONTACT FAX contains the g…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> WEBSITE_U… TRUE   xsd:string      character      </span><span style='color: #949494;'>"</span><span>WEBSITE_URL contains the l…
-#&gt; </span><span style='color: #949494;'># … with 23 more rows</span><span></div><div class='input'>
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;lgl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                       
+#&gt; <span style='color: #BCBCBC;'> 1</span> DESCRIPTI… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>DESCRIPTION describes the …
+#&gt; <span style='color: #BCBCBC;'> 2</span> PHYSICAL_… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>PHYSICAL_ADDRESS contains …
+#&gt; <span style='color: #BCBCBC;'> 3</span> ALIAS_ADD… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>ALIAS_ADDRESS contains an …
+#&gt; <span style='color: #BCBCBC;'> 4</span> STREET_AD… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>STREET_ADDRESS is a free f…
+#&gt; <span style='color: #BCBCBC;'> 5</span> POSTAL_CO… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>POSTAL_CODE is the Canadia…
+#&gt; <span style='color: #BCBCBC;'> 6</span> LOCALITY   TRUE   xsd:string      character      <span style='color: #949494;'>"</span>LOCALITY is the name of th…
+#&gt; <span style='color: #BCBCBC;'> 7</span> CONTACT_P… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>CONTACT PHONE contains the…
+#&gt; <span style='color: #BCBCBC;'> 8</span> CONTACT_E… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>CONTACT_EMAIL contains the…
+#&gt; <span style='color: #BCBCBC;'> 9</span> CONTACT_F… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>CONTACT FAX contains the g…
+#&gt; <span style='color: #BCBCBC;'>10</span> WEBSITE_U… TRUE   xsd:string      character      <span style='color: #949494;'>"</span>WEBSITE_URL contains the l…
+#&gt; <span style='color: #949494;'># … with 23 more rows</span></div><div class='input'>
 <span class='co'>## Select columns</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>select</span><span class='op'>(</span><span class='va'>DESCRIPTION</span>, <span class='va'>PHYSICAL_ADDRESS</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; • Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
-#&gt; • features and </span><span style='color: #00BB00;'>11</span><span> fields
+</div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-airports'</span> record
+#&gt; • Using <span style='color: #0000BB;'>collect()</span> on this object will return <span style='color: #00BB00;'>455</span> features
+#&gt; • and <span style='color: #00BB00;'>11</span> fields
 #&gt; • At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 11 fields
@@ -218,26 +218,26 @@ of issuing the Web Feature Service call.</p>
 #&gt; Dimension:     XY
 #&gt; Bounding box:  xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
 #&gt; Projected CRS: NAD83 / BC Albers
-#&gt; </span><span style='color: #949494;'># A tibble: 6 x 12</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 6 x 12</span>
 #&gt;   id       CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #949494;'># … with 7 more variables: SOURCE_DATA_ID &lt;chr&gt;, SUPPLIED_SOURCE_ID_IND &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   AIRPORT_NAME &lt;chr&gt;, DESCRIPTION &lt;chr&gt;, PHYSICAL_ADDRESS &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span><span></div><div class='input'>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'>1</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>2</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>3</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>4</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>5</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>6</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #949494;'># … with 7 more variables: SOURCE_DATA_ID &lt;chr&gt;, SUPPLIED_SOURCE_ID_IND &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   AIRPORT_NAME &lt;chr&gt;, DESCRIPTION &lt;chr&gt;, PHYSICAL_ADDRESS &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span></div><div class='input'>
 <span class='co'>## Select "sticky" columns</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>select</span><span class='op'>(</span><span class='va'>LOCALITY</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; Querying </span><span style='color: #BB0000;'>'bc-airports'</span><span> record
-#&gt; • Using </span><span style='color: #0000BB;'>collect()</span><span> on this object will return </span><span style='color: #00BB00;'>455</span><span>
-#&gt; • features and </span><span style='color: #00BB00;'>10</span><span> fields
+</div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-airports'</span> record
+#&gt; • Using <span style='color: #0000BB;'>collect()</span> on this object will return <span style='color: #00BB00;'>455</span> features
+#&gt; • and <span style='color: #00BB00;'>10</span> fields
 #&gt; • At most six rows of the record are printed here
 #&gt; ────────────────────────────────────────────────────────────────────────────────
 #&gt; Simple feature collection with 6 features and 10 fields
@@ -245,20 +245,20 @@ of issuing the Web Feature Service call.</p>
 #&gt; Dimension:     XY
 #&gt; Bounding box:  xmin: 833323.9 ymin: 381604.1 xmax: 1198292 ymax: 1054950
 #&gt; Projected CRS: NAD83 / BC Albers
-#&gt; </span><span style='color: #949494;'># A tibble: 6 x 11</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 6 x 11</span>
 #&gt;   id       CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> WHSE_IM… </span><span style='color: #949494;'>"</span><span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
-#&gt; </span><span style='color: #949494;'># … with 6 more variables: SOURCE_DATA_ID &lt;chr&gt;, SUPPLIED_SOURCE_ID_IND &lt;chr&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   AIRPORT_NAME &lt;chr&gt;, LOCALITY &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span><span></div><div class='input'><span class='co'># }</span>
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'>1</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>2</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>3</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>4</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>5</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #BCBCBC;'>6</span> WHSE_IM… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
+#&gt; <span style='color: #949494;'># … with 6 more variables: SOURCE_DATA_ID &lt;chr&gt;, SUPPLIED_SOURCE_ID_IND &lt;chr&gt;,</span>
+#&gt; <span style='color: #949494;'>#   AIRPORT_NAME &lt;chr&gt;, LOCALITY &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span></div><div class='input'><span class='co'># }</span>
 
 
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
