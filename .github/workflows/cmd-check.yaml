@@ -60,7 +60,8 @@ jobs:
         if: runner.os == 'macOS'
         continue-on-error: true
         run: |
-          brew install pkg-config gdal udunits xquartz
+          brew install pkg-config gdal udunits
+          brew install xquartz --cask
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
