@@ -50,7 +50,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Cache R packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ env.cache-version }}-${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
@@ -61,7 +61,6 @@ jobs:
         continue-on-error: true
         run: |
           brew install pkg-config gdal udunits
-          brew install xquartz --cask
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
