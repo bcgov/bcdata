@@ -200,7 +200,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; Dimension:     XY
 #&gt; Bounding box:  xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
 #&gt; Projected CRS: NAD83 / BC Albers
-#&gt; <span style='color: #949494;'># A tibble: 455 x 42</span>
+#&gt; <span style='color: #949494;'># A tibble: 455 × 42</span>
 #&gt;    id      CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
 #&gt; <span style='color: #BCBCBC;'> 1</span> WHSE_I… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
@@ -229,14 +229,11 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'><span style='color: #00BBBB;'>──</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  CITY = <span style='color: #BB0000;'>col_character()</span>,</span>
-#&gt; <span class='message'>  NAME = <span style='color: #BB0000;'>col_character()</span>,</span>
-#&gt; <span class='message'>  ADDRESS = <span style='color: #BB0000;'>col_character()</span>,</span>
-#&gt; <span class='message'>  POSTALCODE = <span style='color: #BB0000;'>col_character()</span></span>
-#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 357 x 4</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'><span style='font-weight: bold;'>Rows: </span><span style='color: #0000BB;'>357</span> <span style='font-weight: bold;'>Columns: </span><span style='color: #0000BB;'>4</span></span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>──</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span></span>
+#&gt; <span class='message'><span style='font-weight: bold;'>Delimiter:</span> ","</span>
+#&gt; <span class='message'><span style='color: #BB0000;'>chr</span> (4): CITY, NAME, ADDRESS, POSTALCODE</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Use <span style='color: #262626; background-color: #DADADA;'>`spec()`</span> to retrieve the full column specification for this data.</span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Specify the column types or set <span style='color: #262626; background-color: #DADADA;'>`show_col_types = FALSE`</span> to quiet this message.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 357 × 4</span>
 #&gt;    CITY        NAME                    ADDRESS                        POSTALCODE
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
 #&gt; <span style='color: #BCBCBC;'> 1</span> PRINCE GEO… Pacific Western Brewin… 641 NORTH NECHAKO RD           V2K4M4    
@@ -258,14 +255,11 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='va'>record</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'><span style='color: #00BBBB;'>──</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  CITY = <span style='color: #BB0000;'>col_character()</span>,</span>
-#&gt; <span class='message'>  NAME = <span style='color: #BB0000;'>col_character()</span>,</span>
-#&gt; <span class='message'>  ADDRESS = <span style='color: #BB0000;'>col_character()</span>,</span>
-#&gt; <span class='message'>  POSTALCODE = <span style='color: #BB0000;'>col_character()</span></span>
-#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 357 x 4</span>
+</div><div class='output co'>#&gt; <span class='message'>Reading the data using the read_csv function from the readr package.</span></div><div class='output co'>#&gt; <span class='message'><span style='font-weight: bold;'>Rows: </span><span style='color: #0000BB;'>357</span> <span style='font-weight: bold;'>Columns: </span><span style='color: #0000BB;'>4</span></span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>──</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span></span>
+#&gt; <span class='message'><span style='font-weight: bold;'>Delimiter:</span> ","</span>
+#&gt; <span class='message'><span style='color: #BB0000;'>chr</span> (4): CITY, NAME, ADDRESS, POSTALCODE</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Use <span style='color: #262626; background-color: #DADADA;'>`spec()`</span> to retrieve the full column specification for this data.</span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Specify the column types or set <span style='color: #262626; background-color: #DADADA;'>`show_col_types = FALSE`</span> to quiet this message.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 357 × 4</span>
 #&gt;    CITY        NAME                    ADDRESS                        POSTALCODE
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
 #&gt; <span style='color: #BCBCBC;'> 1</span> PRINCE GEO… Pacific Western Brewin… 641 NORTH NECHAKO RD           V2K4M4    
@@ -288,7 +282,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; Dimension:     XY
 #&gt; Bounding box:  xmin: 406543.7 ymin: 367957.6 xmax: 1796645 ymax: 1689146
 #&gt; Projected CRS: NAD83 / BC Albers
-#&gt; <span style='color: #949494;'># A tibble: 455 x 42</span>
+#&gt; <span style='color: #949494;'># A tibble: 455 × 42</span>
 #&gt;    id      CUSTODIAN_ORG_DES… BUSINESS_CATEGO… BUSINESS_CATEGO… OCCUPANT_TYPE_D…
 #&gt;  <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
 #&gt; <span style='color: #BCBCBC;'> 1</span> WHSE_I… <span style='color: #949494;'>"</span>Ministry of Fore… airTransportati… Air Transportat… BC Airports     
@@ -328,7 +322,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; Dimension:     XY
 #&gt; Bounding box:  xmin: 529420.8 ymin: 367780.7 xmax: 1203949 ymax: 1157953
 #&gt; Projected CRS: NAD83 / BC Albers
-#&gt; <span style='color: #949494;'># A tibble: 6,106 x 2</span>
+#&gt; <span style='color: #949494;'># A tibble: 6,106 × 2</span>
 #&gt;    SHAPE_Length                                                             geom
 #&gt;           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>                                                 <span style='color: #949494; font-style: italic;'>&lt;LINESTRING [m]&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span>         79.2 (1183654 367787.5, 1183637 367780.7, 1183633 367785.6, 1183637 …
@@ -360,7 +354,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; <span class='message'>* `` -&gt; ...4</span>
 #&gt; <span class='message'>* `` -&gt; ...5</span>
 #&gt; <span class='message'>* `` -&gt; ...6</span>
-#&gt; <span class='message'>* ...</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 901 x 11</span>
+#&gt; <span class='message'>* ...</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 901 × 11</span>
 #&gt;    `Regional Distri… ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9  ...10 ...11
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 1</span> RD Code           Regi… Sex   Year  Age … 15-19 20-24 25-64 65-84 85+   All …
@@ -398,7 +392,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
  <span class='fu'><a href='bcdc_read_functions.html'>bcdc_read_functions</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 11 × 3</span>
 #&gt;    format  package fun      
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    
 #&gt; <span style='color: #BCBCBC;'> 1</span> kml     sf      read_sf  
@@ -423,7 +417,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; <span class='message'> 'Single Detached '</span>
 #&gt; <span class='message'> 'Multi Unit Homes'</span>
 #&gt; <span class='message'> 'Purpose Built Rental'</span>
-#&gt; <span class='message'> '# of Multi-unit Buildings'</span></div><div class='output co'>#&gt; <span class='message'>Defaulting to the 'Notes' sheet. See ?bcdc_get_data for examples on how to specify a sheet.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 0 x 0</span></div><div class='input'>
+#&gt; <span class='message'> '# of Multi-unit Buildings'</span></div><div class='output co'>#&gt; <span class='message'>Defaulting to the 'Notes' sheet. See ?bcdc_get_data for examples on how to specify a sheet.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 0 × 0</span></div><div class='input'>
 <span class='co'>## we can control what is read in from an excel file</span>
 <span class='co'>## using arguments from readxl::read_excel</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
@@ -440,7 +434,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt;   Error: Sheet 'Regional Districts' not found
 #&gt; 
 #&gt; The file can be found here:
-#&gt;   '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpQNBNX1/bcdata_877610f63a3/file8773956941d.xlsx'
+#&gt;   '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp2uZuTs/bcdata_f4b2a2d6959/filef4bb5f67b1.xlsx'
 #&gt; if you would like to try to read it manually.
 #&gt; </div><div class='input'><span class='co'># }</span>
 
