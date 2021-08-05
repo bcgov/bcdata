@@ -219,13 +219,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; <span style='color: #949494;'>#   POSTAL_CODE &lt;chr&gt;, LOCALITY &lt;chr&gt;, CONTACT_PHONE &lt;chr&gt;,</span>
 #&gt; <span style='color: #949494;'>#   CONTACT_EMAIL &lt;chr&gt;, CONTACT_FAX &lt;chr&gt;, WEBSITE_URL &lt;chr&gt;, IMAGE_URL &lt;chr&gt;,</span>
 #&gt; <span style='color: #949494;'>#   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, KEYWORDS &lt;chr&gt;, DATE_UPDATED &lt;date&gt;,</span>
-#&gt; <span style='color: #949494;'>#   SITE_GEOCODED_IND &lt;chr&gt;, AERODROME_STATUS &lt;chr&gt;, AIRCRAFT_ACCESS_IND &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   DATA_SOURCE &lt;chr&gt;, DATA_SOURCE_YEAR &lt;chr&gt;, ELEVATION &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   FUEL_AVAILABILITY_IND &lt;chr&gt;, HELICOPTER_ACCESS_IND &lt;chr&gt;, IATA_CODE &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   ICAO_CODE &lt;chr&gt;, MAX_RUNWAY_LENGTH &lt;dbl&gt;, NUMBER_OF_RUNWAYS &lt;int&gt;,</span>
-#&gt; <span style='color: #949494;'>#   OIL_AVAILABILITY_IND &lt;chr&gt;, RUNWAY_SURFACE &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   SEAPLANE_ACCESS_IND &lt;chr&gt;, TC_LID_CODE &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;,</span>
-#&gt; <span style='color: #949494;'>#   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POINT [m]&gt;</span></div><div class='input'>
+#&gt; <span style='color: #949494;'>#   SITE_GEOCODED_IND &lt;chr&gt;, AERODROME_STATUS &lt;chr&gt;, …</span></div><div class='input'>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_get_data</span><span class='op'>(</span><span class='st'>'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class='op'>)</span>
 <span class='op'>)</span>
@@ -234,18 +228,18 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; <span class='message'><span style='color: #BB0000;'>chr</span> (4): CITY, NAME, ADDRESS, POSTALCODE</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Use <span style='color: #262626; background-color: #DADADA;'>`spec()`</span> to retrieve the full column specification for this data.</span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Specify the column types or set <span style='color: #262626; background-color: #DADADA;'>`show_col_types = FALSE`</span> to quiet this message.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 357 × 4</span>
-#&gt;    CITY        NAME                    ADDRESS                        POSTALCODE
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
-#&gt; <span style='color: #BCBCBC;'> 1</span> PRINCE GEO… Pacific Western Brewin… 641 NORTH NECHAKO RD           V2K4M4    
-#&gt; <span style='color: #BCBCBC;'> 2</span> OSOYOOS     Bordertown Vineyards    9140 92ND AVENUE               V0H1V2    
-#&gt; <span style='color: #BCBCBC;'> 3</span> CHILLIWACK  Whispering Horse Winery 43721 VEDDER MTN. ROAD         V2R4C5    
-#&gt; <span style='color: #BCBCBC;'> 4</span> KELOWNA     Okanaganvilla Estate W… 3240 POOLEY ROAD               V1W4G7    
-#&gt; <span style='color: #BCBCBC;'> 5</span> OLIVER      Church &amp; State Wines (… 31120 87TH STREET              V0H1T0    
-#&gt; <span style='color: #BCBCBC;'> 6</span> KEREMEOS    Corcelettes Estate Win… 2582 UPPER BENCH ROAD          V0X1N4    
-#&gt; <span style='color: #BCBCBC;'> 7</span> DUNCAN      Blue Grouse Vineyards   4365 BLUE GROUSE ROAD AND 218… V9L6M3    
-#&gt; <span style='color: #BCBCBC;'> 8</span> VANCOUVER   City Side Winery        328 WEST 2ND AVENUE            V5Y1C8    
-#&gt; <span style='color: #BCBCBC;'> 9</span> WEST KELOW… Volcanic Hills Estate … 2845 BOUCHERIE ROAD            V1Z2G6    
-#&gt; <span style='color: #BCBCBC;'>10</span> OLIVER      Orchard Hill Estate Ci… 3480 FRUITVALE WAY             V0H1T0    
+#&gt;    CITY          NAME                              ADDRESS            POSTALCODE
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
+#&gt; <span style='color: #BCBCBC;'> 1</span> PRINCE GEORGE Pacific Western Brewing Company   641 NORTH NECHAKO… V2K4M4    
+#&gt; <span style='color: #BCBCBC;'> 2</span> OSOYOOS       Bordertown Vineyards              9140 92ND AVENUE   V0H1V2    
+#&gt; <span style='color: #BCBCBC;'> 3</span> CHILLIWACK    Whispering Horse Winery           43721 VEDDER MTN.… V2R4C5    
+#&gt; <span style='color: #BCBCBC;'> 4</span> KELOWNA       Okanaganvilla Estate Winery       3240 POOLEY ROAD   V1W4G7    
+#&gt; <span style='color: #BCBCBC;'> 5</span> OLIVER        Church &amp; State Wines (Black Sage) 31120 87TH STREET  V0H1T0    
+#&gt; <span style='color: #BCBCBC;'> 6</span> KEREMEOS      Corcelettes Estate Winery         2582 UPPER BENCH … V0X1N4    
+#&gt; <span style='color: #BCBCBC;'> 7</span> DUNCAN        Blue Grouse Vineyards             4365 BLUE GROUSE … V9L6M3    
+#&gt; <span style='color: #BCBCBC;'> 8</span> VANCOUVER     City Side Winery                  328 WEST 2ND AVEN… V5Y1C8    
+#&gt; <span style='color: #BCBCBC;'> 9</span> WEST KELOWNA  Volcanic Hills Estate Winery      2845 BOUCHERIE RO… V1Z2G6    
+#&gt; <span style='color: #BCBCBC;'>10</span> OLIVER        Orchard Hill Estate Cidery        3480 FRUITVALE WAY V0H1T0    
 #&gt; <span style='color: #949494;'># … with 347 more rows</span></div><div class='input'>
 <span class='co'># Using a `bcdc_record` object obtained from `bcdc_get_record`:</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
@@ -260,18 +254,18 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; <span class='message'><span style='color: #BB0000;'>chr</span> (4): CITY, NAME, ADDRESS, POSTALCODE</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Use <span style='color: #262626; background-color: #DADADA;'>`spec()`</span> to retrieve the full column specification for this data.</span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>ℹ</span> Specify the column types or set <span style='color: #262626; background-color: #DADADA;'>`show_col_types = FALSE`</span> to quiet this message.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 357 × 4</span>
-#&gt;    CITY        NAME                    ADDRESS                        POSTALCODE
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
-#&gt; <span style='color: #BCBCBC;'> 1</span> PRINCE GEO… Pacific Western Brewin… 641 NORTH NECHAKO RD           V2K4M4    
-#&gt; <span style='color: #BCBCBC;'> 2</span> OSOYOOS     Bordertown Vineyards    9140 92ND AVENUE               V0H1V2    
-#&gt; <span style='color: #BCBCBC;'> 3</span> CHILLIWACK  Whispering Horse Winery 43721 VEDDER MTN. ROAD         V2R4C5    
-#&gt; <span style='color: #BCBCBC;'> 4</span> KELOWNA     Okanaganvilla Estate W… 3240 POOLEY ROAD               V1W4G7    
-#&gt; <span style='color: #BCBCBC;'> 5</span> OLIVER      Church &amp; State Wines (… 31120 87TH STREET              V0H1T0    
-#&gt; <span style='color: #BCBCBC;'> 6</span> KEREMEOS    Corcelettes Estate Win… 2582 UPPER BENCH ROAD          V0X1N4    
-#&gt; <span style='color: #BCBCBC;'> 7</span> DUNCAN      Blue Grouse Vineyards   4365 BLUE GROUSE ROAD AND 218… V9L6M3    
-#&gt; <span style='color: #BCBCBC;'> 8</span> VANCOUVER   City Side Winery        328 WEST 2ND AVENUE            V5Y1C8    
-#&gt; <span style='color: #BCBCBC;'> 9</span> WEST KELOW… Volcanic Hills Estate … 2845 BOUCHERIE ROAD            V1Z2G6    
-#&gt; <span style='color: #BCBCBC;'>10</span> OLIVER      Orchard Hill Estate Ci… 3480 FRUITVALE WAY             V0H1T0    
+#&gt;    CITY          NAME                              ADDRESS            POSTALCODE
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                             <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
+#&gt; <span style='color: #BCBCBC;'> 1</span> PRINCE GEORGE Pacific Western Brewing Company   641 NORTH NECHAKO… V2K4M4    
+#&gt; <span style='color: #BCBCBC;'> 2</span> OSOYOOS       Bordertown Vineyards              9140 92ND AVENUE   V0H1V2    
+#&gt; <span style='color: #BCBCBC;'> 3</span> CHILLIWACK    Whispering Horse Winery           43721 VEDDER MTN.… V2R4C5    
+#&gt; <span style='color: #BCBCBC;'> 4</span> KELOWNA       Okanaganvilla Estate Winery       3240 POOLEY ROAD   V1W4G7    
+#&gt; <span style='color: #BCBCBC;'> 5</span> OLIVER        Church &amp; State Wines (Black Sage) 31120 87TH STREET  V0H1T0    
+#&gt; <span style='color: #BCBCBC;'> 6</span> KEREMEOS      Corcelettes Estate Winery         2582 UPPER BENCH … V0X1N4    
+#&gt; <span style='color: #BCBCBC;'> 7</span> DUNCAN        Blue Grouse Vineyards             4365 BLUE GROUSE … V9L6M3    
+#&gt; <span style='color: #BCBCBC;'> 8</span> VANCOUVER     City Side Winery                  328 WEST 2ND AVEN… V5Y1C8    
+#&gt; <span style='color: #BCBCBC;'> 9</span> WEST KELOWNA  Volcanic Hills Estate Winery      2845 BOUCHERIE RO… V1Z2G6    
+#&gt; <span style='color: #BCBCBC;'>10</span> OLIVER        Orchard Hill Estate Cidery        3480 FRUITVALE WAY V0H1T0    
 #&gt; <span style='color: #949494;'># … with 347 more rows</span></div><div class='input'>
 <span class='co'># Using a BCGW name</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
@@ -301,13 +295,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt; <span style='color: #949494;'>#   POSTAL_CODE &lt;chr&gt;, LOCALITY &lt;chr&gt;, CONTACT_PHONE &lt;chr&gt;,</span>
 #&gt; <span style='color: #949494;'>#   CONTACT_EMAIL &lt;chr&gt;, CONTACT_FAX &lt;chr&gt;, WEBSITE_URL &lt;chr&gt;, IMAGE_URL &lt;chr&gt;,</span>
 #&gt; <span style='color: #949494;'>#   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, KEYWORDS &lt;chr&gt;, DATE_UPDATED &lt;date&gt;,</span>
-#&gt; <span style='color: #949494;'>#   SITE_GEOCODED_IND &lt;chr&gt;, AERODROME_STATUS &lt;chr&gt;, AIRCRAFT_ACCESS_IND &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   DATA_SOURCE &lt;chr&gt;, DATA_SOURCE_YEAR &lt;chr&gt;, ELEVATION &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   FUEL_AVAILABILITY_IND &lt;chr&gt;, HELICOPTER_ACCESS_IND &lt;chr&gt;, IATA_CODE &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   ICAO_CODE &lt;chr&gt;, MAX_RUNWAY_LENGTH &lt;dbl&gt;, NUMBER_OF_RUNWAYS &lt;int&gt;,</span>
-#&gt; <span style='color: #949494;'>#   OIL_AVAILABILITY_IND &lt;chr&gt;, RUNWAY_SURFACE &lt;chr&gt;,</span>
-#&gt; <span style='color: #949494;'>#   SEAPLANE_ACCESS_IND &lt;chr&gt;, TC_LID_CODE &lt;chr&gt;, SEQUENCE_ID &lt;int&gt;,</span>
-#&gt; <span style='color: #949494;'>#   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POINT [m]&gt;</span></div><div class='input'>
+#&gt; <span style='color: #949494;'>#   SITE_GEOCODED_IND &lt;chr&gt;, AERODROME_STATUS &lt;chr&gt;, …</span></div><div class='input'>
 <span class='co'># Using sf's sql querying ability</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_get_data</span><span class='op'>(</span>
@@ -434,7 +422,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 #&gt;   Error: Sheet 'Regional Districts' not found
 #&gt; 
 #&gt; The file can be found here:
-#&gt;   '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpp7EZ0Z/bcdata_8b21df573cc/file8b25d856571.xlsx'
+#&gt;   '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpzRXcA7/bcdata_8d978f06606/file8d96eba51f1.xlsx'
 #&gt; if you would like to try to read it manually.
 #&gt; </div><div class='input'><span class='co'># }</span>
 
