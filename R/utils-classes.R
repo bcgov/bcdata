@@ -330,7 +330,7 @@ tail.bcdc_promise <- function(x, n = 6L, ...) {
   x
 }
 
-#' @importFrom base names
+
 #' @export
 names.bcdc_promise <- function(x) {
   x$cols_df$col_name
