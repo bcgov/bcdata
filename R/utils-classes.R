@@ -333,7 +333,21 @@ tail.bcdc_promise <- function(x, n = 6L, ...) {
 
 #' @export
 names.bcdc_promise <- function(x) {
-  x$cols_df$col_name
+  cols <- x[["cols_df"]]
+  query <- x[["query_list"]]
+
+  if (!is.null(query$propertyName)) {
+    select_cols <- strsplit(query$propertyName, ",")[[1]]
+    cols <- cols$col_name[cols$sticky | cols$col_name %in% select_cols]
+  } else {
+    cols <- cols$col_name
+  }
+
+  cols[cols == "SHAPE" | cols == "GEOMETRY"] <- "geometry"
+  geom_idx <- which(cols == "geometry")
+
+  cols[c((1:length(cols))[-geom_idx], geom_idx)]
+
 }
 
 
