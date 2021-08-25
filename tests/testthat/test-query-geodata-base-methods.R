@@ -58,3 +58,24 @@ test_that("head/tail works with a record that would otherwise require pagination
 
   expect_equal(nrow(dt), 3L)
 })
+
+test_that("names.bcdc_promise returns the same as names on a data.frame", {
+  query <- bcdc_query_geodata(point_record) %>%
+    head()
+
+  expect_identical(
+    names(query),
+    names(collect(query))
+  )
+})
+
+test_that("names.bcdc_promise returns the same as names on a data.frame when using select", {
+  sub_query <- bcdc_query_geodata(polygon_record) %>%
+    head() %>%
+    select(1:3)
+
+  expect_identical(
+    names(sub_query),
+    names(collect(sub_query))
+  )
+})
