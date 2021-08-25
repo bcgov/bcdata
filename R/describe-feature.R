@@ -106,7 +106,7 @@ feature_helper <- function(whse_name){
   ## This is an ugly way of doing this
   ## Manually add id and turn into a row
   id_row <- dplyr::tibble(name = "id",
-                          nillable = FALSE,
+                          nillable = TRUE,
                           type = "xsd:string")
 
   xml_df <- parse_raw_feature_tbl(query_list)
