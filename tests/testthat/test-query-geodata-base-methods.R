@@ -25,12 +25,12 @@ test_that("head works", {
 test_that("tail works", {
   skip_if_net_down()
   skip_on_cran()
-  promise <- bcdc_query_geodata(record) %>%
+  promise <- bcdc_query_geodata(point_record) %>%
     tail()
   expect_is(promise, "bcdc_promise")
   collected <- collect(promise)
   expect_equal(nrow(collected), 6L)
-  d2 <- bcdc_query_geodata(record) %>%
+  d2 <- bcdc_query_geodata(point_record) %>%
     tail(n = 3) %>%
     collect()
   expect_equal(nrow(d2), 3L)
