@@ -1,5 +1,11 @@
 # bcdata (development version)
 
+### IMPROVEMENTS
+* Add `names` method for `bcdc.promise` objects. You can now call `names` on an object produced by `bcdc_query_geodata`. This is handy when trying to figure out exact column spelling etc. 
+
+### BUG FIXES
+* Fix bug where sticky column were incorrectly identified in `bcdc_describe_feature` (#279)
+
 # bcdata 0.2.4
 
 * Code in `.onLoad()` that sent a request to the wfs getCapabilities endpoint could cause the package to fail to load. This was moved into an internal function `bcdc_get_capabilities()` that makes the request the first time it's required, and stores the result for the remainder of the session (#271)
