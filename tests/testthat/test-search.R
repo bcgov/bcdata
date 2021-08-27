@@ -13,15 +13,14 @@
 context('test bcdc_search')
 
 
-test_that('works with a record that has no resource', {
+test_that('bcdc_search works', {
   skip_on_cran()
   skip_if_net_down()
   output_path <- tempfile()
   suppressWarnings(
     verify_output(output_path, {
-      bcdc_search("Major Railways")
+      bcdc_search("Container")
     })
   )
   expect_false(any(grepl("Error", readLines(output_path))))
-  expect_true(any(grepl("no resources", readLines(output_path))))
 })
