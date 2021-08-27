@@ -34,7 +34,7 @@ test_that("tail works", {
     tail(n = 3) %>%
     collect()
   expect_equal(nrow(d2), 3L)
-  col <- pagination_sort_col(bcdc_describe_feature(record))
+  col <- pagination_sort_col(bcdc_describe_feature(point_record))
   full_airport <- bcdc_get_data(point_record, resource = point_resource)
   expect_equal(
     d2[[col]],
