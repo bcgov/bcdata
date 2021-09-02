@@ -47,14 +47,15 @@ jobs:
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
+          cat(as.character(getRversion()), file = "R-version") # for caching
         shell: Rscript {0}
 
       - name: Cache R packages
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-6-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-6-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-${{ env.cache-version }}-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-${{ env.cache-version }}
 
       - name: install macOS system dependencies
         if: runner.os == 'macOS'
