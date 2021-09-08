@@ -84,6 +84,24 @@ library(bcdata)
 - [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
 - [Exploring Silviculture Data with bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
 
+### Methods for `bcdc_promise`
+
+The `bcdc_query_geodata()` returns an object of the class `bcdc_promise`. We have written an ever growing list methods for this class. You can use these methods directly on a object returned by `bcdc_query_geodata()`:
+
+```{r}
+airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
+names(airports)
+```
+
+Here are all the methods for the `bcdc_promise` class:
+```{r echo=FALSE}
+bcdc_methods <- methods(class = "bcdc_promise")
+bcdc_methods <- attributes(bcdc_methods)$info[,c("generic"), drop=FALSE]
+rownames(bcdc_methods) <- NULL
+knitr::kable(bcdc_methods)
+```
+
+
 ### BCDC Authentication
 
 If you are an authorized editor of the B.C. Data Catalogue you may want to
