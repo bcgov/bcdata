@@ -346,7 +346,7 @@ names.bcdc_promise <- function(x) {
   cols[cols == "SHAPE" | cols == "GEOMETRY"] <- "geometry"
   geom_idx <- which(cols == "geometry")
 
-  cols[c((1:length(cols))[-geom_idx], geom_idx)]
+  cols[c(seq_along(cols)[-geom_idx], geom_idx)]
 
 }
 
