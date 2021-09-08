@@ -33,7 +33,10 @@ test_that("bcdc_query_geodata returns an object with a query, a cli, the catalog
   skip_if_net_down()
   skip_on_cran()
   bc_airports <- bcdc_query_geodata("bc-airports")
-  expect_equivalent(names(bc_airports), c("query_list", "cli", "record", "cols_df"))
+  expect_is(bc_airports[["query_list"]], "list")
+  expect_is(bc_airports[["cli"]], "HttpClient")
+  expect_is(bc_airports[["record"]], "bcdc_record")
+  expect_is(bc_airports[["cols_df"]], "data.frame")
 })
 
 

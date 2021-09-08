@@ -86,6 +86,54 @@ library(bcdata)
 -   [Exploring Silviculture Data with
     bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
 
+### Methods for `bcdc_promise`
+
+The `bcdc_query_geodata()` returns an object of the class
+`bcdc_promise`. We have written an ever growing list methods for this
+class. You can use these methods directly on a object returned by
+`bcdc_query_geodata()`:
+
+``` r
+airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
+names(airports)
+#>  [1] "id"                            "CUSTODIAN_ORG_DESCRIPTION"    
+#>  [3] "BUSINESS_CATEGORY_CLASS"       "BUSINESS_CATEGORY_DESCRIPTION"
+#>  [5] "OCCUPANT_TYPE_DESCRIPTION"     "SOURCE_DATA_ID"               
+#>  [7] "SUPPLIED_SOURCE_ID_IND"        "AIRPORT_NAME"                 
+#>  [9] "DESCRIPTION"                   "PHYSICAL_ADDRESS"             
+#> [11] "ALIAS_ADDRESS"                 "STREET_ADDRESS"               
+#> [13] "POSTAL_CODE"                   "LOCALITY"                     
+#> [15] "CONTACT_PHONE"                 "CONTACT_EMAIL"                
+#> [17] "CONTACT_FAX"                   "WEBSITE_URL"                  
+#> [19] "IMAGE_URL"                     "LATITUDE"                     
+#> [21] "LONGITUDE"                     "KEYWORDS"                     
+#> [23] "DATE_UPDATED"                  "SITE_GEOCODED_IND"            
+#> [25] "AERODROME_STATUS"              "AIRCRAFT_ACCESS_IND"          
+#> [27] "DATA_SOURCE"                   "DATA_SOURCE_YEAR"             
+#> [29] "ELEVATION"                     "FUEL_AVAILABILITY_IND"        
+#> [31] "HELICOPTER_ACCESS_IND"         "IATA_CODE"                    
+#> [33] "ICAO_CODE"                     "MAX_RUNWAY_LENGTH"            
+#> [35] "NUMBER_OF_RUNWAYS"             "OIL_AVAILABILITY_IND"         
+#> [37] "RUNWAY_SURFACE"                "SEAPLANE_ACCESS_IND"          
+#> [39] "TC_LID_CODE"                   "SEQUENCE_ID"                  
+#> [41] "SE_ANNO_CAD_DATA"              "geometry"
+```
+
+Here are all the methods for the `bcdc_promise` class:
+
+| generic     |
+|:------------|
+| as\_tibble  |
+| collect     |
+| filter      |
+| head        |
+| mutate      |
+| names       |
+| print       |
+| select      |
+| show\_query |
+| tail        |
+
 ### BCDC Authentication
 
 If you are an authorized editor of the B.C. Data Catalogue you may want

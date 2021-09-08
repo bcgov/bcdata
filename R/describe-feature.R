@@ -76,7 +76,6 @@ bcdc_describe_feature.bcdc_record <- function(record){
 }
 
 parse_raw_feature_tbl <- function(query_list){
-
   ## GET and parse data to sf object
   cli <- bcdc_wfs_client()
 
@@ -107,7 +106,7 @@ feature_helper <- function(whse_name){
   ## This is an ugly way of doing this
   ## Manually add id and turn into a row
   id_row <- dplyr::tibble(name = "id",
-                          nillable = FALSE,
+                          nillable = TRUE,
                           type = "xsd:string")
 
   xml_df <- parse_raw_feature_tbl(query_list)
@@ -115,7 +114,7 @@ feature_helper <- function(whse_name){
 
 
   ## Fix logicals
-  xml_df$nillable = ifelse(xml_df$nillable == "true", TRUE, FALSE)
+  xml_df$nillable = ifelse(xml_df$nillable == "true", FALSE, TRUE)
   xml_df <- xml_df[, c("name", "nillable", "type")]
 
   ## Add the id_row back into the front
