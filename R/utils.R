@@ -10,7 +10,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-catalogue_base_url <- function() "https://catalogue.data.gov.bc.ca/api/3/"
+catalogue_base_url <- function() {
+  getOption("bcdata.catalogue_endpoint",
+            default = "https://catalogue.data.gov.bc.ca/api/3/")
+}
 
 wfs_base_url <- function(host = bcdc_web_service_host()) {
   paste(host, "geo/pub/wfs/", sep = "/")

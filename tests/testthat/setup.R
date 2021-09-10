@@ -19,6 +19,9 @@ options("silence_named_get_record_warning" = TRUE)
 ## OR
 # options("bcdata.web_service_host" = "https://test.openmaps.gov.bc.ca")
 
+##### To test on beta catalogue
+#options("bcdata.catalogue_endpoint" = "https://cat.data.gov.bc.ca/api/3/")
+
 
 point_record <- '76b1b7a3-2112-4444-857a-afccf7b20da8'
 point_resource <-  "4d0377d9-e8a1-429b-824f-0ce8f363512c"
