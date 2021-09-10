@@ -278,14 +278,14 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; <span style='color: #949494;'># A tibble: 1 × 6</span>
 #&gt;   id                       GW_WW_SYSID WELL_TAG_NUMBER INTENDED_WATER_… OBJECTID
 #&gt; <span style='color: #BCBCBC;'>*</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                          <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>               <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> WHSE_WATER_MANAGEMENT.G…       <span style='text-decoration: underline;'>22</span>688           <span style='text-decoration: underline;'>22</span>722 Not Applicable   49<span style='text-decoration: underline;'>817</span>734
+#&gt; <span style='color: #BCBCBC;'>1</span> WHSE_WATER_MANAGEMENT.G…       <span style='text-decoration: underline;'>22</span>688           <span style='text-decoration: underline;'>22</span>722 Not Applicable   50<span style='text-decoration: underline;'>055</span>174
 #&gt; <span style='color: #949494;'># … with 1 more variable: geometry &lt;POINT [m]&gt;</span></div><div class='input'>
 <span class='co'>## A moderately large layer</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_query_geodata</span><span class='op'>(</span><span class='st'>"bc-environmental-monitoring-locations"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; Querying <span style='color: #BB0000;'>'bc-environmental-monitoring-locations'</span> record
-#&gt; • Using <span style='color: #0000BB;'>collect()</span> on this object will return <span style='color: #00BB00;'>38139</span>
+#&gt; • Using <span style='color: #0000BB;'>collect()</span> on this object will return <span style='color: #00BB00;'>38142</span>
 #&gt; • features and <span style='color: #00BB00;'>35</span> fields
 #&gt; • Accessing this record requires pagination and will make <span style='color: #00BB00;'>39</span>
 #&gt; • separate requests to the WFS. See ?bcdc_options
@@ -294,17 +294,17 @@ object with <code><a href='as_tibble.html'>collect()</a></code>. See examples.</
 #&gt; Simple feature collection with 6 features and 35 fields
 #&gt; Geometry type: POINT
 #&gt; Dimension:     XY
-#&gt; Bounding box:  xmin: 1460605 ymin: 469014.6 xmax: 1569170 ymax: 478741
+#&gt; Bounding box:  xmin: 1310955 ymin: 569146.1 xmax: 1469171 ymax: 686237
 #&gt; Projected CRS: NAD83 / BC Albers
 #&gt; <span style='color: #949494;'># A tibble: 6 × 36</span>
 #&gt;   id         MONITORING_LOCA… CLIENT_LOCATION… CONTAMINATED_SI… DISCHARGE_MEDIA…
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                       <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
-#&gt; <span style='color: #BCBCBC;'>1</span> WHSE_ENVI… E105562                        52 <span style='color: #BB0000;'>NA</span>               4               
-#&gt; <span style='color: #BCBCBC;'>2</span> WHSE_ENVI… E105563                        52 <span style='color: #BB0000;'>NA</span>               4               
-#&gt; <span style='color: #BCBCBC;'>3</span> WHSE_ENVI… E105564                        52 <span style='color: #BB0000;'>NA</span>               4               
-#&gt; <span style='color: #BCBCBC;'>4</span> WHSE_ENVI… E105566                        41 <span style='color: #BB0000;'>NA</span>               4               
-#&gt; <span style='color: #BCBCBC;'>5</span> WHSE_ENVI… E105570                        52 <span style='color: #BB0000;'>NA</span>               4               
-#&gt; <span style='color: #BCBCBC;'>6</span> WHSE_ENVI… E105573                        41 <span style='color: #BB0000;'>NA</span>               4               
+#&gt; <span style='color: #BCBCBC;'>1</span> WHSE_ENVI… 0600251                        31 <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>2</span> WHSE_ENVI… 0600253                        31 <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>3</span> WHSE_ENVI… 0600255                        31 <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>4</span> WHSE_ENVI… 0600256                        31 <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>5</span> WHSE_ENVI… 0600258                        31 <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
+#&gt; <span style='color: #BCBCBC;'>6</span> WHSE_ENVI… 0600259                        31 <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
 #&gt; <span style='color: #949494;'># … with 31 more variables: ECO_REGION_CD &lt;chr&gt;, GEOREFERENCE_SOURCE_CD &lt;chr&gt;,</span>
 #&gt; <span style='color: #949494;'>#   LOCATION_PURPOSE_CD &lt;chr&gt;, LOCATION_TYPE_CD &lt;chr&gt;, OFFICE_CD &lt;chr&gt;,</span>
 #&gt; <span style='color: #949494;'>#   SOURCE_CLASS_CD &lt;chr&gt;, WATERSHED_CD &lt;chr&gt;, CALC_STATISTICS_IND &lt;chr&gt;,</span>
