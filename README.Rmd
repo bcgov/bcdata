@@ -86,19 +86,13 @@ library(bcdata)
 
 ### Methods for `bcdc_promise`
 
-The `bcdc_query_geodata()` returns an object of the class `bcdc_promise`. We have written an ever growing list methods for this class. You can use these methods directly on a object returned by `bcdc_query_geodata()`:
+The `bcdc_query_geodata()` returns an object of the class `bcdc_promise`. We have written an ever growing list methods for this class. You can use these methods directly on a object returned by `bcdc_query_geodata()`. Here are all the methods for the `bcdc_promise` class:
 
-```{r}
-airports <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
-names(airports)
-```
-
-Here are all the methods for the `bcdc_promise` class:
-```{r echo=FALSE}
+```{r echo=FALSE, results='asis'}
 bcdc_methods <- methods(class = "bcdc_promise")
-bcdc_methods <- attributes(bcdc_methods)$info[,c("generic"), drop=FALSE]
-rownames(bcdc_methods) <- NULL
-knitr::kable(bcdc_methods)
+bcdc_methods <- sort(attributes(bcdc_methods)$info[,c("generic"), ])
+
+cat(paste0("- `", bcdc_methods, "`", collapse = "\n"))
 ```
 
 
