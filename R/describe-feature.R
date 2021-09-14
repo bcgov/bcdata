@@ -56,7 +56,7 @@ bcdc_describe_feature.character <- function(record){
   if (is_whse_object_name(record)) {
     bgc <- bcdc_get_wfs_records()
     cat_record <- bcdc_get_record(bgc$cat_url[grepl(record, bgc$whse_name)])
-    return(obj_desc_join(record, cat_record$details))
+    return(obj_desc_join(cat_record))
   }
 
   bcdc_describe_feature(bcdc_get_record(record))
@@ -71,7 +71,7 @@ bcdc_describe_feature.bcdc_record <- function(record){
          call. = FALSE
     )
   }
-  obj_desc_join(record$layer_name, record$details)
+  obj_desc_join(record)
 
 }
 
@@ -127,10 +127,23 @@ feature_helper <- function(whse_name){
 
 
 
-obj_desc_join <- function(x, y) {
+obj_desc_join <- function(record) {
+  stopifnot(inherits(record, "bcdc_record"))
+
+  wfs_resource <- get_wfs_resource_from_record(record)
+  whse_name <- wfs_resource$object_name
+  wfs_df <- jsonlite::fromJSON(wfs_resource$details)
+
   dplyr::left_join(
-    feature_helper(x),
-    y[,c("column_comments", "column_name")],
+    feature_helper(whse_name),
+    wfs_df[,c("column_comments", "column_name")],
     by = c("col_name" = "column_name")
   )
+}
+
+get_wfs_resource_from_record <- function(record) {
+  is_wfs <- vapply(record$resources, function(x) {
+    x$format == "wms"
+  }, FUN.VALUE = logical(1))
+  record$resources[[which(is_wfs)]]
 }
