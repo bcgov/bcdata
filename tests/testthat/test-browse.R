@@ -15,9 +15,11 @@ context("confirm browsing ability")
 test_that("bcdc_browse returns the correct url", {
   skip_if_net_down()
   skip_on_cran()
-  forest_url <- bcdc_browse("forest")
-  expect_identical(forest_url, paste0(catalogue_base_url(), "dataset?q=forest"))
+  airports_url <- bcdc_browse("bc-airports")
+  expect_identical(airports_url, paste0(catalogue_base_url(), "dataset/bc-airports"))
   catalogue_url <- bcdc_browse()
   expect_identical(catalogue_url, catalogue_base_url())
+  expect_error(bcdc_browse("no-record-here"),
+               "The specified record does not exist in the catalogue")
 
 })
