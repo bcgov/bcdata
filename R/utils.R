@@ -11,8 +11,14 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 catalogue_base_url <- function() {
-  getOption("bcdata.catalogue_endpoint",
-            default = "https://catalogue.data.gov.bc.ca/api/3/")
+  getOption("bcdata.catalogue_url",
+            default = "https://catalogue.data.gov.bc.ca/")
+}
+
+catalogue_base_api_url <- function() {
+  api_path <- getOption("bcdata.api_path",
+            default = "api/3/")
+  paste0(catalogue_base_url(), api_path)
 }
 
 wfs_base_url <- function(host = bcdc_web_service_host()) {
@@ -94,7 +100,7 @@ formats_supported <- function(){
 }
 
 bcdc_catalogue_client <- function(endpoint = NULL) {
-  url <- paste0(catalogue_base_url(), endpoint)
+  url <- paste0(catalogue_base_api_url(), endpoint)
   bcdc_http_client(url, auth = TRUE)
 }
 
@@ -238,7 +244,7 @@ read_from_url <- function(resource, ...){
   if (!reported_format %in% formats_supported()) {
     stop("Reading ", reported_format, " files is not currently supported in bcdata.")
   }
-  auth <- grepl("(catalogue|pub)\\.data\\.gov\\.bc\\.ca", file_url)
+  auth <- grepl("(cat(alogue)?|pub)\\.data\\.gov\\.bc\\.ca", file_url)
   cli <- bcdc_http_client(file_url, auth = auth)
 
   ## Establish where to download file

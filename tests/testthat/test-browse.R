@@ -16,8 +16,8 @@ test_that("bcdc_browse returns the correct url", {
   skip_if_net_down()
   skip_on_cran()
   forest_url <- bcdc_browse("forest")
-  expect_identical(forest_url, "https://catalogue.data.gov.bc.ca/dataset?q=forest")
+  expect_identical(forest_url, paste0(catalogue_base_url(), "dataset?q=forest"))
   catalogue_url <- bcdc_browse()
-  expect_identical(catalogue_url, "https://catalogue.data.gov.bc.ca")
+  expect_identical(catalogue_url, catalogue_base_url())
 
 })

@@ -54,19 +54,20 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
+  base_url <- catalogue_base_url()
 
-  if(is.null(query))  url <- "https://catalogue.data.gov.bc.ca"
+  if(is.null(query))  url <- base_url
 
   if(!is.null(query)){
 
     ## Check if the record is valid, if not return a query
-    url <- paste0("https://catalogue.data.gov.bc.ca/dataset/", query)
+    url <- paste0(base_url, "dataset/", query)
     cli <- crul::HttpClient$new(url = url,
                                 headers = list(`User-Agent` = bcdata_user_agent()))
     res <- cli$get()
 
     if(res$status_code == 404){
-      url <- paste0("https://catalogue.data.gov.bc.ca/dataset?q=", query)
+      url <- paste0(base_url, "dataset?q=", query)
     }
   }
 

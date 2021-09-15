@@ -85,7 +85,7 @@ print.bcdc_promise <- function(x, ...) {
 print.bcdc_record <- function(x, ...) {
   cat_line_wrap(cli::col_blue(cli::style_bold("B.C. Data Catalogue Record: ")), x$title)
   cat_line_wrap(cli::col_blue(cli::style_italic("Name: ")), x$name, " (ID: ", x$id, ")")
-  cat_line_wrap(cli::col_blue(cli::style_italic("Permalink: ")), paste0("https://catalogue.data.gov.bc.ca/dataset/", x$id))
+  cat_line_wrap(cli::col_blue(cli::style_italic("Permalink: ")), paste0(catalogue_base_url(), "dataset/", x$id))
   cat_line_wrap(cli::col_blue(cli::style_italic("Sector: ")), x$sector)
   cat_line_wrap(cli::col_blue(cli::style_italic("Licence: ")), x$license_title)
   cat_line_wrap(cli::col_blue(cli::style_italic("Type: ")), x$type)
