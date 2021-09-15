@@ -61,13 +61,14 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
   if(!is.null(query)){
 
     ## Check if the record is valid, if not return a query
-    url <- paste0(base_url, "dataset/", query)
+    url <- make_url(base_url, "dataset", query)
     cli <- crul::HttpClient$new(url = url,
                                 headers = list(`User-Agent` = bcdata_user_agent()))
     res <- cli$get()
 
     if(res$status_code == 404){
-      url <- paste0(base_url, "dataset?q=", query)
+      url <- paste0(make_url(base_url, "dataset"),
+                    "?q=", query)
     }
   }
 

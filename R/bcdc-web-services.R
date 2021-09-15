@@ -215,7 +215,7 @@ bcdc_preview.bcdc_record <- function(record) {
 }
 
 make_wms <- function(x){
-  wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
+  wms_url <- wms_url()
   wms_options <- leaflet::WMSTileOptions(format = "image/png",
                                          transparent = TRUE,
                                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")

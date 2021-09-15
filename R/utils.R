@@ -18,15 +18,15 @@ catalogue_base_url <- function() {
 catalogue_base_api_url <- function() {
   api_path <- getOption("bcdata.api_path",
             default = "api/3/")
-  paste0(catalogue_base_url(), api_path)
+  make_url(catalogue_base_url(), api_path)
 }
 
 wfs_base_url <- function(host = bcdc_web_service_host()) {
-  paste(host, "geo/pub/wfs/", sep = "/")
+  make_url(host, "geo/pub/wfs")
 }
 
 wms_base_url <- function(host = bcdc_web_service_host()) {
-  paste(host, "geo/pub/wms/", sep = "/")
+  make_url(host, "geo/pub/wms")
 }
 
 bcdc_web_service_host <- function() {
@@ -39,6 +39,23 @@ bcdata_user_agent <- function(){
 }
 
 compact <- function(l) Filter(Negate(is.null), l)
+
+#' Combine url components without having to worry
+#' about slashes
+#'
+#' @param ... url components
+#' @param trailing_slash
+#'
+#' @return complete url
+make_url <- function(..., trailing_slash = FALSE) {
+  components <- unlist(list(...))
+  components <- gsub("^/|/$", "", components)
+  url <- paste(components, collapse = "/")
+  if (trailing_slash) {
+    url <- paste0(url, "/")
+  }
+  url
+}
 
 bcdc_number_wfs_records <- function(query_list, client){
 
@@ -100,12 +117,12 @@ formats_supported <- function(){
 }
 
 bcdc_catalogue_client <- function(endpoint = NULL) {
-  url <- paste0(catalogue_base_api_url(), endpoint)
+  url <- make_url(catalogue_base_api_url(), endpoint)
   bcdc_http_client(url, auth = TRUE)
 }
 
 bcdc_wfs_client <- function(endpoint = NULL) {
-  url <- paste0(wfs_base_url(), endpoint)
+  url <- make_url(wfs_base_url(), endpoint)
   bcdc_http_client(url, auth = FALSE)
 }
 
