@@ -43,12 +43,6 @@
 #' try(
 #'   bcdc_browse("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' )
-#'
-#' ## Take me to the catalogue search results for 'fish'
-#' try(
-#'  bcdc_browse("fish")
-#' )
-#'
 #' }
 bcdc_browse <- function(query = NULL, browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
