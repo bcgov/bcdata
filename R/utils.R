@@ -11,14 +11,13 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 catalogue_base_url <- function() {
-  getOption("bcdata.catalogue_url",
+  getOption("bcdata.catalogue_gui_url",
             default = "https://catalogue.data.gov.bc.ca/")
 }
 
 catalogue_base_api_url <- function() {
-  api_path <- getOption("bcdata.api_path",
-            default = "api/3/")
-  make_url(catalogue_base_url(), api_path)
+  getOption("bcdata.catalogue_api_url",
+            default = "https://catalogue.data.gov.bc.ca/api/3")
 }
 
 wfs_base_url <- function(host = bcdc_web_service_host()) {
