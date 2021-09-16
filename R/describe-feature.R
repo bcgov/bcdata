@@ -142,8 +142,10 @@ obj_desc_join <- function(record) {
 }
 
 get_wfs_resource_from_record <- function(record) {
+
+  wfs_res_id <- record$resource_df$id[record$resource_df$wfs_available]
   is_wfs <- vapply(record$resources, function(x) {
-    x$format == "wms"
+    x$id == wfs_res_id
   }, FUN.VALUE = logical(1))
   record$resources[[which(is_wfs)]]
 }

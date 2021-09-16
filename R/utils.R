@@ -296,7 +296,7 @@ read_from_url <- function(resource, ...){
 
 
 resource_to_tibble <- function(x){
-  dplyr::tibble(
+  res_df <- dplyr::tibble(
     name = safe_map_chr(x, "name"),
     url = safe_map_chr(x, "url"),
     id = safe_map_chr(x, "id"),
@@ -305,6 +305,10 @@ resource_to_tibble <- function(x){
     package_id = safe_map_chr(x, "package_id"),
     location = simplify_string(safe_map_chr(x, "resource_storage_location"))
   )
+
+  mutate(res_df,
+         wfs_available = wfs_available(res_df),
+         bcdata_available = wfs_available | other_format_available(res_df))
 }
 
 #' @importFrom rlang "%||%"
