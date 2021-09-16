@@ -167,10 +167,6 @@ test_that("bcdc_get_data fails when >1 resource not specified & noninteractive",
 test_that("bcdc_get_data handles sheet name specification", {
   skip_if_net_down()
   skip_on_cran()
-  skip_if(
-    grepl("beta", catalogue_base_url()),
-    "beta catalogue has no resources for download"
-  )
   expect_message(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6'), 'This .xlsx resource contains the following sheets:')
   expect_error(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = "foo"), "Error: Sheet 'foo' not found")
   out <- capture.output(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = "Notes"), type = 'message')
