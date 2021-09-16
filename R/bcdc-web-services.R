@@ -142,9 +142,19 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
     )
   }
 
+  wfs_resource <- get_wfs_resource_from_record(record)
+  # Need to get layer name from wms url rather than
+  # object_name field, sometimes they don't match
+  # (e.g., if a generalized view is available from wms)
   layer_name <- basename(dirname(
-    record$resource_df$url[record$resource_df$format == "wms"]
+    wfs_resource$url
   ))
+
+  if (layer_name != wfs_resource$object_name) {
+    warning("The name of the object available through the web service ",
+            "differs from the warehouse object name. You may be accessing ",
+            "a simplified view of the data - see the catalogue record for details.")
+  }
 
   ## Parameters for the API call
   query_list <- make_query_list(layer_name = layer_name, crs = crs)
