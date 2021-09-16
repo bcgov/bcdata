@@ -31,7 +31,7 @@ test_that("bcdc_search_facets works", {
   skip_on_cran()
   skip_if_net_down()
   ret_names <- c("facet", "count", "display_name", "name")
-  lapply(c("license_id", "download_audience", "type", "res_format",
+  lapply(c("license_id", "download_audience", "res_format",
            "sector", "organization"),
          function(x) expect_named(bcdc_search_facets(x))
   )
