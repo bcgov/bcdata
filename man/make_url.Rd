@@ -10,7 +10,7 @@ make_url(..., trailing_slash = FALSE)
 \arguments{
 \item{...}{url components}
 
-\item{trailing_slash}{}
+\item{trailing_slash}{should the url end in /}
 }
 \value{
 complete url

@@ -43,7 +43,7 @@ compact <- function(l) Filter(Negate(is.null), l)
 #' about slashes
 #'
 #' @param ... url components
-#' @param trailing_slash
+#' @param trailing_slash should the url end in /
 #'
 #' @return complete url
 make_url <- function(..., trailing_slash = FALSE) {
