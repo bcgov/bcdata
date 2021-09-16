@@ -8,7 +8,6 @@ bcdc_search(
   ...,
   license_id = NULL,
   download_audience = "Public",
-  type = NULL,
   res_format = NULL,
   sector = NULL,
   organization = NULL,
@@ -22,8 +21,6 @@ bcdc_search(
 
 \item{download_audience}{download audience
 (see \code{bcdc_search_facets("download_audience")}). Default \code{"Public"}}
-
-\item{type}{type of resource (see \code{bcdc_search_facets("type")})}
 
 \item{res_format}{format of resource (see \code{bcdc_search_facets("res_format")})}
 
@@ -48,7 +45,7 @@ try(
 )
 
 try(
-  bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+  bcdc_search("regional district", res_format = "fgdb")
 )
 }
 }

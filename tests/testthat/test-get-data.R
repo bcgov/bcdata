@@ -103,9 +103,12 @@ test_that("fails when multiple files in a zip", {
 test_that("fails informatively when can't read a file", {
   skip_if_net_down()
   skip_on_cran()
-  expect_error(bcdc_get_data(record = '523dce9d-b464-44a5-b733-2022e94546c3',
-                             resource = '4cc98644-f6eb-410b-9df0-f9b2beac9717'),
-               "Reading the data set failed with the following error message:")
+  expect_error(
+    suppressWarnings(
+      bcdc_get_data(record = '523dce9d-b464-44a5-b733-2022e94546c3',
+                             resource = '4cc98644-f6eb-410b-9df0-f9b2beac9717')
+      ),
+    "Reading the data set failed with the following error message:")
 })
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource",{
@@ -164,6 +167,10 @@ test_that("bcdc_get_data fails when >1 resource not specified & noninteractive",
 test_that("bcdc_get_data handles sheet name specification", {
   skip_if_net_down()
   skip_on_cran()
+  skip_if(
+    grepl("beta", catalogue_base_url()),
+    "beta catalogue has no resources for download"
+  )
   expect_message(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6'), 'This .xlsx resource contains the following sheets:')
   expect_error(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = "foo"), "Error: Sheet 'foo' not found")
   out <- capture.output(bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = "Notes"), type = 'message')

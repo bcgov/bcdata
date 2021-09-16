@@ -67,8 +67,7 @@ test_that("bcdc_search works", {
   skip_on_cran()
   skip_if_net_down()
   expect_is(bcdc_search("forest"), "bcdc_recordlist")
-  expect_is(bcdc_search("regional district",
-                        type = "Geographic", res_format = "fgdb"),
+  expect_is(bcdc_search("regional district", res_format = "fgdb"),
             "bcdc_recordlist")
   expect_error(bcdc_search(organization = "foo"),
                "foo is not a valid value for organization")

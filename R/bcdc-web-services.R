@@ -153,7 +153,8 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   if (layer_name != wfs_resource$object_name) {
     warning("The name of the object available through the web service ",
             "differs from the warehouse object name. You may be accessing ",
-            "a simplified view of the data - see the catalogue record for details.")
+            "a simplified view of the data - see the catalogue record for details.",
+            call. = FALSE)
   }
 
   ## Parameters for the API call
