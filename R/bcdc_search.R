@@ -272,7 +272,6 @@ bcdc_get_record <- function(id) {
 }
 
 format_record <- function(pkg) {
-  pkg$details <- dplyr::bind_rows(pkg$details)
   # Create a resources data frame
   res_df <- resource_to_tibble(pkg$resources)
   pkg$resource_df <- res_df
