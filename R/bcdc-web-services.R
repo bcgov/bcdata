@@ -221,12 +221,14 @@ bcdc_preview.character <- function(record) {
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
 
-  make_wms(record$layer_name)
+  wfs_resource <- get_wfs_resource_from_record(record)
+
+  make_wms(basename(dirname(wfs_resource$url)))
 
 }
 
 make_wms <- function(x){
-  wms_url <- wms_url()
+  wms_url <- wms_base_url()
   wms_options <- leaflet::WMSTileOptions(format = "image/png",
                                          transparent = TRUE,
                                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
@@ -237,7 +239,7 @@ make_wms <- function(x){
              layer=pub%3A{x}")
 
   leaflet::leaflet() %>%
-    leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
+    leaflet::addProviderTiles(leaflet::providers$CartoDB.Positron,
                               options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
     leaflet::addWMSTiles(wms_url,
                          layers=glue::glue("pub:{x}"),
