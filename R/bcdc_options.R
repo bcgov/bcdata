@@ -97,7 +97,7 @@ bcdc_get_capabilities <- function() {
   }
 
   if (has_internet()) {
-    url <- "http://openmaps.gov.bc.ca/geo/pub/ows"
+    url <- make_url(bcdc_web_service_host(https = FALSE), "geo/pub/ows")
     cli <- bcdc_http_client(url, auth = FALSE)
 
 

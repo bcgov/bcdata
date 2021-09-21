@@ -28,9 +28,13 @@ wms_base_url <- function(host = bcdc_web_service_host()) {
   make_url(host, "geo/pub/wms")
 }
 
-bcdc_web_service_host <- function() {
-  getOption("bcdata.web_service_host",
+bcdc_web_service_host <- function(https = TRUE) {
+  host <- getOption("bcdata.web_service_host",
             default = "https://openmaps.gov.bc.ca")
+  if (!https) {
+    return(gsub("^https", "http", host))
+  }
+  host
 }
 
 bcdata_user_agent <- function(){
