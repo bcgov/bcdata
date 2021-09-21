@@ -34,9 +34,12 @@ This document is an attempt at a comprehensive list of services and API endpoint
     - `id`
     - `package_id`
     - `object_name`
+        (This is not always the same as the `typeNames` parameter in `resource.url`, as that is sometimes a simplified view - eg., `WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SPG` vs 
+`WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP`)
     - `details`
       - `column_comments`
       - `column_name`
+    - `bcdc_type` (not actually using yet but [may be useful](https://github.com/bcgov/bcdata/pull/283#issuecomment-924442166))
     - `format`
     - `resource_storage_location`
     - `name`
@@ -57,4 +60,3 @@ This document is an attempt at a comprehensive list of services and API endpoint
   Endpoints:
     - wfs: `geo/pub/wfs`
     - wms: `geo/pub/wms`
-    - 
