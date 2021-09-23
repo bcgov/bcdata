@@ -58,20 +58,22 @@ This document is an attempt at a comprehensive list of services and API endpoint
   - PROD: https://openmaps.gov.bc.ca
   
   Endpoints:
-    - wfs: `geo/pub/wfs`
-    - wms: `geo/pub/wms`
+  
+  - wfs: `geo/pub/wfs`
+  - wms: `geo/pub/wms`
 
-  Query Parameters for `geo/pub/wfs`
-      - query is sent in the body of a `POST` request (with `encode = "form"`). If a dataset has > n records (default n = 1000), pagination is used to send sequential requests. Pagination is executed using `count`, `sortBY`, and `startIndex`.
-        - SERVICE = "WFS"
-        - VERSION = "2.0.0"
-        - REQUEST = "GetCapabilities"
-        - REQUEST = "GetFeature"
-          - outputFormat = "application/json"
-          - typeNames (extracted from `resource.url` and compared against `resource.object_name`)
-          - SRSNAME (default `EPSG:3005`)
-          - CQL_FILTER
-          - count
-          - propertyName
-          - sortBy
-          - startIndex
+  Query Parameters for `geo/pub/wfs`:
+  
+  - query is sent in the body of a `POST` request (with `encode = "form"`). If a dataset has > n records (default n = 1000), pagination is used to send sequential requests. Pagination is executed using `count`, `sortBY`, and `startIndex`.
+    - SERVICE = "WFS"
+    - VERSION = "2.0.0"
+    - REQUEST = "GetCapabilities"
+    - REQUEST = "GetFeature"
+      - outputFormat = "application/json"
+      - typeNames (extracted from `resource.url` and compared against `resource.object_name`)
+      - SRSNAME (default `EPSG:3005`)
+      - CQL_FILTER
+      - count
+      - propertyName
+      - sortBy
+      - startIndex
