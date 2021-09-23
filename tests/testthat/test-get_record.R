@@ -120,10 +120,28 @@ test_that("bcdc_get_record works with/without authentication", {
   skip_if_not(nzchar(key_val))
   on.exit(Sys.setenv(BCDC_KEY = key_val))
 
-  expect_message(res <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8'),
+  # record NOT requiring auth
+  expect_message(res <- bcdc_get_record(point_record),
+                 "Authorizing with your stored API key")
+  expect_is(res, "bcdc_record")
+
+  # record requiring auth
+  auth_record_id <- Sys.getenv("BCDC_TEST_RECORD")
+  skip_if_not(nzchar(key_val))
+
+  expect_message(res <- bcdc_get_record(auth_record_id),
                  "Authorizing with your stored API key")
   expect_is(res, "bcdc_record")
 
   Sys.unsetenv("BCDC_KEY")
-  expect_silent(bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8'))
+
+  # record NOT requiring auth
+  expect_silent(bcdc_get_record(point_record))
+
+  # record requiring auth (with no key set)
+  expect_error(bcdc_get_record(auth_record_id))
+
+  # record requiring auth (with bad key set)
+  Sys.setenv(BCDC_KEY = "not-a-valid-key")
+  expect_error(bcdc_get_record(auth_record_id))
 })
