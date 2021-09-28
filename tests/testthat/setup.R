@@ -20,7 +20,7 @@ options("silence_named_get_record_warning" = TRUE)
 # options("bcdata.web_service_host" = "https://test.openmaps.gov.bc.ca")
 
 ##### To test on beta catalogue
-options("bcdata.catalogue_api_url" = "https://cat.data.gov.bc.ca/api/3/")
+options("bcdata.catalogue_api_url" = "https://beta-catalogue.data.gov.bc.ca/api/3/")
 options("bcdata.catalogue_gui_url" = "https://beta-catalogue.data.gov.bc.ca/")
 
 point_record <- '76b1b7a3-2112-4444-857a-afccf7b20da8'
