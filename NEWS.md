@@ -1,4 +1,6 @@
-# bcdata (development version)
+# bcdata 0.3.0
+
+* The BC Data Catalogue and its [API has been updated](https://www2.gov.bc.ca/gov/content?id=8A553CABCCDD434D8614D1CA92B03400), requiring mostly internal changes (#283). These should be mostly invisible to the user, except for the removal of the `type` search facet in `bcdc_search()` and `bcdc_search_facets()`. If you use an API key (authorized catalogue editors only), you will need to login to the new catalogue and get your updated key and set your `BCDC_KEY` environment variable to the new key.
 
 ### IMPROVEMENTS
 * Add `names` method for `bcdc.promise` objects. You can now call `names` on an object produced by `bcdc_query_geodata`. This is handy when trying to figure out exact column spelling etc. 
