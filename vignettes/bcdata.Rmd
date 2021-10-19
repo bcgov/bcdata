@@ -133,12 +133,12 @@ bcdc_search_facets(facet = "license_id")
 #> 4  license_id    12 Open Government Licence – Municipality of North Cowichan   44
 #> 5  license_id     4                 Open Government Licence - Destination BC   43
 #> 6  license_id    59                         Open Government Licence - Canada   24
-#> 7  license_id  1566               Open Government Licence - British Columbia    2
+#> 7  license_id  1567               Open Government Licence - British Columbia    2
 #> 8  license_id     2                  Open Government Licence - BC Assessment   47
-#> 9  license_id     2                   Open Data Licence for ICBC Information   49
+#> 9  license_id     4                   Open Data Licence for ICBC Information   49
 #> 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45
 #> 11 license_id    15                           Elections BC Open Data Licence   42
-#> 12 license_id  1361                                              Access Only   22
+#> 12 license_id  1390                                              Access Only   22
 ```
 
 Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:
@@ -173,7 +173,7 @@ Once you have located the B.C. Data Catalogue record with the data you want, you
 ```r
 ## Get the data resource for the `bc-highway-cams` catalogue record
 bcdc_get_data("bc-highway-cams")
-#> # A tibble: 894 x 17
+#> # A tibble: 917 × 19
 #>    links_bchighwaycam  links_imageDisplay links_imageThumbn… links_replayTheDay    id highway_number
 #>    <chr>               <chr>              <chr>              <chr>              <dbl> <chr>         
 #>  1 http://images.driv… http://images.dri… http://images.dri… http://images.dri…     2 5             
@@ -186,14 +186,14 @@ bcdc_get_data("bc-highway-cams")
 #>  8 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    11 1             
 #>  9 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    12 1             
 #> 10 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    13 99            
-#> # … with 884 more rows, and 11 more variables: highway_locationDescription <chr>, camName <chr>,
+#> # … with 907 more rows, and 13 more variables: highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
-#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>,
+#> #   updatePeriodMean <dbl>, updatePeriodStdDev <dbl>, fetchMean <dbl>
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-#> # A tibble: 894 x 17
+#> # A tibble: 917 × 19
 #>    links_bchighwaycam  links_imageDisplay links_imageThumbn… links_replayTheDay    id highway_number
 #>    <chr>               <chr>              <chr>              <chr>              <dbl> <chr>         
 #>  1 http://images.driv… http://images.dri… http://images.dri… http://images.dri…     2 5             
@@ -206,15 +206,15 @@ bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 #>  8 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    11 1             
 #>  9 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    12 1             
 #> 10 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    13 99            
-#> # … with 884 more rows, and 11 more variables: highway_locationDescription <chr>, camName <chr>,
+#> # … with 907 more rows, and 13 more variables: highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
-#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>,
+#> #   updatePeriodMean <dbl>, updatePeriodStdDev <dbl>, fetchMean <dbl>
 
 ## OR use the result from bcdc_get_record()
 my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 bcdc_get_data(my_record)
-#> # A tibble: 894 x 17
+#> # A tibble: 917 × 19
 #>    links_bchighwaycam  links_imageDisplay links_imageThumbn… links_replayTheDay    id highway_number
 #>    <chr>               <chr>              <chr>              <chr>              <dbl> <chr>         
 #>  1 http://images.driv… http://images.dri… http://images.dri… http://images.dri…     2 5             
@@ -227,10 +227,10 @@ bcdc_get_data(my_record)
 #>  8 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    11 1             
 #>  9 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    12 1             
 #> 10 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    13 99            
-#> # … with 884 more rows, and 11 more variables: highway_locationDescription <chr>, camName <chr>,
+#> # … with 907 more rows, and 13 more variables: highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>,
-#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>
+#> #   imageStats_updatePeriodMean <chr>, imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>,
+#> #   updatePeriodMean <dbl>, updatePeriodStdDev <dbl>, fetchMean <dbl>
 ```
 
 A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:
@@ -274,7 +274,7 @@ We see there are two data files or resources available in this record, so we nee
 ## Get the txt data resource from the `bc-schools-programs-offered-in-schools`
 ## catalogue record
 bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
-#> # A tibble: 16,152 x 24
+#> # A tibble: 16,152 × 24
 #>    `Data Level` `School Year` `Facility Type` `Public Or Independ… `District Numbe… `District Name` 
 #>    <chr>        <chr>         <chr>           <chr>                <chr>            <chr>           
 #>  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School     005              Southeast Koote…
@@ -303,11 +303,11 @@ Alternatively, you can retrieve the full details of the available resources for 
 ## Get a data frame of data resources for the `bc-schools-programs-offered-in-schools`
 ## catalogue record
 bcdc_tidy_resources("b1f27d1c-244a-410e-a361-931fac62a524")
-#> # A tibble: 2 x 8
-#>   name       url                  id          format ext   package_id      location bcdata_available
-#>   <chr>      <chr>                <chr>       <chr>  <chr> <chr>           <chr>    <lgl>           
-#> 1 ProgramsO… http://www.bced.gov… a393f8cf-5… txt    txt   b1f27d1c-244a-… external TRUE            
-#> 2 ProgramsO… http://www.bced.gov… 1e34098e-7… xlsx   xlsx  b1f27d1c-244a-… external TRUE
+#> # A tibble: 2 × 9
+#>   name     url           id        format ext   package_id   location wfs_available bcdata_available
+#>   <chr>    <chr>         <chr>     <chr>  <chr> <chr>        <chr>    <lgl>         <lgl>           
+#> 1 Program… http://www.b… a393f8cf… txt    txt   b1f27d1c-24… external FALSE         TRUE            
+#> 2 Program… http://www.b… 1e34098e… xlsx   xlsx  b1f27d1c-24… external FALSE         TRUE
 ```
 
 `bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically reads and returns it as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
@@ -378,34 +378,21 @@ bc_regional_districts_metadata <- bcdc_get_record("d1aff64e-dbfe-45a6-af97-582b7
 
 ## Have a quick look at the geospatial columns to help with filter or select
 bcdc_describe_feature(bc_regional_districts_metadata)
-#> # A tibble: 21 x 5
-#>    col_name       sticky remote_col_type local_col_type column_comments                             
-#>    <chr>          <lgl>  <chr>           <chr>          <chr>                                       
-#>  1 id             FALSE  xsd:string      character       <NA>                                       
-#>  2 LGL_ADMIN_ARE… FALSE  xsd:decimal     numeric        "An operationally-generated unique identifi…
-#>  3 ADMIN_AREA_NA… TRUE   xsd:string      character      "The authoritative, officially approved nam…
-#>  4 ADMIN_AREA_AB… TRUE   xsd:string      character      "A short form or commonly-known acronym for…
-#>  5 ADMIN_AREA_BO… TRUE   xsd:string      character      "BOUNDARY TYPE is a high-level grouping of …
-#>  6 ADMIN_AREA_GR… TRUE   xsd:string      character      "The name given to the larger administrativ…
-#>  7 CHANGE_REQUES… TRUE   xsd:string      character      "The government acronym of the Ministry or …
-#>  8 UPDATE_TYPE    TRUE   xsd:string      character      "A short description of the latest alterati…
-#>  9 WHEN_UPDATED   TRUE   xsd:date        date           "The date and time the record was last modi…
-#> 10 MAP_STATUS     TRUE   xsd:string      character      "That the digital map has been appended to …
-#> # … with 11 more rows
+#> Error: Argument 'txt' must be a JSON string, URL or file.
 
 ## Get the Capital Regional District polygon from the B.C. Regional
 ## Districts geospatial data
 my_regional_district <- bcdc_query_geodata(bc_regional_districts_metadata) %>%
   filter(ADMIN_AREA_NAME == "Capital Regional District") %>%
   collect()
+#> Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero
 
 ## Plot the Capital Regional District polygon with ggplot()
 my_regional_district  %>%
   ggplot() +
   geom_sf() +
   theme_minimal()
+#> Error in ggplot(.): object 'my_regional_district' not found
 ```
-
-<img src="vignette-fig-regional_districts-1.png" title="plot of chunk regional_districts" alt="plot of chunk regional_districts" width="100%" />
 
 The vignette [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Feature Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.
