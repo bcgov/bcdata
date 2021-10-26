@@ -21,8 +21,8 @@ See the License for the specific language governing permissions and limitations 
 [![R build
 status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata)
 [![Codecov test
-coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://codecov.io/gh/bcgov/bcdata?branch=master)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
+coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bcgov/bcdata?branch=master)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
 [![cran
