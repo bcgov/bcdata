@@ -1,3 +1,14 @@
+---
+title: "bcdata Service Documentation"
+date: "2021-10-27"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bcdata Service Documentation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
 # DataBC Services used by `bcdata`
 
 This document is an attempt at a comprehensive list of services and API endpoints accessed by the bcdata R package, as well which return values we rely on from those endpoints.
