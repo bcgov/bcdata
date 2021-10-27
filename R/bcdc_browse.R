@@ -43,31 +43,33 @@
 #' try(
 #'   bcdc_browse("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' )
-#'
-#' ## Take me to the catalogue search results for 'fish'
-#' try(
-#'  bcdc_browse("fish")
-#' )
-#'
 #' }
 bcdc_browse <- function(query = NULL, browser = getOption("browser"),
                         encodeIfNeeded = FALSE) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
+  base_url <- catalogue_base_url()
 
-  if(is.null(query))  url <- "https://catalogue.data.gov.bc.ca"
+  if (is.null(query))  {
+    url <- base_url
+  } else {
 
-  if(!is.null(query)){
-
-    ## Check if the record is valid, if not return a query
-    url <- paste0("https://catalogue.data.gov.bc.ca/dataset/", query)
-    cli <- crul::HttpClient$new(url = url,
-                                headers = list(`User-Agent` = bcdata_user_agent()))
-    res <- cli$get()
+    ## Check if the record is valid, if not return a query.
+    # Need to check via HEAD request to the api as the catalogue
+    # doesn't return a 404 status code.
+    cli <- bcdc_catalogue_client("action/package_show")
+    res <- cli$head(query = list(id = query))
 
     if(res$status_code == 404){
-      url <- paste0("https://catalogue.data.gov.bc.ca/dataset?q=", query)
+      stop("The specified record does not exist in the catalogue")
+      ## NB - previous version would show a catalogue search in the
+      ## browser, but with new catalogue it doesn't seem possible
+      ## to set a browser-based catalogue search via url query parameters
+      # url <- paste0(make_url(base_url, "dataset"),
+      #               "?q=", query)
     }
+
+    url <- make_url(catalogue_base_url(), "dataset", query)
   }
 
   ## Facilitates testing

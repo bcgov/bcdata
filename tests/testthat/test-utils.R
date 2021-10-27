@@ -71,3 +71,10 @@ test_that("bcdc_get_capabilities works", {
   expect_is(bcdc_get_capabilities(), "xml_document")
   expect_equal(bcdc_get_capabilities(), ._bcdataenv_$get_capabilities_xml)
 })
+
+test_that("make_url works", {
+  expect_equal(make_url("https://foo.bar", "blah", "/buzz/", "/home.html"),
+               "https://foo.bar/blah/buzz/home.html")
+  expect_equal(make_url("https://foo.bar/", "blah/", "/buzz/", trailing_slash = TRUE),
+               "https://foo.bar/blah/buzz/")
+})

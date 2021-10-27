@@ -14,7 +14,7 @@
 #'
 #' @param facet the facet(s) for which to retrieve valid values. Can be one or
 #' more of:
-#'  `"license_id", "download_audience", "type", "res_format", "sector", "organization", "groups"`
+#'  `"license_id", "download_audience", "res_format", "sector", "organization", "groups"`
 #'
 #' @return A data frame of values for the selected facet
 #' @export
@@ -22,11 +22,11 @@
 #' @examples
 #' \donttest{
 #' try(
-#'   bcdc_search_facets("type")
+#'   bcdc_search_facets("res_format")
 #' )
 #' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
-                                  "type", "res_format", "sector",
+                                  "res_format", "sector",
                                   "organization", "groups")) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
@@ -130,7 +130,6 @@ bcdc_list <- function() {
 #' @param license_id the type of license (see `bcdc_search_facets("license_id")`).
 #' @param download_audience download audience
 #'        (see `bcdc_search_facets("download_audience")`). Default `"Public"`
-#' @param type type of resource (see `bcdc_search_facets("type")`)
 #' @param res_format format of resource (see `bcdc_search_facets("res_format")`)
 #' @param sector sector of government from which the data comes
 #'        (see `bcdc_search_facets("sector")`)
@@ -148,12 +147,11 @@ bcdc_list <- function() {
 #' )
 #'
 #' try(
-#'   bcdc_search("regional district", type = "Geographic", res_format = "fgdb")
+#'   bcdc_search("regional district", res_format = "fgdb")
 #' )
 #' }
 bcdc_search <- function(..., license_id = NULL,
                         download_audience = "Public",
-                        type = NULL,
                         res_format=NULL,
                         sector = NULL,
                         organization = NULL,
@@ -165,7 +163,6 @@ bcdc_search <- function(..., license_id = NULL,
   terms <- paste0(compact(list(...)), collapse = "+")
   facets <- compact(list(license_id = license_id,
                 download_audience = download_audience,
-                type = type,
                 res_format = res_format,
                 sector = sector,
                 organization = organization
@@ -275,10 +272,8 @@ bcdc_get_record <- function(id) {
 }
 
 format_record <- function(pkg) {
-  pkg$details <- dplyr::bind_rows(pkg$details)
   # Create a resources data frame
   res_df <- resource_to_tibble(pkg$resources)
-  res_df$bcdata_available <- other_format_available(res_df) | wfs_available(res_df)
   pkg$resource_df <- res_df
   pkg
 }

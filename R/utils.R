@@ -11,21 +11,30 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 catalogue_base_url <- function() {
-  getOption("bcdata.catalogue_endpoint",
-            default = "https://catalogue.data.gov.bc.ca/api/3/")
+  getOption("bcdata.catalogue_gui_url",
+            default = "https://catalogue.data.gov.bc.ca/")
+}
+
+catalogue_base_api_url <- function() {
+  getOption("bcdata.catalogue_api_url",
+            default = "https://catalogue.data.gov.bc.ca/api/3")
 }
 
 wfs_base_url <- function(host = bcdc_web_service_host()) {
-  paste(host, "geo/pub/wfs/", sep = "/")
+  make_url(host, "geo/pub/wfs")
 }
 
 wms_base_url <- function(host = bcdc_web_service_host()) {
-  paste(host, "geo/pub/wms/", sep = "/")
+  make_url(host, "geo/pub/wms")
 }
 
-bcdc_web_service_host <- function() {
-  getOption("bcdata.web_service_host",
+bcdc_web_service_host <- function(https = TRUE) {
+  host <- getOption("bcdata.web_service_host",
             default = "https://openmaps.gov.bc.ca")
+  if (!https) {
+    return(gsub("^https", "http", host))
+  }
+  host
 }
 
 bcdata_user_agent <- function(){
@@ -33,6 +42,23 @@ bcdata_user_agent <- function(){
 }
 
 compact <- function(l) Filter(Negate(is.null), l)
+
+#' Combine url components without having to worry
+#' about slashes
+#'
+#' @param ... url components
+#' @param trailing_slash should the url end in /
+#'
+#' @return complete url
+make_url <- function(..., trailing_slash = FALSE) {
+  components <- unlist(list(...))
+  components <- gsub("^/|/$", "", components)
+  url <- paste(components, collapse = "/")
+  if (trailing_slash) {
+    url <- paste0(url, "/")
+  }
+  url
+}
 
 bcdc_number_wfs_records <- function(query_list, client){
 
@@ -94,12 +120,12 @@ formats_supported <- function(){
 }
 
 bcdc_catalogue_client <- function(endpoint = NULL) {
-  url <- paste0(catalogue_base_url(), endpoint)
+  url <- make_url(catalogue_base_api_url(), endpoint)
   bcdc_http_client(url, auth = TRUE)
 }
 
 bcdc_wfs_client <- function(endpoint = NULL) {
-  url <- paste0(wfs_base_url(), endpoint)
+  url <- make_url(wfs_base_url(), endpoint)
   bcdc_http_client(url, auth = FALSE)
 }
 
@@ -238,7 +264,7 @@ read_from_url <- function(resource, ...){
   if (!reported_format %in% formats_supported()) {
     stop("Reading ", reported_format, " files is not currently supported in bcdata.")
   }
-  auth <- grepl("(catalogue|pub)\\.data\\.gov\\.bc\\.ca", file_url)
+  auth <- grepl("(cat(alogue)?|pub)\\.data\\.gov\\.bc\\.ca", file_url)
   cli <- bcdc_http_client(file_url, auth = auth)
 
   ## Establish where to download file
@@ -274,7 +300,7 @@ read_from_url <- function(resource, ...){
 
 
 resource_to_tibble <- function(x){
-  dplyr::tibble(
+  res_df <- dplyr::tibble(
     name = safe_map_chr(x, "name"),
     url = safe_map_chr(x, "url"),
     id = safe_map_chr(x, "id"),
@@ -283,6 +309,10 @@ resource_to_tibble <- function(x){
     package_id = safe_map_chr(x, "package_id"),
     location = simplify_string(safe_map_chr(x, "resource_storage_location"))
   )
+
+  mutate(res_df,
+         wfs_available = wfs_available(res_df),
+         bcdata_available = wfs_available | other_format_available(res_df))
 }
 
 #' @importFrom rlang "%||%"

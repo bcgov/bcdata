@@ -1,0 +1,90 @@
+---
+title: "bcdata Service Documentation"
+date: "2021-10-27"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bcdata Service Documentation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+# DataBC Services used by `bcdata`
+
+This document is an attempt at a comprehensive list of services and API endpoints accessed by the bcdata R package, as well which return values we rely on from those endpoints.
+
+## BC Data Catalogue
+
+### API version: 
+  - PROD: https://catalogue.data.gov.bc.ca/api/3
+  - BETA: https://beta-catalogue.data.gov.bc.ca/api/3
+
+### Endpoints:
+  - `/action/package_show`
+  - `/action/package_search`
+    - `license_id`
+    - `download_audience`
+    - `res_format`
+    - `sector`
+    - `organization`
+  - `/action/package_list`
+  - `/action/group_show`
+
+### Response values used:
+  - package:
+    - `title`
+    - `name`
+    - `id`
+    - `license_title`
+    - `type`
+    - `notes`
+    - `layer_name`
+    - `resources` (see below)
+    
+  - resource:
+    - `id`
+    - `package_id`
+    - `object_name`
+        (This is not always the same as the `typeNames` parameter in `resource.url`, as that is sometimes a simplified view - eg., `WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SPG` vs 
+`WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP`)
+    - `details`
+      - `column_comments`
+      - `column_name`
+    - `bcdc_type` (not actually using yet but [may be useful](https://github.com/bcgov/bcdata/pull/283#issuecomment-924442166))
+    - `format`
+    - `resource_storage_location`
+    - `name`
+    - `url`
+    
+  - group: 
+    - `description`
+    - `packages`
+
+## Web Services
+
+### API Version:
+
+  - TEST: https://test.openmaps.gov.bc.ca
+  - DELIVERY: https://delivery.openmaps.gov.bc.ca
+  - PROD: https://openmaps.gov.bc.ca
+  
+  Endpoints:
+  
+  - wfs: `geo/pub/wfs`
+  - wms: `geo/pub/wms`
+
+  Query Parameters for `geo/pub/wfs`:
+  
+  - query is sent in the body of a `POST` request (with `encode = "form"`). If a dataset has > n records (default n = 1000), pagination is used to send sequential requests. Pagination is executed using `count`, `sortBY`, and `startIndex`.
+    - SERVICE = "WFS"
+    - VERSION = "2.0.0"
+    - REQUEST = "GetCapabilities"
+    - REQUEST = "GetFeature"
+      - outputFormat = "application/json"
+      - typeNames (extracted from `resource.url` and compared against `resource.object_name`)
+      - SRSNAME (default `EPSG:3005`)
+      - CQL_FILTER
+      - count
+      - propertyName
+      - sortBy
+      - startIndex

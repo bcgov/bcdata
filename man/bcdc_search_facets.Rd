@@ -5,14 +5,14 @@
 \title{Get the valid values for a facet (that you can use in \code{\link[=bcdc_search]{bcdc_search()}})}
 \usage{
 bcdc_search_facets(
-  facet = c("license_id", "download_audience", "type", "res_format", "sector",
-    "organization", "groups")
+  facet = c("license_id", "download_audience", "res_format", "sector", "organization",
+    "groups")
 )
 }
 \arguments{
 \item{facet}{the facet(s) for which to retrieve valid values. Can be one or
 more of:
-\verb{"license_id", "download_audience", "type", "res_format", "sector", "organization", "groups"}}
+\verb{"license_id", "download_audience", "res_format", "sector", "organization", "groups"}}
 }
 \value{
 A data frame of values for the selected facet
@@ -23,7 +23,7 @@ Get the valid values for a facet (that you can use in \code{\link[=bcdc_search]{
 \examples{
 \donttest{
 try(
-  bcdc_search_facets("type")
+  bcdc_search_facets("res_format")
 )
 }
 }

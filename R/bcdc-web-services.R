@@ -142,9 +142,20 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
     )
   }
 
+  wfs_resource <- get_wfs_resource_from_record(record)
+  # Need to get layer name from wms url rather than
+  # object_name field, sometimes they don't match
+  # (e.g., if a generalized view is available from wms)
   layer_name <- basename(dirname(
-    record$resource_df$url[record$resource_df$format == "wms"]
+    wfs_resource$url
   ))
+
+  if (layer_name != wfs_resource$object_name) {
+    warning("The name of the object available through the web service ",
+            "differs from the warehouse object name. You may be accessing ",
+            "a simplified view of the data - see the catalogue record for details.",
+            call. = FALSE)
+  }
 
   ## Parameters for the API call
   query_list <- make_query_list(layer_name = layer_name, crs = crs)
@@ -210,12 +221,14 @@ bcdc_preview.character <- function(record) {
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
 
-  make_wms(record$layer_name)
+  wfs_resource <- get_wfs_resource_from_record(record)
+
+  make_wms(basename(dirname(wfs_resource$url)))
 
 }
 
 make_wms <- function(x){
-  wms_url <- "http://openmaps.gov.bc.ca/geo/pub/wms"
+  wms_url <- wms_base_url()
   wms_options <- leaflet::WMSTileOptions(format = "image/png",
                                          transparent = TRUE,
                                          attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
@@ -226,7 +239,7 @@ make_wms <- function(x){
              layer=pub%3A{x}")
 
   leaflet::leaflet() %>%
-    leaflet::addProviderTiles(leaflet::providers$CartoDB.DarkMatter,
+    leaflet::addProviderTiles(leaflet::providers$CartoDB.Positron,
                               options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
     leaflet::addWMSTiles(wms_url,
                          layers=glue::glue("pub:{x}"),

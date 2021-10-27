@@ -13,5 +13,8 @@ test_that("recods with wms but inconsistent layer_name, object_name fields work"
   # layer_name = WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SPG
   # object_name = WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP
   # wms uses layer_name (generalized)
-  expect_is(bcdc_query_geodata("natural-resource-nr-district"), "bcdc_promise")
+  expect_warning(
+    expect_is(bcdc_query_geodata("natural-resource-nr-district"), "bcdc_promise"),
+    "The name of the object available through the web service"
+  )
 })

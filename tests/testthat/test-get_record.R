@@ -31,7 +31,7 @@ test_that("bcdc_search_facets works", {
   skip_on_cran()
   skip_if_net_down()
   ret_names <- c("facet", "count", "display_name", "name")
-  lapply(c("license_id", "download_audience", "type", "res_format",
+  lapply(c("license_id", "download_audience", "res_format",
            "sector", "organization"),
          function(x) expect_named(bcdc_search_facets(x))
   )
@@ -67,8 +67,7 @@ test_that("bcdc_search works", {
   skip_on_cran()
   skip_if_net_down()
   expect_is(bcdc_search("forest"), "bcdc_recordlist")
-  expect_is(bcdc_search("regional district",
-                        type = "Geographic", res_format = "fgdb"),
+  expect_is(bcdc_search("regional district", res_format = "fgdb"),
             "bcdc_recordlist")
   expect_error(bcdc_search(organization = "foo"),
                "foo is not a valid value for organization")
@@ -97,7 +96,7 @@ test_that("a data frame with 8 columns of expected types is returned by bcdc_tid
   sr <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
   d <- bcdc_tidy_resources(sr)
   expect_s3_class(d, "data.frame")
-  expect_true(ncol(d) == 8)
+  expect_true(ncol(d) == 9)
   expect_type(d$name, "character")
   expect_type(d$url, "character")
   expect_type(d$id, "character")
@@ -105,6 +104,7 @@ test_that("a data frame with 8 columns of expected types is returned by bcdc_tid
   expect_type(d$ext, "character")
   expect_type(d$package_id, "character")
   expect_type(d$location, "character")
+  expect_type(d$wfs_available, "logical")
   expect_type(d$bcdata_available, "logical")
   expect_equal(d, bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8'))
   expect_error(bcdc_tidy_resources(list()), "No bcdc_tidy_resources method for an object of class")
@@ -120,10 +120,28 @@ test_that("bcdc_get_record works with/without authentication", {
   skip_if_not(nzchar(key_val))
   on.exit(Sys.setenv(BCDC_KEY = key_val))
 
-  expect_message(res <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8'),
+  # record NOT requiring auth
+  expect_message(res <- bcdc_get_record(point_record),
+                 "Authorizing with your stored API key")
+  expect_is(res, "bcdc_record")
+
+  # record requiring auth
+  auth_record_id <- Sys.getenv("BCDC_TEST_RECORD")
+  skip_if_not(nzchar(key_val))
+
+  expect_message(res <- bcdc_get_record(auth_record_id),
                  "Authorizing with your stored API key")
   expect_is(res, "bcdc_record")
 
   Sys.unsetenv("BCDC_KEY")
-  expect_silent(bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8'))
+
+  # record NOT requiring auth
+  expect_silent(bcdc_get_record(point_record))
+
+  # record requiring auth (with no key set)
+  expect_error(bcdc_get_record(auth_record_id))
+
+  # record requiring auth (with bad key set)
+  Sys.setenv(BCDC_KEY = "not-a-valid-key")
+  expect_error(bcdc_get_record(auth_record_id))
 })
