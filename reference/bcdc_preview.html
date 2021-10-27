@@ -82,7 +82,7 @@ Leaflet map window" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -112,6 +112,9 @@ Leaflet map window" />
     </li>
     <li>
       <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
+    <li>
+      <a href="../articles/service_documentation.html">bcdata Service Documentation</a>
     </li>
   </ul>
 </li>
@@ -179,7 +182,9 @@ in your .Rprofile file so the option persists across sessions.</p></td>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"points-of-well-diversion-applications"</span><span class='op'>)</span>
 <span class='op'>)</span>
-
+</div><div class='output co'>#&gt; Error in vapply(record$resources, function(x) { : 
+#&gt;   values must be length 1,
+#&gt;  but FUN(X[[1]]) result is length 0</div><div class='input'>
 <span class='co'># Using BCGW name</span>
 <span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
   <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"</span><span class='op'>)</span>
