@@ -87,7 +87,6 @@ print.bcdc_record <- function(x, ...) {
   cat_line_wrap(cli::col_blue(cli::style_italic("Name: ")), x$name, " (ID: ", x$id, ")")
   cat_line_wrap(cli::col_blue(cli::style_italic("Permalink: ")), paste0(catalogue_base_url(), "dataset/", x$id))
   cat_line_wrap(cli::col_blue(cli::style_italic("Licence: ")), x$license_title)
-  cat_line_wrap(cli::col_blue(cli::style_italic("Type: ")), x$type)
   cat_line_wrap(cli::col_blue(cli::style_italic("Description: ")), x$notes)
 
 
