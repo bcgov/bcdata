@@ -90,15 +90,15 @@ Let's search the catalogue for records that contain the word "recycling":
 bcdc_search("recycling")
 ```
 
-You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search _facets_ `license_id`, `download_audience`, `type`, `res_format`, `sector`, and `organization`:
+You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search _facets_ `license_id`, `download_audience`, `res_format`, `sector`, and `organization`:
 
 ```{r}
 ## Give me the first catalogue search result for 'recycling'
 bcdc_search("recycling", n = 1)
 
 ## Give me the catalogue search results for 'recycling' where the
-## data is tabular and licenced under Open Government Licence – British Columbia
-bcdc_search("recycling", type = "Dataset", license_id = "2")
+## data is licenced under Open Government Licence – British Columbia
+bcdc_search("recycling", license_id = "2")
 ```
 
 You can see all valid values for the catalogue search facets using `bcdata::bcdc_search_facets()`:

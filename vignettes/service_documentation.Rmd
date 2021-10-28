@@ -16,8 +16,8 @@ This document is an attempt at a comprehensive list of services and API endpoint
 ## BC Data Catalogue
 
 ### API version: 
-  - PROD: https://catalogue.data.gov.bc.ca/api/3
-  - BETA: https://beta-catalogue.data.gov.bc.ca/api/3
+  - PROD: `https://catalogue.data.gov.bc.ca/api/3`
+  - BETA: `https://beta-catalogue.data.gov.bc.ca/api/3`
 
 ### Endpoints:
   - `/action/package_show`

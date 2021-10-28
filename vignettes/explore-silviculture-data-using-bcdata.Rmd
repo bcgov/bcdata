@@ -1,6 +1,6 @@
 ---
 title: "Exploring Silviculture Data with bcdata"
-date: "2021-10-19"
+date: "2021-10-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Exploring Silviculture Data with bcdata}
@@ -65,9 +65,7 @@ bcdc_get_record("results-forest-cover-silviculture")
 #> B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture
 #> Name: results-forest-cover-silviculture (ID: 258bb088-4113-47b1-b568-ce20bd64e3e3)
 #> Permalink: https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3
-#> Sector: Natural Resources
 #> Licence: Open Government Licence - British Columbia
-#> Type: Geographic
 #> Description: RESULTS opening's forest cover poylgons with silviculture component
 #>  provided.  Current forest cover subimssion into RESULTS must contain attribute and map
 #>  information.  However, there are historical forest cover polygon infomration where maps
@@ -89,7 +87,33 @@ We see that this is a [Web Feature Service-enabled](https://en.wikipedia.org/wik
 ```r
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
-#> Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero
+#> Querying 'results-forest-cover-silviculture' record
+#> • Using collect() on this object will return 898559 features and 159 fields
+#> • Accessing this record requires pagination and will make 899 separate requests to the WFS.
+#> • See ?bcdc_options
+#> • At most six rows of the record are printed here
+#> ───────────────────────────────────────────────────────────────────────────────────────────────────────
+#> Simple feature collection with 6 features and 159 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 1184167 ymin: 526455.5 xmax: 1801754 ymax: 1083545
+#> Projected CRS: NAD83 / BC Albers
+#> # A tibble: 6 × 160
+#>   id                 FOREST_COVER_ID STOCKING_STANDARD… OPENING_ID STANDARDS_UNIT_… SILV_POLYGON_NU…
+#>   <chr>                        <int>              <int>      <int> <chr>            <chr>           
+#> 1 WHSE_FOREST_VEGET…         4177991            2243439    1724262 1                C               
+#> 2 WHSE_FOREST_VEGET…         3994007                 NA    1248495 <NA>             91              
+#> 3 WHSE_FOREST_VEGET…         3994067                 NA    1120935 <NA>             86              
+#> 4 WHSE_FOREST_VEGET…         3994009            1404558    1248495 A                AA              
+#> 5 WHSE_FOREST_VEGET…         3994057            1211894    1120935 B                2B              
+#> 6 WHSE_FOREST_VEGET…         3994063                 NA    1120935 <NA>             82              
+#> # … with 154 more variables: SILV_POLYGON_AREA <dbl>, SILV_POLYGON_NET_AREA <dbl>,
+#> #   SILV_NON_MAPPED_AREA <int>, STOCKING_STATUS_CODE <chr>, STOCKING_TYPE_CODE <chr>,
+#> #   STOCKING_CLASS_CODE <chr>, SILV_RESERVE_CODE <chr>, SILV_RESERVE_OBJECTIVE_CODE <chr>,
+#> #   TREE_COVER_PATTERN_CODE <chr>, REENTRY_YEAR <chr>, REFERENCE_YEAR <int>, SITE_INDEX <int>,
+#> #   SITE_INDEX_SOURCE_CODE <chr>, BGC_ZONE_CODE <chr>, BGC_SUBZONE_CODE <chr>, BGC_VARIANT <chr>,
+#> #   BGC_PHASE <chr>, BEC_SITE_SERIES <chr>, BEC_SITE_TYPE <chr>, BEC_SERAL <chr>,
+#> #   IS_SILV_IMPLIED_IND <chr>, FOREST_COVER_SILV_TYPE <chr>, S_FOREST_COVER_LAYER_ID <int>, …
 ```
 
 This query shows that this data set has many features and over 150 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
@@ -109,7 +133,6 @@ First, we can use the `bcdata` package to download the spatial boundary for the 
 dpg <- bcdc_query_geodata("natural-resource-nr-district") %>%
   filter(ORG_UNIT=="DPG") %>% # filter for Prince George Natural Resource District
   collect() # and collect the data
-#> Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero
 ```
 
 Let's plot this spatial object and double check we have we what we need:
@@ -120,8 +143,9 @@ dpg %>%
   ggplot() +
   geom_sf() +
   theme_minimal()
-#> Error in ggplot(.): object 'dpg' not found
 ```
+
+<img src="vignette-fig-plot-dpg-1.png" title="plot of chunk plot-dpg" alt="plot of chunk plot-dpg" width="100%" />
 
 Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.
 
@@ -145,7 +169,6 @@ trees_dpg <-
       S_SPECIES_CODE_5 %in% spp_list
   ) %>%
   collect() #collect/download the data
-#> Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero
 ```
 
 
@@ -156,7 +179,7 @@ Let's look at the dimensions of this now much more manageable data object we hav
 
 ```r
 dim(trees_dpg)
-#> Error in eval(expr, envir, enclos): object 'trees_dpg' not found
+#> [1] 159 160
 ```
 
 We can see there are several treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:
@@ -168,8 +191,9 @@ trees_dpg %>%
   geom_sf() +
   geom_sf(data = dpg, fill = NA) + #add the DPG spatial boundary
   theme_minimal()
-#> Error in ggplot(.): object 'trees_dpg' not found
 ```
+
+<img src="vignette-fig-map-larch-plantations-dpg-1.png" title="plot of chunk map-larch-plantations-dpg" alt="plot of chunk map-larch-plantations-dpg" width="100%" />
 
 
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
@@ -194,8 +218,9 @@ trees_dpg %>%
                         " using the bcdata R package")) +
   theme_minimal() +
   theme(legend.position = "none")
-#> Error in mutate(., age = 2020 - REFERENCE_YEAR + S_SPECIES_AGE_1): object 'trees_dpg' not found
 ```
+
+<img src="vignette-fig-unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="100%" />
 
 #### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
 
@@ -210,12 +235,10 @@ library(sf) #load the sf package
 bgc_dpg <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") %>%
   filter(BBOX(dpg, crs = `EPSG:3005`)) %>% #note filtering with a BoundingBox
   collect()
-#> Error: 'coords' must be a length 4 numeric vector
 
 # Join the BEC data with our tress_dpg geospatial data set
 trees_bec_dpg <- trees_dpg %>%
   st_join(bgc_dpg[, "MAP_LABEL"]) #join BEC data for each polygon
-#> Error in st_join(., bgc_dpg[, "MAP_LABEL"]): object 'trees_dpg' not found
 ```
 
 Now, we can summarize the area planted with western larch by biogeoclimatic unit:
@@ -236,5 +259,6 @@ trees_bec_dpg %>%
                         " using the bcdata R package")) +
   theme_minimal() +
   theme(legend.position = "none")
-#> Error in group_by(., MAP_LABEL): object 'trees_bec_dpg' not found
 ```
+
+<img src="vignette-fig-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%" />
