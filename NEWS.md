@@ -1,3 +1,5 @@
+# bcdata (development version)
+
 # bcdata 0.3.0
 
 * The [BC Data Catalogue and its API have been updated](https://www2.gov.bc.ca/gov/content?id=8A553CABCCDD434D8614D1CA92B03400), requiring changes to the `bcdata` package, most of which are internal only (#283). These should be mostly invisible to the user, except for the removal of the `type` search facet in `bcdc_search()` and `bcdc_search_facets()`. If you use an API key (authorized catalogue editors only), you will need to login to the new catalogue and get your updated key and set the value your `BCDC_KEY` environment variable to the new key.
