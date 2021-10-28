@@ -136,7 +136,7 @@ print.bcdc_recordlist <- function(x, ...) {
   cat_line_wrap("Titles:")
   x <- purrr::set_names(x, NULL)
 
-  purrr::imap(x[1:n_print], ~ {
+  purrr::imap(unclass(x)[1:n_print], ~ {
 
     if (!nrow(bcdc_tidy_resources(x[[.y]]))) {
       cat_line_wrap(.y, ": ",purrr::pluck(.x, "title"))
@@ -531,4 +531,10 @@ finalize_cql <- function(x, con = wfs_con) {
 cat_line_wrap <- function(..., indent = 0, exdent = 1, col = NULL, background_col = NULL, file = stdout()) {
   txt <- strwrap(paste0(..., collapse = ""), indent = indent, exdent = exdent)
   cat_line(txt, col = col, background_col = background_col, file = file)
+}
+
+#' @export
+"[.bcdc_recordlist" <- function(x, i, j, ..., drop = FALSE) {
+  out <- unclass(x)[i]
+  as.bcdc_recordlist(out)
 }
