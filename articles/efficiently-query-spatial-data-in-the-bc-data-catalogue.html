@@ -100,7 +100,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Querying Spatial Data with bcdata</h1>
             
-            <h4 class="date">2021-10-19</h4>
+            <h4 class="date">2021-10-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="hidden name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -146,9 +146,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; B.C. Data Catalogue Record: School Districts of BC</span>
 <span class="co">#&gt; Name: school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b)</span>
 <span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b</span>
-<span class="co">#&gt; Sector: Education</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
-<span class="co">#&gt; Type: Geographic</span>
 <span class="co">#&gt; Description: The School Districts dataset contains the spatial representation (polygon)</span>
 <span class="co">#&gt;  of the current extent of the administrative areas defined under section 176(1) of the</span>
 <span class="co">#&gt;  School Act for the purposes of preservation and promotion of the fundamental principle</span>
@@ -163,29 +161,73 @@ See the License for the specific language governing permissions and limitations 
 <p>This data is the boundary of each school district. The key information in this metadata is that the layer has a resource in <code>"wms"</code> format —which means it is available through a Web Feature Service. From this we know we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+<span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
+<span class="co">#&gt; • Using collect() on this object will return 59 features and 9 fields</span>
+<span class="co">#&gt; • At most six rows of the record are printed here</span>
+<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Simple feature collection with 6 features and 9 fields</span>
+<span class="co">#&gt; Geometry type: POLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 956376 ymin: 475108.4 xmax: 1635228 ymax: 901924.4</span>
+<span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
+<span class="co">#&gt; # A tibble: 6 × 10</span>
+<span class="co">#&gt;   id                 ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;                        &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 WHSE_TANTALIS.TA_…            300 Arrow Lakes                     10 FH10000300        7392472526.</span>
+<span class="co">#&gt; 2 WHSE_TANTALIS.TA_…            301 Revelstoke                      19 FH10000300        9416076465.</span>
+<span class="co">#&gt; 3 WHSE_TANTALIS.TA_…            302 Kootenay-Columb…                20 FH10000300        3072672101.</span>
+<span class="co">#&gt; 4 WHSE_TANTALIS.TA_…            303 Vernon                          22 FH10000300        5588468673.</span>
+<span class="co">#&gt; 5 WHSE_TANTALIS.TA_…            304 Central Okanagan                23 FH10000300        2916757936.</span>
+<span class="co">#&gt; 6 WHSE_TANTALIS.TA_…            305 Cariboo-Chilcot…                27 FH10000300       61213520885.</span>
+<span class="co">#&gt; # … with 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span>
+<span class="co">#&gt; #   geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
 <p>This is the initial query to the data in the catalogue. What has been returned is <em>not</em> the actual data but rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also receive instruction that using <code><a href="../reference/as_tibble.html">collect()</a></code> will retrieve a given number of features and fields present for this query. Lastly, there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the catalogue for only those polygons just like we would in a typical <code>dplyr</code> workflow:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+<span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
+<span class="co">#&gt; • Using collect() on this object will return 1 features and 9 fields</span>
+<span class="co">#&gt; • At most six rows of the record are printed here</span>
+<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Simple feature collection with 1 feature and 9 fields</span>
+<span class="co">#&gt; Geometry type: POLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202</span>
+<span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
+<span class="co">#&gt; # A tibble: 1 × 10</span>
+<span class="co">#&gt;   id                 ADMIN_AREA_SID SCHOOL_DISTRICT… SCHOOL_DISTRICT_… FEATURE_CODE FEATURE_AREA_SQM</span>
+<span class="co">#&gt;   &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;                        &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 WHSE_TANTALIS.TA_…            328 Prince George                   57 FH10000300       51888780641.</span>
+<span class="co">#&gt; # … with 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span>
+<span class="co">#&gt; #   geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
 <p>To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. During an actual analysis, it is possible that you may need to initially collect more data than you want to determine value to subset by. For example, there is currently no way to ask the catalogue for all possible unique values of <code>SCHOOL_DISTRICT_NAME</code>. Is that case the data will need to be brought into R and unique values will need to be determined there.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/select.bcdc_promise.html">select</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+<span class="co">#&gt; Querying 'school-districts-of-bc' record</span>
+<span class="co">#&gt; • Using collect() on this object will return 1 features and 5 fields</span>
+<span class="co">#&gt; • At most six rows of the record are printed here</span>
+<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Simple feature collection with 1 feature and 5 fields</span>
+<span class="co">#&gt; Geometry type: POLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202</span>
+<span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
+<span class="co">#&gt; # A tibble: 1 × 6</span>
+<span class="co">#&gt;   id        ADMIN_AREA_SID SCHOOL_DISTRICT_… SCHOOL_DISTRICT… OBJECTID                      geometry</span>
+<span class="co">#&gt;   &lt;chr&gt;              &lt;int&gt; &lt;chr&gt;                        &lt;int&gt;    &lt;int&gt;                 &lt;POLYGON [m]&gt;</span>
+<span class="co">#&gt; 1 WHSE_TAN…            328 Prince George                   57      562 ((1137478 1221549, 1137399 1…</span></code></pre></div>
 <p>Note that in the <code>select</code> statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn’t select. This is because within each data set in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don’t want those columns after you <code>collect</code> the data, which we will take care of right now, you can drop them:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"78ec5279-4534-49a1-97e8-9d315936f08b"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Greater Victoria"</span>, <span class="st">"Prince George"</span>,<span class="st">"Kamloops/Thompson"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/select.bcdc_promise.html">select</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+  <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Again note here that we have assigned the object a name and added the <code>collect</code> statement. This step happens when you have selected the data you want and wish to begin working with it in R like a normal <code>sf</code> object. For example, we can now plot these three school districts:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error in st_geometry(districts): object 'districts' not found</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="vignette-fig-districts-1.png" title="plot of chunk districts" alt="plot of chunk districts" width="100%"></p>
 <p>Now that we have the spatial boundaries narrowed by specific school districts we can perform some spatial operations to determine parks in the school districts.</p>
 </div>
 <div id="greenspaces-data" class="section level2">
@@ -197,9 +239,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; B.C. Data Catalogue Record: Local and Regional Greenspaces</span>
 <span class="co">#&gt; Name: local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da)</span>
 <span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da</span>
-<span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
-<span class="co">#&gt; Type: Geographic</span>
 <span class="co">#&gt; Description: This dataset contains spatial and attribute information for local and</span>
 <span class="co">#&gt;  regional greenspaces in British Columbia. Local and regional greenspaces are municipal</span>
 <span class="co">#&gt;  or regional district lands designated by local government agencies and managed for</span>
@@ -218,76 +258,167 @@ See the License for the specific language governing permissions and limitations 
 <p>Again we recognize this is <a href="https://en.wikipedia.org/wiki/Web_Feature_Service">WFS-enabled</a> geospatial data, which means we can make use of <code>bcdc_query_geodata</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+<span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span>
+<span class="co">#&gt; • Using collect() on this object will return 8708 features and 19 fields</span>
+<span class="co">#&gt; • At most six rows of the record are printed here</span>
+<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
+<span class="co">#&gt; Geometry type: POLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 1228153 ymin: 453419.9 xmax: 1240644 ymax: 467184.1</span>
+<span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
+<span class="co">#&gt; # A tibble: 6 × 20</span>
+<span class="co">#&gt;   id          LOCAL_REG_GREENS… PARK_NAME   PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY</span>
+<span class="co">#&gt;   &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
+<span class="co">#&gt; 1 WHSE_BASEM…                59 Hazelnut M… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 2 WHSE_BASEM…                60 Hazelwood … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 3 WHSE_BASEM…                61 Hemlock Pa… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 4 WHSE_BASEM…                62 Heritage W… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 5 WHSE_BASEM…                63 Heron Park  Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 6 WHSE_BASEM…                64 Hillcrest … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; # … with 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span>
+<span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
+<span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span>
+<span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
 <p>Since we are interested in only “Park” data we can subset our query:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">PARK_PRIMARY_USE</span> <span class="op">==</span> <span class="st">"Park"</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+<span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span>
+<span class="co">#&gt; • Using collect() on this object will return 4373 features and 19 fields</span>
+<span class="co">#&gt; • At most six rows of the record are printed here</span>
+<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span>
+<span class="co">#&gt; Geometry type: POLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 1228153 ymin: 453419.9 xmax: 1240644 ymax: 467184.1</span>
+<span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
+<span class="co">#&gt; # A tibble: 6 × 20</span>
+<span class="co">#&gt;   id          LOCAL_REG_GREENS… PARK_NAME   PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRI… MUNICIPALITY</span>
+<span class="co">#&gt;   &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;       </span>
+<span class="co">#&gt; 1 WHSE_BASEM…                59 Hazelnut M… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 2 WHSE_BASEM…                60 Hazelwood … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 3 WHSE_BASEM…                61 Hemlock Pa… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 4 WHSE_BASEM…                62 Heritage W… Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 5 WHSE_BASEM…                63 Heron Park  Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; 6 WHSE_BASEM…                64 Hillcrest … Local     Park             Metro Vancouver  Surrey      </span>
+<span class="co">#&gt; # … with 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span>
+<span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span>
+<span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span>
+<span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></code></pre></div>
 <p>Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the <code>districts</code> object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the <code>INTERSECTS</code> function is appropriate and since this is a last tuning step, we can call <code>collect</code> and assign a name to this object. These requests can sometimes take quite a long:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts_parks</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">PARK_PRIMARY_USE</span> <span class="op">==</span> <span class="st">"Park"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+<span class="co">#&gt; The object is too large to perform exact spatial operations using bcdata.</span>
+<span class="co">#&gt; Object size: 948576 bytes</span>
+<span class="co">#&gt; BC Data Threshold: 500000 bytes</span>
+<span class="co">#&gt; Exceedance: 448576 bytes</span>
+<span class="co">#&gt; See ?bcdc_check_geom_size for more details</span>
+<span class="co">#&gt; A bounding box was drawn around the object passed to INTERSECTS and all features within the box will be returned.</span></code></pre></div>
 <p>Plotting both the filtered parks data and the district polygons reveals an important consideration when using <code>bcdata</code>:</p>
-<pre><code>#&gt; Error in st_geometry(districts): object 'districts' not found
-#&gt; Error in st_geometry(districts_parks): object 'districts_parks' not found</code></pre>
+<p><img src="vignette-fig-district_parks-1.png" title="plot of chunk district_parks" alt="plot of chunk district_parks" width="100%"></p>
 <p>In this example, many parks not contained within the school districts are included in the <code>districts_parks</code> object. This is because rather than a full intersection, <code>bcdata</code> draws a bounding box around all the polygons that are doing the intersection (in this case <code>district</code>) and does the intersection based on that bounding box. This behaviour is imposed by the Web Feature Server but controlled via the <code>bcdata.max_geom_pred_size</code> option (See <code><a href="../reference/bcdc_options.html">?bcdc_options</a></code> for default values). Using this example, you can check to see if the size of the <code>districts</code> object exceeded the current value of <code>bcdata.max_geom_pred_size</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_check_geom_size.html">bcdc_check_geom_size</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span>
-<span class="co">#&gt; Error in bcdc_check_geom_size(districts): object 'districts' not found</span></code></pre></div>
+<span class="co">#&gt; The object is too large to perform exact spatial operations using bcdata.</span>
+<span class="co">#&gt; Object size: 948576 bytes</span>
+<span class="co">#&gt; BC Data Threshold: 500000 bytes</span>
+<span class="co">#&gt; Exceedance: 448576 bytes</span>
+<span class="co">#&gt; See ?bcdc_check_geom_size for more details</span></code></pre></div>
 <p>Drawing the bounding box illustrates this point:</p>
-<pre><code>#&gt; Error in st_bbox(districts): object 'districts' not found
-#&gt; Error in st_geometry(districts): object 'districts' not found
-#&gt; Error in st_geometry(districts_parks): object 'districts_parks' not found
-#&gt; Error in plot(bounding_box, add = TRUE, border = "purple"): object 'bounding_box' not found</code></pre>
+<p><img src="vignette-fig-bbox-1.png" title="plot of chunk bbox" alt="plot of chunk bbox" width="100%"></p>
 <p>We are left with two options to get around this problem. First, we can simply do some additional processing with the <code>sf</code> package. Specifically we can use a spatial join to assign parks into their respective district:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts_parks_join</span> <span class="op">&lt;-</span> <span class="va">districts_parks</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></span><span class="op">(</span><span class="va">districts</span>, left <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; Error in st_join(., districts, left = FALSE): object 'districts_parks' not found</span></code></pre></div>
-<pre><code>#&gt; Error in st_geometry(districts): object 'districts' not found
-#&gt; Error in st_geometry(districts_parks_join): object 'districts_parks_join' not found</code></pre>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></span><span class="op">(</span><span class="va">districts</span>, left <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p><img src="vignette-fig-dp_join-1.png" title="plot of chunk dp_join" alt="plot of chunk dp_join" width="100%"></p>
 <p>A second approach is to set an internal option (<code>bcdata.max_geom_pred_size</code>) and increase the threshold of when a bounding box is drawn. Options are set in R like this:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">options</span>(<span class="st">"bcdata.max_geom_pred_size"</span> =<span class="st"> </span>{object size <span class="cf">in</span> bytes})</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">options</span>(<span class="st">"bcdata.max_geom_pred_size"</span> =<span class="st"> </span>{object size <span class="cf">in</span> bytes})</span></code></pre></div>
 <p>The value of <code>bcdata.max_geom_pred_size</code> is set conservatively so that requests to the Web Feature Service are more consistently successful. Increasing this value may result in invalid requests.</p>
 <p>Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">districts_parks_join</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/mutate.bcdc_promise.html">mutate</a></span><span class="op">(</span>area <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_set_geometry</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SCHOOL_DISTRICT_NAME</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>total_area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">area</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">total_area</span><span class="op">)</span>
-<span class="co">#&gt; Error in mutate(., area = st_area(geometry)): object 'districts_parks_join' not found</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 1 × 2</span>
+<span class="co">#&gt;   SCHOOL_DISTRICT_NAME total_area</span>
+<span class="co">#&gt;   &lt;chr&gt;                     [m^2]</span>
+<span class="co">#&gt; 1 Prince George         12254346.</span></code></pre></div>
 </div>
 <div id="additional-useful-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#additional-useful-functions" class="anchor"></a>Additional Useful Functions</h2>
 <p>There are a couple of other functions in <code>bcdata</code> that are useful to know when working with spatial data from the catalogue. <code>bcdc_describe_feature</code> gives the column names, whether the column is selectable, and the column types in both R and on the remote server:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span>
-<span class="co">#&gt; Error: Argument 'txt' must be a JSON string, URL or file.</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 20 × 5</span>
+<span class="co">#&gt;    col_name                sticky remote_col_type          local_col_type column_comments           </span>
+<span class="co">#&gt;    &lt;chr&gt;                   &lt;lgl&gt;  &lt;chr&gt;                    &lt;chr&gt;          &lt;chr&gt;                     </span>
+<span class="co">#&gt;  1 id                      TRUE   xsd:string               character      &lt;NA&gt;                      </span>
+<span class="co">#&gt;  2 LOCAL_REG_GREENSPACE_ID TRUE   xsd:decimal              numeric        LOCAL_REG_GREENSPACE_ID i…</span>
+<span class="co">#&gt;  3 PARK_NAME               FALSE  xsd:string               character      PARK NAME is the name of …</span>
+<span class="co">#&gt;  4 PARK_TYPE               FALSE  xsd:string               character      PARK_TYPE is the type of …</span>
+<span class="co">#&gt;  5 PARK_PRIMARY_USE        FALSE  xsd:string               character      PARK PRIMARY USE defines …</span>
+<span class="co">#&gt;  6 REGIONAL_DISTRICT       FALSE  xsd:string               character      REGIONAL_DISTRICT is the …</span>
+<span class="co">#&gt;  7 MUNICIPALITY            FALSE  xsd:string               character      MUNICIPALITY is the name …</span>
+<span class="co">#&gt;  8 CIVIC_NUMBER            FALSE  xsd:decimal              numeric        CIVIC_NUMBER is the stree…</span>
+<span class="co">#&gt;  9 CIVIC_NUMBER_SUFFIX     FALSE  xsd:string               character      CIVIC_NUMBER_SUFFIX is th…</span>
+<span class="co">#&gt; 10 STREET_NAME             FALSE  xsd:string               character      STREET_NAME is the name o…</span>
+<span class="co">#&gt; 11 LATITUDE                FALSE  xsd:decimal              numeric        LATITUDE is the geographi…</span>
+<span class="co">#&gt; 12 LONGITUDE               FALSE  xsd:decimal              numeric        LONGITUDE is the geograph…</span>
+<span class="co">#&gt; 13 WHEN_UPDATED            FALSE  xsd:date                 date           WHEN_UPDATED is the date …</span>
+<span class="co">#&gt; 14 WEBSITE_URL             FALSE  xsd:string               character      WEBSITE_URL contains a li…</span>
+<span class="co">#&gt; 15 LICENCE_COMMENTS        FALSE  xsd:string               character      LICENCE_COMMENTS describe…</span>
+<span class="co">#&gt; 16 FEATURE_AREA_SQM        FALSE  xsd:decimal              numeric        FEATURE_AREA_SQM is the s…</span>
+<span class="co">#&gt; 17 FEATURE_LENGTH_M        FALSE  xsd:decimal              numeric        FEATURE_LENGTH_M is the s…</span>
+<span class="co">#&gt; 18 SHAPE                   FALSE  gml:GeometryPropertyType sfc geometry   SHAPE is the column used …</span>
+<span class="co">#&gt; 19 OBJECTID                TRUE   xsd:decimal              numeric        OBJECTID is a column requ…</span>
+<span class="co">#&gt; 20 SE_ANNO_CAD_DATA        FALSE  xsd:hexBinary            numeric        SE_ANNO_CAD_DATA is a bin…</span></code></pre></div>
 <p>This is a helpful initial step to learn column names and types when you construct your query.</p>
 <p>Another useful function is <code><a href="../reference/show_query.bcdc_promise.html">show_query()</a></code> which provides information on the request issued to the remote server:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">PARK_PRIMARY_USE</span> <span class="op">==</span> <span class="st">"Park"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/show_query.bcdc_promise.html">show_query</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Error in if (layer_name != wfs_resource$object_name) {: argument is of length zero</span></code></pre></div>
+<span class="co">#&gt; &lt;url&gt;</span>
+<span class="co">#&gt; &lt;body&gt;</span>
+<span class="co">#&gt; SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature outputFormat: application/json typeNames:</span>
+<span class="co">#&gt;  WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP SRSNAME: EPSG:3005 CQL_FILTER:</span>
+<span class="co">#&gt;  (("PARK_PRIMARY_USE" = 'Park') AND (INTERSECTS(SHAPE, POLYGON ((1126789 821142.1,</span>
+<span class="co">#&gt;  1528155 821142.1, 1528155 1224202, 1126789 1224202, 1126789 821142.1)))))</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; &lt;full query url&gt;</span>
+<span class="co">#&gt; https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%28%22PARK_PRIMARY_USE%22%20%3D%20%27Park%27%29%20AND%20%28INTERSECTS%28SHAPE%2C%20POLYGON%20%28%281126789%20821142.1%2C%201528155%20821142.1%2C%201528155%201224202%2C%201126789%201224202%2C%201126789%20821142.1%29%29%29%29%29</span></code></pre></div>
 <p>This output is what being created by the dplyr code outlined above.</p>
 </div>
 <div id="using-b-c--geographic-warehouse-bcgw-layer-names" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-b-c--geographic-warehouse-bcgw-layer-names" class="anchor"></a>Using B.C. Geographic Warehouse (BCGW) layer names</h2>
 <p>If you are familiar with the <a href="https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse">B.C. Geographic Warehouse (BCGW)</a>, you may already know the name of a layer that you want from the BCGW. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (as well as all other related functions) supports supplying that name directly. For example, the <a href="https://catalogue.data.gov.bc.ca/dataset/bc-airports#object-description">record for the B.C. airports layer</a> shows that the object name is <code>WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW</code>, and we can use that in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Look at the columns available:</span>
 <span class="fu"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span>
-<span class="co">#&gt; Error: Argument 'txt' must be a JSON string, URL or file.</span>
+<span class="co">#&gt; # A tibble: 42 × 5</span>
+<span class="co">#&gt;    col_name                      sticky remote_col_type local_col_type column_comments              </span>
+<span class="co">#&gt;    &lt;chr&gt;                         &lt;lgl&gt;  &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;                        </span>
+<span class="co">#&gt;  1 id                            TRUE   xsd:string      character      &lt;NA&gt;                         </span>
+<span class="co">#&gt;  2 CUSTODIAN_ORG_DESCRIPTION     TRUE   xsd:string      character      CUSTODIAN_ORG_DESCRIPTION co…</span>
+<span class="co">#&gt;  3 BUSINESS_CATEGORY_CLASS       TRUE   xsd:string      character      BUSINESS_CATEGORY_CLASS desi…</span>
+<span class="co">#&gt;  4 BUSINESS_CATEGORY_DESCRIPTION TRUE   xsd:string      character      BUSINESS_CATEGORY_DESCRIPTIO…</span>
+<span class="co">#&gt;  5 OCCUPANT_TYPE_DESCRIPTION     TRUE   xsd:string      character      OCCUPANT_TYPE_DESCRIPTION co…</span>
+<span class="co">#&gt;  6 SOURCE_DATA_ID                TRUE   xsd:string      character      SOURCE_DATA_ID is a unique o…</span>
+<span class="co">#&gt;  7 SUPPLIED_SOURCE_ID_IND        TRUE   xsd:string      character      SUPPLIED_SOURCE_ID_IND is an…</span>
+<span class="co">#&gt;  8 AIRPORT_NAME                  TRUE   xsd:string      character      AIRPORT_NAME is a business n…</span>
+<span class="co">#&gt;  9 DESCRIPTION                   FALSE  xsd:string      character      DESCRIPTION describes the Oc…</span>
+<span class="co">#&gt; 10 PHYSICAL_ADDRESS              FALSE  xsd:string      character      PHYSICAL_ADDRESS contains th…</span>
+<span class="co">#&gt; # … with 32 more rows</span>
 
 <span class="co"># Query the data with bcdc_query_geodata and filter + select:</span>
 <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -296,7 +427,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; Querying 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW' record</span>
 <span class="co">#&gt; • Using collect() on this object will return 37 features and 11 fields</span>
 <span class="co">#&gt; • At most six rows of the record are printed here</span>
-<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 11 fields</span>
 <span class="co">#&gt; Geometry type: POINT</span>
 <span class="co">#&gt; Dimension:     XY</span>
