@@ -130,9 +130,12 @@ record_print_helper <- function(r, n, print_avail = FALSE) {
 print.bcdc_recordlist <- function(x, ...) {
   cat_line_wrap("List of B.C. Data Catalogue Records")
   len <- length(x)
-  n_print <- min(10, len)
-  cat_line_wrap("Number of records: ", len)
-  if (n_print < len) cat_line(" (Showing the top 10)")
+  n_print <- min(50, len)
+  cat_line_wrap(cli::col_blue("Number of records: ", len))
+  if (n_print < len) {
+    cat_line_wrap(cli::col_blue("Showing the top 50 results. You can assign the output of bcdc_search, to an object and subset with `[` to see other results in the set."))
+  cat_line("")
+    }
   cat_line_wrap("Titles:")
   x <- purrr::set_names(x, NULL)
 
