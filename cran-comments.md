@@ -10,7 +10,7 @@ There were no CRAN check issues to be fixed.
 * ubuntu 18.04.6 (on github actions), R-devel (2021-10-25 r81105)
 * Windows Server 2019 (on github actions), R 4.1.1
 * macOS Catalina 10.15.7 (on github actions), R 4.1.1
-* win-builder (R-devel: R version 4.1.0 alpha (2021-05-01 r80254))
+* win-builder (R-devel: 2021-10-25 r81104)
 
 ## R CMD check results
 
