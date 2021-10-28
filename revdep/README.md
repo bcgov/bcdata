@@ -5,12 +5,12 @@
 |version  |R version 4.1.1 (2021-08-10) |
 |os       |macOS Big Sur 11.6           |
 |system   |x86_64, darwin17.0           |
-|ui       |RStudio                      |
+|ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_CA.UTF-8                  |
 |ctype    |en_CA.UTF-8                  |
 |tz       |America/Vancouver            |
-|date     |2021-10-26                   |
+|date     |2021-10-27                   |
 
 # Dependencies
 
@@ -24,7 +24,7 @@
 |blob              |1.2.2   |1.2.2   |   |
 |cellranger        |1.1.0   |1.1.0   |   |
 |classInt          |0.4-3   |0.4-3   |   |
-|cli               |3.0.1   |3.0.1   |   |
+|cli               |3.1.0   |3.1.0   |   |
 |clipr             |0.7.1   |0.7.1   |   |
 |colorspace        |2.0-2   |2.0-2   |   |
 |cpp11             |0.4.0   |0.4.0   |   |
@@ -87,7 +87,7 @@
 |tibble            |3.1.5   |3.1.5   |   |
 |tidyselect        |1.1.1   |1.1.1   |   |
 |triebeard         |0.3.0   |0.3.0   |   |
-|tzdb              |0.1.2   |0.1.2   |   |
+|tzdb              |0.2.0   |0.2.0   |   |
 |units             |0.7-2   |0.7-2   |   |
 |urltools          |1.7.3   |1.7.3   |   |
 |utf8              |1.2.2   |1.2.2   |   |
