@@ -85,3 +85,17 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
 
 
 
+
+bcdc_get_data_citation <- function(record, resource = NULL) {
+  rec <- bcdc_get_record(record)
+
+  utils::bibentry(
+    bibtype = "Manual",
+    title = rec$title,
+    author = rec$organization$title,
+    organization = jsonlite::fromJSON(rec$contacts)$name,
+    year = format(as.Date(rec$record_last_modified), "%Y"),
+    url = paste0(catalogue_base_url(), "dataset/", rec$id)
+  )
+
+}
