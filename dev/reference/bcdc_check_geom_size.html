@@ -88,7 +88,7 @@ Further processing on the returned object
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -118,6 +118,9 @@ Further processing on the returned object
     </li>
     <li>
       <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
+    <li>
+      <a href="../articles/service_documentation.html">bcdata Service Documentation</a>
     </li>
   </ul>
 </li>
@@ -184,13 +187,14 @@ FALSE, the check will fails and a bounding box will be drawn.</p>
 for more details.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span>
-  <span class='va'>airports</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='as_tibble.html'>collect</a></span><span class='op'>(</span><span class='op'>)</span>
-  <span class='fu'>bcdc_check_geom_size</span><span class='op'>(</span><span class='va'>airports</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span></div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>airports</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bcdc_query_geodata.html'>bcdc_query_geodata</a></span><span class='op'>(</span><span class='st'>"bc-airports"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'><a href='as_tibble.html'>collect</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>bcdc_check_geom_size</span><span class='op'>(</span><span class='va'>airports</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.</span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

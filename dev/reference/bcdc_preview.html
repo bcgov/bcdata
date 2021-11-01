@@ -82,7 +82,7 @@ Leaflet map window" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -112,6 +112,9 @@ Leaflet map window" />
     </li>
     <li>
       <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
+    <li>
+      <a href="../articles/service_documentation.html">bcdata Service Documentation</a>
     </li>
   </ul>
 </li>
@@ -164,28 +167,31 @@ Warehouse (BCGW) name.</p>
 human-readable name to guard against future name changes of the record.
 If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
-<code><a href='https://rdrr.io/r/base/options.html'>options("silence_named_get_data_warning" = TRUE)</a></code> - which you can set
+<code>options("silence_named_get_data_warning" = TRUE)</code> - which you can set
 in your .Rprofile file so the option persists across sessions.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"regional-districts-legally-defined-administrative-areas-of-bc"</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"points-of-well-diversion-applications"</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='co'># Using BCGW name</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"</span><span class='op'>)</span>
-<span class='op'>)</span>
-<span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"regional-districts-legally-defined-administrative-areas-of-bc"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"points-of-well-diversion-applications"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Error in vapply(record$resources, function(x) { : </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   values must be length 1,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  but FUN(X[[1]]) result is length 0</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Using BCGW name</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'>bcdc_preview</span><span class='op'>(</span><span class='st'>"WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

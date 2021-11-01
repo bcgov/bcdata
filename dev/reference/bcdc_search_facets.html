@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -110,6 +110,9 @@
     </li>
     <li>
       <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
+    <li>
+      <a href="../articles/service_documentation.html">bcdata Service Documentation</a>
     </li>
   </ul>
 </li>
@@ -147,8 +150,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>bcdc_search_facets</span><span class='op'>(</span>
-  facet <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"license_id"</span>, <span class='st'>"download_audience"</span>, <span class='st'>"type"</span>, <span class='st'>"res_format"</span>, <span class='st'>"sector"</span>,
-    <span class='st'>"organization"</span>, <span class='st'>"groups"</span><span class='op'>)</span>
+  facet <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"license_id"</span>, <span class='st'>"download_audience"</span>, <span class='st'>"res_format"</span>, <span class='st'>"sector"</span>, <span class='st'>"organization"</span>,
+    <span class='st'>"groups"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -158,7 +161,7 @@
       <th>facet</th>
       <td><p>the facet(s) for which to retrieve valid values. Can be one or
 more of:
-<code>"license_id", "download_audience", "type", "res_format", "sector", "organization", "groups"</code></p></td>
+<code>"license_id", "download_audience", "res_format", "sector", "organization", "groups"</code></p></td>
     </tr>
     </table>
 
@@ -167,16 +170,32 @@ more of:
     <p>A data frame of values for the selected facet</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span>
-  <span class='fu'>bcdc_search_facets</span><span class='op'>(</span><span class='st'>"type"</span><span class='op'>)</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;   facet count display_name        name
-#&gt; 1  type    34   WebService  WebService
-#&gt; 2  type  1817   Geographic  Geographic
-#&gt; 3  type  1098      Dataset     Dataset
-#&gt; 4  type   171  Application Application</div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'>bcdc_search_facets</span><span class='op'>(</span><span class='st'>"res_format"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         facet count display_name         name</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  res_format    28          zip          zip</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  res_format    21          xml          xml</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  res_format   596         xlsx         xlsx</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  res_format   306          xls          xls</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  res_format   835          wms          wms</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  res_format    26          txt          txt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  res_format  1863          shp          shp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  res_format   116          pdf          pdf</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  res_format   109        other        other</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 res_format    11 openapi-json openapi-json</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 res_format    22          kmz          kmz</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 res_format   841          kml          kml</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 res_format    12         json         json</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 res_format    82         html         html</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15 res_format    17      geojson      geojson</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 res_format  1849         fgdb         fgdb</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17 res_format  1827          e00          e00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 res_format   495          csv          csv</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19 res_format    92  arcgis_rest  arcgis_rest</span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

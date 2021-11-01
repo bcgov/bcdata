@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -70,6 +70,9 @@
     <li>
       <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
     </li>
+    <li>
+      <a href="../articles/service_documentation.html">bcdata Service Documentation</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -98,7 +101,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Exploring Silviculture Data with bcdata</h1>
             
-            <h4 class="date">2021-04-13</h4>
+            <h4 class="date">2021-10-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/explore-silviculture-data-using-bcdata.Rmd"><code>vignettes/explore-silviculture-data-using-bcdata.Rmd</code></a></small>
       <div class="hidden name"><code>explore-silviculture-data-using-bcdata.Rmd</code></div>
@@ -155,9 +158,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture</span>
 <span class="co">#&gt; Name: results-forest-cover-silviculture (ID: 258bb088-4113-47b1-b568-ce20bd64e3e3)</span>
 <span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3</span>
-<span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
-<span class="co">#&gt; Type: Geographic</span>
 <span class="co">#&gt; Description: RESULTS opening's forest cover poylgons with silviculture component</span>
 <span class="co">#&gt;  provided.  Current forest cover subimssion into RESULTS must contain attribute and map</span>
 <span class="co">#&gt;  information.  However, there are historical forest cover polygon infomration where maps</span>
@@ -176,20 +177,20 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span>
 <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span>
 <span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span>
-<span class="co">#&gt; ● Using collect() on this object will return 888963 features and 159 fields</span>
-<span class="co">#&gt; ● Accessing this record requires pagination and will make 889 separate requests to the WFS.</span>
-<span class="co">#&gt; ● See ?bcdc_options</span>
-<span class="co">#&gt; ● At most six rows of the record are printed here</span>
-<span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; • Using collect() on this object will return 898559 features and 159 fields</span>
+<span class="co">#&gt; • Accessing this record requires pagination and will make 899 separate requests to the WFS.</span>
+<span class="co">#&gt; • See ?bcdc_options</span>
+<span class="co">#&gt; • At most six rows of the record are printed here</span>
+<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; Simple feature collection with 6 features and 159 fields</span>
 <span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
 <span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 1184167 ymin: 676633.7 xmax: 1411085 ymax: 1083545</span>
+<span class="co">#&gt; Bounding box:  xmin: 1184167 ymin: 526455.5 xmax: 1801754 ymax: 1083545</span>
 <span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
-<span class="co">#&gt; # A tibble: 6 x 160</span>
+<span class="co">#&gt; # A tibble: 6 × 160</span>
 <span class="co">#&gt;   id                 FOREST_COVER_ID STOCKING_STANDARD… OPENING_ID STANDARDS_UNIT_… SILV_POLYGON_NU…</span>
 <span class="co">#&gt;   &lt;chr&gt;                        &lt;int&gt;              &lt;int&gt;      &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE_FOREST_VEGET…         3994018            1805957    1486231 2                2               </span>
+<span class="co">#&gt; 1 WHSE_FOREST_VEGET…         4177991            2243439    1724262 1                C               </span>
 <span class="co">#&gt; 2 WHSE_FOREST_VEGET…         3994007                 NA    1248495 &lt;NA&gt;             91              </span>
 <span class="co">#&gt; 3 WHSE_FOREST_VEGET…         3994067                 NA    1120935 &lt;NA&gt;             86              </span>
 <span class="co">#&gt; 4 WHSE_FOREST_VEGET…         3994009            1404558    1248495 A                AA              </span>
@@ -201,36 +202,8 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; #   TREE_COVER_PATTERN_CODE &lt;chr&gt;, REENTRY_YEAR &lt;chr&gt;, REFERENCE_YEAR &lt;int&gt;, SITE_INDEX &lt;int&gt;,</span>
 <span class="co">#&gt; #   SITE_INDEX_SOURCE_CODE &lt;chr&gt;, BGC_ZONE_CODE &lt;chr&gt;, BGC_SUBZONE_CODE &lt;chr&gt;, BGC_VARIANT &lt;chr&gt;,</span>
 <span class="co">#&gt; #   BGC_PHASE &lt;chr&gt;, BEC_SITE_SERIES &lt;chr&gt;, BEC_SITE_TYPE &lt;chr&gt;, BEC_SERAL &lt;chr&gt;,</span>
-<span class="co">#&gt; #   IS_SILV_IMPLIED_IND &lt;chr&gt;, FOREST_COVER_SILV_TYPE &lt;chr&gt;, S_FOREST_COVER_LAYER_ID &lt;int&gt;,</span>
-<span class="co">#&gt; #   S_TOTAL_STEMS_PER_HA &lt;chr&gt;, S_TOTAL_WELL_SPACED_STEMS_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S_WELL_SPACED_STEMS_PER_HA &lt;int&gt;, S_FREE_GROWING_STEMS_PER_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S_CROWN_CLOSURE_PERCENT &lt;chr&gt;, S_BASAL_AREA &lt;chr&gt;, S_SPECIES_CODE_1 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S_SPECIES_PERCENT_1 &lt;int&gt;, S_SPECIES_AGE_1 &lt;int&gt;, S_SPECIES_HEIGHT_1 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   S_SPECIES_CODE_2 &lt;chr&gt;, S_SPECIES_PERCENT_2 &lt;int&gt;, S_SPECIES_AGE_2 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S_SPECIES_HEIGHT_2 &lt;chr&gt;, S_SPECIES_CODE_3 &lt;chr&gt;, S_SPECIES_PERCENT_3 &lt;int&gt;,</span>
-<span class="co">#&gt; #   S_SPECIES_CODE_4 &lt;chr&gt;, S_SPECIES_PERCENT_4 &lt;chr&gt;, S_SPECIES_CODE_5 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S_SPECIES_PERCENT_5 &lt;chr&gt;, S_MORE_SPECIES_EXIST_IND &lt;chr&gt;, S_SILV_LABEL &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S1_FOREST_COVER_LAYER_ID &lt;int&gt;, S1_TOTAL_STEMS_PER_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S1_TOTAL_WELL_SPACED_STEMS_HA &lt;int&gt;, S1_WELL_SPACED_STEMS_PER_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S1_FREE_GROWING_STEMS_PER_HA &lt;int&gt;, S1_CROWN_CLOSURE_PERCENT &lt;int&gt;, S1_BASAL_AREA &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S1_SPECIES_CODE_1 &lt;chr&gt;, S1_SPECIES_PERCENT_1 &lt;int&gt;, S1_SPECIES_AGE_1 &lt;int&gt;,</span>
-<span class="co">#&gt; #   S1_SPECIES_HEIGHT_1 &lt;int&gt;, S1_SPECIES_CODE_2 &lt;chr&gt;, S1_SPECIES_PERCENT_2 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S1_SPECIES_AGE_2 &lt;chr&gt;, S1_SPECIES_HEIGHT_2 &lt;chr&gt;, S1_SPECIES_CODE_3 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S1_SPECIES_PERCENT_3 &lt;chr&gt;, S1_SPECIES_CODE_4 &lt;chr&gt;, S1_SPECIES_PERCENT_4 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S1_SPECIES_CODE_5 &lt;chr&gt;, S1_SPECIES_PERCENT_5 &lt;chr&gt;, S1_MORE_SPECIES_EXIST_IND &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S1_SILV_LABEL &lt;chr&gt;, S2_FOREST_COVER_LAYER_ID &lt;int&gt;, S2_TOTAL_STEMS_PER_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S2_TOTAL_WELL_SPACED_STEMS_HA &lt;int&gt;, S2_WELL_SPACED_STEMS_PER_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S2_FREE_GROWING_STEMS_PER_HA &lt;int&gt;, S2_CROWN_CLOSURE_PERCENT &lt;int&gt;, S2_BASAL_AREA &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S2_SPECIES_CODE_1 &lt;chr&gt;, S2_SPECIES_PERCENT_1 &lt;int&gt;, S2_SPECIES_AGE_1 &lt;int&gt;,</span>
-<span class="co">#&gt; #   S2_SPECIES_HEIGHT_1 &lt;int&gt;, S2_SPECIES_CODE_2 &lt;chr&gt;, S2_SPECIES_PERCENT_2 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S2_SPECIES_AGE_2 &lt;chr&gt;, S2_SPECIES_HEIGHT_2 &lt;chr&gt;, S2_SPECIES_CODE_3 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S2_SPECIES_PERCENT_3 &lt;chr&gt;, S2_SPECIES_CODE_4 &lt;chr&gt;, S2_SPECIES_PERCENT_4 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S2_SPECIES_CODE_5 &lt;chr&gt;, S2_SPECIES_PERCENT_5 &lt;chr&gt;, S2_MORE_SPECIES_EXIST_IND &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S2_SILV_LABEL &lt;chr&gt;, S3_FOREST_COVER_LAYER_ID &lt;int&gt;, S3_TOTAL_STEMS_PER_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S3_TOTAL_WELL_SPACED_STEMS_HA &lt;int&gt;, S3_WELL_SPACED_STEMS_PER_HA &lt;int&gt;,</span>
-<span class="co">#&gt; #   S3_FREE_GROWING_STEMS_PER_HA &lt;int&gt;, S3_CROWN_CLOSURE_PERCENT &lt;int&gt;, S3_BASAL_AREA &lt;chr&gt;,</span>
-<span class="co">#&gt; #   S3_SPECIES_CODE_1 &lt;chr&gt;, S3_SPECIES_PERCENT_1 &lt;int&gt;, …</span></code></pre></div>
-<p>This query shows that this data set has over 850,000 features and over 150 fields. Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.</p>
+<span class="co">#&gt; #   IS_SILV_IMPLIED_IND &lt;chr&gt;, FOREST_COVER_SILV_TYPE &lt;chr&gt;, S_FOREST_COVER_LAYER_ID &lt;int&gt;, …</span></code></pre></div>
+<p>This query shows that this data set has many features and over 150 fields. Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.</p>
 <p>Note that we have only <em>queried</em> the data set so far—the data set would be too large (~1GB) to download efficiently. So, let’s use <code><a href="../reference/filter.bcdc_promise.html">filter()</a></code> with <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> to refine our query <em>before</em> we collect the data and import it into R.</p>
 </div>
 <div id="refining-a-geospatial-data-query" class="section level2">
@@ -240,12 +213,12 @@ See the License for the specific language governing permissions and limitations 
 <p>First, we can use the <code>bcdata</code> package to download the spatial boundary for the Prince George Natural Resource District—<code>DPG</code> is the <code>ORG_UNIT</code> for Prince George Natural Resource District:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Create a spatial feature object named dpg</span>
-<span class="va">dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"natural-resource-nr-district"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">ORG_UNIT</span><span class="op">==</span><span class="st">"DPG"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># filter for Prince George Natural Resource District</span>
+<span class="va">dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"natural-resource-nr-district"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">ORG_UNIT</span><span class="op">==</span><span class="st">"DPG"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># filter for Prince George Natural Resource District</span>
   <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># and collect the data</span></code></pre></div>
 <p>Let’s plot this spatial object and double check we have we what we need:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dpg</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">dpg</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -259,15 +232,15 @@ See the License for the specific language governing permissions and limitations 
 
 <span class="co"># Query and filter the data layer</span>
 <span class="va">trees_dpg</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">dpg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#filter for records that are within the DPG boundary</span>
+  <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">dpg</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="co">#filter for records that are within the DPG boundary</span>
   <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span>
-      <span class="va">S_SPECIES_CODE_1</span> <span class="op">%in%</span> <span class="va">spp_list</span> <span class="op">|</span>  <span class="co">#filter for LW records</span>
-      <span class="va">S_SPECIES_CODE_2</span> <span class="op">%in%</span> <span class="va">spp_list</span> <span class="op">|</span>
-      <span class="va">S_SPECIES_CODE_3</span> <span class="op">%in%</span> <span class="va">spp_list</span> <span class="op">|</span>
-      <span class="va">S_SPECIES_CODE_4</span> <span class="op">%in%</span> <span class="va">spp_list</span> <span class="op">|</span>
-      <span class="va">S_SPECIES_CODE_5</span> <span class="op">%in%</span> <span class="va">spp_list</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span>
+      <span class="va">S_SPECIES_CODE_1</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>  <span class="co">#filter for LW records</span>
+      <span class="va">S_SPECIES_CODE_2</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>
+      <span class="va">S_SPECIES_CODE_3</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>
+      <span class="va">S_SPECIES_CODE_4</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>
+      <span class="va">S_SPECIES_CODE_5</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">spp_list</span>
+  <span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#collect/download the data</span></code></pre></div>
 </div>
 <div id="exploring-the-data" class="section level2">
@@ -276,10 +249,10 @@ See the License for the specific language governing permissions and limitations 
 <p>Let’s look at the dimensions of this now much more manageable data object we have downloaded from the B.C. Data Catalogue:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">trees_dpg</span><span class="op">)</span>
-<span class="co">#&gt; [1] 156 160</span></code></pre></div>
-<p>We can see there are 156 treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:</p>
+<span class="co">#&gt; [1] 159 160</span></code></pre></div>
+<p>We can see there are several treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dpg</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> <span class="co">#add the DPG spatial boundary</span>
@@ -290,8 +263,8 @@ See the License for the specific language governing permissions and limitations 
 <h4 class="hasAnchor">
 <a href="#what-is-the-size-and-age-distribution-of-larch-plantations-in-the-prince-george-natural-resource-district-in-the-year-2020" class="anchor"></a>What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?</h4>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/mutate.bcdc_promise.html">mutate</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">2020</span> <span class="op">-</span> <span class="va">REFERENCE_YEAR</span> <span class="op">+</span> <span class="va">S_SPECIES_AGE_1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#create a plantation age column</span>
+<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/mutate.bcdc_promise.html">mutate</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">2020</span> <span class="op">-</span> <span class="va">REFERENCE_YEAR</span> <span class="op">+</span> <span class="va">S_SPECIES_AGE_1</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="co">#create a plantation age column</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>  <span class="co">#start a plot</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">FEATURE_AREA_SQM</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op">+</span> <span class="co">#convert feature area to hectares</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span> <span class="op">+</span>
@@ -315,18 +288,18 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span> <span class="co">#load the sf package</span>
 
 <span class="co"># Load the BEC data for Prince George Natural Resource District</span>
-<span class="va">bgc_dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">BBOX</a></span><span class="op">(</span><span class="va">dpg</span>, crs <span class="op">=</span> <span class="va">`EPSG:3005`</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#note filtering with a BoundingBox</span>
+<span class="va">bgc_dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">BBOX</a></span><span class="op">(</span><span class="va">dpg</span>, crs <span class="op">=</span> <span class="va">`EPSG:3005`</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="co">#note filtering with a BoundingBox</span>
   <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Join the BEC data with our tress_dpg geospatial data set</span>
-<span class="va">trees_bec_dpg</span> <span class="op">&lt;-</span> <span class="va">trees_dpg</span> <span class="op">%&gt;%</span>
+<span class="va">trees_bec_dpg</span> <span class="op">&lt;-</span> <span class="va">trees_dpg</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></span><span class="op">(</span><span class="va">bgc_dpg</span><span class="op">[</span>, <span class="st">"MAP_LABEL"</span><span class="op">]</span><span class="op">)</span> <span class="co">#join BEC data for each polygon</span></code></pre></div>
 <p>Now, we can summarize the area planted with western larch by biogeoclimatic unit:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">trees_bec_dpg</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">MAP_LABEL</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># group polygons by biogeoclimatic unit</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>Area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">FEATURE_AREA_SQM</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">trees_bec_dpg</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">MAP_LABEL</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="co"># group polygons by biogeoclimatic unit</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html">summarise</a></span><span class="op">(</span>Area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">FEATURE_AREA_SQM</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">MAP_LABEL</span>, y <span class="op">=</span> <span class="va">Area</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>

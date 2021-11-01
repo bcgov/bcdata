@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -69,6 +69,9 @@
     </li>
     <li>
       <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
+    <li>
+      <a href="../articles/service_documentation.html">bcdata Service Documentation</a>
     </li>
   </ul>
 </li>
@@ -152,7 +155,7 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="co">## Give me the catalogue search results for 'recycling'</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span><span class="op">)</span>
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
-<span class="co">#&gt; Number of records: 4</span>
+<span class="co">#&gt; Number of records: 3</span>
 <span class="co">#&gt; Titles:</span>
 <span class="co">#&gt; 1: BC FIRST Tire Recycling Data 1991-2006 (csv)</span>
 <span class="co">#&gt;  ID: a29ad492-29a2-44b9-8693-d27a8cc8e686</span>
@@ -160,16 +163,13 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 2: Tire Stewardship BC Tire Recycling Data (csv)</span>
 <span class="co">#&gt;  ID: f791329b-c2dc-4f82-9993-209780f2a1c6</span>
 <span class="co">#&gt;  Name: tire-stewardship-bc-tire-recycling-data</span>
-<span class="co">#&gt; 3: Environmental Protection Information Resources e-Library ()</span>
+<span class="co">#&gt; 3: Environmental Protection Information Resources e-Library (other)</span>
 <span class="co">#&gt;  ID: dae0f2c3-b4f4-4d16-a96d-d7fe7c1581f3</span>
 <span class="co">#&gt;  Name: environmental-protection-information-resources-e-library</span>
-<span class="co">#&gt; 4: Ministry of Transportation (MOT) Surface Type (other, wms, kml)</span>
-<span class="co">#&gt;  ID: 3a77f19f-2f49-416c-ad32-75e8d06e6c5a</span>
-<span class="co">#&gt;  Name: ministry-of-transportation-mot-surface-type</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Access a single record by calling `bcdc_get_record(ID)` with the ID from the desired</span>
 <span class="co">#&gt;  record.</span></code></pre></div>
-<p>You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search <em>facets</em> <code>license_id</code>, <code>download_audience</code>, <code>type</code>, <code>res_format</code>, <code>sector</code>, and <code>organization</code>:</p>
+<p>You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search <em>facets</em> <code>license_id</code>, <code>download_audience</code>, <code>res_format</code>, <code>sector</code>, and <code>organization</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Give me the first catalogue search result for 'recycling'</span>
 <span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
@@ -184,8 +184,8 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  record.</span>
 
 <span class="co">## Give me the catalogue search results for 'recycling' where the</span>
-<span class="co">## data is tabular and licenced under Open Government Licence – British Columbia</span>
-<span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span>, type <span class="op">=</span> <span class="st">"Dataset"</span>, license_id <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span>
+<span class="co">## data is licenced under Open Government Licence – British Columbia</span>
+<span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span>, license_id <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span>
 <span class="co">#&gt; List of B.C. Data Catalogue Records</span>
 <span class="co">#&gt; Number of records: 1</span>
 <span class="co">#&gt; Titles:</span>
@@ -208,10 +208,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; 6  license_id    59                         Open Government Licence - Canada   24</span>
 <span class="co">#&gt; 7  license_id  1566               Open Government Licence - British Columbia    2</span>
 <span class="co">#&gt; 8  license_id     2                  Open Government Licence - BC Assessment   47</span>
-<span class="co">#&gt; 9  license_id     2                   Open Data Licence for ICBC Information   49</span>
+<span class="co">#&gt; 9  license_id     4                   Open Data Licence for ICBC Information   49</span>
 <span class="co">#&gt; 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45</span>
 <span class="co">#&gt; 11 license_id    15                           Elections BC Open Data Licence   42</span>
-<span class="co">#&gt; 12 license_id  1361                                              Access Only   22</span></code></pre></div>
+<span class="co">#&gt; 12 license_id  1395                                              Access Only   22</span></code></pre></div>
 <p>Finally, you can retrieve the <em>metadata</em> for a single catalogue record by using the record name or permanent ID with <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations—like scripts—to guard against future name changes of a record:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`</span>
@@ -219,9 +219,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; B.C. Data Catalogue Record: BC FIRST Tire Recycling Data 1991-2006</span>
 <span class="co">#&gt; Name: bc-first-tire-recycling-data-1991-2006 (ID: a29ad492-29a2-44b9-8693-d27a8cc8e686)</span>
 <span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/a29ad492-29a2-44b9-8693-d27a8cc8e686</span>
-<span class="co">#&gt; Sector: Natural Resources</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
-<span class="co">#&gt; Type: Dataset</span>
 <span class="co">#&gt; Description: Financial Incentives for Recycling Scrap Tires (FIRST) collection and</span>
 <span class="co">#&gt;  recycling data (tonnes) from 1991 to 2006. In 2007 [Tire Stewardship</span>
 <span class="co">#&gt;  BC](http://www.tsbc.ca/), a not for profit society, launched the new scrap tire</span>
@@ -241,7 +239,7 @@ See the License for the specific language governing permissions and limitations 
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Get the data resource for the `bc-highway-cams` catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"bc-highway-cams"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 894 x 17</span>
+<span class="co">#&gt; # A tibble: 917 × 19</span>
 <span class="co">#&gt;    links_bchighwaycam  links_imageDisplay links_imageThumbn… links_replayTheDay    id highway_number</span>
 <span class="co">#&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;         </span>
 <span class="co">#&gt;  1 http://images.driv… http://images.dri… http://images.dri… http://images.dri…     2 5             </span>
@@ -254,14 +252,14 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  8 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    11 1             </span>
 <span class="co">#&gt;  9 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    12 1             </span>
 <span class="co">#&gt; 10 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    13 99            </span>
-<span class="co">#&gt; # … with 884 more rows, and 11 more variables: highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span>
+<span class="co">#&gt; # … with 907 more rows, and 13 more variables: highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span>
 <span class="co">#&gt; #   caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   imageStats_updatePeriodMean &lt;chr&gt;, imageStats_updatePeriodStdDev &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;</span>
+<span class="co">#&gt; #   imageStats_updatePeriodMean &lt;chr&gt;, imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span>
 
 <span class="co">## OR use the permanent ID, which is better for scripts or non-interactive use</span>
 <span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 894 x 17</span>
+<span class="co">#&gt; # A tibble: 917 × 19</span>
 <span class="co">#&gt;    links_bchighwaycam  links_imageDisplay links_imageThumbn… links_replayTheDay    id highway_number</span>
 <span class="co">#&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;         </span>
 <span class="co">#&gt;  1 http://images.driv… http://images.dri… http://images.dri… http://images.dri…     2 5             </span>
@@ -274,15 +272,15 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  8 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    11 1             </span>
 <span class="co">#&gt;  9 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    12 1             </span>
 <span class="co">#&gt; 10 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    13 99            </span>
-<span class="co">#&gt; # … with 884 more rows, and 11 more variables: highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span>
+<span class="co">#&gt; # … with 907 more rows, and 13 more variables: highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span>
 <span class="co">#&gt; #   caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   imageStats_updatePeriodMean &lt;chr&gt;, imageStats_updatePeriodStdDev &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;</span>
+<span class="co">#&gt; #   imageStats_updatePeriodMean &lt;chr&gt;, imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span>
 
 <span class="co">## OR use the result from bcdc_get_record()</span>
 <span class="va">my_record</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="va">my_record</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 894 x 17</span>
+<span class="co">#&gt; # A tibble: 917 × 19</span>
 <span class="co">#&gt;    links_bchighwaycam  links_imageDisplay links_imageThumbn… links_replayTheDay    id highway_number</span>
 <span class="co">#&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;         </span>
 <span class="co">#&gt;  1 http://images.driv… http://images.dri… http://images.dri… http://images.dri…     2 5             </span>
@@ -295,10 +293,10 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt;  8 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    11 1             </span>
 <span class="co">#&gt;  9 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    12 1             </span>
 <span class="co">#&gt; 10 http://images.driv… http://images.dri… http://images.dri… http://images.dri…    13 99            </span>
-<span class="co">#&gt; # … with 884 more rows, and 11 more variables: highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span>
+<span class="co">#&gt; # … with 907 more rows, and 13 more variables: highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span>
 <span class="co">#&gt; #   caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   imageStats_updatePeriodMean &lt;chr&gt;, imageStats_updatePeriodStdDev &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt; #   imageStats_updatePeriodMean &lt;chr&gt;, imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   updatePeriodMean &lt;dbl&gt;, updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;</span></code></pre></div>
 <p>A catalogue record can have one or multiple data files—or “resources”. If there is only one resource, <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will return that resource by default, as in the above <code>bc-highway-cams</code> example. If there are multiple data resources you will need to specify which resource you want. Let’s look at a catalogue record that contains multiple data resources—BC Schools - Programs Offered in Schools:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Get the record ID for the `bc-schools-programs-offered-in-schools` catalogue record</span>
@@ -318,9 +316,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="co">#&gt; B.C. Data Catalogue Record: BC Schools - Programs Offered in Schools</span>
 <span class="co">#&gt; Name: bc-schools-programs-offered-in-schools (ID: b1f27d1c-244a-410e-a361-931fac62a524)</span>
 <span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/b1f27d1c-244a-410e-a361-931fac62a524</span>
-<span class="co">#&gt; Sector: Education</span>
 <span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
-<span class="co">#&gt; Type: Dataset</span>
 <span class="co">#&gt; Description: BC Schools English Language Learners, French Immersion, Francophone, Career</span>
 <span class="co">#&gt;  Preparation, Aboriginal Support Services, Aboriginal Language and Culture, Continuing</span>
 <span class="co">#&gt;  Education and Career Technical Programs offered in BC schools up to 2013/2014.</span>
@@ -334,7 +330,7 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="co">## Get the txt data resource from the `bc-schools-programs-offered-in-schools`</span>
 <span class="co">## catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"b1f27d1c-244a-410e-a361-931fac62a524"</span>, resource <span class="op">=</span> <span class="st">'a393f8cf-51ec-42c6-8449-4cea4c75385c'</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 16,152 x 24</span>
+<span class="co">#&gt; # A tibble: 16,152 × 24</span>
 <span class="co">#&gt;    `Data Level` `School Year` `Facility Type` `Public Or Independ… `District Numbe… `District Name` </span>
 <span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;                &lt;chr&gt;            &lt;chr&gt;           </span>
 <span class="co">#&gt;  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School     005              Southeast Koote…</span>
@@ -359,11 +355,11 @@ See the License for the specific language governing permissions and limitations 
 <code class="sourceCode R"><span class="co">## Get a data frame of data resources for the `bc-schools-programs-offered-in-schools`</span>
 <span class="co">## catalogue record</span>
 <span class="fu"><a href="../reference/bcdc_tidy_resources.html">bcdc_tidy_resources</a></span><span class="op">(</span><span class="st">"b1f27d1c-244a-410e-a361-931fac62a524"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name       url                  id          format ext   package_id      location bcdata_available</span>
-<span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;    &lt;lgl&gt;           </span>
-<span class="co">#&gt; 1 ProgramsO… http://www.bced.gov… a393f8cf-5… txt    txt   b1f27d1c-244a-… external TRUE            </span>
-<span class="co">#&gt; 2 ProgramsO… http://www.bced.gov… 1e34098e-7… xlsx   xlsx  b1f27d1c-244a-… external TRUE</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 2 × 9</span>
+<span class="co">#&gt;   name     url           id       format ext   package_id   location  wfs_available bcdata_available</span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;     &lt;lgl&gt;         &lt;lgl&gt;           </span>
+<span class="co">#&gt; 1 Program… http://www.b… a393f8c… txt    txt   b1f27d1c-24… catalogu… FALSE         TRUE            </span>
+<span class="co">#&gt; 2 Program… http://www.b… 1e34098… xlsx   xlsx  b1f27d1c-24… catalogu… FALSE         TRUE</span></code></pre></div>
 <p><code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> will also detect if the data resource is a geospatial file, and automatically reads and returns it as an <a href="https://r-spatial.github.io/sf/"><code>sf</code> object</a> in your R session.</p>
 <p>Let’s get the air zones for British Columbia:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -386,7 +382,7 @@ See the License for the specific language governing permissions and limitations 
 <span class="va">bc_az</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="va">bc_az_metadata</span>, resource <span class="op">=</span> <span class="st">"c495d082-b586-4df0-9e06-bd6b66a8acd9"</span><span class="op">)</span>
 
 <span class="co">## Plot the B.C. Air Zone geospatial data with ggplot()</span>
-<span class="va">bc_az</span> <span class="op">%&gt;%</span>
+<span class="va">bc_az</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -422,29 +418,29 @@ See the License for the specific language governing permissions and limitations 
 
 <span class="co">## Have a quick look at the geospatial columns to help with filter or select</span>
 <span class="fu"><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature</a></span><span class="op">(</span><span class="va">bc_regional_districts_metadata</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 21 x 5</span>
-<span class="co">#&gt;    col_name       sticky remote_col_type local_col_type column_comments                             </span>
-<span class="co">#&gt;    &lt;chr&gt;          &lt;lgl&gt;  &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;                                       </span>
-<span class="co">#&gt;  1 id             FALSE  xsd:string      character       &lt;NA&gt;                                       </span>
-<span class="co">#&gt;  2 LGL_ADMIN_ARE… FALSE  xsd:decimal     numeric        "An operationally-generated unique identifi…</span>
-<span class="co">#&gt;  3 ADMIN_AREA_NA… TRUE   xsd:string      character      "The authoritative, officially approved nam…</span>
-<span class="co">#&gt;  4 ADMIN_AREA_AB… TRUE   xsd:string      character      "A short form or commonly-known acronym for…</span>
-<span class="co">#&gt;  5 ADMIN_AREA_BO… TRUE   xsd:string      character      "BOUNDARY TYPE is a high-level grouping of …</span>
-<span class="co">#&gt;  6 ADMIN_AREA_GR… TRUE   xsd:string      character      "The name given to the larger administrativ…</span>
-<span class="co">#&gt;  7 CHANGE_REQUES… TRUE   xsd:string      character      "The government acronym of the Ministry or …</span>
-<span class="co">#&gt;  8 UPDATE_TYPE    TRUE   xsd:string      character      "A short description of the latest alterati…</span>
-<span class="co">#&gt;  9 WHEN_UPDATED   TRUE   xsd:date        date           "The date and time the record was last modi…</span>
-<span class="co">#&gt; 10 MAP_STATUS     TRUE   xsd:string      character      "That the digital map has been appended to …</span>
+<span class="co">#&gt; # A tibble: 21 × 5</span>
+<span class="co">#&gt;    col_name                 sticky remote_col_type local_col_type column_comments                   </span>
+<span class="co">#&gt;    &lt;chr&gt;                    &lt;lgl&gt;  &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;                             </span>
+<span class="co">#&gt;  1 id                       TRUE   xsd:string      character       &lt;NA&gt;                             </span>
+<span class="co">#&gt;  2 LGL_ADMIN_AREA_ID        TRUE   xsd:decimal     numeric        "An operationally-generated uniqu…</span>
+<span class="co">#&gt;  3 ADMIN_AREA_NAME          FALSE  xsd:string      character      "The authoritative, officially ap…</span>
+<span class="co">#&gt;  4 ADMIN_AREA_ABBREVIATION  FALSE  xsd:string      character      "A short form or commonly-known a…</span>
+<span class="co">#&gt;  5 ADMIN_AREA_BOUNDARY_TYPE FALSE  xsd:string      character      "BOUNDARY TYPE is a high-level gr…</span>
+<span class="co">#&gt;  6 ADMIN_AREA_GROUP_NAME    FALSE  xsd:string      character      "The name given to the larger adm…</span>
+<span class="co">#&gt;  7 CHANGE_REQUESTED_ORG     FALSE  xsd:string      character      "The government acronym of the Mi…</span>
+<span class="co">#&gt;  8 UPDATE_TYPE              FALSE  xsd:string      character      "A short description of the lates…</span>
+<span class="co">#&gt;  9 WHEN_UPDATED             FALSE  xsd:date        date           "The date and time the record was…</span>
+<span class="co">#&gt; 10 MAP_STATUS               FALSE  xsd:string      character      "That the digital map has been ap…</span>
 <span class="co">#&gt; # … with 11 more rows</span>
 
 <span class="co">## Get the Capital Regional District polygon from the B.C. Regional</span>
 <span class="co">## Districts geospatial data</span>
-<span class="va">my_regional_district</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="va">bc_regional_districts_metadata</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">ADMIN_AREA_NAME</span> <span class="op">==</span> <span class="st">"Capital Regional District"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">my_regional_district</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="va">bc_regional_districts_metadata</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/filter.bcdc_promise.html">filter</a></span><span class="op">(</span><span class="va">ADMIN_AREA_NAME</span> <span class="op">==</span> <span class="st">"Capital Regional District"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/as_tibble.html">collect</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co">## Plot the Capital Regional District polygon with ggplot()</span>
-<span class="va">my_regional_district</span>  <span class="op">%&gt;%</span>
+<span class="va">my_regional_district</span>  <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_sf</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></code></pre></div>

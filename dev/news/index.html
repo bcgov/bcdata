@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bcdata</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.4.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -109,6 +109,9 @@
     </li>
     <li>
       <a href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    </li>
+    <li>
+      <a href="../articles/service_documentation.html">bcdata Service Documentation</a>
     </li>
   </ul>
 </li>
@@ -144,11 +147,22 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#bcdata-development-version" class="anchor"></a>bcdata (development version)<small> Unreleased </small>
 </h1>
+<ul>
+<li>Results from <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> (objects of class <code>"bcdc_recordlist"</code>) now print 50 records by default, instead of 10. In addition, there is a new <code>[</code> method for <code>"bcdc_recordlist"</code> objects, allowing you to subset these lists and still have a nice printout (<a href='https://github.com/bcgov/bcdata/issues/288'>#288</a>).</li>
+</ul>
+</div>
+    <div id="bcdata-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#bcdata-030" class="anchor"></a>bcdata 0.3.0<small> 2021-10-28 </small>
+</h1>
+<ul>
+<li>The <a href="https://www2.gov.bc.ca/gov/content?id=8A553CABCCDD434D8614D1CA92B03400">BC Data Catalogue and its API have been updated</a>, requiring changes to the <code>bcdata</code> package, most of which are internal only (<a href='https://github.com/bcgov/bcdata/issues/283'>#283</a>). These should be mostly invisible to the user, except for the removal of the <code>type</code> search facet in <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> and <code><a href="../reference/bcdc_search_facets.html">bcdc_search_facets()</a></code>. If you use an API key (authorized catalogue editors only), you will need to login to the new catalogue and get your updated key and set the value your <code>BCDC_KEY</code> environment variable to the new key.</li>
+</ul>
 <div id="improvements" class="section level3">
 <h3 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>IMPROVEMENTS</h3>
 <ul>
-<li>Add <code>names</code> method for <code>bcdc.promise</code> objects. You can now call <code>names</code> on an object produced by <code>bcdc_query_geodata</code>. This is handy when trying to figure out exact column spelling etc.</li>
+<li>Add <code>names</code> method for <code>bcdc.promise</code> objects. You can now call <code>names</code> on an object produced by <code>bcdc_query_geodata</code>. This is handy when trying to figure out exact column spelling etc. <a href='https://github.com/bcgov/bcdata/issues/278'>#278</a></li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level3">
