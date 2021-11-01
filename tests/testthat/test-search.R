@@ -19,8 +19,19 @@ test_that('bcdc_search works', {
   output_path <- tempfile()
   suppressWarnings(
     verify_output(output_path, {
-      bcdc_search("Container")
+      bcdc_search("Container", n = 5)
     })
   )
   expect_false(any(grepl("Error", readLines(output_path))))
+})
+
+test_that('bcdc_search subsetting works', {
+  skip_on_cran()
+  skip_if_net_down()
+  rec_list <- bcdc_search("Container", n = 5)
+  expect_is(rec_list, "bcdc_recordlist")
+  expect_length(rec_list, 5)
+  shorter <- rec_list[3:5]
+  expect_is(shorter, "bcdc_recordlist")
+  expect_length(shorter, 3)
 })

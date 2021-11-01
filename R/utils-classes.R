@@ -130,13 +130,16 @@ record_print_helper <- function(r, n, print_avail = FALSE) {
 print.bcdc_recordlist <- function(x, ...) {
   cat_line_wrap("List of B.C. Data Catalogue Records")
   len <- length(x)
-  n_print <- min(10, len)
-  cat_line_wrap("Number of records: ", len)
-  if (n_print < len) cat_line(" (Showing the top 10)")
+  n_print <- min(50, len)
+  cat_line_wrap(cli::col_blue("Number of records: ", len))
+  if (n_print < len) {
+    cat_line_wrap(cli::col_blue("Showing the top 50 results. You can assign the output of bcdc_search, to an object and subset with `[` to see other results in the set."))
+  cat_line("")
+    }
   cat_line_wrap("Titles:")
   x <- purrr::set_names(x, NULL)
 
-  purrr::imap(x[1:n_print], ~ {
+  purrr::imap(unclass(x)[1:n_print], ~ {
 
     if (!nrow(bcdc_tidy_resources(x[[.y]]))) {
       cat_line_wrap(.y, ": ",purrr::pluck(.x, "title"))
@@ -531,4 +534,10 @@ finalize_cql <- function(x, con = wfs_con) {
 cat_line_wrap <- function(..., indent = 0, exdent = 1, col = NULL, background_col = NULL, file = stdout()) {
   txt <- strwrap(paste0(..., collapse = ""), indent = indent, exdent = exdent)
   cat_line(txt, col = col, background_col = background_col, file = file)
+}
+
+#' @export
+"[.bcdc_recordlist" <- function(x, i, j, ..., drop = FALSE) {
+  out <- unclass(x)[i]
+  as.bcdc_recordlist(out)
 }
