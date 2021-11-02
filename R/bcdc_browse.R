@@ -105,7 +105,7 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
 bcdc_get_data_citation <- function(id) {
   rec <- bcdc_get_record(id)
 
-  utils::bibentry(
+  bib_rec <- utils::bibentry(
     bibtype = "Manual",
     title = rec$title,
     author = person(rec$organization$title),
@@ -113,6 +113,10 @@ bcdc_get_data_citation <- function(id) {
     year = format(as.Date(rec$record_last_modified), "%Y"),
     url = paste0(catalogue_base_url(), "dataset/", rec$id),
     note = rec$license_title
+  )
+
+  structure(bib_rec,
+            class = c("citation", setdiff(class(bib_rec), "citation"))
   )
 
 }
