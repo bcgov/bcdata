@@ -84,39 +84,3 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
 }
 
 
-
-#' Generate a bibentry from a Data Catalogue Record
-#'
-#' Generate a bibentry object for use .bib file.
-#' for more details
-#'
-#' @inheritParams bcdc_get_record
-#' @export
-#'
-#' @seealso \link{utils::bibentry}
-#'
-#' @examples
-#'
-#' try(
-#' cite <- bcdc_get_data_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
-#'
-#' print(cite, stype = "citation")
-#' )
-bcdc_get_data_citation <- function(id) {
-  rec <- bcdc_get_record(id)
-
-  bib_rec <- utils::bibentry(
-    bibtype = "Manual",
-    title = rec$title,
-    author = person(rec$organization$title),
-    organization = jsonlite::fromJSON(rec$contacts)$name,
-    year = format(as.Date(rec$record_last_modified), "%Y"),
-    url = paste0(catalogue_base_url(), "dataset/", rec$id),
-    note = rec$license_title
-  )
-
-  structure(bib_rec,
-            class = c("citation", setdiff(class(bib_rec), "citation"))
-  )
-
-}
