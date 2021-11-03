@@ -32,8 +32,6 @@
 #' in your .Rprofile file so the option persists across sessions.
 #' @export
 #'
-#' @seealso \link{utils::bibentry}
-#'
 #' @examples
 #'
 #' try(
