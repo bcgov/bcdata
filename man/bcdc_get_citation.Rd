@@ -36,6 +36,3 @@ rec <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 bcdc_get_citation(rec)
 )
 }
-\seealso{
-\link{utils::bibentry}
-}
