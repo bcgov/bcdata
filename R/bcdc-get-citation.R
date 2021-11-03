@@ -30,7 +30,6 @@
 #' session. You can silence these warnings altogether by setting an option:
 #' `options("silence_named_get_data_warning" = TRUE)` - which you can set
 #' in your .Rprofile file so the option persists across sessions.
-#' @export
 #'
 #' @examples
 #'
