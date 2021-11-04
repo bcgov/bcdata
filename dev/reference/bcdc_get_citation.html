@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the valid values for a facet (that you can use in bcdc_search()) — bcdc_search_facets • bcdata</title>
+<title>Generate a bibentry from a Data Catalogue Record — bcdc_get_citation • bcdata</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,14 @@
 
 
 
-<meta property="og:title" content="Get the valid values for a facet (that you can use in bcdc_search()) — bcdc_search_facets" />
-<meta property="og:description" content="Get the valid values for a facet (that you can use in bcdc_search())" />
+<meta property="og:title" content="Generate a bibentry from a Data Catalogue Record — bcdc_get_citation" />
+<meta property="og:description" content="Generate a &quot;TechReport&quot; bibentry object directly from a catalogue record.
+The primary use of this function is as a helper to create a .bib file for use
+in reference management software to cite data from the B.C. Data Catalogue.
+This function is likely to be starting place for this process and manual
+adjustment will often be needed. The bibentries are not designed to be
+authoritative and may not reflect all fields required for individual
+citation requirements." />
 <meta property="og:image" content="https://bcgov.github.io/bcdata/logo.png" />
 
 
@@ -140,62 +146,56 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the valid values for a facet (that you can use in <code><a href='bcdc_search.html'>bcdc_search()</a></code>)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc_search.R'><code>R/bcdc_search.R</code></a></small>
-    <div class="hidden name"><code>bcdc_search_facets.Rd</code></div>
+    <h1>Generate a bibentry from a Data Catalogue Record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bcgov/bcdata/blob/master/R/bcdc-get-citation.R'><code>R/bcdc-get-citation.R</code></a></small>
+    <div class="hidden name"><code>bcdc_get_citation.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the valid values for a facet (that you can use in <code><a href='bcdc_search.html'>bcdc_search()</a></code>)</p>
+    <p>Generate a "TechReport" bibentry object directly from a catalogue record.
+The primary use of this function is as a helper to create a <code>.bib</code> file for use
+in reference management software to cite data from the B.C. Data Catalogue.
+This function is likely to be starting place for this process and manual
+adjustment will often be needed. The bibentries are not designed to be
+authoritative and may not reflect all fields required for individual
+citation requirements.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bcdc_search_facets</span><span class='op'>(</span>
-  facet <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"license_id"</span>, <span class='st'>"download_audience"</span>, <span class='st'>"res_format"</span>, <span class='st'>"sector"</span>, <span class='st'>"organization"</span>,
-    <span class='st'>"groups"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>bcdc_get_citation</span><span class='op'>(</span><span class='va'>record</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>facet</th>
-      <td><p>the facet(s) for which to retrieve valid values. Can be one or
-more of:
-<code>"license_id", "download_audience", "res_format", "sector", "organization", "groups"</code></p></td>
+      <th>record</th>
+      <td><p>either a <code>bcdc_record</code> object (from the result of <code><a href='bcdc_get_record.html'>bcdc_get_record()</a></code>),
+a character string denoting the name or ID of a resource (or the URL)</p>
+<p>It is advised to use the permanent ID for a record rather than the
+human-readable name to guard against future name changes of the record.
+If you use the human-readable name a warning will be issued once per
+session. You can silence these warnings altogether by setting an option:
+<code>options("silence_named_get_data_warning" = TRUE)</code> - which you can set
+in your .Rprofile file so the option persists across sessions.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>A data frame of values for the selected facet</p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/utils/bibentry.html'>utils::bibentry()</a></code></p>
+<p>try(
+bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
+)</p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Or directly on a record object</h3>
+
+
+<p>try(
+rec &lt;- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
+bcdc_get_citation(rec)
+)</p>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
-<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span></span>
-<span class='r-in'>  <span class='fu'>bcdc_search_facets</span><span class='op'>(</span><span class='st'>"res_format"</span><span class='op'>)</span></span>
-<span class='r-in'><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         facet count display_name         name</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  res_format    28          zip          zip</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  res_format    21          xml          xml</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  res_format   596         xlsx         xlsx</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  res_format   306          xls          xls</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  res_format   835          wms          wms</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  res_format    26          txt          txt</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  res_format  1866          shp          shp</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  res_format   116          pdf          pdf</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  res_format   109        other        other</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 res_format     1   oracle_sde   oracle_sde</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 res_format    11 openapi-json openapi-json</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 res_format    22          kmz          kmz</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 res_format   841          kml          kml</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 res_format    12         json         json</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 15 res_format    82         html         html</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 res_format    17      geojson      geojson</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 17 res_format  1852         fgdb         fgdb</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 res_format  1830          e00          e00</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 19 res_format   495          csv          csv</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 20 res_format    92  arcgis_rest  arcgis_rest</span>
-<span class='r-in'><span class='co'># }</span></span>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
