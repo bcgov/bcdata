@@ -33,10 +33,14 @@
 #'
 #' @examples
 #'
+#' @seealso [utils::bibentry()]
+#'
 #' try(
 #' bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#' )
 #'
 #' ## Or directly on a record object
+#' try(
 #' rec <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' bcdc_get_citation(rec)
 #' )
