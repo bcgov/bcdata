@@ -169,6 +169,9 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
 
   ## non-wms; resource specified
   if (!is.null(resource)) {
+    if (!resource %in% resource_df$id) {
+      stop("The specified resource does not exist in this record", call. = FALSE)
+    }
     return(read_from_url(resource_df[resource_df$id == resource, , drop = FALSE],
                          ...))
   }
