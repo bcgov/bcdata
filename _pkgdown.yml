@@ -3,6 +3,12 @@ development:
 
 url: https://bcgov.github.io/bcdata
 
+template:
+  bootstrap: 5
+
+code:
+  width: 50
+
 reference:
   - title: "Interacting with the B.C. Data Catalogue"
     desc: >
@@ -17,6 +23,7 @@ reference:
       - '`bcdc_tidy_resources`'
       - '`bcdc_list_groups`'
       - '`bcdc_list_group_records`'
+      - '`bcdc_get_citation`'
   - title: "Direct downloads of data sets"
     desc: >
       Directly download (or preview) data sets (resources) from the
@@ -37,6 +44,7 @@ reference:
       - '`mutate.bcdc_promise`'
       - '`collect.bcdc_promise`'
       - '`cql_geom_predicates`'
+      - '`bcdc_check_geom_size`'
       - '`CQL`'
       - '`bcdc_options`'
 
