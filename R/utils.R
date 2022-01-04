@@ -50,6 +50,7 @@ compact <- function(l) Filter(Negate(is.null), l)
 #' @param trailing_slash should the url end in /
 #'
 #' @return complete url
+#' @noRd
 make_url <- function(..., trailing_slash = FALSE) {
   components <- unlist(list(...))
   components <- gsub("^/|/$", "", components)
