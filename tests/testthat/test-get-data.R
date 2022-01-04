@@ -92,11 +92,19 @@ test_that("unknown single file (shp) inside zip", {
             "sf")
 })
 
+test_that("fails when resource doesn't exist", {
+  skip_if_net_down()
+  skip_on_cran()
+  expect_error(bcdc_get_data("300c0980-b5e3-4202-b0da-d816f14fadad",
+                             resource = "not-a-real-resource"),
+               "The specified resource does not exist in this record")
+})
+
 test_that("fails when multiple files in a zip", {
   skip_if_net_down()
   skip_on_cran()
   expect_error(bcdc_get_data("300c0980-b5e3-4202-b0da-d816f14fadad",
-                             resource = "4bc42b04-f126-4f91-90de-804b27cd51f2"),
+                             resource = "c212a8a7-c625-4464-b9c8-4527c843f52f"),
                "More than one supported file in zip file")
 })
 

@@ -1,7 +1,9 @@
 # bcdata (development version)
-* Added `bcdc_get_citation` to generate bibliographic entries (via `utils::bibentry`) for individuals records. #273
 
+* Added `bcdc_get_citation` to generate bibliographic entries (via `utils::bibentry`) for individuals records. #273
 * Results from `bcdc_search()` (objects of class `"bcdc_recordlist"`) now print 50 records by default, instead of 10. In addition, there is a new `[` method for `"bcdc_recordlist"` objects, allowing you to subset these lists and still have a nice printout (#288).
+* Ensure that `bcdc_get_data()` fails informatively when a given resource doesn't exist in a record (#290)
+
 
 # bcdata 0.3.0
 
