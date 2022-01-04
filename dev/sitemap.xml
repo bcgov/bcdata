@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://bcgov.github.io/bcdata/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/articles/bcdata.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/articles/service_documentation.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/authors.html</loc>
+  </url>
+  <url>
     <loc>https://bcgov.github.io/bcdata/index.html</loc>
+  </url>
+  <url>
+    <loc>https://bcgov.github.io/bcdata/news/index.html</loc>
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/CQL.html</loc>
@@ -64,6 +94,9 @@
     <loc>https://bcgov.github.io/bcdata/reference/filter.html</loc>
   </url>
   <url>
+    <loc>https://bcgov.github.io/bcdata/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://bcgov.github.io/bcdata/reference/make_url.html</loc>
   </url>
   <url>
@@ -80,17 +113,5 @@
   </url>
   <url>
     <loc>https://bcgov.github.io/bcdata/reference/wfsConnection-class.html</loc>
-  </url>
-  <url>
-    <loc>https://bcgov.github.io/bcdata/articles/bcdata.html</loc>
-  </url>
-  <url>
-    <loc>https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html</loc>
-  </url>
-  <url>
-    <loc>https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html</loc>
-  </url>
-  <url>
-    <loc>https://bcgov.github.io/bcdata/articles/service_documentation.html</loc>
   </url>
 </urlset>

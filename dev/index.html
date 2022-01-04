@@ -33,6 +33,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -51,12 +53,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/bcdata.html">Get started</a>
 </li>
@@ -87,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bcgov/bcdata/">
+  <a href="https://github.com/bcgov/bcdata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,13 +100,13 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="bcdata-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#bcdata-" class="anchor"></a>bcdata <a href="https://bcgov.github.io/bcdata/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="bcdata-">bcdata <a href="https://bcgov.github.io/bcdata/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a class="anchor" aria-label="anchor" href="#bcdata-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>An R package 📦 for searching &amp; retrieving data from the <a href="https://catalogue.data.gov.bc.ca">B.C. Data Catalogue</a>.</p>
+<p>An R package 📦 for searching &amp; retrieving data from the <a href="https://catalogue.data.gov.bc.ca" class="external-link">B.C. Data Catalogue</a>.</p>
 <ul>
 <li>
 <code><a href="reference/bcdc_browse.html">bcdc_browse()</a></code> - Open the catalogue in your default browser</li>
@@ -125,40 +121,40 @@
 <li>
 <code><a href="reference/bcdc_get_data.html">bcdc_get_data()</a></code> - Get catalogue data</li>
 <li>
-<code><a href="reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> - Get &amp; query catalogue geospatial data available through a <a href="https://en.wikipedia.org/wiki/Web_Feature_Service">Web Feature Service</a>
+<code><a href="reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> - Get &amp; query catalogue geospatial data available through a <a href="https://en.wikipedia.org/wiki/Web_Feature_Service" class="external-link">Web Feature Service</a>
 </li>
 </ul>
-<p><strong>Note:</strong> The <code>bcdata</code> package supports downloading <em>most</em> file types, including zip archives. It will do its best to identify and read data from zip files, however if there are multiple data files in the zip, or data files that <code>bcdata</code> doesn’t know how to import, it will fail. If you encounter a file type in the B.C. Data Catalogue not currently supported by <code>bcdata</code> please file an <a href="https://github.com/bcgov/bcdata/issues/">issue</a>.</p>
-<div id="reference" class="section level3">
-<h3 class="hasAnchor">
-<a href="#reference" class="anchor"></a>Reference</h3>
+<p><strong>Note:</strong> The <code>bcdata</code> package supports downloading <em>most</em> file types, including zip archives. It will do its best to identify and read data from zip files, however if there are multiple data files in the zip, or data files that <code>bcdata</code> doesn’t know how to import, it will fail. If you encounter a file type in the B.C. Data Catalogue not currently supported by <code>bcdata</code> please file an <a href="https://github.com/bcgov/bcdata/issues/" class="external-link">issue</a>.</p>
+<div class="section level3">
+<h3 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
+</h3>
 <p><a href="https://bcgov.github.io/bcdata/">bcdata package 📦 home page and reference guide</a></p>
 </div>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
-<p>You can install <code>bcdata</code> directly from <a href="https://cran.r-project.org/package=bcdata">CRAN</a>:</p>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
+<p>You can install <code>bcdata</code> directly from <a href="https://cran.r-project.org/package=bcdata" class="external-link">CRAN</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bcdata"</span><span class="op">)</span></code></pre></div>
-<p>To install the development version from GitHub, use the <a href="https://cran.r-project.org/package=remotes">remotes</a> package:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"bcdata"</span><span class="op">)</span></code></pre></div>
+<p>To install the development version from GitHub, use the <a href="https://cran.r-project.org/package=remotes" class="external-link">remotes</a> package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"bcgov/bcdata"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"bcgov/bcdata"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="vignettes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vignettes" class="anchor"></a>Vignettes</h3>
+<div class="section level3">
+<h3 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+</h3>
 <ul>
 <li><a href="https://bcgov.github.io/bcdata/articles/bcdata.html">Get Started with bcdata</a></li>
 <li><a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a></li>
 <li><a href="https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a></li>
 </ul>
 </div>
-<div id="methods-for-bcdc_promise" class="section level3">
-<h3 class="hasAnchor">
-<a href="#methods-for-bcdc_promise" class="anchor"></a>Methods for <code>bcdc_promise</code>
+<div class="section level3">
+<h3 id="methods-for-bcdc_promise">Methods for <code>bcdc_promise</code>
+<a class="anchor" aria-label="anchor" href="#methods-for-bcdc_promise"></a>
 </h3>
 <p>The <code><a href="reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> returns an object of the class <code>bcdc_promise</code>. We have written an ever growing list methods for this class. You can use these methods directly on a object returned by <code><a href="reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>. Here are all the methods for the <code>bcdc_promise</code> class:</p>
 <ul>
@@ -174,13 +170,13 @@
 <li><code>tail</code></li>
 </ul>
 </div>
-<div id="bcdc-authentication" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bcdc-authentication" class="anchor"></a>BCDC Authentication</h3>
+<div class="section level3">
+<h3 id="bcdc-authentication">BCDC Authentication<a class="anchor" aria-label="anchor" href="#bcdc-authentication"></a>
+</h3>
 <p>If you are an authorized editor of the B.C. Data Catalogue you may want to access records that are not publicly available (e.g., in DRAFT, waiting to be published). This can be done by authenticating with the catalogue with an API key.</p>
 <p><strong><em>Important Note:</em></strong> <em>Your API key is like a password and you must take care to keep it private. Do not share it, and be careful to not include it in any scripts or accidentally commit it to GitHub.</em></p>
-<p>You can log in to the catalogue to obtain your API key, then store it as an environment variable in your <a href="https://rstats.wtf/r-startup.html#renviron"><code>.Renviron</code> file</a>. The environment variable must be called <code>BCDC_KEY</code>, set like this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>BCDC_KEY=your<span class="op">-</span>api<span class="op">-</span>key</span></code></pre></div>
+<p>You can log in to the catalogue to obtain your API key, then store it as an environment variable in your <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code> file</a>. The environment variable must be called <code>BCDC_KEY</code>, set like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>BCDC_KEY<span class="ot">=</span>your<span class="sc">-</span>api<span class="sc">-</span>key</span></code></pre></div>
 <p>This way, the relevant bcdata functions will read that key and use it to authorize your calls to the catalogue, allowing you to access additional records that you are authorized to see if you were logged into the catalogue web interface. Functions that benefit from this are:</p>
 <ul>
 <li><code><a href="reference/bcdc_search.html">bcdc_search()</a></code></li>
@@ -189,119 +185,123 @@
 <li><code><a href="reference/bcdc_get_data.html">bcdc_get_data()</a></code></li>
 </ul>
 </div>
-<div id="getting-help-or-reporting-an-issue" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-help-or-reporting-an-issue" class="anchor"></a>Getting Help or Reporting an Issue</h3>
-<p>To report bugs/issues/feature requests, please file an <a href="https://github.com/bcgov/bcdata/issues/">issue</a>.</p>
+<div class="section level3">
+<h3 id="getting-help-or-reporting-an-issue">Getting Help or Reporting an Issue<a class="anchor" aria-label="anchor" href="#getting-help-or-reporting-an-issue"></a>
+</h3>
+<p>To report bugs/issues/feature requests, please file an <a href="https://github.com/bcgov/bcdata/issues/" class="external-link">issue</a>.</p>
 </div>
-<div id="how-to-contribute" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-to-contribute" class="anchor"></a>How to Contribute</h3>
-<p>If you would like to contribute to the package, please see our <a href="https://github.com/bcgov/bcdata/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> guidelines.</p>
-<p>Please note that this project is released with a <a href="https://github.com/bcgov/bcdata/blob/master/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<div class="section level3">
+<h3 id="how-to-contribute">How to Contribute<a class="anchor" aria-label="anchor" href="#how-to-contribute"></a>
+</h3>
+<p>If you would like to contribute to the package, please see our <a href="https://github.com/bcgov/bcdata/blob/master/CONTRIBUTING.md" class="external-link">CONTRIBUTING</a> guidelines.</p>
+<p>Please note that this project is released with a <a href="https://github.com/bcgov/bcdata/blob/master/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
-<div id="citation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>To cite bcdata <span class="cf">in</span> publications please use<span class="op">:</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="st">  </span>Teucher et al., (<span class="dv">2021</span>). bcdata<span class="op">:</span><span class="st"> </span>An R package <span class="cf">for</span> searching and</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  retrieving data from the B.C. Data Catalogue. Journal of Open Source</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  Software, <span class="dv">6</span>(<span class="dv">61</span>), <span class="dv">2927</span>, https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.21105</span><span class="op">/</span>joss<span class="fl">.02927</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a>  <span class="op">@</span>Article{,</span>
-<span id="cb4-10"><a href="#cb4-10"></a>    doi =<span class="st"> </span>{<span class="fl">10.21105</span><span class="op">/</span>joss<span class="fl">.02927</span>},</span>
-<span id="cb4-11"><a href="#cb4-11"></a>    year =<span class="st"> </span>{<span class="dv">2021</span>},</span>
-<span id="cb4-12"><a href="#cb4-12"></a>    publisher =<span class="st"> </span>{The Open Journal},</span>
-<span id="cb4-13"><a href="#cb4-13"></a>    volume =<span class="st"> </span>{<span class="dv">6</span>},</span>
-<span id="cb4-14"><a href="#cb4-14"></a>    number =<span class="st"> </span>{<span class="dv">61</span>},</span>
-<span id="cb4-15"><a href="#cb4-15"></a>    pages =<span class="st"> </span>{<span class="dv">2927</span>},</span>
-<span id="cb4-16"><a href="#cb4-16"></a>    author =<span class="st"> </span>{Andrew C. Teucher and Sam J. Albers and Stephanie L. Hazlitt},</span>
-<span id="cb4-17"><a href="#cb4-17"></a>    title =<span class="st"> </span>{bcdata<span class="op">:</span><span class="st"> </span>An R package <span class="cf">for</span> searching and retrieving data from the B.C. Data Catalogue},</span>
-<span id="cb4-18"><a href="#cb4-18"></a>    journal =<span class="st"> </span>{Journal of Open Source Software},</span>
-<span id="cb4-19"><a href="#cb4-19"></a>  }</span></code></pre></div>
+<div class="section level3">
+<h3 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>To cite bcdata <span class="cf">in</span> publications please use<span class="sc">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  Teucher et al., (<span class="dv">2021</span>). bcdata<span class="sc">:</span> An R package <span class="cf">for</span> searching and</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  retrieving data from the B.C. Data Catalogue. Journal of Open Source</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  Software, <span class="dv">6</span>(<span class="dv">61</span>), <span class="dv">2927</span>, https<span class="sc">:</span><span class="er">//</span>doi.org<span class="sc">/</span><span class="fl">10.21105</span><span class="sc">/</span>joss<span class="fl">.02927</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    doi <span class="ot">=</span> {<span class="fl">10.21105</span><span class="sc">/</span>joss<span class="fl">.02927</span>},</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    publisher <span class="ot">=</span> {The Open Journal},</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    volume <span class="ot">=</span> {<span class="dv">6</span>},</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    number <span class="ot">=</span> {<span class="dv">61</span>},</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    pages <span class="ot">=</span> {<span class="dv">2927</span>},</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    author <span class="ot">=</span> {Andrew C. Teucher and Sam J. Albers and Stephanie L. Hazlitt},</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">=</span> {bcdata<span class="sc">:</span> An R package <span class="cf">for</span> searching and retrieving data from the B.C. Data Catalogue},</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    journal <span class="ot">=</span> {Journal of Open Source Software},</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
-<div id="license" class="section level3">
-<h3 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h3>
+<div class="section level3">
+<h3 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h3>
 <p>Copyright 2018 Province of British Columbia</p>
 <p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
-<p><a href="https://www.apache.org/licenses/LICENSE-2.0" class="uri">https://www.apache.org/licenses/LICENSE-2.0</a></p>
+<p><a href="https://www.apache.org/licenses/LICENSE-2.0" class="external-link uri">https://www.apache.org/licenses/LICENSE-2.0</a></p>
 <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 <hr>
-<p><em>This project was created using the <a href="https://github.com/bcgov/bcgovr">bcgovr</a> package.</em></p>
+<p><em>This project was created using the <a href="https://github.com/bcgov/bcgovr" class="external-link">bcgovr</a> package.</em></p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=bcdata">https://​cloud.r-project.org/​package=bcdata</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/bcgov/bcdata/">https://​github.com/​bcgov/​bcdata/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/bcgov/bcdata/issues">https://​github.com/​bcgov/​bcdata/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=bcdata" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/bcgov/bcdata/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/bcgov/bcdata/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small>Apache License (== 2.0)</small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing bcdata</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Andy Teucher <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7840-692X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Sam Albers <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-9270-7884" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Stephanie Hazlitt <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-3161-2304" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing bcdata</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></li>
-<li><a href="https://github.com/bcgov/bcdata"><img src="https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://app.codecov.io/gh/bcgov/bcdata?branch=master"><img src="https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://cran.r-project.org/package=bcdata"><img src="https://www.r-pkg.org/badges/version/bcdata" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://CRAN.R-project.org/package=bcdata"><img src="https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen" alt="CRAN Downloads"></a></li>
-<li><a href="https://CRAN.R-project.org/web/checks/check_results_bcdata.html"><img src="https://cranchecks.info/badges/worst/bcdata" alt="cran checks"></a></li>
-<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md"><img src="https://img.shields.io/badge/Lifecycle-Maturing-007EC6" alt="img"></a></li>
-<li><a href="https://doi.org/10.21105/joss.02927"><img src="https://joss.theoj.org/papers/10.21105/joss.02927/status.svg" alt="DOI"></a></li>
-<li><a href="https://doi.org/10.5281/zenodo.4737824"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4737824.svg" alt="DOI"></a></li>
+<li>Andy Teucher <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7840-692X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Sam Albers <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-9270-7884" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Stephanie Hazlitt <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0002-3161-2304" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://opensource.org/licenses/Apache-2.0" class="external-link"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></li>
+<li><a href="https://github.com/bcgov/bcdata" class="external-link"><img src="https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://app.codecov.io/gh/bcgov/bcdata?branch=master" class="external-link"><img src="https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://cran.r-project.org/package=bcdata" class="external-link"><img src="https://www.r-pkg.org/badges/version/bcdata" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://CRAN.R-project.org/package=bcdata" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen" alt="CRAN Downloads"></a></li>
+<li><a href="https://CRAN.R-project.org/web/checks/check_results_bcdata.html" class="external-link"><img src="https://cranchecks.info/badges/worst/bcdata" alt="cran checks"></a></li>
+<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Maturing-007EC6" alt="img"></a></li>
+<li><a href="https://doi.org/10.21105/joss.02927" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.02927/status.svg" alt="DOI"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.4737824" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4737824.svg" alt="DOI"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
+  <p></p>
+<p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -309,6 +309,8 @@
 
   
 
+
+  
 
   </body>
 </html>

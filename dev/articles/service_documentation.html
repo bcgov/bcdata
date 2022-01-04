@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,12 +47,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/bcdata.html">Get started</a>
 </li>
@@ -81,7 +77,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bcgov/bcdata/">
+  <a href="https://github.com/bcgov/bcdata/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -96,31 +92,30 @@
 
       
 
-      </header><script src="service_documentation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>bcdata Service Documentation</h1>
             
-            <h4 class="date">2021-10-27</h4>
+            <h4 data-toc-skip class="date">2021-10-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/master/vignettes/service_documentation.Rmd"><code>vignettes/service_documentation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/HEAD/vignettes/service_documentation.Rmd" class="external-link"><code>vignettes/service_documentation.Rmd</code></a></small>
       <div class="hidden name"><code>service_documentation.Rmd</code></div>
 
     </div>
 
     
     
-<div id="databc-services-used-by-bcdata" class="section level1">
-<h1 class="hasAnchor">
-<a href="#databc-services-used-by-bcdata" class="anchor"></a>DataBC Services used by <code>bcdata</code>
+<div class="section level1">
+<h1 id="databc-services-used-by-bcdata">DataBC Services used by <code>bcdata</code><a class="anchor" aria-label="anchor" href="#databc-services-used-by-bcdata"></a>
 </h1>
 <p>This document is an attempt at a comprehensive list of services and API endpoints accessed by the bcdata R package, as well which return values we rely on from those endpoints.</p>
-<div id="bc-data-catalogue" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bc-data-catalogue" class="anchor"></a>BC Data Catalogue</h2>
-<div id="api-version" class="section level3">
-<h3 class="hasAnchor">
-<a href="#api-version" class="anchor"></a>API version:</h3>
+<div class="section level2">
+<h2 id="bc-data-catalogue">BC Data Catalogue<a class="anchor" aria-label="anchor" href="#bc-data-catalogue"></a>
+</h2>
+<div class="section level3">
+<h3 id="api-version">API version:<a class="anchor" aria-label="anchor" href="#api-version"></a>
+</h3>
 <ul>
 <li>PROD: <code>https://catalogue.data.gov.bc.ca/api/3</code>
 </li>
@@ -128,9 +123,9 @@
 </li>
 </ul>
 </div>
-<div id="endpoints" class="section level3">
-<h3 class="hasAnchor">
-<a href="#endpoints" class="anchor"></a>Endpoints:</h3>
+<div class="section level3">
+<h3 id="endpoints">Endpoints:<a class="anchor" aria-label="anchor" href="#endpoints"></a>
+</h3>
 <ul>
 <li><code>/action/package_show</code></li>
 <li>
@@ -147,9 +142,9 @@
 <li><code>/action/group_show</code></li>
 </ul>
 </div>
-<div id="response-values-used" class="section level3">
-<h3 class="hasAnchor">
-<a href="#response-values-used" class="anchor"></a>Response values used:</h3>
+<div class="section level3">
+<h3 id="response-values-used">Response values used:<a class="anchor" aria-label="anchor" href="#response-values-used"></a>
+</h3>
 <ul>
 <li>package:
 <ul>
@@ -178,7 +173,7 @@
 </ul>
 </li>
 <li>
-<code>bcdc_type</code> (not actually using yet but <a href="https://github.com/bcgov/bcdata/pull/283#issuecomment-924442166">may be useful</a>)</li>
+<code>bcdc_type</code> (not actually using yet but <a href="https://github.com/bcgov/bcdata/pull/283#issuecomment-924442166" class="external-link">may be useful</a>)</li>
 <li><code>format</code></li>
 <li><code>resource_storage_location</code></li>
 <li><code>name</code></li>
@@ -194,18 +189,18 @@
 </ul>
 </div>
 </div>
-<div id="web-services" class="section level2">
-<h2 class="hasAnchor">
-<a href="#web-services" class="anchor"></a>Web Services</h2>
-<div id="api-version-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#api-version-1" class="anchor"></a>API Version:</h3>
+<div class="section level2">
+<h2 id="web-services">Web Services<a class="anchor" aria-label="anchor" href="#web-services"></a>
+</h2>
+<div class="section level3">
+<h3 id="api-version-1">API Version:<a class="anchor" aria-label="anchor" href="#api-version-1"></a>
+</h3>
 <ul>
-<li>TEST: <a href="https://test.openmaps.gov.bc.ca" class="uri">https://test.openmaps.gov.bc.ca</a>
+<li>TEST: <a href="https://test.openmaps.gov.bc.ca" class="external-link uri">https://test.openmaps.gov.bc.ca</a>
 </li>
-<li>DELIVERY: <a href="https://delivery.openmaps.gov.bc.ca" class="uri">https://delivery.openmaps.gov.bc.ca</a>
+<li>DELIVERY: <a href="https://delivery.openmaps.gov.bc.ca" class="external-link uri">https://delivery.openmaps.gov.bc.ca</a>
 </li>
-<li>PROD: <a href="https://openmaps.gov.bc.ca" class="uri">https://openmaps.gov.bc.ca</a>
+<li>PROD: <a href="https://openmaps.gov.bc.ca" class="external-link uri">https://openmaps.gov.bc.ca</a>
 </li>
 </ul>
 <p>Endpoints:</p>
@@ -253,11 +248,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
+  <p></p>
+<p>Developed by Andy Teucher, Sam Albers, Stephanie Hazlitt.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -265,6 +262,8 @@
 
   
 
+
+  
 
   </body>
 </html>
