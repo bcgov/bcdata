@@ -5,9 +5,10 @@ url: https://bcgov.github.io/bcdata
 
 template:
   bootstrap: 5
+  base_font: "BCSans"
 
 code:
-  width: 50
+  width: 60
 
 reference:
   - title: "Interacting with the B.C. Data Catalogue"
