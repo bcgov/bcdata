@@ -5,7 +5,9 @@ url: https://bcgov.github.io/bcdata
 
 template:
   bootstrap: 5
-  base_font: "BCSans"
+  bslib:
+    base_font: "BCSans"
+    code_font: "Fira Mono"
 
 code:
   width: 60
