@@ -7,7 +7,7 @@ template:
   bootstrap: 5
   bslib:
     base_font: "BCSans"
-    code_font: "Fira Mono"
+    code_font: {google: "Fira Mono"}
 
 code:
   width: 60
