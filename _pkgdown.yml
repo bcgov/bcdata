@@ -5,9 +5,12 @@ url: https://bcgov.github.io/bcdata
 
 template:
   bootstrap: 5
+  bslib:
+    base_font: "BCSans"
+    code_font: {google: "Fira Mono"}
 
 code:
-  width: 50
+  width: 60
 
 reference:
   - title: "Interacting with the B.C. Data Catalogue"
