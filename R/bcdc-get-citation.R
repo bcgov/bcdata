@@ -79,7 +79,7 @@ bcdc_get_citation.bcdc_record <- function(record) {
   bib_rec <- utils::bibentry(
     bibtype = "techreport",
     title = record$title,
-    author = person(record$organization$title),
+    author = utils::person(record$organization$title),
     address = clean_org_name(record),
     institution = "Province of British Columbia",
     year = format(as.Date(record$record_last_modified), "%Y"),
