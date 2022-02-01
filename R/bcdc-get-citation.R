@@ -36,13 +36,12 @@
 #' @examples
 #'
 #' try(
-#' bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#'  bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' )
 #'
 #' ## Or directly on a record object
 #' try(
-#' rec <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
-#' bcdc_get_citation(rec)
+#'  bcdc_get_citation(bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8"))
 #' )
 #' @export
 bcdc_get_citation <- function(record) {
