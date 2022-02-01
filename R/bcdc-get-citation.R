@@ -31,9 +31,9 @@
 #' `options("silence_named_get_data_warning" = TRUE)` - which you can set
 #' in your .Rprofile file so the option persists across sessions.
 #'
-#' @examples
-#'
 #' @seealso [utils::bibentry()]
+#'
+#' @examples
 #'
 #' try(
 #' bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
