@@ -31,18 +31,17 @@
 #' `options("silence_named_get_data_warning" = TRUE)` - which you can set
 #' in your .Rprofile file so the option persists across sessions.
 #'
-#' @examples
-#'
 #' @seealso [utils::bibentry()]
 #'
+#' @examples
+#'
 #' try(
-#' bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
+#'  bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' )
 #'
 #' ## Or directly on a record object
 #' try(
-#' rec <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
-#' bcdc_get_citation(rec)
+#'  bcdc_get_citation(bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8"))
 #' )
 #' @export
 bcdc_get_citation <- function(record) {
@@ -79,7 +78,7 @@ bcdc_get_citation.bcdc_record <- function(record) {
   bib_rec <- utils::bibentry(
     bibtype = "techreport",
     title = record$title,
-    author = person(record$organization$title),
+    author = utils::person(record$organization$title),
     address = clean_org_name(record),
     institution = "Province of British Columbia",
     year = format(as.Date(record$record_last_modified), "%Y"),
