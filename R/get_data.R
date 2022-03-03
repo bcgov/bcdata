@@ -220,7 +220,7 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
     resource <- resource_df[choice_input, , drop = FALSE]
     id_choice <- resource_df$id[choice_input]
 
-    message("To directly access this record in the future please use this command:\n",
+    message("To directly access this resource in the future please use this command:\n",
             glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
     read_from_url(resource, ...)
   }
