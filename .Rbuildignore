@@ -20,3 +20,4 @@
 ^\.github/workflows/pr-commands\.yaml$
 ^depends\.Rds$
 ^revdep$
+^CRAN-SUBMISSION$
