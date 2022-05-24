@@ -60,18 +60,16 @@
 <ul><li>Added <code>bcdc_get_citation</code> to generate bibliographic entries (via <code><a href="https://rdrr.io/r/utils/bibentry.html" class="external-link">utils::bibentry</a></code>) for individuals records. <a href="https://github.com/bcgov/bcdata/issues/273" class="external-link">#273</a></li>
 <li>Results from <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> (objects of class <code>"bcdc_recordlist"</code>) now print 50 records by default, instead of 10. In addition, there is a new <code>[</code> method for <code>"bcdc_recordlist"</code> objects, allowing you to subset these lists and still have a nice printout (<a href="https://github.com/bcgov/bcdata/issues/288" class="external-link">#288</a>).</li>
 <li>Ensure that <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> fails informatively when a given resource doesn’t exist in a record (<a href="https://github.com/bcgov/bcdata/issues/290" class="external-link">#290</a>)</li>
+<li>Ensure compatability with <code>dbplyr 2.2.0</code> (<a href="https://github.com/bcgov/bcdata/issues/297" class="external-link">#297</a>, 82b9defa376ab)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="bcdata-030">bcdata 0.3.0<a class="anchor" aria-label="anchor" href="#bcdata-030"></a></h2><p class="text-muted">CRAN release: 2021-10-28</p>
-<ul><li>The <a href="https://www2.gov.bc.ca/gov/content?id=8A553CABCCDD434D8614D1CA92B03400" class="external-link">BC Data Catalogue and its API have been updated</a>, requiring changes to the <code>bcdata</code> package, most of which are internal only (<a href="https://github.com/bcgov/bcdata/issues/283" class="external-link">#283</a>). These should be mostly invisible to the user, except for the removal of the <code>type</code> search facet in <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> and <code><a href="../reference/bcdc_search_facets.html">bcdc_search_facets()</a></code>. If you use an API key (authorized catalogue editors only), you will need to login to the new catalogue and get your updated key and set the value your <code>BCDC_KEY</code> environment variable to the new key.</li>
-</ul><div class="section level4">
+<ul><li>The <a href="https://www2.gov.bc.ca/gov/content?id=8A553CABCCDD434D8614D1CA92B03400" class="external-link">BC Data Catalogue and its API have been updated</a>, requiring changes to the <code>bcdata</code> package, most of which are internal only (<a href="https://github.com/bcgov/bcdata/issues/283" class="external-link">#283</a>). These should be mostly invisible to the user, except for the removal of the <code>type</code> search facet in <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> and <code><a href="../reference/bcdc_search_facets.html">bcdc_search_facets()</a></code>. If you use an API key (authorized catalogue editors only), you will need to login to the new catalogue and get your updated key and set the value your <code>BCDC_KEY</code> environment variable to the new key.</li></ul><div class="section level4">
 <h4 id="improvements-0-3-0">IMPROVEMENTS<a class="anchor" aria-label="anchor" href="#improvements-0-3-0"></a></h4>
-<ul><li>Add <code>names</code> method for <code>bcdc.promise</code> objects. You can now call <code>names</code> on an object produced by <code>bcdc_query_geodata</code>. This is handy when trying to figure out exact column spelling etc. <a href="https://github.com/bcgov/bcdata/issues/278" class="external-link">#278</a></li>
-</ul></div>
+<ul><li>Add <code>names</code> method for <code>bcdc.promise</code> objects. You can now call <code>names</code> on an object produced by <code>bcdc_query_geodata</code>. This is handy when trying to figure out exact column spelling etc. <a href="https://github.com/bcgov/bcdata/issues/278" class="external-link">#278</a></li></ul></div>
 <div class="section level4">
 <h4 id="bug-fixes-0-3-0">BUG FIXES<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-0"></a></h4>
-<ul><li>Fix bug where sticky column were incorrectly identified in <code>bcdc_describe_feature</code> (<a href="https://github.com/bcgov/bcdata/issues/279" class="external-link">#279</a>)</li>
-</ul></div>
+<ul><li>Fix bug where sticky column were incorrectly identified in <code>bcdc_describe_feature</code> (<a href="https://github.com/bcgov/bcdata/issues/279" class="external-link">#279</a>)</li></ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.4" id="bcdata-024">bcdata 0.2.4<a class="anchor" aria-label="anchor" href="#bcdata-024"></a></h2><p class="text-muted">CRAN release: 2021-05-04</p>
@@ -121,8 +119,7 @@
 <h2 class="pkg-version" data-toc-text="0.2.0" id="bcdata-020">bcdata 0.2.0<a class="anchor" aria-label="anchor" href="#bcdata-020"></a></h2><p class="text-muted">CRAN release: 2020-06-25</p>
 <div class="section level4">
 <h4 id="breaking-changes-0-2-0">BREAKING CHANGES<a class="anchor" aria-label="anchor" href="#breaking-changes-0-2-0"></a></h4>
-<ul><li>Rename <code>selectable</code> column from <code>bcdc_describe_feature</code> to <code>sticky</code> and modify corresponding docs and tests (<a href="https://github.com/bcgov/bcdata/issues/180" class="external-link">#180</a>).</li>
-</ul></div>
+<ul><li>Rename <code>selectable</code> column from <code>bcdc_describe_feature</code> to <code>sticky</code> and modify corresponding docs and tests (<a href="https://github.com/bcgov/bcdata/issues/180" class="external-link">#180</a>).</li></ul></div>
 <div class="section level4">
 <h4 id="improvements-0-2-0">IMPROVEMENTS<a class="anchor" aria-label="anchor" href="#improvements-0-2-0"></a></h4>
 <ul><li>Add explore-silviculture-data-using-bcdata vignette/article. h/t <a href="https://github.com/hgriesbauer" class="external-link">@hgriesbauer</a></li>
@@ -156,8 +153,7 @@
 </ul></div>
 <div class="section level4">
 <h4 id="minor-breaking-changes-0-1-2">MINOR BREAKING CHANGES<a class="anchor" aria-label="anchor" href="#minor-breaking-changes-0-1-2"></a></h4>
-<ul><li>Remove <code>BEYOND()</code> and <code>RELATE()</code> geometry predicates as they are currently not fully supported by geoserver</li>
-</ul></div>
+<ul><li>Remove <code>BEYOND()</code> and <code>RELATE()</code> geometry predicates as they are currently not fully supported by geoserver</li></ul></div>
 <div class="section level4">
 <h4 id="bug-fixes-0-1-2">BUG FIXES<a class="anchor" aria-label="anchor" href="#bug-fixes-0-1-2"></a></h4>
 <ul><li>Now precompiling vignettes so that queries are submitted locally and no actually requests are made from CRAN (<a href="https://github.com/bcgov/bcdata/issues/151" class="external-link">#151</a>)</li>
@@ -183,8 +179,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="bcdata-010">bcdata 0.1.0<a class="anchor" aria-label="anchor" href="#bcdata-010"></a></h2>
-<ul><li>Initial Release</li>
-</ul></div>
+<ul><li>Initial Release</li></ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -194,7 +189,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>
