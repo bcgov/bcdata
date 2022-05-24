@@ -1,3 +1,5 @@
+# bcdata (development version)
+
 # bcdata 0.3.1
 
 * Added `bcdc_get_citation` to generate bibliographic entries (via `utils::bibentry`) for individuals records. #273
