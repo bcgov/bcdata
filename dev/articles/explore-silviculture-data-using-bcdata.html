@@ -84,7 +84,7 @@
 
 
 <script src="explore-silviculture-data-using-bcdata_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Exploring Silviculture Data with bcdata</h1>
             
             <h4 data-toc-skip class="date">2021-10-27</h4>
@@ -129,65 +129,65 @@ See the License for the specific language governing permissions and limitations 
 </h2>
 <p>To start, let’s load the <code>bcdata</code> package. We will also load the <code>dplyr</code> and <code>ggplot2</code> packages to help us work with the data. You can learn more about the <code>dplyr</code> package <a href="https://dplyr.tidyverse.org/" class="external-link">here</a> and the <code>ggplot2</code> package <a href="https://ggplot2.tidyverse.org/" class="external-link">here</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bcgov.github.io/bcdata/">bcdata</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-the-data">Getting the Data<a class="anchor" aria-label="anchor" href="#getting-the-data"></a>
 </h2>
 <p>We can gather the data we need to answer our question using the <a href="https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3" class="external-link">RESULTS - silviculture forest cover dataset</a>. First, let’s take a look at the metadata record using <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Get the metadata using the human-readable record name</span>
-<span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"results-forest-cover-silviculture"</span><span class="op">)</span>
-<span class="co">#&gt; B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture</span>
-<span class="co">#&gt; Name: results-forest-cover-silviculture (ID: 258bb088-4113-47b1-b568-ce20bd64e3e3)</span>
-<span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3</span>
-<span class="co">#&gt; Licence: Open Government Licence - British Columbia</span>
-<span class="co">#&gt; Description: RESULTS opening's forest cover poylgons with silviculture component</span>
-<span class="co">#&gt;  provided.  Current forest cover subimssion into RESULTS must contain attribute and map</span>
-<span class="co">#&gt;  information.  However, there are historical forest cover polygon infomration where maps</span>
-<span class="co">#&gt;  are not available.  Forest Cover is provided at three critical milestones of at</span>
-<span class="co">#&gt;  harvesting, at regeneration, and at free growing.  This is a part o fthe Silviculture</span>
-<span class="co">#&gt;  and Land Status Tracking dataset, which includes tracking achievement of silviculture</span>
-<span class="co">#&gt;  obligations on Crown Land</span>
-<span class="co">#&gt; Available Resources (1):</span>
-<span class="co">#&gt;  1. WMS getCapabilities request (wms)</span>
-<span class="co">#&gt; Access the full 'Resources' data frame using:</span>
-<span class="co">#&gt;  bcdc_tidy_resources('258bb088-4113-47b1-b568-ce20bd64e3e3')</span>
-<span class="co">#&gt; Query and filter this data using:</span>
-<span class="co">#&gt;  bcdc_query_geodata('258bb088-4113-47b1-b568-ce20bd64e3e3')</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Get the metadata using the human-readable record name</span></span>
+<span><span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"results-forest-cover-silviculture"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture</span></span>
+<span><span class="co">#&gt; Name: results-forest-cover-silviculture (ID: 258bb088-4113-47b1-b568-ce20bd64e3e3)</span></span>
+<span><span class="co">#&gt; Permalink: https://catalogue.data.gov.bc.ca/dataset/258bb088-4113-47b1-b568-ce20bd64e3e3</span></span>
+<span><span class="co">#&gt; Licence: Open Government Licence - British Columbia</span></span>
+<span><span class="co">#&gt; Description: RESULTS opening's forest cover poylgons with silviculture component</span></span>
+<span><span class="co">#&gt;  provided.  Current forest cover subimssion into RESULTS must contain attribute and map</span></span>
+<span><span class="co">#&gt;  information.  However, there are historical forest cover polygon infomration where maps</span></span>
+<span><span class="co">#&gt;  are not available.  Forest Cover is provided at three critical milestones of at</span></span>
+<span><span class="co">#&gt;  harvesting, at regeneration, and at free growing.  This is a part o fthe Silviculture</span></span>
+<span><span class="co">#&gt;  and Land Status Tracking dataset, which includes tracking achievement of silviculture</span></span>
+<span><span class="co">#&gt;  obligations on Crown Land</span></span>
+<span><span class="co">#&gt; Available Resources (1):</span></span>
+<span><span class="co">#&gt;  1. WMS getCapabilities request (wms)</span></span>
+<span><span class="co">#&gt; Access the full 'Resources' data frame using:</span></span>
+<span><span class="co">#&gt;  bcdc_tidy_resources('258bb088-4113-47b1-b568-ce20bd64e3e3')</span></span>
+<span><span class="co">#&gt; Query and filter this data using:</span></span>
+<span><span class="co">#&gt;  bcdc_query_geodata('258bb088-4113-47b1-b568-ce20bd64e3e3')</span></span></code></pre></div>
 <p>We see that this is a <a href="https://en.wikipedia.org/wiki/Web_Feature_Service" class="external-link">Web Feature Service-enabled</a> geospatial data set–the list of data resources includes <code>WMS getCapabilities request</code>–so we can query and retrieve this geospatial data set using <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span>
-<span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span>
-<span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span>
-<span class="co">#&gt; • Using collect() on this object will return 898559 features and 159 fields</span>
-<span class="co">#&gt; • Accessing this record requires pagination and will make 899 separate requests to the WFS.</span>
-<span class="co">#&gt; • See ?bcdc_options</span>
-<span class="co">#&gt; • At most six rows of the record are printed here</span>
-<span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-<span class="co">#&gt; Simple feature collection with 6 features and 159 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 1184167 ymin: 526455.5 xmax: 1801754 ymax: 1083545</span>
-<span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span>
-<span class="co">#&gt; # A tibble: 6 × 160</span>
-<span class="co">#&gt;   id                 FOREST_COVER_ID STOCKING_STANDARD… OPENING_ID STANDARDS_UNIT_… SILV_POLYGON_NU…</span>
-<span class="co">#&gt;   &lt;chr&gt;                        &lt;int&gt;              &lt;int&gt;      &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;           </span>
-<span class="co">#&gt; 1 WHSE_FOREST_VEGET…         4177991            2243439    1724262 1                C               </span>
-<span class="co">#&gt; 2 WHSE_FOREST_VEGET…         3994007                 NA    1248495 &lt;NA&gt;             91              </span>
-<span class="co">#&gt; 3 WHSE_FOREST_VEGET…         3994067                 NA    1120935 &lt;NA&gt;             86              </span>
-<span class="co">#&gt; 4 WHSE_FOREST_VEGET…         3994009            1404558    1248495 A                AA              </span>
-<span class="co">#&gt; 5 WHSE_FOREST_VEGET…         3994057            1211894    1120935 B                2B              </span>
-<span class="co">#&gt; 6 WHSE_FOREST_VEGET…         3994063                 NA    1120935 &lt;NA&gt;             82              </span>
-<span class="co">#&gt; # … with 154 more variables: SILV_POLYGON_AREA &lt;dbl&gt;, SILV_POLYGON_NET_AREA &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   SILV_NON_MAPPED_AREA &lt;int&gt;, STOCKING_STATUS_CODE &lt;chr&gt;, STOCKING_TYPE_CODE &lt;chr&gt;,</span>
-<span class="co">#&gt; #   STOCKING_CLASS_CODE &lt;chr&gt;, SILV_RESERVE_CODE &lt;chr&gt;, SILV_RESERVE_OBJECTIVE_CODE &lt;chr&gt;,</span>
-<span class="co">#&gt; #   TREE_COVER_PATTERN_CODE &lt;chr&gt;, REENTRY_YEAR &lt;chr&gt;, REFERENCE_YEAR &lt;int&gt;, SITE_INDEX &lt;int&gt;,</span>
-<span class="co">#&gt; #   SITE_INDEX_SOURCE_CODE &lt;chr&gt;, BGC_ZONE_CODE &lt;chr&gt;, BGC_SUBZONE_CODE &lt;chr&gt;, BGC_VARIANT &lt;chr&gt;,</span>
-<span class="co">#&gt; #   BGC_PHASE &lt;chr&gt;, BEC_SITE_SERIES &lt;chr&gt;, BEC_SITE_TYPE &lt;chr&gt;, BEC_SERAL &lt;chr&gt;,</span>
-<span class="co">#&gt; #   IS_SILV_IMPLIED_IND &lt;chr&gt;, FOREST_COVER_SILV_TYPE &lt;chr&gt;, S_FOREST_COVER_LAYER_ID &lt;int&gt;, …</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span></span>
+<span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 898559 features and 159 fields</span></span>
+<span><span class="co">#&gt; • Accessing this record requires pagination and will make 899 separate requests to the WFS.</span></span>
+<span><span class="co">#&gt; • See ?bcdc_options</span></span>
+<span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>
+<span><span class="co">#&gt; ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; Simple feature collection with 6 features and 159 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 1184167 ymin: 526455.5 xmax: 1801754 ymax: 1083545</span></span>
+<span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 160</span></span>
+<span><span class="co">#&gt;   id                 FOREST_COVER_ID STOCKING_STANDARD… OPENING_ID STANDARDS_UNIT_… SILV_POLYGON_NU…</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                        &lt;int&gt;              &lt;int&gt;      &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;           </span></span>
+<span><span class="co">#&gt; 1 WHSE_FOREST_VEGET…         4177991            2243439    1724262 1                C               </span></span>
+<span><span class="co">#&gt; 2 WHSE_FOREST_VEGET…         3994007                 NA    1248495 &lt;NA&gt;             91              </span></span>
+<span><span class="co">#&gt; 3 WHSE_FOREST_VEGET…         3994067                 NA    1120935 &lt;NA&gt;             86              </span></span>
+<span><span class="co">#&gt; 4 WHSE_FOREST_VEGET…         3994009            1404558    1248495 A                AA              </span></span>
+<span><span class="co">#&gt; 5 WHSE_FOREST_VEGET…         3994057            1211894    1120935 B                2B              </span></span>
+<span><span class="co">#&gt; 6 WHSE_FOREST_VEGET…         3994063                 NA    1120935 &lt;NA&gt;             82              </span></span>
+<span><span class="co">#&gt; # … with 154 more variables: SILV_POLYGON_AREA &lt;dbl&gt;, SILV_POLYGON_NET_AREA &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SILV_NON_MAPPED_AREA &lt;int&gt;, STOCKING_STATUS_CODE &lt;chr&gt;, STOCKING_TYPE_CODE &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   STOCKING_CLASS_CODE &lt;chr&gt;, SILV_RESERVE_CODE &lt;chr&gt;, SILV_RESERVE_OBJECTIVE_CODE &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   TREE_COVER_PATTERN_CODE &lt;chr&gt;, REENTRY_YEAR &lt;chr&gt;, REFERENCE_YEAR &lt;int&gt;, SITE_INDEX &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   SITE_INDEX_SOURCE_CODE &lt;chr&gt;, BGC_ZONE_CODE &lt;chr&gt;, BGC_SUBZONE_CODE &lt;chr&gt;, BGC_VARIANT &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   BGC_PHASE &lt;chr&gt;, BEC_SITE_SERIES &lt;chr&gt;, BEC_SITE_TYPE &lt;chr&gt;, BEC_SERAL &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   IS_SILV_IMPLIED_IND &lt;chr&gt;, FOREST_COVER_SILV_TYPE &lt;chr&gt;, S_FOREST_COVER_LAYER_ID &lt;int&gt;, …</span></span></code></pre></div>
 <p>This query shows that this data set has many features and over 150 fields. Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.</p>
 <p>Note that we have only <em>queried</em> the data set so far—the data set would be too large (~1GB) to download efficiently. So, let’s use <code><a href="../reference/filter.html">filter()</a></code> with <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> to refine our query <em>before</em> we collect the data and import it into R.</p>
 </div>
@@ -197,72 +197,72 @@ See the License for the specific language governing permissions and limitations 
 <p>To address our question, we need the treatment data (1) from the Prince George Natural Resource District <em>and</em> (2) that contain western larch.</p>
 <p>First, we can use the <code>bcdata</code> package to download the spatial boundary for the Prince George Natural Resource District—<code>DPG</code> is the <code>ORG_UNIT</code> for Prince George Natural Resource District:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Create a spatial feature object named dpg</span>
-<span class="va">dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"natural-resource-nr-district"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ORG_UNIT</span><span class="op">==</span><span class="st">"DPG"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># filter for Prince George Natural Resource District</span>
-  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># and collect the data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Create a spatial feature object named dpg</span></span>
+<span><span class="va">dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"natural-resource-nr-district"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ORG_UNIT</span><span class="op">==</span><span class="st">"DPG"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># filter for Prince George Natural Resource District</span></span>
+<span>  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># and collect the data</span></span></code></pre></div>
 <p>Let’s plot this spatial object and double check we have we what we need:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="vignette-fig-plot-dpg-1.png" title="plot of chunk plot-dpg" alt="plot of chunk plot-dpg" width="100%"></p>
 <p>Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.</p>
 <p>We only need to download the treatments that have western larch planted. We can use the <code><a href="../reference/bcdc_describe_feature.html">bcdc_describe_feature()</a></code> helper function to examine the column names and types of the layer. In this case, we want to keep rows where the five <code>S_SPECIES_CODE_*</code> columns contain <code>"LW"</code>, the code for western larch.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Make a vector of tree species we are interested in</span>
-<span class="co"># (in this case only LW for western larch)</span>
-<span class="va">spp_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LW"</span><span class="op">)</span>
-
-<span class="co"># Query and filter the data layer</span>
-<span class="va">trees_dpg</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">dpg</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co">#filter for records that are within the DPG boundary</span>
-  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span>
-      <span class="va">S_SPECIES_CODE_1</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>  <span class="co">#filter for LW records</span>
-      <span class="va">S_SPECIES_CODE_2</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>
-      <span class="va">S_SPECIES_CODE_3</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>
-      <span class="va">S_SPECIES_CODE_4</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>
-      <span class="va">S_SPECIES_CODE_5</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span>
-  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#collect/download the data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Make a vector of tree species we are interested in</span></span>
+<span><span class="co"># (in this case only LW for western larch)</span></span>
+<span><span class="va">spp_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LW"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Query and filter the data layer</span></span>
+<span><span class="va">trees_dpg</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">dpg</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co">#filter for records that are within the DPG boundary</span></span>
+<span>  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span></span>
+<span>      <span class="va">S_SPECIES_CODE_1</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span>  <span class="co">#filter for LW records</span></span>
+<span>      <span class="va">S_SPECIES_CODE_2</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span></span>
+<span>      <span class="va">S_SPECIES_CODE_3</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span></span>
+<span>      <span class="va">S_SPECIES_CODE_4</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span> <span class="op">|</span></span>
+<span>      <span class="va">S_SPECIES_CODE_5</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">spp_list</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#collect/download the data</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="exploring-the-data">Exploring the Data<a class="anchor" aria-label="anchor" href="#exploring-the-data"></a>
 </h2>
 <p>Let’s look at the dimensions of this now much more manageable data object we have downloaded from the B.C. Data Catalogue:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">trees_dpg</span><span class="op">)</span>
-<span class="co">#&gt; [1] 159 160</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">trees_dpg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 159 160</span></span></code></pre></div>
 <p>We can see there are several treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dpg</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> <span class="co">#add the DPG spatial boundary</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">trees_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dpg</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> <span class="co">#add the DPG spatial boundary</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="vignette-fig-map-larch-plantations-dpg-1.png" title="plot of chunk map-larch-plantations-dpg" alt="plot of chunk map-larch-plantations-dpg" width="100%"></p>
 <p>We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question—how much western larch has been planted in the Prince George Natural Resource District?</p>
 <div class="section level4">
 <h4 id="what-is-the-size-and-age-distribution-of-larch-plantations-in-the-prince-george-natural-resource-district-in-the-year-2020">What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?<a class="anchor" aria-label="anchor" href="#what-is-the-size-and-age-distribution-of-larch-plantations-in-the-prince-george-natural-resource-district-in-the-year-2020"></a>
 </h4>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">trees_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/mutate.html">mutate</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">2020</span> <span class="op">-</span> <span class="va">REFERENCE_YEAR</span> <span class="op">+</span> <span class="va">S_SPECIES_AGE_1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co">#create a plantation age column</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>  <span class="co">#start a plot</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">FEATURE_AREA_SQM</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op">+</span> <span class="co">#convert feature area to hectares</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Stand Age (years)"</span>,
-                     limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">30</span><span class="op">)</span>,
-                     breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">5</span>, to <span class="op">=</span> <span class="fl">30</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Sum Treatment Unit Area (ha)"</span>,
-       title <span class="op">=</span> <span class="st">"Area Planted with Western Larch by Stand Age\nin Prince George Natural Resource District"</span>,
-       caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Data sourced from the B.C. Data Catalogue\n on "</span>,
-                        <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,
-                        <span class="st">" using the bcdata R package"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">trees_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/mutate.html">mutate</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">2020</span> <span class="op">-</span> <span class="va">REFERENCE_YEAR</span> <span class="op">+</span> <span class="va">S_SPECIES_AGE_1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co">#create a plantation age column</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>  <span class="co">#start a plot</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, y <span class="op">=</span> <span class="va">FEATURE_AREA_SQM</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op">+</span> <span class="co">#convert feature area to hectares</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Stand Age (years)"</span>,</span>
+<span>                     limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>                     breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">5</span>, to <span class="op">=</span> <span class="fl">30</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Sum Treatment Unit Area (ha)"</span>,</span>
+<span>       title <span class="op">=</span> <span class="st">"Area Planted with Western Larch by Stand Age\nin Prince George Natural Resource District"</span>,</span>
+<span>       caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Data sourced from the B.C. Data Catalogue\n on "</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                        <span class="st">" using the bcdata R package"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="vignette-fig-unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="100%"></p>
 </div>
 <div class="section level4">
@@ -270,32 +270,32 @@ See the License for the specific language governing permissions and limitations 
 </h4>
 <p>We can download <a href="https://catalogue.data.gov.bc.ca/dataset/bec-map" class="external-link">British Columbia biogeoclimatic (BEC) data</a> from the B.C. Data Catalogue using <code>bcdata</code> and join to our existing <code>trees_dpg</code> geospatial dataset using the <code>st_join</code> function from the <code>sf</code> package. You can learn more about <code>sf</code> <a href="https://r-spatial.github.io/sf/" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span> <span class="co">#load the sf package</span>
-
-<span class="co"># Load the BEC data for Prince George Natural Resource District</span>
-<span class="va">bgc_dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">BBOX</a></span><span class="op">(</span><span class="va">dpg</span>, crs <span class="op">=</span> <span class="va">`EPSG:3005`</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co">#note filtering with a BoundingBox</span>
-  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># Join the BEC data with our tress_dpg geospatial data set</span>
-<span class="va">trees_bec_dpg</span> <span class="op">&lt;-</span> <span class="va">trees_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join</a></span><span class="op">(</span><span class="va">bgc_dpg</span><span class="op">[</span>, <span class="st">"MAP_LABEL"</span><span class="op">]</span><span class="op">)</span> <span class="co">#join BEC data for each polygon</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span> <span class="co">#load the sf package</span></span>
+<span></span>
+<span><span class="co"># Load the BEC data for Prince George Natural Resource District</span></span>
+<span><span class="va">bgc_dpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="../reference/cql_geom_predicates.html">BBOX</a></span><span class="op">(</span><span class="va">dpg</span>, crs <span class="op">=</span> <span class="va">`EPSG:3005`</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co">#note filtering with a BoundingBox</span></span>
+<span>  <span class="fu"><a href="../reference/collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Join the BEC data with our tress_dpg geospatial data set</span></span>
+<span><span class="va">trees_bec_dpg</span> <span class="op">&lt;-</span> <span class="va">trees_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join</a></span><span class="op">(</span><span class="va">bgc_dpg</span><span class="op">[</span>, <span class="st">"MAP_LABEL"</span><span class="op">]</span><span class="op">)</span> <span class="co">#join BEC data for each polygon</span></span></code></pre></div>
 <p>Now, we can summarize the area planted with western larch by biogeoclimatic unit:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">trees_bec_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">MAP_LABEL</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># group polygons by biogeoclimatic unit</span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html" class="external-link">summarise</a></span><span class="op">(</span>Area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">FEATURE_AREA_SQM</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">MAP_LABEL</span>, y <span class="op">=</span> <span class="va">Area</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Sum Treatment Unit Area (ha)"</span>,
-       x <span class="op">=</span> <span class="st">"Biogeoclimatic Unit"</span>,
-       title <span class="op">=</span> <span class="st">"Area Planted with Western Larch by Biogeoclimatic Unit\nin Prince George Natural Resource District"</span>,
-       caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Data sourced from the B.C. Data Catalogue\n on "</span>,
-                        <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,
-                        <span class="st">" using the bcdata R package"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">trees_bec_dpg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">MAP_LABEL</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># group polygons by biogeoclimatic unit</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>Area <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">FEATURE_AREA_SQM</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">MAP_LABEL</span>, y <span class="op">=</span> <span class="va">Area</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Sum Treatment Unit Area (ha)"</span>,</span>
+<span>       x <span class="op">=</span> <span class="st">"Biogeoclimatic Unit"</span>,</span>
+<span>       title <span class="op">=</span> <span class="st">"Area Planted with Western Larch by Biogeoclimatic Unit\nin Prince George Natural Resource District"</span>,</span>
+<span>       caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Data sourced from the B.C. Data Catalogue\n on "</span>,</span>
+<span>                        <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                        <span class="st">" using the bcdata R package"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="vignette-fig-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%"></p>
 </div>
 </div>
@@ -312,7 +312,7 @@ See the License for the specific language governing permissions and limitations 
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
     </footer>

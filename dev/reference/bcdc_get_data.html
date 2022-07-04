@@ -62,7 +62,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bcdc_get_data</span><span class="op">(</span><span class="va">record</span>, resource <span class="op">=</span> <span class="cn">NULL</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bcdc_get_data</span><span class="op">(</span><span class="va">record</span>, resource <span class="op">=</span> <span class="cn">NULL</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -77,33 +77,42 @@ If you use the human-readable name a warning will be issued once per
 session. You can silence these warnings altogether by setting an option:
 <code>options("silence_named_get_data_warning" = TRUE)</code> - which you can set
 in your .Rprofile file so the option persists across sessions.</p></dd>
+
+
 <dt>resource</dt>
 <dd><p>optional argument used when there are multiple data files
 within the same record. See examples.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>When more than one resource is available for a record,
 should extra information about those resources be printed to the console?
 Default <code>TRUE</code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed to other functions. Tabular data is passed to a function to handle
 the import based on the file extension. <code><a href="bcdc_read_functions.html">bcdc_read_functions()</a></code> provides details on which functions
 handle the data import. You can then use this information to look at the help pages of those functions.
 See the examples for a workflow that illustrates this process.
 For spatial Web Feature Service data the <code>...</code> arguments are passed to <code><a href="bcdc_query_geodata.html">bcdc_query_geodata()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of a type relevant to the resource (usually a tibble or an sf object)</p>
+    
+
+<p>An object of a type relevant to the resource (usually a tibble or an sf object)</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># Using the record and resource ID:</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">bcdc_get_data</span><span class="op">(</span>record <span class="op">=</span> <span class="st">'76b1b7a3-2112-4444-857a-afccf7b20da8'</span>,</span>
-<span class="r-in">                resource <span class="op">=</span> <span class="st">'4d0377d9-e8a1-429b-824f-0ce8f363512c'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Using the record and resource ID:</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">bcdc_get_data</span><span class="op">(</span>record <span class="op">=</span> <span class="st">'76b1b7a3-2112-4444-857a-afccf7b20da8'</span>,</span></span>
+<span class="r-in"><span>                resource <span class="op">=</span> <span class="st">'4d0377d9-e8a1-429b-824f-0ce8f363512c'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 455 features and 41 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POINT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
@@ -129,10 +138,10 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ALIAS_ADDRESS &lt;chr&gt;, STREET_ADDRESS &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   POSTAL_CODE &lt;chr&gt;, LOCALITY &lt;chr&gt;, CONTACT_PHONE &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CONTACT_EMAIL &lt;chr&gt;, CONTACT_FAX &lt;chr&gt;, …</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading the data using the read_csv function from the readr package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">357</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">4</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────</span></span>
@@ -155,15 +164,15 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> WEST KELOWNA  Volcanic Hills Estate W… 2845 B… V1Z2G6    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> OLIVER        Orchard Hill Estate Cid… 3480 F… V0H1T0    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 347 more rows</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Using a `bcdc_record` object obtained from `bcdc_get_record`:</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">record</span> <span class="op">&lt;-</span> <span class="fu"><a href="bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using a `bcdc_record` object obtained from `bcdc_get_record`:</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">record</span> <span class="op">&lt;-</span> <span class="fu"><a href="bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">'1d21922b-ec4f-42e5-8f6b-bf320a286157'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading the data using the read_csv function from the readr package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">357</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">4</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────</span></span>
@@ -186,11 +195,11 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> WEST KELOWNA  Volcanic Hills Estate W… 2845 B… V1Z2G6    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> OLIVER        Orchard Hill Estate Cid… 3480 F… V0H1T0    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 347 more rows</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Using a BCGW name</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using a BCGW name</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 455 features and 41 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POINT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
@@ -216,16 +225,16 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ALIAS_ADDRESS &lt;chr&gt;, STREET_ADDRESS &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   POSTAL_CODE &lt;chr&gt;, LOCALITY &lt;chr&gt;, CONTACT_PHONE &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CONTACT_EMAIL &lt;chr&gt;, CONTACT_FAX &lt;chr&gt;, …</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Using sf's sql querying ability</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">bcdc_get_data</span><span class="op">(</span></span>
-<span class="r-in">    record <span class="op">=</span> <span class="st">'30aeb5c1-4285-46c8-b60b-15b1a6f4258b'</span>,</span>
-<span class="r-in">    resource <span class="op">=</span> <span class="st">'3d72cf36-ab53-4a2a-9988-a883d7488384'</span>,</span>
-<span class="r-in">    layer <span class="op">=</span> <span class="st">'BC_Boundary_Terrestrial_Line'</span>,</span>
-<span class="r-in">    query <span class="op">=</span> <span class="st">"SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length &lt; 100"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using sf's sql querying ability</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">bcdc_get_data</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    record <span class="op">=</span> <span class="st">'30aeb5c1-4285-46c8-b60b-15b1a6f4258b'</span>,</span></span>
+<span class="r-in"><span>    resource <span class="op">=</span> <span class="st">'3d72cf36-ab53-4a2a-9988-a883d7488384'</span>,</span></span>
+<span class="r-in"><span>    layer <span class="op">=</span> <span class="st">'BC_Boundary_Terrestrial_Line'</span>,</span></span>
+<span class="r-in"><span>    query <span class="op">=</span> <span class="st">"SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length &lt; 100"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading the data using the read_sf function from the sf package.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument layer is ignored when query is specified</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 6106 features and 1 field</span>
@@ -247,13 +256,13 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         76.7 (1176492 371248.6, 1176485 371248.3, 117647…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         87.2 (1178786 371574.1, 1178778 371572.7, 117877…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6,096 more rows</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Example of correcting import problems</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Some initial problems reading in the data</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Example of correcting import problems</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Some initial problems reading in the data</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'d7e6c8c7-052f-4f06-b178-74c02c243ea4'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading the data using the read_xlsx function from the readxl package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This .xlsx resource contains the following sheets: </span>
@@ -289,11 +298,11 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1000                  East… Male  2027  4515  1645  1510 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 891 more rows, and 4 more variables: ...8 &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ...9 &lt;chr&gt;, ...10 &lt;chr&gt;, ...11 &lt;chr&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## From bcdc_get_record we realize that the data is in xlsx format</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in"> <span class="fu"><a href="bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">'8620ce82-4943-43c4-9932-40730a0255d6'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## From bcdc_get_record we realize that the data is in xlsx format</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">'8620ce82-4943-43c4-9932-40730a0255d6'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">B.C. Data Catalogue Record: </span>New Homes</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Registry (2016-2021)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Name: </span>new-homes-registry-2016-2021-</span>
@@ -307,12 +316,12 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1. New Homes Registrations 2016-2021 (xlsx)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Access the full 'Resources' data frame using:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_tidy_resources('8620ce82-4943-43c4-9932-40730a0255d6')</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## bcdc_read_functions let's us know that bcdata</span></span>
-<span class="r-in"><span class="co">## uses readxl::read_excel to import xlsx files</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in"> <span class="fu"><a href="bcdc_read_functions.html">bcdc_read_functions</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## bcdc_read_functions let's us know that bcdata</span></span></span>
+<span class="r-in"><span><span class="co">## uses readxl::read_excel to import xlsx files</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="bcdc_read_functions.html">bcdc_read_functions</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    format  package fun      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
@@ -327,12 +336,12 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> tsv     readr   read_tsv </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> xlsx    readxl  read_xlsx</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> xls     readxl  read_xls </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## bcdata let's you know that this resource has</span></span>
-<span class="r-in"><span class="co">## multiple worksheets</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in"> <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'8620ce82-4943-43c4-9932-40730a0255d6'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## bcdata let's you know that this resource has</span></span></span>
+<span class="r-in"><span><span class="co">## multiple worksheets</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span> <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'8620ce82-4943-43c4-9932-40730a0255d6'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading the data using the read_xlsx function from the readxl package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This .xlsx resource contains the following sheets: </span>
@@ -342,12 +351,12 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  'Purpose Built Rental'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Defaulting to the 'Notes' sheet. See ?bcdc_get_data for examples on how to specify a sheet.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 0</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## we can control what is read in from an excel file</span></span>
-<span class="r-in"><span class="co">## using arguments from readxl::read_excel</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'8620ce82-4943-43c4-9932-40730a0255d6'</span>, sheet <span class="op">=</span> <span class="st">'Regional Districts'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## we can control what is read in from an excel file</span></span></span>
+<span class="r-in"><span><span class="co">## using arguments from readxl::read_excel</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu">bcdc_get_data</span><span class="op">(</span><span class="st">'8620ce82-4943-43c4-9932-40730a0255d6'</span>, sheet <span class="op">=</span> <span class="st">'Regional Districts'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading the data using the read_xlsx function from the readxl package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This .xlsx resource contains the following sheets: </span>
@@ -360,11 +369,11 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Error: Sheet 'Regional Districts' not found</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The file can be found here:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   '/tmp/Rtmp0OmFF8/bcdata_4c818a03bc9/file4c81671e5411.xlsx'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   '/tmp/Rtmpx774ua/bcdata_41d04819bfed/file41d07e22c855.xlsx'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> if you would like to try to read it manually.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -376,7 +385,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
     </footer></div>
