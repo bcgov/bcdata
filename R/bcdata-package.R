@@ -19,6 +19,6 @@
 #' @importFrom methods setOldClass
 NULL
 
-releas_qustions <- function() {
+release_questions <- function() {
   c("Have you run test and check with internet turned off?")
 }
