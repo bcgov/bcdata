@@ -60,6 +60,8 @@ test_that("head/tail works with a record that would otherwise require pagination
 })
 
 test_that("names.bcdc_promise returns the same as names on a data.frame", {
+  skip_if_net_down()
+  skip_on_cran()
   query01 <- bcdc_query_geodata(point_record) %>%
     head()
 
@@ -70,6 +72,8 @@ test_that("names.bcdc_promise returns the same as names on a data.frame", {
 })
 
 test_that("names.bcdc_promise returns the same as names on a data.frame when using select", {
+  skip_if_net_down()
+  skip_on_cran()
   query02 <- bcdc_query_geodata(polygon_record) %>%
     head() %>%
     select(1:3)
