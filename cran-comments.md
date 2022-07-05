@@ -1,6 +1,6 @@
 ## Release summary
 
-This is a patch release.
+This is a patch release, primarily to fix a test that did not fail gracefully when the internet resource was unavailable, as per email from CRAN June 27, 2022.
 
 ### CRAN check issues
 
