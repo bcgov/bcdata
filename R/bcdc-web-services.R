@@ -46,18 +46,18 @@
 #' \donttest{
 #' # Returns a bcdc_promise, which can be further refined using filter/select:
 #' try(
-#'   bcdc_query_geodata("bc-airports", crs = 3857)
+#'   res <- bcdc_query_geodata("bc-airports", crs = 3857)
 #' )
 #'
 #' # To obtain the actual data as an sf object, collect() must be called:
 #' try(
-#'   bcdc_query_geodata("bc-airports", crs = 3857) %>%
+#'   res <- bcdc_query_geodata("bc-airports", crs = 3857) %>%
 #'     filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
 #'     collect()
 #' )
 #'
 #' try(
-#'   bcdc_query_geodata("groundwater-wells") %>%
+#'   res <- bcdc_query_geodata("groundwater-wells") %>%
 #'     filter(OBSERVATION_WELL_NUMBER == "108") %>%
 #'     select(WELL_TAG_NUMBER, INTENDED_WATER_USE) %>%
 #'     collect()
@@ -65,23 +65,23 @@
 #'
 #' ## A moderately large layer
 #' try(
-#'   bcdc_query_geodata("bc-environmental-monitoring-locations")
+#'   res <- bcdc_query_geodata("bc-environmental-monitoring-locations")
 #' )
 #'
 #' try(
-#'   bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
+#'   res <- bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
 #'     filter(PERMIT_RELATIONSHIP == "DISCHARGE")
 #' )
 #'
 #'
 #' ## A very large layer
 #' try(
-#'   bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+#'   res <- bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 #' )
 #'
 #' ## Using a BCGW name
 #' try(
-#'   bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
+#'   res <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #' )
 #' }
 #' @export

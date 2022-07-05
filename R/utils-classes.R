@@ -274,13 +274,13 @@ filter.bcdc_promise <- function(.data, ...) {
 #'
 #' ## Select columns
 #' try(
-#'   bcdc_query_geodata("bc-airports") %>%
+#'   res <- bcdc_query_geodata("bc-airports") %>%
 #'     select(DESCRIPTION, PHYSICAL_ADDRESS)
 #' )
 #'
 #' ## Select "sticky" columns
 #' try(
-#'   bcdc_query_geodata("bc-airports") %>%
+#'   res <- bcdc_query_geodata("bc-airports") %>%
 #'     select(LOCALITY)
 #' )
 #' }
@@ -366,7 +366,7 @@ names.bcdc_promise <- function(x) {
 #'
 #' ## Mutate columns
 #' try(
-#'   bcdc_query_geodata("bc-airports") %>%
+#'   res <- bcdc_query_geodata("bc-airports") %>%
 #'     mutate(LATITUDE * 100)
 #' )
 #' }
