@@ -133,37 +133,12 @@ object with <code><a href="collect-methods.html">collect()</a></code>. See examp
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Returns a bcdc_promise, which can be further refined using filter/select:</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-airports"</span>, crs <span class="op">=</span> <span class="fl">3857</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-airports"</span>, crs <span class="op">=</span> <span class="fl">3857</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> There was an issue sending this WFS request</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Request:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   URL: https://openmaps.gov.bc.ca/geo/pub/wfs</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   POST fields:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3857&amp;count=6</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Content-Type: application/x-www-form-urlencoded</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept-Encoding: gzip, deflate</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept: application/json, text/xml, application/xml, */*</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   User-Agent: https://github.com/bcgov/bcdata</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Response:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   status: HTTP/1.1 503</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 18:29:59 GMT</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   server: Apache</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-frame-options: allow-from (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60002</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-type: text/html;charset=utf-8</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-language: en</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-length: 1201</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-origin: (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-credentials: true</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-max-age: 1000</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   connection: close</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To obtain the actual data as an sf object, collect() must be called:</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-airports"</span>, crs <span class="op">=</span> <span class="fl">3857</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-airports"</span>, crs <span class="op">=</span> <span class="fl">3857</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="filter.html">filter</a></span><span class="op">(</span><span class="va">PHYSICAL_ADDRESS</span> <span class="op">==</span> <span class="st">'Victoria, BC'</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
@@ -188,7 +163,7 @@ object with <code><a href="collect-methods.html">collect()</a></code>. See examp
 <span class="r-out co"><span class="r-pr">#&gt;</span>   User-Agent: https://github.com/bcgov/bcdata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Response:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   status: HTTP/1.1 503</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 18:31:02 GMT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 20:28:36 GMT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   server: Apache</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   x-frame-options: allow-from (null)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60002</span>
@@ -204,7 +179,7 @@ object with <code><a href="collect-methods.html">collect()</a></code>. See examp
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"groundwater-wells"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"groundwater-wells"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="filter.html">filter</a></span><span class="op">(</span><span class="va">OBSERVATION_WELL_NUMBER</span> <span class="op">==</span> <span class="st">"108"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="select.html">select</a></span><span class="op">(</span><span class="va">WELL_TAG_NUMBER</span>, <span class="va">INTENDED_WATER_USE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -221,10 +196,10 @@ object with <code><a href="collect-methods.html">collect()</a></code>. See examp
 <span class="r-out co"><span class="r-pr">#&gt;</span>   User-Agent: https://github.com/bcgov/bcdata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Response:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   status: HTTP/1.1 503</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 18:32:04 GMT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 20:29:37 GMT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   server: Apache</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   x-frame-options: allow-from (null)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60003</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60005</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   content-type: text/html;charset=utf-8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   content-language: en</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   content-length: 1201</span>
@@ -238,124 +213,24 @@ object with <code><a href="collect-methods.html">collect()</a></code>. See examp
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## A moderately large layer</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-environmental-monitoring-locations"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-environmental-monitoring-locations"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> There was an issue sending this WFS request</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Request:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   URL: https://openmaps.gov.bc.ca/geo/pub/wfs</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   POST fields:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW&amp;SRSNAME=EPSG%3A3005&amp;count=6</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Content-Type: application/x-www-form-urlencoded</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept-Encoding: gzip, deflate</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept: application/json, text/xml, application/xml, */*</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   User-Agent: https://github.com/bcgov/bcdata</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Response:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   status: HTTP/1.1 503</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 18:33:06 GMT</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   server: Apache</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-frame-options: allow-from (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60009</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-type: text/html;charset=utf-8</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-language: en</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-length: 1201</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-origin: (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-credentials: true</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-max-age: 1000</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   connection: close</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-environmental-monitoring-locations"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-environmental-monitoring-locations"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="filter.html">filter</a></span><span class="op">(</span><span class="va">PERMIT_RELATIONSHIP</span> <span class="op">==</span> <span class="st">"DISCHARGE"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> There was an issue sending this WFS request</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Request:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   URL: https://openmaps.gov.bc.ca/geo/pub/wfs</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   POST fields:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW&amp;SRSNAME=EPSG%3A3005&amp;CQL_FILTER=%28%22PERMIT_RELATIONSHIP%22%20%3D%20%27DISCHARGE%27%29&amp;count=6</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Content-Type: application/x-www-form-urlencoded</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept-Encoding: gzip, deflate</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept: application/json, text/xml, application/xml, */*</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   User-Agent: https://github.com/bcgov/bcdata</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Response:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   status: HTTP/1.1 503</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 18:34:07 GMT</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   server: Apache</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-frame-options: allow-from (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60002</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-type: text/html;charset=utf-8</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-language: en</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-length: 1201</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-origin: (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-credentials: true</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-max-age: 1000</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   connection: close</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## A very large layer</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"terrestrial-protected-areas-representation-by-biogeoclimatic-unit"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"terrestrial-protected-areas-representation-by-biogeoclimatic-unit"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> There was an issue sending this WFS request</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Request:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   URL: https://openmaps.gov.bc.ca/geo/pub/wfs</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   POST fields:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_LAND_AND_NATURAL_RESOURCE.PASO_PCT_BGC_CODE_PRTCTD_SVW&amp;SRSNAME=EPSG%3A3005&amp;count=6</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Content-Type: application/x-www-form-urlencoded</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept-Encoding: gzip, deflate</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept: application/json, text/xml, application/xml, */*</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   User-Agent: https://github.com/bcgov/bcdata</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Response:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   status: HTTP/1.1 503</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 18:35:10 GMT</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   server: Apache</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-frame-options: allow-from (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60004</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-type: text/html;charset=utf-8</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-language: en</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-length: 1201</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-origin: (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-credentials: true</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-max-age: 1000</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   connection: close</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Using a BCGW name</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> There was an issue sending this WFS request</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Request:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   URL: https://openmaps.gov.bc.ca/geo/pub/wfs</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   POST fields:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>     SERVICE=WFS&amp;VERSION=2.0.0&amp;REQUEST=GetFeature&amp;outputFormat=application%2Fjson&amp;typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&amp;SRSNAME=EPSG%3A3005&amp;count=6</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Content-Type: application/x-www-form-urlencoded</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept-Encoding: gzip, deflate</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   Accept: application/json, text/xml, application/xml, */*</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   User-Agent: https://github.com/bcgov/bcdata</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Response:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   status: HTTP/1.1 503</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   date: Tue, 05 Jul 2022 18:36:10 GMT</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   server: Apache</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-frame-options: allow-from (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   x-control-flow-delay-ms: 60002</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-type: text/html;charset=utf-8</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-language: en</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   content-length: 1201</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-origin: (null)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-credentials: true</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-methods: POST, GET, OPTIONS, HEAD</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-allow-headers: X-Requested-With, Referer, Origin, Content-Type, SOAPAction, Authorization, Accept</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   access-control-max-age: 1000</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   connection: close</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
