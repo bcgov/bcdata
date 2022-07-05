@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.3.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,12 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.1" id="bcdata-031">bcdata 0.3.1<a class="anchor" aria-label="anchor" href="#bcdata-031"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.3.2" id="bcdata-032">bcdata 0.3.2<a class="anchor" aria-label="anchor" href="#bcdata-032"></a></h2>
+<ul><li>Fixed a test that was failing when no internet was available</li>
+<li>Upgraded to <code>dbplyr</code> edition 2, bumped dependency to <code>2.0.0</code> (<a href="https://github.com/bcgov/bcdata/issues/300" class="external-link">#300</a>)</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.1" id="bcdata-031">bcdata 0.3.1<a class="anchor" aria-label="anchor" href="#bcdata-031"></a></h2><p class="text-muted">CRAN release: 2022-05-24</p>
 <ul><li>Added <code>bcdc_get_citation</code> to generate bibliographic entries (via <code><a href="https://rdrr.io/r/utils/bibentry.html" class="external-link">utils::bibentry</a></code>) for individuals records. <a href="https://github.com/bcgov/bcdata/issues/273" class="external-link">#273</a></li>
 <li>Results from <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> (objects of class <code>"bcdc_recordlist"</code>) now print 50 records by default, instead of 10. In addition, there is a new <code>[</code> method for <code>"bcdc_recordlist"</code> objects, allowing you to subset these lists and still have a nice printout (<a href="https://github.com/bcgov/bcdata/issues/288" class="external-link">#288</a>).</li>
 <li>Ensure that <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> fails informatively when a given resource doesn’t exist in a record (<a href="https://github.com/bcgov/bcdata/issues/290" class="external-link">#290</a>)</li>
@@ -73,7 +78,7 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.4" id="bcdata-024">bcdata 0.2.4<a class="anchor" aria-label="anchor" href="#bcdata-024"></a></h2><p class="text-muted">CRAN release: 2021-05-04</p>
-<ul><li>Code in <code><a href="https://rdrr.io/r/base/ns-hooks.html" class="external-link">.onLoad()</a></code> that sent a request to the wfs getCapabilities endpoint could cause the package to fail to load. This was moved into an internal function <code>bcdc_get_capabilities()</code> that makes the request the first time it’s required, and stores the result for the remainder of the session (<a href="https://github.com/bcgov/bcdata/issues/271" class="external-link">#271</a>)</li>
+<ul><li>Code in <code>.onLoad()</code> that sent a request to the wfs getCapabilities endpoint could cause the package to fail to load. This was moved into an internal function <code>bcdc_get_capabilities()</code> that makes the request the first time it’s required, and stores the result for the remainder of the session (<a href="https://github.com/bcgov/bcdata/issues/271" class="external-link">#271</a>)</li>
 <li>testthat is now used conditionally to only run tests if the testthat package is installed.</li>
 </ul></div>
     <div class="section level2">
@@ -189,7 +194,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
     </footer></div>
