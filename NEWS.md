@@ -1,4 +1,7 @@
-# bcdata (development version)
+# bcdata 0.3.2
+
+* Fixed a test that was failing when no internet was available
+* Upgraded to `dbplyr` edition 2, bumped dependency to `2.0.0` (#300)
 
 # bcdata 0.3.1
 
