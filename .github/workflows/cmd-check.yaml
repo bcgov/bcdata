@@ -16,12 +16,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: 'release', args: "'--no-manual'"}
-        - { os: macOS-latest,   r: 'release', args: "'--no-manual'"}
-        - { os: ubuntu-18.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "'--no-manual'"}
-        - { os: ubuntu-18.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "'--no-manual'"}
-        - { os: ubuntu-18.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "''"}
-        - { os: ubuntu-18.04,   r: 'devel',   rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "'--no-manual'"}
+        - { os: windows-latest, r: 'release', args: "'--no-manual'", rundonttest: "false"}
+        - { os: macOS-latest,   r: 'release', args: "'--no-manual'", rundonttest: "false"}
+        - { os: ubuntu-18.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "'--no-manual'", rundonttest: "false"}
+        - { os: ubuntu-18.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "'--no-manual'", rundonttest: "false"}
+        - { os: ubuntu-18.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "''", rundonttest: "true"}
+        - { os: ubuntu-18.04,   r: 'devel',   rspm: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest", args: "'--no-manual'", rundonttest: "false"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -31,6 +31,7 @@ jobs:
       BCDC_KEY: ${{ secrets.BCDC_KEY }}
       BCDC_TEST_RECORD: ${{ secrets.BCDC_TEST_RECORD }}
       cache-version: v6
+      _R_CHECK_DONTTEST_EXAMPLES_: ${{ matrix.config.rundonttest }}
 
     steps:
       - uses: actions/checkout@v2
