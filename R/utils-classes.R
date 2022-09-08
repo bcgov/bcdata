@@ -233,7 +233,7 @@ print.bcdc_query <- function(x, ...) {
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
 
-  current_cql = cql_translate(...)
+  current_cql = cql_translate(..., .colnames = .data$cols_df$col_name %||% character(0))
   ## Change CQL query on the fly if geom is not GEOMETRY
   current_cql = specify_geom_name(.data$cols_df, current_cql)
 

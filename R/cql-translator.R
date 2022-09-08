@@ -18,7 +18,7 @@ NULL
 #' @importFrom rlang :=
 
 # Function to translate R code to CQL
-cql_translate <- function(...) {
+cql_translate <- function(..., .colnames = character(0)) {
   ## convert dots to list of quosures
   dots <- rlang::quos(...)
   ## run partial_eval on them to evaluate named objects in the environment
@@ -38,19 +38,27 @@ cql_translate <- function(...) {
     # not evaluated. Do this by using `rlang::call2` to wrap the function call in
     # local()
     # See ?rlang::partial_eval and https://github.com/bcgov/bcdata/issues/146
-    for (call_arg in rlang::call_args_names(x)) {
-      if (is.call(rlang::call_args(x)[[call_arg]])) {
-        x <- rlang::call_modify(
-          x, !!call_arg := rlang::call2("local", rlang::call_args(x)[[call_arg]])
-        )
+    newargs <- lapply(rlang::call_args(x), function(y) {
+      if (is.call(y)) {
+        return(rlang::call2("local", y))
+      } else {
+        y
       }
-    }
+    })
+
+    # Recreate call with local() in the right places
+    x <- rlang::as_quosure(rlang::call2(rlang::call_name(x), !!!newargs), env = rlang::get_env(x))
 
     if (utils::packageVersion("dbplyr") <= "2.1.1") {
-      rlang::new_quosure(dbplyr::partial_eval(x, vars = character()), rlang::get_env(x))
+      x <- rlang::new_quosure(dbplyr::partial_eval(x, vars = .colnames), rlang::get_env(x))
     } else {
-      rlang::new_quosure(dbplyr::partial_eval(x, data = dbplyr::lazy_frame()), rlang::get_env(x))
+      zero_row_df <- setNames(data.frame(t(.colnames)), .colnames)[0, , drop = FALSE])
+      x <- rlang::new_quosure(
+        dbplyr::partial_eval(x, data = dbplyr::tbl_lazy(zero_row_df),
+                             rlang::get_env(x)
+        )
     }
+    x
   })
 
   sql_where <- dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE)

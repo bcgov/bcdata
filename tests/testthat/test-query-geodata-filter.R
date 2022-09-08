@@ -70,7 +70,8 @@ test_that("Different combinations of predicates work", {
     crs = 3005)
 
   # with raw CQL
-  expect_equal(as.character(cql_translate(CQL('"POP_2000" < 2000'))),
+  expect_equal(as.character(cql_translate(CQL('"POP_2000" < 2000'),
+                                          .colnames = "POP_2000")),
                "(\"POP_2000\" < 2000)")
 
   # just with spatial predicate
@@ -79,52 +80,59 @@ test_that("Different combinations of predicates work", {
 
   # spatial predicate combined with regular comparison using comma
   and_statement <- "((WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8)))) AND (\"POP_2000\" < 2000))"
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < 2000L)),
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < 2000L),
+                            .colnames = "POP_2000"),
                and_statement)
 
   # spatial predicate combined with regular comparison as a named object using comma
   pop <- 2000L
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < pop)),
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < pop,
+                                          .colnames = "POP_2000")),
                and_statement)
 
   and_with_logical <- "(WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8))) AND \"POP_2000\" < 2000)"
   # spatial predicate combined with regular comparison as a named object using
   # explicit &
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox) & POP_2000 < pop)),
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox) & POP_2000 < pop,
+                                          .colnames = "POP_2000")),
                and_with_logical)
 
   # spatial predicate combined with regular comparison as a named object using
   # explicit |
   or_statement <- "(WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8))) OR \"POP_2000\" < 2000)"
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox) | POP_2000 < pop)),
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox) | POP_2000 < pop,
+                                          .colnames = "POP_2000")),
                or_statement)
 
   # spatial predicate combined with CQL using comma
   expect_equal(as.character(cql_translate(WITHIN(the_bbox),
-                                          CQL("\"POP_2000\" < 2000"))),
+                                          CQL("\"POP_2000\" < 2000"),
+                                          .colnames = "POP_2000")),
                and_statement)
 
   # spatial predicate combined with CQL using explicit &
   expect_equal(as.character(cql_translate(WITHIN(the_bbox) &
-                                            CQL("\"POP_2000\" < 2000"))),
+                                            CQL("\"POP_2000\" < 2000"),
+                                          .colnames = "POP_2000")),
                and_with_logical)
 
   # spatial predicate combined with CQL using explicit &
   expect_equal(as.character(cql_translate(WITHIN(the_bbox) |
-                                            CQL("\"POP_2000\" < 2000"))),
+                                            CQL("\"POP_2000\" < 2000"),
+                                          .colnames = "POP_2000")),
                or_statement)
 })
 
 test_that("subsetting works locally", {
   x <- c("a", "b")
   y <- data.frame(id = x, stringsAsFactors = FALSE)
-  expect_equal(as.character(cql_translate(foo == x[1])),
+  expect_equal(as.character(cql_translate(foo == x[1], .colnames = "foo")),
                "(\"foo\" = 'a')")
-  expect_equal(as.character(cql_translate(foo %in% y$id)),
+  expect_equal(as.character(cql_translate(foo %in% y$id, .colnames = "foo")),
                "(\"foo\" IN ('a', 'b'))")
-  expect_equal(as.character(cql_translate(foo %in% y[["id"]])),
+  expect_equal(as.character(cql_translate(foo %in% y[["id"]], .colnames = "foo")),
                "(\"foo\" IN ('a', 'b'))")
-  expect_equal(as.character(cql_translate(foo == y$id[2])),
+  expect_equal(as.character(cql_translate(foo == y$id[2], .colnames = "foo")),
                "(\"foo\" = 'b')")
 })
 
