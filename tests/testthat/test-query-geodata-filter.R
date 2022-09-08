@@ -80,8 +80,8 @@ test_that("Different combinations of predicates work", {
 
   # spatial predicate combined with regular comparison using comma
   and_statement <- "((WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8)))) AND (\"POP_2000\" < 2000))"
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < 2000L),
-                            .colnames = "POP_2000"),
+  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < 2000L,
+                            .colnames = "POP_2000")),
                and_statement)
 
   # spatial predicate combined with regular comparison as a named object using comma

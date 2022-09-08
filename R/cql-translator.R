@@ -52,10 +52,10 @@ cql_translate <- function(..., .colnames = character(0)) {
     if (utils::packageVersion("dbplyr") <= "2.1.1") {
       x <- rlang::new_quosure(dbplyr::partial_eval(x, vars = .colnames), rlang::get_env(x))
     } else {
-      zero_row_df <- setNames(data.frame(t(.colnames)), .colnames)[0, , drop = FALSE])
+      zero_row_df <- setNames(data.frame(t(.colnames)), .colnames)[0, , drop = FALSE]
       x <- rlang::new_quosure(
         dbplyr::partial_eval(x, data = dbplyr::tbl_lazy(zero_row_df),
-                             rlang::get_env(x)
+                             rlang::get_env(x))
         )
     }
     x
