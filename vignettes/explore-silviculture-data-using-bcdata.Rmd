@@ -1,6 +1,6 @@
 ---
 title: "Exploring Silviculture Data with bcdata"
-date: "2021-10-27"
+date: "2022-09-09"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Exploring Silviculture Data with bcdata}
@@ -88,32 +88,32 @@ We see that this is a [Web Feature Service-enabled](https://en.wikipedia.org/wik
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 #> Querying 'results-forest-cover-silviculture' record
-#> • Using collect() on this object will return 898559 features and 159 fields
-#> • Accessing this record requires pagination and will make 899 separate requests to the WFS.
+#> • Using collect() on this object will return 919424 features and 159 fields
+#> • Accessing this record requires pagination and will make 920 separate requests to the WFS.
 #> • See ?bcdc_options
 #> • At most six rows of the record are printed here
-#> ───────────────────────────────────────────────────────────────────────────────────────────────────────
+#> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 159 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
 #> Bounding box:  xmin: 1184167 ymin: 526455.5 xmax: 1801754 ymax: 1083545
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 160
-#>   id                 FOREST_COVER_ID STOCKING_STANDARD… OPENING_ID STANDARDS_UNIT_… SILV_POLYGON_NU…
-#>   <chr>                        <int>              <int>      <int> <chr>            <chr>           
-#> 1 WHSE_FOREST_VEGET…         4177991            2243439    1724262 1                C               
-#> 2 WHSE_FOREST_VEGET…         3994007                 NA    1248495 <NA>             91              
-#> 3 WHSE_FOREST_VEGET…         3994067                 NA    1120935 <NA>             86              
-#> 4 WHSE_FOREST_VEGET…         3994009            1404558    1248495 A                AA              
-#> 5 WHSE_FOREST_VEGET…         3994057            1211894    1120935 B                2B              
-#> 6 WHSE_FOREST_VEGET…         3994063                 NA    1120935 <NA>             82              
-#> # … with 154 more variables: SILV_POLYGON_AREA <dbl>, SILV_POLYGON_NET_AREA <dbl>,
-#> #   SILV_NON_MAPPED_AREA <int>, STOCKING_STATUS_CODE <chr>, STOCKING_TYPE_CODE <chr>,
-#> #   STOCKING_CLASS_CODE <chr>, SILV_RESERVE_CODE <chr>, SILV_RESERVE_OBJECTIVE_CODE <chr>,
+#>   id         FORES…¹ STOCK…² OPENI…³ STAND…⁴ SILV_…⁵ SILV_…⁶ SILV_…⁷ SILV_…⁸ STOCK…⁹ STOCK…˟ STOCK…˟
+#>   <chr>        <int>   <int>   <int> <chr>   <chr>     <dbl>   <dbl>   <int> <chr>   <chr>   <chr>  
+#> 1 WHSE_FORE… 4177991 2243439 1724262 1       C           1.6     1.6       0 IMM     ART     <NA>   
+#> 2 WHSE_FORE… 3994007      NA 1248495 <NA>    91          1.2     1.2       0 MAT     NAT     <NA>   
+#> 3 WHSE_FORE… 3994067      NA 1120935 <NA>    86          0.6     0.6       0 MAT     NAT     <NA>   
+#> 4 WHSE_FORE… 3994009 1404558 1248495 A       AA         22.1    22.1       0 IMM     ART     <NA>   
+#> 5 WHSE_FORE… 3994057 1211894 1120935 B       2B         16.9    16.9       0 IMM     ART     <NA>   
+#> 6 WHSE_FORE… 3994063      NA 1120935 <NA>    82          0.1     0.1       0 MAT     NAT     <NA>   
+#> # … with 148 more variables: SILV_RESERVE_CODE <chr>, SILV_RESERVE_OBJECTIVE_CODE <chr>,
 #> #   TREE_COVER_PATTERN_CODE <chr>, REENTRY_YEAR <chr>, REFERENCE_YEAR <int>, SITE_INDEX <int>,
 #> #   SITE_INDEX_SOURCE_CODE <chr>, BGC_ZONE_CODE <chr>, BGC_SUBZONE_CODE <chr>, BGC_VARIANT <chr>,
 #> #   BGC_PHASE <chr>, BEC_SITE_SERIES <chr>, BEC_SITE_TYPE <chr>, BEC_SERAL <chr>,
-#> #   IS_SILV_IMPLIED_IND <chr>, FOREST_COVER_SILV_TYPE <chr>, S_FOREST_COVER_LAYER_ID <int>, …
+#> #   IS_SILV_IMPLIED_IND <chr>, FOREST_COVER_SILV_TYPE <chr>, S_FOREST_COVER_LAYER_ID <int>,
+#> #   S_TOTAL_STEMS_PER_HA <chr>, S_TOTAL_WELL_SPACED_STEMS_HA <int>,
+#> #   S_WELL_SPACED_STEMS_PER_HA <int>, S_FREE_GROWING_STEMS_PER_HA <int>, …
 ```
 
 This query shows that this data set has many features and over 150 fields.  Each feature is a treatment unit within a harvested opening, and contains information on the leading five tree species that are present in each treatment unit, including stems per hectare, age, and height.
@@ -145,7 +145,7 @@ dpg %>%
   theme_minimal()
 ```
 
-<img src="vignette-fig-plot-dpg-1.png" title="plot of chunk plot-dpg" alt="plot of chunk plot-dpg" width="100%" />
+<img src="vignette-fig-plot-dpg-1.png" alt="plot of chunk plot-dpg" width="100%" />
 
 Now we have a spatial object that we can use as a bounding box to filter and download records in the RESULTS - silviculture layer from the Prince George Natural Resource District.
 
@@ -179,7 +179,7 @@ Let's look at the dimensions of this now much more manageable data object we hav
 
 ```r
 dim(trees_dpg)
-#> [1] 159 160
+#> [1] 211 160
 ```
 
 We can see there are several treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:
@@ -193,7 +193,7 @@ trees_dpg %>%
   theme_minimal()
 ```
 
-<img src="vignette-fig-map-larch-plantations-dpg-1.png" title="plot of chunk map-larch-plantations-dpg" alt="plot of chunk map-larch-plantations-dpg" width="100%" />
+<img src="vignette-fig-map-larch-plantations-dpg-1.png" alt="plot of chunk map-larch-plantations-dpg" width="100%" />
 
 
 We can also create some quick descriptive summaries of the data, treating the geospatial attribute table as a data frame in R, and answer our original question---how much western larch has been planted in the Prince George Natural Resource District?
@@ -220,7 +220,7 @@ trees_dpg %>%
   theme(legend.position = "none")
 ```
 
-<img src="vignette-fig-unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="100%" />
+<img src="vignette-fig-unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1" width="100%" />
 
 #### What is the Biogeoclimatic Ecosystem Classification (BEC) distribution of western larch plantations in the Prince George Natural Resource District?
 
@@ -231,6 +231,7 @@ We can download [British Columbia biogeoclimatic (BEC) data](https://catalogue.d
 ```r
 library(sf) #load the sf package
 
+# Load the BEC data for Prince George Natural Resource District
 # Load the BEC data for Prince George Natural Resource District
 bgc_dpg <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") %>%
   filter(BBOX(dpg, crs = "EPSG:3005")) %>% #note filtering with a BoundingBox
@@ -261,4 +262,4 @@ trees_bec_dpg %>%
   theme(legend.position = "none")
 ```
 
-<img src="vignette-fig-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%" />
+<img src="vignette-fig-unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" width="100%" />
