@@ -151,8 +151,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   ))
 
   if (grepl("_SP?G$", layer_name)) {
-    message("You are accessing a simplified view of the data - see the catalogue record for details.",
-            call. = FALSE)
+    message("You are accessing a simplified view of the data - see the catalogue record for details.")
   }
 
   ## Parameters for the API call
