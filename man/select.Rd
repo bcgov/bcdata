@@ -23,9 +23,9 @@ See \code{dplyr::\link[dplyr]{select}} for details.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{bcdc_promise}: select.bcdc_promise
-}}
+\item \code{select(bcdc_promise)}: select.bcdc_promise
 
+}}
 \examples{
 \donttest{
 try(

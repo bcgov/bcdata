@@ -20,11 +20,11 @@ See \code{dplyr::\link[dplyr:explain]{show_query}} for details.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{bcdc_promise}: show_query.bcdc_promise
+\item \code{show_query(bcdc_promise)}: show_query.bcdc_promise
 
-\item \code{bcdc_sf}: show_query.bcdc_promise
+\item \code{show_query(bcdc_sf)}: show_query.bcdc_promise
+
 }}
-
 \examples{
 \donttest{
 try(

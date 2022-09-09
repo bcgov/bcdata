@@ -15,7 +15,10 @@ conditions are combined with \code{&}. Only rows where the condition evaluates t
 \code{TRUE} are kept. Accepts normal R expressions as well as any of the special
 \link[=cql_geom_predicates]{CQL geometry functions} such as \code{WITHIN()} or \code{INTERSECTS()}.
 If you know \code{CQL} and want to write a \code{CQL} query directly, write it enclosed
-in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("ID = '42'")}}
+in quotes, wrapped in the \code{\link[=CQL]{CQL()}} function. e.g., \code{CQL("ID = '42'")}.
+
+If your filter expression contains calls that need to be executed locally, wrap them
+in \code{local()} to force evaluation in R before the request is sent to the server.}
 }
 \description{
 Filter a query from Web Feature Service using dplyr
@@ -27,9 +30,9 @@ See \code{dplyr::\link[dplyr]{filter}} for details.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{bcdc_promise}: filter.bcdc_promise
-}}
+\item \code{filter(bcdc_promise)}: filter.bcdc_promise
 
+}}
 \examples{
 \donttest{
 try(
@@ -41,6 +44,22 @@ try(
 try(
   ret1 <- bcdc_query_geodata("fire-perimeters-historical") \%>\%
     filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) \%>\%
+    collect()
+)
+
+# Use local() to force parts of your call to be evaluated in R:
+try(
+  # Create a bounding box around two points and use that to filter
+  # the remote data set
+  two_points <- st_sfc(st_point(c(1164434, 368738)),
+                     st_point(c(1203023, 412959)),
+                     crs = 3005)
+
+  # Wrapping the call to `st_bbox()` in `local()` ensures that it
+  # is executed in R to make a bounding box that is then sent to
+  # the server for the filtering operation:
+  res <- bcdc_query_geodata("local-and-regional-greenspaces") \%>\%
+    filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points))))) \%>\%
     collect()
 )
   }
