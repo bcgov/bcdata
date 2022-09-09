@@ -128,11 +128,11 @@ test_that("subsetting works locally", {
   y <- data.frame(id = x, stringsAsFactors = FALSE)
   expect_equal(as.character(cql_translate(foo == x[1], .colnames = "foo")),
                "(\"foo\" = 'a')")
-  expect_equal(as.character(cql_translate(foo %in% y$id, .colnames = "foo")),
+  expect_equal(as.character(cql_translate(foo %in% local(y$id), .colnames = "foo")),
                "(\"foo\" IN ('a', 'b'))")
   expect_equal(as.character(cql_translate(foo %in% y[["id"]], .colnames = "foo")),
                "(\"foo\" IN ('a', 'b'))")
-  expect_equal(as.character(cql_translate(foo == y$id[2], .colnames = "foo")),
+  expect_equal(as.character(cql_translate(foo == local(y$id[2]), .colnames = "foo")),
                "(\"foo\" = 'b')")
 })
 
@@ -258,14 +258,14 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
                      crs = 3005)
 
   qry <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
-    filter(BBOX(st_bbox(the_geom, crs = st_crs(the_geom)))) %>%
+    filter(BBOX(local(st_bbox(the_geom, crs = st_crs(the_geom))))) %>%
     show_query()
 
   expect_equal(as.character(qry$query_list$CQL_FILTER),
                "(BBOX(SHAPE, 1164434, 368738, 1203023, 412959, 'EPSG:3005'))")
 
   qry2 <- bcdc_query_geodata("local-and-regional-greenspaces") %>%
-    filter(DWITHIN(st_buffer(the_geom, 10000, nQuadSegs = 2), 100, "meters")) %>%
+    filter(DWITHIN(local(st_buffer(the_geom, 10000, nQuadSegs = 2)), 100, "meters")) %>%
     show_query()
 
   expect_match(as.character(qry2$query_list$CQL_FILTER),

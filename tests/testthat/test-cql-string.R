@@ -84,7 +84,7 @@ test_that("CQL functions fail correctly", {
 })
 
 test_that("unsupported aggregation functions fail correctly", {
-  expect_error(filter(structure(data.frame(x = 1), class = "bcdc_promise"), mean(x) > 5),
+  expect_error(filter(structure(list(cols_df = list(col_name = "x")), class = "bcdc_promise"), mean(x) > 5),
                "not supported by this database")
 })
 

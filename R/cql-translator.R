@@ -29,36 +29,10 @@ cql_translate <- function(..., .colnames = character(0)) {
   ## predicates and CQL() expressions are evaluated into valid CQL code
   ## so they can be combined with the rest of the query
   dots <- lapply(dots, function(x) {
-
-    # make sure all arguments are named in the call so can be modified
-    x <- rlang::call_standardise(x, env = rlang::get_env(x))
-
-    # if an argument to a predicate is a function call, need to tell it to evaluate
-    # locally, as by default all functions are treated as remote and thus
-    # not evaluated. Do this by using `rlang::call2` to wrap the function call in
-    # local()
-    # See ?rlang::partial_eval and https://github.com/bcgov/bcdata/issues/146
-    newargs <- lapply(rlang::call_args(x), function(y) {
-      if (is.call(y)) {
-        return(rlang::call2("local", y))
-      } else {
-        y
-      }
-    })
-
-    # Recreate call with local() in the right places
-    x <- rlang::as_quosure(rlang::call2(rlang::call_name(x), !!!newargs), env = rlang::get_env(x))
-
-    if (utils::packageVersion("dbplyr") <= "2.1.1") {
-      x <- rlang::new_quosure(dbplyr::partial_eval(x, vars = .colnames), rlang::get_env(x))
-    } else {
-      zero_row_df <- setNames(data.frame(t(.colnames)), .colnames)[0, , drop = FALSE]
-      x <- rlang::new_quosure(
-        dbplyr::partial_eval(x, data = dbplyr::tbl_lazy(zero_row_df),
-                             rlang::get_env(x))
-        )
-    }
-    x
+    zero_row_df <- stats::setNames(data.frame(t(.colnames)), .colnames)[0, , drop = FALSE]
+    rlang::new_quosure(
+      dbplyr::partial_eval(x, data = dbplyr::tbl_lazy(zero_row_df))
+    )
   })
 
   sql_where <- dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE)
