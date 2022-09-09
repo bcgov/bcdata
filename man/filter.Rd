@@ -48,9 +48,10 @@ try(
 )
 
 # Use local() to force parts of your call to be evaluated in R:
-try(
+try({
   # Create a bounding box around two points and use that to filter
   # the remote data set
+  library(sf)
   two_points <- st_sfc(st_point(c(1164434, 368738)),
                      st_point(c(1203023, 412959)),
                      crs = 3005)
@@ -61,7 +62,7 @@ try(
   res <- bcdc_query_geodata("local-and-regional-greenspaces") \%>\%
     filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points))))) \%>\%
     collect()
-)
+})
   }
 }
 \keyword{internal}
