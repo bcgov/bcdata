@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2022-09-09"
+date: "2022-09-12"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -318,6 +318,17 @@ districts_parks_join %>%
 #>   SCHOOL_DISTRICT_NAME total_area
 #>   <chr>                     [m^2]
 #> 1 Prince George         11793481.
+```
+
+### A note about using local R functions in constructing filter queries
+
+Suppose we now want to find all of the parks within 1km of the school districts we are interested in. We can use `sf::st_buffer()` to make a buffer around the `districts` object, then intersect that with the greenspaces data. Note that `st_buffer()` needs to be executed in R on our computer, to create the buffered area that is sent to the WFS server to perform the `INTERSECT` query remotely. We tell `filter()` to evaluate that piece of code locally by wrapping it in a `local()` call:
+
+
+```r
+greenspaces_around <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  filter(INTERSECTS(local(st_buffer(districts, 1000)))) %>%
+  collect()
 ```
 
 ## Additional Useful Functions
