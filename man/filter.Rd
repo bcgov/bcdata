@@ -63,6 +63,6 @@ try({
     filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points))))) \%>\%
     collect()
 })
-  }
+}
 }
 \keyword{internal}

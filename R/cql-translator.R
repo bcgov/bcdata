@@ -148,13 +148,19 @@ sql_translation.wfsConnection <- function(conn) {
   )
 }
 
+#' @rdname CQL
+#' @export
+#' @aliases
+#'   CQL-class
+setClass("CQL", contains = c("SQL", "character"))
+
 # Make sure that identities (LHS of relations) are escaped with double quotes
 
 #' @keywords internal
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteIdentifier
 #' @export
-setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
+setMethod("dbQuoteIdentifier", c("wfsConnection", "CQL"),
           function(conn, x) dbplyr::sql_quote(x, "\""))
 
 # Make sure that strings (RHS of relations) are escaped with single quotes
@@ -163,5 +169,5 @@ setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteString
 #' @export
-setMethod("dbQuoteString", c("wfsConnection", "ANY"),
+setMethod("dbQuoteString", c("wfsConnection", "CQL"),
           function(conn, x) dbplyr::sql_quote(x, "'"))
