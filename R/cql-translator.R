@@ -29,9 +29,8 @@ cql_translate <- function(..., .colnames = character(0)) {
   ## predicates and CQL() expressions are evaluated into valid CQL code
   ## so they can be combined with the rest of the query
   dots <- lapply(dots, function(x) {
-    zero_row_df <- stats::setNames(data.frame(t(.colnames)), .colnames)[0, , drop = FALSE]
     rlang::new_quosure(
-      dbplyr::partial_eval(x, data = dbplyr::tbl_lazy(zero_row_df))
+      dbplyr::partial_eval(x, data = names_to_lazy_tbl(.colnames))
     )
   })
 
