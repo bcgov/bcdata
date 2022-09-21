@@ -78,3 +78,10 @@ test_that("make_url works", {
   expect_equal(make_url("https://foo.bar/", "blah/", "/buzz/", trailing_slash = TRUE),
                "https://foo.bar/blah/buzz/")
 })
+
+test_that("names_to_lazy_tbl works", {
+  nms <- letters[1:3]
+  lazy <- names_to_lazy_tbl(nms)
+  expect_is(lazy, "tbl_lazy")
+  expect_equal(lazy$lazy_query$vars, nms)
+})
