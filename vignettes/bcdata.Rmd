@@ -124,19 +124,19 @@ You can see all valid values for the catalogue search facets using `bcdata::bcdc
 ## Valid values for search facet 'license_id'
 bcdc_search_facets(facet = "license_id")
 #>         facet count                                             display_name name
-#> 1  license_id    92                           Statistics Canada Open Licence   21
+#> 1  license_id    66                           Statistics Canada Open Licence   21
 #> 2  license_id     1               Queen's Printer Licence - British Columbia   25
 #> 3  license_id    12                      Open Government Licence – TransLink   48
 #> 4  license_id    13 Open Government Licence – Municipality of North Cowichan   44
 #> 5  license_id     5    Open Government Licence – Industry Training Authority   50
 #> 6  license_id     3                 Open Government Licence - Destination BC   43
 #> 7  license_id    61                         Open Government Licence - Canada   24
-#> 8  license_id  1827               Open Government Licence - British Columbia    2
+#> 8  license_id  1590               Open Government Licence - British Columbia    2
 #> 9  license_id     2                  Open Government Licence - BC Assessment   47
 #> 10 license_id     4                   Open Data Licence for ICBC Information   49
 #> 11 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45
 #> 12 license_id    15                           Elections BC Open Data Licence   42
-#> 13 license_id  1689                                              Access Only   22
+#> 13 license_id  1432                                              Access Only   22
 ```
 
 Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:

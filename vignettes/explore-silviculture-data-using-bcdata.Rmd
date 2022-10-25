@@ -1,6 +1,6 @@
 ---
 title: "Exploring Silviculture Data with bcdata"
-date: "2022-09-09"
+date: "2022-10-25"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Exploring Silviculture Data with bcdata}
@@ -88,8 +88,8 @@ We see that this is a [Web Feature Service-enabled](https://en.wikipedia.org/wik
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 #> Querying 'results-forest-cover-silviculture' record
-#> • Using collect() on this object will return 919424 features and 159 fields
-#> • Accessing this record requires pagination and will make 920 separate requests to the WFS.
+#> • Using collect() on this object will return 920464 features and 159 fields
+#> • Accessing this record requires pagination and will make 921 separate requests to the WFS.
 #> • See ?bcdc_options
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -179,7 +179,7 @@ Let's look at the dimensions of this now much more manageable data object we hav
 
 ```r
 dim(trees_dpg)
-#> [1] 211 160
+#> [1] 212 160
 ```
 
 We can see there are several treatment units planted with western larch, and we can make a quick map of these harvested openings for the Prince George Natural Resource District:
