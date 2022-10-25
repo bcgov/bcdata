@@ -82,8 +82,7 @@
 
 
 
-
-<div class="row">
+<script src="efficiently-query-spatial-data-in-the-bc-data-catalogue_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Querying Spatial Data with bcdata</h1>
             
@@ -322,7 +321,7 @@ See the License for the specific language governing permissions and limitations 
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join</a></span><span class="op">(</span><span class="va">districts</span>, left <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="vignette-fig-dp_join-1.png" title="plot of chunk dp_join" alt="plot of chunk dp_join" width="100%"></p>
 <p>A second approach is to set an internal option (<code>bcdata.max_geom_pred_size</code>) and increase the threshold of when a bounding box is drawn. Options are set in R like this:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"bcdata.max_geom_pred_size"</span> <span class="ot">=</span> {object size <span class="cf">in</span> bytes})</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">options</span>(<span class="st">"bcdata.max_geom_pred_size"</span> =<span class="st"> </span>{object size <span class="cf">in</span> bytes})</span></code></pre></div>
 <p>The value of <code>bcdata.max_geom_pred_size</code> is set conservatively so that requests to the Web Feature Service are more consistently successful. Increasing this value may result in invalid requests.</p>
 <p>Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
