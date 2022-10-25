@@ -18,9 +18,9 @@ https://catalogue.data.gov.bc.ca/group or accessed directly from R using \code{b
 }
 \section{Functions}{
 \itemize{
-\item \code{bcdc_list_groups}: 
-}}
+\item \code{bcdc_list_groups()}: 
 
+}}
 \examples{
 \donttest{
 try(

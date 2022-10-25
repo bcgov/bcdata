@@ -196,8 +196,9 @@ We can download [British Columbia biogeoclimatic (BEC) data](https://catalogue.d
 library(sf) #load the sf package
 
 # Load the BEC data for Prince George Natural Resource District
+# Load the BEC data for Prince George Natural Resource District
 bgc_dpg <- bcdc_query_geodata("WHSE_FOREST_VEGETATION.BEC_BIOGEOCLIMATIC_POLY") %>%
-  filter(BBOX(dpg, crs = `EPSG:3005`)) %>% #note filtering with a BoundingBox
+  filter(BBOX(dpg, crs = "EPSG:3005")) %>% #note filtering with a BoundingBox
   collect()
 
 # Join the BEC data with our tress_dpg geospatial data set

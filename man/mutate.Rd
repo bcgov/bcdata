@@ -21,9 +21,9 @@ See \code{dplyr::\link[dplyr]{mutate}} for details.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{bcdc_promise}: mutate.bcdc_promise
-}}
+\item \code{mutate(bcdc_promise)}: mutate.bcdc_promise
 
+}}
 \examples{
 \donttest{
 

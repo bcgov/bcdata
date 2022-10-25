@@ -18,7 +18,7 @@ NULL
 #' @importFrom rlang :=
 
 # Function to translate R code to CQL
-cql_translate <- function(...) {
+cql_translate <- function(..., .colnames = character(0)) {
   ## convert dots to list of quosures
   dots <- rlang::quos(...)
   ## run partial_eval on them to evaluate named objects in the environment
@@ -29,31 +29,19 @@ cql_translate <- function(...) {
   ## predicates and CQL() expressions are evaluated into valid CQL code
   ## so they can be combined with the rest of the query
   dots <- lapply(dots, function(x) {
-
-    # make sure all arguments are named in the call so can be modified
-    x <- rlang::call_standardise(x, env = rlang::get_env(x))
-
-    # if an argument to a predicate is a function call, need to tell it to evaluate
-    # locally, as by default all functions are treated as remote and thus
-    # not evaluated. Do this by using `rlang::call2` to wrap the function call in
-    # local()
-    # See ?rlang::partial_eval and https://github.com/bcgov/bcdata/issues/146
-    for (call_arg in rlang::call_args_names(x)) {
-      if (is.call(rlang::call_args(x)[[call_arg]])) {
-        x <- rlang::call_modify(
-          x, !!call_arg := rlang::call2("local", rlang::call_args(x)[[call_arg]])
-        )
-      }
-    }
-
-    if (utils::packageVersion("dbplyr") <= "2.1.1") {
-      rlang::new_quosure(dbplyr::partial_eval(x, vars = character()), rlang::get_env(x))
-    } else {
-      rlang::new_quosure(dbplyr::partial_eval(x, data = dbplyr::lazy_frame()), rlang::get_env(x))
-    }
+    rlang::new_quosure(
+      dbplyr::partial_eval(x, data = names_to_lazy_tbl(.colnames))
+    )
   })
 
-  sql_where <- dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE)
+  sql_where <- try(dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE))
+
+  if (inherits(sql_where, "try-error")) {
+    if (grepl("no applicable method", sql_where)) {
+      stop("Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.")
+    }
+    stop(sql_where)
+  }
 
   build_where(sql_where)
 }
@@ -61,13 +49,15 @@ cql_translate <- function(...) {
 # Builds a complete WHERE clause from a vector of WHERE statements
 # Modified from dbplyr:::sql_clause_where
 build_where <- function(where, con = wfs_con) {
-  if (length(where) > 0L) {
-    where_paren <- dbplyr::escape(where, parens = TRUE, con = con)
-    dbplyr::build_sql(
-      dbplyr::sql_vector(where_paren, collapse = " AND ", con = con),
-      con = con
-    )
+  if (length(where) == 0L) {
+    return()
   }
+
+  where_paren <- dbplyr::escape(where, parens = TRUE, con = con)
+  dbplyr::build_sql(
+    dbplyr::sql_vector(where_paren, collapse = " AND ", con = con),
+    con = con
+  )
 }
 
 bcdc_identity <- function(f) {
@@ -166,13 +156,19 @@ sql_translation.wfsConnection <- function(conn) {
   )
 }
 
+#' @rdname CQL
+#' @export
+#' @aliases
+#'   CQL-class
+setClass("CQL", contains = c("SQL", "character"))
+
 # Make sure that identities (LHS of relations) are escaped with double quotes
 
 #' @keywords internal
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteIdentifier
 #' @export
-setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
+setMethod("dbQuoteIdentifier", c("wfsConnection", "CQL"),
           function(conn, x) dbplyr::sql_quote(x, "\""))
 
 # Make sure that strings (RHS of relations) are escaped with single quotes
@@ -181,5 +177,5 @@ setMethod("dbQuoteIdentifier", c("wfsConnection", "ANY"),
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteString
 #' @export
-setMethod("dbQuoteString", c("wfsConnection", "ANY"),
+setMethod("dbQuoteString", c("wfsConnection", "CQL"),
           function(conn, x) dbplyr::sql_quote(x, "'"))
