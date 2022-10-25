@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2022-09-12"
+date: "2022-10-25"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -198,23 +198,23 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> Geometry type: POLYGON
+#> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1228153 ymin: 453419.9 xmax: 1240644 ymax: 467184.1
+#> Bounding box:  xmin: 1228935 ymin: 455032.1 xmax: 1236528 ymax: 471352
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
 #>   id         LOCAL…¹ PARK_…² PARK_…³ PARK_…⁴ REGIO…⁵ MUNIC…⁶ CIVIC…⁷ CIVIC…⁸ STREE…⁹ LATIT…˟ LONGI…˟
 #>   <chr>        <int> <chr>   <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>     <dbl>   <dbl>
-#> 1 WHSE_BASE…      59 Hazeln… Local   Park    Metro … Surrey    14069 <NA>    68 Ave     49.1   -123.
-#> 2 WHSE_BASE…      60 Hazelw… Local   Park    Metro … Surrey     7886 <NA>    163 St     49.1   -123.
-#> 3 WHSE_BASE…      61 Hemloc… Local   Park    Metro … Surrey     9353 <NA>    160 St     49.2   -123.
-#> 4 WHSE_BASE…      62 Herita… Local   Park    Metro … Surrey    13468 <NA>    63 Ave     49.1   -123.
-#> 5 WHSE_BASE…      63 Heron … Local   Park    Metro … Surrey    12324 <NA>    Beeche…    49.1   -123.
-#> 6 WHSE_BASE…      64 Hillcr… Local   Park    Metro … Surrey     6530 <NA>    185 St     49.1   -123.
+#> 1 WHSE_BASE…      30 Blumse… Local   Park    Metro … Surrey     3536 <NA>    Rosema…    49.1   -123.
+#> 2 WHSE_BASE…      31 Bob Ru… Local   Park    Metro … Surrey     5448 <NA>    148 St     49.1   -123.
+#> 3 WHSE_BASE…      32 Bog Pa… Local   Park    Metro … Surrey     9740 <NA>    130 St     49.2   -123.
+#> 4 WHSE_BASE…      33 Bonacc… Local   Park    Metro … Surrey    14962 <NA>    98 Ave     49.2   -123.
+#> 5 WHSE_BASE…      34 Cotton… Local   Playgr… Metro … Surrey     9356 <NA>    132A St    49.2   -123.
+#> 6 WHSE_BASE…      35 North … Local   Green … Metro … Surrey    11260 <NA>    164 St     49.2   -123.
 #> # … with 8 more variables: WHEN_UPDATED <date>, WEBSITE_URL <chr>, LICENCE_COMMENTS <chr>,
 #> #   FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>,
-#> #   geometry <POLYGON [m]>, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID, ²​PARK_NAME,
-#> #   ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,
+#> #   geometry <MULTIPOLYGON [m]>, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID,
+#> #   ²​PARK_NAME, ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,
 #> #   ⁸​CIVIC_NUMBER_SUFFIX, ⁹​STREET_NAME, ˟​LATITUDE, ˟​LONGITUDE
 ```
 
@@ -229,23 +229,23 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> Geometry type: POLYGON
+#> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1228153 ymin: 453419.9 xmax: 1240644 ymax: 467184.1
+#> Bounding box:  xmin: 1228935 ymin: 455032.1 xmax: 1238850 ymax: 468825.5
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
 #>   id         LOCAL…¹ PARK_…² PARK_…³ PARK_…⁴ REGIO…⁵ MUNIC…⁶ CIVIC…⁷ CIVIC…⁸ STREE…⁹ LATIT…˟ LONGI…˟
 #>   <chr>        <int> <chr>   <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>     <dbl>   <dbl>
-#> 1 WHSE_BASE…      59 Hazeln… Local   Park    Metro … Surrey    14069 <NA>    68 Ave     49.1   -123.
-#> 2 WHSE_BASE…      60 Hazelw… Local   Park    Metro … Surrey     7886 <NA>    163 St     49.1   -123.
-#> 3 WHSE_BASE…      61 Hemloc… Local   Park    Metro … Surrey     9353 <NA>    160 St     49.2   -123.
-#> 4 WHSE_BASE…      62 Herita… Local   Park    Metro … Surrey    13468 <NA>    63 Ave     49.1   -123.
-#> 5 WHSE_BASE…      63 Heron … Local   Park    Metro … Surrey    12324 <NA>    Beeche…    49.1   -123.
-#> 6 WHSE_BASE…      64 Hillcr… Local   Park    Metro … Surrey     6530 <NA>    185 St     49.1   -123.
+#> 1 WHSE_BASE…      30 Blumse… Local   Park    Metro … Surrey     3536 <NA>    Rosema…    49.1   -123.
+#> 2 WHSE_BASE…      31 Bob Ru… Local   Park    Metro … Surrey     5448 <NA>    148 St     49.1   -123.
+#> 3 WHSE_BASE…      32 Bog Pa… Local   Park    Metro … Surrey     9740 <NA>    130 St     49.2   -123.
+#> 4 WHSE_BASE…      33 Bonacc… Local   Park    Metro … Surrey    14962 <NA>    98 Ave     49.2   -123.
+#> 5 WHSE_BASE…      37 Freedo… Local   Park    Metro … Surrey    15452 <NA>    84 Ave     49.2   -123.
+#> 6 WHSE_BASE…      46 Barnst… Local   Park    Metro … Surrey     9998 <NA>    Lyncea…    49.2   -123.
 #> # … with 8 more variables: WHEN_UPDATED <date>, WEBSITE_URL <chr>, LICENCE_COMMENTS <chr>,
 #> #   FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>,
-#> #   geometry <POLYGON [m]>, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID, ²​PARK_NAME,
-#> #   ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,
+#> #   geometry <MULTIPOLYGON [m]>, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID,
+#> #   ²​PARK_NAME, ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,
 #> #   ⁸​CIVIC_NUMBER_SUFFIX, ⁹​STREET_NAME, ˟​LATITUDE, ˟​LONGITUDE
 ```
 
@@ -257,7 +257,6 @@ districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
   collect()
-#> Authorizing with your stored API key
 #> The object is too large to perform exact spatial operations using bcdata.
 #> Object size: 948576 bytes
 #> BC Data Threshold: 500000 bytes
