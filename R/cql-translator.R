@@ -34,7 +34,14 @@ cql_translate <- function(..., .colnames = character(0)) {
     )
   })
 
-  sql_where <- dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE)
+  sql_where <- try(dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE))
+
+  if (inherits(sql_where, "try-error")) {
+    if (grepl("no applicable method", sql_where)) {
+      stop("Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.")
+    }
+    stop(sql_where)
+  }
 
   build_where(sql_where)
 }
@@ -42,13 +49,15 @@ cql_translate <- function(..., .colnames = character(0)) {
 # Builds a complete WHERE clause from a vector of WHERE statements
 # Modified from dbplyr:::sql_clause_where
 build_where <- function(where, con = wfs_con) {
-  if (length(where) > 0L) {
-    where_paren <- dbplyr::escape(where, parens = TRUE, con = con)
-    dbplyr::build_sql(
-      dbplyr::sql_vector(where_paren, collapse = " AND ", con = con),
-      con = con
-    )
+  if (length(where) == 0L) {
+    return()
   }
+
+  where_paren <- dbplyr::escape(where, parens = TRUE, con = con)
+  dbplyr::build_sql(
+    dbplyr::sql_vector(where_paren, collapse = " AND ", con = con),
+    con = con
+  )
 }
 
 bcdc_identity <- function(f) {
