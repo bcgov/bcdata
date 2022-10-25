@@ -268,8 +268,13 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
     filter(DWITHIN(local(st_buffer(the_geom, 10000, nQuadSegs = 2)), 100, "meters")) %>%
     show_query()
 
-  expect_match(as.character(qry2$query_list$CQL_FILTER),
+    expect_match(as.character(qry2$query_list$CQL_FILTER),
                "\\(DWITHIN\\(SHAPE, MULTIPOLYGON \\(\\(\\([0-9. ,()]+\\)\\)\\), 100, meters\\)\\)")
+
+  # Informative error when omit local:
+  expect_error(bcdc_query_geodata("local-and-regional-greenspaces") %>%
+                 filter(DWITHIN(st_buffer(the_geom, 10000, nQuadSegs = 2), 100, "meters")),
+               "Unable to process query")
 })
 
 test_that("works with dates", {
