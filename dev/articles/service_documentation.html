@@ -99,7 +99,9 @@
 <div class="section level2">
 <h2 id="databc-services-used-by-bcdata">DataBC Services used by <code>bcdata</code><a class="anchor" aria-label="anchor" href="#databc-services-used-by-bcdata"></a>
 </h2>
-<p>This document is an attempt at a comprehensive list of services and API endpoints accessed by the bcdata R package, as well which return values we rely on from those endpoints.</p>
+<p>This document is an attempt at a comprehensive list of services and
+API endpoints accessed by the bcdata R package, as well which return
+values we rely on from those endpoints.</p>
 <div class="section level3">
 <h3 id="bc-data-catalogue">BC Data Catalogue<a class="anchor" aria-label="anchor" href="#bc-data-catalogue"></a>
 </h3>
@@ -154,7 +156,11 @@
 <li><code>id</code></li>
 <li><code>package_id</code></li>
 <li>
-<code>object_name</code> (This is not always the same as the <code>typeNames</code> parameter in <code>resource.url</code>, as that is sometimes a simplified view - eg., <code>WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SPG</code> vs <code>WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP</code>)</li>
+<code>object_name</code> (This is not always the same as the
+<code>typeNames</code> parameter in <code>resource.url</code>, as that
+is sometimes a simplified view - eg.,
+<code>WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SPG</code> vs
+<code>WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP</code>)</li>
 <li>
 <code>details</code>
 <ul>
@@ -163,7 +169,8 @@
 </ul>
 </li>
 <li>
-<code>bcdc_type</code> (not actually using yet but <a href="https://github.com/bcgov/bcdata/pull/283#issuecomment-924442166" class="external-link">may be useful</a>)</li>
+<code>bcdc_type</code> (not actually using yet but <a href="https://github.com/bcgov/bcdata/pull/283#issuecomment-924442166" class="external-link">may
+be useful</a>)</li>
 <li><code>format</code></li>
 <li><code>resource_storage_location</code></li>
 <li><code>name</code></li>
@@ -202,7 +209,11 @@
 </ul>
 <p>Query Parameters for <code>geo/pub/wfs</code>:</p>
 <ul>
-<li>query is sent in the body of a <code>POST</code> request (with <code>encode = "form"</code>). If a dataset has &gt; n records (default n = 1000), pagination is used to send sequential requests. Pagination is executed using <code>count</code>, <code>sortBY</code>, and <code>startIndex</code>.
+<li>query is sent in the body of a <code>POST</code> request (with
+<code>encode = "form"</code>). If a dataset has &gt; n records (default
+n = 1000), pagination is used to send sequential requests. Pagination is
+executed using <code>count</code>, <code>sortBY</code>, and
+<code>startIndex</code>.
 <ul>
 <li>SERVICE = “WFS”</li>
 <li>VERSION = “2.0.0”</li>
@@ -210,7 +221,8 @@
 <li>REQUEST = “GetFeature”
 <ul>
 <li>outputFormat = “application/json”</li>
-<li>typeNames (extracted from <code>resource.url</code> and compared against <code>resource.object_name</code>)</li>
+<li>typeNames (extracted from <code>resource.url</code> and compared
+against <code>resource.object_name</code>)</li>
 <li>SRSNAME (default <code>EPSG:3005</code>)</li>
 <li>CQL_FILTER</li>
 <li>count</li>
