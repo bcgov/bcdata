@@ -2,7 +2,7 @@
 
 ### User-facing changes
 
-* For WFS queries constructed using `bcdc_query_geodata()`, function calls in `filter()` that need to be evaluated locally are no-longer auto-detected. They now need to be wrapped in `local()` to force local evaluation before the `CQL` query is constructed and sent to the WFS server. This aligns with recommended usage patterns in other `dbplyr` backends (#304, PR #305).
+* For WFS queries constructed using `bcdc_query_geodata()`, function calls in `filter()` that need to be evaluated locally are no-longer auto-detected. They now need to be wrapped in `local()` to force local evaluation before the `CQL` query is constructed and sent to the WFS server. Please see `vignette("local-filter")` for more information. This aligns with recommended usage patterns in other `dbplyr` backends (#304, PR #305).
 
 # bcdata 0.3.2
 

@@ -1,0 +1,68 @@
+---
+title: "Update to `filter()` behaviour in bcdata v0.4.0"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Update to `filter()` behaviour in bcdata v0.4.0}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This vignette describes a change in `{bcdata}` v0.4.0 related to 
+using local functions in a `filter()` query with `bcdc_query_geodata()`:
+
+When using `bcdc_query_geodata()` with `filter()`, many functions are
+translated to a form that is executed on the server - this includes the
+CQL Geometry predicates such as `INTERESECTS()`, `CROSSES()`, `BBOX()`
+etc, as well as many base R functions. However you sometimes want to
+include a function call in your `filter()` statement which should be
+evaluated locally - i.e., it's an R function (often an `{sf}` function)
+with no equivalent function on the server. Prior to version 0.4.0,
+`{bcdata}` did a reasonable (though not perfect) job of detecting R
+functions inside a `filter()` statement that needed to be evaluated
+locally. In order to align with recommended best practices for
+`{dbplyr}` backends, as of v0.4.0, function calls that are to be
+evaluated locally now need to be wrapped in `local()`.
+
+For example, say we want to create a bounding box around two points and
+use that box to to perform a spatial filter on the remote dataset, to
+give us just the set of local greenspaces that exist within that
+bounding box.
+
+```{r}
+#| include: false
+Sys.unsetenv("BCDC_KEY")
+```
+
+
+```{r}
+#| message: false
+library(sf)
+library(bcdata)
+
+two_points <- st_sfc(st_point(c(1164434, 368738)),
+                     st_point(c(1203023, 412959)),
+                     crs = 3005)
+```
+
+Previously, we could just do this, with `sf::st_bbox()`
+embedded in the call:
+
+```{r}
+#| error: true
+#| warning: false
+bcdc_query_geodata("local-and-regional-greenspaces") %>%
+  filter(BBOX(st_bbox(two_points, crs = st_crs(two_points))))
+```
+
+However you must now use `local()` to force evaluation of
+`st_bbox()` on your machine in R, before it is translated
+into a query to be executed on the server:
+
+```{r}
+#| warning: false
+bcdc_query_geodata("local-and-regional-greenspaces") %>%
+  filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points)))))
+```
+
+There is another illustration in the ["querying spatial data vignette"](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html#a-note-about-using-local-r-functions-in-constructing-filter-queries).
