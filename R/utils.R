@@ -445,6 +445,6 @@ catch_wfs_error <- function(catalogue_response) {
 
 names_to_lazy_tbl <- function(x) {
   stopifnot(is.character(x))
-  frame <- as.data.frame(setNames(rep(list(logical()), length(x)), x))
+  frame <- as.data.frame(stats::setNames(rep(list(logical()), length(x)), x))
   dbplyr::tbl_lazy(frame)
 }
