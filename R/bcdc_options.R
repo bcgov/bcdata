@@ -105,7 +105,7 @@ bcdc_get_capabilities <- function() {
       SERVICE = "WFS",
       VERSION = "2.0.0",
       REQUEST = "Getcapabilities"
-    )))
+    )), silent = TRUE)
 
     if (inherits(cc, "try-error")) {
       return(NULL)

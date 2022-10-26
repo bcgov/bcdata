@@ -34,13 +34,14 @@ cql_translate <- function(..., .colnames = character(0)) {
     )
   })
 
-  sql_where <- try(dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE))
+  sql_where <- try(dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE),
+                   silent = TRUE)
 
   if (inherits(sql_where, "try-error")) {
     if (grepl("no applicable method", sql_where)) {
-      stop("Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.")
+      stop("Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.", call. = FALSE)
     }
-    stop(sql_where)
+      stop(sql_where, call. = FALSE)
   }
 
   build_where(sql_where)
