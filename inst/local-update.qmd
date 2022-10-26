@@ -6,15 +6,19 @@ format: gfm
 A (very niche) head's up for a breaking change in the next
 `{bcdata}` release (v0.4.0):
 
-When using `bcdc_query_geodata()` with `filter()`, you
-sometimes want to include a function call in your
-`filter()` statement which should be evaluated locally -
-i.e., it's an R function, not a function to be executed
-on the server. Previously {bcdata} did a reasonable
+When using `bcdc_query_geodata()` with `filter()`, many
+functions are translated to a form that is executed on the
+server - this includes the CQL Geometry predicates such as
+`INTERESECTS()`, `CROSSES()`, `BBOX()` etc, as well as many
+base R functions. However you sometimes want to include a
+function call in your `filter()` statement which should be
+evaluated locally - i.e., it's an R function (often an
+`{sf}` function) with no equivalent function to be executed
+on the server. Previously `{bcdata}` did a reasonable
 (though not perfect) job of detecting R functions inside a
 `filter()` statement that needed to be evaluated locally.
 In order to align with recommended best practices for
-{dbplyr} backends, function calls that are to be evaluated
+`{dbplyr}` backends, function calls that are to be evaluated
 locally now need to be wrapped in `local()`.
 
 For example, say we want to create a bounding box around
