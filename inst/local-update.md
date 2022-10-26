@@ -1,14 +1,12 @@
----
-title: Update to `filter()` behaviour in `{bcdata}`
-toc-title: Table of contents
----
+Update to `filter()` behaviour in `{bcdata}`
+================
 
-A (very niche) head's up for a breaking change in the next `{bcdata}`
+A (very niche) head’s up for a breaking change in the next `{bcdata}`
 release (v0.4.0):
 
 When using `bcdc_query_geodata()` with `filter()`, you sometimes want to
 include a function call in your `filter()` statement which should be
-evaluated locally - i.e., it's an R function, not a function to be
+evaluated locally - i.e., it’s an R function, not a function to be
 executed on the server. Previously {bcdata} did a reasonable (though not
 perfect) job of detecting R functions inside a `filter()` statement that
 needed to be evaluated locally. In order to align with recommended best
@@ -20,8 +18,7 @@ use that box to to perform a spatial filter on the remote dataset, to
 give us just the set of local greenspaces that exist within that
 bounding box.
 
-::: cell
-``` {.r .cell-code}
+``` r
 library(sf)
 library(bcdata)
 
@@ -29,33 +26,26 @@ two_points <- st_sfc(st_point(c(1164434, 368738)),
                      st_point(c(1203023, 412959)),
                      crs = 3005)
 ```
-:::
 
 Previously, we could just do this, with `sf::st_bbox()` embedded in the
 call:
 
-::: cell
-``` {.r .cell-code}
+``` r
 bcdc_query_geodata("local-and-regional-greenspaces") %>%
   filter(BBOX(st_bbox(two_points, crs = st_crs(two_points))))
 ```
 
-::: {.cell-output .cell-output-error}
     Error: Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.
-:::
-:::
 
 However you must now use `local()` to force evaluation of `st_bbox()` on
 your machine in R, before it is translated into a query to be executed
 on the server:
 
-::: cell
-``` {.r .cell-code}
+``` r
 bcdc_query_geodata("local-and-regional-greenspaces") %>%
   filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points)))))
 ```
 
-::: {.cell-output .cell-output-stdout}
     Querying 'local-and-regional-greenspaces' record
     • Using collect() on this object will return 1154 features and 19 fields
     • At most six rows of the record are printed here
@@ -81,8 +71,6 @@ bcdc_query_geodata("local-and-regional-greenspaces") %>%
     #   names ¹​LOCAL_REG_GREENSPACE_ID, ²​PARK_NAME, ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE,
     #   ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER, ⁸​CIVIC_NUMBER_SUFFIX,
     #   ⁹​STREET_NAME
-:::
-:::
 
 This is also explained and illustrated in the development version of the
 [package

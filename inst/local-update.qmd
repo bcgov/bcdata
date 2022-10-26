@@ -1,6 +1,6 @@
 ---
 title: "Update to `filter()` behaviour in `{bcdata}`"
-format: markdown_github
+format: gfm
 ---
 
 A (very niche) head's up for a breaking change in the next
