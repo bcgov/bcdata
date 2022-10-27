@@ -13,7 +13,7 @@ using local functions in a `filter()` query with `bcdc_query_geodata()`:
 
 When using `bcdc_query_geodata()` with `filter()`, many functions are
 translated to a form that is executed on the server - this includes the
-CQL Geometry predicates such as `INTERESECTS()`, `CROSSES()`, `BBOX()`
+CQL Geometry predicates such as `INTERSECTS()`, `CROSSES()`, `BBOX()`
 etc, as well as many base R functions. However you sometimes want to
 include a function call in your `filter()` statement which should be
 evaluated locally - i.e., it's an R function (often an `{sf}` function)
