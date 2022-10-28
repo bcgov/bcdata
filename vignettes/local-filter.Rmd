@@ -1,6 +1,6 @@
 ---
 title: "Update to `filter()` behaviour in bcdata v0.4.0"
-date: "2022-10-27"
+date: "2022-10-28"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Update to `filter()` behaviour in bcdata v0.4.0}
@@ -9,11 +9,11 @@ vignette: >
 ---
 
 This vignette describes a change in `{bcdata}` v0.4.0 related to 
-using local functions in a `filter()` query with `bcdc_query_geodata()`:
+using locally-executed functions in a `filter()` query with `bcdc_query_geodata()`:
 
 When using `bcdc_query_geodata()` with `filter()`, many functions are
-translated to a form that is executed on the server - this includes the
-CQL Geometry predicates such as `INTERSECTS()`, `CROSSES()`, `BBOX()`
+translated to a query plan that is passed to and executed on the server - this includes the
+CQL Geometry predicates such as `INTERESECTS()`, `CROSSES()`, `BBOX()`
 etc, as well as many base R functions. However you sometimes want to
 include a function call in your `filter()` statement which should be
 evaluated locally - i.e., it's an R function (often an `{sf}` function)
@@ -25,7 +25,7 @@ locally. In order to align with recommended best practices for
 evaluated locally now need to be wrapped in `local()`.
 
 For example, say we want to create a bounding box around two points and
-use that box to to perform a spatial filter on the remote dataset, to
+use that box to perform a spatial filter on the remote dataset, to
 give us just the set of local greenspaces that exist within that
 bounding box.
 
@@ -55,9 +55,9 @@ bcdc_query_geodata("local-and-regional-greenspaces") %>%
 ## Error: Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.
 ```
 
-However you must now use `local()` to force evaluation of
+However you must now use `local()` to force local evaluation of
 `st_bbox()` on your machine in R, before it is translated
-into a query to be executed on the server:
+into a query plan to be executed on the server:
 
 
 ```r
