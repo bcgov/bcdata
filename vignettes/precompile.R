@@ -46,12 +46,3 @@ precompile()
 
 ## Or just one
 #precompile("bcdata.Rmd.orig")
-
-
-
-
-
-
-
-
-

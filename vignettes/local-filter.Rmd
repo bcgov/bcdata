@@ -1,0 +1,94 @@
+---
+title: "Update to `filter()` behaviour in bcdata v0.4.0"
+date: "2022-10-28"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Update to `filter()` behaviour in bcdata v0.4.0}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This vignette describes a change in `{bcdata}` v0.4.0 related to 
+using locally-executed functions in a `filter()` query with `bcdc_query_geodata()`:
+
+When using `bcdc_query_geodata()` with `filter()`, many functions are
+translated to a query plan that is passed to and executed on the server - this includes the
+CQL Geometry predicates such as `INTERESECTS()`, `CROSSES()`, `BBOX()`
+etc, as well as many base R functions. However you sometimes want to
+include a function call in your `filter()` statement which should be
+evaluated locally - i.e., it's an R function (often an `{sf}` function)
+with no equivalent function on the server. Prior to version 0.4.0,
+`{bcdata}` did a reasonable (though not perfect) job of detecting R
+functions inside a `filter()` statement that needed to be evaluated
+locally. In order to align with recommended best practices for
+`{dbplyr}` backends, as of v0.4.0, function calls that are to be
+evaluated locally now need to be wrapped in `local()`.
+
+For example, say we want to create a bounding box around two points and
+use that box to perform a spatial filter on the remote dataset, to
+give us just the set of local greenspaces that exist within that
+bounding box.
+
+
+
+
+
+```r
+library(sf)
+library(bcdata)
+
+two_points <- st_sfc(st_point(c(1164434, 368738)),
+                     st_point(c(1203023, 412959)),
+                     crs = 3005)
+```
+
+Previously, we could just do this, with `sf::st_bbox()`
+embedded in the call:
+
+
+```r
+bcdc_query_geodata("local-and-regional-greenspaces") %>%
+  filter(BBOX(st_bbox(two_points, crs = st_crs(two_points))))
+```
+
+```
+## Error: Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.
+```
+
+However you must now use `local()` to force local evaluation of
+`st_bbox()` on your machine in R, before it is translated
+into a query plan to be executed on the server:
+
+
+```r
+bcdc_query_geodata("local-and-regional-greenspaces") %>%
+  filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points)))))
+```
+
+```
+## Querying 'local-and-regional-greenspaces' record
+## • Using collect() on this object will return 1154 features and 19 fields
+## • At most six rows of the record are printed here
+## ────────────────────────────────────────────────────────────────────────────────────────────────────
+## Simple feature collection with 6 features and 19 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 1200113 ymin: 385903.5 xmax: 1202608 ymax: 386561.8
+## Projected CRS: NAD83 / BC Albers
+## # A tibble: 6 × 20
+##   id         LOCAL…¹ PARK_…² PARK_…³ PARK_…⁴ REGIO…⁵ MUNIC…⁶ CIVIC…⁷ CIVIC…⁸ STREE…⁹ LATIT…˟ LONGI…˟
+##   <chr>        <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <dbl>   <dbl>
+## 1 WHSE_BASE…    3347 Konuks… Local   Green … Capital Distri… <NA>    <NA>    <NA>       48.5   -123.
+## 2 WHSE_BASE…    3304 <NA>    Local   Trail   Capital Distri… <NA>    <NA>    <NA>       48.5   -123.
+## 3 WHSE_BASE…    3380 <NA>    Local   Water … Capital Distri… <NA>    <NA>    <NA>       48.5   -123.
+## 4 WHSE_BASE…    3369 <NA>    Local   Water … Capital Distri… <NA>    <NA>    <NA>       48.5   -123.
+## 5 WHSE_BASE…    3453 <NA>    Local   Water … Capital Distri… <NA>    <NA>    <NA>       48.5   -123.
+## 6 WHSE_BASE…    3361 <NA>    Local   Trail   Capital Distri… <NA>    <NA>    <NA>       48.5   -123.
+## # … with 8 more variables: WHEN_UPDATED <date>, WEBSITE_URL <chr>, LICENCE_COMMENTS <chr>,
+## #   FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>,
+## #   geometry <POLYGON [m]>, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID, ²​PARK_NAME,
+## #   ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,
+## #   ⁸​CIVIC_NUMBER_SUFFIX, ⁹​STREET_NAME, ˟​LATITUDE, ˟​LONGITUDE
+```
+
+There is another illustration in the ["querying spatial data vignette"](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html#a-note-about-using-local-r-functions-in-constructing-filter-queries).
