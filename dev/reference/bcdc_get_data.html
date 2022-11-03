@@ -194,8 +194,27 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-in"><span>    query <span class="op">=</span> <span class="st">"SELECT SHAPE_Length, geom FROM BC_Boundary_Terrestrial_Line WHERE SHAPE_Length &lt; 100"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_disk(x$url$url, x$disk, handle = x$url$handle) : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached: [ftp.geobc.gov.bc.ca] Connection timed out after 10001 milliseconds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading the data using the read_sf function from the sf package.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument layer is ignored when query is specified</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 6106 features and 1 field</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: LINESTRING</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 529420.8 ymin: 367780.7 xmax: 1203949 ymax: 1157953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Projected CRS: NAD83 / BC Albers</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6,106 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    SHAPE_Length                                         geom</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;LINESTRING [m]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         79.2 (1183654 367787.5, 1183637 367780.7, 118363…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         92.8 (1178975 369462.2, 1178962 369460.6, 117895…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         71.0 (1178340 369486.6, 1178335 369481.4, 117832…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         80.2 (1182295 369909.3, 1182289 369909.1, 118228…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         90.7 (1177992 370787.7, 1177986 370785.4, 117797…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>         94.3 (1178597 370831.9, 1178591 370831.7, 117858…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>         75.3 (1178008 371008.1, 1178002 371005.8, 117799…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         77.4 (1178022 371104.5, 1178017 371100.4, 117801…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         76.7 (1176492 371248.6, 1176485 371248.3, 117647…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         87.2 (1178786 371574.1, 1178778 371572.7, 117877…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6,096 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Example of correcting import problems</span></span></span>
 <span class="r-in"><span></span></span>
@@ -310,7 +329,7 @@ For spatial Web Feature Service data the <code>...</code> arguments are passed t
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Error: Sheet 'Regional Districts' not found</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The file can be found here:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   '/tmp/RtmppjJHxR/bcdata_4032319b153d/file403219992e47.xlsx'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   '/tmp/RtmpP74r5U/bcdata_40402cc3f99c/file404060ff7aa8.xlsx'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> if you would like to try to read it manually.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
