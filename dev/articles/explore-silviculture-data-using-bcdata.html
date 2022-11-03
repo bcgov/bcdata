@@ -56,6 +56,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a>
     <a class="dropdown-item" href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    <a class="dropdown-item" href="../articles/local-filter.html">Update to `filter()` behaviour in bcdata v0.4.0</a>
     <a class="dropdown-item" href="../articles/service_documentation.html">bcdata Service Documentation</a>
   </div>
 </li>
@@ -88,7 +89,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Exploring Silviculture Data with bcdata</h1>
             
-            <h4 data-toc-skip class="date">2022-10-25</h4>
+            <h4 data-toc-skip class="date">2022-10-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/HEAD/vignettes/explore-silviculture-data-using-bcdata.Rmd" class="external-link"><code>vignettes/explore-silviculture-data-using-bcdata.Rmd</code></a></small>
       <div class="d-none name"><code>explore-silviculture-data-using-bcdata.Rmd</code></div>
@@ -190,7 +191,7 @@ retrieve this geospatial data set using
 <code class="sourceCode R"><span><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span></span>
 <span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span></span>
-<span><span class="co">#&gt; • Using collect() on this object will return 920464 features and 159 fields</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 920718 features and 159 fields</span></span>
 <span><span class="co">#&gt; • Accessing this record requires pagination and will make 921 separate requests to the WFS.</span></span>
 <span><span class="co">#&gt; • See ?bcdc_options</span></span>
 <span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>

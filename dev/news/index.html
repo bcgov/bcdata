@@ -29,6 +29,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html">Querying Spatial Data with bcdata</a>
     <a class="dropdown-item" href="../articles/explore-silviculture-data-using-bcdata.html">Exploring Silviculture Data with bcdata</a>
+    <a class="dropdown-item" href="../articles/local-filter.html">Update to `filter()` behaviour in bcdata v0.4.0</a>
     <a class="dropdown-item" href="../articles/service_documentation.html">bcdata Service Documentation</a>
   </div>
 </li>
@@ -59,7 +60,7 @@
 <h2 class="pkg-version" data-toc-text="development version" id="bcdata-development-version">bcdata (development version)<a class="anchor" aria-label="anchor" href="#bcdata-development-version"></a></h2>
 <div class="section level4">
 <h4 id="user-facing-changes-development-version">User-facing changes<a class="anchor" aria-label="anchor" href="#user-facing-changes-development-version"></a></h4>
-<ul><li>For WFS queries constructed using <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>, function calls in <code><a href="../reference/filter.html">filter()</a></code> that need to be evaluated locally are no-longer auto-detected. They now need to be wrapped in <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> to force local evaluation before the <code>CQL</code> query is constructed and sent to the WFS server. This aligns with recommended usage patterns in other <code>dbplyr</code> backends (<a href="https://github.com/bcgov/bcdata/issues/304" class="external-link">#304</a>, PR <a href="https://github.com/bcgov/bcdata/issues/305" class="external-link">#305</a>).</li>
+<ul><li>For WFS queries constructed using <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code>, function calls in <code><a href="../reference/filter.html">filter()</a></code> that need to be evaluated locally are no-longer auto-detected. They now need to be wrapped in <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> to force local evaluation before the <code>CQL</code> query is constructed and sent to the WFS server. Please see <code><a href="../articles/local-filter.html">vignette("local-filter")</a></code> for more information. This aligns with recommended usage patterns in other <code>dbplyr</code> backends (<a href="https://github.com/bcgov/bcdata/issues/304" class="external-link">#304</a>, PR <a href="https://github.com/bcgov/bcdata/issues/305" class="external-link">#305</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">
