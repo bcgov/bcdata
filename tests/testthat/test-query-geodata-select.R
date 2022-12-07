@@ -70,9 +70,9 @@ test_that("select accept dplyr like column specifications",{
   ## Most basic select
   expect_is(select(layer, ADMIN_AREA_NAME, OIC_MO_YEAR), "bcdc_promise")
   ## Using a pre-assigned vector
-  expect_is(select(layer, correct_fields), "bcdc_promise")
+  expect_is(select(layer, all_of(correct_fields)), "bcdc_promise")
   ## Throws an error when column doesn't exist
-  expect_error(select(layer, wrong_fields))
+  expect_error(select(layer, all_of(wrong_fields)))
   expect_is(select(layer, ADMIN_AREA_NAME:OIC_MO_YEAR), "bcdc_promise")
   ## Some weird mix
   expect_is(select(layer, 'ADMIN_AREA_NAME', OIC_MO_YEAR), "bcdc_promise")
