@@ -35,15 +35,15 @@ checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org
 An R package 📦 for searching & retrieving data from the [B.C. Data
 Catalogue](https://catalogue.data.gov.bc.ca).
 
--   `bcdc_browse()` - Open the catalogue in your default browser
--   `bcdc_search()` - Search records in the catalogue
--   `bcdc_search_facets()` - List catalogue facet search options
--   `bcdc_get_record()` - Print a catalogue record
--   `bcdc_tidy_resources()` - Get a data frame of resources for a record
--   `bcdc_get_data()` - Get catalogue data
--   `bcdc_query_geodata()` - Get & query catalogue geospatial data
-    available through a [Web Feature
-    Service](https://en.wikipedia.org/wiki/Web_Feature_Service)
+- `bcdc_browse()` - Open the catalogue in your default browser
+- `bcdc_search()` - Search records in the catalogue
+- `bcdc_search_facets()` - List catalogue facet search options
+- `bcdc_get_record()` - Print a catalogue record
+- `bcdc_tidy_resources()` - Get a data frame of resources for a record
+- `bcdc_get_data()` - Get catalogue data
+- `bcdc_query_geodata()` - Get & query catalogue geospatial data
+  available through a [Web Feature
+  Service](https://en.wikipedia.org/wiki/Web_Feature_Service)
 
 **Note:** The `bcdata` package supports downloading *most* file types,
 including zip archives. It will do its best to identify and read data
@@ -79,12 +79,12 @@ library(bcdata)
 
 ### Vignettes
 
--   [Get Started with
-    bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
--   [Querying Spatial Data with
-    bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
--   [Exploring Silviculture Data with
-    bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
+- [Get Started with
+  bcdata](https://bcgov.github.io/bcdata/articles/bcdata.html)
+- [Querying Spatial Data with
+  bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html)
+- [Exploring Silviculture Data with
+  bcdata](https://bcgov.github.io/bcdata/articles/explore-silviculture-data-using-bcdata.html)
 
 ### Methods for `bcdc_promise`
 
@@ -94,16 +94,16 @@ class. You can use these methods directly on a object returned by
 `bcdc_query_geodata()`. Here are all the methods for the `bcdc_promise`
 class:
 
--   `as_tibble`
--   `collect`
--   `filter`
--   `head`
--   `mutate`
--   `names`
--   `print`
--   `select`
--   `show_query`
--   `tail`
+- `as_tibble`
+- `collect`
+- `filter`
+- `head`
+- `mutate`
+- `names`
+- `print`
+- `select`
+- `show_query`
+- `tail`
 
 ### BCDC Authentication
 
@@ -128,10 +128,10 @@ authorize your calls to the catalogue, allowing you to access additional
 records that you are authorized to see if you were logged into the
 catalogue web interface. Functions that benefit from this are:
 
--   `bcdc_search()`
--   `bcdc_list()`
--   `bcdc_get_record()`
--   `bcdc_get_data()`
+- `bcdc_search()`
+- `bcdc_list()`
+- `bcdc_get_record()`
+- `bcdc_get_data()`
 
 ### Getting Help or Reporting an Issue
 
