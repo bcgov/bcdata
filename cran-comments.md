@@ -1,6 +1,8 @@
 ## Release summary
 
-This is a patch release, primarily to fix a test that did not fail gracefully when the internet resource was unavailable, as per email from CRAN June 27, 2022.
+This is a minor release, primarily to bring compatibility with an upcoming release of dbplyr.
+
+This release also changes the maintainer email address from andy.teucher@gov.bc.ca to andy.teucher@gmail.com (this will be confirmed via email).
 
 ### CRAN check issues
 
