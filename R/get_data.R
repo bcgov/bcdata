@@ -238,23 +238,25 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
 #' @importFrom sf read_sf
 #' @importFrom readxl read_xlsx
 #' @importFrom readxl read_xls
+#' @importFrom jsonlite read_json
 #' @export
 #'
 
 
 bcdc_read_functions <- function(){
   dplyr::tribble(
-    ~format,   ~package, ~fun,
-    "kml",     "sf",     "read_sf",
-    "geojson", "sf",     "read_sf",
-    "gpkg",    "sf",     "read_sf",
-    "gdb",     "sf",     "read_sf",
-    "fgdb",    "sf",     "read_sf",
-    "shp",     "sf",     "read_sf",
-    "csv",     "readr",  "read_csv",
-    "txt",     "readr",  "read_tsv",
-    "tsv",     "readr",  "read_tsv",
-    "xlsx",    "readxl", "read_xlsx",
-    "xls",     "readxl", "read_xls"
+    ~format,   ~package,    ~fun,
+    "kml",     "sf",        "read_sf",
+    "geojson", "sf",        "read_sf",
+    "gpkg",    "sf",        "read_sf",
+    "gdb",     "sf",        "read_sf",
+    "fgdb",    "sf",        "read_sf",
+    "shp",     "sf",        "read_sf",
+    "csv",     "readr",     "read_csv",
+    "txt",     "readr",     "read_tsv",
+    "tsv",     "readr",     "read_tsv",
+    "xlsx",    "readxl",    "read_xlsx",
+    "xls",     "readxl",    "read_xls",
+    "json",    "jsonlite",  "read_json"
   )
 }
