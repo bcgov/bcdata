@@ -35,7 +35,7 @@
 #' Default `TRUE`
 #'
 #'
-#' @return An object of a type relevant to the resource (usually a tibble or an sf object)
+#' @return An object of a type relevant to the resource (usually a tibble or an sf object, a list if the resource is a json file)
 #' @export
 #'
 #' @examples
