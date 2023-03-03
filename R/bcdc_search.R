@@ -22,6 +22,10 @@
 #' @examples
 #' \donttest{
 #' try(
+#'   bcdc_search_facets("download_audience")
+#' )
+#'
+#' try(
 #'   bcdc_search_facets("res_format")
 #' )
 #' }
