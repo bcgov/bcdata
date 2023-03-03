@@ -32,7 +32,7 @@ See the examples for a workflow that illustrates this process.
 For spatial Web Feature Service data the \code{...} arguments are passed to \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}}.}
 }
 \value{
-An object of a type relevant to the resource (usually a tibble or an sf object)
+An object of a type relevant to the resource (usually a tibble or an sf object, a list if the resource is a json file)
 }
 \description{
 Download and read a resource from a B.C. Data Catalogue record
@@ -104,4 +104,19 @@ try(
 )
 }
 
+## Pass an argument through to a read_* function
+
+try(
+  bcdc_get_data(record = "a2a2130b-e853-49e8-9b30-1d0c735aa3d9",
+                resource = "0b9e7d31-91ff-4146-a473-106a3b301964")
+)
+
+## we can control some properties of the list object returned by
+## jsonlite::read_json by setting simplifyVector = TRUE or
+## simplifyDataframe = TRUE
+try(
+ bcdc_get_data(record = "a2a2130b-e853-49e8-9b30-1d0c735aa3d9",
+                resource = "0b9e7d31-91ff-4146-a473-106a3b301964",
+                simplifyVector = TRUE)
+)
 }

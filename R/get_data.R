@@ -35,7 +35,7 @@
 #' Default `TRUE`
 #'
 #'
-#' @return An object of a type relevant to the resource (usually a tibble or an sf object)
+#' @return An object of a type relevant to the resource (usually a tibble or an sf object, a list if the resource is a json file)
 #' @export
 #'
 #' @examples
@@ -105,6 +105,21 @@
 #' )
 #' }
 #'
+#' ## Pass an argument through to a read_* function
+#'
+#' try(
+#'   bcdc_get_data(record = "a2a2130b-e853-49e8-9b30-1d0c735aa3d9",
+#'                 resource = "0b9e7d31-91ff-4146-a473-106a3b301964")
+#' )
+#'
+#' ## we can control some properties of the list object returned by
+#' ## jsonlite::read_json by setting simplifyVector = TRUE or
+#' ## simplifyDataframe = TRUE
+#' try(
+#'  bcdc_get_data(record = "a2a2130b-e853-49e8-9b30-1d0c735aa3d9",
+#'                 resource = "0b9e7d31-91ff-4146-a473-106a3b301964",
+#'                 simplifyVector = TRUE)
+#' )
 #' @export
 bcdc_get_data <- function(record, resource = NULL, verbose = TRUE, ...) {
   if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
@@ -238,23 +253,25 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
 #' @importFrom sf read_sf
 #' @importFrom readxl read_xlsx
 #' @importFrom readxl read_xls
+#' @importFrom jsonlite read_json
 #' @export
 #'
 
 
 bcdc_read_functions <- function(){
   dplyr::tribble(
-    ~format,   ~package, ~fun,
-    "kml",     "sf",     "read_sf",
-    "geojson", "sf",     "read_sf",
-    "gpkg",    "sf",     "read_sf",
-    "gdb",     "sf",     "read_sf",
-    "fgdb",    "sf",     "read_sf",
-    "shp",     "sf",     "read_sf",
-    "csv",     "readr",  "read_csv",
-    "txt",     "readr",  "read_tsv",
-    "tsv",     "readr",  "read_tsv",
-    "xlsx",    "readxl", "read_xlsx",
-    "xls",     "readxl", "read_xls"
+    ~format,   ~package,    ~fun,
+    "kml",     "sf",        "read_sf",
+    "geojson", "sf",        "read_sf",
+    "gpkg",    "sf",        "read_sf",
+    "gdb",     "sf",        "read_sf",
+    "fgdb",    "sf",        "read_sf",
+    "shp",     "sf",        "read_sf",
+    "csv",     "readr",     "read_csv",
+    "txt",     "readr",     "read_tsv",
+    "tsv",     "readr",     "read_tsv",
+    "xlsx",    "readxl",    "read_xlsx",
+    "xls",     "readxl",    "read_xls",
+    "json",    "jsonlite",  "read_json"
   )
 }

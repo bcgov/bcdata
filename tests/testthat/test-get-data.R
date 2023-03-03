@@ -181,3 +181,8 @@ test_that("bcdc_get_data handles sheet name specification", {
   expect_false(any(grepl('This .xlsx resource contains the following sheets:', out)))
 })
 
+test_that("bcdc_get_data returns a list object when resource has a json extension", {
+  skip_if_net_down()
+  skip_on_cran()
+  expect_type(bcdc_get_data("8e24f2bc-ab7a-49df-9418-539387180f33"), "list")
+})
