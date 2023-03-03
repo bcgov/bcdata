@@ -112,8 +112,8 @@ try(
 )
 
 ## we can control some properties of the list object returned by
-## jsonlite::read_json by setting simplifyVector = FALSE or
-## simplifyDataframe = FALSE
+## jsonlite::read_json by setting simplifyVector = TRUE or
+## simplifyDataframe = TRUE
 try(
  bcdc_get_data(record = "a2a2130b-e853-49e8-9b30-1d0c735aa3d9",
                 resource = "0b9e7d31-91ff-4146-a473-106a3b301964",
