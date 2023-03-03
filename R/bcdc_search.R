@@ -129,7 +129,7 @@ bcdc_list <- function() {
 #' @param ... search terms
 #' @param license_id the type of license (see `bcdc_search_facets("license_id")`).
 #' @param download_audience download audience
-#'        (see `bcdc_search_facets("download_audience")`). Default `"Public"`
+#'        (see `bcdc_search_facets("download_audience")`)
 #' @param res_format format of resource (see `bcdc_search_facets("res_format")`)
 #' @param sector sector of government from which the data comes
 #'        (see `bcdc_search_facets("sector")`)
@@ -151,8 +151,8 @@ bcdc_list <- function() {
 #' )
 #' }
 bcdc_search <- function(..., license_id = NULL,
-                        download_audience = "Public",
-                        res_format=NULL,
+                        download_audience = NULL,
+                        res_format = NULL,
                         sector = NULL,
                         organization = NULL,
                         n = 100) {
