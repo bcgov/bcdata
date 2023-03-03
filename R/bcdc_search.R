@@ -177,8 +177,8 @@ bcdc_search <- function(..., license_id = NULL,
   })
 
   query <- paste0(
-    terms, ifelse(nzchar(terms), "+", ""),
-    paste(names(facets), facets, sep = ":", collapse = "+"))
+    terms, ifelse(length(facets) > 0, "+", ""),
+    ifelse(length(facets) > 0, paste(names(facets), paste0("\"", facets, "\""), sep = ":", collapse = "+"), ""))
 
   query <- gsub("\\s+", "%20", query)
 
