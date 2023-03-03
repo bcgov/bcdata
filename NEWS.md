@@ -1,5 +1,7 @@
 # bcdata (development version)
 
+* Add `jsonlite::read_json()` as a file read method, so users can now download & read `json` resources in B.C. Data Catalogue records
+
 # bcdata 0.4.0
 
 ### User-facing changes

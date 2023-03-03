@@ -47,6 +47,7 @@ Imports:
     purrr (>= 0.3),
     readr (>= 2.1),
     readxl (>= 1.4.0),
+    jsonlite (>= 1.8.4),
     rlang (>= 1.0),
     sf (>= 1.0),
     tidyselect (>= 1.1.0),
@@ -62,7 +63,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Collate: 
     'bcdata-package.R'
     'bcdc-get-citation.R'
