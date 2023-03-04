@@ -180,9 +180,17 @@ bcdc_search <- function(..., license_id = NULL,
     }
   })
 
+  # build query by collating the terms and any user supplied facets
+  # if there are no supplied facets (e.g., is_list_empty(facets) == FALSE just use terms)
   query <- paste0(
-    terms, ifelse(length(facets) > 0, "+", ""),
-    ifelse(length(facets) > 0, paste(names(facets), paste0("\"", facets, "\""), sep = ":", collapse = "+"), ""))
+    terms,
+    ifelse(is_list_empty(facets) == FALSE, "+", ""),
+    ifelse(is_list_empty(facets) == FALSE, paste(names(facets), paste0("\"", facets, "\""), sep = ":", collapse = "+"), "")
+    )
+
+  # query <- paste0(
+  #   terms, ifelse(length(facets) > 0, "+", ""),
+  #   ifelse(length(facets) > 0, paste(names(facets), paste0("\"", facets, "\""), sep = ":", collapse = "+"), ""))
 
   query <- gsub("\\s+", "%20", query)
 
