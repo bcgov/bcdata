@@ -449,6 +449,6 @@ names_to_lazy_tbl <- function(x) {
   dbplyr::tbl_lazy(frame)
 }
 
-is_list_empty <- function(x) {
+is_empty <- function(x) {
   length(x) == 0
 }
