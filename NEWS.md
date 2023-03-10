@@ -1,6 +1,8 @@
 # bcdata (development version)
 
 * Add `jsonlite::read_json()` as a file read method, so users can now download & read `json` resources in B.C. Data Catalogue records
+* Change the `download_audience` default from `Public` to `NULL` in `bcdc_search()` (#315)
+* Fix bug where some/all facet values in `bcdc_search()` need to be quoted to generate a valid API query (#315)
 
 # bcdata 0.4.0
 
