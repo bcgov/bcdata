@@ -20,7 +20,7 @@ bcdc_search(
 \item{license_id}{the type of license (see \code{bcdc_search_facets("license_id")}).}
 
 \item{download_audience}{download audience
-(see \code{bcdc_search_facets("download_audience")})}
+(see \code{bcdc_search_facets("download_audience")}). Default \code{NULL} (all audiences).}
 
 \item{res_format}{format of resource (see \code{bcdc_search_facets("res_format")})}
 
