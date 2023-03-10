@@ -149,7 +149,7 @@ wfs_con <- structure(
 #' @keywords internal
 #' @importFrom dbplyr sql_translation
 #' @export
-sql_translation.wfsConnection <- function(conn) {
+sql_translation.wfsConnection <- function(con) {
   dbplyr::sql_variant(
     cql_scalar,
     cql_agg,
