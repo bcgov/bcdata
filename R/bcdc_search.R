@@ -172,21 +172,27 @@ bcdc_search <- function(..., license_id = NULL,
                 organization = organization
                 ))
 
-  lapply(names(facets), function(x) {
-    facet_vals <- bcdc_search_facets(x)
-    if (!facets[x] %in% facet_vals$name) {
-      stop(facets[x], " is not a valid value for ", x,
-           call. = FALSE)
-    }
-  })
-
   # build query by collating the terms and any user supplied facets
   # if there are no supplied facets (e.g., is_empty(facets) returns TRUE) just use terms)
   query <- if (is_empty(facets)) {
-      paste0(terms)
-    } else {
-      paste0(terms, "+", paste(names(facets), paste0("\"", facets, "\""), sep = ":", collapse = "+"))
-    }
+    paste0(terms)
+  } else {
+    #check that the facet values are valid
+    lapply(names(facets), function(x) {
+      facet_vals <- bcdc_search_facets(x)
+      if (!facets[x] %in% facet_vals$name) {
+        stop(facets[x], " is not a valid value for ", x,
+             call. = FALSE)
+      }
+    })
+
+    paste0(terms, "+", paste(
+      names(facets),
+      paste0("\"", facets, "\""),
+      sep = ":",
+      collapse = "+"
+    ))
+  }
 
   query <- gsub("\\s+", "%20", query)
 
