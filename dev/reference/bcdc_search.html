@@ -66,7 +66,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bcdc_search</span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>
 <span>  license_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  download_audience <span class="op">=</span> <span class="st">"Public"</span>,</span>
+<span>  download_audience <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  res_format <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sector <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -86,7 +86,7 @@
 
 <dt>download_audience</dt>
 <dd><p>download audience
-(see <code>bcdc_search_facets("download_audience")</code>). Default <code>"Public"</code></p></dd>
+(see <code>bcdc_search_facets("download_audience")</code>). Default <code>NULL</code> (all audiences).</p></dd>
 
 
 <dt>res_format</dt>
@@ -120,8 +120,8 @@
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_search</span><span class="op">(</span><span class="st">"forest"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Found 313 matches. Returning the first 100.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> To see them all, rerun the search and set the 'n' argument to 313.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Found 551 matches. Returning the first 100.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> To see them all, rerun the search and set the 'n' argument to 551.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of B.C. Data Catalogue Records</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Number of records: 100</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Showing the top 50 results. You can assign the</span></span>
@@ -129,207 +129,192 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"> `[` to see other results in the set.</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Titles:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Forest Development Units (multiple, wms, kml,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Non Replaceable Forest Licenses Kamloops Forest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  District (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: af8d871d-6612-4c94-a2ce-d05672ec9efa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   non-replaceable-forest-licenses-kamloops-forest-district</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Forest Development Units (multiple, wms, kml,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  oracle_sde)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 25bbc9a6-f0eb-47dd-849c-3161a6512468</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-development-units</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: FADM - Provincial Forest (multiple, wms, kml)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: FADM - Provincial Forest (multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 4a023cb2-09fd-44c2-b3ce-439ecb5f39f3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: fadm-provincial-forest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: Forest Inventory Zones (multiple, wms, kml)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: Forest Ecosystem Networks for the Chilcotin Forest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  District (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: e55ea13e-7503-4109-ae46-9c1a113eaed8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   forest-ecosystem-networks-for-the-chilcotin-forest-district</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: Forest Inventory Zones (multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 67e95c68-c1ef-4363-b351-0dfead151122</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-inventory-zones</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: Forest Tenure Managed Licence (multiple, wms, kml)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: Forest MapView (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 67acfc63-1dea-43be-bee0-4bc8fa8901fc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-mapview</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: Forest Tenure Managed Licence (multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: c3e96239-cdc9-4328-ac19-58fba1623ef8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-managed-licence</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: FDU - Forest Licence Reference (multiple)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: Forest Tenure Road Lines (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: bed9be0f-3590-415b-b130-d5bfa2938604</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-road-lines</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9: FDU - Forest Licence Reference (multiple)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 7e986391-c740-4d1b-9294-7576af2d2998</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: fdu-forest-licence-reference</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: Forest Tenure Communication Sites (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: Forest Tenure Communication Sites (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 1361d483-26ae-4ca9-adba-e19c3efac147</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-communication-sites</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: FADM - Provincial Forest Deletion (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: FADM - Provincial Forest Deletion (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: fc480dec-1e67-4944-9343-6c72ae124440</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: fadm-provincial-forest-deletion</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: Forest Tenure Timber Licence (multiple, wms, kml)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: Forest Tenure Timber Licence (multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: f2356651-4456-4d93-ba17-7b8c4a3ee53d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-timber-licence</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9: FADM - Provincial Forest Addition (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: FADM - Provincial Forest Addition (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 07dba191-3ebc-4c32-af7e-16769c237011</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: fadm-provincial-forest-addition</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: FADM - Provincial Forest Exclusion (multiple,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: FADM - Provincial Forest Exclusion (multiple,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: f3239e0c-f347-49f9-a53d-39290e597159</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: fadm-provincial-forest-exclusion</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: Forest Road Segment Tenure (multiple, wms, kml)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: Forest Road Segment Tenure (multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 07b0830e-a505-4c88-8d9a-8cf0a630f565</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-road-segment-tenure</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: Generalized Forest Harvesting Restrictions (fgdb,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: Generalized Forest Harvesting Restrictions (fgdb,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  csv)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6c0bcb22-49cb-4315-bc9c-c4668495cc45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: generalized-forest-harvesting-restrictions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: RESULTS - Forest Cover Silviculture (multiple,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: RESULTS - Forest Cover Silviculture (multiple,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 258bb088-4113-47b1-b568-ce20bd64e3e3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: results-forest-cover-silviculture</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: RESULTS - Forest Cover Inventory (multiple, wms)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: RESULTS - Forest Cover Inventory (multiple, wms)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 56ac43a7-724a-4f01-b193-d5f9a16ef0a8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: results-forest-cover-inventory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: Generalized Forest Cover Ownership (wms, kml,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: Generalized Forest Cover Ownership (wms, kml,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  multiple, pdf)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 5fc4e8ce-dd1d-44fd-af17-e0789cf65e4e</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: generalized-forest-cover-ownership</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: RESULTS - Forest Cover Reserve (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: RESULTS - Forest Cover Reserve (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 7028ac47-45dd-41d7-a371-be5a04177afe</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: results-forest-cover-reserve</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: Forest Licensee Operating Areas (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: Forest Licensee Operating Areas (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 5a18c401-7c99-48fe-8a1a-b4597072d8b6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-licensee-operating-areas</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: Forest Tenure Road Section Lines (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: Forest Tenure Chart Block Polygons (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 9d341916-d596-481c-b191-a0df41767c2f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-chart-block-polygons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: Forest Tenure Timber Use Polygons (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 4b2afa31-a0b9-488f-8f15-1d6117e0093e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-timber-use-polygons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: Forest Tenure Cut Block Polygons (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 214e60a2-4f1a-4a68-8494-b8a935b6551b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-cut-block-polygons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: Forest Tenure Managed Licenses Polygons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 04fb4da4-8c6e-4166-a4e8-4c8723443980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-managed-licenses-polygons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: Forest Tenure Cut Permit Polygons (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 4876fb83-ce33-4cf8-9c13-7fdeb2f39cf6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-cut-permit-polygons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: Forest Stewardship Plans - Identified Areas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml, oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: dad55255-0f8f-4a4a-a40f-38d22750d065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-stewardship-plans-identified-areas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: Forest Tenure Road Section Lines (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 243c94a1-f275-41dc-bc37-91d8a2b26e10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-road-section-lines</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: Forest Tenure Harvesting Authority Polygons</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: Forest Tenure Harvesting Authority Polygons</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: cff7b8f7-6897-444f-8c53-4bb93c7e9f8b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-harvesting-authority-polygons</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: Forest Tenure Real Property Project (multiple,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: Forest Tenure Real Property Project (multiple,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 3d7f09c3-ff25-429e-a4d9-d88f9919d904</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-real-property-project</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: Forest Tenure Map Notation Point (multiple, wms)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: Forest Tenure Map Notation Point (multiple, wms)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 69f4f070-d70a-43c8-b224-354758f4f492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-map-notation-point</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: Forest Tenure Map Notation Polygon (multiple,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 78838b54-f241-4269-aeb4-126d14bb5f37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-map-notation-polygon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: Forest Tenure Map Notation Line (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: Forest Tenure Map Notation Line (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 8ef18f74-e53f-497a-968d-86e9a20419a2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-map-notation-line</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: Forest Tenure Road Section Amendment (multiple)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: Forest Tenure Map Notation Polygon (multiple,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  wms, kml)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 78838b54-f241-4269-aeb4-126d14bb5f37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-map-notation-polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: Forest Tenure Road Section Amendment (multiple)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: bad79704-3fc9-43e7-b5d4-660657199af8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-road-section-amendment</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: Forest Tenure Free Use Permit (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: Forest Tenure Free Use Permit (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 814e0ed9-95c3-4750-8152-1307795986f1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-free-use-permit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: Forest Tenure Timber Licence Remaining (multiple)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: Forest Tenure Communication Site Polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: d8f0798b-e2e3-48e5-b587-d193daced09e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-communication-site-polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: Forest Tenure Timber Licence Remaining (multiple)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: edf864e8-bae6-4735-a85b-3e6f276d4a14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-timber-licence-remaining</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: Forest Tenure Road Segment Lines (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: Forest Tenure Road Section Polygon (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6c560de6-f322-491f-965a-f75efae6e6d3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-road-section-polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: Forest Tenure Road Segment Lines (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml, other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 9e5bfa62-2339-445e-bf67-81657180c682</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-road-segment-lines</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: Forest Tenure Timber Licence Elimination</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: Forest Tenure Timber Licence Elimination</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: e15e0543-830f-43b8-b824-ed9a8ed7eeca</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-timber-licence-elimination</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29: Forest Tenure Road Use Permits (multiple, wms,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: Forest Tenure Timber License Elimination</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: d3e5f900-bd2c-4537-8c72-96ee71b4d7ce</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-timber-license-elimination</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: Forest Tenure Road Use Permits (multiple, wms,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  kml, oracle_sde)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 5c7bc316-1524-4e3f-b799-f8dbafa7a53a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-road-use-permits</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30: Biodiversity Corridors Kamloops Forest District</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: Forest Operations Map (FOM) - Cutblocks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: f15d11d3-2a3e-41a5-a576-dab136cced9b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 7dda4615-5d32-427e-a303-1dcdb90a6fea</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-operations-map-fom-cutblocks</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: Fertilization Forest Carbon Initiative Projects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (arcgis_rest, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6dec4d9c-f960-4c49-a6df-d4568531db7d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   biodiversity-corridors-kamloops-forest-district</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31: Forest Tenure Special Access Road Line (multiple,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 4ee37a5d-6a14-4f98-8ad9-566b4ea28e2b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-special-access-road-line</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32: Forest Tenure Special Access Road Polygon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6d171eb8-d7a8-4ad5-8a9e-027e43f7a54b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-special-access-road-polygon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33: Forest Tenure Special Use Permit Polygon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: d29b37fc-cbfe-4ebf-ac6e-2bf8fa926a81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-special-use-permit-polygon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34: VRI - 2021 - Forest Vegetation Composite Polygons</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (fgdb)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6ba30649-14cd-44ad-a11f-794feed39f40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: vri-2021-forest-vegetation-composite-polygons</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35: RESULTS - Forest Cover Species (Attribute Only)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 2db77f8b-765b-488f-9752-f1349cf6ebfc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: results-forest-cover-species-attribute-only</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36: Potential Moose Habitat Lillooet Forest District</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: de3be33c-18b1-40e7-a61c-70784ad20a15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   fertilization-forest-carbon-initiative-projects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: Forest Carbon Initiative Projects Portal (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: e861e5eb-5a7f-4f1f-8764-a9b54000767f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-carbon-initiative-projects-portal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: Other Forest Carbon Initiative Projects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (arcgis_rest, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 0bdd1284-16f6-4fe5-b451-bd547bf49b67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: other-forest-carbon-initiative-projects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: Reforestation Forest Carbon Initiative Projects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (arcgis_rest, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: a4f9a983-bc5c-4165-a673-797ded40c9f1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   potential-moose-habitat-lillooet-forest-district</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37: Forest Tenure Cutblock Polygons (FTA 4.0)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: dfb8b498-fa4b-4286-b3ec-58db88aca1cf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: forest-tenure-cutblock-polygons-fta-4-0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38: Priority Old Forest Deferral Areas - Current View</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, other, wms, kml, arcgis_rest)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: f257ca4a-0c33-4eb2-9da8-21dff4482f58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   priority-old-forest-deferral-areas-current-view</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39: Productive Forest Landbase for the Cariboo Region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 0cfa7f53-272d-47d4-83df-95b4edd75460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   productive-forest-landbase-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40: Non-Productive Forest for the Cariboo Region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 8f0eabe0-f424-4062-ade1-cb4368c81b3a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: non-productive-forest-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41: North Thompson Caribou Habitat Clearwater Forest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  District (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6271d5dc-4870-41e4-903d-4d378c297353</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   north-thompson-caribou-habitat-clearwater-forest-district</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42: Rose Swanson Sensitive Area Vernon Forest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  District (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 30a88772-f815-4795-8f4d-9c09d52935a9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   rose-swanson-sensitive-area-vernon-forest-district</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43: Caribou Movement Corridors Clearwater Forest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  District - Lines (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 7c7768f2-7a3d-4a8f-958e-e7a8dd2b18f2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   caribou-movement-corridors-clearwater-forest-district-lines</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44: Recreation Sites, Reserves, and Interpretive</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Forests Details and Closures (wms, kml, multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: b0f23ae8-e0aa-449c-a806-653ba37f100a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   recreation-sites-reserves-and-interpretive-forests-details-and-closures</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45: Mixed Forest 1:250,000 GeoBase Land Cover</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 902f5af2-9fce-4579-b48d-8bd7f85d36dd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: mixed-forest-1-250-000-geobase-land-cover</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46: Coniferous Forest 1:250,000 GeoBase Land Cover</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 177b5ef0-8339-4fd7-a40a-93edb3797d07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: coniferous-forest-1-250-000-geobase-land-cover</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47: Broadleaf Forest 1:250,000 GeoBase Land Cover</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 78bb0ee9-96ed-49fb-9c0c-7434b2f24d7e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: broadleaf-forest-1-250-000-geobase-land-cover</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48: Old Growth Technical Advisory Panel (TAP) -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Ancient Forest (multiple, other, pdf, wms, kml)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: b43bc442-8a0f-42f2-b085-04f4771b2f28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   old-growth-technical-advisory-panel-tap-ancient-forest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49: Purchasing Card Expenditures - Forest Practices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Board - FYE11 (csv)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 618260d9-5dfe-4d98-805b-f11d9b4a94e1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   purchasing-card-expenditures-forest-practices-board-fye11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50: Old Growth Technical Advisory Panel (TAP) - Old</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Forests (multiple, other, pdf)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6f08c9d8-d6c0-4f08-ac64-54585c92ccb0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   old-growth-technical-advisory-panel-tap-old-forests</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   reforestation-forest-carbon-initiative-projects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48: Lake Classification Vernon Forest District</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 9fe70228-f96e-4c2b-9fda-4b08dd443d64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: lake-classification-vernon-forest-district</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49: Lake Classification Penticton Forest District</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 14ffefb0-ef97-499e-abfd-3375ed83ef62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: lake-classification-penticton-forest-district</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50: Grasslands Fort Nelson Forest District</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (oracle_sde)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 91ae918d-5b16-4256-aab6-69de8d769045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: grasslands-fort-nelson-forest-district</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Access a single record by calling</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  `bcdc_get_record(ID)` with the ID from the desired</span>
@@ -339,85 +324,193 @@
 <span class="r-in"><span>  <span class="fu">bcdc_search</span><span class="op">(</span><span class="st">"regional district"</span>, res_format <span class="op">=</span> <span class="st">"fgdb"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of B.C. Data Catalogue Records</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Number of records: 18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Number of records: 41</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Titles:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Recreation Trails for the Cariboo Region (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: Multiple Resource Value Assessment - Coast</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mountains District - Skeena Region - Web Viewer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: c23f158f-193e-444f-baaf-f21a48c1c58b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   multiple-resource-value-assessment-coast-mountains-district-skeena-region-web-viewer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Multiple Resource Value Assessment - Sunshine</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Coast District - South Coast Region - Web Viewer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: ad20cdab-c8bf-43b4-b393-00fdbab075ac</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   multiple-resource-value-assessment-sunshine-coast-district-south-coast-region-web-viewer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: Integrated Monitoring and Assessment Report -</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  District of Quesnel - Cariboo Region - Web Viewer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 50933ec6-e160-4c21-959e-c2ba7821a07a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   integrated-monitoring-and-assessment-report-district-of-quesnel-cariboo-region-web-viewer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: Recreation Trails for the Cariboo Region (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: e919372d-5fa1-4214-9f57-1d606a06f1f4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: recreation-trails-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: Recreation Sites and Trail BC Region Boundaries</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: Recreation Sites and Trail BC Region Boundaries</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (fgdb, multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 919f236a-e40f-4f07-a459-f976f02b6e11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   recreation-sites-and-trail-bc-region-boundaries</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: Grassland Benchmark for the Cariboo Region (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: Cariboo Region Wildfire Recovery Map (BC Map Hub)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 655e14f0-0de9-4b46-8acc-69a15156fbec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cariboo-region-wildfire-recovery-map-bc-map-hub-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: Grassland Benchmark for the Cariboo Region (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 2285c49d-a11d-4932-97d4-8c68695e03bb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: grassland-benchmark-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: Recreation Sites and Trails BC District Boundaries</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: Recreation Sites and Trails BC District Boundaries</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (fgdb, multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 0ad49841-a25b-4be4-b98c-9e817e94cc48</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   recreation-sites-and-trails-bc-district-boundaries</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: Backcountry Recreation Areas for the Cariboo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9: Forest Service Road Conditions - Cariboo Natural</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Resource Region (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: b53fd985-5524-4cbe-b179-433c04411dd4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   forest-service-road-conditions-cariboo-natural-resource-region</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: Prince George District Road Alerts Web</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Application (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: c7f2e1e6-84f4-463a-bc16-a07d24da2cf7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prince-george-district-road-alerts-web-application</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: Quesnel Natural Resource District Small Scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Salvage Opportunities (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 0a68944c-b1b7-42cc-9f12-09965dc327dc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   quesnel-natural-resource-district-small-scale-salvage-opportunities</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: Backcountry Recreation Areas for the Cariboo</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Region (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 95aaaa75-14a1-4afb-a5cd-e6b5bc8f2dd2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   backcountry-recreation-areas-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: High Elevation Viewpoints for the Cariboo Region</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: High Elevation Viewpoints for the Cariboo Region</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 76e34f98-55f7-461c-9843-30bfe7b72b95</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   high-elevation-viewpoints-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: Recreation Trails with Buffer for the Cariboo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: Cariboo-Chilcotin Natural Resource District Small</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Scale Salvage Opportunities (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 45004465-bff3-4601-a355-95e94bb9a8d9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cariboo-chilcotin-natural-resource-district-small-scale-salvage-opportunities</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: Forest Service Road Conditions Web Map - Cariboo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Natural Resource Region (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: da349704-60d4-48d0-86ec-0122bc1c8163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   forest-service-road-conditions-web-map-cariboo-natural-resource-region</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: Recreation Trails with Buffer for the Cariboo</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Region (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: e403b4f8-1e78-4a8b-ac05-3d8c305d9f55</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   recreation-trails-with-buffer-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: Seral Stage Analysis 2004 Cariboo Region - Maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: Seral Stage Analysis 2004 Cariboo Region - Maps</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  and Reports (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: a4fd5e98-804c-4f95-888f-bedcc9964dbd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   seral-stage-analysis-2004-cariboo-region-maps-and-reports</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9: Candidate Goal 2 Protected Areas for the Cariboo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: Candidate Goal 2 Protected Areas for the Cariboo</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Region (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: e67c7336-d9ac-4ca8-91ed-a512746a517e</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   candidate-goal-2-protected-areas-for-the-cariboo-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: Timing Windows for Work in and About Waterbodies</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: Timing Windows for Work in and About Waterbodies</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  in the Cariboo Natural Resource Region (other,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  multiple, wms, kml)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: fc586323-4f8d-4d64-a178-a74b254131bc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   timing-windows-for-work-in-and-about-waterbodies-in-the-cariboo-natural-resource-region</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: Timing Windows for Work in and About Waterbodies</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: Timing Windows for Work in and About Waterbodies</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  in the Cariboo NR Region Generalized View (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 96a968f8-f9bb-4ff3-9109-1b523706eeef</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   timing-windows-for-work-in-and-about-waterbodies-in-the-cariboo-nr-region-generalized-view</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: Custom Census Reports (2016, 2011, 2006) (other,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: Timing Windows for Work in and About Waterbodies</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  in the Cariboo Natural Resource Region - Web Map</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: a975db21-3f5f-443c-b2b3-c6e30d37073e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   timing-windows-for-work-in-and-about-waterbodies-in-the-cariboo-natural-resource-region-web-map</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: Custom Census Reports (2016, 2011, 2006) (other,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  xlsx)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 894497d9-6901-4ed8-8655-79010e4b9b09</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: custom-census-reports-2016-2011-2006-</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: CMHC Primary Rental Market (BC) (other, pdf)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: British Columbia Local Administrative Boundaries</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Portal (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 8d400574-f0cf-4a67-afbb-4b5be509a537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   british-columbia-local-administrative-boundaries-portal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: PreparedBC Hazard Map (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 6abe8c84-3383-4d2a-84a3-df0a0b3bf405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: preparedbc-hazard-map</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: Forest Service Road Safety Information Web Map</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Application - South Coast (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 55af70f9-a4f9-4468-8aca-4ba727969ec4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   forest-service-road-safety-information-web-map-application-south-coast</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: Haida Gwaii - Road and Safety Web App (other,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  arcgis_rest)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 2f772815-efdd-4829-b684-5fd17c73ce9b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: haida-gwaii-road-and-safety-web-app</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: Forest Service Road Safety and Closure</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Information - South Coast (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 018ed540-24a4-4b7f-9dfd-ce837f0d812f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   forest-service-road-safety-and-closure-information-south-coast</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: Timber Harvesting Land Base - Data - Howe Sound</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Cumulative Effects (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 9a2c42ce-7d51-4ace-a065-48a00ec0b804</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   timber-harvesting-land-base-data-howe-sound-cumulative-effects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: CMHC Primary Rental Market (BC) (other, pdf)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: aa7a5049-4a47-4182-b2c5-f4737f1913e0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: cmhc-primary-rental-market-bc-</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: Legal Planning Objectives - Current - Polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: Legal Planning Objectives - All - Polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: eed2b09d-295a-4a02-adf2-178283ffacb7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: legal-planning-objectives-all-polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: Legal Planning Objectives - Current - Polygon</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml, other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 2c02040c-d7c5-4960-8d04-dea01d6d3e9f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: legal-planning-objectives-current-polygon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: Local Government Tax Rates and Assessments 2013</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: Local Government Tax Rates and Assessments 2013</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 93d9cdb1-f28a-46a5-8f16-b4d900bdcd18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   local-government-tax-rates-and-assessments-2013</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: Local Government Tax Rates and Assessment 2014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: Local Government Tax Rates and Assessment 2014</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 7fcbc227-7406-4bd9-aabf-7086ff445535</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: local-government-tax-rates-and-assessment-2014</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: Strategic Land and Resource Plans - Current</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: Strategic Land and Resource Plans - All</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 298d1034-c1be-4fd1-ad4b-d00ad5ab4b88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: strategic-land-and-resource-plans-all</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: BC Wildfire Community Wildfire Protection Plan</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (CWPP) Locations - Internal (other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 513e1310-d2c4-486f-8923-3b06caff2dc7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   bc-wildfire-community-wildfire-protection-plan-locations-internal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: Strategic Land and Resource Plans - Current</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml, other, oracle_sde)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 4b142d4c-83d6-4ecc-b66c-66601ae65992</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: strategic-land-and-resource-plans-current</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: Non Legal Planning Features - Current - Polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: Soil Relocation Receiving Sites (arcgis_rest,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 549cb689-b602-45a8-b56c-49726891cd65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: soil-relocation-receiving-sites</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: Soil Relocation Source Sites (arcgis_rest, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 404dfaf6-7c94-4b34-86a5-8d445f19ffbd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: soil-relocation-source-sites</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: High Volume Receiving Sites (arcgis_rest, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 5bc1cbef-c802-4dc6-af87-b5813b3a4a77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: high-volume-receiving-sites</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: Non Legal Planning Features - All - Polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, other)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ID: ad71d3c2-0776-4233-9765-18fbf18580cf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Name: non-legal-planning-features-all-polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: Non Legal Planning Features - Current - Polygon</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  (multiple, wms, kml, other)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ID: 5d859a89-f173-4006-82f9-16254de2c1fc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Name: non-legal-planning-features-current-polygon</span>
