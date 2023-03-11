@@ -448,3 +448,7 @@ names_to_lazy_tbl <- function(x) {
   frame <- as.data.frame(stats::setNames(rep(list(logical()), length(x)), x))
   dbplyr::tbl_lazy(frame)
 }
+
+is_empty <- function(x) {
+  length(x) == 0
+}

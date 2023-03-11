@@ -22,6 +22,10 @@
 #' @examples
 #' \donttest{
 #' try(
+#'   bcdc_search_facets("download_audience")
+#' )
+#'
+#' try(
 #'   bcdc_search_facets("res_format")
 #' )
 #' }
@@ -129,7 +133,7 @@ bcdc_list <- function() {
 #' @param ... search terms
 #' @param license_id the type of license (see `bcdc_search_facets("license_id")`).
 #' @param download_audience download audience
-#'        (see `bcdc_search_facets("download_audience")`). Default `"Public"`
+#'        (see `bcdc_search_facets("download_audience")`). Default `NULL` (all audiences).
 #' @param res_format format of resource (see `bcdc_search_facets("res_format")`)
 #' @param sector sector of government from which the data comes
 #'        (see `bcdc_search_facets("sector")`)
@@ -151,8 +155,8 @@ bcdc_list <- function() {
 #' )
 #' }
 bcdc_search <- function(..., license_id = NULL,
-                        download_audience = "Public",
-                        res_format=NULL,
+                        download_audience = NULL,
+                        res_format = NULL,
                         sector = NULL,
                         organization = NULL,
                         n = 100) {
@@ -168,17 +172,27 @@ bcdc_search <- function(..., license_id = NULL,
                 organization = organization
                 ))
 
-  lapply(names(facets), function(x) {
-    facet_vals <- bcdc_search_facets(x)
-    if (!facets[x] %in% facet_vals$name) {
-      stop(facets[x], " is not a valid value for ", x,
-           call. = FALSE)
-    }
-  })
+  # build query by collating the terms and any user supplied facets
+  # if there are no supplied facets (e.g., is_empty(facets) returns TRUE) just use terms)
+  query <- if (is_empty(facets)) {
+    paste0(terms)
+  } else {
+    #check that the facet values are valid
+    lapply(names(facets), function(x) {
+      facet_vals <- bcdc_search_facets(x)
+      if (!facets[x] %in% facet_vals$name) {
+        stop(facets[x], " is not a valid value for ", x,
+             call. = FALSE)
+      }
+    })
 
-  query <- paste0(
-    terms, ifelse(nzchar(terms), "+", ""),
-    paste(names(facets), facets, sep = ":", collapse = "+"))
+    paste0(terms, "+", paste(
+      names(facets),
+      paste0("\"", facets, "\""),
+      sep = ":",
+      collapse = "+"
+    ))
+  }
 
   query <- gsub("\\s+", "%20", query)
 

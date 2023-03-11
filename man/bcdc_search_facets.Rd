@@ -23,6 +23,10 @@ Get the valid values for a facet (that you can use in \code{\link[=bcdc_search]{
 \examples{
 \donttest{
 try(
+  bcdc_search_facets("download_audience")
+)
+
+try(
   bcdc_search_facets("res_format")
 )
 }
