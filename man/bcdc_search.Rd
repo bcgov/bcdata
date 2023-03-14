@@ -11,6 +11,7 @@ bcdc_search(
   res_format = NULL,
   sector = NULL,
   organization = NULL,
+  groups = NULL,
   n = 100
 )
 }
@@ -30,6 +31,9 @@ bcdc_search(
 \item{organization}{government organization that manages the data
 (see \code{bcdc_search_facets("organization")})}
 
+\item{groups}{collections of datasets for a particular project or on a particular theme
+(see \code{bcdc_search_facets("groups")})}
+
 \item{n}{number of results to return. Default \code{100}}
 }
 \value{
@@ -46,6 +50,10 @@ try(
 
 try(
   bcdc_search("regional district", res_format = "fgdb")
+)
+
+try(
+  bcdc_search("angling", groups = "bc-tourism")
 )
 }
 }
