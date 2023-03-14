@@ -55,6 +55,22 @@ test_that("bcdc_list_groups", {
   expect_s3_class(bcdc_list_groups(), "data.frame")
 })
 
+test_that("bcdc_list_organization_records works", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  expect_s3_class(bcdc_list_organization_records('bc-stats'), "bcdc_organization")
+  expect_s3_class(bcdc_list_organization_records('bc-stats'), "tbl_df")
+
+})
+
+test_that("bcdc_list_organizations", {
+  skip_on_cran()
+  skip_if_net_down()
+
+  expect_s3_class(bcdc_list_organizations(), "data.frame")
+})
+
 test_that("bcdc_list works", {
   skip_on_cran()
   skip_if_net_down()
