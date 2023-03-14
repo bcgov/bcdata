@@ -103,7 +103,7 @@ bcdc_list_organizations <- function() bcdc_search_facets("organization")
 #' Returns a tibble of organizations or records. Organizations can be viewed here:
 #' https://catalogue.data.gov.bc.ca/organizations or accessed directly from R using `bcdc_list_organizations`
 #'
-#' @param orgnization Name of the organization
+#' @param organization Name of the organization
 #' @export
 #' @examples
 #' \donttest{

@@ -10,7 +10,7 @@ bcdc_list_organizations()
 bcdc_list_organization_records(organization)
 }
 \arguments{
-\item{orgnization}{Name of the organization}
+\item{organization}{Name of the organization}
 }
 \description{
 Returns a tibble of organizations or records. Organizations can be viewed here:
