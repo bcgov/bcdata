@@ -41,3 +41,11 @@ test_that("process_search_terms works", {
   expect_equal(terms, "a+b+c")
   expect_error(process_search_terms(a = "one"), "should not be named")
 })
+
+test_that("bcdc_search works with zero results", {
+  res <- bcdc_search("foobarbananas")
+  expect_is(res, "bcdc_recordlist")
+  expect_length(res, 0L)
+
+  expect_output(print(res), "returned no results")
+})
