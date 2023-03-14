@@ -83,6 +83,11 @@ bcdc_list_group_records <- function(group) {
   cli <- bcdc_catalogue_client("action/group_show")
 
   r <- cli$get(query = list(id = group, include_datasets = 'true'))
+
+  if (r$status_code == 404){
+    stop("404: URL not found - you may have specified an invalid group?")
+  }
+
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
@@ -118,6 +123,11 @@ bcdc_list_organization_records <- function(organization) {
   cli <- bcdc_catalogue_client("action/organization_show")
 
   r <- cli$get(query = list(id = organization, include_datasets = 'true'))
+
+  if (r$status_code == 404){
+    stop("404: URL not found - you may have specified an invalid organization?")
+  }
+
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
