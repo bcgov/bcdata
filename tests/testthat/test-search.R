@@ -35,3 +35,11 @@ test_that('bcdc_search subsetting works', {
   expect_is(shorter, "bcdc_recordlist")
   expect_length(shorter, 3)
 })
+
+test_that("bcdc_search works with zero results", {
+  res <- bcdc_search("foobarbananas")
+  expect_is(res, "bcdc_recordlist")
+  expect_length(res, 0L)
+
+  expect_output(print(res), "returned no results")
+})

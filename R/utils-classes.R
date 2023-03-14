@@ -128,8 +128,15 @@ record_print_helper <- function(r, n, print_avail = FALSE) {
 
 #' @export
 print.bcdc_recordlist <- function(x, ...) {
-  cat_line_wrap("List of B.C. Data Catalogue Records")
+
   len <- length(x)
+
+  if (len == 0L) {
+    cat_line_wrap("Your search returned no results. Please try a different query.")
+    return(x)
+  }
+
+  cat_line_wrap("List of B.C. Data Catalogue Records")
   n_print <- min(50, len)
   cat_line_wrap(cli::col_blue("Number of records: ", len))
   if (n_print < len) {
