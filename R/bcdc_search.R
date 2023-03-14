@@ -159,17 +159,20 @@ bcdc_search <- function(..., license_id = NULL,
                         res_format = NULL,
                         sector = NULL,
                         organization = NULL,
+                        groups = NULL,
                         n = 100) {
 
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   # TODO: allow terms to be passed as a vector, and allow use of | for OR
-  terms <- paste0(compact(list(...)), collapse = "+")
+  terms <- process_search_terms(...)
+
   facets <- compact(list(license_id = license_id,
                 download_audience = download_audience,
                 res_format = res_format,
                 sector = sector,
-                organization = organization
+                organization = organization,
+                groups = groups
                 ))
 
   # build query by collating the terms and any user supplied facets
@@ -360,4 +363,12 @@ bcdc_tidy_resources.character <- function(record){
 #' @export
 bcdc_tidy_resources.bcdc_record <- function(record) {
   record$resource_df
+}
+
+process_search_terms <- function(...) {
+  dots_list <- compact(list(...))
+  if (length(names(dots_list)) > 0) {
+    stop("search terms passed to ... should not be named")
+  }
+  paste0(dots_list, collapse = "+")
 }
