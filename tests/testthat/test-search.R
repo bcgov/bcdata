@@ -36,7 +36,16 @@ test_that('bcdc_search subsetting works', {
   expect_length(shorter, 3)
 })
 
+test_that("process_search_terms works", {
+  terms <- process_search_terms("a", "b", "c")
+  expect_equal(terms, "a+b+c")
+  expect_error(process_search_terms(a = "one"), "should not be named")
+})
+
 test_that("bcdc_search works with zero results", {
+  skip_on_cran()
+  skip_if_net_down()
+
   res <- bcdc_search("foobarbananas")
   expect_is(res, "bcdc_recordlist")
   expect_length(res, 0L)

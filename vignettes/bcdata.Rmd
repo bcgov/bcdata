@@ -71,7 +71,7 @@ Let's search the catalogue for records that contain the word "recycling":
 ## Give me the catalogue search results for 'recycling'
 bcdc_search("recycling")
 #> List of B.C. Data Catalogue Records
-#> Number of records: 3
+#> Number of records: 4
 #> Titles:
 #> 1: Tire Stewardship BC Tire Recycling Data (csv)
 #>  ID: f791329b-c2dc-4f82-9993-209780f2a1c6
@@ -82,12 +82,15 @@ bcdc_search("recycling")
 #> 3: Environmental Protection Information Resources e-Library (other)
 #>  ID: dae0f2c3-b4f4-4d16-a96d-d7fe7c1581f3
 #>  Name: environmental-protection-information-resources-e-library
+#> 4: Cross-linked Information Resources (CLIR) (other)
+#>  ID: 6f8576bc-1585-429c-97f9-e94b059fa455
+#>  Name: cross-linked-information-resources-clir
 #> 
 #> Access a single record by calling `bcdc_get_record(ID)` with the ID from the desired
 #>  record.
 ```
 
-You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search _facets_ `license_id`, `download_audience`, `res_format`, `sector`, and `organization`:
+You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search _facets_ `license_id`, `download_audience`, `res_format`, `sector`, `organization`, and `groups`:
 
 
 ```r
@@ -124,19 +127,19 @@ You can see all valid values for the catalogue search facets using `bcdata::bcdc
 ## Valid values for search facet 'license_id'
 bcdc_search_facets(facet = "license_id")
 #>         facet count                                             display_name name
-#> 1  license_id    66                           Statistics Canada Open Licence   21
-#> 2  license_id     1               Queen's Printer Licence - British Columbia   25
-#> 3  license_id    12                      Open Government Licence – TransLink   48
-#> 4  license_id    13 Open Government Licence – Municipality of North Cowichan   44
-#> 5  license_id     5    Open Government Licence – Industry Training Authority   50
-#> 6  license_id     3                 Open Government Licence - Destination BC   43
-#> 7  license_id    61                         Open Government Licence - Canada   24
-#> 8  license_id  1590               Open Government Licence - British Columbia    2
-#> 9  license_id     2                  Open Government Licence - BC Assessment   47
-#> 10 license_id     4                   Open Data Licence for ICBC Information   49
-#> 11 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45
+#> 1  license_id    92                           Statistics Canada Open Licence   21
+#> 2  license_id    12                      Open Government Licence – TransLink   48
+#> 3  license_id    13 Open Government Licence – Municipality of North Cowichan   44
+#> 4  license_id     5    Open Government Licence – Industry Training Authority   50
+#> 5  license_id     3                 Open Government Licence - Destination BC   43
+#> 6  license_id    61                         Open Government Licence - Canada   24
+#> 7  license_id  1837               Open Government Licence - British Columbia    2
+#> 8  license_id     2                  Open Government Licence - BC Assessment   47
+#> 9  license_id     5                   Open Data Licence for ICBC Information   49
+#> 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45
+#> 11 license_id     1                King's Printer Licence - British Columbia   25
 #> 12 license_id    15                           Elections BC Open Data Licence   42
-#> 13 license_id  1433                                              Access Only   22
+#> 13 license_id  1710                                              Access Only   22
 ```
 
 Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:
@@ -169,67 +172,67 @@ Once you have located the B.C. Data Catalogue record with the data you want, you
 ```r
 ## Get the data resource for the `bc-highway-cams` catalogue record
 bcdc_get_data("bc-highway-cams")
-#> # A tibble: 978 × 21
-#>       id highwayNum…¹ highw…² camName caption credit orien…³ latit…⁴ longi…⁵ eleva…⁶ image…⁷ timeO…⁸
-#>    <dbl> <chr>        <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl> <chr>   <chr>  
-#>  1     2 5            Coquih… Coquih… Hwy 5,…  <NA>  N          49.6   -121.     980 f4e581… 2022-0…
-#>  2     5 3            <NA>    Kooten… Hwy 3,…  <NA>  E          49.1   -117.    1781 f1322d… 2022-0…
-#>  3     6 16           <NA>    Smithe… Hwy 16…  <NA>  N          54.8   -127.     497 5f3cb5… 2022-0…
-#>  4     7 1            Fraser… Cole R… Hwy 1 …  <NA>  E          49.1   -122.      12 771e32… 2022-0…
-#>  5     8 1            Vancou… Malaha… Hwy 1 …  <NA>  N          48.6   -124.     327 a4b785… 2022-0…
-#>  6     9 19           <NA>    Nanaim… Hwy 19…  <NA>  N          49.2   -124.     130 83714f… 2022-0…
-#>  7    10 97           Northe… South … Hwy 97…  <NA>  N          56.1   -121.     714 55a7f6… 2022-0…
-#>  8    11 1            Trans … Revels… Hwy 1 …  <NA>  NE         51.0   -118.     450 bd7314… 2022-0…
-#>  9    12 1            Trans … Three … Hwy 1,…  <NA>  E          50.9   -118.     510 569d16… 2022-0…
-#> 10    13 99           Peace … Peace … Hwy 99… "For … N          49.0   -123.      10 91e9eb… 2022-0…
-#> # … with 968 more rows, 9 more variables: secondsSinceLastAttempt <dbl>, lastModified <chr>,
-#> #   secondsSinceLastModified <dbl>, markedStale <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, dbcMark <chr>, and abbreviated variable names
-#> #   ¹​highwayNumber, ²​highwayLocationDescription, ³​orientation, ⁴​latitude, ⁵​longitude, ⁶​elevation,
-#> #   ⁷​imageMD5, ⁸​timeOfLastAttempt
+#> # A tibble: 999 × 19
+#>    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸
+#>    <chr>        <chr>   <chr>   <chr>   <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>
+#>  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… <NA>   N          49.6
+#>  2 http://imag… http:/… http:/… http:/…     5 3       <NA>    Kooten… Hwy 3,… <NA>   E          49.1
+#>  3 http://imag… http:/… http:/… http:/…     6 16      <NA>    Smithe… Hwy 16… <NA>   N          54.8
+#>  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … <NA>   E          49.1
+#>  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … <NA>   N          48.6
+#>  6 http://imag… http:/… http:/… http:/…     9 19      <NA>    Nanaim… Hwy 19… <NA>   N          49.2
+#>  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… <NA>   N          56.1
+#>  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … <NA>   NE         51.0
+#>  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… <NA>   E          50.9
+#> 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… <NA>   N          49.0
+#> # … with 989 more rows, 7 more variables: longitude <dbl>, imageStats_updatePeriodMean <dttm>,
+#> #   imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
+#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, and abbreviated variable names ¹​links_bchighwaycam,
+#> #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,
+#> #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-#> # A tibble: 978 × 21
-#>       id highwayNum…¹ highw…² camName caption credit orien…³ latit…⁴ longi…⁵ eleva…⁶ image…⁷ timeO…⁸
-#>    <dbl> <chr>        <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl> <chr>   <chr>  
-#>  1     2 5            Coquih… Coquih… Hwy 5,…  <NA>  N          49.6   -121.     980 f4e581… 2022-0…
-#>  2     5 3            <NA>    Kooten… Hwy 3,…  <NA>  E          49.1   -117.    1781 f1322d… 2022-0…
-#>  3     6 16           <NA>    Smithe… Hwy 16…  <NA>  N          54.8   -127.     497 5f3cb5… 2022-0…
-#>  4     7 1            Fraser… Cole R… Hwy 1 …  <NA>  E          49.1   -122.      12 771e32… 2022-0…
-#>  5     8 1            Vancou… Malaha… Hwy 1 …  <NA>  N          48.6   -124.     327 a4b785… 2022-0…
-#>  6     9 19           <NA>    Nanaim… Hwy 19…  <NA>  N          49.2   -124.     130 83714f… 2022-0…
-#>  7    10 97           Northe… South … Hwy 97…  <NA>  N          56.1   -121.     714 55a7f6… 2022-0…
-#>  8    11 1            Trans … Revels… Hwy 1 …  <NA>  NE         51.0   -118.     450 bd7314… 2022-0…
-#>  9    12 1            Trans … Three … Hwy 1,…  <NA>  E          50.9   -118.     510 569d16… 2022-0…
-#> 10    13 99           Peace … Peace … Hwy 99… "For … N          49.0   -123.      10 91e9eb… 2022-0…
-#> # … with 968 more rows, 9 more variables: secondsSinceLastAttempt <dbl>, lastModified <chr>,
-#> #   secondsSinceLastModified <dbl>, markedStale <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, dbcMark <chr>, and abbreviated variable names
-#> #   ¹​highwayNumber, ²​highwayLocationDescription, ³​orientation, ⁴​latitude, ⁵​longitude, ⁶​elevation,
-#> #   ⁷​imageMD5, ⁸​timeOfLastAttempt
+#> # A tibble: 999 × 19
+#>    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸
+#>    <chr>        <chr>   <chr>   <chr>   <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>
+#>  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… <NA>   N          49.6
+#>  2 http://imag… http:/… http:/… http:/…     5 3       <NA>    Kooten… Hwy 3,… <NA>   E          49.1
+#>  3 http://imag… http:/… http:/… http:/…     6 16      <NA>    Smithe… Hwy 16… <NA>   N          54.8
+#>  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … <NA>   E          49.1
+#>  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … <NA>   N          48.6
+#>  6 http://imag… http:/… http:/… http:/…     9 19      <NA>    Nanaim… Hwy 19… <NA>   N          49.2
+#>  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… <NA>   N          56.1
+#>  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … <NA>   NE         51.0
+#>  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… <NA>   E          50.9
+#> 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… <NA>   N          49.0
+#> # … with 989 more rows, 7 more variables: longitude <dbl>, imageStats_updatePeriodMean <dttm>,
+#> #   imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
+#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, and abbreviated variable names ¹​links_bchighwaycam,
+#> #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,
+#> #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude
 
 ## OR use the result from bcdc_get_record()
 my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 bcdc_get_data(my_record)
-#> # A tibble: 978 × 21
-#>       id highwayNum…¹ highw…² camName caption credit orien…³ latit…⁴ longi…⁵ eleva…⁶ image…⁷ timeO…⁸
-#>    <dbl> <chr>        <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl> <chr>   <chr>  
-#>  1     2 5            Coquih… Coquih… Hwy 5,…  <NA>  N          49.6   -121.     980 f4e581… 2022-0…
-#>  2     5 3            <NA>    Kooten… Hwy 3,…  <NA>  E          49.1   -117.    1781 f1322d… 2022-0…
-#>  3     6 16           <NA>    Smithe… Hwy 16…  <NA>  N          54.8   -127.     497 5f3cb5… 2022-0…
-#>  4     7 1            Fraser… Cole R… Hwy 1 …  <NA>  E          49.1   -122.      12 771e32… 2022-0…
-#>  5     8 1            Vancou… Malaha… Hwy 1 …  <NA>  N          48.6   -124.     327 a4b785… 2022-0…
-#>  6     9 19           <NA>    Nanaim… Hwy 19…  <NA>  N          49.2   -124.     130 83714f… 2022-0…
-#>  7    10 97           Northe… South … Hwy 97…  <NA>  N          56.1   -121.     714 55a7f6… 2022-0…
-#>  8    11 1            Trans … Revels… Hwy 1 …  <NA>  NE         51.0   -118.     450 bd7314… 2022-0…
-#>  9    12 1            Trans … Three … Hwy 1,…  <NA>  E          50.9   -118.     510 569d16… 2022-0…
-#> 10    13 99           Peace … Peace … Hwy 99… "For … N          49.0   -123.      10 91e9eb… 2022-0…
-#> # … with 968 more rows, 9 more variables: secondsSinceLastAttempt <dbl>, lastModified <chr>,
-#> #   secondsSinceLastModified <dbl>, markedStale <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, dbcMark <chr>, and abbreviated variable names
-#> #   ¹​highwayNumber, ²​highwayLocationDescription, ³​orientation, ⁴​latitude, ⁵​longitude, ⁶​elevation,
-#> #   ⁷​imageMD5, ⁸​timeOfLastAttempt
+#> # A tibble: 999 × 19
+#>    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸
+#>    <chr>        <chr>   <chr>   <chr>   <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>
+#>  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… <NA>   N          49.6
+#>  2 http://imag… http:/… http:/… http:/…     5 3       <NA>    Kooten… Hwy 3,… <NA>   E          49.1
+#>  3 http://imag… http:/… http:/… http:/…     6 16      <NA>    Smithe… Hwy 16… <NA>   N          54.8
+#>  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … <NA>   E          49.1
+#>  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … <NA>   N          48.6
+#>  6 http://imag… http:/… http:/… http:/…     9 19      <NA>    Nanaim… Hwy 19… <NA>   N          49.2
+#>  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… <NA>   N          56.1
+#>  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … <NA>   NE         51.0
+#>  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… <NA>   E          50.9
+#> 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… <NA>   N          49.0
+#> # … with 989 more rows, 7 more variables: longitude <dbl>, imageStats_updatePeriodMean <dttm>,
+#> #   imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
+#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, and abbreviated variable names ¹​links_bchighwaycam,
+#> #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,
+#> #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude
 ```
 
 A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:
