@@ -184,6 +184,8 @@ bcdc_list <- function() {
 #'        (see `bcdc_search_facets("sector")`)
 #' @param organization government organization that manages the data
 #'        (see `bcdc_search_facets("organization")`)
+#' @param groups collections of datasets for a particular project or on a particular theme
+#'        (see `bcdc_search_facets("groups")`)
 #' @param n number of results to return. Default `100`
 #'
 #' @return A list containing the records that match the search
@@ -198,23 +200,30 @@ bcdc_list <- function() {
 #' try(
 #'   bcdc_search("regional district", res_format = "fgdb")
 #' )
+#'
+#' try(
+#'   bcdc_search("angling", groups = "bc-tourism")
+#' )
 #' }
 bcdc_search <- function(..., license_id = NULL,
                         download_audience = NULL,
                         res_format = NULL,
                         sector = NULL,
                         organization = NULL,
+                        groups = NULL,
                         n = 100) {
 
-  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   # TODO: allow terms to be passed as a vector, and allow use of | for OR
-  terms <- paste0(compact(list(...)), collapse = "+")
+  terms <- process_search_terms(...)
+
   facets <- compact(list(license_id = license_id,
                 download_audience = download_audience,
                 res_format = res_format,
                 sector = sector,
-                organization = organization
+                organization = organization,
+                groups = groups
                 ))
 
   # build query by collating the terms and any user supplied facets
@@ -410,4 +419,12 @@ bcdc_tidy_resources.character <- function(record){
 #' @export
 bcdc_tidy_resources.bcdc_record <- function(record) {
   record$resource_df
+}
+
+process_search_terms <- function(...) {
+  dots_list <- compact(list(...))
+  if (length(names(dots_list)) > 0) {
+    stop("search terms passed to ... should not be named")
+  }
+  paste0(dots_list, collapse = "+")
 }
