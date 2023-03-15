@@ -153,7 +153,7 @@ Catalogue, returning the search results in your R session.</p>
 <code class="sourceCode R"><span><span class="co">## Give me the catalogue search results for 'recycling'</span></span>
 <span><span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of B.C. Data Catalogue Records</span></span>
-<span><span class="co">#&gt; Number of records: 3</span></span>
+<span><span class="co">#&gt; Number of records: 4</span></span>
 <span><span class="co">#&gt; Titles:</span></span>
 <span><span class="co">#&gt; 1: Tire Stewardship BC Tire Recycling Data (csv)</span></span>
 <span><span class="co">#&gt;  ID: f791329b-c2dc-4f82-9993-209780f2a1c6</span></span>
@@ -164,14 +164,17 @@ Catalogue, returning the search results in your R session.</p>
 <span><span class="co">#&gt; 3: Environmental Protection Information Resources e-Library (other)</span></span>
 <span><span class="co">#&gt;  ID: dae0f2c3-b4f4-4d16-a96d-d7fe7c1581f3</span></span>
 <span><span class="co">#&gt;  Name: environmental-protection-information-resources-e-library</span></span>
+<span><span class="co">#&gt; 4: Cross-linked Information Resources (CLIR) (other)</span></span>
+<span><span class="co">#&gt;  ID: 6f8576bc-1585-429c-97f9-e94b059fa455</span></span>
+<span><span class="co">#&gt;  Name: cross-linked-information-resources-clir</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Access a single record by calling `bcdc_get_record(ID)` with the ID from the desired</span></span>
 <span><span class="co">#&gt;  record.</span></span></code></pre></div>
 <p>You can set the number of records to be returned from the search
 and/or you can customize your search using the catalogue search
 <em>facets</em> <code>license_id</code>, <code>download_audience</code>,
-<code>res_format</code>, <code>sector</code>, and
-<code>organization</code>:</p>
+<code>res_format</code>, <code>sector</code>, <code>organization</code>,
+and <code>groups</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Give me the first catalogue search result for 'recycling'</span></span>
 <span><span class="fu"><a href="../reference/bcdc_search.html">bcdc_search</a></span><span class="op">(</span><span class="st">"recycling"</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -203,19 +206,19 @@ and/or you can customize your search using the catalogue search
 <code class="sourceCode R"><span><span class="co">## Valid values for search facet 'license_id'</span></span>
 <span><span class="fu"><a href="../reference/bcdc_search_facets.html">bcdc_search_facets</a></span><span class="op">(</span>facet <span class="op">=</span> <span class="st">"license_id"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         facet count                                             display_name name</span></span>
-<span><span class="co">#&gt; 1  license_id    66                           Statistics Canada Open Licence   21</span></span>
-<span><span class="co">#&gt; 2  license_id     1               Queen's Printer Licence - British Columbia   25</span></span>
-<span><span class="co">#&gt; 3  license_id    12                      Open Government Licence – TransLink   48</span></span>
-<span><span class="co">#&gt; 4  license_id    13 Open Government Licence – Municipality of North Cowichan   44</span></span>
-<span><span class="co">#&gt; 5  license_id     5    Open Government Licence – Industry Training Authority   50</span></span>
-<span><span class="co">#&gt; 6  license_id     3                 Open Government Licence - Destination BC   43</span></span>
-<span><span class="co">#&gt; 7  license_id    61                         Open Government Licence - Canada   24</span></span>
-<span><span class="co">#&gt; 8  license_id  1590               Open Government Licence - British Columbia    2</span></span>
-<span><span class="co">#&gt; 9  license_id     2                  Open Government Licence - BC Assessment   47</span></span>
-<span><span class="co">#&gt; 10 license_id     4                   Open Data Licence for ICBC Information   49</span></span>
-<span><span class="co">#&gt; 11 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45</span></span>
+<span><span class="co">#&gt; 1  license_id    92                           Statistics Canada Open Licence   21</span></span>
+<span><span class="co">#&gt; 2  license_id    12                      Open Government Licence – TransLink   48</span></span>
+<span><span class="co">#&gt; 3  license_id    13 Open Government Licence – Municipality of North Cowichan   44</span></span>
+<span><span class="co">#&gt; 4  license_id     5    Open Government Licence – Industry Training Authority   50</span></span>
+<span><span class="co">#&gt; 5  license_id     3                 Open Government Licence - Destination BC   43</span></span>
+<span><span class="co">#&gt; 6  license_id    61                         Open Government Licence - Canada   24</span></span>
+<span><span class="co">#&gt; 7  license_id  1837               Open Government Licence - British Columbia    2</span></span>
+<span><span class="co">#&gt; 8  license_id     2                  Open Government Licence - BC Assessment   47</span></span>
+<span><span class="co">#&gt; 9  license_id     5                   Open Data Licence for ICBC Information   49</span></span>
+<span><span class="co">#&gt; 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45</span></span>
+<span><span class="co">#&gt; 11 license_id     1                King's Printer Licence - British Columbia   25</span></span>
 <span><span class="co">#&gt; 12 license_id    15                           Elections BC Open Data Licence   42</span></span>
-<span><span class="co">#&gt; 13 license_id  1433                                              Access Only   22</span></span></code></pre></div>
+<span><span class="co">#&gt; 13 license_id  1710                                              Access Only   22</span></span></code></pre></div>
 <p>Finally, you can retrieve the <em>metadata</em> for a single
 catalogue record by using the record name or permanent ID with
 <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. It is advised to use the permanent ID
@@ -251,67 +254,67 @@ look at the B.C. Highway Web Cameras data:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get the data resource for the `bc-highway-cams` catalogue record</span></span>
 <span><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"bc-highway-cams"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 978 × 21</span></span>
-<span><span class="co">#&gt;       id highwayNum…¹ highw…² camName caption credit orien…³ latit…⁴ longi…⁵ eleva…⁶ image…⁷ timeO…⁸</span></span>
-<span><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1     2 5            Coquih… Coquih… Hwy 5,…  &lt;NA&gt;  N          49.6   -121.     980 f4e581… 2022-0…</span></span>
-<span><span class="co">#&gt;  2     5 3            &lt;NA&gt;    Kooten… Hwy 3,…  &lt;NA&gt;  E          49.1   -117.    1781 f1322d… 2022-0…</span></span>
-<span><span class="co">#&gt;  3     6 16           &lt;NA&gt;    Smithe… Hwy 16…  &lt;NA&gt;  N          54.8   -127.     497 5f3cb5… 2022-0…</span></span>
-<span><span class="co">#&gt;  4     7 1            Fraser… Cole R… Hwy 1 …  &lt;NA&gt;  E          49.1   -122.      12 771e32… 2022-0…</span></span>
-<span><span class="co">#&gt;  5     8 1            Vancou… Malaha… Hwy 1 …  &lt;NA&gt;  N          48.6   -124.     327 a4b785… 2022-0…</span></span>
-<span><span class="co">#&gt;  6     9 19           &lt;NA&gt;    Nanaim… Hwy 19…  &lt;NA&gt;  N          49.2   -124.     130 83714f… 2022-0…</span></span>
-<span><span class="co">#&gt;  7    10 97           Northe… South … Hwy 97…  &lt;NA&gt;  N          56.1   -121.     714 55a7f6… 2022-0…</span></span>
-<span><span class="co">#&gt;  8    11 1            Trans … Revels… Hwy 1 …  &lt;NA&gt;  NE         51.0   -118.     450 bd7314… 2022-0…</span></span>
-<span><span class="co">#&gt;  9    12 1            Trans … Three … Hwy 1,…  &lt;NA&gt;  E          50.9   -118.     510 569d16… 2022-0…</span></span>
-<span><span class="co">#&gt; 10    13 99           Peace … Peace … Hwy 99… "For … N          49.0   -123.      10 91e9eb… 2022-0…</span></span>
-<span><span class="co">#&gt; # … with 968 more rows, 9 more variables: secondsSinceLastAttempt &lt;dbl&gt;, lastModified &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   secondsSinceLastModified &lt;dbl&gt;, markedStale &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;, dbcMark &lt;chr&gt;, and abbreviated variable names</span></span>
-<span><span class="co">#&gt; #   ¹​highwayNumber, ²​highwayLocationDescription, ³​orientation, ⁴​latitude, ⁵​longitude, ⁶​elevation,</span></span>
-<span><span class="co">#&gt; #   ⁷​imageMD5, ⁸​timeOfLastAttempt</span></span>
+<span><span class="co">#&gt; # A tibble: 999 × 19</span></span>
+<span><span class="co">#&gt;    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… &lt;NA&gt;   N          49.6</span></span>
+<span><span class="co">#&gt;  2 http://imag… http:/… http:/… http:/…     5 3       &lt;NA&gt;    Kooten… Hwy 3,… &lt;NA&gt;   E          49.1</span></span>
+<span><span class="co">#&gt;  3 http://imag… http:/… http:/… http:/…     6 16      &lt;NA&gt;    Smithe… Hwy 16… &lt;NA&gt;   N          54.8</span></span>
+<span><span class="co">#&gt;  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … &lt;NA&gt;   E          49.1</span></span>
+<span><span class="co">#&gt;  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … &lt;NA&gt;   N          48.6</span></span>
+<span><span class="co">#&gt;  6 http://imag… http:/… http:/… http:/…     9 19      &lt;NA&gt;    Nanaim… Hwy 19… &lt;NA&gt;   N          49.2</span></span>
+<span><span class="co">#&gt;  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… &lt;NA&gt;   N          56.1</span></span>
+<span><span class="co">#&gt;  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … &lt;NA&gt;   NE         51.0</span></span>
+<span><span class="co">#&gt;  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… &lt;NA&gt;   E          50.9</span></span>
+<span><span class="co">#&gt; 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… &lt;NA&gt;   N          49.0</span></span>
+<span><span class="co">#&gt; # … with 989 more rows, 7 more variables: longitude &lt;dbl&gt;, imageStats_updatePeriodMean &lt;dttm&gt;,</span></span>
+<span><span class="co">#&gt; #   imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;, and abbreviated variable names ¹​links_bchighwaycam,</span></span>
+<span><span class="co">#&gt; #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,</span></span>
+<span><span class="co">#&gt; #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude</span></span>
 <span></span>
 <span><span class="co">## OR use the permanent ID, which is better for scripts or non-interactive use</span></span>
 <span><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 978 × 21</span></span>
-<span><span class="co">#&gt;       id highwayNum…¹ highw…² camName caption credit orien…³ latit…⁴ longi…⁵ eleva…⁶ image…⁷ timeO…⁸</span></span>
-<span><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1     2 5            Coquih… Coquih… Hwy 5,…  &lt;NA&gt;  N          49.6   -121.     980 f4e581… 2022-0…</span></span>
-<span><span class="co">#&gt;  2     5 3            &lt;NA&gt;    Kooten… Hwy 3,…  &lt;NA&gt;  E          49.1   -117.    1781 f1322d… 2022-0…</span></span>
-<span><span class="co">#&gt;  3     6 16           &lt;NA&gt;    Smithe… Hwy 16…  &lt;NA&gt;  N          54.8   -127.     497 5f3cb5… 2022-0…</span></span>
-<span><span class="co">#&gt;  4     7 1            Fraser… Cole R… Hwy 1 …  &lt;NA&gt;  E          49.1   -122.      12 771e32… 2022-0…</span></span>
-<span><span class="co">#&gt;  5     8 1            Vancou… Malaha… Hwy 1 …  &lt;NA&gt;  N          48.6   -124.     327 a4b785… 2022-0…</span></span>
-<span><span class="co">#&gt;  6     9 19           &lt;NA&gt;    Nanaim… Hwy 19…  &lt;NA&gt;  N          49.2   -124.     130 83714f… 2022-0…</span></span>
-<span><span class="co">#&gt;  7    10 97           Northe… South … Hwy 97…  &lt;NA&gt;  N          56.1   -121.     714 55a7f6… 2022-0…</span></span>
-<span><span class="co">#&gt;  8    11 1            Trans … Revels… Hwy 1 …  &lt;NA&gt;  NE         51.0   -118.     450 bd7314… 2022-0…</span></span>
-<span><span class="co">#&gt;  9    12 1            Trans … Three … Hwy 1,…  &lt;NA&gt;  E          50.9   -118.     510 569d16… 2022-0…</span></span>
-<span><span class="co">#&gt; 10    13 99           Peace … Peace … Hwy 99… "For … N          49.0   -123.      10 91e9eb… 2022-0…</span></span>
-<span><span class="co">#&gt; # … with 968 more rows, 9 more variables: secondsSinceLastAttempt &lt;dbl&gt;, lastModified &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   secondsSinceLastModified &lt;dbl&gt;, markedStale &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;, dbcMark &lt;chr&gt;, and abbreviated variable names</span></span>
-<span><span class="co">#&gt; #   ¹​highwayNumber, ²​highwayLocationDescription, ³​orientation, ⁴​latitude, ⁵​longitude, ⁶​elevation,</span></span>
-<span><span class="co">#&gt; #   ⁷​imageMD5, ⁸​timeOfLastAttempt</span></span>
+<span><span class="co">#&gt; # A tibble: 999 × 19</span></span>
+<span><span class="co">#&gt;    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… &lt;NA&gt;   N          49.6</span></span>
+<span><span class="co">#&gt;  2 http://imag… http:/… http:/… http:/…     5 3       &lt;NA&gt;    Kooten… Hwy 3,… &lt;NA&gt;   E          49.1</span></span>
+<span><span class="co">#&gt;  3 http://imag… http:/… http:/… http:/…     6 16      &lt;NA&gt;    Smithe… Hwy 16… &lt;NA&gt;   N          54.8</span></span>
+<span><span class="co">#&gt;  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … &lt;NA&gt;   E          49.1</span></span>
+<span><span class="co">#&gt;  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … &lt;NA&gt;   N          48.6</span></span>
+<span><span class="co">#&gt;  6 http://imag… http:/… http:/… http:/…     9 19      &lt;NA&gt;    Nanaim… Hwy 19… &lt;NA&gt;   N          49.2</span></span>
+<span><span class="co">#&gt;  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… &lt;NA&gt;   N          56.1</span></span>
+<span><span class="co">#&gt;  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … &lt;NA&gt;   NE         51.0</span></span>
+<span><span class="co">#&gt;  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… &lt;NA&gt;   E          50.9</span></span>
+<span><span class="co">#&gt; 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… &lt;NA&gt;   N          49.0</span></span>
+<span><span class="co">#&gt; # … with 989 more rows, 7 more variables: longitude &lt;dbl&gt;, imageStats_updatePeriodMean &lt;dttm&gt;,</span></span>
+<span><span class="co">#&gt; #   imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;, and abbreviated variable names ¹​links_bchighwaycam,</span></span>
+<span><span class="co">#&gt; #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,</span></span>
+<span><span class="co">#&gt; #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude</span></span>
 <span></span>
 <span><span class="co">## OR use the result from bcdc_get_record()</span></span>
 <span><span class="va">my_record</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="va">my_record</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 978 × 21</span></span>
-<span><span class="co">#&gt;       id highwayNum…¹ highw…² camName caption credit orien…³ latit…⁴ longi…⁵ eleva…⁶ image…⁷ timeO…⁸</span></span>
-<span><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt;  1     2 5            Coquih… Coquih… Hwy 5,…  &lt;NA&gt;  N          49.6   -121.     980 f4e581… 2022-0…</span></span>
-<span><span class="co">#&gt;  2     5 3            &lt;NA&gt;    Kooten… Hwy 3,…  &lt;NA&gt;  E          49.1   -117.    1781 f1322d… 2022-0…</span></span>
-<span><span class="co">#&gt;  3     6 16           &lt;NA&gt;    Smithe… Hwy 16…  &lt;NA&gt;  N          54.8   -127.     497 5f3cb5… 2022-0…</span></span>
-<span><span class="co">#&gt;  4     7 1            Fraser… Cole R… Hwy 1 …  &lt;NA&gt;  E          49.1   -122.      12 771e32… 2022-0…</span></span>
-<span><span class="co">#&gt;  5     8 1            Vancou… Malaha… Hwy 1 …  &lt;NA&gt;  N          48.6   -124.     327 a4b785… 2022-0…</span></span>
-<span><span class="co">#&gt;  6     9 19           &lt;NA&gt;    Nanaim… Hwy 19…  &lt;NA&gt;  N          49.2   -124.     130 83714f… 2022-0…</span></span>
-<span><span class="co">#&gt;  7    10 97           Northe… South … Hwy 97…  &lt;NA&gt;  N          56.1   -121.     714 55a7f6… 2022-0…</span></span>
-<span><span class="co">#&gt;  8    11 1            Trans … Revels… Hwy 1 …  &lt;NA&gt;  NE         51.0   -118.     450 bd7314… 2022-0…</span></span>
-<span><span class="co">#&gt;  9    12 1            Trans … Three … Hwy 1,…  &lt;NA&gt;  E          50.9   -118.     510 569d16… 2022-0…</span></span>
-<span><span class="co">#&gt; 10    13 99           Peace … Peace … Hwy 99… "For … N          49.0   -123.      10 91e9eb… 2022-0…</span></span>
-<span><span class="co">#&gt; # … with 968 more rows, 9 more variables: secondsSinceLastAttempt &lt;dbl&gt;, lastModified &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   secondsSinceLastModified &lt;dbl&gt;, markedStale &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;, dbcMark &lt;chr&gt;, and abbreviated variable names</span></span>
-<span><span class="co">#&gt; #   ¹​highwayNumber, ²​highwayLocationDescription, ³​orientation, ⁴​latitude, ⁵​longitude, ⁶​elevation,</span></span>
-<span><span class="co">#&gt; #   ⁷​imageMD5, ⁸​timeOfLastAttempt</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 999 × 19</span></span>
+<span><span class="co">#&gt;    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… &lt;NA&gt;   N          49.6</span></span>
+<span><span class="co">#&gt;  2 http://imag… http:/… http:/… http:/…     5 3       &lt;NA&gt;    Kooten… Hwy 3,… &lt;NA&gt;   E          49.1</span></span>
+<span><span class="co">#&gt;  3 http://imag… http:/… http:/… http:/…     6 16      &lt;NA&gt;    Smithe… Hwy 16… &lt;NA&gt;   N          54.8</span></span>
+<span><span class="co">#&gt;  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … &lt;NA&gt;   E          49.1</span></span>
+<span><span class="co">#&gt;  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … &lt;NA&gt;   N          48.6</span></span>
+<span><span class="co">#&gt;  6 http://imag… http:/… http:/… http:/…     9 19      &lt;NA&gt;    Nanaim… Hwy 19… &lt;NA&gt;   N          49.2</span></span>
+<span><span class="co">#&gt;  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… &lt;NA&gt;   N          56.1</span></span>
+<span><span class="co">#&gt;  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … &lt;NA&gt;   NE         51.0</span></span>
+<span><span class="co">#&gt;  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… &lt;NA&gt;   E          50.9</span></span>
+<span><span class="co">#&gt; 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… &lt;NA&gt;   N          49.0</span></span>
+<span><span class="co">#&gt; # … with 989 more rows, 7 more variables: longitude &lt;dbl&gt;, imageStats_updatePeriodMean &lt;dttm&gt;,</span></span>
+<span><span class="co">#&gt; #   imageStats_updatePeriodStdDev &lt;dbl&gt;, markedDelayed &lt;dbl&gt;, updatePeriodMean &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   updatePeriodStdDev &lt;dbl&gt;, fetchMean &lt;dbl&gt;, and abbreviated variable names ¹​links_bchighwaycam,</span></span>
+<span><span class="co">#&gt; #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,</span></span>
+<span><span class="co">#&gt; #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude</span></span></code></pre></div>
 <p>A catalogue record can have one or multiple data files—or
 “resources”. If there is only one resource, <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code>
 will return that resource by default, as in the above
