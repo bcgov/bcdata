@@ -85,7 +85,7 @@ bcdc_list_group_records <- function(group) {
   r <- cli$get(query = list(id = group, include_datasets = 'true'))
 
   if (r$status_code == 404){
-    stop("404: URL not found - you may have specified an invalid group?")
+    stop("404: URL not found - you may have specified an invalid group?", call. = FALSE)
   }
 
   r$raise_for_status()
