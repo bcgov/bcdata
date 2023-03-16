@@ -125,7 +125,7 @@ bcdc_list_organization_records <- function(organization) {
   r <- cli$get(query = list(id = organization, include_datasets = 'true'))
 
   if (r$status_code == 404){
-    stop("404: URL not found - you may have specified an invalid organization?")
+    stop("404: URL not found - you may have specified an invalid organization?",  call. = FALSE)
   }
 
   r$raise_for_status()
