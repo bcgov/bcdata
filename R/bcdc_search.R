@@ -83,6 +83,11 @@ bcdc_list_group_records <- function(group) {
   cli <- bcdc_catalogue_client("action/group_show")
 
   r <- cli$get(query = list(id = group, include_datasets = 'true'))
+
+  if (r$status_code == 404){
+    stop("404: URL not found - you may have specified an invalid group?", call. = FALSE)
+  }
+
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
@@ -90,6 +95,46 @@ bcdc_list_group_records <- function(group) {
 
   d <- tibble::as_tibble(res$result$packages)
   as.bcdc_group(d, description = res$result$description)
+
+}
+
+#' @export
+#' @describeIn bcdc_list_organization_records
+#'
+bcdc_list_organizations <- function() bcdc_search_facets("organization")
+
+#' Retrieve organization information for B.C. Data Catalogue
+#'
+#' Returns a tibble of organizations or records. Organizations can be viewed here:
+#' https://catalogue.data.gov.bc.ca/organizations or accessed directly from R using `bcdc_list_organizations`
+#'
+#' @param organization Name of the organization
+#' @export
+#' @examples
+#' \donttest{
+#' try(
+#'   bcdc_list_organization_records('bc-stats')
+#' )
+#' }
+
+bcdc_list_organization_records <- function(organization) {
+  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+
+  cli <- bcdc_catalogue_client("action/organization_show")
+
+  r <- cli$get(query = list(id = organization, include_datasets = 'true'))
+
+  if (r$status_code == 404){
+    stop("404: URL not found - you may have specified an invalid organization?",  call. = FALSE)
+  }
+
+  r$raise_for_status()
+
+  res <- jsonlite::fromJSON(r$parse("UTF-8"))
+  stopifnot(res$success)
+
+  d <- tibble::as_tibble(res$result$packages)
+  as.bcdc_organization(d, description = res$result$description)
 
 }
 
@@ -318,6 +363,11 @@ as.bcdc_group <- function(x, description) {
             description = description)
 }
 
+as.bcdc_organization <- function(x, description) {
+  structure(x,
+            class = c("bcdc_organization", setdiff(class(x), "bcdc_organization")),
+            description = description)
+}
 
 #' Provide a data frame containing the metadata for all resources from a single B.C. Data Catalogue record
 #'

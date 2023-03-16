@@ -26,6 +26,8 @@ reference:
       - '`bcdc_tidy_resources`'
       - '`bcdc_list_groups`'
       - '`bcdc_list_group_records`'
+      - '`bcdc_list_organizations`'
+      - '`bcdc_list_organization_records`'
       - '`bcdc_get_citation`'
   - title: "Direct downloads of data sets"
     desc: >
