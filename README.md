@@ -151,11 +151,12 @@ By participating in this project you agree to abide by its terms.
 ### Citation
 
 
-    To cite bcdata in publications please use:
+    To cite package 'bcdata' in publications use:
 
-      Teucher et al., (2021). bcdata: An R package for searching and
-      retrieving data from the B.C. Data Catalogue. Journal of Open Source
-      Software, 6(61), 2927, https://doi.org/10.21105/joss.02927
+      Teucher AC, Albers SJ, Hazlitt SL (2021). "bcdata: An R package for
+      searching and retrieving data from the B.C. Data Catalogue." _Journal
+      of Open Source Software_, *6*(61), 2927. doi:10.21105/joss.02927
+      <https://doi.org/10.21105/joss.02927>.
 
     A BibTeX entry for LaTeX users is
 
