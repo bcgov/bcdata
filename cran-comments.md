@@ -1,6 +1,6 @@
 ## Release summary
 
-This is a minor release, primarily to fix the WARNING on R-devel relating to
+This is a patch release, primarily to fix the WARNING on R-devel relating to
 S3 generic/method consistency.
 
 ### CRAN check issues
