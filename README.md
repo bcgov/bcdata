@@ -8,7 +8,7 @@ You may obtain a copy of the License at
 
 https://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, 
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
@@ -18,10 +18,6 @@ See the License for the specific language governing permissions and limitations 
 <!-- badges: start -->
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/license/apache-2-0/)
-[![R build
-status](https://github.com/bcgov/bcdata/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/bcdata)
-[![Codecov test
-coverage](https://codecov.io/gh/bcgov/bcdata/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bcgov/bcdata?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
@@ -30,6 +26,9 @@ checks](https://cranchecks.info/badges/worst/bcdata)](https://CRAN.R-project.org
 [![img](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.02927/status.svg)](https://doi.org/10.21105/joss.02927)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4737824.svg)](https://doi.org/10.5281/zenodo.4737824)
+[![Codecov test
+coverage](https://codecov.io/gh/bcgov/bcdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/bcgov/bcdata?branch=main)
+[![R-CMD-check](https://github.com/bcgov/bcdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bcgov/bcdata/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 An R package 📦 for searching & retrieving data from the [B.C. Data
