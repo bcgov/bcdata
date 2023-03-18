@@ -5,9 +5,9 @@ S3 generic/method consistency.
 
 ### CRAN check issues
 
-The WARNING at https://cran.rstudio.org/web/checks/check_results_bcdata.html
-about S3 generic/method consistency has been fixed by ensuring the argument names
-are the same in the generics and methods.
+We fixed the CRAN check result failures, in particular:
+
+ * We fixed the S3 method inconsistencies for `sql_translation()`.
 
 ## R CMD check results
 
