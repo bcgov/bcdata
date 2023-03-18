@@ -1,4 +1,4 @@
-# bcdata (development version)
+# bcdata 0.4.1
 
 * Add `jsonlite::read_json()` as a file read method, so users can now download & read `json` resources in B.C. Data Catalogue records
 * Change the `download_audience` default from `Public` to `NULL` in `bcdc_search()` (#315)
