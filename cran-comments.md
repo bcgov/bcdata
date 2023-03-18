@@ -1,12 +1,13 @@
 ## Release summary
 
-This is a minor release, primarily to bring compatibility with an upcoming release of dbplyr.
-
-This release also changes the maintainer email address from andy.teucher@gov.bc.ca to andy.teucher@gmail.com (this will be confirmed via email).
+This is a minor release, primarily to fix the WARNING on R-devel relating to
+S3 generic/method consistency.
 
 ### CRAN check issues
 
-There were no CRAN check issues to be fixed.
+The WARNING at https://cran.rstudio.org/web/checks/check_results_bcdata.html
+about S3 generic/method consistency has been fixed by ensuring the argument names
+are the same in the generics and methods.
 
 ## R CMD check results
 
