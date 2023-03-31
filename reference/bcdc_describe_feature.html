@@ -102,39 +102,39 @@ The tibble returns the following columns:</p><ul><li><p>col_name: attributes of 
 <span class="r-in"><span>  <span class="fu">bcdc_describe_feature</span><span class="op">(</span><span class="st">"bc-airports"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 42 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    col_name                   sticky remot…¹ local…² colum…³</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> id                         TRUE   xsd:st… charac… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CUSTODIAN_ORG_DESCRIPTION  TRUE   xsd:st… charac… CUSTOD…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> BUSINESS_CATEGORY_CLASS    TRUE   xsd:st… charac… BUSINE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BUSINESS_CATEGORY_DESCRIP… TRUE   xsd:st… charac… BUSINE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> OCCUPANT_TYPE_DESCRIPTION  TRUE   xsd:st… charac… OCCUPA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SOURCE_DATA_ID             TRUE   xsd:st… charac… SOURCE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SUPPLIED_SOURCE_ID_IND     TRUE   xsd:st… charac… SUPPLI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AIRPORT_NAME               TRUE   xsd:st… charac… AIRPOR…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DESCRIPTION                FALSE  xsd:st… charac… DESCRI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> PHYSICAL_ADDRESS           FALSE  xsd:st… charac… PHYSIC…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 32 more rows, and abbreviated variable names</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​remote_col_type, ²​local_col_type, ³​column_comments</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    col_name            sticky remote_col_type local_col_type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> id                  TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CUSTODIAN_ORG_DESC… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> BUSINESS_CATEGORY_… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BUSINESS_CATEGORY_… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> OCCUPANT_TYPE_DESC… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SOURCE_DATA_ID      TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SUPPLIED_SOURCE_ID… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AIRPORT_NAME        TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DESCRIPTION         FALSE  xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> PHYSICAL_ADDRESS    FALSE  xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 32 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: column_comments &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_describe_feature</span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 42 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    col_name                   sticky remot…¹ local…² colum…³</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> id                         TRUE   xsd:st… charac… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CUSTODIAN_ORG_DESCRIPTION  TRUE   xsd:st… charac… CUSTOD…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> BUSINESS_CATEGORY_CLASS    TRUE   xsd:st… charac… BUSINE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BUSINESS_CATEGORY_DESCRIP… TRUE   xsd:st… charac… BUSINE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> OCCUPANT_TYPE_DESCRIPTION  TRUE   xsd:st… charac… OCCUPA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SOURCE_DATA_ID             TRUE   xsd:st… charac… SOURCE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SUPPLIED_SOURCE_ID_IND     TRUE   xsd:st… charac… SUPPLI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AIRPORT_NAME               TRUE   xsd:st… charac… AIRPOR…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DESCRIPTION                FALSE  xsd:st… charac… DESCRI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> PHYSICAL_ADDRESS           FALSE  xsd:st… charac… PHYSIC…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 32 more rows, and abbreviated variable names</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​remote_col_type, ²​local_col_type, ³​column_comments</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    col_name            sticky remote_col_type local_col_type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> id                  TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CUSTODIAN_ORG_DESC… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> BUSINESS_CATEGORY_… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BUSINESS_CATEGORY_… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> OCCUPANT_TYPE_DESC… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SOURCE_DATA_ID      TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SUPPLIED_SOURCE_ID… TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AIRPORT_NAME        TRUE   xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DESCRIPTION         FALSE  xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> PHYSICAL_ADDRESS    FALSE  xsd:string      character     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 32 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: column_comments &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
