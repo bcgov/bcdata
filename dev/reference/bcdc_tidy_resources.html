@@ -14,7 +14,7 @@ useful information on the formats, availability and types of data available."><m
     
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,15 +104,14 @@ in your .Rprofile file so the option persists across sessions.</p></dd>
 <span class="r-in"><span>  <span class="fu">bcdc_tidy_resources</span><span class="op">(</span><span class="va">airports</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   name      url   id    format ext   packa…¹ locat…² wfs_a…³</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> BC Geogr… <span style="color: #949494;">""</span>    604c… multi… <span style="color: #949494;">""</span>    76b1b7… bcgeog… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> BC_Airpo… <span style="color: #949494;">"</span>htt… fccc… xlsx   <span style="color: #949494;">"</span>xls… 76b1b7… catalo… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> WMS getC… <span style="color: #949494;">"</span>htt… 4d03… wms    <span style="color: #949494;">""</span>    76b1b7… bcgeog… TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> KML Netw… <span style="color: #949494;">"</span>htt… 5b9f… kml    <span style="color: #949494;">"</span>kml<span style="color: #949494;">"</span> 76b1b7… bcgeog… FALSE  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: bcdata_available &lt;lgl&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​package_id, ²​location,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​wfs_available</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name          url   id    format ext   package_id location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> BC Geographi… <span style="color: #949494;">""</span>    604c… multi… <span style="color: #949494;">""</span>    76b1b7a3-… bcgeogr…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> BC_Airports_… <span style="color: #949494;">"</span>htt… fccc… xlsx   <span style="color: #949494;">"</span>xls… 76b1b7a3-… catalog…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> WMS getCapab… <span style="color: #949494;">"</span>htt… 4d03… wms    <span style="color: #949494;">""</span>    76b1b7a3-… bcgeogr…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> KML Network … <span style="color: #949494;">"</span>htt… 5b9f… kml    <span style="color: #949494;">"</span>kml<span style="color: #949494;">"</span> 76b1b7a3-… bcgeogr…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: wfs_available &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bcdata_available &lt;lgl&gt;</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
