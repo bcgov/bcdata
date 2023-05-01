@@ -80,8 +80,8 @@ test_that("bcdc_get_data will return non-wms resources",{
 test_that("bcdc_get_data works with a zipped shp file", {
   skip_if_net_down()
   skip_on_cran()
-  expect_is(bcdc_get_data(record = '68f2f577-28a7-46b4-bca9-7e9770f2f357',
-                          resource = 'f89f99b0-ca68-41e2-afc4-63fdc0edb666'),
+  expect_is(bcdc_get_data(record = '481d6d4d-a536-4df9-9e9c-7473cd2ed89e',
+                          resource = '41c9bff0-4e25-49fc-a3e2-2a2e426ac71d'),
             "sf")
 })
 
