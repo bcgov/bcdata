@@ -30,7 +30,7 @@ try(
 )
 
 try(
-  bcdc_preview("points-of-well-diversion-applications")
+  bcdc_preview("water-reservations-points")
 )
 
 # Using BCGW name
