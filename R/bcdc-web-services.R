@@ -185,7 +185,7 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' )
 #'
 #' try(
-#'   bcdc_preview("points-of-well-diversion-applications")
+#'   bcdc_preview("water-reservations-points")
 #' )
 #'
 #' # Using BCGW name
