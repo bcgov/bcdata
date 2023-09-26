@@ -28,12 +28,12 @@
 #' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
 #' been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
 #' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
-#' it is advisable to lower the chunk limit. Chunks must be less than 10000.
+#' it is advisable to lower the chunk limit. The default is the same as `bcdata.single_download_limit`.
 #'
 #' `bcdata.single_download_limit` is the maximum number of records an object can be before forcing a paginated download
 #' (see entry for `bcdata.chunk_limit` for details on pagination).
 #' Tweaking this option in conjunction with `bcdata.chunk_limit` can often resolve failures in large and complex downloads.
-#' The default is 10000 records.
+#' The default is obtained from the server.
 #'
 #' @examples
 #' \donttest{
@@ -69,24 +69,26 @@ bcdc_options <- function() {
     ifelse(is.null(x), NA, as.numeric(x))
   }
 
+  single_download_limit <- bcdc_single_download_limit()
+
   dplyr::tribble(
     ~ option, ~ value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
-    "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), 1000,
+    "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), single_download_limit,
     "bcdata.single_download_limit",
-    null_to_na(getOption("bcdata.single_download_limit",
-                         default = bcdc_single_download_limit())), 10000
+    null_to_na(getOption("bcdata.single_download_limit")), single_download_limit
   )
 }
 
 
 check_chunk_limit <- function(){
-  chunk_value <- getOption("bcdata.chunk_limit")
+  chunk_value <- getOption("bcdata.chunk_limit", default = bcdc_single_download_limit())
   chunk_limit <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
 
-  if (!is.null(chunk_value) && chunk_value >= chunk_limit) {
+  if (!is.null(chunk_value) && chunk_value > chunk_limit) {
     stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
   }
+  chunk_value
 }
 
 bcdc_get_capabilities <- function() {

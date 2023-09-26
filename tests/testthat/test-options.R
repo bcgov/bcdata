@@ -23,8 +23,13 @@ test_that("bcdc_options() returns a tibble",{
 test_that("bcdata.chunk_limit",{
   skip_if_net_down()
   skip_on_cran()
-  withr::local_options(list(bcdata.chunk_limit = 10000))
-  expect_error(check_chunk_limit())
+  withr::with_options(list(bcdata.chunk_limit = 100000), {
+    expect_error(check_chunk_limit())
+  })
+  withr::with_options(list(bcdata.chunk_limit = 10), {
+    expect_silent(check_chunk_limit())
+    expect_equal(check_chunk_limit(), 10)
+  })
 })
 
 test_that("bcdata.single_download_limit", {
@@ -36,7 +41,6 @@ test_that("bcdata.single_download_limit", {
                     '4d0377d9-e8a1-429b-824f-0ce8f363512c'),
     "paginated"
   )
-
 })
 
 test_that("bcdata.single_download_limit can be changed",{
