@@ -24,12 +24,12 @@ if the bcdata catalogue accepts the request.
 from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
 been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
 requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
-it is advisable to lower the chunk limit. Chunks must be less than 10000.
+it is advisable to lower the chunk limit. The default is the same as \code{bcdata.single_download_limit}.
 
 \code{bcdata.single_download_limit} is the maximum number of records an object can be before forcing a paginated download
 (see entry for \code{bcdata.chunk_limit} for details on pagination).
 Tweaking this option in conjunction with \code{bcdata.chunk_limit} can often resolve failures in large and complex downloads.
-The default is 10000 records.
+The default is obtained from the server.
 }
 \examples{
 \donttest{
