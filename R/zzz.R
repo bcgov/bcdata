@@ -15,7 +15,7 @@
 .onLoad <- function(...) {
   ._bcdataenv_$named_get_record_warned <- FALSE # nocov
   ._bcdataenv_$get_capabilities_xml <- NULL # nocov
-
+  ._bcdataenv_$single_download_limit_warned <- FALSE # nocov
 }
 
 # Define bcdc_sf as a subclass of sf so that it works

@@ -18,8 +18,7 @@
 #' `"wms"` in the `format` column it is available as a Web
 #' Feature Service, and you can query and download it
 #' using `bcdc_query_geodata()`. The response will be
-#' paginated if the number of features is above the number
-#' set by the `bcdata.single_download_limit` option.
+#' paginated if the number of features is greater than that allowed by the server.
 #' Please see [bcdc_options()] for defaults and more
 #' information.
 #'
