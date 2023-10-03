@@ -32,8 +32,7 @@ Queries features from the B.C. Web Feature Service. See
 \code{"wms"} in the \code{format} column it is available as a Web
 Feature Service, and you can query and download it
 using \code{bcdc_query_geodata()}. The response will be
-paginated if the number of features is above the number
-set by the \code{bcdata.single_download_limit} option.
+paginated if the number of features is greater than that allowed by the server.
 Please see \code{\link[=bcdc_options]{bcdc_options()}} for defaults and more
 information.
 }

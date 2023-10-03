@@ -1,5 +1,7 @@
 # bcdata (development version)
 
+* Deprecate the `bcdata.single_download_limit` option, as it was mostly redundant with `bcdata.chunk_limit`, and should always be set by the server. Please set the page size limit for paginated requests via the `bcdata.chunk_limit` option (#332)
+
 # bcdata 0.4.1
 
 * Add `jsonlite::read_json()` as a file read method, so users can now download & read `json` resources in B.C. Data Catalogue records
