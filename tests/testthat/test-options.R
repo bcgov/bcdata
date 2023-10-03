@@ -34,6 +34,7 @@ test_that("bcdata.single_download_limit is deprecated but works", {
   skip_if_net_down()
   skip_on_cran()
   withr::local_options(list(bcdata.single_download_limit = 1))
+  withr::local_envvar(list(BCDC_KEY = NULL)) # so snapshot not affected by message
   expect_snapshot(
     bcdc_query_geodata(record = '76b1b7a3-2112-4444-857a-afccf7b20da8')
   )
