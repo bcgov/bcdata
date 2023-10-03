@@ -10,8 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("Testing bcdc_describe_feature function")
-
 test_that("Test that bcdc_describe feature returns the correct columns",{
   skip_on_cran()
   skip_if_net_down()

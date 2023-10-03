@@ -10,13 +10,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("testing ability of bcdc_query_geodata to retrieve for bcdc using collect")
-
 test_that("bcdc_query_geodata collects an sf object for a valid id", {
   skip_on_cran()
   skip_if_net_down()
   bc_airports <- bcdc_query_geodata("bc-airports") %>% collect()
-  expect_is(bc_airports, "sf")
+  expect_s3_class(bc_airports, "sf")
   expect_equal(attr(bc_airports, "sf_column"), "geometry")
 })
 
@@ -24,7 +22,7 @@ test_that("bcdc_query_geodata collects using as_tibble", {
   skip_on_cran()
   skip_if_net_down()
   bc_airports <- bcdc_query_geodata("bc-airports") %>% as_tibble()
-  expect_is(bc_airports, "sf")
+  expect_s3_class(bc_airports, "sf")
   expect_equal(attr(bc_airports, "sf_column"), "geometry")
 })
 
@@ -32,7 +30,7 @@ test_that("bcdc_query_geodata succeeds with a records over 10000 rows",{
   skip_on_cran()
   skip_if_net_down()
   skip("Skipping the BEC test, though available for testing")
-  expect_is(collect(bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")),
+  expect_s3_class(collect(bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")),
             "bcdc_sf")
 })
 
@@ -40,16 +38,16 @@ test_that("bcdc_query_geodata succeeds with a records over 10000 rows",{
 test_that("bcdc_query_geodata works with slug and full url using collect", {
   skip_on_cran()
   skip_if_net_down()
-  expect_is(ret1 <- bcdc_query_geodata("https://catalogue.data.gov.bc.ca/dataset/bc-airports") %>% collect(),
+  expect_s3_class(ret1 <- bcdc_query_geodata("https://catalogue.data.gov.bc.ca/dataset/bc-airports") %>% collect(),
             "sf")
-  expect_is(ret2 <- bcdc_query_geodata("bc-airports") %>% collect(),
+  expect_s3_class(ret2 <- bcdc_query_geodata("bc-airports") %>% collect(),
             "sf")
-  expect_is(ret3 <- bcdc_query_geodata("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+  expect_s3_class(ret3 <- bcdc_query_geodata("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
             %>% collect(),
             "sf")
-  expect_is(ret4 <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>% collect(),
+  expect_s3_class(ret4 <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>% collect(),
             "sf")
-  expect_is(ret5 <- bcdc_query_geodata("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c")
+  expect_s3_class(ret5 <- bcdc_query_geodata("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c")
             %>% collect(),
             "sf")
 
@@ -74,7 +72,7 @@ test_that("bcdc_query_geodata works with spatial data that have SHAPE for the ge
       filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
       collect()
   )
-  expect_is(ret1, "sf")
+  expect_s3_class(ret1, "sf")
 })
 
 test_that("collect() returns a bcdc_sf object",{
@@ -100,5 +98,5 @@ test_that("bcdc_sf objects has attributes",{
                      "url", "full_url", "time_downloaded"))
   expect_true(nzchar(attributes(sf_obj)$url))
   expect_true(nzchar(attributes(sf_obj)$full_url))
-  expect_is(attributes(sf_obj)$time_downloaded, "POSIXt")
+  expect_s3_class(attributes(sf_obj)$time_downloaded, "POSIXt")
 })

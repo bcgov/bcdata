@@ -9,8 +9,6 @@
 # Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
-
-context("testing ability of filter methods to narrow a wfs query")
 library(sf, quietly = TRUE)
 
 test_that("bcdc_query_geodata accepts R expressions to refine data call",{
@@ -19,7 +17,7 @@ test_that("bcdc_query_geodata accepts R expressions to refine data call",{
   one_feature <- bcdc_query_geodata(point_record) %>%
     filter(SOURCE_DATA_ID == '455') %>%
     collect()
-  expect_is(one_feature, "sf")
+  expect_s3_class(one_feature, "sf")
   expect_equal(attr(one_feature, "sf_column"), "geometry")
   expect_equal(nrow(one_feature), 1)
 })
@@ -30,7 +28,7 @@ test_that("bcdc_query_geodata accepts R expressions to refine data call",{
   one_feature <- bcdc_query_geodata(point_record) %>%
     filter(SOURCE_DATA_ID == '455') %>%
     collect()
-  expect_is(one_feature, "sf")
+  expect_s3_class(one_feature, "sf")
   expect_equal(attr(one_feature, "sf_column"), "geometry")
   expect_equal(nrow(one_feature), 1)
 })
@@ -48,7 +46,7 @@ test_that("operators work with different remote geom col names",{
   em_program <- bcdc_query_geodata("employment-program-of-british-columbia-regional-boundaries") %>%
     filter(INTERSECTS(crd)) %>%
     collect()
-  expect_is(em_program, "sf")
+  expect_s3_class(em_program, "sf")
   expect_equal(attr(em_program, "sf_column"), "geometry")
 
   ## REMOTE "SHAPE"
@@ -57,7 +55,7 @@ test_that("operators work with different remote geom col names",{
       filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
       collect()
   )
-  expect_is(crd_fires, "sf")
+  expect_s3_class(crd_fires, "sf")
   expect_equal(attr(crd_fires, "sf_column"), "geometry")
 
 })
@@ -143,7 +141,7 @@ test_that("large vectors supplied to filter succeeds",{
     filter(WATERSHED_GROUP_CODE %in% "PORI") %>%
     collect()
 
-  expect_is(bcdc_query_geodata(lines_record) %>%
+  expect_s3_class(bcdc_query_geodata(lines_record) %>%
     filter(WATERSHED_KEY %in% pori$WATERSHED_KEY),
     "bcdc_promise")
 
@@ -220,7 +218,7 @@ test_that("an intersect with an object less than 5E5 proceeds",{
     st_as_sfc()
 
 
-  expect_is(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
+  expect_s3_class(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
     filter(WITHIN(small_districts)) %>%
     collect(),
     "bcdc_sf")
@@ -282,21 +280,21 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
 test_that("works with dates", {
   skip_if_net_down()
   skip_on_cran()
-  expect_is(bcdc_query_geodata('historical-orders-and-alerts') %>%
+  expect_s3_class(bcdc_query_geodata('historical-orders-and-alerts') %>%
               filter(EVENT_START_DATE < "2017-05-01") %>%
               collect(), "bcdc_sf")
-  expect_is(bcdc_query_geodata('historical-orders-and-alerts') %>%
+  expect_s3_class(bcdc_query_geodata('historical-orders-and-alerts') %>%
               filter(EVENT_START_DATE < as.Date("2017-05-01")) %>%
               collect(), "bcdc_sf")
-  expect_is(bcdc_query_geodata('historical-orders-and-alerts') %>%
+  expect_s3_class(bcdc_query_geodata('historical-orders-and-alerts') %>%
               filter(EVENT_START_DATE < as.POSIXct("2017-05-01")) %>%
               collect(), "bcdc_sf")
   dt <- as.Date("2017-05-01")
-  expect_is(bcdc_query_geodata('historical-orders-and-alerts') %>%
+  expect_s3_class(bcdc_query_geodata('historical-orders-and-alerts') %>%
               filter(EVENT_START_DATE < dt) %>%
               collect(), "bcdc_sf")
   pt <- as.Date("2017-05-01")
-  expect_is(bcdc_query_geodata('historical-orders-and-alerts') %>%
+  expect_s3_class(bcdc_query_geodata('historical-orders-and-alerts') %>%
               filter(EVENT_START_DATE < pt) %>%
               collect(), "bcdc_sf")
 })
@@ -304,12 +302,12 @@ test_that("works with dates", {
 test_that("works with various as.x functions", {
   skip_if_net_down()
   skip_on_cran()
-  expect_is(
+  expect_s3_class(
     bcdc_query_geodata(point_record) %>%
       filter(NUMBER_OF_RUNWAYS == as.numeric("3")) %>%
       collect(),
     "bcdc_sf")
-  expect_is(
+  expect_s3_class(
     bcdc_query_geodata(point_record) %>%
       filter(DESCRIPTION == as.character("seaplane anchorage")) %>%
       collect(),

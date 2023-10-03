@@ -10,8 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("test-utils")
-
 test_that("check_geom_col_names works", {
   col_df_list <- lapply(gml_types(), function(x) {
     data.frame(col_name = "SHAPE", remote_col_type = x)
@@ -19,7 +17,7 @@ test_that("check_geom_col_names works", {
   lapply(col_df_list, function(x) {
     new_query <- specify_geom_name(x, "DWITHIN({geom_col}, foobar)")
     expect_equal(as.character(new_query), "DWITHIN(SHAPE, foobar)")
-    expect_is(new_query, "sql")
+    expect_s3_class(new_query, "sql")
   })
 })
 
@@ -68,7 +66,7 @@ test_that("bcdc_get_capabilities works", {
   )
 
   ._bcdataenv_$get_capabilities_xml <- NULL
-  expect_is(bcdc_get_capabilities(), "xml_document")
+  expect_s3_class(bcdc_get_capabilities(), "xml_document")
   expect_equal(bcdc_get_capabilities(), ._bcdataenv_$get_capabilities_xml)
 })
 
@@ -82,6 +80,6 @@ test_that("make_url works", {
 test_that("names_to_lazy_tbl works", {
   nms <- letters[1:3]
   lazy <- names_to_lazy_tbl(nms)
-  expect_is(lazy, "tbl_lazy")
+  expect_s3_class(lazy, "tbl_lazy")
   expect_equal(lazy$lazy_query$vars, nms)
 })

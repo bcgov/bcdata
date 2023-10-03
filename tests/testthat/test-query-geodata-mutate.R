@@ -10,8 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("testing that mutate method fails")
-
 test_that("mutate fails on a bcdata promise object",{
   skip_on_cran()
   skip_if_net_down()
