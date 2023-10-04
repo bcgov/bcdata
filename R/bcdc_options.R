@@ -23,7 +23,7 @@
 #' for a geometric operation. Objects that are bigger than this value will have
 #' a bounding box drawn and apply the geometric operation on that simpler
 #' polygon. The [bcdc_check_geom_size] function can be used to assess whether a
-#' given spatial object exceed the value of this option. Users can iteratively
+#' given spatial object exceeds the value of this option. Users can iteratively
 #' try to increase the maximum geometric predicate size and see if the bcdata
 #' catalogue accepts the request.
 #'
