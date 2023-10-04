@@ -30,7 +30,7 @@
 #' `bcdata.chunk_limit` is an option useful when dealing with very large data
 #' sets. When requesting large objects from the catalogue, the request is broken
 #' up into smaller chunks which are then recombined after they've been
-#' downloaded. This is called "pagination". bcdata does this all for you but
+#' downloaded. This is called "pagination". bcdata does this all for you, however by
 #' using this option you can set the size of the chunk requested. On slower
 #' connections, or when having problems, it may help to lower the chunk limit.
 #'
