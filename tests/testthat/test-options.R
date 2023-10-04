@@ -31,6 +31,7 @@ test_that("bcdata.chunk_limit",{
 })
 
 test_that("bcdata.single_download_limit is deprecated but works", {
+  # This can be removed when bcdata.single_download_limit is removed
   skip_if_net_down()
   skip_on_cran()
   withr::local_options(list(bcdata.single_download_limit = 1))
@@ -41,6 +42,7 @@ test_that("bcdata.single_download_limit is deprecated but works", {
 })
 
 test_that("bcdata.single_download_limit can be changed",{
+  # This can be removed when bcdata.single_download_limit is removed
   skip_if_net_down()
   skip_on_cran()
   withr::local_options(list(bcdata.single_download_limit = 13))

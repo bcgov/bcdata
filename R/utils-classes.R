@@ -71,7 +71,7 @@ print.bcdc_promise <- function(x, ...) {
 
   cat_bullet(strwrap(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
                         "and {col_green(fields)} fields")))
-  if (number_of_records > chunk_size) {
+  if (number_of_records > chunk_size) { # this triggers pagination
     cat_bullet(strwrap(glue::glue("Accessing this record requires pagination and will make {col_green(ceiling(number_of_records/chunk_size))} separate requests to the WFS. ",
                                               "See ?bcdc_options")))
   }
