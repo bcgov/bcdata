@@ -17,7 +17,7 @@
 #' option})`. The default options are purposefully set conservatively to
 #' hopefully ensure successful requests. Resetting these options may result in
 #' failed calls to the data catalogue. Options in R are reset every time R is
-#' re-started. See examples for addition ways to restore your initial state.
+#' re-started. See examples for additional ways to restore your initial state.
 #'
 #' `bcdata.max_geom_pred_size` is the maximum size in bytes of an object used
 #' for a geometric operation. Objects that are bigger than this value will have
