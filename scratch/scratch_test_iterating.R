@@ -22,6 +22,6 @@ for(nme in single_arg_functions[6]){
     filter(fun(local)) %>%
     collect()
 
-  expect_is(remote, "sf")
+  expect_s3_class(remote, "sf")
   expect_equal(attr(remote, "sf_column"), "geometry")
 }

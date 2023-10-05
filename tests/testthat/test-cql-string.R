@@ -10,7 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("Testing ability to create CQL strings")
 suppressPackageStartupMessages(library(sf, quietly = TRUE))
 
 the_geom <- st_sf(st_sfc(st_point(c(1,1))))
@@ -26,7 +25,7 @@ test_that("bcdc_cql_string fails when used on an uncollected (promise) object", 
 })
 
 test_that("CQL function works", {
-  expect_is(CQL("SELECT * FROM foo;"), c("CQL", "SQL"))
+  expect_s3_class(CQL("SELECT * FROM foo;"), c("CQL", "SQL"))
 })
 
 test_that("All cql geom predicate functions work", {

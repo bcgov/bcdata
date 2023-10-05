@@ -10,8 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("testprint methods")
-
 test_that("bcdc_promise print methods work",{
   skip_on_cran()
   skip_if_net_down()
@@ -37,7 +35,7 @@ test_that("show query works for bcdc_promise object",{
   skip_on_cran()
   skip_if_net_down()
   prom_obj <- bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
-  expect_is(show_query(prom_obj), "bcdc_query")
+  expect_s3_class(show_query(prom_obj), "bcdc_query")
 })
 
 
@@ -45,7 +43,7 @@ test_that("show query works for bcdc_sf object",{
   skip_on_cran()
   skip_if_net_down()
   sf_obj <- collect(bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8'))
-  expect_is(show_query(sf_obj), "bcdc_query")
+  expect_s3_class(show_query(sf_obj), "bcdc_query")
 })
 
 test_that("record with a zip file prints correctly", {

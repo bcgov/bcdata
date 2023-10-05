@@ -12,28 +12,33 @@
 
 #' Retrieve options used in bcdata, their value if set and the default value.
 #'
-#' This function retrieves bcdata specific options that can be set. These options can be set
-#' using `option({name of the option} = {value of the option})`. The default options are purposefully
-#' set conservatively to hopefully ensure successful requests. Resetting these options may result in
-#' failed calls to the data catalogue. Options in R are reset every time R is re-started. See examples for
-#' addition ways to restore your initial state.
+#' This function retrieves bcdata specific options that can be set. These
+#' options can be set using `option({name of the option} = {value of the
+#' option})`. The default options are purposefully set conservatively to
+#' hopefully ensure successful requests. Resetting these options may result in
+#' failed calls to the data catalogue. Options in R are reset every time R is
+#' re-started. See examples for additional ways to restore your initial state.
 #'
-#' `bcdata.max_geom_pred_size` is the maximum size in bytes of an object used for a geometric operation. Objects
-#' that are bigger than this value will have a bounding box drawn and apply the geometric operation
-#' on that simpler polygon. The [bcdc_check_geom_size] function can be used to assess whether a given spatial object
-#' exceed the value of this option. Users can iteratively try to increase the maximum geometric predicate size and see
-#' if the bcdata catalogue accepts the request.
+#' `bcdata.max_geom_pred_size` is the maximum size in bytes of an object used
+#' for a geometric operation. Objects that are bigger than this value will have
+#' a bounding box drawn and apply the geometric operation on that simpler
+#' polygon. The [bcdc_check_geom_size] function can be used to assess whether a
+#' given spatial object exceeds the value of this option. Users can iteratively
+#' try to increase the maximum geometric predicate size and see if the bcdata
+#' catalogue accepts the request.
 #'
-#' `bcdata.chunk_limit` is an option useful when dealing with very large data sets. When requesting large objects
-#' from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
-#' been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
-#' requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
-#' it is advisable to lower the chunk limit. Chunks must be less than 10000.
+#' `bcdata.chunk_limit` is an option useful when dealing with very large data
+#' sets. When requesting large objects from the catalogue, the request is broken
+#' up into smaller chunks which are then recombined after they've been
+#' downloaded. This is called "pagination". bcdata does this all for you, however by
+#' using this option you can set the size of the chunk requested. On slower
+#' connections, or when having problems, it may help to lower the chunk limit.
 #'
-#' `bcdata.single_download_limit` is the maximum number of records an object can be before forcing a paginated download
-#' (see entry for `bcdata.chunk_limit` for details on pagination).
-#' Tweaking this option in conjunction with `bcdata.chunk_limit` can often resolve failures in large and complex downloads.
-#' The default is 10000 records.
+#' `bcdata.single_download_limit` *Deprecated*. This is the maximum number of
+#' records an object can be before forcing a paginated download; it is set by
+#' querying the server capabilities. This option is deprecated and will be
+#' removed in a future release. Use `bcdata.chunk_limit` to set a lower value
+#' pagination value.
 #'
 #' @examples
 #' \donttest{
@@ -69,24 +74,29 @@ bcdc_options <- function() {
     ifelse(is.null(x), NA, as.numeric(x))
   }
 
+  server_single_download_limit <- bcdc_single_download_limit()
+
   dplyr::tribble(
     ~ option, ~ value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
-    "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), 1000,
+    "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), server_single_download_limit,
     "bcdata.single_download_limit",
-    null_to_na(getOption("bcdata.single_download_limit",
-                         default = bcdc_single_download_limit())), 10000
+    null_to_na(deprecate_single_download_limit_option()), server_single_download_limit
   )
 }
 
 
 check_chunk_limit <- function(){
-  chunk_value <- getOption("bcdata.chunk_limit")
-  chunk_limit <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
+  chunk_limit <- getOption("bcdata.chunk_limit")
+  single_download_limit <- deprecate_single_download_limit_option()
 
-  if (!is.null(chunk_value) && chunk_value >= chunk_limit) {
-    stop(glue::glue("Your chunk value of {chunk_value} exceed the BC Data Catalogue chunk limit of {chunk_limit}"), call. = FALSE)
+  if (is.null(chunk_limit)) {
+    return(single_download_limit)
   }
+  if (chunk_limit > single_download_limit) {
+    stop(glue::glue("Your chunk value of {chunk_limit} exceeds the BC Data Catalogue chunk limit of {single_download_limit}"), call. = FALSE)
+  }
+  chunk_limit
 }
 
 bcdc_get_capabilities <- function() {
@@ -151,4 +161,21 @@ bcdc_single_download_limit <- function() {
   # Looking globally also works but is slower: ".//ows:Constraint[@name='CountDefault']"
   count_defaults <- xml2::xml_find_first(doc, count_default_xpath)
   xml2::xml_integer(count_defaults)
+}
+
+# Used to send a message once per session that the single_download_limit option
+# will be deprecated. When we remove it, replace all calls to this function
+# with bcdc_single_download_limit() and remove the ._bcdataenv_$single_download_limit_warned
+# object from .onLoad.
+deprecate_single_download_limit_option <- function() {
+  x <- getOption("bcdata.single_download_limit")
+  if (!is.null(x)) {
+    if (!isTRUE(._bcdataenv_$single_download_limit_warned)) {
+      warning("The bcdata.single_download_limit option is deprecated. Please use bcdata.chunk_limit instead.",
+              call. = FALSE)
+      assign("single_download_limit_warned", TRUE, envir = ._bcdataenv_)
+    }
+    return(x)
+  }
+  bcdc_single_download_limit()
 }

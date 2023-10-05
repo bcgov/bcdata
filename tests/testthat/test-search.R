@@ -10,29 +10,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context('test bcdc_search')
-
-
-test_that('bcdc_search works', {
-  skip_on_cran()
-  skip_if_net_down()
-  output_path <- tempfile()
-  suppressWarnings(
-    verify_output(output_path, {
-      bcdc_search("Container", n = 5)
-    })
-  )
-  expect_false(any(grepl("Error", readLines(output_path))))
-})
-
 test_that('bcdc_search subsetting works', {
   skip_on_cran()
   skip_if_net_down()
   rec_list <- bcdc_search("Container", n = 5)
-  expect_is(rec_list, "bcdc_recordlist")
+  expect_s3_class(rec_list, "bcdc_recordlist")
   expect_length(rec_list, 5)
   shorter <- rec_list[3:5]
-  expect_is(shorter, "bcdc_recordlist")
+  expect_s3_class(shorter, "bcdc_recordlist")
   expect_length(shorter, 3)
 })
 
@@ -47,7 +32,7 @@ test_that("bcdc_search works with zero results", {
   skip_if_net_down()
 
   res <- bcdc_search("foobarbananas")
-  expect_is(res, "bcdc_recordlist")
+  expect_s3_class(res, "bcdc_recordlist")
   expect_length(res, 0L)
 
   expect_output(print(res), "returned no results")

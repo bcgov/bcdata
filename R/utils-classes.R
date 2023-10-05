@@ -52,9 +52,7 @@ print.bcdc_promise <- function(x, ...) {
 
   ## pagination printing
   number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
-  sdl <- getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())
-  cl <- getOption("bcdata.chunk_limit", default = 1000)
-  paginate <- number_of_records > sdl
+  chunk_size <- check_chunk_limit()
 
   if (!is.null(x$query_list$count)) {
     # head or tail have updated the count
@@ -73,8 +71,11 @@ print.bcdc_promise <- function(x, ...) {
 
   cat_bullet(strwrap(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
                         "and {col_green(fields)} fields")))
-  if (paginate) cat_bullet(strwrap(glue::glue("Accessing this record requires pagination and will make {col_green(ceiling(number_of_records/cl))} separate requests to the WFS. ",
+  if (number_of_records > chunk_size) { # this triggers pagination
+    cat_bullet(strwrap(glue::glue("Accessing this record requires pagination and will make {col_green(ceiling(number_of_records/chunk_size))} separate requests to the WFS. ",
                                               "See ?bcdc_options")))
+  }
+
   cat_bullet(strwrap("At most six rows of the record are printed here"))
   cat_rule()
   print(parsed)
@@ -433,7 +434,6 @@ mutate.bcdc_promise <- function(.data, ...){
 #' }
 #'
 collect.bcdc_promise <- function(x, ...){
-  check_chunk_limit()
 
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
 
@@ -442,8 +442,9 @@ collect.bcdc_promise <- function(x, ...){
 
   ## Determine total number of records for pagination purposes
   number_of_records <- bcdc_number_wfs_records(query_list, cli)
+  chunk_size <- check_chunk_limit()
 
-  if (number_of_records < getOption("bcdata.single_download_limit", default = bcdc_single_download_limit())) {
+  if (number_of_records <= chunk_size) {
     cc <- tryCatch(cli$post(body = query_list, encode = "form"),
                    error = function(e) {
                      stop("There was an issue processing this request.
@@ -453,8 +454,7 @@ collect.bcdc_promise <- function(x, ...){
     url <- cc$url
     full_url <- cli$url_fetch(query = query_list)
   } else {
-    chunk <- getOption("bcdata.chunk_limit", default = 1000)
-    message(glue::glue("This object has {number_of_records} records and requires {ceiling(number_of_records/chunk)} paginated requests to complete."))
+    message(glue::glue("This object has {number_of_records} records and requires {ceiling(number_of_records/chunk_size)} paginated requests to complete."))
     sorting_col <- pagination_sort_col(x$cols_df)
 
     query_list <- c(query_list, sortby = sorting_col)
@@ -466,7 +466,7 @@ collect.bcdc_promise <- function(x, ...){
       limit_param = "count",
       offset_param = "startIndex",
       limit = number_of_records,
-      chunk = chunk,
+      chunk = chunk_size,
       progress = interactive()
     )
 
@@ -487,7 +487,6 @@ collect.bcdc_promise <- function(x, ...){
 
   as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
              full_url = full_url)
-
 }
 
 

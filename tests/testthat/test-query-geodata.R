@@ -10,14 +10,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("testing the output of bcdc_query_geodata")
-
 test_that("bcdc_query_geodata returns an bcdc_promise object for a valid id OR bcdc_record", {
   skip_on_cran()
   skip_if_net_down()
   # id (character)
   bc_airports <- bcdc_query_geodata("bc-airports")
-  expect_is(bc_airports, "bcdc_promise")
+  expect_s3_class(bc_airports, "bcdc_promise")
 
   # bcdc_record
   bc_airports_record <- bcdc_get_record("bc-airports")
@@ -33,10 +31,10 @@ test_that("bcdc_query_geodata returns an object with a query, a cli, the catalog
   skip_if_net_down()
   skip_on_cran()
   bc_airports <- bcdc_query_geodata("bc-airports")
-  expect_is(bc_airports[["query_list"]], "list")
-  expect_is(bc_airports[["cli"]], "HttpClient")
-  expect_is(bc_airports[["record"]], "bcdc_record")
-  expect_is(bc_airports[["cols_df"]], "data.frame")
+  expect_type(bc_airports[["query_list"]], "list")
+  expect_s3_class(bc_airports[["cli"]], "HttpClient")
+  expect_s3_class(bc_airports[["record"]], "bcdc_record")
+  expect_s3_class(bc_airports[["cols_df"]], "data.frame")
 })
 
 
@@ -45,7 +43,7 @@ test_that("bcdc_query_geodata returns an object with bcdc_promise class when usi
   skip_if_net_down()
   bc_eml <- bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
     filter(PERMIT_RELATIONSHIP == "DISCHARGE")
-  expect_is(bc_eml, "bcdc_promise")
+  expect_s3_class(bc_eml, "bcdc_promise")
 })
 
 
@@ -53,7 +51,7 @@ test_that("bcdc_query_geodata returns an object with bcdc_promise class on recor
   skip_on_cran()
   skip_if_net_down()
   airports <- bcdc_query_geodata("bc-airports")
-  expect_is(airports, "bcdc_promise")
+  expect_s3_class(airports, "bcdc_promise")
 })
 
 test_that("bcdc_query_geodata fails when >1 record", {

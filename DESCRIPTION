@@ -56,7 +56,7 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 3.0.0),
     withr
 VignetteBuilder: 
     knitr
@@ -86,3 +86,4 @@ Collate:
     'utils-show-query.R'
     'utils.R'
     'zzz.R'
+Config/testthat/edition: 3

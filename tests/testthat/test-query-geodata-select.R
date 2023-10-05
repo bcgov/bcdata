@@ -10,8 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("testing ability of select methods to narrow a wfs query")
-
 test_that("select doesn't remove the geometry column",{
   skip_if_net_down()
   skip_on_cran()
@@ -68,15 +66,15 @@ test_that("select accept dplyr like column specifications",{
 
 
   ## Most basic select
-  expect_is(select(layer, ADMIN_AREA_NAME, OIC_MO_YEAR), "bcdc_promise")
+  expect_s3_class(select(layer, ADMIN_AREA_NAME, OIC_MO_YEAR), "bcdc_promise")
   ## Using a pre-assigned vector
-  expect_is(select(layer, all_of(correct_fields)), "bcdc_promise")
+  expect_s3_class(select(layer, all_of(correct_fields)), "bcdc_promise")
   ## Throws an error when column doesn't exist
   expect_error(select(layer, all_of(wrong_fields)))
-  expect_is(select(layer, ADMIN_AREA_NAME:OIC_MO_YEAR), "bcdc_promise")
+  expect_s3_class(select(layer, ADMIN_AREA_NAME:OIC_MO_YEAR), "bcdc_promise")
   ## Some weird mix
-  expect_is(select(layer, 'ADMIN_AREA_NAME', OIC_MO_YEAR), "bcdc_promise")
+  expect_s3_class(select(layer, 'ADMIN_AREA_NAME', OIC_MO_YEAR), "bcdc_promise")
   ## Another weird mix
-  expect_is(select(layer, c('ADMIN_AREA_NAME','OIC_MO_YEAR') , OIC_MO_NUMBER), "bcdc_promise")
-  expect_is(select(layer, 1:5), "bcdc_promise")
+  expect_s3_class(select(layer, c('ADMIN_AREA_NAME','OIC_MO_YEAR') , OIC_MO_NUMBER), "bcdc_promise")
+  expect_s3_class(select(layer, 1:5), "bcdc_promise")
 })

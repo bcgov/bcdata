@@ -7,29 +7,33 @@
 bcdc_options()
 }
 \description{
-This function retrieves bcdata specific options that can be set. These options can be set
-using \verb{option(\{name of the option\} = \{value of the option\})}. The default options are purposefully
-set conservatively to hopefully ensure successful requests. Resetting these options may result in
-failed calls to the data catalogue. Options in R are reset every time R is re-started. See examples for
-addition ways to restore your initial state.
+This function retrieves bcdata specific options that can be set. These
+options can be set using \verb{option(\{name of the option\} = \{value of the option\})}. The default options are purposefully set conservatively to
+hopefully ensure successful requests. Resetting these options may result in
+failed calls to the data catalogue. Options in R are reset every time R is
+re-started. See examples for additional ways to restore your initial state.
 }
 \details{
-\code{bcdata.max_geom_pred_size} is the maximum size in bytes of an object used for a geometric operation. Objects
-that are bigger than this value will have a bounding box drawn and apply the geometric operation
-on that simpler polygon. The \link{bcdc_check_geom_size} function can be used to assess whether a given spatial object
-exceed the value of this option. Users can iteratively try to increase the maximum geometric predicate size and see
-if the bcdata catalogue accepts the request.
+\code{bcdata.max_geom_pred_size} is the maximum size in bytes of an object used
+for a geometric operation. Objects that are bigger than this value will have
+a bounding box drawn and apply the geometric operation on that simpler
+polygon. The \link{bcdc_check_geom_size} function can be used to assess whether a
+given spatial object exceeds the value of this option. Users can iteratively
+try to increase the maximum geometric predicate size and see if the bcdata
+catalogue accepts the request.
 
-\code{bcdata.chunk_limit} is an option useful when dealing with very large data sets. When requesting large objects
-from the catalogue, the request is broken up into smaller chunks which are then recombined after they've
-been downloaded. This is called "pagination". bcdata does this all for you but using this option you can set the size of the chunk
-requested. On faster internet connections, a bigger chunk limit could be useful while on slower connections,
-it is advisable to lower the chunk limit. Chunks must be less than 10000.
+\code{bcdata.chunk_limit} is an option useful when dealing with very large data
+sets. When requesting large objects from the catalogue, the request is broken
+up into smaller chunks which are then recombined after they've been
+downloaded. This is called "pagination". bcdata does this all for you, however by
+using this option you can set the size of the chunk requested. On slower
+connections, or when having problems, it may help to lower the chunk limit.
 
-\code{bcdata.single_download_limit} is the maximum number of records an object can be before forcing a paginated download
-(see entry for \code{bcdata.chunk_limit} for details on pagination).
-Tweaking this option in conjunction with \code{bcdata.chunk_limit} can often resolve failures in large and complex downloads.
-The default is 10000 records.
+\code{bcdata.single_download_limit} \emph{Deprecated}. This is the maximum number of
+records an object can be before forcing a paginated download; it is set by
+querying the server capabilities. This option is deprecated and will be
+removed in a future release. Use \code{bcdata.chunk_limit} to set a lower value
+pagination value.
 }
 \examples{
 \donttest{

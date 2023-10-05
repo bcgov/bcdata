@@ -1,13 +1,10 @@
-context("test base methods")
-
-
 
 test_that("head works", {
   skip_if_net_down()
   skip_on_cran()
   promise <- bcdc_query_geodata(point_record) %>%
     head()
-  expect_is(promise, "bcdc_promise")
+  expect_s3_class(promise, "bcdc_promise")
   collected <- collect(promise)
   expect_equal(nrow(collected), 6L)
   d2 <- bcdc_query_geodata(point_record) %>%
@@ -27,7 +24,7 @@ test_that("tail works", {
   skip_on_cran()
   promise <- bcdc_query_geodata(point_record) %>%
     tail()
-  expect_is(promise, "bcdc_promise")
+  expect_s3_class(promise, "bcdc_promise")
   collected <- collect(promise)
   expect_equal(nrow(collected), 6L)
   d2 <- bcdc_query_geodata(point_record) %>%

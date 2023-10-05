@@ -10,18 +10,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-context("test-get_record")
-
 test_that("bcdc_get_record works with slug and full url", {
   skip_on_cran()
   skip_if_net_down()
-  expect_is(ret1 <- bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports"),
+  expect_s3_class(ret1 <- bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports"),
            "bcdc_record")
-  expect_is(ret2 <- bcdc_get_record("bc-airports"),
+  expect_s3_class(ret2 <- bcdc_get_record("bc-airports"),
            "bcdc_record")
-  expect_is(ret3 <- bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"),
+  expect_s3_class(ret3 <- bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"),
            "bcdc_record")
-  expect_is(ret4 <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8"),
+  expect_s3_class(ret4 <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8"),
            "bcdc_record")
   expect_equal(ret1$title, "BC Airports")
   lapply(list(ret2, ret3, ret4), expect_equal, ret1)
@@ -75,15 +73,15 @@ test_that("bcdc_list works", {
   skip_on_cran()
   skip_if_net_down()
   ret <- bcdc_list()
-  expect_is(ret, "character")
+  expect_type(ret, "character")
   expect_gt(length(ret), 1000)
 })
 
 test_that("bcdc_search works", {
   skip_on_cran()
   skip_if_net_down()
-  expect_is(bcdc_search("forest"), "bcdc_recordlist")
-  expect_is(bcdc_search("regional district", res_format = "fgdb"),
+  expect_s3_class(bcdc_search("forest"), "bcdc_recordlist")
+  expect_s3_class(bcdc_search("regional district", res_format = "fgdb"),
             "bcdc_recordlist")
   expect_error(bcdc_search(organization = "foo"),
                "foo is not a valid value for organization")
@@ -139,7 +137,7 @@ test_that("bcdc_get_record works with/without authentication", {
   # record NOT requiring auth
   expect_message(res <- bcdc_get_record(point_record),
                  "Authorizing with your stored API key")
-  expect_is(res, "bcdc_record")
+  expect_s3_class(res, "bcdc_record")
 
   # record requiring auth
   auth_record_id <- Sys.getenv("BCDC_TEST_RECORD")
@@ -147,7 +145,7 @@ test_that("bcdc_get_record works with/without authentication", {
 
   expect_message(res <- bcdc_get_record(auth_record_id),
                  "Authorizing with your stored API key")
-  expect_is(res, "bcdc_record")
+  expect_s3_class(res, "bcdc_record")
 
   Sys.unsetenv("BCDC_KEY")
 
