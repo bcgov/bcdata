@@ -107,14 +107,14 @@ bcdc_get_capabilities <- function() {
   }
 
   if (has_internet()) {
-    url <- make_url(bcdc_web_service_host(https = FALSE), "geo/pub/ows")
+    url <- make_url(bcdc_web_service_host(), "geo/pub/ows")
     cli <- bcdc_http_client(url, auth = FALSE)
 
 
     cc <- try(cli$get(query = list(
       SERVICE = "WFS",
       VERSION = "2.0.0",
-      REQUEST = "Getcapabilities"
+      REQUEST = "GetCapabilities"
     )), silent = TRUE)
 
     if (inherits(cc, "try-error")) {
