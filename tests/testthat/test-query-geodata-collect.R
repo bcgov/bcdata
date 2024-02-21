@@ -69,7 +69,7 @@ test_that("bcdc_query_geodata works with spatial data that have SHAPE for the ge
 
   ret1 <- suppressWarnings(
     bcdc_query_geodata("fire-perimeters-historical") %>%
-      filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
+      filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", !!INTERSECTS(crd)) %>%
       collect()
   )
   expect_s3_class(ret1, "sf")

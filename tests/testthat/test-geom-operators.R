@@ -40,7 +40,7 @@ test_that("WITHIN works",{
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-airports") %>%
-      filter(WITHIN(local)) %>%
+      filter(!!WITHIN(local)) %>%
       collect()
   )
 
@@ -55,7 +55,7 @@ test_that("INTERSECTS works",{
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
-      filter(FEATURE_LENGTH_M <= 1000, INTERSECTS(local)) %>%
+      filter(FEATURE_LENGTH_M <= 1000, !!INTERSECTS(local)) %>%
       collect()
   )
 
@@ -85,7 +85,7 @@ test_that("DWITHIN works", {
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
-      filter(DWITHIN(local, 100, "meters")) %>%
+      filter(!!DWITHIN(local, 100, "meters")) %>%
       collect()
   )
 
@@ -115,7 +115,7 @@ test_that("BBOX works with an sf bbox", {
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
-      filter(FEATURE_LENGTH_M <= 1000, BBOX(sf::st_bbox(local))) %>%
+      filter(FEATURE_LENGTH_M <= 1000, !!BBOX(sf::st_bbox(local))) %>%
       collect()
   )
 
@@ -130,7 +130,7 @@ test_that("BBOX works with an sf object", {
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
-      filter(FEATURE_LENGTH_M <= 1000, BBOX(local)) %>%
+      filter(FEATURE_LENGTH_M <= 1000, !!BBOX(local)) %>%
       collect()
   )
 
@@ -144,7 +144,7 @@ test_that("Other predicates work with an sf bbox", {
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
-      filter(FEATURE_LENGTH_M <= 1000, INTERSECTS(sf::st_bbox(local))) %>%
+      filter(FEATURE_LENGTH_M <= 1000, !!INTERSECTS(sf::st_bbox(local))) %>%
       collect()
   )
 

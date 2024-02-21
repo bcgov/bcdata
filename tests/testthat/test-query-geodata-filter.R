@@ -44,7 +44,7 @@ test_that("operators work with different remote geom col names",{
 
   ## REMOTE "GEOMETRY"
   em_program <- bcdc_query_geodata("employment-program-of-british-columbia-regional-boundaries") %>%
-    filter(INTERSECTS(crd)) %>%
+    filter(!!INTERSECTS(crd)) %>%
     collect()
   expect_s3_class(em_program, "sf")
   expect_equal(attr(em_program, "sf_column"), "geometry")
@@ -52,7 +52,7 @@ test_that("operators work with different remote geom col names",{
   ## REMOTE "SHAPE"
   crd_fires <- suppressWarnings(
     bcdc_query_geodata("fire-perimeters-historical") %>%
-      filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
+      filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", !!INTERSECTS(crd)) %>%
       collect()
   )
   expect_s3_class(crd_fires, "sf")
@@ -73,18 +73,18 @@ test_that("Different combinations of predicates work", {
                "(\"POP_2000\" < 2000)")
 
   # just with spatial predicate
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox))),
+  expect_equal(as.character(cql_translate(!!WITHIN(the_bbox))),
                "(WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8))))")
 
   # spatial predicate combined with regular comparison using comma
   and_statement <- "((WITHIN({geom_name}, POLYGON ((1670289 667643.8, 1719022 667643.8, 1719022 745981.7, 1670289 745981.7, 1670289 667643.8)))) AND (\"POP_2000\" < 2000))"
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < 2000L,
+  expect_equal(as.character(cql_translate(!!WITHIN(the_bbox), POP_2000 < 2000L,
                             .colnames = "POP_2000")),
                and_statement)
 
   # spatial predicate combined with regular comparison as a named object using comma
   pop <- 2000L
-  expect_equal(as.character(cql_translate(WITHIN(the_bbox), POP_2000 < pop,
+  expect_equal(as.character(cql_translate(!!WITHIN(the_bbox), POP_2000 < pop,
                                           .colnames = "POP_2000")),
                and_statement)
 
@@ -128,7 +128,7 @@ test_that("subsetting works locally", {
                "(\"foo\" = 'a')")
   expect_equal(as.character(cql_translate(foo %in% local(y$id), .colnames = "foo")),
                "(\"foo\" IN ('a', 'b'))")
-  expect_equal(as.character(cql_translate(foo %in% y[["id"]], .colnames = "foo")),
+  expect_equal(as.character(cql_translate(foo %in% !!y[["id"]], .colnames = "foo")),
                "(\"foo\" IN ('a', 'b'))")
   expect_equal(as.character(cql_translate(foo == local(y$id[2]), .colnames = "foo")),
                "(\"foo\" = 'b')")
@@ -142,7 +142,7 @@ test_that("large vectors supplied to filter succeeds",{
     collect()
 
   expect_s3_class(bcdc_query_geodata(lines_record) %>%
-    filter(WATERSHED_KEY %in% pori$WATERSHED_KEY),
+    filter(WATERSHED_KEY %in% !!pori$WATERSHED_KEY),
     "bcdc_promise")
 
 })
@@ -183,7 +183,7 @@ test_that("multiple filter statements are additive with geometric operators",{
   ## REMOTE "GEOMETRY"
   em_program <- bcdc_query_geodata("employment-program-of-british-columbia-regional-boundaries") %>%
     filter(ELMSD_REGION_BOUNDARY_NAME == "Interior") %>%
-    filter(INTERSECTS(crd))
+    filter(!!INTERSECTS(crd))
 
   cql_query <- "((\"ELMSD_REGION_BOUNDARY_NAME\" = 'Interior') AND (INTERSECTS(GEOMETRY, POLYGON ((956376 653960.8, 1397042 653960.8, 1397042 949343.3, 956376 949343.3, 956376 653960.8)))))"
 
@@ -203,7 +203,7 @@ test_that("an intersect with an object greater than 5E5 bytes automatically gets
   expect_true(utils::object.size(regions) > 5E5)
 
   expect_message(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
-    filter(WITHIN(regions)) %>%
+    filter(!!WITHIN(regions)) %>%
       collect())
 })
 
@@ -219,7 +219,7 @@ test_that("an intersect with an object less than 5E5 proceeds",{
 
 
   expect_s3_class(parks <- bcdc_query_geodata(record = "6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
-    filter(WITHIN(small_districts)) %>%
+    filter(!!WITHIN(small_districts)) %>%
     collect(),
     "bcdc_sf")
 })
@@ -232,7 +232,7 @@ test_that("a BCGW name works with filter", {
                                   crs = 3005))
 
   expect_silent(ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
-    filter(WITHIN(little_box)) %>%
+    filter(!!WITHIN(little_box)) %>%
     collect())
   expect_equal(nrow(ret), 367)
 })
