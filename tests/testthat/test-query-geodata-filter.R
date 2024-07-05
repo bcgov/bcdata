@@ -274,7 +274,7 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
     bcdc_query_geodata("local-and-regional-greenspaces") %>%
                  filter(DWITHIN(st_buffer(the_geom, 10000, nQuadSegs = 2), 100, "meters"))
     ),
-    "Unable to process query")
+    "Cannot translate")
 })
 
 test_that("works with dates", {
