@@ -236,7 +236,7 @@ print.bcdc_query <- function(x, ...) {
 #' )
 #'
 #' try(
-#'   ret1 <- bcdc_query_geodata("fire-perimeters-historical") %>%
+#'   ret1 <- bcdc_query_geodata("bc-wildfire-fire-perimeters-historical") %>%
 #'     filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
 #'     collect()
 #' )

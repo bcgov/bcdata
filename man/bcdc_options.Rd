@@ -58,7 +58,7 @@ try(
 
 ## Reset initial conditions
 try(
- options(original_options)
+  options(original_options)
 )
 }
 }
