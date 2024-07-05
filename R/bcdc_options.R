@@ -63,7 +63,7 @@
 #'
 #' ## Reset initial conditions
 #' try(
-#'  options(original_options)
+#'   options(original_options)
 #' )
 #' }
 #' @export
@@ -77,7 +77,7 @@ bcdc_options <- function() {
   server_single_download_limit <- bcdc_single_download_limit()
 
   dplyr::tribble(
-    ~ option, ~ value, ~default,
+    ~option, ~value, ~default,
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
     "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), server_single_download_limit,
     "bcdata.single_download_limit",
@@ -86,7 +86,7 @@ bcdc_options <- function() {
 }
 
 
-check_chunk_limit <- function(){
+check_chunk_limit <- function() {
   chunk_limit <- getOption("bcdata.chunk_limit")
   single_download_limit <- deprecate_single_download_limit_option()
 
@@ -110,28 +110,31 @@ bcdc_get_capabilities <- function() {
     url <- make_url(bcdc_web_service_host(), "geo/pub/ows")
     cli <- bcdc_http_client(url, auth = FALSE)
 
+    get_caps <- function(cli) {
+      cc <- cli$get(query = list(
+        SERVICE = "WFS",
+        VERSION = "2.0.0",
+        REQUEST = "GetCapabilities"
+      ))
+      cc$raise_for_status()
+      res <- cc$parse("UTF-8")
+      xml2::read_xml(res)
+    }
 
-    cc <- try(cli$get(query = list(
-      SERVICE = "WFS",
-      VERSION = "2.0.0",
-      REQUEST = "GetCapabilities"
-    )), silent = TRUE)
+    # The GetCapabilities request can be fragile,
+    # if it breaks return NULL (#339)
+    ret <- try(get_caps(cli), silent = TRUE)
 
-    if (inherits(cc, "try-error")) {
+    if (inherits(ret, "try-error")) {
       return(NULL)
     }
 
-    cc$raise_for_status()
-
-    res <- cc$parse("UTF-8")
-    ret <- xml2::read_xml(res)
     # store it and return it
     ._bcdataenv_$get_capabilities_xml <- ret
     return(ret)
   }
 
   invisible(NULL)
-
 }
 
 bcdc_get_wfs_records <- function() {
@@ -171,8 +174,10 @@ deprecate_single_download_limit_option <- function() {
   x <- getOption("bcdata.single_download_limit")
   if (!is.null(x)) {
     if (!isTRUE(._bcdataenv_$single_download_limit_warned)) {
-      warning("The bcdata.single_download_limit option is deprecated. Please use bcdata.chunk_limit instead.",
-              call. = FALSE)
+      warning(
+        "The bcdata.single_download_limit option is deprecated. Please use bcdata.chunk_limit instead.",
+        call. = FALSE
+      )
       assign("single_download_limit_warned", TRUE, envir = ._bcdataenv_)
     }
     return(x)
