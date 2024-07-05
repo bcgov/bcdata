@@ -1,5 +1,9 @@
 # bcdata (development version)
 
+* Make functions more robust to non-functioning WMS/WFS GetCapabilities requests (#339, #341)
+* dbplyr 2.5.0 has made the requirement for using `!!` or 
+  `local()` for local functions more restrictive; updated tests
+  and examples (#341).
 * Deprecate the `bcdata.single_download_limit` option, as it was mostly redundant with `bcdata.chunk_limit`, and should always be set by the server. Please set the page size limit for paginated requests via the `bcdata.chunk_limit` option (#332)
 
 # bcdata 0.4.1
