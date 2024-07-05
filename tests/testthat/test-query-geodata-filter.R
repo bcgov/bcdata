@@ -51,7 +51,7 @@ test_that("operators work with different remote geom col names",{
 
   ## REMOTE "SHAPE"
   crd_fires <- suppressWarnings(
-    bcdc_query_geodata("fire-perimeters-historical") %>%
+    bcdc_query_geodata("f635b5a6-c810-4623-9286-df9386b1ee75") %>%
       filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
       collect()
   )

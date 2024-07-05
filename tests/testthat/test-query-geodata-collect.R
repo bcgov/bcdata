@@ -72,7 +72,7 @@ test_that("bcdc_query_geodata works with slug and full url using collect", {
 
 test_that("bcdc_query_geodata works with spatial data that have SHAPE for the geom", {
   ## View metadata to see that geom is SHAPE
-  ## bcdc_browse("fire-perimeters-historical")
+  ## bcdc_browse("bc-wildfire-fire-perimeters-historical")
   skip_on_cran()
   skip_if_net_down()
   crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
