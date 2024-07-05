@@ -58,6 +58,7 @@ test_that("is_whse_object_name works", {
 test_that("bcdc_get_capabilities works", {
   skip_on_cran()
   skip_if_net_down()
+  skip_if_no_capabilities()
 
   old_get_caps <- ._bcdataenv_$get_capabilities_xml
 

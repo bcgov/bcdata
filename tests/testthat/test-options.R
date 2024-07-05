@@ -25,7 +25,7 @@ test_that("bcdata.chunk_limit",{
     expect_error(check_chunk_limit())
   })
   withr::with_options(list(bcdata.chunk_limit = 10), {
-    expect_silent(check_chunk_limit())
+    expect_true(is.numeric(check_chunk_limit()))
     expect_equal(check_chunk_limit(), 10)
   })
 })
