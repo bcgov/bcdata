@@ -140,7 +140,7 @@ bcdc_get_capabilities <- function() {
 bcdc_get_wfs_records <- function() {
   doc <- bcdc_get_capabilities()
 
-  if (is.null(doc)) stop("Unable to access wfs record listing", call. = FALSE)
+  if (is.null(doc)) stop("Unable to access wfs listing from server", call. = FALSE)
 
   # d1 is the default xml namespace (see xml2::xml_ns(doc))
   features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
@@ -156,7 +156,7 @@ bcdc_single_download_limit <- function() {
   doc <- bcdc_get_capabilities()
 
   if (is.null(doc)) {
-    message("Unable to access wfs record listing, using default download limit of 10000")
+    message("Unable to access server to determine single download limit; using default download limit of 10000")
     return(10000L)
   }
 
