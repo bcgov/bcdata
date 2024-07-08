@@ -140,7 +140,7 @@ bcdc_get_capabilities <- function() {
 bcdc_get_wfs_records <- function() {
   doc <- bcdc_get_capabilities()
 
-  if (is.null(doc)) stop("Unable to access wfs listing from server", call. = FALSE)
+  if (is.null(doc)) stop("Unable to access wfs listing from server. Please open an issue. ", call. = FALSE)
 
   # d1 is the default xml namespace (see xml2::xml_ns(doc))
   features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
