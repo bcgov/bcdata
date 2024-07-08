@@ -16,7 +16,7 @@ if (has_internet() && identical(Sys.getenv("NOT_CRAN"), "true")) {
     collect()
 }
 
-test_that("bcdc_check_geom_size outputs message with low threshold",{
+test_that("bcdc_check_geom_size outputs message with low threshold", {
   skip_on_cran()
   skip_if_net_down()
 
@@ -25,7 +25,7 @@ test_that("bcdc_check_geom_size outputs message with low threshold",{
   expect_false(bcdc_check_geom_size(local))
 })
 
-test_that("bcdc_check_geom_size is silent with high threshold",{
+test_that("bcdc_check_geom_size is silent with high threshold", {
   skip_on_cran()
   skip_if_net_down()
 
@@ -34,7 +34,7 @@ test_that("bcdc_check_geom_size is silent with high threshold",{
 })
 
 
-test_that("WITHIN works",{
+test_that("WITHIN works", {
   skip_on_cran()
   skip_if_net_down()
 
@@ -49,7 +49,7 @@ test_that("WITHIN works",{
 })
 
 
-test_that("INTERSECTS works",{
+test_that("INTERSECTS works", {
   skip_on_cran()
   skip_if_net_down()
 
@@ -61,7 +61,6 @@ test_that("INTERSECTS works",{
 
   expect_s3_class(remote, "sf")
   expect_equal(attr(remote, "sf_column"), "geometry")
-
 })
 
 test_that("RELATE works", {
@@ -115,7 +114,7 @@ test_that("BBOX works with an sf bbox", {
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
-      filter(FEATURE_LENGTH_M <= 1000, BBOX(sf::st_bbox(local))) %>%
+      filter(FEATURE_LENGTH_M <= 1000, BBOX(!!sf::st_bbox(local))) %>%
       collect()
   )
 
@@ -144,7 +143,7 @@ test_that("Other predicates work with an sf bbox", {
 
   remote <- suppressWarnings(
     bcdc_query_geodata("bc-parks-ecological-reserves-and-protected-areas") %>%
-      filter(FEATURE_LENGTH_M <= 1000, INTERSECTS(sf::st_bbox(local))) %>%
+      filter(FEATURE_LENGTH_M <= 1000, INTERSECTS(!!sf::st_bbox(local))) %>%
       collect()
   )
 

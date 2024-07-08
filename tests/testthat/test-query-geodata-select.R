@@ -51,9 +51,9 @@ test_that("select reduces the number of columns when a sticky ",{
 test_that("select works with BCGW name", {
   skip_on_cran()
   skip_if_net_down()
-  expect_silent(ret <- bcdc_query_geodata(bcgw_point_record) %>%
+  expect_s3_class(bcdc_query_geodata(bcgw_point_record) %>%
                   select(AIRPORT_NAME, DESCRIPTION) %>%
-                  collect())
+                  collect(), "sf")
 })
 
 

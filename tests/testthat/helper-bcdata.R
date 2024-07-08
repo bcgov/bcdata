@@ -16,3 +16,10 @@ skip_if_net_down <- function() {
   }
   testthat::skip("no internet")
 }
+
+skip_if_no_capabilities <- function() {
+  if (!is.null(bcdc_get_capabilities())) {
+    return()
+  }
+  testthat::skip("GetCapabilities request is broken")
+}

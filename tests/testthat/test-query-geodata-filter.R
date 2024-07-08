@@ -231,9 +231,9 @@ test_that("a BCGW name works with filter", {
                                     xmax = 1696644.998, ymax = 1589145.873),
                                   crs = 3005))
 
-  expect_silent(ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
+  ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
     filter(WITHIN(little_box)) %>%
-    collect())
+    collect()
   expect_equal(nrow(ret), 367)
 })
 
@@ -274,7 +274,7 @@ test_that("Nesting functions inside a CQL geometry predicate works (#146)", {
     bcdc_query_geodata("local-and-regional-greenspaces") %>%
                  filter(DWITHIN(st_buffer(the_geom, 10000, nQuadSegs = 2), 100, "meters"))
     ),
-    "Unable to process query")
+    "Cannot translate")
 })
 
 test_that("works with dates", {
