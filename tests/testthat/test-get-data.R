@@ -10,6 +10,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
+skip("Temporary skip for missing data in test catalogue")
+
 test_that("bcdc_get_data collects an sf object for a valid record and resource id", {
   skip_if_net_down()
   skip_on_cran()
