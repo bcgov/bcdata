@@ -125,14 +125,14 @@ feature_helper <- function(whse_name){
   xml_df
 }
 
-
-
 obj_desc_join <- function(record) {
   stopifnot(inherits(record, "bcdc_record"))
 
   wfs_resource <- get_wfs_resource_from_record(record)
   whse_name <- wfs_resource$object_name
-  wfs_df <- jsonlite::fromJSON(wfs_resource$details)
+  wfs_df <- purrr::list_rbind(
+    purrr::map(wfs_resource$details, as.data.frame)
+  )
 
   dplyr::left_join(
     feature_helper(whse_name),

@@ -16,6 +16,6 @@ test_that("bcdc_get_citation take a character and returns a bibentry",{
   rec <- bcdc_get_record(point_record)
   expect_s3_class(bcdc_get_citation(rec), c("citation", "bibentry"))
   expect_s3_class(bcdc_get_citation(point_record), c("citation", "bibentry"))
-  test_url <- paste0("https://catalogue.data.gov.bc.ca/dataset/", point_record)
+  test_url <- glue::glue("{catalogue_base_url()}/dataset/{point_record}")
   expect_s3_class(bcdc_get_citation(test_url), c("citation", "bibentry"))
 })

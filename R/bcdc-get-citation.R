@@ -93,8 +93,8 @@ bcdc_get_citation.bcdc_record <- function(record) {
 }
 
 clean_org_name <- function(rec) {
-  name <- jsonlite::fromJSON(rec$contacts)$name
+  name <- vapply(rec$contacts, function(x) x$name, FUN.VALUE = character(1))
   name <- trimws(name)
   name <- paste0(name, collapse = ", ")
-  sub(",([^,]*)$", " &\\1", name)
+  gsub(",([^,]*)$", " &\\1", name)
 }

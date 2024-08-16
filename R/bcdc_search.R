@@ -14,7 +14,7 @@
 #'
 #' @param facet the facet(s) for which to retrieve valid values. Can be one or
 #' more of:
-#'  `"license_id", "download_audience", "res_format", "sector", "organization", "groups"`
+#'  `"license_id", "download_audience", "res_format", "publish_state", "organization", "groups"`
 #'
 #' @return A data frame of values for the selected facet
 #' @export
@@ -30,7 +30,7 @@
 #' )
 #' }
 bcdc_search_facets <- function(facet = c("license_id", "download_audience",
-                                  "res_format", "sector",
+                                  "res_format", "publish_state",
                                   "organization", "groups")) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
