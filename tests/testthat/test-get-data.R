@@ -27,7 +27,7 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
   skip_on_cran()
   expect_s3_class(
     ret1 <- bcdc_get_data(
-      "https://catalogue.data.gov.bc.ca/dataset/bc-airports",
+      glue::glue("{catalogue_base_url()}/dataset/bc-airports"),
       resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"
     ),
     "sf"
@@ -41,7 +41,7 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
   )
   expect_s3_class(
     ret3 <- bcdc_get_data(
-      "https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8",
+      glue::glue("{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"),
       resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"
     ),
     "sf"
@@ -55,7 +55,7 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
   )
   expect_s3_class(
     ret5 <- bcdc_get_data(
-      "https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c"
+      glue::glue("{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c")
     ),
     "sf"
   )

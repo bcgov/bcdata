@@ -13,14 +13,26 @@
 test_that("bcdc_get_record works with slug and full url", {
   skip_on_cran()
   skip_if_net_down()
-  expect_s3_class(ret1 <- bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports"),
-           "bcdc_record")
-  expect_s3_class(ret2 <- bcdc_get_record("bc-airports"),
-           "bcdc_record")
-  expect_s3_class(ret3 <- bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"),
-           "bcdc_record")
-  expect_s3_class(ret4 <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8"),
-           "bcdc_record")
+  expect_s3_class(
+    ret1 <- bcdc_get_record(
+      glue::glue("{catalogue_base_url()}/dataset/bc-airports")
+    ),
+    "bcdc_record"
+  )
+  expect_s3_class(
+    ret2 <- bcdc_get_record("bc-airports"),
+    "bcdc_record"
+  )
+  expect_s3_class(
+    ret3 <- bcdc_get_record(
+      glue::glue("{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+    ),
+    "bcdc_record"
+  )
+  expect_s3_class(
+    ret4 <- bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8"),
+    "bcdc_record"
+  )
   expect_equal(ret1$title, "BC Airports")
   lapply(list(ret2, ret3, ret4), expect_equal, ret1)
 })
@@ -29,9 +41,15 @@ test_that("bcdc_search_facets works", {
   skip_on_cran()
   skip_if_net_down()
   ret_names <- c("facet", "count", "display_name", "name")
-  lapply(c("license_id", "download_audience", "res_format",
-           "publish_state", "organization"),
-         function(x) expect_named(bcdc_search_facets(x))
+  lapply(
+    c(
+      "license_id",
+      "download_audience",
+      "res_format",
+      "publish_state",
+      "organization"
+    ),
+    function(x) expect_named(bcdc_search_facets(x))
   )
   expect_error(bcdc_search_facets("foo"), "'arg' should be one of")
 })
@@ -83,8 +101,10 @@ test_that("bcdc_search works", {
   expect_s3_class(bcdc_search("forest"), "bcdc_recordlist")
   expect_s3_class(bcdc_search("regional district", res_format = "fgdb"),
             "bcdc_recordlist")
-  expect_error(bcdc_search(organization = "foo"),
-               "foo is not a valid value for organization")
+  expect_error(
+    bcdc_search(organization = "foo"),
+    "foo is not a valid value for organization"
+  )
 })
 
 test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record",{
@@ -122,8 +142,10 @@ test_that("a data frame with 8 columns of expected types is returned by bcdc_tid
   expect_type(d$bcdata_available, "logical")
   expect_equal(d, bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8'))
   expect_error(bcdc_tidy_resources(list()), "No bcdc_tidy_resources method for an object of class")
-  expect_error(bcdc_tidy_resources("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"),
-               "No bcdc_tidy_resources method for a BCGW object name")
+  expect_error(
+    bcdc_tidy_resources("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"),
+    "No bcdc_tidy_resources method for a BCGW object name"
+  )
 })
 
 test_that("bcdc_get_record works with/without authentication", {
@@ -135,16 +157,20 @@ test_that("bcdc_get_record works with/without authentication", {
   on.exit(Sys.setenv(BCDC_KEY = key_val))
 
   # record NOT requiring auth
-  expect_message(res <- bcdc_get_record(point_record),
-                 "Authorizing with your stored API key")
+  expect_message(
+    res <- bcdc_get_record(point_record),
+    "Authorizing with your stored API key"
+  )
   expect_s3_class(res, "bcdc_record")
 
   # record requiring auth
   auth_record_id <- Sys.getenv("BCDC_TEST_RECORD")
   skip_if_not(nzchar(key_val))
 
-  expect_message(res <- bcdc_get_record(auth_record_id),
-                 "Authorizing with your stored API key")
+  expect_message(
+    res <- bcdc_get_record(auth_record_id),
+    "Authorizing with your stored API key"
+  )
   expect_s3_class(res, "bcdc_record")
 
   Sys.unsetenv("BCDC_KEY")
