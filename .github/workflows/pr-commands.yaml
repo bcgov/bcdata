@@ -8,7 +8,7 @@ jobs:
     name: document
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: r-lib/actions/pr-fetch@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -32,7 +32,7 @@ jobs:
     name: precompile
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: r-lib/actions/pr-fetch@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
