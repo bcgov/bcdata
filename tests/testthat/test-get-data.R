@@ -68,8 +68,6 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
 
 
 test_that("bcdc_get_data works with a non-wms record with only one resource", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   name <- "ee9d4ee0-6a34-4dff-89e0-9add9a969168" # "criminal-code-traffic-offences"
@@ -77,8 +75,6 @@ test_that("bcdc_get_data works with a non-wms record with only one resource", {
 })
 
 test_that("bcdc_get_data works when using read_excel arguments", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   ret <- bcdc_get_data(
@@ -92,8 +88,6 @@ test_that("bcdc_get_data works when using read_excel arguments", {
 })
 
 test_that("bcdc_get_data works with an xls when specifying a specific resource", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   name <- 'bc-grizzly-bear-habitat-classification-and-rating'
@@ -104,8 +98,6 @@ test_that("bcdc_get_data works with an xls when specifying a specific resource",
 })
 
 test_that("bcdc_get_data will return non-wms resources",{
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   expect_s3_class(
@@ -138,8 +130,6 @@ test_that("bcdc_get_data works with a zipped shp file", {
 })
 
 test_that("unknown single file (shp) inside zip", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   expect_s3_class(
@@ -158,8 +148,6 @@ test_that("fails when resource doesn't exist", {
 })
 
 test_that("fails when multiple files in a zip", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   expect_error(bcdc_get_data(
@@ -169,8 +157,6 @@ test_that("fails when multiple files in a zip", {
 })
 
 test_that("fails informatively when can't read a file", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   expect_error(
@@ -206,8 +192,6 @@ test_that("a wms record with only one resource works with only the record id",{
   })
 
 test_that("bcdc_get_data works with a bcdc_record object", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   record <- bcdc_get_record("bc-college-region-boundaries")
@@ -257,8 +241,6 @@ test_that("bcdc_get_data fails when >1 resource not specified & noninteractive",
 })
 
 test_that("bcdc_get_data handles sheet name specification", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   expect_message(
@@ -279,8 +261,6 @@ test_that("bcdc_get_data handles sheet name specification", {
 })
 
 test_that("bcdc_get_data returns a list object when resource has a json extension", {
-  skip("Temporary skip for missing data in test catalogue")
-
   skip_if_net_down()
   skip_on_cran()
   expect_type(bcdc_get_data("8e24f2bc-ab7a-49df-9418-539387180f33"), "list")
