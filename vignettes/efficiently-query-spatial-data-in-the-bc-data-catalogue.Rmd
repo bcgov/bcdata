@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2022-10-28"
+date: "2024-12-11"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -31,7 +31,7 @@ This vignette illustrates how to use `bcdata::bcdc_query_geodata` to request and
 First you need to load the package. We will also load the `sf` and `dplyr` packages to help us work with spatial data. You can learn more about the `sf` package [here](https://r-spatial.github.io/sf/) and `dplyr` [here](https://dplyr.tidyverse.org/):
 
 
-```r
+``` r
 library(bcdata)
 library(sf)
 library(dplyr)
@@ -45,7 +45,7 @@ The [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset) provides man
 Our first step is to extract the [school district polygons](https://catalog.data.gov.bc.ca/dataset/78ec5279-4534-49a1-97e8-9d315936f08b) from the B.C. Data Catalogue. This layer is described using this command:
 
 
-```r
+``` r
 bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> B.C. Data Catalogue Record: School Districts of BC
 #> Name: school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b)
@@ -67,7 +67,7 @@ bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
 This data is the boundary of each school district. The key information in this metadata is that the layer has a resource in `"wms"` format ---which means it is available through a Web Feature Service. From this we know we can make use of `bcdc_query_geodata`.
 
 
-```r
+``` r
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> Querying 'school-districts-of-bc' record
 #> • Using collect() on this object will return 59 features and 9 fields
@@ -79,23 +79,22 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> Bounding box:  xmin: 956376 ymin: 475108.4 xmax: 1635228 ymax: 901924.4
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 10
-#>   id       ADMIN…¹ SCHOO…² SCHOO…³ FEATU…⁴ FEATU…⁵ FEATU…⁶ OBJEC…⁷ SE_AN…⁸                  geometry
-#>   <chr>      <int> <chr>     <int> <chr>     <dbl>   <dbl>   <int> <chr>               <POLYGON [m]>
-#> 1 WHSE_TA…     300 Arrow …      10 FH1000… 7.39e 9  6.38e5     534 <NA>    ((1600278 678750, 160026…
-#> 2 WHSE_TA…     301 Revels…      19 FH1000… 9.42e 9  7.00e5     535 <NA>    ((1509789 831133.3, 1509…
-#> 3 WHSE_TA…     302 Kooten…      20 FH1000… 3.07e 9  3.49e5     536 <NA>    ((1554806 563111.3, 1554…
-#> 4 WHSE_TA…     303 Vernon       22 FH1000… 5.59e 9  6.23e5     537 <NA>    ((1542093 677612.6, 1542…
-#> 5 WHSE_TA…     304 Centra…      23 FH1000… 2.92e 9  3.57e5     538 <NA>    ((1464990 601366.2, 1464…
-#> 6 WHSE_TA…     305 Caribo…      27 FH1000… 6.12e10  2.14e6     539 <NA>    ((1372394 901260.4, 1372…
-#> # … with abbreviated variable names ¹​ADMIN_AREA_SID, ²​SCHOOL_DISTRICT_NAME,
-#> #   ³​SCHOOL_DISTRICT_NUMBER, ⁴​FEATURE_CODE, ⁵​FEATURE_AREA_SQM, ⁶​FEATURE_LENGTH_M, ⁷​OBJECTID,
-#> #   ⁸​SE_ANNO_CAD_DATA
+#>   id        ADMIN_AREA_SID SCHOOL_DISTRICT_NAME SCHOOL_DISTRICT_NUMBER FEATURE_CODE FEATURE_AREA_SQM
+#>   <chr>              <int> <chr>                                 <int> <chr>                   <dbl>
+#> 1 WHSE_TAN…            300 Arrow Lakes                              10 FH10000300        7392472526.
+#> 2 WHSE_TAN…            301 Revelstoke                               19 FH10000300        9416076465.
+#> 3 WHSE_TAN…            302 Kootenay-Columbia                        20 FH10000300        3072672101.
+#> 4 WHSE_TAN…            303 Vernon                                   22 FH10000300        5588468673.
+#> 5 WHSE_TAN…            304 Central Okanagan                         23 FH10000300        2916757936.
+#> 6 WHSE_TAN…            305 Cariboo-Chilcotin                        27 FH10000300       61213520885.
+#> # ℹ 4 more variables: FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>,
+#> #   geometry <POLYGON [m]>
 ```
 
 This is the initial query to the data in the catalogue. What has been returned is *not* the actual data but rather a subset to help you tune your query. The printed output of this query offers several useful pieces of information. Because we have queried with a unique ID, we are shown the name of the record. We also receive instruction that using `collect()` will retrieve a given number of features and fields present for this query. Lastly, there is a reminder that what is printed is only the first 6 rows of the record. Since we are limiting the scope of analysis to the Greater Victoria, Prince George and Kamloops/Thompson school districts, we want to ask the catalogue for only those polygons just like we would in a typical `dplyr` workflow:
 
 
-```r
+``` r
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson"))
 #> Querying 'school-districts-of-bc' record
@@ -108,18 +107,17 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 1 × 10
-#>   id       ADMIN…¹ SCHOO…² SCHOO…³ FEATU…⁴ FEATU…⁵ FEATU…⁶ OBJEC…⁷ SE_AN…⁸                  geometry
-#>   <chr>      <int> <chr>     <int> <chr>     <dbl>   <dbl>   <int> <chr>               <POLYGON [m]>
-#> 1 WHSE_TA…     328 Prince…      57 FH1000… 5.19e10  2.26e6     562 <NA>    ((1137478 1221549, 11373…
-#> # … with abbreviated variable names ¹​ADMIN_AREA_SID, ²​SCHOOL_DISTRICT_NAME,
-#> #   ³​SCHOOL_DISTRICT_NUMBER, ⁴​FEATURE_CODE, ⁵​FEATURE_AREA_SQM, ⁶​FEATURE_LENGTH_M, ⁷​OBJECTID,
-#> #   ⁸​SE_ANNO_CAD_DATA
+#>   id        ADMIN_AREA_SID SCHOOL_DISTRICT_NAME SCHOOL_DISTRICT_NUMBER FEATURE_CODE FEATURE_AREA_SQM
+#>   <chr>              <int> <chr>                                 <int> <chr>                   <dbl>
+#> 1 WHSE_TAN…            328 Prince George                            57 FH10000300       51888780641.
+#> # ℹ 4 more variables: FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>,
+#> #   geometry <POLYGON [m]>
 ```
 
 To further tune our query, we can also request only the columns we want. Really we only want the school district column and the spatial information. During an actual analysis, it is possible that you may need to initially collect more data than you want to determine value to subset by. For example, there is currently no way to ask the catalogue for all possible unique values of `SCHOOL_DISTRICT_NAME`. Is that case the data will need to be brought into R and unique values will need to be determined there.
 
 
-```r
+``` r
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
   select(SCHOOL_DISTRICT_NAME)
@@ -133,17 +131,16 @@ bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 #> Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 1 × 6
-#>   id                                       ADMIN…¹ SCHOO…² SCHOO…³ OBJEC…⁴                  geometry
-#>   <chr>                                      <int> <chr>     <int>   <int>             <POLYGON [m]>
-#> 1 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.f…     328 Prince…      57     562 ((1137478 1221549, 11373…
-#> # … with abbreviated variable names ¹​ADMIN_AREA_SID, ²​SCHOOL_DISTRICT_NAME,
-#> #   ³​SCHOOL_DISTRICT_NUMBER, ⁴​OBJECTID
+#>   id                             ADMIN_AREA_SID SCHOOL_DISTRICT_NAME SCHOOL_DISTRICT_NUMBER OBJECTID
+#>   <chr>                                   <int> <chr>                                 <int>    <int>
+#> 1 WHSE_TANTALIS.TA_SCHOOL_DISTR…            328 Prince George                            57      562
+#> # ℹ 1 more variable: geometry <POLYGON [m]>
 ```
 
 Note that in the `select` statement, we did not explicitly ask for the spatial data and also that there are several columns present that we didn't select. This is because within each data set in the data catalogue, there are several columns that will always be returned regardless of what is selected. If you really don't want those columns after you `collect` the data, which we will take care of right now, you can drop them:
 
 
-```r
+``` r
 districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
   select(SCHOOL_DISTRICT_NAME) %>%
@@ -153,11 +150,14 @@ districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
 Again note here that we have assigned the object a name and added the `collect` statement. This step happens when you have selected the data you want and wish to begin working with it in R like a normal `sf` object. For example, we can now plot these three school districts:
 
 
-```r
+``` r
 plot(st_geometry(districts))
 ```
 
+<div class="figure">
 <img src="vignette-fig-districts-1.png" alt="plot of chunk districts" width="100%" />
+<p class="caption">plot of chunk districts</p>
+</div>
 
 Now that we have the spatial boundaries narrowed by specific school districts we can perform some spatial operations to determine parks in the school districts.
 
@@ -165,7 +165,7 @@ Now that we have the spatial boundaries narrowed by specific school districts we
 For the purposes of this example, let's consider [this greenspace](https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf755d516da) layer in the catalogue. This layer is described here:
 
 
-```r
+``` r
 bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> B.C. Data Catalogue Record: Local and Regional Greenspaces
 #> Name: local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da)
@@ -191,68 +191,68 @@ bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 Again we recognize this is [WFS-enabled](https://en.wikipedia.org/wiki/Web_Feature_Service) geospatial data, which means we can make use of `bcdc_query_geodata`.
 
 
-```r
+``` r
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Querying 'local-and-regional-greenspaces' record
-#> • Using collect() on this object will return 8555 features and 19 fields
+#> • Using collect() on this object will return 9143 features and 19 fields
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1228935 ymin: 455032.1 xmax: 1236528 ymax: 471352
+#> Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
-#>   id         LOCAL…¹ PARK_…² PARK_…³ PARK_…⁴ REGIO…⁵ MUNIC…⁶ CIVIC…⁷ CIVIC…⁸ STREE…⁹ LATIT…˟ LONGI…˟
-#>   <chr>        <int> <chr>   <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>     <dbl>   <dbl>
-#> 1 WHSE_BASE…      30 Blumse… Local   Park    Metro … Surrey     3536 <NA>    Rosema…    49.1   -123.
-#> 2 WHSE_BASE…      31 Bob Ru… Local   Park    Metro … Surrey     5448 <NA>    148 St     49.1   -123.
-#> 3 WHSE_BASE…      32 Bog Pa… Local   Park    Metro … Surrey     9740 <NA>    130 St     49.2   -123.
-#> 4 WHSE_BASE…      33 Bonacc… Local   Park    Metro … Surrey    14962 <NA>    98 Ave     49.2   -123.
-#> 5 WHSE_BASE…      34 Cotton… Local   Playgr… Metro … Surrey     9356 <NA>    132A St    49.2   -123.
-#> 6 WHSE_BASE…      35 North … Local   Green … Metro … Surrey    11260 <NA>    164 St     49.2   -123.
-#> # … with 8 more variables: WHEN_UPDATED <date>, WEBSITE_URL <chr>, LICENCE_COMMENTS <chr>,
-#> #   FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>,
-#> #   geometry <MULTIPOLYGON [m]>, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID,
-#> #   ²​PARK_NAME, ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,
-#> #   ⁸​CIVIC_NUMBER_SUFFIX, ⁹​STREET_NAME, ˟​LATITUDE, ˟​LONGITUDE
+#>   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
+#>   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
+#> 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    
+#> 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    
+#> 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    
+#> 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    
+#> 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    
+#> 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    
+#> # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
+#> # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
+#> #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
+#> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
+#> #   SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Since we are interested in only "Park" data we can subset our query:
 
 
-```r
+``` r
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park")
 #> Querying 'local-and-regional-greenspaces' record
-#> • Using collect() on this object will return 4251 features and 19 fields
+#> • Using collect() on this object will return 4517 features and 19 fields
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1228935 ymin: 455032.1 xmax: 1238850 ymax: 468825.5
+#> Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
-#>   id         LOCAL…¹ PARK_…² PARK_…³ PARK_…⁴ REGIO…⁵ MUNIC…⁶ CIVIC…⁷ CIVIC…⁸ STREE…⁹ LATIT…˟ LONGI…˟
-#>   <chr>        <int> <chr>   <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>     <dbl>   <dbl>
-#> 1 WHSE_BASE…      30 Blumse… Local   Park    Metro … Surrey     3536 <NA>    Rosema…    49.1   -123.
-#> 2 WHSE_BASE…      31 Bob Ru… Local   Park    Metro … Surrey     5448 <NA>    148 St     49.1   -123.
-#> 3 WHSE_BASE…      32 Bog Pa… Local   Park    Metro … Surrey     9740 <NA>    130 St     49.2   -123.
-#> 4 WHSE_BASE…      33 Bonacc… Local   Park    Metro … Surrey    14962 <NA>    98 Ave     49.2   -123.
-#> 5 WHSE_BASE…      37 Freedo… Local   Park    Metro … Surrey    15452 <NA>    84 Ave     49.2   -123.
-#> 6 WHSE_BASE…      46 Barnst… Local   Park    Metro … Surrey     9998 <NA>    Lyncea…    49.2   -123.
-#> # … with 8 more variables: WHEN_UPDATED <date>, WEBSITE_URL <chr>, LICENCE_COMMENTS <chr>,
-#> #   FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>, SE_ANNO_CAD_DATA <chr>,
-#> #   geometry <MULTIPOLYGON [m]>, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID,
-#> #   ²​PARK_NAME, ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,
-#> #   ⁸​CIVIC_NUMBER_SUFFIX, ⁹​STREET_NAME, ˟​LATITUDE, ˟​LONGITUDE
+#>   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
+#>   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
+#> 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    
+#> 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    
+#> 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    
+#> 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    
+#> 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    
+#> 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    
+#> # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
+#> # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
+#> #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
+#> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
+#> #   SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are dealing with (and correspondingly the amount of data that needs to be transferred over the web). Remember also that we still have not actually requested the full data set. This is just still a preview. Also this query still includes all municipal parks in BC while we only want the ones in the three school districts - the polygons defined by the `districts` object. To find that subset of parks we can make use of the built-in geometric operators which allow us to perform spatial operations remotely fine tuning our query even further. Here using the `INTERSECTS` function is appropriate and since this is a last tuning step, we can call `collect` and assign a name to this object. These requests can sometimes take quite a long:
 
 
-```r
+``` r
 districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
@@ -267,12 +267,15 @@ districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>
 
 Plotting both the filtered parks data and the district polygons reveals an important consideration when using `bcdata`:
 
+<div class="figure">
 <img src="vignette-fig-district_parks-1.png" alt="plot of chunk district_parks" width="100%" />
+<p class="caption">plot of chunk district_parks</p>
+</div>
 
 In this example, many parks not contained within the school districts are included in the `districts_parks` object. This is because rather than a full intersection, `bcdata` draws a bounding box around all the polygons that are doing the intersection (in this case `district`) and does the intersection based on that bounding box. This behaviour is imposed by the Web Feature Server but controlled via the `bcdata.max_geom_pred_size` option (See `?bcdc_options` for default values). Using this example, you can check to see if the size of the `districts` object exceeded the current value of `bcdata.max_geom_pred_size`:
 
 
-```r
+``` r
 bcdc_check_geom_size(districts)
 #> The object is too large to perform exact spatial operations using bcdata.
 #> Object size: 948576 bytes
@@ -283,21 +286,27 @@ bcdc_check_geom_size(districts)
 
 Drawing the bounding box illustrates this point:
 
+<div class="figure">
 <img src="vignette-fig-bbox-1.png" alt="plot of chunk bbox" width="100%" />
+<p class="caption">plot of chunk bbox</p>
+</div>
 
 We are left with two options to get around this problem. First, we can simply do some additional processing with the `sf` package. Specifically we can use a spatial join to assign parks into their respective district:
 
 
-```r
+``` r
 districts_parks_join <- districts_parks %>%
   st_join(districts, left = FALSE)
 ```
 
+<div class="figure">
 <img src="vignette-fig-dp_join-1.png" alt="plot of chunk dp_join" width="100%" />
+<p class="caption">plot of chunk dp_join</p>
+</div>
 
 A second approach is to set an internal option (`bcdata.max_geom_pred_size`) and increase the threshold of when a bounding box is drawn. Options are set in R like this:
 
-```r
+``` r
 options("bcdata.max_geom_pred_size" = {object size in bytes})
 ```
 
@@ -306,7 +315,7 @@ The value of `bcdata.max_geom_pred_size` is set conservatively so that requests 
 Finally, to address our original question of which school district has the most municipal park space we can calculate the area of each park polygon and then sum those areas by school district:
 
 
-```r
+``` r
 districts_parks_join %>%
   mutate(area = st_area(geometry)) %>%
   st_set_geometry(NULL) %>%
@@ -324,7 +333,7 @@ districts_parks_join %>%
 Suppose we now want to find all of the parks within 1km of the school districts we are interested in. We can use `sf::st_buffer()` to make a buffer around the `districts` object, then intersect that with the greenspaces data. Note that `st_buffer()` needs to be executed in R on our computer, to create the buffered area that is sent to the WFS server to perform the `INTERSECT` query remotely. We tell `filter()` to evaluate that piece of code locally by wrapping it in a `local()` call:
 
 
-```r
+``` r
 greenspaces_around <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(INTERSECTS(local(st_buffer(districts, 1000)))) %>%
   collect()
@@ -334,7 +343,7 @@ greenspaces_around <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 There are a couple of other functions in `bcdata` that are useful to know when working with spatial data from the catalogue. `bcdc_describe_feature` gives the column names, whether the column is selectable, and the column types in both R and on the remote server:
 
 
-```r
+``` r
 bcdc_describe_feature("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> # A tibble: 20 × 5
 #>    col_name                sticky remote_col_type          local_col_type column_comments           
@@ -366,7 +375,7 @@ This is a helpful initial step to learn column names and types when you construc
 Another useful function is `show_query()` which provides information on the request issued to the remote server:
 
 
-```r
+``` r
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
@@ -386,7 +395,7 @@ This output is what being created by the dplyr code outlined above.
 
 ## Using B.C. Geographic Warehouse (BCGW) layer names
 
-If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse),
+If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/finding-and-sharing/bc-geographic-warehouse),
 you may already know the name of a layer that you want from the BCGW.
 `bcdc_query_geodata()` (as well as all other related functions)
 supports supplying that name directly. For example, the
@@ -395,7 +404,7 @@ shows that the object name is `WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW`, and
 we can use that in `bcdc_query_geodata()`:
 
 
-```r
+``` r
 # Look at the columns available:
 bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #> # A tibble: 42 × 5
@@ -411,7 +420,7 @@ bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #>  8 AIRPORT_NAME                  TRUE   xsd:string      character      AIRPORT_NAME is a business n…
 #>  9 DESCRIPTION                   FALSE  xsd:string      character      DESCRIPTION describes the Oc…
 #> 10 PHYSICAL_ADDRESS              FALSE  xsd:string      character      PHYSICAL_ADDRESS contains th…
-#> # … with 32 more rows
+#> # ℹ 32 more rows
 
 # Query the data with bcdc_query_geodata and filter + select:
 bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
@@ -427,16 +436,16 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 12
-#>   id                 CUSTO…¹ BUSIN…² BUSIN…³ OCCUP…⁴ SOURC…⁵ SUPPL…⁶ AIRPO…⁷ LOCAL…⁸ NUMBE…⁹ SEQUE…˟
-#>   <chr>              <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>
-#> 1 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 455     N       Terrac… Terrace       2     578
-#> 2 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 464     N       Victor… North …       3     734
-#> 3 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 482     N       Nanaim… Nanaimo       1     854
-#> 4 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 483     N       Tofino… Tofino        3     642
-#> 5 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 484     N       Abbots… Abbots…       2    1036
-#> 6 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 487     N       Bounda… Delta         2     828
-#> # … with 1 more variable: geometry <POINT [m]>, and abbreviated variable names
-#> #   ¹​CUSTODIAN_ORG_DESCRIPTION, ²​BUSINESS_CATEGORY_CLASS, ³​BUSINESS_CATEGORY_DESCRIPTION,
-#> #   ⁴​OCCUPANT_TYPE_DESCRIPTION, ⁵​SOURCE_DATA_ID, ⁶​SUPPLIED_SOURCE_ID_IND, ⁷​AIRPORT_NAME, ⁸​LOCALITY,
-#> #   ⁹​NUMBER_OF_RUNWAYS, ˟​SEQUENCE_ID
+#>   id     CUSTODIAN_ORG_DESCRI…¹ BUSINESS_CATEGORY_CL…² BUSINESS_CATEGORY_DE…³ OCCUPANT_TYPE_DESCRI…⁴
+#>   <chr>  <chr>                  <chr>                  <chr>                  <chr>                 
+#> 1 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           
+#> 2 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           
+#> 3 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           
+#> 4 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           
+#> 5 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           
+#> 6 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           
+#> # ℹ abbreviated names: ¹​CUSTODIAN_ORG_DESCRIPTION, ²​BUSINESS_CATEGORY_CLASS,
+#> #   ³​BUSINESS_CATEGORY_DESCRIPTION, ⁴​OCCUPANT_TYPE_DESCRIPTION
+#> # ℹ 7 more variables: SOURCE_DATA_ID <chr>, SUPPLIED_SOURCE_ID_IND <chr>, AIRPORT_NAME <chr>,
+#> #   LOCALITY <chr>, NUMBER_OF_RUNWAYS <int>, SEQUENCE_ID <int>, geometry <POINT [m]>
 ```

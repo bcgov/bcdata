@@ -48,7 +48,7 @@ library(ggplot2)
 
 The `bcdata` [R](https://www.r-project.org/) package contains functions for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
 
-The [B.C. Data Catalogue](https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5) is the place to find British Columbia Government data, applications and web services. Much of the data are released under the [Open Government Licence --- British Columbia](https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc), as well as numerous other [licences](https://catalogue.data.gov.bc.ca/dataset?download_audience=Public).
+The [B.C. Data Catalogue](https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5) is the place to find British Columbia Government data, applications and web services. Much of the data are released under the [Open Government Licence --- British Columbia](https://www2.gov.bc.ca/gov/content/data/policy-standards/open-data/open-government-licence-bc), as well as numerous other [licences](https://catalogue.data.gov.bc.ca/dataset?download_audience=Public).
 
 
 

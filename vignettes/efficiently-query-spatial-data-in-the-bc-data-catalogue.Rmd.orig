@@ -220,7 +220,7 @@ This output is what being created by the dplyr code outlined above.
 
 ## Using B.C. Geographic Warehouse (BCGW) layer names
 
-If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse),
+If you are familiar with the [B.C. Geographic Warehouse (BCGW)](https://www2.gov.bc.ca/gov/content/data/finding-and-sharing/bc-geographic-warehouse),
 you may already know the name of a layer that you want from the BCGW.
 `bcdc_query_geodata()` (as well as all other related functions)
 supports supplying that name directly. For example, the

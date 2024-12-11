@@ -26,14 +26,14 @@ See the License for the specific language governing permissions and limitations 
 
 The `bcdata` [R](https://www.r-project.org/) package contains functions for searching & retrieving data from the [B.C. Data Catalogue]( https://catalogue.data.gov.bc.ca).
 
-The [B.C. Data Catalogue](https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5) is the place to find British Columbia Government data, applications and web services. Much of the data are released under the [Open Government Licence --- British Columbia](https://www2.gov.bc.ca/gov/content/data/open-data/open-government-licence-bc), as well as numerous other [licences](https://catalogue.data.gov.bc.ca/dataset?download_audience=Public).
+The [B.C. Data Catalogue](https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C5) is the place to find British Columbia Government data, applications and web services. Much of the data are released under the [Open Government Licence --- British Columbia](https://www2.gov.bc.ca/gov/content/data/policy-standards/open-data/open-government-licence-bc), as well as numerous other [licences](https://catalogue.data.gov.bc.ca/dataset?download_audience=Public).
 
 
 
 You can install `bcdata` directly from CRAN:
 
 
-```r
+``` r
 install.packages("bcdata")
 
 library(bcdata)
@@ -44,7 +44,7 @@ library(bcdata)
 `bcdata::bcdc_browse()` let's you access the [B.C. Data Catalogue web interface](https://catalogue.data.gov.bc.ca) directly from R---opening the catalogue search page in your default browser:
 
 
-```r
+``` r
 ## Take me to the B.C. Data Catalogue home page
 bcdc_browse()
 ```
@@ -52,7 +52,7 @@ bcdc_browse()
 If you know the catalogue "human-readable" record name or permanent ID you can open directly to the record web page:
 
 
-```r
+``` r
 ## Take me to the B.C. Winery Locations catalogue record using the record name
 bcdc_browse("bc-winery-locations")
 
@@ -67,7 +67,7 @@ bcdc_browse("1d21922b-ec4f-42e5-8f6b-bf320a286157")
 Let's search the catalogue for records that contain the word "recycling":
 
 
-```r
+``` r
 ## Give me the catalogue search results for 'recycling'
 bcdc_search("recycling")
 #> List of B.C. Data Catalogue Records
@@ -93,7 +93,7 @@ bcdc_search("recycling")
 You can set the number of records to be returned from the search and/or you can customize your search using the catalogue search _facets_ `license_id`, `download_audience`, `res_format`, `sector`, `organization`, and `groups`:
 
 
-```r
+``` r
 ## Give me the first catalogue search result for 'recycling'
 bcdc_search("recycling", n = 1)
 #> List of B.C. Data Catalogue Records
@@ -123,29 +123,47 @@ bcdc_search("recycling", license_id = "2")
 You can see all valid values for the catalogue search facets using `bcdata::bcdc_search_facets()`:
 
 
-```r
+``` r
 ## Valid values for search facet 'license_id'
 bcdc_search_facets(facet = "license_id")
-#>         facet count                                             display_name name
-#> 1  license_id    92                           Statistics Canada Open Licence   21
-#> 2  license_id    12                      Open Government Licence – TransLink   48
-#> 3  license_id    13 Open Government Licence – Municipality of North Cowichan   44
-#> 4  license_id     5    Open Government Licence – Industry Training Authority   50
-#> 5  license_id     3                 Open Government Licence - Destination BC   43
-#> 6  license_id    61                         Open Government Licence - Canada   24
-#> 7  license_id  1837               Open Government Licence - British Columbia    2
-#> 8  license_id     2                  Open Government Licence - BC Assessment   47
-#> 9  license_id     5                   Open Data Licence for ICBC Information   49
-#> 10 license_id     2 Open Data Commons - Public Domain Dedication and Licence   45
-#> 11 license_id     1                King's Printer Licence - British Columbia   25
-#> 12 license_id    15                           Elections BC Open Data Licence   42
-#> 13 license_id  1710                                              Access Only   22
+#>         facet name                                                                  display_name
+#> 1  license_id   21                                                Statistics Canada Open Licence
+#> 2  license_id   53                        Open Licence - University of Northern British Columbia
+#> 3  license_id   48                                           Open Government Licence – TransLink
+#> 4  license_id   44                      Open Government Licence – Municipality of North Cowichan
+#> 5  license_id   50                                     Open Government Licence - SkilledTradesBC
+#> 6  license_id   43                                      Open Government Licence - Destination BC
+#> 7  license_id   24                                              Open Government Licence - Canada
+#> 8  license_id    2                                    Open Government Licence - British Columbia
+#> 9  license_id   47                                       Open Government Licence - BC Assessment
+#> 10 license_id   49                                        Open Data Licence for ICBC Information
+#> 11 license_id   52 Open Data Licence - Office of the Registrar of Lobbyists for British Columbia
+#> 12 license_id   45                      Open Data Commons - Public Domain Dedication and Licence
+#> 13 license_id   25                                     King's Printer Licence - British Columbia
+#> 14 license_id   42                                                Elections BC Open Data Licence
+#> 15 license_id   22                                                                   Access Only
+#>    count
+#> 1     70
+#> 2      2
+#> 3     12
+#> 4     13
+#> 5      5
+#> 6      3
+#> 7     61
+#> 8   1638
+#> 9      2
+#> 10     5
+#> 11     1
+#> 12     2
+#> 13     1
+#> 14    18
+#> 15  1642
 ```
 
 Finally, you can retrieve the _metadata_ for a single catalogue record by using the record name or permanent ID with `bcdc_get_record()`. It is advised to use the permanent ID rather than the human-readable name in non-interactive situations---like scripts---to guard against future name changes of a record:
 
 
-```r
+``` r
 ## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`
 bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 #> B.C. Data Catalogue Record: BC FIRST Tire Recycling Data 1991-2006
@@ -169,76 +187,70 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 Once you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, permanent ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
 
 
-```r
+``` r
 ## Get the data resource for the `bc-highway-cams` catalogue record
 bcdc_get_data("bc-highway-cams")
-#> # A tibble: 999 × 19
-#>    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸
-#>    <chr>        <chr>   <chr>   <chr>   <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>
-#>  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… <NA>   N          49.6
-#>  2 http://imag… http:/… http:/… http:/…     5 3       <NA>    Kooten… Hwy 3,… <NA>   E          49.1
-#>  3 http://imag… http:/… http:/… http:/…     6 16      <NA>    Smithe… Hwy 16… <NA>   N          54.8
-#>  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … <NA>   E          49.1
-#>  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … <NA>   N          48.6
-#>  6 http://imag… http:/… http:/… http:/…     9 19      <NA>    Nanaim… Hwy 19… <NA>   N          49.2
-#>  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… <NA>   N          56.1
-#>  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … <NA>   NE         51.0
-#>  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… <NA>   E          50.9
-#> 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… <NA>   N          49.0
-#> # … with 989 more rows, 7 more variables: longitude <dbl>, imageStats_updatePeriodMean <dttm>,
-#> #   imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, and abbreviated variable names ¹​links_bchighwaycam,
-#> #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,
-#> #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude
+#> # A tibble: 1,007 × 13
+#>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
+#>    <chr>                            <chr>              <chr>                <chr>              <dbl>
+#>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
+#>  2 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     5
+#>  3 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     6
+#>  4 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     7
+#>  5 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     8
+#>  6 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     9
+#>  7 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    10
+#>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
+#>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
+#> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
+#> # ℹ 997 more rows
+#> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
+#> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-#> # A tibble: 999 × 19
-#>    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸
-#>    <chr>        <chr>   <chr>   <chr>   <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>
-#>  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… <NA>   N          49.6
-#>  2 http://imag… http:/… http:/… http:/…     5 3       <NA>    Kooten… Hwy 3,… <NA>   E          49.1
-#>  3 http://imag… http:/… http:/… http:/…     6 16      <NA>    Smithe… Hwy 16… <NA>   N          54.8
-#>  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … <NA>   E          49.1
-#>  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … <NA>   N          48.6
-#>  6 http://imag… http:/… http:/… http:/…     9 19      <NA>    Nanaim… Hwy 19… <NA>   N          49.2
-#>  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… <NA>   N          56.1
-#>  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … <NA>   NE         51.0
-#>  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… <NA>   E          50.9
-#> 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… <NA>   N          49.0
-#> # … with 989 more rows, 7 more variables: longitude <dbl>, imageStats_updatePeriodMean <dttm>,
-#> #   imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, and abbreviated variable names ¹​links_bchighwaycam,
-#> #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,
-#> #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude
+#> # A tibble: 1,007 × 13
+#>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
+#>    <chr>                            <chr>              <chr>                <chr>              <dbl>
+#>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
+#>  2 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     5
+#>  3 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     6
+#>  4 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     7
+#>  5 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     8
+#>  6 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     9
+#>  7 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    10
+#>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
+#>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
+#> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
+#> # ℹ 997 more rows
+#> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
+#> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 
 ## OR use the result from bcdc_get_record()
 my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 bcdc_get_data(my_record)
-#> # A tibble: 999 × 19
-#>    links_bchi…¹ links…² links…³ links…⁴    id highw…⁵ highw…⁶ camName caption credit orien…⁷ latit…⁸
-#>    <chr>        <chr>   <chr>   <chr>   <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>
-#>  1 http://imag… http:/… http:/… http:/…     2 5       Coquih… Coquih… Hwy 5,… <NA>   N          49.6
-#>  2 http://imag… http:/… http:/… http:/…     5 3       <NA>    Kooten… Hwy 3,… <NA>   E          49.1
-#>  3 http://imag… http:/… http:/… http:/…     6 16      <NA>    Smithe… Hwy 16… <NA>   N          54.8
-#>  4 http://imag… http:/… http:/… http:/…     7 1       Fraser… Cole R… Hwy 1 … <NA>   E          49.1
-#>  5 http://imag… http:/… http:/… http:/…     8 1       Vancou… Malaha… Hwy 1 … <NA>   N          48.6
-#>  6 http://imag… http:/… http:/… http:/…     9 19      <NA>    Nanaim… Hwy 19… <NA>   N          49.2
-#>  7 http://imag… http:/… http:/… http:/…    10 97      Northe… South … Hwy 97… <NA>   N          56.1
-#>  8 http://imag… http:/… http:/… http:/…    11 1       Trans … Revels… Hwy 1 … <NA>   NE         51.0
-#>  9 http://imag… http:/… http:/… http:/…    12 1       Trans … Three … Hwy 1,… <NA>   E          50.9
-#> 10 http://imag… http:/… http:/… http:/…    13 99      Peace … Peace … Hwy 99… <NA>   N          49.0
-#> # … with 989 more rows, 7 more variables: longitude <dbl>, imageStats_updatePeriodMean <dttm>,
-#> #   imageStats_updatePeriodStdDev <dbl>, markedDelayed <dbl>, updatePeriodMean <dbl>,
-#> #   updatePeriodStdDev <dbl>, fetchMean <dbl>, and abbreviated variable names ¹​links_bchighwaycam,
-#> #   ²​links_imageDisplay, ³​links_imageThumbnail, ⁴​links_replayTheDay, ⁵​highway_number,
-#> #   ⁶​highway_locationDescription, ⁷​orientation, ⁸​latitude
+#> # A tibble: 1,007 × 13
+#>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
+#>    <chr>                            <chr>              <chr>                <chr>              <dbl>
+#>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
+#>  2 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     5
+#>  3 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     6
+#>  4 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     7
+#>  5 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     8
+#>  6 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     9
+#>  7 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    10
+#>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
+#>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
+#> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
+#> # ℹ 997 more rows
+#> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
+#> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 ```
 
 A catalogue record can have one or multiple data files---or "resources". If there is only one resource, `bcdc_get_data()` will return that resource by default, as in the above `bc-highway-cams` example. If there are multiple data resources you will need to specify which resource you want. Let's look at a catalogue record that contains multiple data resources---BC Schools - Programs Offered in Schools:
 
 
-```r
+``` r
 ## Get the record ID for the `bc-schools-programs-offered-in-schools` catalogue record
 bcdc_search("school programs", n = 1)
 #> List of B.C. Data Catalogue Records
@@ -270,45 +282,44 @@ bcdc_get_record("b1f27d1c-244a-410e-a361-931fac62a524")
 We see there are two data files or resources available in this record, so we need to tell `bcdc_get_data()` which one we want. When used interactively, `bcdc_get_data()` will prompt you with the list of available resources through `bcdata` and ask you to select the resource you want. The resource ID for each data set is available _in_ the metadata record ☝️:
 
 
-```r
+``` r
 ## Get the txt data resource from the `bc-schools-programs-offered-in-schools`
 ## catalogue record
 bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
 #> # A tibble: 16,152 × 24
-#>    Data Le…¹ Schoo…² Facil…³ Publi…⁴ Distr…⁵ Distr…⁶ Schoo…⁷ Schoo…⁸ Has E…⁹ Has C…˟ Has E…˟ Has L…˟
-#>    <chr>     <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <lgl>   <lgl>   <lgl>   <lgl>  
-#>  1 SCHOOL L… 2005/2… STANDA… BC Pub… 005     Southe… 005010… Sparwo… NA      TRUE    NA      NA     
-#>  2 SCHOOL L… 2006/2… STANDA… BC Pub… 005     Southe… 005010… Sparwo… NA      TRUE    NA      NA     
-#>  3 SCHOOL L… 2007/2… STANDA… BC Pub… 005     Southe… 005010… Sparwo… NA      TRUE    NA      NA     
-#>  4 SCHOOL L… 2005/2… STANDA… BC Pub… 005     Southe… 005010… Jaffra… NA      TRUE    NA      NA     
-#>  5 SCHOOL L… 2006/2… STANDA… BC Pub… 005     Southe… 005010… Jaffra… NA      TRUE    NA      NA     
-#>  6 SCHOOL L… 2007/2… STANDA… BC Pub… 005     Southe… 005010… Jaffra… NA      TRUE    NA      NA     
-#>  7 SCHOOL L… 2008/2… STANDA… BC Pub… 005     Southe… 005010… Jaffra… NA      TRUE    NA      NA     
-#>  8 SCHOOL L… 2009/2… STANDA… BC Pub… 005     Southe… 005010… Jaffra… NA      TRUE    NA      NA     
-#>  9 SCHOOL L… 2010/2… STANDA… BC Pub… 005     Southe… 005010… Jaffra… NA      TRUE    NA      NA     
-#> 10 SCHOOL L… 2011/2… STANDA… BC Pub… 005     Southe… 005010… Jaffra… NA      TRUE    NA      NA     
-#> # … with 16,142 more rows, 12 more variables: `Has Prog Francophone` <lgl>,
+#>    `Data Level` `School Year` `Facility Type` `Public Or Independent` `District Number`
+#>    <chr>        <chr>         <chr>           <chr>                   <chr>            
+#>  1 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School        005              
+#>  2 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School        005              
+#>  3 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School        005              
+#>  4 SCHOOL LEVEL 2005/2006     STANDARD        BC Public School        005              
+#>  5 SCHOOL LEVEL 2006/2007     STANDARD        BC Public School        005              
+#>  6 SCHOOL LEVEL 2007/2008     STANDARD        BC Public School        005              
+#>  7 SCHOOL LEVEL 2008/2009     STANDARD        BC Public School        005              
+#>  8 SCHOOL LEVEL 2009/2010     STANDARD        BC Public School        005              
+#>  9 SCHOOL LEVEL 2010/2011     STANDARD        BC Public School        005              
+#> 10 SCHOOL LEVEL 2011/2012     STANDARD        BC Public School        005              
+#> # ℹ 16,142 more rows
+#> # ℹ 19 more variables: `District Name` <chr>, `School Number` <chr>, `School Name` <chr>,
+#> #   `Has Eng Lang Learner Prog` <lgl>, `Has Core French` <lgl>, `Has Early French Immersion` <lgl>,
+#> #   `Has Late French Immersion` <lgl>, `Has Prog Francophone` <lgl>,
 #> #   `Has Any French Immersion Prog` <lgl>, `Has Any French Prog` <lgl>,
 #> #   `Has Aborig Supp Services` <lgl>, `Has Other Appr Aborig Prog` <lgl>,
-#> #   `Has Aborig Lang And Cult` <lgl>, `Has Continuing Ed Prog` <lgl>,
-#> #   `Has Distributed Learn Prog` <lgl>, `Has Career Prep Prog` <lgl>, `Has Coop Prog` <lgl>,
-#> #   `Has Apprenticeship Prog` <lgl>, `Has Career Technical Prog` <lgl>, and abbreviated variable
-#> #   names ¹​`Data Level`, ²​`School Year`, ³​`Facility Type`, ⁴​`Public Or Independent`, …
+#> #   `Has Aborig Lang And Cult` <lgl>, `Has Continuing Ed Prog` <lgl>, …
 ```
 
 Alternatively, you can retrieve the full details of the available resources for a given record as a data frame using `bcdc_tidy_resources()`:
 
 
-```r
+``` r
 ## Get a data frame of data resources for the `bc-schools-programs-offered-in-schools`
 ## catalogue record
 bcdc_tidy_resources("b1f27d1c-244a-410e-a361-931fac62a524")
 #> # A tibble: 2 × 9
-#>   name                          url               id    format ext   packa…¹ locat…² wfs_a…³ bcdat…⁴
-#>   <chr>                         <chr>             <chr> <chr>  <chr> <chr>   <chr>   <lgl>   <lgl>  
-#> 1 ProgramsOfferedinSchools.txt  http://www.bced.… a393… txt    txt   b1f27d… catalo… FALSE   TRUE   
-#> 2 ProgramsOfferedinSchools.xlsx http://www.bced.… 1e34… xlsx   xlsx  b1f27d… catalo… FALSE   TRUE   
-#> # … with abbreviated variable names ¹​package_id, ²​location, ³​wfs_available, ⁴​bcdata_available
+#>   name                   url   id    format ext   package_id location wfs_available bcdata_available
+#>   <chr>                  <chr> <chr> <chr>  <chr> <chr>      <chr>    <lgl>         <lgl>           
+#> 1 ProgramsOfferedinScho… http… a393… txt    txt   b1f27d1c-… catalog… FALSE         TRUE            
+#> 2 ProgramsOfferedinScho… http… 1e34… xlsx   xlsx  b1f27d1c-… catalog… FALSE         TRUE
 ```
 
 `bcdc_get_data()` will also detect if the data resource is a geospatial file, and automatically reads and returns it as an [`sf` object](https://r-spatial.github.io/sf/) in your R session.
@@ -316,7 +327,7 @@ bcdc_tidy_resources("b1f27d1c-244a-410e-a361-931fac62a524")
 Let's get the air zones for British Columbia:
 
 
-```r
+``` r
 ## Find the B.C. Air Zones catalogue record
 bcdc_search("air zones", res_format = "geojson")
 #> List of B.C. Data Catalogue Records
@@ -342,7 +353,10 @@ bc_az %>%
   theme_minimal()
 ```
 
+<div class="figure">
 <img src="vignette-fig-air_zones-1.png" alt="plot of chunk air_zones" width="100%" />
+<p class="caption">plot of chunk air_zones</p>
+</div>
 
 
 **Note:** The `bcdata` package supports downloading _most_ file types, including zip archives. It will do its best to identify and read data from
@@ -356,7 +370,7 @@ Many geospatial data sets in the B.C. Data Catalogue are available through a [We
 Let's get the Capital Regional District boundary from the [B.C. Regional Districts geospatial data](https://catalogue.data.gov.bc.ca/dataset/d1aff64e-dbfe-45a6-af97-582b7f6418b9)---the whole file takes 30-60 seconds to download and I only need the one polygon, so why not save some time:
 
 
-```r
+``` r
 ## Find the B.C. Regional Districts catalogue record
 bcdc_search("regional districts administrative areas", res_format = "wms", n = 1)
 #> List of B.C. Data Catalogue Records
@@ -392,7 +406,7 @@ bcdc_describe_feature(bc_regional_districts_metadata)
 #>  8 UPDATE_TYPE              FALSE  xsd:string      character      "A short description of the lates…
 #>  9 WHEN_UPDATED             FALSE  xsd:date        date           "The date and time the record was…
 #> 10 MAP_STATUS               FALSE  xsd:string      character      "That the digital map has been ap…
-#> # … with 11 more rows
+#> # ℹ 11 more rows
 
 ## Get the Capital Regional District polygon from the B.C. Regional
 ## Districts geospatial data
@@ -407,6 +421,9 @@ my_regional_district  %>%
   theme_minimal()
 ```
 
+<div class="figure">
 <img src="vignette-fig-regional_districts-1.png" alt="plot of chunk regional_districts" width="100%" />
+<p class="caption">plot of chunk regional_districts</p>
+</div>
 
 The vignette [Querying Spatial Data with bcdata](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html) provides a full demonstration on how to use `bcdata::bcdc_query_geodata()` to fine tune a [Web Feature Service](https://www2.gov.bc.ca/gov/content?id=95D78D544B244F34B89223EF069DF74E) request for geospatial data from the B.C. Data Catalogue.
