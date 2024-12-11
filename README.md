@@ -1,14 +1,11 @@
 
 <!--
 Copyright 2018 Province of British Columbia
-
-Licensed under the Apache License, Version 2.0 (the "License");
+&#10;Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
-https://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, 
+&#10;https://www.apache.org/licenses/LICENSE-2.0
+&#10;Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, 
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 -->
@@ -17,7 +14,7 @@ See the License for the specific language governing permissions and limitations 
 
 <!-- badges: start -->
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/license/apache-2-0/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/license/apache-2-0)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/bcdata)](https://cran.r-project.org/package=bcdata)
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/bcdata?color=brightgreen)](https://CRAN.R-project.org/package=bcdata)
@@ -148,7 +145,6 @@ Conduct](https://github.com/bcgov/bcdata/blob/master/CODE_OF_CONDUCT.md).
 By participating in this project you agree to abide by its terms.
 
 ### Citation
-
 
     To cite package 'bcdata' in publications use:
 
