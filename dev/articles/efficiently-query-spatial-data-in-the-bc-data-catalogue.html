@@ -70,7 +70,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Querying Spatial Data with bcdata</h1>
             
-            <h4 data-toc-skip class="date">2022-10-28</h4>
+            <h4 data-toc-skip class="date">2024-12-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/main/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd" class="external-link"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="d-none name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -171,17 +171,16 @@ Feature Service. From this we know we can make use of
 <span><span class="co">#&gt; Bounding box:  xmin: 956376 ymin: 475108.4 xmax: 1635228 ymax: 901924.4</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 10</span></span>
-<span><span class="co">#&gt;   id       ADMIN…¹ SCHOO…² SCHOO…³ FEATU…⁴ FEATU…⁵ FEATU…⁶ OBJEC…⁷ SE_AN…⁸                  geometry</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;               &lt;POLYGON [m]&gt;</span></span>
-<span><span class="co">#&gt; 1 WHSE_TA…     300 Arrow …      10 FH1000… 7.39e 9  6.38e5     534 &lt;NA&gt;    ((1600278 678750, 160026…</span></span>
-<span><span class="co">#&gt; 2 WHSE_TA…     301 Revels…      19 FH1000… 9.42e 9  7.00e5     535 &lt;NA&gt;    ((1509789 831133.3, 1509…</span></span>
-<span><span class="co">#&gt; 3 WHSE_TA…     302 Kooten…      20 FH1000… 3.07e 9  3.49e5     536 &lt;NA&gt;    ((1554806 563111.3, 1554…</span></span>
-<span><span class="co">#&gt; 4 WHSE_TA…     303 Vernon       22 FH1000… 5.59e 9  6.23e5     537 &lt;NA&gt;    ((1542093 677612.6, 1542…</span></span>
-<span><span class="co">#&gt; 5 WHSE_TA…     304 Centra…      23 FH1000… 2.92e 9  3.57e5     538 &lt;NA&gt;    ((1464990 601366.2, 1464…</span></span>
-<span><span class="co">#&gt; 6 WHSE_TA…     305 Caribo…      27 FH1000… 6.12e10  2.14e6     539 &lt;NA&gt;    ((1372394 901260.4, 1372…</span></span>
-<span><span class="co">#&gt; # … with abbreviated variable names ¹​ADMIN_AREA_SID, ²​SCHOOL_DISTRICT_NAME,</span></span>
-<span><span class="co">#&gt; #   ³​SCHOOL_DISTRICT_NUMBER, ⁴​FEATURE_CODE, ⁵​FEATURE_AREA_SQM, ⁶​FEATURE_LENGTH_M, ⁷​OBJECTID,</span></span>
-<span><span class="co">#&gt; #   ⁸​SE_ANNO_CAD_DATA</span></span></code></pre></div>
+<span><span class="co">#&gt;   id        ADMIN_AREA_SID SCHOOL_DISTRICT_NAME SCHOOL_DISTRICT_NUMBER FEATURE_CODE FEATURE_AREA_SQM</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;              &lt;int&gt; &lt;chr&gt;                                 &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 WHSE_TAN…            300 Arrow Lakes                              10 FH10000300        7392472526.</span></span>
+<span><span class="co">#&gt; 2 WHSE_TAN…            301 Revelstoke                               19 FH10000300        9416076465.</span></span>
+<span><span class="co">#&gt; 3 WHSE_TAN…            302 Kootenay-Columbia                        20 FH10000300        3072672101.</span></span>
+<span><span class="co">#&gt; 4 WHSE_TAN…            303 Vernon                                   22 FH10000300        5588468673.</span></span>
+<span><span class="co">#&gt; 5 WHSE_TAN…            304 Central Okanagan                         23 FH10000300        2916757936.</span></span>
+<span><span class="co">#&gt; 6 WHSE_TAN…            305 Cariboo-Chilcotin                        27 FH10000300       61213520885.</span></span>
+<span><span class="co">#&gt; # ℹ 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   geometry &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <p>This is the initial query to the data in the catalogue. What has been
 returned is <em>not</em> the actual data but rather a subset to help you
 tune your query. The printed output of this query offers several useful
@@ -207,12 +206,11 @@ workflow:</p>
 <span><span class="co">#&gt; Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 10</span></span>
-<span><span class="co">#&gt;   id       ADMIN…¹ SCHOO…² SCHOO…³ FEATU…⁴ FEATU…⁵ FEATU…⁶ OBJEC…⁷ SE_AN…⁸                  geometry</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;               &lt;POLYGON [m]&gt;</span></span>
-<span><span class="co">#&gt; 1 WHSE_TA…     328 Prince…      57 FH1000… 5.19e10  2.26e6     562 &lt;NA&gt;    ((1137478 1221549, 11373…</span></span>
-<span><span class="co">#&gt; # … with abbreviated variable names ¹​ADMIN_AREA_SID, ²​SCHOOL_DISTRICT_NAME,</span></span>
-<span><span class="co">#&gt; #   ³​SCHOOL_DISTRICT_NUMBER, ⁴​FEATURE_CODE, ⁵​FEATURE_AREA_SQM, ⁶​FEATURE_LENGTH_M, ⁷​OBJECTID,</span></span>
-<span><span class="co">#&gt; #   ⁸​SE_ANNO_CAD_DATA</span></span></code></pre></div>
+<span><span class="co">#&gt;   id        ADMIN_AREA_SID SCHOOL_DISTRICT_NAME SCHOOL_DISTRICT_NUMBER FEATURE_CODE FEATURE_AREA_SQM</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;              &lt;int&gt; &lt;chr&gt;                                 &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 WHSE_TAN…            328 Prince George                            57 FH10000300       51888780641.</span></span>
+<span><span class="co">#&gt; # ℹ 4 more variables: FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   geometry &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <p>To further tune our query, we can also request only the columns we
 want. Really we only want the school district column and the spatial
 information. During an actual analysis, it is possible that you may need
@@ -235,11 +233,10 @@ need to be determined there.</p>
 <span><span class="co">#&gt; Bounding box:  xmin: 1126789 ymin: 821142.1 xmax: 1528155 ymax: 1224202</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 6</span></span>
-<span><span class="co">#&gt;   id                                       ADMIN…¹ SCHOO…² SCHOO…³ OBJEC…⁴                  geometry</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                                      &lt;int&gt; &lt;chr&gt;     &lt;int&gt;   &lt;int&gt;             &lt;POLYGON [m]&gt;</span></span>
-<span><span class="co">#&gt; 1 WHSE_TANTALIS.TA_SCHOOL_DISTRICTS_SVW.f…     328 Prince…      57     562 ((1137478 1221549, 11373…</span></span>
-<span><span class="co">#&gt; # … with abbreviated variable names ¹​ADMIN_AREA_SID, ²​SCHOOL_DISTRICT_NAME,</span></span>
-<span><span class="co">#&gt; #   ³​SCHOOL_DISTRICT_NUMBER, ⁴​OBJECTID</span></span></code></pre></div>
+<span><span class="co">#&gt;   id                             ADMIN_AREA_SID SCHOOL_DISTRICT_NAME SCHOOL_DISTRICT_NUMBER OBJECTID</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                                   &lt;int&gt; &lt;chr&gt;                                 &lt;int&gt;    &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 WHSE_TANTALIS.TA_SCHOOL_DISTR…            328 Prince George                            57      562</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: geometry &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <p>Note that in the <code>select</code> statement, we did not explicitly
 ask for the spatial data and also that there are several columns present
 that we didn’t select. This is because within each data set in the data
@@ -259,7 +256,11 @@ the data you want and wish to begin working with it in R like a normal
 districts:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">districts</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="vignette-fig-districts-1.png" alt="plot of chunk districts" width="100%"></p>
+<div class="figure">
+<img src="vignette-fig-districts-1.png" alt="plot of chunk districts" width="100%"><p class="caption">
+plot of chunk districts
+</p>
+</div>
 <p>Now that we have the spatial boundaries narrowed by specific school
 districts we can perform some spatial operations to determine parks in
 the school districts.</p>
@@ -296,56 +297,56 @@ geospatial data, which means we can make use of
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></span>
-<span><span class="co">#&gt; • Using collect() on this object will return 8555 features and 19 fields</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 9143 features and 19 fields</span></span>
 <span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 1228935 ymin: 455032.1 xmax: 1236528 ymax: 471352</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 20</span></span>
-<span><span class="co">#&gt;   id         LOCAL…¹ PARK_…² PARK_…³ PARK_…⁴ REGIO…⁵ MUNIC…⁶ CIVIC…⁷ CIVIC…⁸ STREE…⁹ LATIT…˟ LONGI…˟</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 WHSE_BASE…      30 Blumse… Local   Park    Metro … Surrey     3536 &lt;NA&gt;    Rosema…    49.1   -123.</span></span>
-<span><span class="co">#&gt; 2 WHSE_BASE…      31 Bob Ru… Local   Park    Metro … Surrey     5448 &lt;NA&gt;    148 St     49.1   -123.</span></span>
-<span><span class="co">#&gt; 3 WHSE_BASE…      32 Bog Pa… Local   Park    Metro … Surrey     9740 &lt;NA&gt;    130 St     49.2   -123.</span></span>
-<span><span class="co">#&gt; 4 WHSE_BASE…      33 Bonacc… Local   Park    Metro … Surrey    14962 &lt;NA&gt;    98 Ave     49.2   -123.</span></span>
-<span><span class="co">#&gt; 5 WHSE_BASE…      34 Cotton… Local   Playgr… Metro … Surrey     9356 &lt;NA&gt;    132A St    49.2   -123.</span></span>
-<span><span class="co">#&gt; 6 WHSE_BASE…      35 North … Local   Green … Metro … Surrey    11260 &lt;NA&gt;    164 St     49.2   -123.</span></span>
-<span><span class="co">#&gt; # … with 8 more variables: WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;, LICENCE_COMMENTS &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [m]&gt;, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID,</span></span>
-<span><span class="co">#&gt; #   ²​PARK_NAME, ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,</span></span>
-<span><span class="co">#&gt; #   ⁸​CIVIC_NUMBER_SUFFIX, ⁹​STREET_NAME, ˟​LATITUDE, ˟​LONGITUDE</span></span></code></pre></div>
+<span><span class="co">#&gt;   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;       </span></span>
+<span><span class="co">#&gt; 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID</span></span>
+<span><span class="co">#&gt; # ℹ 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre></div>
 <p>Since we are interested in only “Park” data we can subset our
 query:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">PARK_PRIMARY_USE</span> <span class="op">==</span> <span class="st">"Park"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></span>
-<span><span class="co">#&gt; • Using collect() on this object will return 4251 features and 19 fields</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 4517 features and 19 fields</span></span>
 <span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 1228935 ymin: 455032.1 xmax: 1238850 ymax: 468825.5</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 20</span></span>
-<span><span class="co">#&gt;   id         LOCAL…¹ PARK_…² PARK_…³ PARK_…⁴ REGIO…⁵ MUNIC…⁶ CIVIC…⁷ CIVIC…⁸ STREE…⁹ LATIT…˟ LONGI…˟</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 WHSE_BASE…      30 Blumse… Local   Park    Metro … Surrey     3536 &lt;NA&gt;    Rosema…    49.1   -123.</span></span>
-<span><span class="co">#&gt; 2 WHSE_BASE…      31 Bob Ru… Local   Park    Metro … Surrey     5448 &lt;NA&gt;    148 St     49.1   -123.</span></span>
-<span><span class="co">#&gt; 3 WHSE_BASE…      32 Bog Pa… Local   Park    Metro … Surrey     9740 &lt;NA&gt;    130 St     49.2   -123.</span></span>
-<span><span class="co">#&gt; 4 WHSE_BASE…      33 Bonacc… Local   Park    Metro … Surrey    14962 &lt;NA&gt;    98 Ave     49.2   -123.</span></span>
-<span><span class="co">#&gt; 5 WHSE_BASE…      37 Freedo… Local   Park    Metro … Surrey    15452 &lt;NA&gt;    84 Ave     49.2   -123.</span></span>
-<span><span class="co">#&gt; 6 WHSE_BASE…      46 Barnst… Local   Park    Metro … Surrey     9998 &lt;NA&gt;    Lyncea…    49.2   -123.</span></span>
-<span><span class="co">#&gt; # … with 8 more variables: WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;, LICENCE_COMMENTS &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;, SE_ANNO_CAD_DATA &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [m]&gt;, and abbreviated variable names ¹​LOCAL_REG_GREENSPACE_ID,</span></span>
-<span><span class="co">#&gt; #   ²​PARK_NAME, ³​PARK_TYPE, ⁴​PARK_PRIMARY_USE, ⁵​REGIONAL_DISTRICT, ⁶​MUNICIPALITY, ⁷​CIVIC_NUMBER,</span></span>
-<span><span class="co">#&gt; #   ⁸​CIVIC_NUMBER_SUFFIX, ⁹​STREET_NAME, ˟​LATITUDE, ˟​LONGITUDE</span></span></code></pre></div>
+<span><span class="co">#&gt;   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;       </span></span>
+<span><span class="co">#&gt; 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID</span></span>
+<span><span class="co">#&gt; # ℹ 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre></div>
 <p>Here we see that this greatly reduces the number of features that we
 are dealing with (and correspondingly the amount of data that needs to
 be transferred over the web). Remember also that we still have not
@@ -371,7 +372,11 @@ name to this object. These requests can sometimes take quite a long:</p>
 <span><span class="co">#&gt; A bounding box was drawn around the object passed to INTERSECTS and all features within the box will be returned.</span></span></code></pre></div>
 <p>Plotting both the filtered parks data and the district polygons
 reveals an important consideration when using <code>bcdata</code>:</p>
-<p><img src="vignette-fig-district_parks-1.png" alt="plot of chunk district_parks" width="100%"></p>
+<div class="figure">
+<img src="vignette-fig-district_parks-1.png" alt="plot of chunk district_parks" width="100%"><p class="caption">
+plot of chunk district_parks
+</p>
+</div>
 <p>In this example, many parks not contained within the school districts
 are included in the <code>districts_parks</code> object. This is because
 rather than a full intersection, <code>bcdata</code> draws a bounding
@@ -391,7 +396,11 @@ exceeded the current value of
 <span><span class="co">#&gt; Exceedance: 448576 bytes</span></span>
 <span><span class="co">#&gt; See ?bcdc_check_geom_size for more details</span></span></code></pre></div>
 <p>Drawing the bounding box illustrates this point:</p>
-<p><img src="vignette-fig-bbox-1.png" alt="plot of chunk bbox" width="100%"></p>
+<div class="figure">
+<img src="vignette-fig-bbox-1.png" alt="plot of chunk bbox" width="100%"><p class="caption">
+plot of chunk bbox
+</p>
+</div>
 <p>We are left with two options to get around this problem. First, we
 can simply do some additional processing with the <code>sf</code>
 package. Specifically we can use a spatial join to assign parks into
@@ -399,7 +408,11 @@ their respective district:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">districts_parks_join</span> <span class="op">&lt;-</span> <span class="va">districts_parks</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html" class="external-link">st_join</a></span><span class="op">(</span><span class="va">districts</span>, left <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="vignette-fig-dp_join-1.png" alt="plot of chunk dp_join" width="100%"></p>
+<div class="figure">
+<img src="vignette-fig-dp_join-1.png" alt="plot of chunk dp_join" width="100%"><p class="caption">
+plot of chunk dp_join
+</p>
+</div>
 <p>A second approach is to set an internal option
 (<code>bcdata.max_geom_pred_size</code>) and increase the threshold of
 when a bounding box is drawn. Options are set in R like this:</p>
@@ -498,7 +511,7 @@ above.</p>
 <div class="section level2">
 <h2 id="using-b-c--geographic-warehouse-bcgw-layer-names">Using B.C. Geographic Warehouse (BCGW) layer names<a class="anchor" aria-label="anchor" href="#using-b-c--geographic-warehouse-bcgw-layer-names"></a>
 </h2>
-<p>If you are familiar with the <a href="https://www2.gov.bc.ca/gov/content/data/geographic-data-services/bc-spatial-data-infrastructure/bc-geographic-warehouse" class="external-link">B.C.
+<p>If you are familiar with the <a href="https://www2.gov.bc.ca/gov/content/data/finding-and-sharing/bc-geographic-warehouse" class="external-link">B.C.
 Geographic Warehouse (BCGW)</a>, you may already know the name of a
 layer that you want from the BCGW. <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (as
 well as all other related functions) supports supplying that name
@@ -522,7 +535,7 @@ that in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata(
 <span><span class="co">#&gt;  8 AIRPORT_NAME                  TRUE   xsd:string      character      AIRPORT_NAME is a business n…</span></span>
 <span><span class="co">#&gt;  9 DESCRIPTION                   FALSE  xsd:string      character      DESCRIPTION describes the Oc…</span></span>
 <span><span class="co">#&gt; 10 PHYSICAL_ADDRESS              FALSE  xsd:string      character      PHYSICAL_ADDRESS contains th…</span></span>
-<span><span class="co">#&gt; # … with 32 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 32 more rows</span></span>
 <span></span>
 <span><span class="co"># Query the data with bcdc_query_geodata and filter + select:</span></span>
 <span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -538,18 +551,18 @@ that in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata(
 <span><span class="co">#&gt; Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 12</span></span>
-<span><span class="co">#&gt;   id                 CUSTO…¹ BUSIN…² BUSIN…³ OCCUP…⁴ SOURC…⁵ SUPPL…⁶ AIRPO…⁷ LOCAL…⁸ NUMBE…⁹ SEQUE…˟</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 455     N       Terrac… Terrace       2     578</span></span>
-<span><span class="co">#&gt; 2 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 464     N       Victor… North …       3     734</span></span>
-<span><span class="co">#&gt; 3 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 482     N       Nanaim… Nanaimo       1     854</span></span>
-<span><span class="co">#&gt; 4 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 483     N       Tofino… Tofino        3     642</span></span>
-<span><span class="co">#&gt; 5 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 484     N       Abbots… Abbots…       2    1036</span></span>
-<span><span class="co">#&gt; 6 WHSE_IMAGERY_AND_… "Minis… airTra… Air Tr… BC Air… 487     N       Bounda… Delta         2     828</span></span>
-<span><span class="co">#&gt; # … with 1 more variable: geometry &lt;POINT [m]&gt;, and abbreviated variable names</span></span>
-<span><span class="co">#&gt; #   ¹​CUSTODIAN_ORG_DESCRIPTION, ²​BUSINESS_CATEGORY_CLASS, ³​BUSINESS_CATEGORY_DESCRIPTION,</span></span>
-<span><span class="co">#&gt; #   ⁴​OCCUPANT_TYPE_DESCRIPTION, ⁵​SOURCE_DATA_ID, ⁶​SUPPLIED_SOURCE_ID_IND, ⁷​AIRPORT_NAME, ⁸​LOCALITY,</span></span>
-<span><span class="co">#&gt; #   ⁹​NUMBER_OF_RUNWAYS, ˟​SEQUENCE_ID</span></span></code></pre></div>
+<span><span class="co">#&gt;   id     CUSTODIAN_ORG_DESCRI…¹ BUSINESS_CATEGORY_CL…² BUSINESS_CATEGORY_DE…³ OCCUPANT_TYPE_DESCRI…⁴</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;                  &lt;chr&gt;                  &lt;chr&gt;                  &lt;chr&gt;                 </span></span>
+<span><span class="co">#&gt; 1 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           </span></span>
+<span><span class="co">#&gt; 2 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           </span></span>
+<span><span class="co">#&gt; 3 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           </span></span>
+<span><span class="co">#&gt; 4 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           </span></span>
+<span><span class="co">#&gt; 5 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           </span></span>
+<span><span class="co">#&gt; 6 WHSE_… "Ministry of Forest, … airTransportation      Air Transportation     BC Airports           </span></span>
+<span><span class="co">#&gt; # ℹ abbreviated names: ¹​CUSTODIAN_ORG_DESCRIPTION, ²​BUSINESS_CATEGORY_CLASS,</span></span>
+<span><span class="co">#&gt; #   ³​BUSINESS_CATEGORY_DESCRIPTION, ⁴​OCCUPANT_TYPE_DESCRIPTION</span></span>
+<span><span class="co">#&gt; # ℹ 7 more variables: SOURCE_DATA_ID &lt;chr&gt;, SUPPLIED_SOURCE_ID_IND &lt;chr&gt;, AIRPORT_NAME &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   LOCALITY &lt;chr&gt;, NUMBER_OF_RUNWAYS &lt;int&gt;, SEQUENCE_ID &lt;int&gt;, geometry &lt;POINT [m]&gt;</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
