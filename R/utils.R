@@ -148,8 +148,10 @@ bcdc_auth <- function() {
 ## Check if there is internet
 ## h/t to https://github.com/ropensci/handlr/blob/pluralize/tests/testthat/helper-handlr.R
 has_internet <- function() {
-  z <- try(suppressWarnings(readLines('https://www.google.com', n = 1)),
-           silent = TRUE)
+  z <- try(
+    suppressWarnings(readLines('https://www.google.com', n = 1)),
+    silent = TRUE
+  )
   !inherits(z, "try-error")
 }
 
@@ -285,13 +287,15 @@ read_from_url <- function(resource, ...){
           fun$package, " package.")
   handle_excel(tmp, ...)
 
-  tryCatch(do.call(fun$fun, list(tmp, ...)),
-           error = function(e) {
-             stop("Reading the data set failed with the following error message:\n\n  ", e,
-                  "\nThe file can be found here:\n  '",
-                  tmp, "'\nif you would like to try to read it manually.\n",
-                  call. = FALSE)
-           })
+tryCatch(
+  do.call(fun$fun, list(tmp, ...)),
+  error = function(e) {
+    stop("Reading the data set failed with the following error message:\n\n  ", e,
+    "\nThe file can be found here:\n  '",
+    tmp, "'\nif you would like to try to read it manually.\n",
+    call. = FALSE)
+  }
+)
 }
 
 
@@ -305,11 +309,11 @@ resource_to_tibble <- function(x){
     package_id = safe_map_chr(x, "package_id"),
     location = simplify_string(safe_map_chr(x, "resource_storage_location"))
   )
-
-  mutate(res_df,
-         wfs_available = wfs_available(res_df),
-         bcdata_available = wfs_available | other_format_available(res_df))
-}
+  
+  dplyr::mutate(res_df,
+    wfs_available = wfs_available(res_df),
+    bcdata_available = wfs_available | other_format_available(res_df))
+  }
 
 #' @importFrom rlang "%||%"
 safe_map_chr <- function(x, name) {
@@ -329,10 +333,13 @@ pagination_sort_col <- function(cols_df) {
     if (idcol %in% cols) return(idcol)
   }
   #Otherwise use the first column - this is likely pretty fragile
-  warning("Unable to find a suitable column to sort on for pagination. Using",
-          " the first column (", cols[1],
-          "). Please check your data for obvious duplicated or missing rows.",
-          call. = FALSE)
+  warning(
+    "Unable to find a suitable column to sort on for pagination. Using",
+    " the first column (",
+    cols[1],
+    "). Please check your data for obvious duplicated or missing rows.",
+    call. = FALSE
+  )
   cols[1]
 }
 
@@ -348,11 +355,15 @@ handle_zip <- function(x) {
   files <- list_supported_files(dir)
   # check if it's a shapefile
 
-  if (length(files) > 1L) {
-    stop("More than one supported file in zip file. It has been downloaded and ",
-         "extracted to '", dir, "', where you can access its contents manually.",
-         call. = FALSE)
-  }
+if (length(files) > 1L) {
+  stop(
+    "More than one supported file in zip file. It has been downloaded and ",
+    "extracted to '",
+    dir,
+    "', where you can access its contents manually.",
+    call. = FALSE
+  )
+}
 
   files
 }
