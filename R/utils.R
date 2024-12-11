@@ -12,12 +12,12 @@
 
 catalogue_base_url <- function() {
   getOption("bcdata.catalogue_gui_url",
-            default = "https://toyger.data.gov.bc.ca/")
+            default = "https://catalogue.data.gov.bc.ca/")
 }
 
 catalogue_base_api_url <- function() {
   getOption("bcdata.catalogue_api_url",
-            default = "https://toyger.data.gov.bc.ca/api/3")
+            default = "https://catalogue.data.gov.bc.ca/api/3")
 }
 
 wfs_base_url <- function(host = bcdc_web_service_host()) {
