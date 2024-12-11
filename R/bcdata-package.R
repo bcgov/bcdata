@@ -19,6 +19,9 @@
 #' @importFrom methods setOldClass
 NULL
 
-release_questions <- function() {
-  c("Have you run test and check with internet turned off?")
+release_bullets <- function() {
+  c(
+    "Run test and check with internet turned off", 
+    "Precompile vignettes"
+  )
 }
