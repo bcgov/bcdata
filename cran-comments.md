@@ -1,14 +1,3 @@
-## Release summary
-
-This is a patch release, primarily to fix the WARNING on R-devel relating to
-S3 generic/method consistency.
-
-### CRAN check issues
-
-We fixed the CRAN check result failures, in particular:
-
- * We fixed the S3 method inconsistencies for `sql_translation()`.
-
 ## R CMD check results
 
 There were no ERRORs, WARNINGs, or NOTEs.
