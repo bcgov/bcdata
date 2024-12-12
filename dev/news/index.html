@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +41,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="bcdata-development-version">bcdata (development version)<a class="anchor" aria-label="anchor" href="#bcdata-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.0" id="bcdata-050">bcdata 0.5.0<a class="anchor" aria-label="anchor" href="#bcdata-050"></a></h2><p class="text-muted">CRAN release: 2024-12-12</p>
 <ul><li>Make functions more robust to non-functioning WMS/WFS GetCapabilities requests (<a href="https://github.com/bcgov/bcdata/issues/339" class="external-link">#339</a>, <a href="https://github.com/bcgov/bcdata/issues/341" class="external-link">#341</a>).</li>
 <li>dbplyr 2.5.0 has made the requirement for using <code>!!</code> or <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> for local functions more restrictive; updated tests and examples (<a href="https://github.com/bcgov/bcdata/issues/341" class="external-link">#341</a>).</li>
 <li>Deprecate the <code>bcdata.single_download_limit</code> option, as it was mostly redundant with <code>bcdata.chunk_limit</code>, and should always be set by the server. Please set the page size limit for paginated requests via the <code>bcdata.chunk_limit</code> option (<a href="https://github.com/bcgov/bcdata/issues/332" class="external-link">#332</a>).</li>
