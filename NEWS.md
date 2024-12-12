@@ -1,4 +1,4 @@
-# bcdata (development version)
+# bcdata 0.5.0
 
 * Make functions more robust to non-functioning WMS/WFS GetCapabilities requests
  (#339, #341).
