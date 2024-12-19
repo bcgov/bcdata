@@ -89,8 +89,12 @@ bcdc_read_sf <- function(x, ...){
 
   # avoid use of spherical geomotry while reading (#337):
   # https://r.geocompx.org/read-write#geographic-web-services
-  uses_s2 <- sf::sf_use_s2(FALSE)
-  on.exit(sf::sf_use_s2(uses_s2), add = TRUE, after = FALSE)
+  uses_s2 <- suppressMessages(sf::sf_use_s2(FALSE))
+  on.exit(
+    suppressMessages(sf::sf_use_s2(uses_s2)),
+    add = TRUE,
+    after = FALSE
+  )
 
   if(length(x) == 1){
 
