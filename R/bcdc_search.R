@@ -80,9 +80,9 @@ bcdc_list_groups <- function() bcdc_search_facets("groups")
 bcdc_list_group_records <- function(group) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
-  cli <- bcdc_catalogue_client("action/group_show")
+  cli <- bcdc_catalogue_client("action/group_package_show")
 
-  r <- cli$get(query = list(id = group, include_datasets = 'true'))
+  r <- cli$get(query = list(id = group, limit = 1000))
 
   if (r$status_code == 404){
     stop("404: URL not found - you may have specified an invalid group?", call. = FALSE)
@@ -93,7 +93,7 @@ bcdc_list_group_records <- function(group) {
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
   stopifnot(res$success)
 
-  d <- tibble::as_tibble(res$result$packages)
+  d <- tibble::as_tibble(res$result)
   as.bcdc_group(d, description = res$result$description)
 
 }
