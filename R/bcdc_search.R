@@ -40,7 +40,7 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
   cli <- bcdc_catalogue_client("action/package_search")
 
-  r <- cli$get(query = list(facet.field = query, rows = 0))
+  r <- cli$get(query = list(facet.field = query, rows = 0, facet.limit=1000))
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
