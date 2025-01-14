@@ -40,7 +40,7 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
   cli <- bcdc_catalogue_client("action/package_search")
 
-  r <- cli$get(query = list(facet.field = query, rows = 0, facet.limit=1000))
+  r <- cli$get(query = list(facet.field = query, rows = 0, facet.limit = 1000))
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
@@ -120,9 +120,14 @@ bcdc_list_organizations <- function() bcdc_search_facets("organization")
 bcdc_list_organization_records <- function(organization) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
-  cli <- bcdc_catalogue_client("action/organization_show")
+  query <- paste0("organization:", organization)
 
-  r <- cli$get(query = list(id = organization, include_datasets = 'true'))
+  cli <- bcdc_catalogue_client("action/package_search")
+
+  r <- cli$get(query = list(
+    fq = query,          # filter query for the organization
+    rows = 1000          # number of datasets to retrieve (adjust as needed)
+  ))
 
   if (r$status_code == 404){
     stop("404: URL not found - you may have specified an invalid organization?",  call. = FALSE)
@@ -133,7 +138,7 @@ bcdc_list_organization_records <- function(organization) {
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
   stopifnot(res$success)
 
-  d <- tibble::as_tibble(res$result$packages)
+  d <- tibble::as_tibble(res$result$results)
   as.bcdc_organization(d, description = res$result$description)
 
 }
