@@ -40,7 +40,9 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
   cli <- bcdc_catalogue_client("action/package_search")
 
-  r <- cli$get(query = list(facet.field = query, rows = 0, facet.limit = 1000))
+  option_facet_limit <- getOption("bcdata.max_package_search_facet_limit", 1000)
+
+  r <- cli$get(query = list(facet.field = query, rows = 0, facet.limit = option_facet_limit))
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
@@ -82,7 +84,9 @@ bcdc_list_group_records <- function(group) {
 
   cli <- bcdc_catalogue_client("action/group_package_show")
 
-  r <- cli$get(query = list(id = group, limit = 1000))
+  option_group_limit <- getOption("bcdata.max_group_package_show_limit", 1000)
+
+  r <- cli$get(query = list(id = group, limit = option_group_limit))
 
   if (r$status_code == 404){
     stop("404: URL not found - you may have specified an invalid group?", call. = FALSE)
@@ -120,13 +124,13 @@ bcdc_list_organizations <- function() bcdc_search_facets("organization")
 bcdc_list_organization_records <- function(organization) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
-  query <- paste0("organization:", organization)
+  option_package_limit <- getOption("bcdata.max_package_search_limit", 1000)
 
   cli <- bcdc_catalogue_client("action/package_search")
 
   r <- cli$get(query = list(
-    fq = query,          # filter query for the organization
-    rows = 1000          # number of datasets to retrieve (adjust as needed)
+    fq = paste0("organization:", organization), # filter query for the organization
+    rows = option_package_limit
   ))
 
   if (r$status_code == 404){
