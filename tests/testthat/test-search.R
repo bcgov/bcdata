@@ -37,3 +37,33 @@ test_that("bcdc_search works with zero results", {
 
   expect_output(print(res), "returned no results")
 })
+
+test_that('bcdc_search_facets works', {
+  skip_on_cran()
+  skip_if_net_down()
+  orgs <- bcdc_search_facets("organization")
+  grps <- bcdc_search_facets("groups")
+  licences <- bcdc_search_facets("license_id")
+  expect_s3_class(orgs, "data.frame")
+  expect_s3_class(grps, "data.frame")
+  expect_s3_class(licences, "data.frame")
+  expect_gt(nrow(orgs), 160)
+  expect_gt(nrow(grps), 20)
+  expect_gte(nrow(licences), 15)
+})
+
+test_that('bcdc_list_group_records works', {
+  skip_on_cran()
+  skip_if_net_down()
+  census <- bcdc_list_group_records("census-profiles")
+  expect_s3_class(census, "data.frame")
+  expect_gte(nrow(census), 30)
+})
+
+test_that('bcdc_list_organization_records works', {
+  skip_on_cran()
+  skip_if_net_down()
+  bcstats <- bcdc_list_organization_records("bc-stats")
+  expect_s3_class(bcstats, "data.frame")
+  expect_gt(nrow(bcstats), 70)
+})
