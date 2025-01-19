@@ -34,6 +34,21 @@
 #' using this option you can set the size of the chunk requested. On slower
 #' connections, or when having problems, it may help to lower the chunk limit.
 #'
+#' `bcdata.max_package_search_limit`  is an option for setting the maximum number of
+#' datasets returned when querying by organization with the package_search API endpoint. The
+#' default limit (1000) is purposely set high to return all datasets for a
+#' given organization.
+#'
+#' `bcdata.max_package_search_facet_limit` is an option for setting the maximum number of
+#' values returned when querying facet fields with the package_search API endpoint. The
+#' default limit (1000) is purposely set high to return all values for each facet field
+#' ("license_id", "download_audience", "res_format", "publish_state", "organization", "groups").
+#'
+#' `bcdata.max_group_package_show_limit` is an option for setting the maximum number of
+#' datasets returned when querying by group with the group_package_show API endpoint. The
+#' default limit (1000) is purposely set high to return all datasets for a
+#' given group.
+#'
 #' `bcdata.single_download_limit` *Deprecated*. This is the maximum number of
 #' records an object can be before forcing a paginated download; it is set by
 #' querying the server capabilities. This option is deprecated and will be
@@ -81,7 +96,10 @@ bcdc_options <- function() {
     "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
     "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), server_single_download_limit,
     "bcdata.single_download_limit",
-    null_to_na(deprecate_single_download_limit_option()), server_single_download_limit
+    null_to_na(deprecate_single_download_limit_option()), server_single_download_limit,
+    "bcdata.max_package_search_limit", null_to_na(getOption("bcdata.max_package_search_limit")), 1000,
+    "bcdata.max_package_search_facet_limit", null_to_na(getOption("bcdata.max_package_search_facet_limit")), 1000,
+    "bcdata.max_group_package_show_limit", null_to_na(getOption("bcdata.max_group_package_show_limit")), 1000
   )
 }
 
