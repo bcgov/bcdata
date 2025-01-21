@@ -29,6 +29,21 @@ downloaded. This is called "pagination". bcdata does this all for you, however b
 using this option you can set the size of the chunk requested. On slower
 connections, or when having problems, it may help to lower the chunk limit.
 
+\code{bcdata.max_package_search_limit}  is an option for setting the maximum number of
+datasets returned when querying by organization with the package_search API endpoint. The
+default limit (1000) is purposely set high to return all datasets for a
+given organization.
+
+\code{bcdata.max_package_search_facet_limit} is an option for setting the maximum number of
+values returned when querying facet fields with the package_search API endpoint. The
+default limit (1000) is purposely set high to return all values for each facet field
+("license_id", "download_audience", "res_format", "publish_state", "organization", "groups").
+
+\code{bcdata.max_group_package_show_limit} is an option for setting the maximum number of
+datasets returned when querying by group with the group_package_show API endpoint. The
+default limit (1000) is purposely set high to return all datasets for a
+given group.
+
 \code{bcdata.single_download_limit} \emph{Deprecated}. This is the maximum number of
 records an object can be before forcing a paginated download; it is set by
 querying the server capabilities. This option is deprecated and will be

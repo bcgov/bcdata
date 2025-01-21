@@ -40,7 +40,9 @@ bcdc_search_facets <- function(facet = c("license_id", "download_audience",
 
   cli <- bcdc_catalogue_client("action/package_search")
 
-  r <- cli$get(query = list(facet.field = query, rows = 0))
+  option_facet_limit <- getOption("bcdata.max_package_search_facet_limit", 1000)
+
+  r <- cli$get(query = list(facet.field = query, rows = 0, facet.limit = option_facet_limit))
   r$raise_for_status()
 
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
@@ -80,9 +82,11 @@ bcdc_list_groups <- function() bcdc_search_facets("groups")
 bcdc_list_group_records <- function(group) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
-  cli <- bcdc_catalogue_client("action/group_show")
+  cli <- bcdc_catalogue_client("action/group_package_show")
 
-  r <- cli$get(query = list(id = group, include_datasets = 'true'))
+  option_group_limit <- getOption("bcdata.max_group_package_show_limit", 1000)
+
+  r <- cli$get(query = list(id = group, limit = option_group_limit))
 
   if (r$status_code == 404){
     stop("404: URL not found - you may have specified an invalid group?", call. = FALSE)
@@ -93,7 +97,7 @@ bcdc_list_group_records <- function(group) {
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
   stopifnot(res$success)
 
-  d <- tibble::as_tibble(res$result$packages)
+  d <- tibble::as_tibble(res$result)
   as.bcdc_group(d, description = res$result$description)
 
 }
@@ -120,9 +124,14 @@ bcdc_list_organizations <- function() bcdc_search_facets("organization")
 bcdc_list_organization_records <- function(organization) {
   if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
-  cli <- bcdc_catalogue_client("action/organization_show")
+  option_package_limit <- getOption("bcdata.max_package_search_limit", 1000)
 
-  r <- cli$get(query = list(id = organization, include_datasets = 'true'))
+  cli <- bcdc_catalogue_client("action/package_search")
+
+  r <- cli$get(query = list(
+    fq = paste0("organization:", organization), # filter query for the organization
+    rows = option_package_limit
+  ))
 
   if (r$status_code == 404){
     stop("404: URL not found - you may have specified an invalid organization?",  call. = FALSE)
@@ -133,7 +142,7 @@ bcdc_list_organization_records <- function(organization) {
   res <- jsonlite::fromJSON(r$parse("UTF-8"))
   stopifnot(res$success)
 
-  d <- tibble::as_tibble(res$result$packages)
+  d <- tibble::as_tibble(res$result$results)
   as.bcdc_organization(d, description = res$result$description)
 
 }
