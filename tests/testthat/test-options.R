@@ -17,7 +17,6 @@ test_that("bcdc_options() returns a tibble",{
   expect_s3_class(opts, "tbl_df")
 })
 
-
 test_that("bcdata.chunk_limit",{
   skip_if_net_down()
   skip_on_cran()
@@ -30,6 +29,33 @@ test_that("bcdata.chunk_limit",{
   })
 })
 
+test_that("bcdata.max_package_search_limit works",{
+  skip_if_net_down()
+  skip_on_cran()
+  withr::with_options(list(bcdata.max_package_search_limit = 10), {
+    bcstats <- bcdc_list_organization_records("bc-stats")
+    expect_lte(nrow(bcstats), 10)
+  })
+})
+
+test_that("bcdata.max_package_search_facet_limit works",{
+  skip_if_net_down()
+  skip_on_cran()
+  withr::with_options(list(bcdata.max_package_search_facet_limit = 10), {
+    orgs <- bcdc_search_facets("organization")
+    expect_lte(nrow(orgs), 10)
+  })
+})
+
+test_that("bcdata.max_group_package_show_limit works",{
+  skip_if_net_down()
+  skip_on_cran()
+  withr::with_options(list(bcdata.max_group_package_show_limit = 10), {
+    census <- bcdc_list_group_records("census-profiles")
+    expect_lte(nrow(census), 10)
+  })
+})
+
 test_that("bcdata.single_download_limit is deprecated but works", {
   # This can be removed when bcdata.single_download_limit is removed
   skip_if_net_down()
@@ -37,7 +63,7 @@ test_that("bcdata.single_download_limit is deprecated but works", {
   withr::local_options(list(bcdata.single_download_limit = 1))
   withr::local_envvar(list(BCDC_KEY = NULL)) # so snapshot not affected by message
   expect_s3_class(
-    bcdc_query_geodata(record = '76b1b7a3-2112-4444-857a-afccf7b20da8'), 
+    bcdc_query_geodata(record = '76b1b7a3-2112-4444-857a-afccf7b20da8'),
     "bcdc_promise"
   )
 })
