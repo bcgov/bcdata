@@ -57,16 +57,22 @@
 #'
 #' # To query based on partial matches, use %LIKE%:
 #' try(
-#'   bcdc_query_geodata("bc-airports") %>%
-#'   filter(PHYSICAL_ADDRESS %LIKE% 'Vict%')
-#')
+#'   res <- bcdc_query_geodata("bc-airports") %>%
+#'     filter(PHYSICAL_ADDRESS %LIKE% 'Vict%')
+#' )
+#' 
 #' # To query using %IN%
 #' try(
-#'   bcdc_query_geodata("bc-airports") %>%
-#'   filter(AIRPORT_NAME %IN% c("Victoria Harbour (Camel Point) Heliport",
-#'                              "Victoria Harbour (Shoal Point) Heliport")) %>%
-#'   collect()
-#')
+#'   res <- bcdc_query_geodata("bc-airports") %>%
+#'     filter(
+#'       AIRPORT_NAME %IN%
+#'         c(
+#'           "Victoria Harbour (Camel Point) Heliport",
+#'           "Victoria Harbour (Shoal Point) Heliport"
+#'         )
+#'     ) %>%
+#'     collect()
+#' )
 #'
 #'
 #' try(
