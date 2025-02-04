@@ -124,6 +124,26 @@ object with <code><a href="collect-methods.html">collect()</a></code>. See examp
 <span class="r-in"><span>    <span class="fu"><a href="collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># To query based on partial matches, use %LIKE%:</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-airports"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="filter.html">filter</a></span><span class="op">(</span><span class="va">PHYSICAL_ADDRESS</span> <span class="op">%LIKE%</span> <span class="st">'Vict%'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># To query using %IN%</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"bc-airports"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="filter.html">filter</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="va">AIRPORT_NAME</span> <span class="op">%IN%</span></span></span>
+<span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>          <span class="st">"Victoria Harbour (Camel Point) Heliport"</span>,</span></span>
+<span class="r-in"><span>          <span class="st">"Victoria Harbour (Shoal Point) Heliport"</span></span></span>
+<span class="r-in"><span>        <span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">bcdc_query_geodata</span><span class="op">(</span><span class="st">"groundwater-wells"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="filter.html">filter</a></span><span class="op">(</span><span class="va">OBSERVATION_WELL_NUMBER</span> <span class="op">==</span> <span class="st">"108"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
