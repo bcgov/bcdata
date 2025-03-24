@@ -21,7 +21,7 @@ test_that("bcdc_cql_string fails when an invalid arguments are given", {
 
 test_that("bcdc_cql_string fails when used on an uncollected (promise) object", {
   expect_error(
-    bcdc_cql_string(structure(list, class = "bcdc_promise")),
+    bcdc_cql_string(structure(list(), class = "bcdc_promise")),
     "you need to use collect"
   )
 })
