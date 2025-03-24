@@ -21,3 +21,5 @@
 ^depends\.Rds$
 ^revdep$
 ^CRAN-SUBMISSION$
+^[\.]?air\.toml$
+^\.vscode$
