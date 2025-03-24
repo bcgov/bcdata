@@ -20,16 +20,18 @@ mp2 # inner parentheses added
 
 # Issue a request to geoserver using the multipoint without parentheses around
 # points
-a <- GET("https://openmaps.gov.bc.ca/geo/pub/wfs",
-          query = list(
-            SERVICE = "WFS",
-            VERSION = "2.0.0",
-            REQUEST = "GetFeature",
-            outputFormat = "application/json",
-            typeNames = "WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP",
-            SRSNAME = "EPSG:3005",
-            CQL_FILTER = paste0("INTERSECTS(SHAPE, ", mp, ")")
-          ))
+a <- GET(
+  "https://openmaps.gov.bc.ca/geo/pub/wfs",
+  query = list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "GetFeature",
+    outputFormat = "application/json",
+    typeNames = "WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP",
+    SRSNAME = "EPSG:3005",
+    CQL_FILTER = paste0("INTERSECTS(SHAPE, ", mp, ")")
+  )
+)
 
 URLdecode(a$url)
 a$status_code
@@ -37,16 +39,18 @@ content(a, as = "text")
 
 # Issue a request to geoserver using the multipoint *with* parentheses around
 # points
-b <- httr::GET("https://openmaps.gov.bc.ca/geo/pub/wfs",
-          query = list(
-            SERVICE = "WFS",
-            VERSION = "2.0.0",
-            REQUEST = "GetFeature",
-            outputFormat = "application/json",
-            typeNames = "WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP",
-            SRSNAME = "EPSG:3005",
-            CQL_FILTER = paste0("INTERSECTS(SHAPE, ", mp2, ")")
-          ))
+b <- httr::GET(
+  "https://openmaps.gov.bc.ca/geo/pub/wfs",
+  query = list(
+    SERVICE = "WFS",
+    VERSION = "2.0.0",
+    REQUEST = "GetFeature",
+    outputFormat = "application/json",
+    typeNames = "WHSE_BASEMAPPING.GBA_LOCAL_REG_GREENSPACES_SP",
+    SRSNAME = "EPSG:3005",
+    CQL_FILTER = paste0("INTERSECTS(SHAPE, ", mp2, ")")
+  )
+)
 
 URLdecode(b$url)
 b$status_code

@@ -33,15 +33,14 @@ test_that("pagination_sort_col works", {
     col_name = c("foo", "OBJECTID", "OBJECT_ID", "SEQUENCE_ID", "FEATURE_ID"),
     stringsAsFactors = FALSE
   )
-  expect_equal(pagination_sort_col(cols_df),
-               "OBJECTID")
-  expect_equal(pagination_sort_col(cols_df[-2, , drop = FALSE]),
-               "OBJECT_ID")
-  expect_equal(pagination_sort_col(cols_df[c(-2, -3), , drop = FALSE]),
-               "SEQUENCE_ID")
+  expect_equal(pagination_sort_col(cols_df), "OBJECTID")
+  expect_equal(pagination_sort_col(cols_df[-2, , drop = FALSE]), "OBJECT_ID")
+  expect_equal(
+    pagination_sort_col(cols_df[c(-2, -3), , drop = FALSE]),
+    "SEQUENCE_ID"
+  )
   expect_warning(
-    expect_equal(pagination_sort_col(cols_df[1, , drop = FALSE]),
-               "foo")
+    expect_equal(pagination_sort_col(cols_df[1, , drop = FALSE]), "foo")
   )
 })
 
@@ -72,10 +71,14 @@ test_that("bcdc_get_capabilities works", {
 })
 
 test_that("make_url works", {
-  expect_equal(make_url("https://foo.bar", "blah", "/buzz/", "/home.html"),
-               "https://foo.bar/blah/buzz/home.html")
-  expect_equal(make_url("https://foo.bar/", "blah/", "/buzz/", trailing_slash = TRUE),
-               "https://foo.bar/blah/buzz/")
+  expect_equal(
+    make_url("https://foo.bar", "blah", "/buzz/", "/home.html"),
+    "https://foo.bar/blah/buzz/home.html"
+  )
+  expect_equal(
+    make_url("https://foo.bar/", "blah/", "/buzz/", trailing_slash = TRUE),
+    "https://foo.bar/blah/buzz/"
+  )
 })
 
 test_that("names_to_lazy_tbl works", {

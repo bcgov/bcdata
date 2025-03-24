@@ -10,25 +10,39 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-test_that("Test that bcdc_describe feature returns the correct columns",{
+test_that("Test that bcdc_describe feature returns the correct columns", {
   skip_on_cran()
   skip_if_net_down()
   airport_feature <- bcdc_describe_feature("bc-airports")
-  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type", "column_comments"))
+  expect_identical(
+    names(airport_feature),
+    c(
+      "col_name",
+      "sticky",
+      "remote_col_type",
+      "local_col_type",
+      "column_comments"
+    )
+  )
 })
 
 
 test_that("columns are the same as the query", {
   skip_on_cran()
   skip_if_net_down()
-  query <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+  query <- bcdc_query_geodata(
+    "regional-districts-legally-defined-administrative-areas-of-bc"
+  ) %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>% ## just to make the query smaller
     collect()
 
-  description <- bcdc_describe_feature("regional-districts-legally-defined-administrative-areas-of-bc")
+  description <- bcdc_describe_feature(
+    "regional-districts-legally-defined-administrative-areas-of-bc"
+  )
 
-  expect_identical(sort(setdiff(names(query), "geometry")),
-                   sort(setdiff(unique(description$col_name), "SHAPE"))
+  expect_identical(
+    sort(setdiff(names(query), "geometry")),
+    sort(setdiff(unique(description$col_name), "SHAPE"))
   )
 })
 
@@ -37,15 +51,35 @@ test_that("bcdc_describe_feature accepts a bcdc_record object", {
   skip_if_net_down()
   airports <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
   airport_feature <- bcdc_describe_feature(airports)
-  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type", "column_comments"))
+  expect_identical(
+    names(airport_feature),
+    c(
+      "col_name",
+      "sticky",
+      "remote_col_type",
+      "local_col_type",
+      "column_comments"
+    )
+  )
 })
 
-test_that("bcdc_describe_feature accepts BCGW name",{
+test_that("bcdc_describe_feature accepts BCGW name", {
   skip_on_cran()
   skip_if_net_down()
   skip_if_no_capabilities()
-  airport_feature <- bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
-  expect_identical(names(airport_feature), c("col_name", "sticky", "remote_col_type","local_col_type", "column_comments"))
+  airport_feature <- bcdc_describe_feature(
+    "WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"
+  )
+  expect_identical(
+    names(airport_feature),
+    c(
+      "col_name",
+      "sticky",
+      "remote_col_type",
+      "local_col_type",
+      "column_comments"
+    )
+  )
 })
 
 test_that("bcdc_describe_feature fails on unsupported classes", {
@@ -59,8 +93,10 @@ test_that("bcdc_describe_feature fails with non-wfs record", {
   skip_if_net_down()
   skip_on_cran()
   skip_if_no_capabilities()
-  expect_error(bcdc_describe_feature("dba6c78a-1bc1-4d4f-b75c-96b5b0e7fd30"),
-               "No WFS resource available for this data set")
+  expect_error(
+    bcdc_describe_feature("dba6c78a-1bc1-4d4f-b75c-96b5b0e7fd30"),
+    "No WFS resource available for this data set"
+  )
 })
 
 test_that("bcdc_get_wfs_records works", {

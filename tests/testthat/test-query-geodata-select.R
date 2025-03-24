@@ -10,7 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-test_that("select doesn't remove the geometry column",{
+test_that("select doesn't remove the geometry column", {
   skip_if_net_down()
   skip_on_cran()
   feat <- bcdc_query_geodata(point_record) %>%
@@ -20,7 +20,7 @@ test_that("select doesn't remove the geometry column",{
   expect_s3_class(feat, "bcdc_sf")
 })
 
-test_that("select works when selecting a column that isn't sticky",{
+test_that("select works when selecting a column that isn't sticky", {
   skip_if_net_down()
   skip_on_cran()
   feat <- bcdc_query_geodata(point_record) %>%
@@ -32,14 +32,15 @@ test_that("select works when selecting a column that isn't sticky",{
 })
 
 
-test_that("select reduces the number of columns when a sticky ",{
+test_that("select reduces the number of columns when a sticky ", {
   skip_if_net_down()
   skip_on_cran()
   feature_spec <- bcdc_describe_feature(point_record)
   ## Columns that can selected, while manually including GEOMETRY col
   sticky_cols <- c(
-    feature_spec[feature_spec$sticky,]$col_name,
-    "geometry")
+    feature_spec[feature_spec$sticky, ]$col_name,
+    "geometry"
+  )
 
   sub_cols <- bcdc_query_geodata(point_record) %>%
     select(BUSINESS_CATEGORY_CLASS) %>%
@@ -51,19 +52,21 @@ test_that("select reduces the number of columns when a sticky ",{
 test_that("select works with BCGW name", {
   skip_on_cran()
   skip_if_net_down()
-  expect_s3_class(bcdc_query_geodata(bcgw_point_record) %>%
-                  select(AIRPORT_NAME, DESCRIPTION) %>%
-                  collect(), "sf")
+  expect_s3_class(
+    bcdc_query_geodata(bcgw_point_record) %>%
+      select(AIRPORT_NAME, DESCRIPTION) %>%
+      collect(),
+    "sf"
+  )
 })
 
 
-test_that("select accept dplyr like column specifications",{
+test_that("select accept dplyr like column specifications", {
   skip_if_net_down()
   skip_on_cran()
-  layer <-  bcdc_query_geodata(polygon_record)
-  wrong_fields <-  c('ADMIN_AREA_NAME', 'dummy_col')
-  correct_fields <-  c('ADMIN_AREA_NAME', 'OIC_MO_YEAR')
-
+  layer <- bcdc_query_geodata(polygon_record)
+  wrong_fields <- c('ADMIN_AREA_NAME', 'dummy_col')
+  correct_fields <- c('ADMIN_AREA_NAME', 'OIC_MO_YEAR')
 
   ## Most basic select
   expect_s3_class(select(layer, ADMIN_AREA_NAME, OIC_MO_YEAR), "bcdc_promise")
@@ -75,6 +78,9 @@ test_that("select accept dplyr like column specifications",{
   ## Some weird mix
   expect_s3_class(select(layer, 'ADMIN_AREA_NAME', OIC_MO_YEAR), "bcdc_promise")
   ## Another weird mix
-  expect_s3_class(select(layer, c('ADMIN_AREA_NAME','OIC_MO_YEAR') , OIC_MO_NUMBER), "bcdc_promise")
+  expect_s3_class(
+    select(layer, c('ADMIN_AREA_NAME', 'OIC_MO_YEAR'), OIC_MO_NUMBER),
+    "bcdc_promise"
+  )
   expect_s3_class(select(layer, 1:5), "bcdc_promise")
 })

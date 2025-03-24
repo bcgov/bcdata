@@ -10,14 +10,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-test_that("bcdc_options() returns a tibble",{
+test_that("bcdc_options() returns a tibble", {
   skip_if_net_down()
   skip_on_cran()
   opts <- bcdc_options()
   expect_s3_class(opts, "tbl_df")
 })
 
-test_that("bcdata.chunk_limit",{
+test_that("bcdata.chunk_limit", {
   skip_if_net_down()
   skip_on_cran()
   withr::with_options(list(bcdata.chunk_limit = 100000), {
@@ -29,7 +29,7 @@ test_that("bcdata.chunk_limit",{
   })
 })
 
-test_that("bcdata.max_package_search_limit works",{
+test_that("bcdata.max_package_search_limit works", {
   skip_if_net_down()
   skip_on_cran()
   withr::with_options(list(bcdata.max_package_search_limit = 10), {
@@ -38,7 +38,7 @@ test_that("bcdata.max_package_search_limit works",{
   })
 })
 
-test_that("bcdata.max_package_search_facet_limit works",{
+test_that("bcdata.max_package_search_facet_limit works", {
   skip_if_net_down()
   skip_on_cran()
   withr::with_options(list(bcdata.max_package_search_facet_limit = 10), {
@@ -47,7 +47,7 @@ test_that("bcdata.max_package_search_facet_limit works",{
   })
 })
 
-test_that("bcdata.max_group_package_show_limit works",{
+test_that("bcdata.max_group_package_show_limit works", {
   skip_if_net_down()
   skip_on_cran()
   withr::with_options(list(bcdata.max_group_package_show_limit = 10), {
@@ -68,7 +68,7 @@ test_that("bcdata.single_download_limit is deprecated but works", {
   )
 })
 
-test_that("bcdata.single_download_limit can be changed",{
+test_that("bcdata.single_download_limit can be changed", {
   # This can be removed when bcdata.single_download_limit is removed
   skip_if_net_down()
   skip_on_cran()
@@ -76,7 +76,7 @@ test_that("bcdata.single_download_limit can be changed",{
   expect_equal(getOption("bcdata.single_download_limit"), 13)
 })
 
-test_that("bcdc_single_download_limit returns a number",{
+test_that("bcdc_single_download_limit returns a number", {
   skip_on_cran()
   skip_if_net_down()
   lt <- bcdc_single_download_limit()

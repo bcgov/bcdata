@@ -34,14 +34,19 @@ cql_translate <- function(..., .colnames = character(0)) {
     )
   })
 
-  sql_where <- try(dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE),
-                   silent = TRUE)
+  sql_where <- try(
+    dbplyr::translate_sql_(dots, con = wfs_con, window = FALSE),
+    silent = TRUE
+  )
 
   if (inherits(sql_where, "try-error")) {
     if (grepl("no applicable method", sql_where)) {
-      stop("Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.", call. = FALSE)
+      stop(
+        "Unable to process query. Did you use a function that should be evaluated locally? If so, try wrapping it in 'local()'.",
+        call. = FALSE
+      )
     }
-      stop(sql_where, call. = FALSE)
+    stop(sql_where, call. = FALSE)
   }
 
   build_where(sql_where)
@@ -110,19 +115,23 @@ no_agg <- function(f) {
   force(f)
 
   function(...) {
-    stop("Aggregation function `", f, "()` is not supported by this database",
-         call. = FALSE)
+    stop(
+      "Aggregation function `",
+      f,
+      "()` is not supported by this database",
+      call. = FALSE
+    )
   }
 }
 
 # Construct the errors for common aggregation functions
 cql_agg <- dbplyr::sql_translator(
-  n          = no_agg("n"),
-  mean       = no_agg("mean"),
-  var        = no_agg("var"),
-  sum        = no_agg("sum"),
-  min        = no_agg("min"),
-  max        = no_agg("max")
+  n = no_agg("n"),
+  mean = no_agg("mean"),
+  var = no_agg("var"),
+  sum = no_agg("sum"),
+  min = no_agg("min"),
+  max = no_agg("max")
 )
 
 #' @importFrom dbplyr dbplyr_edition
@@ -135,9 +144,7 @@ dbplyr_edition.wfsConnection <- function(con) 2L
 #' @import DBI
 #' @export
 #' @keywords internal
-setClass("wfsConnection",
-         contains = "DBIConnection"
-)
+setClass("wfsConnection", contains = "DBIConnection")
 
 # A dummy connection object to ensure the correct sql_translate is used
 wfs_con <- structure(
@@ -169,8 +176,11 @@ setClass("CQL", contains = c("SQL", "character"))
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteIdentifier
 #' @export
-setMethod("dbQuoteIdentifier", c("wfsConnection", "CQL"),
-          function(conn, x) dbplyr::sql_quote(x, "\""))
+setMethod(
+  "dbQuoteIdentifier",
+  c("wfsConnection", "CQL"),
+  function(conn, x) dbplyr::sql_quote(x, "\"")
+)
 
 # Make sure that strings (RHS of relations) are escaped with single quotes
 
@@ -178,5 +188,8 @@ setMethod("dbQuoteIdentifier", c("wfsConnection", "CQL"),
 #' @rdname wfsConnection-class
 #' @exportMethod dbQuoteString
 #' @export
-setMethod("dbQuoteString", c("wfsConnection", "CQL"),
-          function(conn, x) dbplyr::sql_quote(x, "'"))
+setMethod(
+  "dbQuoteString",
+  c("wfsConnection", "CQL"),
+  function(conn, x) dbplyr::sql_quote(x, "'")
+)

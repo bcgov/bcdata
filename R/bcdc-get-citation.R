@@ -51,13 +51,15 @@ bcdc_get_citation <- function(record) {
 
 #' @export
 bcdc_get_citation.default <- function(record) {
-  stop("No bcdc_get_citation method for an object of class ", class(record),
-       call. = FALSE)
+  stop(
+    "No bcdc_get_citation method for an object of class ",
+    class(record),
+    call. = FALSE
+  )
 }
 
 #' @export
 bcdc_get_citation.character <- function(record) {
-
   if (grepl("/resource/", record)) {
     #  A full url was passed including record and resource compenents.
     # Grab the resource id and strip it off the url
@@ -65,16 +67,13 @@ bcdc_get_citation.character <- function(record) {
     record <- gsub("/resource/.+", "", record)
   }
 
-
   rec <- bcdc_get_record(record)
 
   bcdc_get_citation(rec)
-
 }
 
 #' @export
 bcdc_get_citation.bcdc_record <- function(record) {
-
   bib_rec <- utils::bibentry(
     bibtype = "techreport",
     title = record$title,
@@ -87,9 +86,7 @@ bcdc_get_citation.bcdc_record <- function(record) {
     note = record$license_title
   )
 
-  structure(bib_rec,
-            class = c("citation", setdiff(class(bib_rec), "citation"))
-  )
+  structure(bib_rec, class = c("citation", setdiff(class(bib_rec), "citation")))
 }
 
 clean_org_name <- function(rec) {

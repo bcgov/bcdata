@@ -57,7 +57,9 @@ test_that('bcdc_list_group_records works', {
   skip_if_net_down()
   census <- bcdc_list_group_records("census-profiles")
   grps <- bcdc_search_facets("groups")
-  census_count <- grps |> dplyr::filter(name == "census-profiles") |> dplyr::pull(count)
+  census_count <- grps |>
+    dplyr::filter(name == "census-profiles") |>
+    dplyr::pull(count)
   expect_s3_class(census, "data.frame")
   expect_gte(nrow(census), 1)
   expect_equal(nrow(census), census_count)
@@ -68,7 +70,9 @@ test_that('bcdc_list_organization_records works', {
   skip_if_net_down()
   bcstats <- bcdc_list_organization_records("bc-stats")
   orgs <- bcdc_search_facets("organization")
-  bcstats_count <- orgs |> dplyr::filter(name == "bc-stats") |> dplyr::pull(count)
+  bcstats_count <- orgs |>
+    dplyr::filter(name == "bc-stats") |>
+    dplyr::pull(count)
   expect_s3_class(bcstats, "data.frame")
   expect_gte(nrow(bcstats), 1)
   expect_equal(nrow(bcstats), bcstats_count)

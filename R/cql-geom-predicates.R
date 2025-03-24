@@ -55,18 +55,29 @@ CQL <- function(...) {
 #' }
 #'
 #' @noRd
-bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
-                            distance = NULL, units = NULL,
-                            coords = NULL, crs = NULL){
-
+bcdc_cql_string <- function(
+  x,
+  geometry_predicates,
+  pattern = NULL,
+  distance = NULL,
+  units = NULL,
+  coords = NULL,
+  crs = NULL
+) {
   if (inherits(x, "sql")) {
-    stop(glue::glue("object {as.character(x)} not found.\n The object passed to {geometry_predicates} needs to be valid sf object."),
-         call. = FALSE)
+    stop(
+      glue::glue(
+        "object {as.character(x)} not found.\n The object passed to {geometry_predicates} needs to be valid sf object."
+      ),
+      call. = FALSE
+    )
   }
 
   if (inherits(x, "bcdc_promise")) {
-    stop("To use spatial operators, you need to use collect() to retrieve the object used to filter",
-         call. = FALSE)
+    stop(
+      "To use spatial operators, you need to use collect() to retrieve the object used to filter",
+      call. = FALSE
+    )
   }
 
   match.arg(geometry_predicates, cql_geom_predicate_list())
@@ -91,28 +102,37 @@ bcdc_cql_string <- function(x, geometry_predicates, pattern = NULL,
       x
     }
 
-  CQL(paste0(geometry_predicates,"({geom_name}, ", cql_args, ")"))
+  CQL(paste0(geometry_predicates, "({geom_name}, ", cql_args, ")"))
 }
 
 ## Geometry Predicates
 
 cql_geom_predicate_list <- function() {
-  c("EQUALS","DISJOINT","INTERSECTS",
-    "TOUCHES", "CROSSES", "WITHIN",
-    "CONTAINS","OVERLAPS", "RELATE",
-    "DWITHIN", "BEYOND", "BBOX")
+  c(
+    "EQUALS",
+    "DISJOINT",
+    "INTERSECTS",
+    "TOUCHES",
+    "CROSSES",
+    "WITHIN",
+    "CONTAINS",
+    "OVERLAPS",
+    "RELATE",
+    "DWITHIN",
+    "BEYOND",
+    "BBOX"
+  )
 }
 
 sf_text <- function(x, pred) {
-
   if (!bcdc_check_geom_size(x)) {
     message(
       bold_red(
         glue::glue(
           "A bounding box was drawn around the object passed to {pred} and all features within the box will be returned."
-          )
         )
       )
+    )
     x <- sf::st_bbox(x)
   }
 
@@ -155,8 +175,10 @@ sf_text <- function(x, pred) {
 #' }
 bcdc_check_geom_size <- function(x) {
   if (!inherits(x, c("sf", "sfc", "sfg", "bbox"))) {
-    stop(paste(deparse(substitute(x)), "is not a valid sf object"),
-         call. = FALSE)
+    stop(
+      paste(deparse(substitute(x)), "is not a valid sf object"),
+      call. = FALSE
+    )
   }
 
   if (inherits(x, "bbox")) return(invisible(TRUE))
@@ -168,9 +190,13 @@ bcdc_check_geom_size <- function(x) {
   ## If size ok, return TRUE
   if (obj_size < option_size) return(invisible(TRUE))
 
-  message(bold_blue(glue::glue("The object is too large to perform exact spatial operations using bcdata.")))
+  message(bold_blue(glue::glue(
+    "The object is too large to perform exact spatial operations using bcdata."
+  )))
   message(bold_blue(glue::glue("Object size: {obj_size} bytes")))
-  message(bold_blue(glue::glue("BC Data Threshold: {formatC(option_size, format = 'd')} bytes")))
+  message(bold_blue(glue::glue(
+    "BC Data Threshold: {formatC(option_size, format = 'd')} bytes"
+  )))
   message(bold_blue(glue::glue("Exceedance: {obj_size-option_size} bytes")))
   message(bold_blue("See ?bcdc_check_geom_size for more details"))
 
@@ -247,11 +273,15 @@ OVERLAPS <- function(geom) {
 #' `*TF012`. Example: `'1*T***T**'`
 #' @noRd
 RELATE <- function(geom, pattern) {
-  if (!is.character(pattern) ||
+  if (
+    !is.character(pattern) ||
       length(pattern) != 1L ||
-      !grepl("^[*TF012]{9}$", pattern)) {
-    stop("pattern must be a 9-character string using the characters '*TF012'",
-         call. = FALSE)
+      !grepl("^[*TF012]{9}$", pattern)
+  ) {
+    stop(
+      "pattern must be a 9-character string using the characters '*TF012'",
+      call. = FALSE
+    )
   }
   bcdc_cql_string(geom, "RELATE", pattern = pattern)
 }
@@ -266,8 +296,7 @@ RELATE <- function(geom, pattern) {
 #' (For example, `'EPSG:3005'` or just `3005`. The default is to use the CRS of
 #' the queried layer)
 #' @export
-BBOX <- function(coords, crs = NULL){
-
+BBOX <- function(coords, crs = NULL) {
   if (inherits(coords, c("sf", "sfc"))) {
     coords <- sf::st_bbox(coords)
   }
@@ -286,8 +315,10 @@ BBOX <- function(coords, crs = NULL){
   }
 
   if (!is.null(crs) && !(is.character(crs) && length(crs) == 1L)) {
-    stop("crs must be a character string denoting the CRS (e.g., 'EPSG:4326')",
-         call. = FALSE)
+    stop(
+      "crs must be a character string denoting the CRS (e.g., 'EPSG:4326')",
+      call. = FALSE
+    )
   }
   bcdc_cql_string(x = NULL, "BBOX", coords = coords, crs = crs)
 }
@@ -297,8 +328,11 @@ BBOX <- function(coords, crs = NULL){
 #' @param units units that distance is specified in. One of
 #' `"feet"`, `"meters"`, `"statute miles"`, `"nautical miles"`, `"kilometers"`
 #' @export
-DWITHIN <- function(geom, distance,
-                    units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {
+DWITHIN <- function(
+  geom,
+  distance,
+  units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")
+) {
   if (!is.numeric(distance)) {
     stop("'distance' must be numeric", call. = FALSE)
   }
@@ -309,8 +343,11 @@ DWITHIN <- function(geom, distance,
 #' @rdname cql_geom_predicates
 #' @noRd
 # https://osgeo-org.atlassian.net/browse/GEOS-8922
-BEYOND <- function(geom, distance,
-                   units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")) {
+BEYOND <- function(
+  geom,
+  distance,
+  units = c("meters", "feet", "statute miles", "nautical miles", "kilometers")
+) {
   if (!is.numeric(distance)) {
     stop("'distance' must be numeric", call. = FALSE)
   }

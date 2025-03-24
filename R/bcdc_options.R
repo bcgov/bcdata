@@ -92,14 +92,27 @@ bcdc_options <- function() {
   server_single_download_limit <- bcdc_single_download_limit()
 
   dplyr::tribble(
-    ~option, ~value, ~default,
-    "bcdata.max_geom_pred_size", null_to_na(getOption("bcdata.max_geom_pred_size")), 5E5,
-    "bcdata.chunk_limit", null_to_na(getOption("bcdata.chunk_limit")), server_single_download_limit,
+    ~option,
+    ~value,
+    ~default,
+    "bcdata.max_geom_pred_size",
+    null_to_na(getOption("bcdata.max_geom_pred_size")),
+    5E5,
+    "bcdata.chunk_limit",
+    null_to_na(getOption("bcdata.chunk_limit")),
+    server_single_download_limit,
     "bcdata.single_download_limit",
-    null_to_na(deprecate_single_download_limit_option()), server_single_download_limit,
-    "bcdata.max_package_search_limit", null_to_na(getOption("bcdata.max_package_search_limit")), 1000,
-    "bcdata.max_package_search_facet_limit", null_to_na(getOption("bcdata.max_package_search_facet_limit")), 1000,
-    "bcdata.max_group_package_show_limit", null_to_na(getOption("bcdata.max_group_package_show_limit")), 1000
+    null_to_na(deprecate_single_download_limit_option()),
+    server_single_download_limit,
+    "bcdata.max_package_search_limit",
+    null_to_na(getOption("bcdata.max_package_search_limit")),
+    1000,
+    "bcdata.max_package_search_facet_limit",
+    null_to_na(getOption("bcdata.max_package_search_facet_limit")),
+    1000,
+    "bcdata.max_group_package_show_limit",
+    null_to_na(getOption("bcdata.max_group_package_show_limit")),
+    1000
   )
 }
 
@@ -112,7 +125,12 @@ check_chunk_limit <- function() {
     return(single_download_limit)
   }
   if (chunk_limit > single_download_limit) {
-    stop(glue::glue("Your chunk value of {chunk_limit} exceeds the BC Data Catalogue chunk limit of {single_download_limit}"), call. = FALSE)
+    stop(
+      glue::glue(
+        "Your chunk value of {chunk_limit} exceeds the BC Data Catalogue chunk limit of {single_download_limit}"
+      ),
+      call. = FALSE
+    )
   }
   chunk_limit
 }
@@ -129,11 +147,13 @@ bcdc_get_capabilities <- function() {
     cli <- bcdc_http_client(url, auth = FALSE)
 
     get_caps <- function(cli) {
-      cc <- cli$get(query = list(
-        SERVICE = "WFS",
-        VERSION = "2.0.0",
-        REQUEST = "GetCapabilities"
-      ))
+      cc <- cli$get(
+        query = list(
+          SERVICE = "WFS",
+          VERSION = "2.0.0",
+          REQUEST = "GetCapabilities"
+        )
+      )
       cc$raise_for_status()
       res <- cc$parse("UTF-8")
       xml2::read_xml(res)
@@ -158,15 +178,26 @@ bcdc_get_capabilities <- function() {
 bcdc_get_wfs_records <- function() {
   doc <- bcdc_get_capabilities()
 
-  if (is.null(doc)) stop("Unable to access wfs listing from server. Please open an issue. ", call. = FALSE)
+  if (is.null(doc))
+    stop(
+      "Unable to access wfs listing from server. Please open an issue. ",
+      call. = FALSE
+    )
 
   # d1 is the default xml namespace (see xml2::xml_ns(doc))
   features <- xml2::xml_find_all(doc, "./d1:FeatureTypeList/d1:FeatureType")
 
   tibble::tibble(
-    whse_name = gsub("^pub:", "", xml2::xml_text(xml2::xml_find_first(features, "./d1:Name"))),
+    whse_name = gsub(
+      "^pub:",
+      "",
+      xml2::xml_text(xml2::xml_find_first(features, "./d1:Name"))
+    ),
     title = xml2::xml_text(xml2::xml_find_first(features, "./d1:Title")),
-    cat_url = xml2::xml_attr(xml2::xml_find_first(features, "./d1:MetadataURL"), "href")
+    cat_url = xml2::xml_attr(
+      xml2::xml_find_first(features, "./d1:MetadataURL"),
+      "href"
+    )
   )
 }
 
@@ -174,7 +205,9 @@ bcdc_single_download_limit <- function() {
   doc <- bcdc_get_capabilities()
 
   if (is.null(doc)) {
-    message("Unable to access server to determine single download limit; using default download limit of 10000")
+    message(
+      "Unable to access server to determine single download limit; using default download limit of 10000"
+    )
     return(10000L)
   }
 
