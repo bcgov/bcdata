@@ -39,20 +39,22 @@
 #' }
 #'
 #' @export
-bcdc_describe_feature <- function(record){
+bcdc_describe_feature <- function(record) {
   if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
   UseMethod("bcdc_describe_feature")
 }
 
 #' @export
 bcdc_describe_feature.default <- function(record) {
-  stop("No bcdc_describe_feature method for an object of class ", class(record),
-       call. = FALSE)
+  stop(
+    "No bcdc_describe_feature method for an object of class ",
+    class(record),
+    call. = FALSE
+  )
 }
 
 #' @export
-bcdc_describe_feature.character <- function(record){
-
+bcdc_describe_feature.character <- function(record) {
   if (is_whse_object_name(record)) {
     bgc <- bcdc_get_wfs_records()
     cat_record <- bcdc_get_record(bgc$cat_url[grepl(record, bgc$whse_name)])
@@ -64,18 +66,14 @@ bcdc_describe_feature.character <- function(record){
 
 
 #' @export
-bcdc_describe_feature.bcdc_record <- function(record){
-
+bcdc_describe_feature.bcdc_record <- function(record) {
   if (!any(wfs_available(record$resource_df))) {
-    stop("No WFS resource available for this data set.",
-         call. = FALSE
-    )
+    stop("No WFS resource available for this data set.", call. = FALSE)
   }
   obj_desc_join(record)
-
 }
 
-parse_raw_feature_tbl <- function(query_list){
+parse_raw_feature_tbl <- function(query_list) {
   ## GET and parse data to sf object
   cli <- bcdc_wfs_client()
 
@@ -89,29 +87,25 @@ parse_raw_feature_tbl <- function(query_list){
   xml_res <- purrr::map(xml_res, xml2::xml_attrs)
   xml_df <- purrr::map_df(xml_res, ~ as.list(.))
 
-
   attr(xml_df, "geom_type") <- intersect(xml_df$type, gml_types())
 
   return(xml_df)
 }
 
-feature_helper <- function(whse_name){
-
+feature_helper <- function(whse_name) {
   query_list <- list(
     SERVICE = "WFS",
     VERSION = "2.0.0",
     REQUEST = "DescribeFeatureType",
-    typeNames = whse_name)
+    typeNames = whse_name
+  )
 
   ## This is an ugly way of doing this
   ## Manually add id and turn into a row
-  id_row <- dplyr::tibble(name = "id",
-                          nillable = TRUE,
-                          type = "xsd:string")
+  id_row <- dplyr::tibble(name = "id", nillable = TRUE, type = "xsd:string")
 
   xml_df <- parse_raw_feature_tbl(query_list)
   geom_type <- attr(xml_df, "geom_type")
-
 
   ## Fix logicals
   xml_df$nillable = ifelse(xml_df$nillable == "true", FALSE, TRUE)
@@ -136,16 +130,19 @@ obj_desc_join <- function(record) {
 
   dplyr::left_join(
     feature_helper(whse_name),
-    wfs_df[,c("column_comments", "column_name")],
+    wfs_df[, c("column_comments", "column_name")],
     by = c("col_name" = "column_name")
   )
 }
 
 get_wfs_resource_from_record <- function(record) {
-
   wfs_res_id <- record$resource_df$id[record$resource_df$wfs_available]
-  is_wfs <- vapply(record$resources, function(x) {
-    x$id == wfs_res_id
-  }, FUN.VALUE = logical(1))
+  is_wfs <- vapply(
+    record$resources,
+    function(x) {
+      x$id == wfs_res_id
+    },
+    FUN.VALUE = logical(1)
+  )
   record$resources[[which(is_wfs)]]
 }

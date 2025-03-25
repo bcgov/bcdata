@@ -10,7 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-test_that("bcdc_get_citation take a character and returns a bibentry",{
+test_that("bcdc_get_citation take a character and returns a bibentry", {
   skip_if_net_down()
   skip_on_cran()
   rec <- bcdc_get_record(point_record)

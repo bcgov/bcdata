@@ -41,7 +41,9 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
   )
   expect_s3_class(
     ret3 <- bcdc_get_data(
-      glue::glue("{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"),
+      glue::glue(
+        "{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"
+      ),
       resource = "4d0377d9-e8a1-429b-824f-0ce8f363512c"
     ),
     "sf"
@@ -55,7 +57,9 @@ test_that("bcdc_get_data works with slug and full url with corresponding resourc
   )
   expect_s3_class(
     ret5 <- bcdc_get_data(
-      glue::glue("{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c")
+      glue::glue(
+        "{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c"
+      )
     ),
     "sf"
   )
@@ -97,7 +101,7 @@ test_that("bcdc_get_data works with an xls when specifying a specific resource",
   )
 })
 
-test_that("bcdc_get_data will return non-wms resources",{
+test_that("bcdc_get_data will return non-wms resources", {
   skip_if_net_down()
   skip_on_cran()
   expect_s3_class(
@@ -141,19 +145,25 @@ test_that("unknown single file (shp) inside zip", {
 test_that("fails when resource doesn't exist", {
   skip_if_net_down()
   skip_on_cran()
-  expect_error(bcdc_get_data(
-    "300c0980-b5e3-4202-b0da-d816f14fadad",
-    resource = "not-a-real-resource"
-  ), "The specified resource does not exist in this record")
+  expect_error(
+    bcdc_get_data(
+      "300c0980-b5e3-4202-b0da-d816f14fadad",
+      resource = "not-a-real-resource"
+    ),
+    "The specified resource does not exist in this record"
+  )
 })
 
 test_that("fails when multiple files in a zip", {
   skip_if_net_down()
   skip_on_cran()
-  expect_error(bcdc_get_data(
-    "300c0980-b5e3-4202-b0da-d816f14fadad",
-    resource = "c212a8a7-c625-4464-b9c8-4527c843f52f"
-  ), "More than one supported file in zip file")
+  expect_error(
+    bcdc_get_data(
+      "300c0980-b5e3-4202-b0da-d816f14fadad",
+      resource = "c212a8a7-c625-4464-b9c8-4527c843f52f"
+    ),
+    "More than one supported file in zip file"
+  )
 })
 
 test_that("fails informatively when can't read a file", {
@@ -165,8 +175,9 @@ test_that("fails informatively when can't read a file", {
         record = '523dce9d-b464-44a5-b733-2022e94546c3',
         resource = '4cc98644-f6eb-410b-9df0-f9b2beac9717'
       )
-      ),
-    "Reading the data set failed with the following error message:")
+    ),
+    "Reading the data set failed with the following error message:"
+  )
 })
 
 test_that("bcdc_get_data can return the wms resource when it is specified by resource", {
@@ -182,14 +193,14 @@ test_that("bcdc_get_data can return the wms resource when it is specified by res
 })
 
 
-test_that("a wms record with only one resource works with only the record id",{
+test_that("a wms record with only one resource works with only the record id", {
   skip_if_net_down()
   skip_on_cran()
   expect_s3_class(
     bcdc_get_data("bc-college-region-boundaries"),
     "sf"
   )
-  })
+})
 
 test_that("bcdc_get_data works with a bcdc_record object", {
   skip_if_net_down()

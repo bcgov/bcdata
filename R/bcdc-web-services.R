@@ -10,7 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-
 #' Query data from the B.C. Web Feature Service
 #'
 #' Queries features from the B.C. Web Feature Service. See
@@ -60,7 +59,7 @@
 #'   res <- bcdc_query_geodata("bc-airports") %>%
 #'     filter(PHYSICAL_ADDRESS %LIKE% 'Vict%')
 #' )
-#' 
+#'
 #' # To query using %IN%
 #' try(
 #'   res <- bcdc_query_geodata("bc-airports") %>%
@@ -111,13 +110,15 @@ bcdc_query_geodata <- function(record, crs = 3005) {
 
 #' @export
 bcdc_query_geodata.default <- function(record, crs = 3005) {
-  stop("No bcdc_query_geodata method for an object of class ", class(record),
-       call. = FALSE)
+  stop(
+    "No bcdc_query_geodata method for an object of class ",
+    class(record),
+    call. = FALSE
+  )
 }
 
 #' @export
 bcdc_query_geodata.character <- function(record, crs = 3005) {
-
   if (length(record) != 1) {
     stop("Only one record my be queried at a time.", call. = FALSE)
   }
@@ -137,8 +138,12 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
     cols_df <- feature_helper(record)
 
     return(
-      as.bcdc_promise(list(query_list = query_list, cli = cli, record = NULL,
-                           cols_df = cols_df))
+      as.bcdc_promise(list(
+        query_list = query_list,
+        cli = cli,
+        record = NULL,
+        cols_df = cols_df
+      ))
     )
   }
 
@@ -156,8 +161,9 @@ bcdc_query_geodata.character <- function(record, crs = 3005) {
 #' @export
 bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   if (!any(wfs_available(record$resource_df))) {
-    stop("No Web Feature Service resource available for this data set.",
-         call. = FALSE
+    stop(
+      "No Web Feature Service resource available for this data set.",
+      call. = FALSE
     )
   }
 
@@ -170,7 +176,9 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
   ))
 
   if (grepl("_SP?G$", layer_name)) {
-    message("You are accessing a simplified view of the data - see the catalogue record for details.")
+    message(
+      "You are accessing a simplified view of the data - see the catalogue record for details."
+    )
   }
 
   ## Parameters for the API call
@@ -184,8 +192,12 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 
   cols_df <- feature_helper(query_list$typeNames)
 
-  as.bcdc_promise(list(query_list = query_list, cli = cli, record = record,
-                       cols_df = cols_df))
+  as.bcdc_promise(list(
+    query_list = query_list,
+    cli = cli,
+    record = record,
+    cols_df = cols_df
+  ))
 }
 
 #' Get preview map from the B.C. Web Map Service
@@ -213,20 +225,23 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' )
 #' }
 #' @export
-bcdc_preview <- function(record) { # nocov start
+bcdc_preview <- function(record) {
+  # nocov start
   if (!has_internet()) stop("No access to internet", call. = FALSE)
   UseMethod("bcdc_preview")
 }
 
 #' @export
 bcdc_preview.default <- function(record) {
-  stop("No bcdc_preview method for an object of class ", class(record),
-       call. = FALSE)
+  stop(
+    "No bcdc_preview method for an object of class ",
+    class(record),
+    call. = FALSE
+  )
 }
 
 #' @export
 bcdc_preview.character <- function(record) {
-
   if (is_whse_object_name(record)) {
     make_wms(record)
   } else {
@@ -236,30 +251,36 @@ bcdc_preview.character <- function(record) {
 
 #' @export
 bcdc_preview.bcdc_record <- function(record) {
-
   wfs_resource <- get_wfs_resource_from_record(record)
 
   make_wms(basename(dirname(wfs_resource$url)))
-
 }
 
-make_wms <- function(x){
+make_wms <- function(x) {
   wms_url <- wms_base_url()
-  wms_options <- leaflet::WMSTileOptions(format = "image/png",
-                                         transparent = TRUE,
-                                         attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)")
-  wms_legend <- glue::glue("{wms_url}?request=GetLegendGraphic&
+  wms_options <- leaflet::WMSTileOptions(
+    format = "image/png",
+    transparent = TRUE,
+    attribution = "BC Data Catalogue (https://catalogue.data.gov.bc.ca/)"
+  )
+  wms_legend <- glue::glue(
+    "{wms_url}?request=GetLegendGraphic&
              format=image%2Fpng&
              width=20&
              height=20&
-             layer=pub%3A{x}")
+             layer=pub%3A{x}"
+  )
 
   leaflet::leaflet() %>%
-    leaflet::addProviderTiles(leaflet::providers$CartoDB.Positron,
-                              options = leaflet::providerTileOptions(noWrap = TRUE)) %>%
-    leaflet::addWMSTiles(wms_url,
-                         layers=glue::glue("pub:{x}"),
-                         options = wms_options) %>%
+    leaflet::addProviderTiles(
+      leaflet::providers$CartoDB.Positron,
+      options = leaflet::providerTileOptions(noWrap = TRUE)
+    ) %>%
+    leaflet::addWMSTiles(
+      wms_url,
+      layers = glue::glue("pub:{x}"),
+      options = wms_options
+    ) %>%
     leaflet.extras::addWMSLegend(uri = wms_legend) %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
 } # nocov end
@@ -275,4 +296,3 @@ make_query_list <- function(layer_name, crs) {
     SRSNAME = paste0("EPSG:", crs)
   )
 }
-

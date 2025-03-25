@@ -11,7 +11,9 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 if (has_internet() && identical(Sys.getenv("NOT_CRAN"), "true")) {
-  local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+  local <- bcdc_query_geodata(
+    "regional-districts-legally-defined-administrative-areas-of-bc"
+  ) %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
 }

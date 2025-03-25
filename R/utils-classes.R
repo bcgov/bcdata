@@ -12,23 +12,23 @@
 
 ## Add "bcdc_promise" class
 as.bcdc_promise <- function(res) {
-  structure(res,
-            class = c("bcdc_promise", setdiff(class(res), "bcdc_promise"))
-  )
+  structure(res, class = c("bcdc_promise", setdiff(class(res), "bcdc_promise")))
 }
 
 as.bcdc_sf <- function(x, query_list, url, full_url) {
-  structure(x,
-            class = c("bcdc_sf", setdiff(class(x), "bcdc_sf")),
-            query_list = query_list,
-            url = url, full_url = full_url, time_downloaded = Sys.time())
+  structure(
+    x,
+    class = c("bcdc_sf", setdiff(class(x), "bcdc_sf")),
+    query_list = query_list,
+    url = url,
+    full_url = full_url,
+    time_downloaded = Sys.time()
+  )
 }
 
 
 as.bcdc_query <- function(x) {
-  structure(x,
-            class = c("bcdc_query", setdiff(class(x), "bcdc_query"))
-  )
+  structure(x, class = c("bcdc_query", setdiff(class(x), "bcdc_query")))
 }
 
 
@@ -36,13 +36,12 @@ as.bcdc_query <- function(x) {
 
 #' @export
 print.bcdc_promise <- function(x, ...) {
-
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
 
   if (is.null(x$query_list$count)) {
     query_list <- c(x$query_list, count = 6) ## only add if not there.
   } else {
-   query_list <- x$query_list
+    query_list <- x$query_list
   }
 
   cli <- x$cli
@@ -64,16 +63,23 @@ print.bcdc_promise <- function(x, ...) {
 
   # Check if this was called using a whse name directly without going
   # through a catalogue record so don't have this info
-  name <- ifelse(is_record(x$record),
-                 paste0("'", x[["record"]][["name"]], "'"),
-                 paste0("'", x[["query_list"]][["typeNames"]], "'"))
+  name <- ifelse(
+    is_record(x$record),
+    paste0("'", x[["record"]][["name"]], "'"),
+    paste0("'", x[["query_list"]][["typeNames"]], "'")
+  )
   cat_line_wrap(glue::glue("Querying {col_red(name)} record"))
 
-  cat_bullet(strwrap(glue::glue("Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
-                        "and {col_green(fields)} fields")))
-  if (number_of_records > chunk_size) { # this triggers pagination
-    cat_bullet(strwrap(glue::glue("Accessing this record requires pagination and will make {col_green(ceiling(number_of_records/chunk_size))} separate requests to the WFS. ",
-                                              "See ?bcdc_options")))
+  cat_bullet(strwrap(glue::glue(
+    "Using {col_blue('collect()')} on this object will return {col_green(number_of_records)} features ",
+    "and {col_green(fields)} fields"
+  )))
+  if (number_of_records > chunk_size) {
+    # this triggers pagination
+    cat_bullet(strwrap(glue::glue(
+      "Accessing this record requires pagination and will make {col_green(ceiling(number_of_records/chunk_size))} separate requests to the WFS. ",
+      "See ?bcdc_options"
+    )))
   }
 
   cat_bullet(strwrap("At most six rows of the record are printed here"))
@@ -84,24 +90,53 @@ print.bcdc_promise <- function(x, ...) {
 
 #' @export
 print.bcdc_record <- function(x, ...) {
-  cat_line_wrap(cli::col_blue(cli::style_bold("B.C. Data Catalogue Record: ")), x$title)
-  cat_line_wrap(cli::col_blue(cli::style_italic("Name: ")), x$name, " (ID: ", x$id, ")")
-  cat_line_wrap(cli::col_blue(cli::style_italic("Permalink: ")), paste0(catalogue_base_url(), "dataset/", x$id))
+  cat_line_wrap(
+    cli::col_blue(cli::style_bold("B.C. Data Catalogue Record: ")),
+    x$title
+  )
+  cat_line_wrap(
+    cli::col_blue(cli::style_italic("Name: ")),
+    x$name,
+    " (ID: ",
+    x$id,
+    ")"
+  )
+  cat_line_wrap(
+    cli::col_blue(cli::style_italic("Permalink: ")),
+    paste0(catalogue_base_url(), "dataset/", x$id)
+  )
   cat_line_wrap(cli::col_blue(cli::style_italic("Licence: ")), x$license_title)
   cat_line_wrap(cli::col_blue(cli::style_italic("Description: ")), x$notes)
 
-
   tidy_resources <- bcdc_tidy_resources(x)
   avail_res <- tidy_resources[tidy_resources$bcdata_available, , drop = FALSE]
-  cat_line_wrap(cli::col_blue(cli::style_italic("Available Resources (", nrow(avail_res), "):")))
-  cli::cat_line(" ", seq_len(nrow(avail_res)), ". ", avail_res$name, " (", avail_res$format, ")")
+  cat_line_wrap(cli::col_blue(cli::style_italic(
+    "Available Resources (",
+    nrow(avail_res),
+    "):"
+  )))
+  cli::cat_line(
+    " ",
+    seq_len(nrow(avail_res)),
+    ". ",
+    avail_res$name,
+    " (",
+    avail_res$format,
+    ")"
+  )
 
-  cat_line_wrap(cli::col_blue(cli::style_italic("Access the full 'Resources' data frame using: ")),
-                cli::col_red("bcdc_tidy_resources('", x$id, "')"))
+  cat_line_wrap(
+    cli::col_blue(cli::style_italic(
+      "Access the full 'Resources' data frame using: "
+    )),
+    cli::col_red("bcdc_tidy_resources('", x$id, "')")
+  )
 
   if ("wms" %in% formats_from_record(x)) {
-    cat_line_wrap(cli::col_blue(cli::style_italic("Query and filter this data using: ")),
-                  cli::col_red("bcdc_query_geodata('", x$id, "')"))
+    cat_line_wrap(
+      cli::col_blue(cli::style_italic("Query and filter this data using: ")),
+      cli::col_red("bcdc_query_geodata('", x$id, "')")
+    )
   }
 
   invisible(x)
@@ -114,26 +149,36 @@ record_print_helper <- function(r, n, print_avail = FALSE) {
   if (r$format != "wms") cat_line_wrap("url: ", r$url, indent = 3)
   cat_line_wrap("resource: ", r$id, indent = 3)
   if (print_avail) {
-    cat_line_wrap("available in R via bcdata: ",
-        if (r$format == "zip") {
-          "Will attempt - unknown format (zipped)"
-        } else {
-          r$bcdata_available
-        })
+    cat_line_wrap(
+      "available in R via bcdata: ",
+      if (r$format == "zip") {
+        "Will attempt - unknown format (zipped)"
+      } else {
+        r$bcdata_available
+      }
+    )
   }
   if (r$bcdata_available)
-    cat_line_wrap("code: ", "bcdc_get_data(record = '", r$package_id,
-        "', resource = '",r$id,"')", indent = 3)
+    cat_line_wrap(
+      "code: ",
+      "bcdc_get_data(record = '",
+      r$package_id,
+      "', resource = '",
+      r$id,
+      "')",
+      indent = 3
+    )
   cat_line()
 }
 
 #' @export
 print.bcdc_recordlist <- function(x, ...) {
-
   len <- length(x)
 
   if (len == 0L) {
-    cat_line_wrap("Your search returned no results. Please try a different query.")
+    cat_line_wrap(
+      "Your search returned no results. Please try a different query."
+    )
     return(x)
   }
 
@@ -141,46 +186,64 @@ print.bcdc_recordlist <- function(x, ...) {
   n_print <- min(50, len)
   cat_line_wrap(cli::col_blue("Number of records: ", len))
   if (n_print < len) {
-    cat_line_wrap(cli::col_blue("Showing the top 50 results. You can assign the output of bcdc_search, to an object and subset with `[` to see other results in the set."))
-  cat_line("")
-    }
+    cat_line_wrap(cli::col_blue(
+      "Showing the top 50 results. You can assign the output of bcdc_search, to an object and subset with `[` to see other results in the set."
+    ))
+    cat_line("")
+  }
   cat_line_wrap("Titles:")
   x <- purrr::set_names(x, NULL)
 
-  purrr::imap(unclass(x)[1:n_print], ~ {
+  purrr::imap(
+    unclass(x)[1:n_print],
+    ~ {
+      if (!nrow(bcdc_tidy_resources(x[[.y]]))) {
+        cat_line_wrap(.y, ": ", purrr::pluck(.x, "title"))
+        cat_line_wrap(
+          "This record has no resources. bcdata will not be able to access any data.",
+          col = "red"
+        )
+      } else {
+        cat_line_wrap(
+          .y,
+          ": ",
+          purrr::pluck(.x, "title"),
+          " (",
+          paste0(unique(formats_from_record(.x)), collapse = ", "),
+          ")"
+        )
+      }
 
-    if (!nrow(bcdc_tidy_resources(x[[.y]]))) {
-      cat_line_wrap(.y, ": ",purrr::pluck(.x, "title"))
-      cat_line_wrap("This record has no resources. bcdata will not be able to access any data.", col = "red")
-    } else {
-      cat_line_wrap(.y, ": ",purrr::pluck(.x, "title"),
-                    " (", paste0(unique(formats_from_record(.x)), collapse = ", "),
-                    ")")
+      cat_line_wrap("ID: ", purrr::pluck(.x, "id"), indent = 1, exdent = 2)
+      cat_line_wrap("Name: ", purrr::pluck(.x, "name"), indent = 1, exdent = 2)
     }
-
-    cat_line_wrap("ID: ", purrr::pluck(.x, "id"), indent = 1, exdent = 2)
-    cat_line_wrap("Name: ", purrr::pluck(.x, "name"), indent = 1, exdent = 2)
-  })
+  )
 
   cat_line()
-  cat_line_wrap("Access a single record by calling `bcdc_get_record(ID)`
-      with the ID from the desired record.")
+  cat_line_wrap(
+    "Access a single record by calling `bcdc_get_record(ID)`
+      with the ID from the desired record."
+  )
   invisible(x)
 }
 
 #' @export
 print.bcdc_group <- function(x, ...) {
+  cat_line_wrap(
+    cli::col_blue(
+      cli::style_italic(
+        "Group Description: "
+      )
+    ),
+    unique(attr(x, "description"))
+  )
 
-  cat_line_wrap(cli::col_blue(
-    cli::style_italic(
-      "Group Description: "
-    )
-  ), unique(attr(x, "description")))
-
-
-
-  cat_line_wrap(cli::col_blue(
-    cli::style_italic("Number of datasets: ")), nrow(x))
+  cat_line_wrap(
+    cli::col_blue(
+      cli::style_italic("Number of datasets: ")
+    ),
+    nrow(x)
+  )
 
   print(tibble::as_tibble(x))
 }
@@ -188,7 +251,6 @@ print.bcdc_group <- function(x, ...) {
 
 #' @export
 print.bcdc_query <- function(x, ...) {
-
   cat_line("<url>")
   if (length(x$url) > 1) {
     for (i in seq_along(x$url)) {
@@ -206,7 +268,6 @@ print.bcdc_query <- function(x, ...) {
 
 
 # dplyr methods -----------------------------------------------------------
-
 
 #' Filter a query from bcdc_query_geodata()
 #'
@@ -260,20 +321,28 @@ print.bcdc_query <- function(x, ...) {
 #' }
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
-
-  current_cql = cql_translate(..., .colnames = .data$cols_df$col_name %||% character(0))
+  current_cql = cql_translate(
+    ...,
+    .colnames = .data$cols_df$col_name %||% character(0)
+  )
   ## Change CQL query on the fly if geom is not GEOMETRY
   current_cql = specify_geom_name(.data$cols_df, current_cql)
 
   # Add cql filter statement to any existing cql filter statements.
   # ensure .data$query_list$CQL_FILTER is class sql even if NULL, so
   # dispatches on sql class and dbplyr::c.sql method is used
-  .data$query_list$CQL_FILTER <- c(dbplyr::sql(.data$query_list$CQL_FILTER),
-                                   current_cql,
-                                   drop_null = TRUE)
+  .data$query_list$CQL_FILTER <- c(
+    dbplyr::sql(.data$query_list$CQL_FILTER),
+    current_cql,
+    drop_null = TRUE
+  )
 
-  as.bcdc_promise(list(query_list = .data$query_list, cli = .data$cli,
-                       record = .data$record, cols_df = .data$cols_df))
+  as.bcdc_promise(list(
+    query_list = .data$query_list,
+    cli = .data$cli,
+    record = .data$record,
+    cols_df = .data$cols_df
+  ))
 }
 
 #' Select columns from bcdc_query_geodata() call
@@ -315,8 +384,7 @@ filter.bcdc_promise <- function(.data, ...) {
 #'
 #'
 #'@export
-select.bcdc_promise <- function(.data, ...){
-
+select.bcdc_promise <- function(.data, ...) {
   ## Eventually have to migrate to tidyselect::eval_select
   ## https://community.rstudio.com/t/evaluating-using-rlang-when-supplying-a-vector/44693/10
   cols_to_select <- tidyselect::vars_select(.data$cols_df$col_name, ...)
@@ -324,13 +392,20 @@ select.bcdc_promise <- function(.data, ...){
   ## id is always added in. web request doesn't like asking for it twice
   cols_to_select <- remove_id_col(cols_to_select)
   ## Always add back in the geom
-  cols_to_select <- paste(geom_col_name(.data$cols_df), paste0(cols_to_select, collapse = ","), sep = ",")
+  cols_to_select <- paste(
+    geom_col_name(.data$cols_df),
+    paste0(cols_to_select, collapse = ","),
+    sep = ","
+  )
 
   query_list <- c(.data$query_list, propertyName = cols_to_select)
 
-  as.bcdc_promise(list(query_list = query_list, cli = .data$cli,
-                       record = .data$record, cols_df = .data$cols_df))
-
+  as.bcdc_promise(list(
+    query_list = query_list,
+    cli = .data$cli,
+    record = .data$record,
+    cols_df = .data$cols_df
+  ))
 }
 
 #' @importFrom utils head
@@ -376,7 +451,6 @@ names.bcdc_promise <- function(x) {
   geom_idx <- which(cols == "geometry")
 
   cols[c(seq_along(cols)[-geom_idx], geom_idx)]
-
 }
 
 
@@ -400,12 +474,16 @@ names.bcdc_promise <- function(x) {
 #' }
 #'
 #'@export
-mutate.bcdc_promise <- function(.data, ...){
+mutate.bcdc_promise <- function(.data, ...) {
   dots <- rlang::exprs(...)
 
-  stop(glue::glue(
-    "You must type collect() before using mutate() on a WFS. \nAfter using collect() add this mutate call::
-    mutate({dots}) "), call. = FALSE)
+  stop(
+    glue::glue(
+      "You must type collect() before using mutate() on a WFS. \nAfter using collect() add this mutate call::
+    mutate({dots}) "
+    ),
+    call. = FALSE
+  )
 }
 
 
@@ -433,8 +511,7 @@ mutate.bcdc_promise <- function(.data, ...){
 #' )
 #' }
 #'
-collect.bcdc_promise <- function(x, ...){
-
+collect.bcdc_promise <- function(x, ...) {
   x$query_list$CQL_FILTER <- finalize_cql(x$query_list$CQL_FILTER)
 
   query_list <- x$query_list
@@ -445,16 +522,24 @@ collect.bcdc_promise <- function(x, ...){
   chunk_size <- check_chunk_limit()
 
   if (number_of_records <= chunk_size) {
-    cc <- tryCatch(cli$post(body = query_list, encode = "form"),
-                   error = function(e) {
-                     stop("There was an issue processing this request.
-                     Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
+    cc <- tryCatch(
+      cli$post(body = query_list, encode = "form"),
+      error = function(e) {
+        stop(
+          "There was an issue processing this request.
+                     Try reducing the size of the object you are trying to retrieve.",
+          call. = FALSE
+        )
+      }
+    )
 
     catch_wfs_error(cc)
     url <- cc$url
     full_url <- cli$url_fetch(query = query_list)
   } else {
-    message(glue::glue("This object has {number_of_records} records and requires {ceiling(number_of_records/chunk_size)} paginated requests to complete."))
+    message(glue::glue(
+      "This object has {number_of_records} records and requires {ceiling(number_of_records/chunk_size)} paginated requests to complete."
+    ))
     sorting_col <- pagination_sort_col(x$cols_df)
 
     query_list <- c(query_list, sortby = sorting_col)
@@ -472,10 +557,13 @@ collect.bcdc_promise <- function(x, ...){
 
     message("Retrieving data")
 
-    tryCatch(cc$post(body = query_list, encode = "form"),
-             error = function(e) {
-               stop("There was an issue processing this request.
-                     Try reducing the size of the object you are trying to retrieve.", call. = FALSE)})
+    tryCatch(cc$post(body = query_list, encode = "form"), error = function(e) {
+      stop(
+        "There was an issue processing this request.
+                     Try reducing the size of the object you are trying to retrieve.",
+        call. = FALSE
+      )
+    })
 
     url <- cc$url
     full_url <- cc$url_fetch(query = query_list)
@@ -485,8 +573,12 @@ collect.bcdc_promise <- function(x, ...){
 
   txt <- cc$parse("UTF-8")
 
-  as.bcdc_sf(bcdc_read_sf(txt), query_list = query_list, url = url,
-             full_url = full_url)
+  as.bcdc_sf(
+    bcdc_read_sf(txt),
+    query_list = query_list,
+    url = url,
+    full_url = full_url
+  )
 }
 
 
@@ -514,7 +606,6 @@ as_tibble.bcdc_promise <- collect.bcdc_promise
 #'   }
 #'
 show_query.bcdc_promise <- function(x, ...) {
-
   y <- list()
   y$base_url <- x$cli$url
   y$query_list <- x$query_list
@@ -522,9 +613,7 @@ show_query.bcdc_promise <- function(x, ...) {
   y$full_url <- x$cli$url_fetch(query = y$query_list)
 
   as.bcdc_query(y)
-
 }
-
 
 
 #' @describeIn show_query show_query.bcdc_promise
@@ -542,7 +631,6 @@ show_query.bcdc_promise <- function(x, ...) {
 #' )
 #' }
 show_query.bcdc_sf <- function(x, ...) {
-
   y <- list()
   y$url <- attr(x, "url")
   y$query_list <- attr(x, "query_list")
@@ -557,7 +645,14 @@ finalize_cql <- function(x, con = wfs_con) {
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
 }
 
-cat_line_wrap <- function(..., indent = 0, exdent = 1, col = NULL, background_col = NULL, file = stdout()) {
+cat_line_wrap <- function(
+  ...,
+  indent = 0,
+  exdent = 1,
+  col = NULL,
+  background_col = NULL,
+  file = stdout()
+) {
   txt <- strwrap(paste0(..., collapse = ""), indent = indent, exdent = exdent)
   cat_line(txt, col = col, background_col = background_col, file = file)
 }

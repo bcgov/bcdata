@@ -25,7 +25,9 @@ test_that("bcdc_get_record works with slug and full url", {
   )
   expect_s3_class(
     ret3 <- bcdc_get_record(
-      glue::glue("{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
+      glue::glue(
+        "{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"
+      )
     ),
     "bcdc_record"
   )
@@ -59,9 +61,14 @@ test_that("bcdc_list_group_records works", {
   skip_on_cran()
   skip_if_net_down()
 
-  expect_s3_class(bcdc_list_group_records('environmental-reporting-bc'), "bcdc_group")
-  expect_s3_class(bcdc_list_group_records('environmental-reporting-bc'), "tbl_df")
-
+  expect_s3_class(
+    bcdc_list_group_records('environmental-reporting-bc'),
+    "bcdc_group"
+  )
+  expect_s3_class(
+    bcdc_list_group_records('environmental-reporting-bc'),
+    "tbl_df"
+  )
 })
 
 test_that("bcdc_list_groups", {
@@ -75,9 +82,11 @@ test_that("bcdc_list_organization_records works", {
   skip_on_cran()
   skip_if_net_down()
 
-  expect_s3_class(bcdc_list_organization_records('bc-stats'), "bcdc_organization")
+  expect_s3_class(
+    bcdc_list_organization_records('bc-stats'),
+    "bcdc_organization"
+  )
   expect_s3_class(bcdc_list_organization_records('bc-stats'), "tbl_df")
-
 })
 
 test_that("bcdc_list_organizations", {
@@ -99,32 +108,38 @@ test_that("bcdc_search works", {
   skip_on_cran()
   skip_if_net_down()
   expect_s3_class(bcdc_search("forest"), "bcdc_recordlist")
-  expect_s3_class(bcdc_search("regional district", res_format = "fgdb"),
-            "bcdc_recordlist")
+  expect_s3_class(
+    bcdc_search("regional district", res_format = "fgdb"),
+    "bcdc_recordlist"
+  )
   expect_error(
     bcdc_search(organization = "foo"),
     "foo is not a valid value for organization"
   )
 })
 
-test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record",{
+test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record", {
   skip_on_cran()
   skip_if_net_down()
   sr <- bcdc_get_record('95da1091-7e8c-4aa6-9c1b-5ab159ea7b42')
   d <- sr$resource_df
-  expect_true(d$bcdata_available[d$location == "bcgeographicwarehouse" & d$format == "wms"])
+  expect_true(d$bcdata_available[
+    d$location == "bcgeographicwarehouse" & d$format == "wms"
+  ])
 })
 
-test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record",{
+test_that("a record with bcgeographicwarehouse AND wms is return by bcdc_get_record", {
   skip_on_cran()
   skip_if_net_down()
   sr <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
   d <- sr$resource_df
-  expect_false(all(d$bcdata_available[d$location == "bcgeographicwarehouse" & d$format != "wms"]))
-  })
+  expect_false(all(d$bcdata_available[
+    d$location == "bcgeographicwarehouse" & d$format != "wms"
+  ]))
+})
 
 
-test_that("a data frame with 8 columns of expected types is returned by bcdc_tidy_resources",{
+test_that("a data frame with 8 columns of expected types is returned by bcdc_tidy_resources", {
   skip_if_net_down()
   skip_on_cran()
   sr <- bcdc_get_record('76b1b7a3-2112-4444-857a-afccf7b20da8')
@@ -141,7 +156,10 @@ test_that("a data frame with 8 columns of expected types is returned by bcdc_tid
   expect_type(d$wfs_available, "logical")
   expect_type(d$bcdata_available, "logical")
   expect_equal(d, bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8'))
-  expect_error(bcdc_tidy_resources(list()), "No bcdc_tidy_resources method for an object of class")
+  expect_error(
+    bcdc_tidy_resources(list()),
+    "No bcdc_tidy_resources method for an object of class"
+  )
   expect_error(
     bcdc_tidy_resources("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW"),
     "No bcdc_tidy_resources method for a BCGW object name"

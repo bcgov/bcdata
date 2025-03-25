@@ -4,19 +4,25 @@ for (nme in c("mean", "median", "max", "min")) {
 }
 
 
+single_arg_functions <- c(
+  "EQUALS",
+  "DISJOINT",
+  "INTERSECTS",
+  "TOUCHES",
+  "CROSSES",
+  "WITHIN",
+  "CONTAINS",
+  "OVERLAPS"
+)
 
-
-single_arg_functions <- c("EQUALS","DISJOINT","INTERSECTS",
-                          "TOUCHES", "CROSSES", "WITHIN",
-                          "CONTAINS", "OVERLAPS")
-
-for(nme in single_arg_functions[6]){
+for (nme in single_arg_functions[6]) {
   fun <- match.fun(nme)
 
-  local <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+  local <- bcdc_query_geodata(
+    "regional-districts-legally-defined-administrative-areas-of-bc"
+  ) %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
-
 
   remote <- bcdc_query_geodata("bc-airports") %>%
     filter(fun(local)) %>%

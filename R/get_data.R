@@ -127,14 +127,26 @@ bcdc_get_data <- function(record, resource = NULL, verbose = TRUE, ...) {
 }
 
 #' @export
-bcdc_get_data.default <- function(record, resource = NULL, verbose = TRUE, ...) {
-  stop("No bcdc_get_data method for an object of class ", class(record),
-       call. = FALSE)
+bcdc_get_data.default <- function(
+  record,
+  resource = NULL,
+  verbose = TRUE,
+  ...
+) {
+  stop(
+    "No bcdc_get_data method for an object of class ",
+    class(record),
+    call. = FALSE
+  )
 }
 
 #' @export
-bcdc_get_data.character <- function(record, resource = NULL, verbose = TRUE, ...) {
-
+bcdc_get_data.character <- function(
+  record,
+  resource = NULL,
+  verbose = TRUE,
+  ...
+) {
   if (is_whse_object_name(record)) {
     query <- bcdc_query_geodata(record, ...)
     return(collect(query))
@@ -154,20 +166,30 @@ bcdc_get_data.character <- function(record, resource = NULL, verbose = TRUE, ...
 }
 
 #' @export
-bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, ...) {
+bcdc_get_data.bcdc_record <- function(
+  record,
+  resource = NULL,
+  verbose = TRUE,
+  ...
+) {
   record_id <- record$id
 
   # Only work with resources that are available to read into R
   resource_df <- record$resource_df[record$resource_df$bcdata_available, ]
 
-
   if (!nrow(resource_df)) {
-    stop("There are no resources that bcdata can download from this record", call. = FALSE)
+    stop(
+      "There are no resources that bcdata can download from this record",
+      call. = FALSE
+    )
   }
 
   ## fail if not using interactively and haven't specified resource
   if (is.null(resource) && nrow(resource_df) > 1L && !interactive()) {
-    stop("The record you are trying to access appears to have more than one resource.", call. = TRUE)
+    stop(
+      "The record you are trying to access appears to have more than one resource.",
+      call. = TRUE
+    )
   }
 
   # get wms info
@@ -185,10 +207,15 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
   ## non-wms; resource specified
   if (!is.null(resource)) {
     if (!resource %in% resource_df$id) {
-      stop("The specified resource does not exist in this record", call. = FALSE)
+      stop(
+        "The specified resource does not exist in this record",
+        call. = FALSE
+      )
     }
-    return(read_from_url(resource_df[resource_df$id == resource, , drop = FALSE],
-                         ...))
+    return(read_from_url(
+      resource_df[resource_df$id == resource, , drop = FALSE],
+      ...
+    ))
   }
 
   ## non-wms; only one resource and not specified
@@ -203,7 +230,9 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
   # nocov start
 
   if (interactive() && verbose) {
-    cat_line_wrap("The record you are trying to access appears to have more than one resource.")
+    cat_line_wrap(
+      "The record you are trying to access appears to have more than one resource."
+    )
     cat_line()
     cat_line("Resources:")
 
@@ -217,7 +246,8 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
   choices <- clean_wfs(resource_df$name)
 
   ## To deal with situations where the resource names are the same
-  if(any(duplicated(choices))) choices <- glue::glue("{choices} ({resource_df$format})")
+  if (any(duplicated(choices)))
+    choices <- glue::glue("{choices} ({resource_df$format})")
 
   choice_input <- utils::menu(choices, title = "Please choose one option:")
 
@@ -235,8 +265,11 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
     resource <- resource_df[choice_input, , drop = FALSE]
     id_choice <- resource_df$id[choice_input]
 
-    message("To directly access this resource in the future please use this command:\n",
-            glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),"\n")
+    message(
+      "To directly access this resource in the future please use this command:\n",
+      glue::glue("bcdc_get_data('{record_id}', resource = '{id_choice}')"),
+      "\n"
+    )
     read_from_url(resource, ...)
   }
   # nocov end
@@ -257,21 +290,46 @@ bcdc_get_data.bcdc_record <- function(record, resource = NULL, verbose = TRUE, .
 #' @export
 #'
 
-
-bcdc_read_functions <- function(){
+bcdc_read_functions <- function() {
   dplyr::tribble(
-    ~format,   ~package,    ~fun,
-    "kml",     "sf",        "read_sf",
-    "geojson", "sf",        "read_sf",
-    "gpkg",    "sf",        "read_sf",
-    "gdb",     "sf",        "read_sf",
-    "fgdb",    "sf",        "read_sf",
-    "shp",     "sf",        "read_sf",
-    "csv",     "readr",     "read_csv",
-    "txt",     "readr",     "read_tsv",
-    "tsv",     "readr",     "read_tsv",
-    "xlsx",    "readxl",    "read_xlsx",
-    "xls",     "readxl",    "read_xls",
-    "json",    "jsonlite",  "read_json"
+    ~format,
+    ~package,
+    ~fun,
+    "kml",
+    "sf",
+    "read_sf",
+    "geojson",
+    "sf",
+    "read_sf",
+    "gpkg",
+    "sf",
+    "read_sf",
+    "gdb",
+    "sf",
+    "read_sf",
+    "fgdb",
+    "sf",
+    "read_sf",
+    "shp",
+    "sf",
+    "read_sf",
+    "csv",
+    "readr",
+    "read_csv",
+    "txt",
+    "readr",
+    "read_tsv",
+    "tsv",
+    "readr",
+    "read_tsv",
+    "xlsx",
+    "readxl",
+    "read_xlsx",
+    "xls",
+    "readxl",
+    "read_xls",
+    "json",
+    "jsonlite",
+    "read_json"
   )
 }

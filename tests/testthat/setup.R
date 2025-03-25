@@ -24,7 +24,7 @@ options("silence_named_get_record_warning" = TRUE)
 # options("bcdata.catalogue_gui_url" = "https://beta-catalogue.data.gov.bc.ca/")
 
 point_record <- '76b1b7a3-2112-4444-857a-afccf7b20da8'
-point_resource <-  "4d0377d9-e8a1-429b-824f-0ce8f363512c"
+point_resource <- "4d0377d9-e8a1-429b-824f-0ce8f363512c"
 polygon_record <- 'd1aff64e-dbfe-45a6-af97-582b7f6418b9'
 lines_record <- '92344413-8035-4c08-b996-65a9b3f62fca'
 bcgw_point_record <- 'WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW'

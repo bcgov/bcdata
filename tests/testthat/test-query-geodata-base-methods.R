@@ -1,4 +1,3 @@
-
 test_that("head works", {
   skip_if_net_down()
   skip_on_cran()
@@ -8,14 +7,14 @@ test_that("head works", {
   collected <- collect(promise)
   expect_equal(nrow(collected), 6L)
   d2 <- bcdc_query_geodata(point_record) %>%
-                 head(n = 3) %>%
-      collect()
+    head(n = 3) %>%
+    collect()
   expect_equal(nrow(d2), 3L)
   col <- pagination_sort_col(bcdc_describe_feature(point_record))
   full_airport <- bcdc_get_data(point_record, resource = point_resource)
   expect_equal(
     d2[[col]],
-    head(full_airport[order(full_airport[[col]]),], 3L)[[col]]
+    head(full_airport[order(full_airport[[col]]), ], 3L)[[col]]
   )
 })
 
@@ -35,12 +34,12 @@ test_that("tail works", {
   full_airport <- bcdc_get_data(point_record, resource = point_resource)
   expect_equal(
     d2[[col]],
-    tail(full_airport[order(full_airport[[col]]),], 3L)[[col]]
+    tail(full_airport[order(full_airport[[col]]), ], 3L)[[col]]
   )
 })
 
 
-test_that("head/tail works with a record that would otherwise require pagination",{
+test_that("head/tail works with a record that would otherwise require pagination", {
   skip_if_net_down()
   skip_on_cran()
   dh <- bcdc_query_geodata('2af1388e-d5f7-46dc-a6e2-f85415ddbd1c') %>%

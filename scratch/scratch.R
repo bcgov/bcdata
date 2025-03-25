@@ -1,4 +1,3 @@
-
 foo <- bcdc_search("forest", res_format = "wms")
 
 bcdc_search_facets("type")
@@ -15,7 +14,11 @@ rd <- bcdc_map("tantalis-regional-districts")
 
 hyd <- bcdc_map("hydrology-hydrometric-watershed-boundaries")
 
-obs_wells <- bcdc_map("ground-water-wells",
-                      query = "OBSERVATION_WELL_NUMBER IS NOT NULL")
-obs_wells <- bcdc_map("ground-water-wells",
-                      query = "OBSERVATION_WELL_NUMBER=108")
+obs_wells <- bcdc_map(
+  "ground-water-wells",
+  query = "OBSERVATION_WELL_NUMBER IS NOT NULL"
+)
+obs_wells <- bcdc_map(
+  "ground-water-wells",
+  query = "OBSERVATION_WELL_NUMBER=108"
+)

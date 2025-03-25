@@ -14,10 +14,14 @@ test_that("bcdc_browse returns the correct url", {
   skip_if_net_down()
   skip_on_cran()
   airports_url <- bcdc_browse("bc-airports")
-  expect_identical(airports_url, paste0(catalogue_base_url(), "dataset/bc-airports"))
+  expect_identical(
+    airports_url,
+    paste0(catalogue_base_url(), "dataset/bc-airports")
+  )
   catalogue_url <- bcdc_browse()
   expect_identical(catalogue_url, catalogue_base_url())
-  expect_error(bcdc_browse("no-record-here"),
-               "The specified record does not exist in the catalogue")
-
+  expect_error(
+    bcdc_browse("no-record-here"),
+    "The specified record does not exist in the catalogue"
+  )
 })

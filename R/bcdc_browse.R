@@ -44,23 +44,25 @@
 #'   bcdc_browse("76b1b7a3-2112-4444-857a-afccf7b20da8")
 #' )
 #' }
-bcdc_browse <- function(query = NULL, browser = getOption("browser"),
-                        encodeIfNeeded = FALSE) {
-  if(!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+bcdc_browse <- function(
+  query = NULL,
+  browser = getOption("browser"),
+  encodeIfNeeded = FALSE
+) {
+  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
 
   base_url <- catalogue_base_url()
 
-  if (is.null(query))  {
+  if (is.null(query)) {
     url <- base_url
   } else {
-
     ## Check if the record is valid, if not return a query.
     # Need to check via HEAD request to the api as the catalogue
     # doesn't return a 404 status code.
     cli <- bcdc_catalogue_client("action/package_show")
     res <- cli$head(query = list(id = query))
 
-    if(res$status_code == 404){
+    if (res$status_code == 404) {
       stop("The specified record does not exist in the catalogue")
       ## NB - previous version would show a catalogue search in the
       ## browser, but with new catalogue it doesn't seem possible
@@ -73,14 +75,15 @@ bcdc_browse <- function(query = NULL, browser = getOption("browser"),
   }
 
   ## Facilitates testing
-  if(interactive()){
+  if (interactive()) {
     # nocov start
-    utils::browseURL(url = url, browser = browser,
-                     encodeIfNeeded = encodeIfNeeded)
+    utils::browseURL(
+      url = url,
+      browser = browser,
+      encodeIfNeeded = encodeIfNeeded
+    )
     # nocov end
   }
 
   invisible(url)
 }
-
-

@@ -32,7 +32,9 @@ test_that("bcdc_query_geodata succeeds with a records over 10000 rows", {
   skip("Skipping the BEC test, though available for testing")
   expect_s3_class(
     collect(
-      bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
+      bcdc_query_geodata(
+        "terrestrial-protected-areas-representation-by-biogeoclimatic-unit"
+      )
     ),
     "bcdc_sf"
   )
@@ -45,7 +47,7 @@ test_that("bcdc_query_geodata works with slug and full url using collect", {
   expect_s3_class(
     ret1 <- bcdc_query_geodata(
       glue::glue("{catalogue_base_url()}/dataset/bc-airports")
-    ) %>% 
+    ) %>%
       collect(),
     "sf"
   )
@@ -55,13 +57,16 @@ test_that("bcdc_query_geodata works with slug and full url using collect", {
   )
   expect_s3_class(
     ret3 <- bcdc_query_geodata(
-      glue::glue("{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
-    )
-      %>% collect(),
+      glue::glue(
+        "{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"
+      )
+    ) %>%
+      collect(),
     "sf"
   )
   expect_s3_class(
-    ret4 <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>% collect(),
+    ret4 <- bcdc_query_geodata("76b1b7a3-2112-4444-857a-afccf7b20da8") %>%
+      collect(),
     "sf"
   )
   expect_s3_class(
@@ -69,8 +74,8 @@ test_that("bcdc_query_geodata works with slug and full url using collect", {
       glue::glue(
         "{catalogue_base_url()}/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8/resource/4d0377d9-e8a1-429b-824f-0ce8f363512c"
       )
-    )
-      %>% collect(),
+    ) %>%
+      collect(),
     "sf"
   )
 
@@ -86,7 +91,9 @@ test_that("bcdc_query_geodata works with spatial data that have SHAPE for the ge
   ## bcdc_browse("bc-wildfire-fire-perimeters-historical")
   skip_on_cran()
   skip_if_net_down()
-  crd <- bcdc_query_geodata("regional-districts-legally-defined-administrative-areas-of-bc") %>%
+  crd <- bcdc_query_geodata(
+    "regional-districts-legally-defined-administrative-areas-of-bc"
+  ) %>%
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
 
@@ -119,8 +126,15 @@ test_that("bcdc_sf objects has attributes", {
   expect_identical(
     names(attributes(sf_obj)),
     c(
-      "names", "row.names", "class", "sf_column", "agr", "query_list",
-      "url", "full_url", "time_downloaded"
+      "names",
+      "row.names",
+      "class",
+      "sf_column",
+      "agr",
+      "query_list",
+      "url",
+      "full_url",
+      "time_downloaded"
     )
   )
   expect_true(nzchar(attributes(sf_obj)$url))

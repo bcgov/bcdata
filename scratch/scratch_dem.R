@@ -10,25 +10,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-
-
 bcdc_get_dem <- function(bbox) {
-
   if (inherits(bbox, "bbox")) {
     bbox <- paste(bbox, collapse = ",")
   }
 
   query_list <- list(
-    service="WCS",
-    version="1.0.0",
-    request="GetCoverage",
-    coverage="pub:bc_elevation_25m_bcalb",
-    bbox=bbox,
-    CRS="EPSG:3005",
+    service = "WCS",
+    version = "1.0.0",
+    request = "GetCoverage",
+    coverage = "pub:bc_elevation_25m_bcalb",
+    bbox = bbox,
+    CRS = "EPSG:3005",
     RESPONSE_CRS = "EPSG:3005",
-    Format="GeoTIFF",
-    resx=25,
-    resy=25
+    Format = "GeoTIFF",
+    resx = 25,
+    resy = 25
   )
 
   ## Drop any NULLS from the list
@@ -36,8 +33,6 @@ bcdc_get_dem <- function(bbox) {
 
   ## GET and parse data to sf object
   cli <- bcdc_http_client(url = "https://delivery.openmaps.gov.bc.ca/om/wcs")
-
-
 
   tiff_file <- tempfile(fileext = ".tif")
   res <- cli$get(query = query_list, disk = tiff_file)
