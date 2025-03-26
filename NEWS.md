@@ -1,4 +1,4 @@
-# bcdata (development version)
+# bcdata 0.5.1
 
 * Fix bugs where `bcdc_search_facets()`, `bcdc_list_group_records()` and 
   `bcdc_list_organization_records()` were not returning all records after 
