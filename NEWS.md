@@ -1,8 +1,11 @@
 # bcdata (development version)
+
 * Fix bugs where `bcdc_search_facets()`, `bcdc_list_group_records()` and 
   `bcdc_list_organization_records()` were not returning all records after 
   the upgrade to CKAN 2.9 (#353). Includes adding tests and bcdata-specific 
   options for these queries, see `bcdc_options()`.
+* Added examples of partial query using `%like%` and `%in%` in 
+  `bcdc_query_geodata()` (#356, thanks @bevingtona).
 
 # bcdata 0.5.0
 
