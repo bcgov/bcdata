@@ -9,7 +9,7 @@ https://catalogue.data.gov.bc.ca/group or accessed directly from R using bcdc_li
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,17 +74,9 @@ https://catalogue.data.gov.bc.ca/group or accessed directly from R using <code>b
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_list_group_records</span><span class="op">(</span><span class="st">'environmental-reporting-bc'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Group Description: </span>Environmental</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Reporting BC examines the state and trends of</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  environmental measures across the province. We</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  provide access to scientific data and information</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  about our environment and how it relates to British</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Columbians. See for [More</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Information](https://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  and the [GitHub</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Repo](https://github.com/bcgov/EnvReportBC).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Number of datasets: </span>10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 41</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Group Description: </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Number of datasets: </span>32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 46</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    author     author_email creator_user_id download_audience</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> d0716cb8-… <span style="color: #BB0000;">NA</span>           d0716cb8-7eb5-… NA               </span>
@@ -97,13 +89,13 @@ https://catalogue.data.gov.bc.ca/group or accessed directly from R using <code>b
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 39990ef0-… <span style="color: #BB0000;">NA</span>           39990ef0-fa9a-… Public           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11389078-… <span style="color: #BB0000;">NA</span>           11389078-2e35-… Public           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> d0716cb8-… <span style="color: #BB0000;">NA</span>           d0716cb8-7eb5-… Public           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 37 more variables: id &lt;chr&gt;, isopen &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 42 more variables: id &lt;chr&gt;, isopen &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   license_id &lt;chr&gt;, license_title &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   license_url &lt;chr&gt;, maintainer &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   maintainer_email &lt;lgl&gt;, metadata_created &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   metadata_modified &lt;chr&gt;, metadata_visibility &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   name &lt;chr&gt;, notes &lt;chr&gt;, num_resources &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   num_tags &lt;int&gt;, organization &lt;df[,10]&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   name &lt;chr&gt;, notes &lt;chr&gt;, num_resources &lt;int&gt;, …</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

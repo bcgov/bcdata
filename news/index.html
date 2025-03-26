@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,11 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.1" id="bcdata-051">bcdata 0.5.1<a class="anchor" aria-label="anchor" href="#bcdata-051"></a></h2>
+<ul><li>Fix bugs where <code><a href="../reference/bcdc_search_facets.html">bcdc_search_facets()</a></code>, <code><a href="../reference/bcdc_list_group_records.html">bcdc_list_group_records()</a></code> and <code><a href="../reference/bcdc_list_organization_records.html">bcdc_list_organization_records()</a></code> were not returning all records after the upgrade to CKAN 2.9 (<a href="https://github.com/bcgov/bcdata/issues/353" class="external-link">#353</a>). Includes adding tests and bcdata-specific options for these queries, see <code><a href="../reference/bcdc_options.html">bcdc_options()</a></code>.</li>
+<li>Added examples of partial query using <code>%like%</code> and <code>%in%</code> in <code><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata()</a></code> (<a href="https://github.com/bcgov/bcdata/issues/356" class="external-link">#356</a>, thanks <a href="https://github.com/bevingtona" class="external-link">@bevingtona</a>).</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="bcdata-050">bcdata 0.5.0<a class="anchor" aria-label="anchor" href="#bcdata-050"></a></h2><p class="text-muted">CRAN release: 2024-12-12</p>
 <ul><li>Make functions more robust to non-functioning WMS/WFS GetCapabilities requests (<a href="https://github.com/bcgov/bcdata/issues/339" class="external-link">#339</a>, <a href="https://github.com/bcgov/bcdata/issues/341" class="external-link">#341</a>).</li>
 <li>dbplyr 2.5.0 has made the requirement for using <code>!!</code> or <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> for local functions more restrictive; updated tests and examples (<a href="https://github.com/bcgov/bcdata/issues/341" class="external-link">#341</a>).</li>
@@ -48,7 +53,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="bcdata-041">bcdata 0.4.1<a class="anchor" aria-label="anchor" href="#bcdata-041"></a></h2><p class="text-muted">CRAN release: 2023-03-18</p>
-<ul><li>Add <code><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html" class="external-link">jsonlite::read_json()</a></code> as a file read method, so users can now download &amp; read <code>json</code> resources in B.C. Data Catalogue records</li>
+<ul><li>Add <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/read_json.html" class="external-link">jsonlite::read_json()</a></code> as a file read method, so users can now download &amp; read <code>json</code> resources in B.C. Data Catalogue records</li>
 <li>Change the <code>download_audience</code> default from <code>Public</code> to <code>NULL</code> in <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> (<a href="https://github.com/bcgov/bcdata/issues/315" class="external-link">#315</a>)</li>
 <li>Fix bug where some/all facet values in <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> need to be quoted to generate a valid API query (<a href="https://github.com/bcgov/bcdata/issues/315" class="external-link">#315</a>)</li>
 <li>Add new functions <code>bcdc_list_organizations</code> and <code>bcdc_list_organization_records</code> as helper functions for finding records <a href="https://github.com/bcgov/bcdata/issues/322" class="external-link">#322</a></li>
