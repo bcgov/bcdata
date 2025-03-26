@@ -1,3 +1,9 @@
+## Release summary
+
+This release is primarily to fix new ERRORs on R-devel
+(<https://cran.r-project.org/web/checks/check_results_bcdata.html>) where we
+were inadvertently setting attributes on a primitive function.
+
 ## R CMD check results
 
 There were no ERRORs, WARNINGs, or NOTEs.
