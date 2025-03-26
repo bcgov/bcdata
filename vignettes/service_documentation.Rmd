@@ -1,7 +1,11 @@
 ---
 title: "bcdata Service Documentation"
 date: "2021-10-27"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    md_extensions: [ 
+      "-autolink_bare_uris" 
+    ]
 vignette: >
   %\VignetteIndexEntry{bcdata Service Documentation}
   %\VignetteEngine{knitr::rmarkdown}
@@ -64,9 +68,9 @@ This document is an attempt at a comprehensive list of services and API endpoint
 
 ### API Version:
 
-  - TEST: https://test.openmaps.gov.bc.ca
-  - DELIVERY: https://delivery.openmaps.gov.bc.ca
-  - PROD: https://openmaps.gov.bc.ca
+  - TEST: `https://test.openmaps.gov.bc.ca`
+  - DELIVERY: `https://delivery.openmaps.gov.bc.ca`
+  - PROD: `https://openmaps.gov.bc.ca`
   
   Endpoints:
   
