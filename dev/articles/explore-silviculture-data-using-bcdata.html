@@ -69,7 +69,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Exploring Silviculture Data with bcdata</h1>
             
-            <h4 data-toc-skip class="date">2024-12-11</h4>
+            <h4 data-toc-skip class="date">2026-02-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/main/vignettes/explore-silviculture-data-using-bcdata.Rmd" class="external-link"><code>vignettes/explore-silviculture-data-using-bcdata.Rmd</code></a></small>
       <div class="d-none name"><code>explore-silviculture-data-using-bcdata.Rmd</code></div>
@@ -171,8 +171,8 @@ retrieve this geospatial data set using
 <code class="sourceCode R"><span><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span></span>
 <span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span></span>
-<span><span class="co">#&gt; • Using collect() on this object will return 957189 features and 159 fields</span></span>
-<span><span class="co">#&gt; • Accessing this record requires pagination and will make 96 separate requests to the WFS.</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 976169 features and 159 fields</span></span>
+<span><span class="co">#&gt; • Accessing this record requires pagination and will make 98 separate requests to the WFS.</span></span>
 <span><span class="co">#&gt; • See ?bcdc_options</span></span>
 <span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
@@ -267,7 +267,7 @@ columns contain <code>"LW"</code>, the code for western larch.</p>
 object we have downloaded from the B.C. Data Catalogue:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">trees_dpg</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 261 160</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 253 160</span></span></code></pre></div>
 <p>We can see there are several treatment units planted with western
 larch, and we can make a quick map of these harvested openings for the
 Prince George Natural Resource District:</p>

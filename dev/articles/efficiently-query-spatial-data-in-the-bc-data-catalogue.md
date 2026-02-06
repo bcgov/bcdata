@@ -227,28 +227,28 @@ geospatial data, which means we can make use of `bcdc_query_geodata`.
 ``` r
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Querying 'local-and-regional-greenspaces' record
-#> • Using collect() on this object will return 9143 features and 19 fields
+#> • Using collect() on this object will return 9212 features and 19 fields
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> Geometry type: MULTIPOLYGON
+#> Geometry type: POLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4
+#> Bounding box:  xmin: 1205933 ymin: 459093.3 xmax: 1212220 ymax: 460485.6
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
 #>   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
 #>   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
-#> 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    
-#> 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    
-#> 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    
-#> 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    
-#> 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    
-#> 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    
+#> 1 WHSE_B…                     49 Woodward… Local     Park             Metro Vancouver   Richmond    
+#> 2 WHSE_B…                     50 Woodward… Local     Park             Metro Vancouver   Richmond    
+#> 3 WHSE_B…                     51 Doggie P… Local     Park             Metro Vancouver   Richmond    
+#> 4 WHSE_B…                     52 Bike Ter… Local     Athletic         Metro Vancouver   Richmond    
+#> 5 WHSE_B…                     53 Great We… Local     Trail            Metro Vancouver   Richmond    
+#> 6 WHSE_B…                     54 Imperial… Local     Park             Metro Vancouver   Richmond    
 #> # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
 #> # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
 #> #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
-#> #   SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
+#> #   SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
 ```
 
 Since we are interested in only “Park” data we can subset our query:
@@ -257,28 +257,28 @@ Since we are interested in only “Park” data we can subset our query:
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park")
 #> Querying 'local-and-regional-greenspaces' record
-#> • Using collect() on this object will return 4517 features and 19 fields
+#> • Using collect() on this object will return 4528 features and 19 fields
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
-#> Geometry type: MULTIPOLYGON
+#> Geometry type: POLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4
+#> Bounding box:  xmin: 1205029 ymin: 459093.3 xmax: 1212220 ymax: 461188.7
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
 #>   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
 #>   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
-#> 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    
-#> 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    
-#> 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    
-#> 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    
-#> 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    
-#> 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    
+#> 1 WHSE_B…                     49 Woodward… Local     Park             Metro Vancouver   Richmond    
+#> 2 WHSE_B…                     50 Woodward… Local     Park             Metro Vancouver   Richmond    
+#> 3 WHSE_B…                     51 Doggie P… Local     Park             Metro Vancouver   Richmond    
+#> 4 WHSE_B…                     54 Imperial… Local     Park             Metro Vancouver   Richmond    
+#> 5 WHSE_B…                     55 Stevesto… Local     Park             Metro Vancouver   Richmond    
+#> 6 WHSE_B…                     56 Mariner'… Local     Park             Metro Vancouver   Richmond    
 #> # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
 #> # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
 #> #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 #> #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
-#> #   SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
+#> #   SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
 ```
 
 Here we see that this greatly reduces the number of features that we are
@@ -506,7 +506,7 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> Simple feature collection with 6 features and 11 fields
 #> Geometry type: POINT
 #> Dimension:     XY
-#> Bounding box:  xmin: 833323.9 ymin: 406886.6 xmax: 1266385 ymax: 1054950
+#> Bounding box:  xmin: 1047036 ymin: 456228.3 xmax: 1612700 ymax: 827672.5
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 12
 #>   id     CUSTODIAN_ORG_DESCRI…¹ BUSINESS_CATEGORY_CL…² BUSINESS_CATEGORY_DE…³ OCCUPANT_TYPE_DESCRI…⁴
