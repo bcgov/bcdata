@@ -1,5 +1,8 @@
 # bcdata (development version)
 
+* Removed dependency on `leaflet.extras`, using `leaflet::addControl()` instead
+  of `leaflet.extras::addWMSLegend()` for WMS legend display (#364).
+
 # bcdata 0.5.1
 
 * Fix bugs where `bcdc_search_facets()`, `bcdc_list_group_records()` and 
