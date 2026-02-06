@@ -245,6 +245,7 @@ test_that("bcdc_get_data fails when no downloadable resources", {
 test_that("bcdc_get_data fails when >1 resource not specified & noninteractive", {
   skip_if_net_down()
   skip_on_cran()
+  skip_if(interactive())
   expect_error(
     bcdc_get_data("21c72822-2502-4431-b9a2-92fc9401ef12"),
     "The record you are trying to access appears to have more than one resource."
