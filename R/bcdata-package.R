@@ -20,7 +20,7 @@ NULL
 
 release_bullets <- function() {
   c(
-    "Run test and check with internet turned off",
-    "Precompile vignettes"
+    "Precompile vignettes",
+    "Run test and check with internet turned off"
   )
 }
