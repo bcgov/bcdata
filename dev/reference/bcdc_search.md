@@ -139,14 +139,14 @@ try(
 #>  kml)
 #>  ID: 243c94a1-f275-41dc-bc37-91d8a2b26e10
 #>  Name: forest-tenure-road-section-lines
-#> 19: Forest Tenure Managed Licenses Polygons
-#>  (oracle_sde)
-#>  ID: 04fb4da4-8c6e-4166-a4e8-4c8723443980
-#>  Name: forest-tenure-managed-licenses-polygons
-#> 20: Forest Stewardship Plans - Identified Areas
+#> 19: Forest Stewardship Plans - Identified Areas
 #>  (multiple, wms, kml, oracle_sde)
 #>  ID: dad55255-0f8f-4a4a-a40f-38d22750d065
 #>  Name: forest-stewardship-plans-identified-areas
+#> 20: Forest Tenure Managed Licenses Polygons
+#>  (oracle_sde)
+#>  ID: 04fb4da4-8c6e-4166-a4e8-4c8723443980
+#>  Name: forest-tenure-managed-licenses-polygons
 #> 21: Forest Tenure Timber Use Polygons (oracle_sde)
 #>  ID: 4b2afa31-a0b9-488f-8f15-1d6117e0093e
 #>  Name: forest-tenure-timber-use-polygons
@@ -160,17 +160,17 @@ try(
 #> 24: Forest Tenure Cut Permit Polygons (oracle_sde)
 #>  ID: 4876fb83-ce33-4cf8-9c13-7fdeb2f39cf6
 #>  Name: forest-tenure-cut-permit-polygons
-#> 25: Forest Tenure Map Notation Polygon (multiple,
+#> 25: Forest Tenure Road Section Amendment (multiple)
+#>  ID: bad79704-3fc9-43e7-b5d4-660657199af8
+#>  Name: forest-tenure-road-section-amendment
+#> 26: Forest Tenure Map Notation Polygon (multiple,
 #>  wms, kml)
 #>  ID: 78838b54-f241-4269-aeb4-126d14bb5f37
 #>  Name: forest-tenure-map-notation-polygon
-#> 26: Forest Tenure Map Notation Line (multiple, wms,
+#> 27: Forest Tenure Map Notation Line (multiple, wms,
 #>  kml)
 #>  ID: 8ef18f74-e53f-497a-968d-86e9a20419a2
 #>  Name: forest-tenure-map-notation-line
-#> 27: Forest Tenure Road Section Amendment (multiple)
-#>  ID: bad79704-3fc9-43e7-b5d4-660657199af8
-#>  Name: forest-tenure-road-section-amendment
 #> 28: Forest Tenure Harvesting Authority Polygons
 #>  (multiple, wms, kml)
 #>  ID: cff7b8f7-6897-444f-8c53-4bb93c7e9f8b

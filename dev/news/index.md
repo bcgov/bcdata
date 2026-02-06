@@ -2,6 +2,11 @@
 
 ## bcdata (development version)
 
+- Removed dependency on `leaflet.extras`, using
+  [`leaflet::addControl()`](https://rstudio.github.io/leaflet/reference/map-layers.html)
+  instead of `leaflet.extras::addWMSLegend()` for WMS legend display
+  ([\#364](https://github.com/bcgov/bcdata/issues/364)).
+
 ## bcdata 0.5.1
 
 CRAN release: 2025-03-26
