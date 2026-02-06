@@ -1,6 +1,6 @@
 ---
 title: "Update to `filter()` behaviour in bcdata v0.4.0"
-date: "2024-12-11"
+date: "2026-02-06"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Update to `filter()` behaviour in bcdata v0.4.0}
@@ -52,7 +52,8 @@ bcdc_query_geodata("local-and-regional-greenspaces") %>%
 ```
 
 ```
-## Error: Error : Cannot translate a <sfc_POINT> object to SQL.
+## Error:
+## ! Error : Cannot translate a <sfc_POINT> object to SQL.
 ## ℹ Do you want to force evaluation in R with (e.g.) `!!x` or `local(x)`?
 ```
 
@@ -68,25 +69,25 @@ bcdc_query_geodata("local-and-regional-greenspaces") %>%
 
 ```
 ## Querying 'local-and-regional-greenspaces' record
-## • Using collect() on this object will return 1158 features and 19 fields
+## • Using collect() on this object will return 1236 features and 19 fields
 ## • At most six rows of the record are printed here
 ## ────────────────────────────────────────────────────────────────────────────────────────────────────
 ## Simple feature collection with 6 features and 19 fields
 ## Geometry type: POLYGON
 ## Dimension:     XY
-## Bounding box:  xmin: 1200113 ymin: 385903.5 xmax: 1202130 ymax: 388026
+## Bounding box:  xmin: 1187080 ymin: 409342.1 xmax: 1191300 ymax: 410578
 ## Projected CRS: NAD83 / BC Albers
 ## # A tibble: 6 × 20
 ##   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
 ##   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
-## 1 WHSE_B…                    689 Cranford… Local     Water Access     Capital           District of…
-## 2 WHSE_B…                    634 <NA>      Local     Water Access     Capital           District of…
-## 3 WHSE_B…                    725 <NA>      Local     Water Access     Capital           District of…
-## 4 WHSE_B…                    665 Konukson… Local     Green Space      Capital           District of…
-## 5 WHSE_B…                    622 <NA>      Local     Trail            Capital           District of…
-## 6 WHSE_B…                    698 <NA>      Local     Water Access     Capital           District of…
+## 1 WHSE_B…                   8423 Lillian … Local     Park             Capital           North Saani…
+## 2 WHSE_B…                   8422 Nymph Po… Local     Park             Capital           North Saani…
+## 3 WHSE_B…                   8447 H.M.S. P… Local     Park             Capital           North Saani…
+## 4 WHSE_B…                   8434 Wain Park Local     Park             Capital           North Saani…
+## 5 WHSE_B…                   8446 Prentice… Local     Park             Capital           North Saani…
+## 6 WHSE_B…                   8448 <NA>      Local     Park             Capital           North Saani…
 ## # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
-## # ℹ 13 more variables: CIVIC_NUMBER <chr>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
+## # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
 ## #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
 ## #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
 ## #   SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>

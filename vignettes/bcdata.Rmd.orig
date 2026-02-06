@@ -120,8 +120,8 @@ bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 Once you have located the B.C. Data Catalogue record with the data you want, you can use `bcdata::bcdc_get_data()` to download and read the data from the record.  You can use the record name, permanent ID or the result from `bcdc_get_record()`. Let's look at the B.C. Highway Web Cameras data:
 
 ```{r}
-## Get the data resource for the `bc-highway-cams` catalogue record
-bcdc_get_data("bc-highway-cams")
+## Get the data resource for the `bc-highwaycams` catalogue record
+bcdc_get_data("bc-highwaycams")
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
