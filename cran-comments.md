@@ -1,8 +1,8 @@
 ## Release summary
 
-This release is primarily to fix new ERRORs on R-devel
-(<https://cran.r-project.org/web/checks/check_results_bcdata.html>) where we
-were inadvertently setting attributes on a primitive function.
+This release removes the dependency on `leaflet.extras`, which is scheduled for
+archival on 2026-02-19 due to failing checks
+(<https://cran.r-project.org/web/checks/check_results_leaflet.extras.html>).
 
 ## R CMD check results
 
