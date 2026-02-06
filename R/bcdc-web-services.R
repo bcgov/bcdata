@@ -104,7 +104,9 @@
 #' }
 #' @export
 bcdc_query_geodata <- function(record, crs = 3005) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
   UseMethod("bcdc_query_geodata")
 }
 
@@ -227,7 +229,9 @@ bcdc_query_geodata.bcdc_record <- function(record, crs = 3005) {
 #' @export
 bcdc_preview <- function(record) {
   # nocov start
-  if (!has_internet()) stop("No access to internet", call. = FALSE)
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  }
   UseMethod("bcdc_preview")
 }
 
@@ -271,6 +275,11 @@ make_wms <- function(x) {
              layer=pub%3A{x}"
   )
 
+  legend_html <- htmltools::tags$div(
+    style = "padding: 10px; background: white;",
+    htmltools::tags$img(src = wms_legend, alt = "Legend")
+  )
+
   leaflet::leaflet() %>%
     leaflet::addProviderTiles(
       leaflet::providers$CartoDB.Positron,
@@ -281,7 +290,7 @@ make_wms <- function(x) {
       layers = glue::glue("pub:{x}"),
       options = wms_options
     ) %>%
-    leaflet.extras::addWMSLegend(uri = wms_legend) %>%
+    leaflet::addControl(legend_html, position = "topright") %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
 } # nocov end
 
