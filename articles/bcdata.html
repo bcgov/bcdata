@@ -6,15 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Get Started with bcdata • bcdata</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.9/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
@@ -28,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -200,23 +199,25 @@ and <code>groups</code>:</p>
 <span><span class="co">#&gt; 12 license_id   45                      Open Data Commons - Public Domain Dedication and Licence</span></span>
 <span><span class="co">#&gt; 13 license_id   25                                     King's Printer Licence - British Columbia</span></span>
 <span><span class="co">#&gt; 14 license_id   42                                                Elections BC Open Data Licence</span></span>
-<span><span class="co">#&gt; 15 license_id   22                                                                   Access Only</span></span>
+<span><span class="co">#&gt; 15 license_id   51                                         BC Energy Regulator Open Data License</span></span>
+<span><span class="co">#&gt; 16 license_id   22                                                                   Access Only</span></span>
 <span><span class="co">#&gt;    count</span></span>
-<span><span class="co">#&gt; 1     70</span></span>
+<span><span class="co">#&gt; 1     80</span></span>
 <span><span class="co">#&gt; 2      2</span></span>
 <span><span class="co">#&gt; 3     12</span></span>
 <span><span class="co">#&gt; 4     13</span></span>
 <span><span class="co">#&gt; 5      5</span></span>
 <span><span class="co">#&gt; 6      3</span></span>
-<span><span class="co">#&gt; 7     61</span></span>
-<span><span class="co">#&gt; 8   1638</span></span>
+<span><span class="co">#&gt; 7     62</span></span>
+<span><span class="co">#&gt; 8   1672</span></span>
 <span><span class="co">#&gt; 9      2</span></span>
 <span><span class="co">#&gt; 10     5</span></span>
 <span><span class="co">#&gt; 11     1</span></span>
 <span><span class="co">#&gt; 12     2</span></span>
 <span><span class="co">#&gt; 13     1</span></span>
-<span><span class="co">#&gt; 14    18</span></span>
-<span><span class="co">#&gt; 15  1642</span></span></code></pre></div>
+<span><span class="co">#&gt; 14    19</span></span>
+<span><span class="co">#&gt; 15     5</span></span>
+<span><span class="co">#&gt; 16  1457</span></span></code></pre></div>
 <p>Finally, you can retrieve the <em>metadata</em> for a single
 catalogue record by using the record name or permanent ID with
 <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. It is advised to use the permanent ID
@@ -250,9 +251,9 @@ and read the data from the record. You can use the record name,
 permanent ID or the result from <code><a href="../reference/bcdc_get_record.html">bcdc_get_record()</a></code>. Let’s
 look at the B.C. Highway Web Cameras data:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Get the data resource for the `bc-highway-cams` catalogue record</span></span>
-<span><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"bc-highway-cams"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1,007 × 13</span></span>
+<code class="sourceCode R"><span><span class="co">## Get the data resource for the `bc-highwaycams` catalogue record</span></span>
+<span><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"bc-highwaycams"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1,035 × 13</span></span>
 <span><span class="co">#&gt;    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                            &lt;chr&gt;              &lt;chr&gt;                &lt;chr&gt;              &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2</span></span>
@@ -265,13 +266,13 @@ look at the B.C. Highway Web Cameras data:</p>
 <span><span class="co">#&gt;  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11</span></span>
 <span><span class="co">#&gt;  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12</span></span>
 <span><span class="co">#&gt; 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13</span></span>
-<span><span class="co">#&gt; # ℹ 997 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1,025 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 8 more variables: highway_number &lt;chr&gt;, highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co">## OR use the permanent ID, which is better for scripts or non-interactive use</span></span>
 <span><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1,007 × 13</span></span>
+<span><span class="co">#&gt; # A tibble: 1,035 × 13</span></span>
 <span><span class="co">#&gt;    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                            &lt;chr&gt;              &lt;chr&gt;                &lt;chr&gt;              &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2</span></span>
@@ -284,14 +285,14 @@ look at the B.C. Highway Web Cameras data:</p>
 <span><span class="co">#&gt;  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11</span></span>
 <span><span class="co">#&gt;  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12</span></span>
 <span><span class="co">#&gt; 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13</span></span>
-<span><span class="co">#&gt; # ℹ 997 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1,025 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 8 more variables: highway_number &lt;chr&gt;, highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;</span></span>
 <span></span>
 <span><span class="co">## OR use the result from bcdc_get_record()</span></span>
 <span><span class="va">my_record</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"6b39a910-6c77-476f-ac96-7b4f18849b1c"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/bcdc_get_data.html">bcdc_get_data</a></span><span class="op">(</span><span class="va">my_record</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1,007 × 13</span></span>
+<span><span class="co">#&gt; # A tibble: 1,035 × 13</span></span>
 <span><span class="co">#&gt;    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                            &lt;chr&gt;              &lt;chr&gt;                &lt;chr&gt;              &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2</span></span>
@@ -304,7 +305,7 @@ look at the B.C. Highway Web Cameras data:</p>
 <span><span class="co">#&gt;  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11</span></span>
 <span><span class="co">#&gt;  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12</span></span>
 <span><span class="co">#&gt; 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13</span></span>
-<span><span class="co">#&gt; # ℹ 997 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1,025 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 8 more variables: highway_number &lt;chr&gt;, highway_locationDescription &lt;chr&gt;, camName &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   caption &lt;chr&gt;, credit &lt;chr&gt;, orientation &lt;chr&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;</span></span></code></pre></div>
 <p>A catalogue record can have one or multiple data files—or
@@ -512,7 +513,7 @@ Catalogue.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
