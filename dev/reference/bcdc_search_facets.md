@@ -52,7 +52,7 @@ try(
 #>         facet         name display_name count
 #> 1  res_format          zip          zip    35
 #> 2  res_format          xml          xml    20
-#> 3  res_format         xlsx         xlsx   698
+#> 3  res_format         xlsx         xlsx   699
 #> 4  res_format          xls          xls   303
 #> 5  res_format         wmts         wmts     1
 #> 6  res_format          wms          wms   878
