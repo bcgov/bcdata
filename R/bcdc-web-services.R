@@ -281,7 +281,10 @@ make_wms <- function(x) {
       layers = glue::glue("pub:{x}"),
       options = wms_options
     ) %>%
-    leaflet.extras::addWMSLegend(uri = wms_legend) %>%
+    leaflet::addControl(
+      html = paste0('<img src="', wms_legend, '">'),
+      position = "bottomright"
+    ) %>%
     leaflet::setView(lng = -126.5, lat = 54.5, zoom = 5)
 } # nocov end
 
