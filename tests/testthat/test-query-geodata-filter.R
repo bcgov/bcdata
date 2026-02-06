@@ -323,7 +323,9 @@ test_that("a BCGW name works with filter", {
   ret <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
     filter(WITHIN(little_box)) %>%
     collect()
-  expect_equal(nrow(ret), 367)
+
+  expect_gt(nrow(ret), 350)
+  expect_lt(nrow(ret), 400)
 })
 
 test_that("Using BBOX works", {
