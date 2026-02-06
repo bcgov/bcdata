@@ -506,7 +506,7 @@ bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW") %>%
 #> Simple feature collection with 6 features and 11 fields
 #> Geometry type: POINT
 #> Dimension:     XY
-#> Bounding box:  xmin: 1047036 ymin: 456228.3 xmax: 1612700 ymax: 827672.5
+#> Bounding box:  xmin: 833428.6 ymin: 406147 xmax: 1264896 ymax: 1055403
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 12
 #>   id     CUSTODIAN_ORG_DESCRI…¹ BUSINESS_CATEGORY_CL…² BUSINESS_CATEGORY_DE…³ OCCUPANT_TYPE_DESCRI…⁴
