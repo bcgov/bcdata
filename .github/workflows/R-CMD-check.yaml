@@ -20,13 +20,14 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: macos-latest,   r: 'release', not-cran: 'false'}
+          - {os: windows-latest, r: 'release', not-cran: 'false'}
+          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release', not-cran: 'false'}
+          - {os: ubuntu-latest,   r: 'release', not-cran: 'true'}
+          - {os: ubuntu-latest,   r: 'oldrel-1', not-cran: 'false'}
 
     env:
+      NOT_CRAN: ${{ matrix.config.not-cran }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       # BCDC_KEY: ${{ secrets.BCDC_KEY }}
