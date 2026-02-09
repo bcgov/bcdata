@@ -1,3 +1,5 @@
+# bcdata (development version)
+
 # bcdata 0.5.2
 
 * Removed dependency on `leaflet.extras`, using `leaflet::addControl()` instead

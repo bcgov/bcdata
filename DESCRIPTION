@@ -1,6 +1,6 @@
 Package: bcdata
 Title: Search and Retrieve Data from the BC Data Catalogue
-Version: 0.5.2
+Version: 0.5.2.9000
 Authors@R: 
     c(person(given = "Andy",
              family = "Teucher",
@@ -85,3 +85,4 @@ Collate:
     'utils.R'
     'zzz.R'
 Config/testthat/edition: 3
+Config/testthat/parallel: true
