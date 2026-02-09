@@ -53,7 +53,7 @@ try(
 #>     address = {Joy Sinnett & Nancy Liesch},
 #>     institution = {Province of British Columbia},
 #>     year = {2025},
-#>     howpublished = {Record accessed 2026-02-07},
+#>     howpublished = {Record accessed 2026-02-09},
 #>     url = {https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8},
 #>     note = {Open Government Licence - British Columbia},
 #>   }
@@ -75,7 +75,7 @@ try(
 #>     address = {Joy Sinnett & Nancy Liesch},
 #>     institution = {Province of British Columbia},
 #>     year = {2025},
-#>     howpublished = {Record accessed 2026-02-07},
+#>     howpublished = {Record accessed 2026-02-09},
 #>     url = {https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8},
 #>     note = {Open Government Licence - British Columbia},
 #>   }

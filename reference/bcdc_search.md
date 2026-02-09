@@ -160,17 +160,17 @@ try(
 #> 24: Forest Tenure Cut Permit Polygons (oracle_sde)
 #>  ID: 4876fb83-ce33-4cf8-9c13-7fdeb2f39cf6
 #>  Name: forest-tenure-cut-permit-polygons
-#> 25: Forest Tenure Road Section Amendment (multiple)
-#>  ID: bad79704-3fc9-43e7-b5d4-660657199af8
-#>  Name: forest-tenure-road-section-amendment
-#> 26: Forest Tenure Map Notation Polygon (multiple,
+#> 25: Forest Tenure Map Notation Polygon (multiple,
 #>  wms, kml)
 #>  ID: 78838b54-f241-4269-aeb4-126d14bb5f37
 #>  Name: forest-tenure-map-notation-polygon
-#> 27: Forest Tenure Map Notation Line (multiple, wms,
+#> 26: Forest Tenure Map Notation Line (multiple, wms,
 #>  kml)
 #>  ID: 8ef18f74-e53f-497a-968d-86e9a20419a2
 #>  Name: forest-tenure-map-notation-line
+#> 27: Forest Tenure Road Section Amendment (multiple)
+#>  ID: bad79704-3fc9-43e7-b5d4-660657199af8
+#>  Name: forest-tenure-road-section-amendment
 #> 28: Forest Tenure Harvesting Authority Polygons
 #>  (multiple, wms, kml)
 #>  ID: cff7b8f7-6897-444f-8c53-4bb93c7e9f8b
