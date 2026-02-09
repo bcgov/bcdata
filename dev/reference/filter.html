@@ -15,7 +15,7 @@ See dplyr::filter for details."><meta property="og:image" content="https://bcgov
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,12 +95,18 @@ in <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local(
 <span class="r-in"><span>    <span class="fu">filter</span><span class="op">(</span><span class="va">ADMIN_AREA_NAME</span> <span class="op">==</span> <span class="st">"Cariboo Regional District"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">ret1</span> <span class="op">&lt;-</span> <span class="fu"><a href="bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"bc-wildfire-fire-perimeters-historical"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu">filter</span><span class="op">(</span><span class="va">FIRE_YEAR</span> <span class="op">==</span> <span class="fl">2000</span>, <span class="va">FIRE_CAUSE</span> <span class="op">==</span> <span class="st">"Person"</span>, <span class="fu"><a href="cql_geom_predicates.html">INTERSECTS</a></span><span class="op">(</span><span class="va">crd</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="collect-methods.html">collect</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use local() to force parts of your call to be evaluated in R:</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="op">{</span></span></span>
@@ -120,6 +126,9 @@ in <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local(
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2()</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> is TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

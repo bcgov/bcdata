@@ -11,7 +11,7 @@ Leaflet map window"><meta property="og:image" content="https://bcgov.github.io/b
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,19 +78,23 @@ in your .Rprofile file so the option persists across sessions.</p></dd>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_preview</span><span class="op">(</span><span class="st">"regional-districts-legally-defined-administrative-areas-of-bc"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addWMSTiles","args":["https://openmaps.gov.bc.ca/geo/pub/wms",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","layers":"pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"}]},{"method":"addControl","args":["<img src=\"https://openmaps.gov.bc.ca/geo/pub/wms?request=GetLegendGraphic&\nformat=image%2Fpng&\nwidth=20&\nheight=20&\nlayer=pub%3AWHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP\">","bottomright",null,"info legend"]}],"setView":[[54.5,-126.5],5,[]]},"evals":[],"jsHooks":[]}</script><span class="r-in"><span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_preview</span><span class="op">(</span><span class="st">"water-reservations-points"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<div id="htmlwidget-e5c8c404fe174e4c81bd" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addWMSTiles","args":["https://openmaps.gov.bc.ca/geo/pub/wms",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","layers":"pub:WHSE_WATER_MANAGEMENT.WLS_WATER_RESERVATION_SV"}]},{"method":"addControl","args":["<img src=\"https://openmaps.gov.bc.ca/geo/pub/wms?request=GetLegendGraphic&\nformat=image%2Fpng&\nwidth=20&\nheight=20&\nlayer=pub%3AWHSE_WATER_MANAGEMENT.WLS_WATER_RESERVATION_SV\">","bottomright",null,"info legend"]}],"setView":[[54.5,-126.5],5,[]]},"evals":[],"jsHooks":[]}</script><span class="r-in"><span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using BCGW name</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_preview</span><span class="op">(</span><span class="st">"WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<div id="htmlwidget-36aa3d2a04d42bbc2145" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addWMSTiles","args":["https://openmaps.gov.bc.ca/geo/pub/wms",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","layers":"pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"}]},{"method":"addControl","args":["<img src=\"https://openmaps.gov.bc.ca/geo/pub/wms?request=GetLegendGraphic&\nformat=image%2Fpng&\nwidth=20&\nheight=20&\nlayer=pub%3AWHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP\">","bottomright",null,"info legend"]}],"setView":[[54.5,-126.5],5,[]]},"evals":[],"jsHooks":[]}</script><span class="r-in"><span><span class="co"># }</span></span></span>
+<div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addWMSTiles","args":["https://openmaps.gov.bc.ca/geo/pub/wms",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","layers":"pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"}]},{"method":"addControl","args":["<img src=\"https://openmaps.gov.bc.ca/geo/pub/wms?request=GetLegendGraphic&\nformat=image%2Fpng&\nwidth=20&\nheight=20&\nlayer=pub%3AWHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP\">","bottomright",null,"info legend"]}],"setView":[[54.5,-126.5],5,[]]},"evals":[],"jsHooks":[]}</script><span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

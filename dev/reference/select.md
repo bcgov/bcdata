@@ -44,36 +44,33 @@ select(.data, ...)
 try(
   feature_spec <- bcdc_describe_feature("bc-airports")
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 try(
   ## Columns that can selected:
   feature_spec[feature_spec$sticky == TRUE,]
 )
-#> # A tibble: 9 × 5
-#>   col_name             sticky remote_col_type local_col_type
-#>   <chr>                <lgl>  <chr>           <chr>         
-#> 1 id                   TRUE   xsd:string      character     
-#> 2 CUSTODIAN_ORG_DESCR… TRUE   xsd:string      character     
-#> 3 BUSINESS_CATEGORY_C… TRUE   xsd:string      character     
-#> 4 BUSINESS_CATEGORY_D… TRUE   xsd:string      character     
-#> 5 OCCUPANT_TYPE_DESCR… TRUE   xsd:string      character     
-#> 6 SOURCE_DATA_ID       TRUE   xsd:string      character     
-#> 7 SUPPLIED_SOURCE_ID_… TRUE   xsd:string      character     
-#> 8 AIRPORT_NAME         TRUE   xsd:string      character     
-#> 9 SEQUENCE_ID          TRUE   xsd:decimal     numeric       
-#> # ℹ 1 more variable: column_comments <chr>
+#> Error in eval(expr, envir) : object 'feature_spec' not found
 
 ## Select columns
 try(
   res <- bcdc_query_geodata("bc-airports") %>%
     select(DESCRIPTION, PHYSICAL_ADDRESS)
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 ## Select "sticky" columns
 try(
   res <- bcdc_query_geodata("bc-airports") %>%
     select(LOCALITY)
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 # }
 
 ```

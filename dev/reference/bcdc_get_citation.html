@@ -19,7 +19,7 @@ citation requirements.'><meta property="og:image" content="https://bcgov.github.
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,45 +93,17 @@ in your .Rprofile file so the option persists across sessions.</p></dd>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span> <span class="fu">bcdc_get_citation</span><span class="op">(</span><span class="st">"76b1b7a3-2112-4444-857a-afccf7b20da8"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GeoBC Branch (2025). “BC Airports.” Province of</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> British Columbia, Joy Sinnett &amp; Nancy Liesch. Open</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Government Licence - British Columbia,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8&gt;.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A BibTeX entry for LaTeX users is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   @TechReport{,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     title = {BC Airports},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     author = {{GeoBC Branch}},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     address = {Joy Sinnett &amp; Nancy Liesch},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     institution = {Province of British Columbia},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year = {2025},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     howpublished = {Record accessed 2026-02-06},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     url = {https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     note = {Open Government Licence - British Columbia},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10003 ms: Timeout was reached</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Or directly on a record object</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span> <span class="fu">bcdc_get_citation</span><span class="op">(</span><span class="fu"><a href="bcdc_get_record.html">bcdc_get_record</a></span><span class="op">(</span><span class="st">"76b1b7a3-2112-4444-857a-afccf7b20da8"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GeoBC Branch (2025). “BC Airports.” Province of</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> British Columbia, Joy Sinnett &amp; Nancy Liesch. Open</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Government Licence - British Columbia,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8&gt;.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A BibTeX entry for LaTeX users is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   @TechReport{,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     title = {BC Airports},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     author = {{GeoBC Branch}},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     address = {Joy Sinnett &amp; Nancy Liesch},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     institution = {Province of British Columbia},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year = {2025},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     howpublished = {Record accessed 2026-02-06},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     url = {https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     note = {Open Government Licence - British Columbia},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

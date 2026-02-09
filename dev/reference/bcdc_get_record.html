@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,106 +75,30 @@ in your .Rprofile file so the option persists across sessions.</p></dd>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_get_record</span><span class="op">(</span><span class="st">"https://catalogue.data.gov.bc.ca/dataset/bc-airports"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">B.C. Data Catalogue Record: </span>BC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Airports</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Name: </span>bc-airports (ID:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  76b1b7a3-2112-4444-857a-afccf7b20da8)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Permalink:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span>https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Licence: </span>Open Government Licence -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  British Columbia</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Description: </span>BC Airports identifies</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  locations where aircraft may take-off and land. No</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  guarantee is given that an identified point will be</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  maintained to sufficient standards for landing and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  take-off of any/all aircraft.  It includes airports,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  aerodromes, water aerodromes, heliports, and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  airstrips.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Available Resources (2):</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1. BC_Airports_Attribute_Values (xlsx)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2. WMS getCapabilities request (wms)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Access the full 'Resources' data frame using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Query and filter this data using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_get_record</span><span class="op">(</span><span class="st">"bc-airports"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">B.C. Data Catalogue Record: </span>BC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Airports</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Name: </span>bc-airports (ID:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  76b1b7a3-2112-4444-857a-afccf7b20da8)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Permalink:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span>https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Licence: </span>Open Government Licence -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  British Columbia</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Description: </span>BC Airports identifies</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  locations where aircraft may take-off and land. No</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  guarantee is given that an identified point will be</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  maintained to sufficient standards for landing and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  take-off of any/all aircraft.  It includes airports,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  aerodromes, water aerodromes, heliports, and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  airstrips.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Available Resources (2):</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1. BC_Airports_Attribute_Values (xlsx)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2. WMS getCapabilities request (wms)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Access the full 'Resources' data frame using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Query and filter this data using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_get_record</span><span class="op">(</span><span class="st">"https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">B.C. Data Catalogue Record: </span>BC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Airports</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Name: </span>bc-airports (ID:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  76b1b7a3-2112-4444-857a-afccf7b20da8)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Permalink:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span>https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Licence: </span>Open Government Licence -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  British Columbia</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Description: </span>BC Airports identifies</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  locations where aircraft may take-off and land. No</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  guarantee is given that an identified point will be</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  maintained to sufficient standards for landing and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  take-off of any/all aircraft.  It includes airports,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  aerodromes, water aerodromes, heliports, and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  airstrips.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Available Resources (2):</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1. BC_Airports_Attribute_Values (xlsx)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2. WMS getCapabilities request (wms)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Access the full 'Resources' data frame using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Query and filter this data using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_get_record</span><span class="op">(</span><span class="st">"76b1b7a3-2112-4444-857a-afccf7b20da8"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">B.C. Data Catalogue Record: </span>BC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Airports</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Name: </span>bc-airports (ID:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  76b1b7a3-2112-4444-857a-afccf7b20da8)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Permalink:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span>https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Licence: </span>Open Government Licence -</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  British Columbia</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Description: </span>BC Airports identifies</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  locations where aircraft may take-off and land. No</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  guarantee is given that an identified point will be</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  maintained to sufficient standards for landing and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  take-off of any/all aircraft.  It includes airports,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  aerodromes, water aerodromes, heliports, and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  airstrips.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Available Resources (2):</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1. BC_Airports_Attribute_Values (xlsx)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2. WMS getCapabilities request (wms)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Access the full 'Resources' data frame using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">Query and filter this data using:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;"> </span><span style="color: #BB0000;">bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

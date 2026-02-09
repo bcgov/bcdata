@@ -52,39 +52,13 @@ B.C. Data Catalogue record. The tibble returns the following columns:
 try(
   bcdc_describe_feature("bc-airports")
 )
-#> # A tibble: 42 × 5
-#>    col_name            sticky remote_col_type local_col_type
-#>    <chr>               <lgl>  <chr>           <chr>         
-#>  1 id                  TRUE   xsd:string      character     
-#>  2 CUSTODIAN_ORG_DESC… TRUE   xsd:string      character     
-#>  3 BUSINESS_CATEGORY_… TRUE   xsd:string      character     
-#>  4 BUSINESS_CATEGORY_… TRUE   xsd:string      character     
-#>  5 OCCUPANT_TYPE_DESC… TRUE   xsd:string      character     
-#>  6 SOURCE_DATA_ID      TRUE   xsd:string      character     
-#>  7 SUPPLIED_SOURCE_ID… TRUE   xsd:string      character     
-#>  8 AIRPORT_NAME        TRUE   xsd:string      character     
-#>  9 DESCRIPTION         FALSE  xsd:string      character     
-#> 10 PHYSICAL_ADDRESS    FALSE  xsd:string      character     
-#> # ℹ 32 more rows
-#> # ℹ 1 more variable: column_comments <chr>
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 try(
   bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 )
-#> # A tibble: 42 × 5
-#>    col_name            sticky remote_col_type local_col_type
-#>    <chr>               <lgl>  <chr>           <chr>         
-#>  1 id                  TRUE   xsd:string      character     
-#>  2 CUSTODIAN_ORG_DESC… TRUE   xsd:string      character     
-#>  3 BUSINESS_CATEGORY_… TRUE   xsd:string      character     
-#>  4 BUSINESS_CATEGORY_… TRUE   xsd:string      character     
-#>  5 OCCUPANT_TYPE_DESC… TRUE   xsd:string      character     
-#>  6 SOURCE_DATA_ID      TRUE   xsd:string      character     
-#>  7 SUPPLIED_SOURCE_ID… TRUE   xsd:string      character     
-#>  8 AIRPORT_NAME        TRUE   xsd:string      character     
-#>  9 DESCRIPTION         FALSE  xsd:string      character     
-#> 10 PHYSICAL_ADDRESS    FALSE  xsd:string      character     
-#> # ℹ 32 more rows
-#> # ℹ 1 more variable: column_comments <chr>
+#> Error : Unable to access wfs listing from server. Please open an issue. 
 # }
 ```

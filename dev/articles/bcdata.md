@@ -9,7 +9,7 @@ Catalogue](https://www2.gov.bc.ca/gov/content?id=79B5224167334667A44C9E8B5143D0C
 is the place to find British Columbia Government data, applications and
 web services. Much of the data are released under the [Open Government
 Licence — British
-Columbia](https://www2.gov.bc.ca/gov/content/data/policy-standards/open-data/open-government-licence-bc),
+Columbia](https://www2.gov.bc.ca/gov/content/data/policy-standards/data-policies/open-data/open-government-licence-bc),
 as well as numerous other
 [licences](https://catalogue.data.gov.bc.ca/dataset?download_audience=Public).
 

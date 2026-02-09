@@ -41,8 +41,8 @@ try(
   res <- bcdc_query_geodata("bc-airports") %>%
     mutate(LATITUDE * 100)
 )
-#> Error : You must type collect() before using mutate() on a WFS. 
-#> After using collect() add this mutate call::
-#>     mutate(LATITUDE * 100) 
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 # }
 ```

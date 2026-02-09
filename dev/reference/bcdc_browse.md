@@ -64,10 +64,16 @@ try(
 try(
  bcdc_browse("bc-airports")
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 ## Take me to the B.C. airports catalogue record
 try(
   bcdc_browse("76b1b7a3-2112-4444-857a-afccf7b20da8")
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 # }
 ```

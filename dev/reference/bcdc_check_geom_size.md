@@ -47,6 +47,8 @@ try({
   airports <- bcdc_query_geodata("bc-airports") %>% collect()
   bcdc_check_geom_size(airports)
 })
-#> Warning: It is advised to use the permanent id ('76b1b7a3-2112-4444-857a-afccf7b20da8') rather than the name of the record ('bc-airports') to guard against future name changes.
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10003 ms: Timeout was reached
 # }
 ```

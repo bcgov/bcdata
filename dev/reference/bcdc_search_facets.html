@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,47 +73,16 @@ more of:
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_search_facets</span><span class="op">(</span><span class="st">"download_audience"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               facet                          name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 download_audience                        Public</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 download_audience              Not downloadable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 download_audience                   Named users</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 download_audience                            NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 download_audience Government and Business BCeID</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 download_audience                    Government</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    display_name count</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                        Public  2391</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              Not downloadable   229</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                   Named users    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                            NA   174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Government and Business BCeID     8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                    Government   483</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">bcdc_search_facets</span><span class="op">(</span><span class="st">"res_format"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         facet         name display_name count</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  res_format          zip          zip    35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  res_format          xml          xml    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  res_format         xlsx         xlsx   699</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  res_format          xls          xls   303</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  res_format         wmts         wmts     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  res_format          wms          wms   878</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  res_format          txt          txt    30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  res_format          shp          shp    68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  res_format          pdf          pdf   194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 res_format        other        other   337</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 res_format   oracle_sde   oracle_sde   463</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 res_format openapi-json openapi-json    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 res_format     multiple     multiple  1110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 res_format          kmz          kmz    31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 res_format          kml          kml   876</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 res_format         json         json    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 res_format         html         html   107</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 res_format         gpkg         gpkg    22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 res_format      geojson      geojson    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 res_format         fgdb         fgdb    96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21 res_format          csv          csv   574</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22 res_format  arcgis_rest  arcgis_rest   169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Timeout was reached [catalogue.data.gov.bc.ca]:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10001 ms: Timeout was reached</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

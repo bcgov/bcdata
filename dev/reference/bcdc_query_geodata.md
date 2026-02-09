@@ -70,6 +70,9 @@ See examples.
 try(
   res <- bcdc_query_geodata("bc-airports", crs = 3857)
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 # To obtain the actual data as an sf object, collect() must be called:
 try(
@@ -77,12 +80,18 @@ try(
     filter(PHYSICAL_ADDRESS == 'Victoria, BC') %>%
     collect()
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 # To query based on partial matches, use %LIKE%:
 try(
   res <- bcdc_query_geodata("bc-airports") %>%
     filter(PHYSICAL_ADDRESS %LIKE% 'Vict%')
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 # To query using %IN%
 try(
@@ -96,6 +105,9 @@ try(
     ) %>%
     collect()
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 
 try(
@@ -104,26 +116,41 @@ try(
     select(WELL_TAG_NUMBER, INTENDED_WATER_USE) %>%
     collect()
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 ## A moderately large layer
 try(
   res <- bcdc_query_geodata("bc-environmental-monitoring-locations")
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 try(
   res <- bcdc_query_geodata("bc-environmental-monitoring-locations") %>%
     filter(PERMIT_RELATIONSHIP == "DISCHARGE")
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 
 ## A very large layer
 try(
   res <- bcdc_query_geodata("terrestrial-protected-areas-representation-by-biogeoclimatic-unit")
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [catalogue.data.gov.bc.ca]:
+#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 ## Using a BCGW name
 try(
   res <- bcdc_query_geodata("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 )
+#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
+#>   Timeout was reached [openmaps.gov.bc.ca]:
+#> Failed to connect to openmaps.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 # }
 ```
