@@ -37,18 +37,47 @@ bcdc_get_citation(record)
 ## Examples
 
 ``` r
+
 try(
  bcdc_get_citation("76b1b7a3-2112-4444-857a-afccf7b20da8")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10003 ms: Timeout was reached
+#> GeoBC Branch (2025). “BC Airports.” Province of
+#> British Columbia, Joy Sinnett & Nancy Liesch. Open
+#> Government Licence - British Columbia,
+#> <https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @TechReport{,
+#>     title = {BC Airports},
+#>     author = {{GeoBC Branch}},
+#>     address = {Joy Sinnett & Nancy Liesch},
+#>     institution = {Province of British Columbia},
+#>     year = {2025},
+#>     howpublished = {Record accessed 2026-06-23},
+#>     url = {https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8},
+#>     note = {Open Government Licence - British Columbia},
+#>   }
 
 ## Or directly on a record object
 try(
  bcdc_get_citation(bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8"))
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
+#> GeoBC Branch (2025). “BC Airports.” Province of
+#> British Columbia, Joy Sinnett & Nancy Liesch. Open
+#> Government Licence - British Columbia,
+#> <https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @TechReport{,
+#>     title = {BC Airports},
+#>     author = {{GeoBC Branch}},
+#>     address = {Joy Sinnett & Nancy Liesch},
+#>     institution = {Province of British Columbia},
+#>     year = {2025},
+#>     howpublished = {Record accessed 2026-06-23},
+#>     url = {https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8},
+#>     note = {Open Government Licence - British Columbia},
+#>   }
 ```

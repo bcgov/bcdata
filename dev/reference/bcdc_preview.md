@@ -34,17 +34,13 @@ bcdc_preview(record)
 try(
   bcdc_preview("regional-districts-legally-defined-administrative-areas-of-bc")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
+{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addWMSTiles","args":["https://openmaps.gov.bc.ca/geo/pub/wms",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","layers":"pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP"}]},{"method":"addControl","args":["<img src=\"https://openmaps.gov.bc.ca/geo/pub/wms?request=GetLegendGraphic&\nformat=image%2Fpng&\nwidth=20&\nheight=20&\nlayer=pub%3AWHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP\">","bottomright",null,"info legend"]}],"setView":[[54.5,-126.5],5,[]]},"evals":[],"jsHooks":[]}
 try(
   bcdc_preview("water-reservations-points")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
+{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":true,"detectRetina":false}]},{"method":"addWMSTiles","args":["https://openmaps.gov.bc.ca/geo/pub/wms",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","layers":"pub:WHSE_WATER_MANAGEMENT.WLS_WATER_RESERVATION_SV"}]},{"method":"addControl","args":["<img src=\"https://openmaps.gov.bc.ca/geo/pub/wms?request=GetLegendGraphic&\nformat=image%2Fpng&\nwidth=20&\nheight=20&\nlayer=pub%3AWHSE_WATER_MANAGEMENT.WLS_WATER_RESERVATION_SV\">","bottomright",null,"info legend"]}],"setView":[[54.5,-126.5],5,[]]},"evals":[],"jsHooks":[]}
 # Using BCGW name
 try(
   bcdc_preview("WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_REGIONAL_DISTRICTS_SP")

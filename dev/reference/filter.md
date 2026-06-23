@@ -57,18 +57,12 @@ try(
     filter(ADMIN_AREA_NAME == "Cariboo Regional District") %>%
     collect()
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 try(
   ret1 <- bcdc_query_geodata("bc-wildfire-fire-perimeters-historical") %>%
     filter(FIRE_YEAR == 2000, FIRE_CAUSE == "Person", INTERSECTS(crd)) %>%
     collect()
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 # Use local() to force parts of your call to be evaluated in R:
 try({
@@ -88,8 +82,5 @@ try({
 })
 #> Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2()
 #> is TRUE
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 # }
 ```

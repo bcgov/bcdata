@@ -40,13 +40,18 @@ A data frame containing the metadata for all the resources for a record
 try(
   airports <- bcdc_get_record("bc-airports")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10003 ms: Timeout was reached
 
 try(
   bcdc_tidy_resources(airports)
 )
-#> Error in eval(expr, envir) : object 'airports' not found
+#> # A tibble: 4 × 9
+#>   name          url   id    format ext   package_id location
+#>   <chr>         <chr> <chr> <chr>  <chr> <chr>      <chr>   
+#> 1 BC Geographi… ""    604c… multi… ""    76b1b7a3-… bcgeogr…
+#> 2 BC_Airports_… "htt… fccc… xlsx   "xls… 76b1b7a3-… catalog…
+#> 3 WMS getCapab… "htt… 4d03… wms    ""    76b1b7a3-… bcgeogr…
+#> 4 Download KML… "htt… 5b9f… kml    "kml" 76b1b7a3-… bcgeogr…
+#> # ℹ 2 more variables: wfs_available <lgl>,
+#> #   bcdata_available <lgl>
 # }
 ```

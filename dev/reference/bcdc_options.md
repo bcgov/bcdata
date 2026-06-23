@@ -71,8 +71,6 @@ try(
 try(
   bcdc_options()
 )
-#> Unable to access server to determine single download limit; using default download limit of 10000
-#> Unable to access server to determine single download limit; using default download limit of 10000
 #> # A tibble: 6 × 3
 #>   option                                value default
 #>   <chr>                                 <dbl>   <dbl>
@@ -91,8 +89,6 @@ try(
 try(
   bcdc_options()
 )
-#> Unable to access server to determine single download limit; using default download limit of 10000
-#> Unable to access server to determine single download limit; using default download limit of 10000
 #> # A tibble: 6 × 3
 #>   option                                  value default
 #>   <chr>                                   <dbl>   <dbl>

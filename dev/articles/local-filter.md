@@ -36,6 +36,7 @@ us just the set of local greenspaces that exist within that bounding
 box.
 
 ``` r
+
 library(sf)
 library(bcdata)
 
@@ -49,6 +50,7 @@ Previously, we could just do this, with
 embedded in the call:
 
 ``` r
+
 bcdc_query_geodata("local-and-regional-greenspaces") %>%
   filter(BBOX(st_bbox(two_points, crs = st_crs(two_points))))
 ```
@@ -64,6 +66,7 @@ your machine in R, before it is translated into a query plan to be
 executed on the server:
 
 ``` r
+
 bcdc_query_geodata("local-and-regional-greenspaces") %>%
   filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points)))))
 ```

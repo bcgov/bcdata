@@ -33,29 +33,105 @@ A list containing the metadata for the record
 try(
   bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/bc-airports")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
+#> B.C. Data Catalogue Record: BC
+#>  Airports
+#> Name: bc-airports (ID:
+#>  76b1b7a3-2112-4444-857a-afccf7b20da8)
+#> Permalink:
+#>  https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#> Licence: Open Government Licence -
+#>  British Columbia
+#> Description: BC Airports identifies
+#>  locations where aircraft may take-off and land. No
+#>  guarantee is given that an identified point will be
+#>  maintained to sufficient standards for landing and
+#>  take-off of any/all aircraft.  It includes airports,
+#>  aerodromes, water aerodromes, heliports, and
+#>  airstrips.
+#> Available Resources (2):
+#>  1. BC_Airports_Attribute_Values (xlsx)
+#>  2. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
 
 try(
   bcdc_get_record("bc-airports")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
+#> B.C. Data Catalogue Record: BC
+#>  Airports
+#> Name: bc-airports (ID:
+#>  76b1b7a3-2112-4444-857a-afccf7b20da8)
+#> Permalink:
+#>  https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#> Licence: Open Government Licence -
+#>  British Columbia
+#> Description: BC Airports identifies
+#>  locations where aircraft may take-off and land. No
+#>  guarantee is given that an identified point will be
+#>  maintained to sufficient standards for landing and
+#>  take-off of any/all aircraft.  It includes airports,
+#>  aerodromes, water aerodromes, heliports, and
+#>  airstrips.
+#> Available Resources (2):
+#>  1. BC_Airports_Attribute_Values (xlsx)
+#>  2. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
 
 try(
   bcdc_get_record("https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
+#> B.C. Data Catalogue Record: BC
+#>  Airports
+#> Name: bc-airports (ID:
+#>  76b1b7a3-2112-4444-857a-afccf7b20da8)
+#> Permalink:
+#>  https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#> Licence: Open Government Licence -
+#>  British Columbia
+#> Description: BC Airports identifies
+#>  locations where aircraft may take-off and land. No
+#>  guarantee is given that an identified point will be
+#>  maintained to sufficient standards for landing and
+#>  take-off of any/all aircraft.  It includes airports,
+#>  aerodromes, water aerodromes, heliports, and
+#>  airstrips.
+#> Available Resources (2):
+#>  1. BC_Airports_Attribute_Values (xlsx)
+#>  2. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
 
 try(
   bcdc_get_record("76b1b7a3-2112-4444-857a-afccf7b20da8")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
+#> B.C. Data Catalogue Record: BC
+#>  Airports
+#> Name: bc-airports (ID:
+#>  76b1b7a3-2112-4444-857a-afccf7b20da8)
+#> Permalink:
+#>  https://catalogue.data.gov.bc.ca/dataset/76b1b7a3-2112-4444-857a-afccf7b20da8
+#> Licence: Open Government Licence -
+#>  British Columbia
+#> Description: BC Airports identifies
+#>  locations where aircraft may take-off and land. No
+#>  guarantee is given that an identified point will be
+#>  maintained to sufficient standards for landing and
+#>  take-off of any/all aircraft.  It includes airports,
+#>  aerodromes, water aerodromes, heliports, and
+#>  airstrips.
+#> Available Resources (2):
+#>  1. BC_Airports_Attribute_Values (xlsx)
+#>  2. WMS getCapabilities request (wms)
+#> Access the full 'Resources' data frame using:
+#>  bcdc_tidy_resources('76b1b7a3-2112-4444-857a-afccf7b20da8')
+#> Query and filter this data using:
+#>  bcdc_query_geodata('76b1b7a3-2112-4444-857a-afccf7b20da8')
 # }
 ```

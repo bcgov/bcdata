@@ -37,9 +37,16 @@ try(
     filter(PERMIT_RELATIONSHIP == "DISCHARGE") %>%
     show_query()
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
+#> <url>
+#> <body>
+#> SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature
+#>  outputFormat: application/json typeNames:
+#>  WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW
+#>  SRSNAME: EPSG:3005 CQL_FILTER:
+#>  ("PERMIT_RELATIONSHIP" = 'DISCHARGE')
+#> 
+#> <full query url>
+#> https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application%2Fjson&typeNames=WHSE_ENVIRONMENTAL_MONITORING.EMS_MONITORING_LOCN_TYPES_SVW&SRSNAME=EPSG%3A3005&CQL_FILTER=%28%22PERMIT_RELATIONSHIP%22%20%3D%20%27DISCHARGE%27%29
   # }
 
 # \donttest{
@@ -47,13 +54,18 @@ try(
   air <- bcdc_query_geodata("bc-airports") %>%
     collect()
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
 
 try(
   show_query(air)
 )
-#> Error in eval(expr, envir) : object 'air' not found
+#> <url>
+#> <body>
+#> SERVICE: WFS VERSION: 2.0.0 REQUEST: GetFeature
+#>  outputFormat: application/json typeNames:
+#>  WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW SRSNAME:
+#>  EPSG:3005
+#> 
+#> <full query url>
+#> https://openmaps.gov.bc.ca/geo/pub/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application%2Fjson&typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&SRSNAME=EPSG%3A3005
 # }
 ```

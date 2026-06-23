@@ -31,15 +31,46 @@ A data frame of values for the selected facet
 try(
   bcdc_search_facets("download_audience")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10002 ms: Timeout was reached
+#>               facet                          name
+#> 1 download_audience                        Public
+#> 2 download_audience              Not downloadable
+#> 3 download_audience                   Named users
+#> 4 download_audience                            NA
+#> 5 download_audience Government and Business BCeID
+#> 6 download_audience                    Government
+#>                    display_name count
+#> 1                        Public  2408
+#> 2              Not downloadable   220
+#> 3                   Named users    62
+#> 4                            NA   167
+#> 5 Government and Business BCeID     8
+#> 6                    Government   482
 
 try(
   bcdc_search_facets("res_format")
 )
-#> Error in curl::curl_fetch_memory(x$url$url, handle = x$url$handle) : 
-#>   Timeout was reached [catalogue.data.gov.bc.ca]:
-#> Failed to connect to catalogue.data.gov.bc.ca port 443 after 10001 ms: Timeout was reached
+#>         facet         name display_name count
+#> 1  res_format          zip          zip    34
+#> 2  res_format          xml          xml    19
+#> 3  res_format         xlsx         xlsx   707
+#> 4  res_format          xls          xls   302
+#> 5  res_format         wmts         wmts     1
+#> 6  res_format          wms          wms   884
+#> 7  res_format          txt          txt    30
+#> 8  res_format          shp          shp    67
+#> 9  res_format          pdf          pdf   200
+#> 10 res_format        other        other   334
+#> 11 res_format   oracle_sde   oracle_sde   460
+#> 12 res_format openapi-json openapi-json    12
+#> 13 res_format     multiple     multiple  1122
+#> 14 res_format          kmz          kmz    30
+#> 15 res_format          kml          kml   881
+#> 16 res_format         json         json    12
+#> 17 res_format         html         html   108
+#> 18 res_format         gpkg         gpkg    22
+#> 19 res_format      geojson      geojson    18
+#> 20 res_format         fgdb         fgdb   101
+#> 21 res_format          csv          csv   583
+#> 22 res_format  arcgis_rest  arcgis_rest   161
 # }
 ```

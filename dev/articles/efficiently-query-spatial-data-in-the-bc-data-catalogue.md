@@ -19,6 +19,7 @@ about the `sf` package [here](https://r-spatial.github.io/sf/) and
 `dplyr` [here](https://dplyr.tidyverse.org/):
 
 ``` r
+
 library(bcdata)
 library(sf)
 library(dplyr)
@@ -50,6 +51,7 @@ from the B.C. Data Catalogue. This layer is described using this
 command:
 
 ``` r
+
 bcdc_get_record("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> B.C. Data Catalogue Record: School Districts of BC
 #> Name: school-districts-of-bc (ID: 78ec5279-4534-49a1-97e8-9d315936f08b)
@@ -74,6 +76,7 @@ in this metadata is that the layer has a resource in `"wms"` format
 know we can make use of `bcdc_query_geodata`.
 
 ``` r
+
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b")
 #> Querying 'school-districts-of-bc' record
 #> • Using collect() on this object will return 59 features and 9 fields
@@ -111,6 +114,7 @@ districts, we want to ask the catalogue for only those polygons just
 like we would in a typical `dplyr` workflow:
 
 ``` r
+
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson"))
 #> Querying 'school-districts-of-bc' record
@@ -140,6 +144,7 @@ the data will need to be brought into R and unique values will need to
 be determined there.
 
 ``` r
+
 bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
   select(SCHOOL_DISTRICT_NAME)
@@ -168,6 +173,7 @@ after you `collect` the data, which we will take care of right now, you
 can drop them:
 
 ``` r
+
 districts <- bcdc_query_geodata("78ec5279-4534-49a1-97e8-9d315936f08b") %>%
   filter(SCHOOL_DISTRICT_NAME %in% c("Greater Victoria", "Prince George","Kamloops/Thompson")) %>%
   select(SCHOOL_DISTRICT_NAME) %>%
@@ -180,6 +186,7 @@ you want and wish to begin working with it in R like a normal `sf`
 object. For example, we can now plot these three school districts:
 
 ``` r
+
 plot(st_geometry(districts))
 ```
 
@@ -198,6 +205,7 @@ greenspace](https://catalogue.data.gov.bc.ca/dataset/6a2fea1b-0cc4-4fc2-8017-eaf
 layer in the catalogue. This layer is described here:
 
 ``` r
+
 bcdc_get_record("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> B.C. Data Catalogue Record: Local and Regional Greenspaces
 #> Name: local-and-regional-greenspaces (ID: 6a2fea1b-0cc4-4fc2-8017-eaf755d516da)
@@ -225,6 +233,7 @@ Again we recognize this is
 geospatial data, which means we can make use of `bcdc_query_geodata`.
 
 ``` r
+
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Querying 'local-and-regional-greenspaces' record
 #> • Using collect() on this object will return 9212 features and 19 fields
@@ -254,6 +263,7 @@ bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 Since we are interested in only “Park” data we can subset our query:
 
 ``` r
+
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park")
 #> Querying 'local-and-regional-greenspaces' record
@@ -295,6 +305,7 @@ step, we can call `collect` and assign a name to this object. These
 requests can sometimes take quite a long:
 
 ``` r
+
 districts_parks <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
@@ -327,6 +338,7 @@ size of the `districts` object exceeded the current value of
 `bcdata.max_geom_pred_size`:
 
 ``` r
+
 bcdc_check_geom_size(districts)
 #> The object is too large to perform exact spatial operations using bcdata.
 #> Object size: 948576 bytes
@@ -347,6 +359,7 @@ we can use a spatial join to assign parks into their respective
 district:
 
 ``` r
+
 districts_parks_join <- districts_parks %>%
   st_join(districts, left = FALSE)
 ```
@@ -372,6 +385,7 @@ the most municipal park space we can calculate the area of each park
 polygon and then sum those areas by school district:
 
 ``` r
+
 districts_parks_join %>%
   mutate(area = st_area(geometry)) %>%
   st_set_geometry(NULL) %>%
@@ -400,6 +414,7 @@ evaluate that piece of code locally by wrapping it in a
 [`local()`](https://rdrr.io/r/base/eval.html) call:
 
 ``` r
+
 greenspaces_around <- bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(INTERSECTS(local(st_buffer(districts, 1000)))) %>%
   collect()
@@ -413,6 +428,7 @@ know when working with spatial data from the catalogue.
 selectable, and the column types in both R and on the remote server:
 
 ``` r
+
 bcdc_describe_feature("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> # A tibble: 20 × 5
 #>    col_name                sticky remote_col_type          local_col_type column_comments           
@@ -447,6 +463,7 @@ Another useful function is
 which provides information on the request issued to the remote server:
 
 ``` r
+
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park") %>%
   filter(INTERSECTS(districts)) %>%
@@ -478,6 +495,7 @@ shows that the object name is
 [`bcdc_query_geodata()`](https://bcgov.github.io/bcdata/dev/reference/bcdc_query_geodata.md):
 
 ``` r
+
 # Look at the columns available:
 bcdc_describe_feature("WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW")
 #> # A tibble: 42 × 5
