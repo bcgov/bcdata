@@ -328,14 +328,10 @@ filter.bcdc_promise <- function(.data, ...) {
   ## Change CQL query on the fly if geom is not GEOMETRY
   current_cql = specify_geom_name(.data$cols_df, current_cql)
 
-  # Add cql filter statement to any existing cql filter statements.
-  # ensure .data$query_list$CQL_FILTER is class sql even if NULL, so
-  # dispatches on sql class and dbplyr::c.sql method is used
-  .data$query_list$CQL_FILTER <- c(
-    dbplyr::sql(.data$query_list$CQL_FILTER),
-    current_cql,
-    drop_null = TRUE
-  )
+  # Append the new clause to any existing CQL filter.
+  combined_cql <- c(unclass(.data$query_list$CQL_FILTER), unclass(current_cql))
+  combined_cql <- combined_cql[nzchar(combined_cql)]
+  .data$query_list$CQL_FILTER <- dbplyr::sql(combined_cql)
 
   as.bcdc_promise(list(
     query_list = .data$query_list,
