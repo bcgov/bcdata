@@ -39,7 +39,9 @@ bcdc_search_facets <- function(
     "groups"
   )
 ) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
 
   facet <- match.arg(facet, several.ok = TRUE)
   query <- paste0("\"", facet, "\"", collapse = ",")
@@ -72,7 +74,7 @@ bcdc_search_facets <- function(
 }
 
 #' @export
-#' @describeIn bcdc_list_group_records
+#' @describeIn bcdc_list_group_records List the available groups in the B.C. Data Catalogue.
 #'
 bcdc_list_groups <- function() bcdc_search_facets("groups")
 
@@ -91,7 +93,9 @@ bcdc_list_groups <- function() bcdc_search_facets("groups")
 #' }
 
 bcdc_list_group_records <- function(group) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
 
   cli <- bcdc_catalogue_client("action/group_package_show")
 
@@ -116,7 +120,7 @@ bcdc_list_group_records <- function(group) {
 }
 
 #' @export
-#' @describeIn bcdc_list_organization_records
+#' @describeIn bcdc_list_organization_records List the available organizations in the B.C. Data Catalogue.
 #'
 bcdc_list_organizations <- function() bcdc_search_facets("organization")
 
@@ -135,7 +139,9 @@ bcdc_list_organizations <- function() bcdc_search_facets("organization")
 #' }
 
 bcdc_list_organization_records <- function(organization) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
 
   option_package_limit <- getOption("bcdata.max_package_search_limit", 1000)
 
@@ -175,7 +181,9 @@ bcdc_list_organization_records <- function(organization) {
 #' )
 #' }
 bcdc_list <- function() {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
 
   l_new_ret <- 1
   ret <- character()
@@ -240,7 +248,9 @@ bcdc_search <- function(
   groups = NULL,
   n = 100
 ) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
 
   # TODO: allow terms to be passed as a vector, and allow use of | for OR
   terms <- process_search_terms(...)
@@ -345,7 +355,9 @@ bcdc_search <- function(
 #' )
 #' }
 bcdc_get_record <- function(id) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
 
   id <- slug_from_url(id)
 
@@ -443,7 +455,9 @@ as.bcdc_organization <- function(x, description) {
 #'
 #' @export
 bcdc_tidy_resources <- function(record) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
   UseMethod("bcdc_tidy_resources")
 }
 

@@ -18,7 +18,7 @@ https://catalogue.data.gov.bc.ca/organizations or accessed directly from R using
 }
 \section{Functions}{
 \itemize{
-\item \code{bcdc_list_organizations()}: 
+\item \code{bcdc_list_organizations()}: List the available organizations in the B.C. Data Catalogue.
 
 }}
 \examples{

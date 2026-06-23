@@ -173,6 +173,38 @@ test_that("Different combinations of predicates work", {
   )
 })
 
+test_that("filter() builds clean CQL without a drop_null artifact (#368)", {
+  # Exercises the CQL append path in filter.bcdc_promise offline. A minimal
+  # promise is sufficient because filter() only consults cols_df and query_list.
+  # The snapshots let us confirm at a glance that a single predicate is wrapped
+  # in exactly one set of parentheses and that no TRUE AS "drop_null" leaks in.
+  cols_df <- data.frame(
+    col_name = c("GEOMETRY", "BGC_LABEL"),
+    remote_col_type = c("gml:GeometryPropertyType", "xsd:string"),
+    stringsAsFactors = FALSE
+  )
+  promise <- as.bcdc_promise(list(
+    query_list = list(typeNames = "test", CQL_FILTER = NULL),
+    cli = NULL,
+    record = NULL,
+    cols_df = cols_df
+  ))
+
+  bbox <- st_as_sfc(st_bbox(
+    c(xmin = 0, ymin = 0, xmax = 1, ymax = 1),
+    crs = 3005
+  ))
+  cql <- function(p) finalize_cql(p$query_list$CQL_FILTER)
+
+  # A single spatial clause.
+  expect_snapshot(cql(filter(promise, INTERSECTS(bbox))))
+
+  # A chained second clause AND-joined onto the first.
+  expect_snapshot(
+    cql(filter(filter(promise, INTERSECTS(bbox)), BGC_LABEL != "ZZZ"))
+  )
+})
+
 test_that("subsetting works locally", {
   x <- c("a", "b")
   y <- data.frame(id = x, stringsAsFactors = FALSE)
