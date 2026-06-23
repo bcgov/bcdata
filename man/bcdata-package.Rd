@@ -25,6 +25,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Andy Teucher \email{andy.teucher@gmail.com} (\href{https://orcid.org/0000-0002-7840-692X}{ORCID})
   \item Sam Albers \email{sam.albers@gmail.com} (\href{https://orcid.org/0000-0002-9270-7884}{ORCID}) [contributor]
   \item Stephanie Hazlitt \email{stephhazlitt@gmail.com} (\href{https://orcid.org/0000-0002-3161-2304}{ORCID}) [contributor]
 }
