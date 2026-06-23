@@ -173,9 +173,11 @@ test_that("Different combinations of predicates work", {
   )
 })
 
-test_that("filter() does not leak a drop_null clause or double-wrap parens", {
+test_that("filter() builds clean CQL without a drop_null artifact (#368)", {
   # Exercises the CQL append path in filter.bcdc_promise offline. A minimal
   # promise is sufficient because filter() only consults cols_df and query_list.
+  # The snapshots let us confirm at a glance that a single predicate is wrapped
+  # in exactly one set of parentheses and that no TRUE AS "drop_null" leaks in.
   cols_df <- data.frame(
     col_name = c("GEOMETRY", "BGC_LABEL"),
     remote_col_type = c("gml:GeometryPropertyType", "xsd:string"),
@@ -192,18 +194,15 @@ test_that("filter() does not leak a drop_null clause or double-wrap parens", {
     c(xmin = 0, ymin = 0, xmax = 1, ymax = 1),
     crs = 3005
   ))
-  cql <- function(p) as.character(finalize_cql(p$query_list$CQL_FILTER))
+  cql <- function(p) finalize_cql(p$query_list$CQL_FILTER)
 
-  # A single spatial clause: no TRUE AS "drop_null" artifact, and wrapped in
-  # exactly one set of parentheses rather than two.
-  single <- cql(filter(promise, INTERSECTS(bbox)))
-  expect_false(grepl("drop_null", single))
-  expect_false(grepl("^\\(\\(", single))
+  # A single spatial clause.
+  expect_snapshot(cql(filter(promise, INTERSECTS(bbox))))
 
-  # A chained second clause AND-joins cleanly, still without the artifact.
-  multi <- cql(filter(filter(promise, INTERSECTS(bbox)), BGC_LABEL != "ZZZ"))
-  expect_false(grepl("drop_null", multi))
-  expect_match(multi, "AND \\(\"BGC_LABEL\" != 'ZZZ'\\)")
+  # A chained second clause AND-joined onto the first.
+  expect_snapshot(
+    cql(filter(filter(promise, INTERSECTS(bbox)), BGC_LABEL != "ZZZ"))
+  )
 })
 
 test_that("subsetting works locally", {
