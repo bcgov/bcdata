@@ -1,5 +1,10 @@
 # bcdata (development version)
 
+* Fixed a bug where `filter()` calls using CQL geometry predicates (such as
+  `INTERSECTS()`) produced malformed CQL that the server rejected with an HTTP
+  400 error. The CQL leaked a spurious `TRUE AS "drop_null"` clause and extra
+  parentheses following the removal of `c.sql()` in dbplyr 2.6.0 (#368).
+
 # bcdata 0.5.2
 
 * Removed dependency on `leaflet.extras`, using `leaflet::addControl()` instead
