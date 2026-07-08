@@ -31,18 +31,18 @@ try(
   bcdc_list_organization_records('bc-stats')
 )
 #> # A tibble: 91 × 48
-#>    author     author_email creator_user_id download_audience
-#>  * <chr>      <lgl>        <chr>           <chr>            
-#>  1 NA         NA           40a48d33-5a6c-… Public           
-#>  2 NA         NA           40a48d33-5a6c-… Public           
-#>  3 NA         NA           40a48d33-5a6c-… Public           
-#>  4 NA         NA           40a48d33-5a6c-… Public           
-#>  5 427ce3ac-… NA           427ce3ac-d77d-… Public           
-#>  6 NA         NA           40a48d33-5a6c-… Public           
-#>  7 NA         NA           b3245224-9d10-… Public           
-#>  8 NA         NA           b3245224-9d10-… Public           
-#>  9 NA         NA           40a48d33-5a6c-… Public           
-#> 10 NA         NA           40a48d33-5a6c-… Public           
+#>    author author_email creator_user_id     download_audience
+#>  * <chr>  <lgl>        <chr>               <chr>            
+#>  1 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  2 NA     NA           b3245224-9d10-4bb4… Public           
+#>  3 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  4 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  5 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  6 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  7 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  8 NA     NA           b3245224-9d10-4bb4… Public           
+#>  9 NA     NA           40a48d33-5a6c-4b5e… Public           
+#> 10 NA     NA           40a48d33-5a6c-4b5e… Public           
 #> # ℹ 81 more rows
 #> # ℹ 44 more variables: id <chr>, isopen <lgl>,
 #> #   license_id <chr>, license_title <chr>,

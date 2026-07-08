@@ -6,9 +6,7 @@
   [`filter()`](https://bcgov.github.io/bcdata/dev/reference/filter.md)
   calls using CQL geometry predicates (such as
   [`INTERSECTS()`](https://bcgov.github.io/bcdata/dev/reference/cql_geom_predicates.md))
-  produced malformed CQL that the server rejected with an HTTP 400
-  error. The CQL leaked a spurious `TRUE AS "drop_null"` clause and
-  extra parentheses following the removal of `c.sql()` in dbplyr 2.6.0
+  produced malformed CQL that the server rejected with an HTTP 400 error
   ([\#368](https://github.com/bcgov/bcdata/issues/368)).
 
 ## bcdata 0.5.2
