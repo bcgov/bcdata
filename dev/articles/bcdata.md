@@ -134,9 +134,10 @@ bcdc_search_facets(facet = "license_id")
 #> 11 license_id   52 Open Data Licence - Office of the Registrar of Lobbyists for British Columbia
 #> 12 license_id   45                      Open Data Commons - Public Domain Dedication and Licence
 #> 13 license_id   25                                     King's Printer Licence - British Columbia
-#> 14 license_id   42                                                Elections BC Open Data Licence
-#> 15 license_id   51                                         BC Energy Regulator Open Data License
-#> 16 license_id   22                                                                   Access Only
+#> 14 license_id   54                                              ICI Society Data Sharing Licence
+#> 15 license_id   42                                                Elections BC Open Data Licence
+#> 16 license_id   51                                         BC Energy Regulator Open Data License
+#> 17 license_id   22                                                                   Access Only
 #>    count
 #> 1     80
 #> 2      2
@@ -145,15 +146,16 @@ bcdc_search_facets(facet = "license_id")
 #> 5      5
 #> 6      3
 #> 7     62
-#> 8   1672
+#> 8   1683
 #> 9      2
 #> 10     5
 #> 11     1
 #> 12     2
 #> 13     1
-#> 14    19
-#> 15     5
-#> 16  1457
+#> 14     6
+#> 15    19
+#> 16     6
+#> 17  1447
 ```
 
 Finally, you can retrieve the *metadata* for a single catalogue record
@@ -197,7 +199,7 @@ Let’s look at the B.C. Highway Web Cameras data:
 
 ## Get the data resource for the `bc-highwaycams` catalogue record
 bcdc_get_data("bc-highwaycams")
-#> # A tibble: 1,035 × 13
+#> # A tibble: 1,034 × 13
 #>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
 #>    <chr>                            <chr>              <chr>                <chr>              <dbl>
 #>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
@@ -210,13 +212,13 @@ bcdc_get_data("bc-highwaycams")
 #>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
 #>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
 #> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
-#> # ℹ 1,025 more rows
+#> # ℹ 1,024 more rows
 #> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-#> # A tibble: 1,035 × 13
+#> # A tibble: 1,034 × 13
 #>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
 #>    <chr>                            <chr>              <chr>                <chr>              <dbl>
 #>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
@@ -229,14 +231,14 @@ bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 #>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
 #>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
 #> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
-#> # ℹ 1,025 more rows
+#> # ℹ 1,024 more rows
 #> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 
 ## OR use the result from bcdc_get_record()
 my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 bcdc_get_data(my_record)
-#> # A tibble: 1,035 × 13
+#> # A tibble: 1,034 × 13
 #>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
 #>    <chr>                            <chr>              <chr>                <chr>              <dbl>
 #>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
@@ -249,7 +251,7 @@ bcdc_get_data(my_record)
 #>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
 #>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
 #> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
-#> # ℹ 1,025 more rows
+#> # ℹ 1,024 more rows
 #> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 ```

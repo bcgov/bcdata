@@ -69,7 +69,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Update to `filter()` behaviour in bcdata v0.4.0</h1>
             
-            <h4 data-toc-skip class="date">2026-02-06</h4>
+            <h4 data-toc-skip class="date">2026-07-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/main/vignettes/local-filter.Rmd" class="external-link"><code>vignettes/local-filter.Rmd</code></a></small>
       <div class="d-none name"><code>local-filter.Rmd</code></div>
@@ -125,24 +125,24 @@ translated into a query plan to be executed on the server:</p>
 <span><span class="co">## • At most six rows of the record are printed here</span></span>
 <span><span class="co">## ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">## Simple feature collection with 6 features and 19 fields</span></span>
-<span><span class="co">## Geometry type: POLYGON</span></span>
+<span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">## Dimension:     XY</span></span>
-<span><span class="co">## Bounding box:  xmin: 1187080 ymin: 409342.1 xmax: 1191300 ymax: 410578</span></span>
+<span><span class="co">## Bounding box:  xmin: 1199043 ymin: 387901.5 xmax: 1199503 ymax: 390352.7</span></span>
 <span><span class="co">## Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">## # A tibble: 6 × 20</span></span>
 <span><span class="co">##   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY</span></span>
 <span><span class="co">##   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;       </span></span>
-<span><span class="co">## 1 WHSE_B…                   8423 Lillian … Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 2 WHSE_B…                   8422 Nymph Po… Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 3 WHSE_B…                   8447 H.M.S. P… Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 4 WHSE_B…                   8434 Wain Park Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 5 WHSE_B…                   8446 Prentice… Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 6 WHSE_B…                   8448 &lt;NA&gt;      Local     Park             Capital           North Saani…</span></span>
+<span><span class="co">## 1 WHSE_B…                   7806 Beach Ac… Local     Water Access     Capital           District of…</span></span>
+<span><span class="co">## 2 WHSE_B…                   8020 Balmacar… Local     Water Access     Capital           District of…</span></span>
+<span><span class="co">## 3 WHSE_B…                   7871 Vantreig… Local     Park             Capital           District of…</span></span>
+<span><span class="co">## 4 WHSE_B…                   7844 Montague… Local     Park             Capital           District of…</span></span>
+<span><span class="co">## 5 WHSE_B…                   7882 Houlihan… Local     Park             Capital           District of…</span></span>
+<span><span class="co">## 6 WHSE_B…                   7895 Casa Mar… Local     Green Space      Capital           District of…</span></span>
 <span><span class="co">## # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID</span></span>
-<span><span class="co">## # ℹ 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
+<span><span class="co">## # ℹ 13 more variables: CIVIC_NUMBER &lt;chr&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
 <span><span class="co">## #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span></span>
 <span><span class="co">## #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span></span>
-<span><span class="co">## #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></span></code></pre>
+<span><span class="co">## #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre>
 <p>There is another illustration in the <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html#a-note-about-using-local-r-functions-in-constructing-filter-queries">“querying
 spatial data vignette”</a>.</p>
   </main>
