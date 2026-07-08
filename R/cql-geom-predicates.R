@@ -15,7 +15,7 @@
 #' Write a CQL expression to escape its inputs, and return a CQL/SQL object.
 #' Used when writing filter expressions in [bcdc_query_geodata()].
 #'
-#' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
+#' See [the CQL/ECQL for Geoserver website](https://docs.geoserver.org/main/en/user/tutorials/cql/cql_tutorial/).
 #'
 #' @param ... Character vectors that will be combined into a single CQL statement.
 #'
@@ -181,14 +181,18 @@ bcdc_check_geom_size <- function(x) {
     )
   }
 
-  if (inherits(x, "bbox")) return(invisible(TRUE))
+  if (inherits(x, "bbox")) {
+    return(invisible(TRUE))
+  }
 
   obj_size <- utils::object.size(sf::st_geometry(x))
 
   option_size <- getOption("bcdata.max_geom_pred_size", 5E5)
 
   ## If size ok, return TRUE
-  if (obj_size < option_size) return(invisible(TRUE))
+  if (obj_size < option_size) {
+    return(invisible(TRUE))
+  }
 
   message(bold_blue(glue::glue(
     "The object is too large to perform exact spatial operations using bcdata."
@@ -209,7 +213,7 @@ bcdc_check_geom_size <- function(x) {
 #'
 #' Functions to construct a CQL expression to be used
 #' to filter results from [bcdc_query_geodata()].
-#' See [the geoserver CQL documentation for details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
+#' See [the geoserver CQL documentation for details](https://docs.geoserver.org/main/en/user/filter/ecql_reference/#ecql_spat).
 #' The sf object is automatically converted in a
 #' bounding box to reduce the complexity of the Web Feature Service call. Subsequent in-memory
 #' filtering may be needed to achieve exact results.

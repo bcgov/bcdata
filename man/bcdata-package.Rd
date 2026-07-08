@@ -14,8 +14,8 @@ Search, query, and download tabular and 'geospatial' data from the British Colum
 Useful links:
 \itemize{
   \item \url{https://bcgov.github.io/bcdata/}
-  \item \url{https://catalogue.data.gov.bc.ca/}
-  \item \url{https://github.com/bcgov/bcdata/}
+  \item \url{https://catalogue.data.gov.bc.ca}
+  \item \url{https://github.com/bcgov/bcdata}
   \item Report bugs at \url{https://github.com/bcgov/bcdata/issues}
 }
 

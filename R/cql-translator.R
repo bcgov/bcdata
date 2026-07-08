@@ -73,7 +73,7 @@ bcdc_identity <- function(f) {
 }
 
 # Define custom translations from R functions to filter functions supported
-# by cql: https://docs.geoserver.org/stable/en/user/filter/function_reference.html
+# by cql: https://docs.geoserver.org/main/en/user/filter/function_reference/
 cql_scalar <- dbplyr::sql_translator(
   .parent = dbplyr::base_scalar,
   tolower = dbplyr::sql_prefix("strToLowerCase", 1),

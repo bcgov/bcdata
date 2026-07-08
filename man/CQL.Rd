@@ -19,7 +19,7 @@ Write a CQL expression to escape its inputs, and return a CQL/SQL object.
 Used when writing filter expressions in \code{\link[=bcdc_query_geodata]{bcdc_query_geodata()}}.
 }
 \details{
-See \href{https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html}{the CQL/ECQL for Geoserver website}.
+See \href{https://docs.geoserver.org/main/en/user/tutorials/cql/cql_tutorial/}{the CQL/ECQL for Geoserver website}.
 }
 \examples{
 CQL("FOO > 12 & NAME LIKE 'A&'")
