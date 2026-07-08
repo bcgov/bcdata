@@ -23,7 +23,7 @@ An object of class `c("CQL", "SQL")`
 ## Details
 
 See [the CQL/ECQL for Geoserver
-website](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
+website](https://docs.geoserver.org/main/en/user/tutorials/cql/cql_tutorial/).
 
 ## Examples
 

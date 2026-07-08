@@ -13,9 +13,9 @@ Useful links:
 
 - <https://bcgov.github.io/bcdata/>
 
-- <https://catalogue.data.gov.bc.ca/>
+- <https://catalogue.data.gov.bc.ca>
 
-- <https://github.com/bcgov/bcdata/>
+- <https://github.com/bcgov/bcdata>
 
 - Report bugs at <https://github.com/bcgov/bcdata/issues>
 
