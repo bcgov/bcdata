@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,9 +68,9 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Update to `filter()` behaviour in bcdata v0.4.0</h1>
             
-            <h4 data-toc-skip class="date">2026-02-06</h4>
+            <h4 data-toc-skip class="date">2026-07-08</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/v0.5.2/vignettes/local-filter.Rmd" class="external-link"><code>vignettes/local-filter.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/main/vignettes/local-filter.Rmd" class="external-link"><code>vignettes/local-filter.Rmd</code></a></small>
       <div class="d-none name"><code>local-filter.Rmd</code></div>
     </div>
 
@@ -124,24 +124,24 @@ translated into a query plan to be executed on the server:</p>
 <span><span class="co">## • At most six rows of the record are printed here</span></span>
 <span><span class="co">## ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">## Simple feature collection with 6 features and 19 fields</span></span>
-<span><span class="co">## Geometry type: POLYGON</span></span>
+<span><span class="co">## Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">## Dimension:     XY</span></span>
-<span><span class="co">## Bounding box:  xmin: 1187080 ymin: 409342.1 xmax: 1191300 ymax: 410578</span></span>
+<span><span class="co">## Bounding box:  xmin: 1199043 ymin: 387901.5 xmax: 1199503 ymax: 390352.7</span></span>
 <span><span class="co">## Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">## # A tibble: 6 × 20</span></span>
 <span><span class="co">##   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY</span></span>
 <span><span class="co">##   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;       </span></span>
-<span><span class="co">## 1 WHSE_B…                   8423 Lillian … Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 2 WHSE_B…                   8422 Nymph Po… Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 3 WHSE_B…                   8447 H.M.S. P… Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 4 WHSE_B…                   8434 Wain Park Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 5 WHSE_B…                   8446 Prentice… Local     Park             Capital           North Saani…</span></span>
-<span><span class="co">## 6 WHSE_B…                   8448 &lt;NA&gt;      Local     Park             Capital           North Saani…</span></span>
+<span><span class="co">## 1 WHSE_B…                   7806 Beach Ac… Local     Water Access     Capital           District of…</span></span>
+<span><span class="co">## 2 WHSE_B…                   8020 Balmacar… Local     Water Access     Capital           District of…</span></span>
+<span><span class="co">## 3 WHSE_B…                   7871 Vantreig… Local     Park             Capital           District of…</span></span>
+<span><span class="co">## 4 WHSE_B…                   7844 Montague… Local     Park             Capital           District of…</span></span>
+<span><span class="co">## 5 WHSE_B…                   7882 Houlihan… Local     Park             Capital           District of…</span></span>
+<span><span class="co">## 6 WHSE_B…                   7895 Casa Mar… Local     Green Space      Capital           District of…</span></span>
 <span><span class="co">## # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID</span></span>
-<span><span class="co">## # ℹ 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
+<span><span class="co">## # ℹ 13 more variables: CIVIC_NUMBER &lt;chr&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
 <span><span class="co">## #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span></span>
 <span><span class="co">## #   LICENCE_COMMENTS &lt;chr&gt;, FEATURE_AREA_SQM &lt;dbl&gt;, FEATURE_LENGTH_M &lt;dbl&gt;, OBJECTID &lt;int&gt;,</span></span>
-<span><span class="co">## #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;POLYGON [m]&gt;</span></span></code></pre>
+<span><span class="co">## #   SE_ANNO_CAD_DATA &lt;chr&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></span></code></pre>
 <p>There is another illustration in the <a href="https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html#a-note-about-using-local-r-functions-in-constructing-filter-queries">“querying
 spatial data vignette”</a>.</p>
   </main>
@@ -154,7 +154,7 @@ spatial data vignette”</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

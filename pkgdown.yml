@@ -1,5 +1,5 @@
-pandoc: 3.1.11
-pkgdown: 2.2.0
+pandoc: 3.8.3
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   bcdata: bcdata.html
@@ -7,7 +7,7 @@ articles:
   explore-silviculture-data-using-bcdata: explore-silviculture-data-using-bcdata.html
   local-filter: local-filter.html
   service_documentation: service_documentation.html
-last_built: 2026-02-09T06:34Z
+last_built: 2026-07-10T21:47Z
 urls:
   reference: https://bcgov.github.io/bcdata/reference
   article: https://bcgov.github.io/bcdata/articles

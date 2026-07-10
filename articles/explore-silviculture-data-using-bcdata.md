@@ -39,6 +39,7 @@ about the `dplyr` package [here](https://dplyr.tidyverse.org/) and the
 `ggplot2` package [here](https://ggplot2.tidyverse.org/):
 
 ``` r
+
 library(bcdata)
 library(dplyr)
 library(ggplot2)
@@ -53,6 +54,7 @@ First, let’s take a look at the metadata record using
 [`bcdc_get_record()`](https://bcgov.github.io/bcdata/reference/bcdc_get_record.md):
 
 ``` r
+
 # Get the metadata using the human-readable record name
 bcdc_get_record("results-forest-cover-silviculture")
 #> B.C. Data Catalogue Record: RESULTS - Forest Cover Silviculture
@@ -82,11 +84,12 @@ geospatial data set using
 [`bcdc_query_geodata()`](https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.md):
 
 ``` r
+
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 #> Querying 'results-forest-cover-silviculture' record
-#> • Using collect() on this object will return 976169 features and 159 fields
-#> • Accessing this record requires pagination and will make 98 separate requests to the WFS.
+#> • Using collect() on this object will return 984709 features and 159 fields
+#> • Accessing this record requires pagination and will make 99 separate requests to the WFS.
 #> • See ?bcdc_options
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -134,6 +137,7 @@ for the Prince George Natural Resource District—`DPG` is the `ORG_UNIT`
 for Prince George Natural Resource District:
 
 ``` r
+
 ## Create a spatial feature object named dpg
 dpg <- bcdc_query_geodata("natural-resource-nr-district") %>%
   filter(ORG_UNIT=="DPG") %>% # filter for Prince George Natural Resource District
@@ -143,6 +147,7 @@ dpg <- bcdc_query_geodata("natural-resource-nr-district") %>%
 Let’s plot this spatial object and double check we have we what we need:
 
 ``` r
+
 dpg %>%
   ggplot() +
   geom_sf() +
@@ -165,6 +170,7 @@ this case, we want to keep rows where the five `S_SPECIES_CODE_*`
 columns contain `"LW"`, the code for western larch.
 
 ``` r
+
 # Make a vector of tree species we are interested in
 # (in this case only LW for western larch)
 spp_list = c("LW")
@@ -189,8 +195,9 @@ Let’s look at the dimensions of this now much more manageable data
 object we have downloaded from the B.C. Data Catalogue:
 
 ``` r
+
 dim(trees_dpg)
-#> [1] 253 160
+#> [1] 259 160
 ```
 
 We can see there are several treatment units planted with western larch,
@@ -198,6 +205,7 @@ and we can make a quick map of these harvested openings for the Prince
 George Natural Resource District:
 
 ``` r
+
 trees_dpg %>%
   ggplot() +
   geom_sf() +
@@ -218,6 +226,7 @@ Prince George Natural Resource District?
 #### What is the size and age distribution of larch plantations in the Prince George Natural Resource District in the year 2020?
 
 ``` r
+
 trees_dpg %>%
   mutate(age = 2020 - REFERENCE_YEAR + S_SPECIES_AGE_1) %>% #create a plantation age column
   ggplot() +  #start a plot
@@ -248,6 +257,7 @@ geospatial dataset using the `st_join` function from the `sf` package.
 You can learn more about `sf` [here](https://r-spatial.github.io/sf/).
 
 ``` r
+
 library(sf) #load the sf package
 
 # Load the BEC data for Prince George Natural Resource District
@@ -265,6 +275,7 @@ Now, we can summarize the area planted with western larch by
 biogeoclimatic unit:
 
 ``` r
+
 trees_bec_dpg %>%
   group_by(MAP_LABEL) %>% # group polygons by biogeoclimatic unit
   summarise(Area = sum(FEATURE_AREA_SQM)/10000) %>%

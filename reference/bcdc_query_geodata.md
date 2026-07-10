@@ -64,6 +64,7 @@ See examples.
 ## Examples
 
 ``` r
+
 # \donttest{
 # Returns a bcdc_promise, which can be further refined using filter/select:
 try(
@@ -95,6 +96,34 @@ try(
     ) %>%
     collect()
 )
+#> Error : There was an issue sending this WFS request
+#> ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+#> Request:
+#>   URL: https://openmaps.gov.bc.ca/geo/pub/wfs
+#>   POST fields:
+#>     resultType=hits&SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&outputFormat=application%2Fjson&typeNames=WHSE_IMAGERY_AND_BASE_MAPS.GSR_AIRPORTS_SVW&SRSNAME=EPSG%3A3005&CQL_FILTER=%28%22AIRPORT_NAME%22%20IN%20%27Victoria%20Harbour%20%28Camel%20Point%29%20Heliport%27%2C%20%27Victoria%20Harbour%20%28Shoal%20Point%29%20Heliport%27%29
+#>   Content-Type: application/x-www-form-urlencoded
+#>   Accept-Encoding: gzip, deflate
+#>   Accept: application/json, text/xml, application/xml, */*
+#>   User-Agent: https://github.com/bcgov/bcdata
+#> Response:
+#>   status: HTTP/1.1 400 Bad Request
+#>   content-type: application/xml
+#>   transfer-encoding: chunked
+#>   x-ratelimit-limit-second: 60000
+#>   x-ratelimit-remaining-second: 59999
+#>   ratelimit-limit: 60000
+#>   ratelimit-remaining: 59999
+#>   ratelimit-reset: 1
+#>   vary: Origin
+#>   vary: Access-Control-Request-Method
+#>   vary: Access-Control-Request-Headers
+#>   date: Fri, 10 Jul 2026 21:48:28 GMT
+#>   server: uvicorn
+#>   content-encoding: gzip
+#>   x-kong-upstream-latency: 8
+#>   x-kong-proxy-latency: 1
+#> 
 
 
 try(

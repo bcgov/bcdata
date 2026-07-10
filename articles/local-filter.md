@@ -35,6 +35,7 @@ us just the set of local greenspaces that exist within that bounding
 box.
 
 ``` r
+
 library(sf)
 library(bcdata)
 
@@ -48,6 +49,7 @@ Previously, we could just do this, with
 embedded in the call:
 
 ``` r
+
 bcdc_query_geodata("local-and-regional-greenspaces") %>%
   filter(BBOX(st_bbox(two_points, crs = st_crs(two_points))))
 ```
@@ -63,6 +65,7 @@ your machine in R, before it is translated into a query plan to be
 executed on the server:
 
 ``` r
+
 bcdc_query_geodata("local-and-regional-greenspaces") %>%
   filter(BBOX(local(st_bbox(two_points, crs = st_crs(two_points)))))
 ```
@@ -72,24 +75,24 @@ bcdc_query_geodata("local-and-regional-greenspaces") %>%
     ## • At most six rows of the record are printed here
     ## ────────────────────────────────────────────────────────────────────────────────────────────────────
     ## Simple feature collection with 6 features and 19 fields
-    ## Geometry type: POLYGON
+    ## Geometry type: MULTIPOLYGON
     ## Dimension:     XY
-    ## Bounding box:  xmin: 1187080 ymin: 409342.1 xmax: 1191300 ymax: 410578
+    ## Bounding box:  xmin: 1199043 ymin: 387901.5 xmax: 1199503 ymax: 390352.7
     ## Projected CRS: NAD83 / BC Albers
     ## # A tibble: 6 × 20
     ##   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
     ##   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
-    ## 1 WHSE_B…                   8423 Lillian … Local     Park             Capital           North Saani…
-    ## 2 WHSE_B…                   8422 Nymph Po… Local     Park             Capital           North Saani…
-    ## 3 WHSE_B…                   8447 H.M.S. P… Local     Park             Capital           North Saani…
-    ## 4 WHSE_B…                   8434 Wain Park Local     Park             Capital           North Saani…
-    ## 5 WHSE_B…                   8446 Prentice… Local     Park             Capital           North Saani…
-    ## 6 WHSE_B…                   8448 <NA>      Local     Park             Capital           North Saani…
+    ## 1 WHSE_B…                   7806 Beach Ac… Local     Water Access     Capital           District of…
+    ## 2 WHSE_B…                   8020 Balmacar… Local     Water Access     Capital           District of…
+    ## 3 WHSE_B…                   7871 Vantreig… Local     Park             Capital           District of…
+    ## 4 WHSE_B…                   7844 Montague… Local     Park             Capital           District of…
+    ## 5 WHSE_B…                   7882 Houlihan… Local     Park             Capital           District of…
+    ## 6 WHSE_B…                   7895 Casa Mar… Local     Green Space      Capital           District of…
     ## # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
-    ## # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
+    ## # ℹ 13 more variables: CIVIC_NUMBER <chr>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
     ## #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
     ## #   LICENCE_COMMENTS <chr>, FEATURE_AREA_SQM <dbl>, FEATURE_LENGTH_M <dbl>, OBJECTID <int>,
-    ## #   SE_ANNO_CAD_DATA <chr>, geometry <POLYGON [m]>
+    ## #   SE_ANNO_CAD_DATA <chr>, geometry <MULTIPOLYGON [m]>
 
 There is another illustration in the [“querying spatial data
 vignette”](https://bcgov.github.io/bcdata/articles/efficiently-query-spatial-data-in-the-bc-data-catalogue.html#a-note-about-using-local-r-functions-in-constructing-filter-queries).

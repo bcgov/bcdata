@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/bcgov/bcdata/blob/v0.5.2/inst/CITATION)
+[`inst/CITATION`](https://github.com/bcgov/bcdata/blob/main/inst/CITATION)
 
 Teucher AC, Albers SJ, Hazlitt SL (2021). “bcdata: An R package for
 searching and retrieving data from the B.C. Data Catalogue.” *Journal of

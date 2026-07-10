@@ -20,7 +20,8 @@ bcdc_list_group_records(group)
 
 ## Functions
 
-- `bcdc_list_groups()`:
+- `bcdc_list_groups()`: List the available groups in the B.C. Data
+  Catalogue.
 
 ## Examples
 
@@ -34,12 +35,12 @@ try(
 #> # A tibble: 32 × 47
 #>    author     author_email creator_user_id download_audience
 #>    <chr>      <lgl>        <chr>           <chr>            
-#>  1 d0716cb8-… NA           d0716cb8-7eb5-… Public           
-#>  2 7c3cb269-… NA           7c3cb269-3653-… Public           
-#>  3 7c3cb269-… NA           7c3cb269-3653-… Public           
-#>  4 39990ef0-… NA           39990ef0-fa9a-… Public           
-#>  5 018e9ef6-… NA           018e9ef6-5356-… Public           
-#>  6 018e9ef6-… NA           d0716cb8-7eb5-… Public           
+#>  1 018e9ef6-… NA           d0716cb8-7eb5-… Public           
+#>  2 018e9ef6-… NA           018e9ef6-5356-… Public           
+#>  3 d0716cb8-… NA           d0716cb8-7eb5-… Public           
+#>  4 7c3cb269-… NA           7c3cb269-3653-… Public           
+#>  5 7c3cb269-… NA           7c3cb269-3653-… Public           
+#>  6 39990ef0-… NA           39990ef0-fa9a-… Public           
 #>  7 d0716cb8-… NA           d0716cb8-7eb5-… NA               
 #>  8 d0716cb8-… NA           d0716cb8-7eb5-… Public           
 #>  9 d0716cb8-… NA           d0716cb8-7eb5-… Public           

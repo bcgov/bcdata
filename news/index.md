@@ -1,5 +1,16 @@
 # Changelog
 
+## bcdata 0.5.3
+
+CRAN release: 2026-07-09
+
+- Fixed a bug where
+  [`filter()`](https://bcgov.github.io/bcdata/reference/filter.md) calls
+  using CQL geometry predicates (such as
+  [`INTERSECTS()`](https://bcgov.github.io/bcdata/reference/cql_geom_predicates.md))
+  produced malformed CQL that the server rejected with an HTTP 400 error
+  ([\#368](https://github.com/bcgov/bcdata/issues/368)).
+
 ## bcdata 0.5.2
 
 CRAN release: 2026-02-07
@@ -232,10 +243,13 @@ CRAN release: 2020-10-25
 
 - Updated internal SQL translation to use `DBI` S4 generics
   ([`DBI::dbQuoteIdentifier()`](https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html)
-  is now used instead of `dbplyr::sql_escape_ident()` and
+  is now used instead of
+  [`dbplyr::sql_escape_ident()`](https://dbplyr.tidyverse.org/reference/escape.html)
+  and
   [`DBI::dbQuoteString()`](https://dbi.r-dbi.org/reference/dbQuoteString.html)
-  instead of `dbplyr::sql_escape_string()`), to comply with upcoming
-  `dbplyr` 2.0 release
+  instead of
+  [`dbplyr::sql_escape_string()`](https://dbplyr.tidyverse.org/reference/escape.html)),
+  to comply with upcoming `dbplyr` 2.0 release
   ([\#225](https://github.com/bcgov/bcdata/issues/225),
   [\#225](https://github.com/bcgov/bcdata/issues/225);
   <https://github.com/tidyverse/dbplyr/issues/385>)

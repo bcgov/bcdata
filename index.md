@@ -38,6 +38,7 @@ You can install `bcdata` directly from
 [CRAN](https://cran.r-project.org/package=bcdata):
 
 ``` r
+
 install.packages("bcdata")
 ```
 
@@ -45,6 +46,7 @@ To install the development version from GitHub, use the
 [remotes](https://cran.r-project.org/package=remotes) package:
 
 ``` r
+
 install.packages("remotes")
 
 remotes::install_github("bcgov/bcdata")

@@ -66,8 +66,8 @@ A list containing the records that match the search
 try(
   bcdc_search("forest")
 )
-#> Found 580 matches. Returning the first 100.
-#> To see them all, rerun the search and set the 'n' argument to 580.
+#> Found 578 matches. Returning the first 100.
+#> To see them all, rerun the search and set the 'n' argument to 578.
 #> List of B.C. Data Catalogue Records
 #> Number of records: 100
 #> Showing the top 50 results. You can assign the
@@ -208,18 +208,18 @@ try(
 #> 37: RESULTS - Forest Cover Inventory (multiple, wms)
 #>  ID: 56ac43a7-724a-4f01-b193-d5f9a16ef0a8
 #>  Name: results-forest-cover-inventory
-#> 38: Forest Harvesting Restrictions (generalized)
-#>  (fgdb, xlsx)
-#>  ID: 6c0bcb22-49cb-4315-bc9c-c4668495cc45
-#>  Name: forest-harvesting-restrictions-generalized-
-#> 39: RESULTS - Forest Cover Reserve (multiple, wms,
+#> 38: RESULTS - Forest Cover Reserve (multiple, wms,
 #>  kml)
 #>  ID: 7028ac47-45dd-41d7-a371-be5a04177afe
 #>  Name: results-forest-cover-reserve
-#> 40: Generalized Forest Cover Ownership (wms, kml,
+#> 39: Generalized Forest Cover Ownership (wms, kml,
 #>  multiple, pdf)
 #>  ID: 5fc4e8ce-dd1d-44fd-af17-e0789cf65e4e
 #>  Name: generalized-forest-cover-ownership
+#> 40: Forest Harvesting Restrictions (generalized)
+#>  (fgdb, xlsx)
+#>  ID: 6c0bcb22-49cb-4315-bc9c-c4668495cc45
+#>  Name: forest-harvesting-restrictions-generalized-
 #> 41: Forest Licensee Operating Areas (multiple, wms,
 #>  kml)
 #>  ID: 5a18c401-7c99-48fe-8a1a-b4597072d8b6
@@ -240,26 +240,27 @@ try(
 #>  (multiple, wms, kml)
 #>  ID: d29b37fc-cbfe-4ebf-ac6e-2bf8fa926a81
 #>  Name: forest-tenure-special-use-permit-polygon
-#> 46: VRI - 2024 - Forest Vegetation Composite Polygons
+#> 46: VRI - 2025 - Forest Vegetation Composite Polygons
 #>  (fgdb)
 #>  ID: 6ba30649-14cd-44ad-a11f-794feed39f40
-#>  Name: vri-2024-forest-vegetation-composite-polygons
-#> 47: Fertilization Forest Carbon Initiative Projects
+#>  Name: vri-2025-forest-vegetation-composite-polygons
+#> 47: Forest Landscape Plans Boundary - Current (fgdb,
+#>  shp)
+#>  ID: 611f74d8-6a2b-4c32-93f4-6714e8dc7814
+#>  Name: forest-landscape-plans-boundary-current
+#> 48: Fertilization Forest Carbon Initiative Projects
 #>  (arcgis_rest, other)
 #>  ID: 6dec4d9c-f960-4c49-a6df-d4568531db7d
 #>  Name:
 #>   fertilization-forest-carbon-initiative-projects
-#> 48: Forest Tenure Road Use Permits (multiple, wms,
+#> 49: Forest Tenure Road Use Permits (multiple, wms,
 #>  kml, oracle_sde)
 #>  ID: 5c7bc316-1524-4e3f-b799-f8dbafa7a53a
 #>  Name: forest-tenure-road-use-permits
-#> 49: Forest Operations Map (FOM) - Cutblocks
+#> 50: Forest Operations Map (FOM) - Cutblocks
 #>  (multiple, wms, kml, arcgis_rest)
 #>  ID: 7dda4615-5d32-427e-a303-1dcdb90a6fea
 #>  Name: forest-operations-map-fom-cutblocks
-#> 50: Forest Carbon Initiative Projects Portal (other)
-#>  ID: e861e5eb-5a7f-4f1f-8764-a9b54000767f
-#>  Name: forest-carbon-initiative-projects-portal
 #> 
 #> Access a single record by calling
 #>  `bcdc_get_record(ID)` with the ID from the desired
@@ -269,7 +270,7 @@ try(
   bcdc_search("regional district", res_format = "fgdb")
 )
 #> List of B.C. Data Catalogue Records
-#> Number of records: 5
+#> Number of records: 6
 #> Titles:
 #> 1: Recreation Sites and Trail BC Region Boundaries
 #>  (fgdb, multiple, wms, kml)
@@ -289,7 +290,12 @@ try(
 #>  ID: 32ea7e06-f6e1-4822-b89e-38e145113926
 #>  Name:
 #>   forest-biodiversity-bc-cumulative-effects-framework-2019-assessment
-#> 5: Old Growth - BC Cumulative Effects Framework -
+#> 5: Wetland and Riparian Potential – Lower Fraser
+#>  Valley (fgdb, other, pdf)
+#>  ID: 9c06f5a3-816d-4238-877c-f1e1adc30022
+#>  Name:
+#>   wetland-and-riparian-potential-lower-fraser-valley
+#> 6: Old Growth - BC Cumulative Effects Framework -
 #>  2019 Assessment - Robson Valley (fgdb, multiple)
 #>  ID: 502442fe-0d45-43f3-a8e5-f733e5c74d7d
 #>  Name:

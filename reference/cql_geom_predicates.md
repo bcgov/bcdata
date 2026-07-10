@@ -4,7 +4,7 @@ Functions to construct a CQL expression to be used to filter results
 from
 [`bcdc_query_geodata()`](https://bcgov.github.io/bcdata/reference/bcdc_query_geodata.md).
 See [the geoserver CQL documentation for
-details](https://docs.geoserver.org/stable/en/user/filter/ecql_reference.html#spatial-predicate).
+details](https://docs.geoserver.org/main/en/user/filter/ecql_reference/#ecql_spat).
 The sf object is automatically converted in a bounding box to reduce the
 complexity of the Web Feature Service call. Subsequent in-memory
 filtering may be needed to achieve exact results.

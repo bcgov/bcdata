@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,9 +68,9 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Exploring Silviculture Data with bcdata</h1>
             
-            <h4 data-toc-skip class="date">2026-02-06</h4>
+            <h4 data-toc-skip class="date">2026-07-08</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/v0.5.2/vignettes/explore-silviculture-data-using-bcdata.Rmd" class="external-link"><code>vignettes/explore-silviculture-data-using-bcdata.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/main/vignettes/explore-silviculture-data-using-bcdata.Rmd" class="external-link"><code>vignettes/explore-silviculture-data-using-bcdata.Rmd</code></a></small>
       <div class="d-none name"><code>explore-silviculture-data-using-bcdata.Rmd</code></div>
     </div>
 
@@ -170,8 +170,8 @@ retrieve this geospatial data set using
 <code class="sourceCode R"><span><span class="co"># Query the data using the permanent ID of the record to guard against name changes</span></span>
 <span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"258bb088-4113-47b1-b568-ce20bd64e3e3"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying 'results-forest-cover-silviculture' record</span></span>
-<span><span class="co">#&gt; • Using collect() on this object will return 976169 features and 159 fields</span></span>
-<span><span class="co">#&gt; • Accessing this record requires pagination and will make 98 separate requests to the WFS.</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 984709 features and 159 fields</span></span>
+<span><span class="co">#&gt; • Accessing this record requires pagination and will make 99 separate requests to the WFS.</span></span>
 <span><span class="co">#&gt; • See ?bcdc_options</span></span>
 <span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
@@ -266,7 +266,7 @@ columns contain <code>"LW"</code>, the code for western larch.</p>
 object we have downloaded from the B.C. Data Catalogue:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">trees_dpg</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 253 160</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 259 160</span></span></code></pre></div>
 <p>We can see there are several treatment units planted with western
 larch, and we can make a quick map of these harvested openings for the
 Prince George Natural Resource District:</p>
@@ -368,7 +368,7 @@ plot of chunk unnamed-chunk-3
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

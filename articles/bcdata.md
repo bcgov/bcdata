@@ -16,6 +16,7 @@ as well as numerous other
 You can install `bcdata` directly from CRAN:
 
 ``` r
+
 install.packages("bcdata")
 
 library(bcdata)
@@ -29,6 +30,7 @@ interface](https://catalogue.data.gov.bc.ca) directly from R—opening the
 catalogue search page in your default browser:
 
 ``` r
+
 ## Take me to the B.C. Data Catalogue home page
 bcdc_browse()
 ```
@@ -37,6 +39,7 @@ If you know the catalogue “human-readable” record name or permanent ID
 you can open directly to the record web page:
 
 ``` r
+
 ## Take me to the B.C. Winery Locations catalogue record using the record name
 bcdc_browse("bc-winery-locations")
 
@@ -54,6 +57,7 @@ Let’s search the catalogue for records that contain the word
 “recycling”:
 
 ``` r
+
 ## Give me the catalogue search results for 'recycling'
 bcdc_search("recycling")
 #> List of B.C. Data Catalogue Records
@@ -82,6 +86,7 @@ you can customize your search using the catalogue search *facets*
 `organization`, and `groups`:
 
 ``` r
+
 ## Give me the first catalogue search result for 'recycling'
 bcdc_search("recycling", n = 1)
 #> List of B.C. Data Catalogue Records
@@ -112,6 +117,7 @@ You can see all valid values for the catalogue search facets using
 [`bcdata::bcdc_search_facets()`](https://bcgov.github.io/bcdata/reference/bcdc_search_facets.md):
 
 ``` r
+
 ## Valid values for search facet 'license_id'
 bcdc_search_facets(facet = "license_id")
 #>         facet name                                                                  display_name
@@ -128,9 +134,10 @@ bcdc_search_facets(facet = "license_id")
 #> 11 license_id   52 Open Data Licence - Office of the Registrar of Lobbyists for British Columbia
 #> 12 license_id   45                      Open Data Commons - Public Domain Dedication and Licence
 #> 13 license_id   25                                     King's Printer Licence - British Columbia
-#> 14 license_id   42                                                Elections BC Open Data Licence
-#> 15 license_id   51                                         BC Energy Regulator Open Data License
-#> 16 license_id   22                                                                   Access Only
+#> 14 license_id   54                                              ICI Society Data Sharing Licence
+#> 15 license_id   42                                                Elections BC Open Data Licence
+#> 16 license_id   51                                         BC Energy Regulator Open Data License
+#> 17 license_id   22                                                                   Access Only
 #>    count
 #> 1     80
 #> 2      2
@@ -139,15 +146,16 @@ bcdc_search_facets(facet = "license_id")
 #> 5      5
 #> 6      3
 #> 7     62
-#> 8   1672
+#> 8   1683
 #> 9      2
 #> 10     5
 #> 11     1
 #> 12     2
 #> 13     1
-#> 14    19
-#> 15     5
-#> 16  1457
+#> 14     6
+#> 15    19
+#> 16     6
+#> 17  1447
 ```
 
 Finally, you can retrieve the *metadata* for a single catalogue record
@@ -158,6 +166,7 @@ name in non-interactive situations—like scripts—to guard against future
 name changes of a record:
 
 ``` r
+
 ## Give me the catalogue record metadata for `bc-first-tire-recycling-data-1991-2006`
 bcdc_get_record("a29ad492-29a2-44b9-8693-d27a8cc8e686")
 #> B.C. Data Catalogue Record: BC FIRST Tire Recycling Data 1991-2006
@@ -187,9 +196,10 @@ name, permanent ID or the result from
 Let’s look at the B.C. Highway Web Cameras data:
 
 ``` r
+
 ## Get the data resource for the `bc-highwaycams` catalogue record
 bcdc_get_data("bc-highwaycams")
-#> # A tibble: 1,035 × 13
+#> # A tibble: 1,034 × 13
 #>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
 #>    <chr>                            <chr>              <chr>                <chr>              <dbl>
 #>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
@@ -202,13 +212,13 @@ bcdc_get_data("bc-highwaycams")
 #>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
 #>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
 #> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
-#> # ℹ 1,025 more rows
+#> # ℹ 1,024 more rows
 #> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 
 ## OR use the permanent ID, which is better for scripts or non-interactive use
 bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
-#> # A tibble: 1,035 × 13
+#> # A tibble: 1,034 × 13
 #>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
 #>    <chr>                            <chr>              <chr>                <chr>              <dbl>
 #>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
@@ -221,14 +231,14 @@ bcdc_get_data("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 #>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
 #>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
 #> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
-#> # ℹ 1,025 more rows
+#> # ℹ 1,024 more rows
 #> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 
 ## OR use the result from bcdc_get_record()
 my_record <- bcdc_get_record("6b39a910-6c77-476f-ac96-7b4f18849b1c")
 bcdc_get_data(my_record)
-#> # A tibble: 1,035 × 13
+#> # A tibble: 1,034 × 13
 #>    links_bchighwaycam               links_imageDisplay links_imageThumbnail links_replayTheDay    id
 #>    <chr>                            <chr>              <chr>                <chr>              <dbl>
 #>  1 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…     2
@@ -241,7 +251,7 @@ bcdc_get_data(my_record)
 #>  8 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    11
 #>  9 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    12
 #> 10 https://images.drivebc.ca/bchig… https://images.dr… https://images.driv… https://images.dr…    13
-#> # ℹ 1,025 more rows
+#> # ℹ 1,024 more rows
 #> # ℹ 8 more variables: highway_number <chr>, highway_locationDescription <chr>, camName <chr>,
 #> #   caption <chr>, credit <chr>, orientation <chr>, latitude <dbl>, longitude <dbl>
 ```
@@ -255,6 +265,7 @@ which resource you want. Let’s look at a catalogue record that contains
 multiple data resources—BC Schools - Programs Offered in Schools:
 
 ``` r
+
 ## Get the record ID for the `bc-schools-programs-offered-in-schools` catalogue record
 bcdc_search("school programs", n = 1)
 #> List of B.C. Data Catalogue Records
@@ -293,6 +304,7 @@ and ask you to select the resource you want. The resource ID for each
 data set is available *in* the metadata record ☝️:
 
 ``` r
+
 ## Get the txt data resource from the `bc-schools-programs-offered-in-schools`
 ## catalogue record
 bcdc_get_data("b1f27d1c-244a-410e-a361-931fac62a524", resource = 'a393f8cf-51ec-42c6-8449-4cea4c75385c')
@@ -323,6 +335,7 @@ resources for a given record as a data frame using
 [`bcdc_tidy_resources()`](https://bcgov.github.io/bcdata/reference/bcdc_tidy_resources.md):
 
 ``` r
+
 ## Get a data frame of data resources for the `bc-schools-programs-offered-in-schools`
 ## catalogue record
 bcdc_tidy_resources("b1f27d1c-244a-410e-a361-931fac62a524")
@@ -341,6 +354,7 @@ object](https://r-spatial.github.io/sf/) in your R session.
 Let’s get the air zones for British Columbia:
 
 ``` r
+
 ## Find the B.C. Air Zones catalogue record
 bcdc_search("air zones", res_format = "geojson")
 #> List of B.C. Data Catalogue Records
@@ -400,6 +414,7 @@ whole file takes 30-60 seconds to download and I only need the one
 polygon, so why not save some time:
 
 ``` r
+
 ## Find the B.C. Regional Districts catalogue record
 bcdc_search("regional districts administrative areas", res_format = "wms", n = 1)
 #> List of B.C. Data Catalogue Records

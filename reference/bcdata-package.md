@@ -13,9 +13,9 @@ Useful links:
 
 - <https://bcgov.github.io/bcdata/>
 
-- <https://catalogue.data.gov.bc.ca/>
+- <https://catalogue.data.gov.bc.ca>
 
-- <https://github.com/bcgov/bcdata/>
+- <https://github.com/bcgov/bcdata>
 
 - Report bugs at <https://github.com/bcgov/bcdata/issues>
 
@@ -25,6 +25,9 @@ Useful links:
 ([ORCID](https://orcid.org/0000-0002-7840-692X))
 
 Authors:
+
+- Andy Teucher <andy.teucher@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-7840-692X))
 
 - Sam Albers <sam.albers@gmail.com>
   ([ORCID](https://orcid.org/0000-0002-9270-7884)) \[contributor\]

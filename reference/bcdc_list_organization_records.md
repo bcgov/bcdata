@@ -20,7 +20,8 @@ bcdc_list_organization_records(organization)
 
 ## Functions
 
-- `bcdc_list_organizations()`:
+- `bcdc_list_organizations()`: List the available organizations in the
+  B.C. Data Catalogue.
 
 ## Examples
 
@@ -29,20 +30,20 @@ bcdc_list_organization_records(organization)
 try(
   bcdc_list_organization_records('bc-stats')
 )
-#> # A tibble: 88 × 48
-#>    author     author_email creator_user_id download_audience
-#>  * <chr>      <lgl>        <chr>           <chr>            
-#>  1 NA         NA           bcd0e79c-e403-… Public           
-#>  2 NA         NA           40a48d33-5a6c-… Public           
-#>  3 NA         NA           40a48d33-5a6c-… Public           
-#>  4 d0716cb8-… NA           d0716cb8-7eb5-… Public           
-#>  5 NA         NA           b3245224-9d10-… Public           
-#>  6 NA         NA           b3245224-9d10-… Public           
-#>  7 NA         NA           40a48d33-5a6c-… Public           
-#>  8 NA         NA           40a48d33-5a6c-… Public           
-#>  9 NA         NA           40a48d33-5a6c-… Public           
-#> 10 NA         NA           40a48d33-5a6c-… Public           
-#> # ℹ 78 more rows
+#> # A tibble: 91 × 48
+#>    author author_email creator_user_id     download_audience
+#>  * <chr>  <lgl>        <chr>               <chr>            
+#>  1 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  2 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  3 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  4 NA     NA           b3245224-9d10-4bb4… Public           
+#>  5 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  6 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  7 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  8 NA     NA           b3245224-9d10-4bb4… Public           
+#>  9 NA     NA           40a48d33-5a6c-4b5e… Public           
+#> 10 NA     NA           40a48d33-5a6c-4b5e… Public           
+#> # ℹ 81 more rows
 #> # ℹ 44 more variables: id <chr>, isopen <lgl>,
 #> #   license_id <chr>, license_title <chr>,
 #> #   license_url <chr>, maintainer <lgl>,
