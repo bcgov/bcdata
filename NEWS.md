@@ -1,3 +1,5 @@
+# bcdata (development version)
+
 # bcdata 0.5.3
 
 * Fixed a bug where `filter()` calls using CQL geometry predicates (such as
