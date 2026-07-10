@@ -2,6 +2,10 @@
 
 ## bcdata (development version)
 
+## bcdata 0.5.3
+
+CRAN release: 2026-07-09
+
 - Fixed a bug where
   [`filter()`](https://bcgov.github.io/bcdata/dev/reference/filter.md)
   calls using CQL geometry predicates (such as

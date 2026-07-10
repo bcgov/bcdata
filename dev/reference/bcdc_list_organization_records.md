@@ -34,9 +34,9 @@ try(
 #>    author author_email creator_user_id     download_audience
 #>  * <chr>  <lgl>        <chr>               <chr>            
 #>  1 NA     NA           40a48d33-5a6c-4b5e… Public           
-#>  2 NA     NA           b3245224-9d10-4bb4… Public           
+#>  2 NA     NA           40a48d33-5a6c-4b5e… Public           
 #>  3 NA     NA           40a48d33-5a6c-4b5e… Public           
-#>  4 NA     NA           40a48d33-5a6c-4b5e… Public           
+#>  4 NA     NA           b3245224-9d10-4bb4… Public           
 #>  5 NA     NA           40a48d33-5a6c-4b5e… Public           
 #>  6 NA     NA           40a48d33-5a6c-4b5e… Public           
 #>  7 NA     NA           40a48d33-5a6c-4b5e… Public           

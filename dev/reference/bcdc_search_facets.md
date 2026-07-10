@@ -71,6 +71,6 @@ try(
 #> 19 res_format      geojson      geojson    18
 #> 20 res_format         fgdb         fgdb   102
 #> 21 res_format          csv          csv   583
-#> 22 res_format  arcgis_rest  arcgis_rest   161
+#> 22 res_format  arcgis_rest  arcgis_rest   163
 # }
 ```
