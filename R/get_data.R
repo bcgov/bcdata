@@ -47,12 +47,12 @@
 #' )
 #'
 #' try(
-#'   bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#'   bcdc_get_data('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
 #' )
 #'
 #' # Using a `bcdc_record` object obtained from `bcdc_get_record`:
 #' try(
-#'   record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+#'   record <- bcdc_get_record('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
 #' )
 #'
 #' try(
