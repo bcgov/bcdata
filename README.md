@@ -131,6 +131,15 @@ catalogue web interface. Functions that benefit from this are:
 
 ### Getting Help or Reporting an Issue
 
+For service outages, check the [B.C. Data Catalogue status
+page](https://catalogue-status.data.gov.bc.ca/), which includes monitoring
+for WMS and WFS GetCapabilities requests.
+
+For catalogue or web mapping support, use the [Data Systems & Services
+support portal](https://dpdd.atlassian.net/servicedesk/customer/portal/1).
+Select "Data Requests" for catalogue support or "Web Mapping Requests and
+Services" for web mapping support.
+
 To report bugs/issues/feature requests, please file an
 [issue](https://github.com/bcgov/bcdata/issues/).
 
