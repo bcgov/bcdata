@@ -35,9 +35,9 @@ try(
 #> # A tibble: 32 × 47
 #>    author     author_email creator_user_id download_audience
 #>    <chr>      <lgl>        <chr>           <chr>            
-#>  1 018e9ef6-… NA           d0716cb8-7eb5-… Public           
-#>  2 018e9ef6-… NA           018e9ef6-5356-… Public           
-#>  3 d0716cb8-… NA           d0716cb8-7eb5-… Public           
+#>  1 d0716cb8-… NA           d0716cb8-7eb5-… Public           
+#>  2 018e9ef6-… NA           d0716cb8-7eb5-… Public           
+#>  3 018e9ef6-… NA           018e9ef6-5356-… Public           
 #>  4 7c3cb269-… NA           7c3cb269-3653-… Public           
 #>  5 7c3cb269-… NA           7c3cb269-3653-… Public           
 #>  6 39990ef0-… NA           39990ef0-fa9a-… Public           

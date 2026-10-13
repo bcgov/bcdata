@@ -66,8 +66,8 @@ A list containing the records that match the search
 try(
   bcdc_search("forest")
 )
-#> Found 578 matches. Returning the first 100.
-#> To see them all, rerun the search and set the 'n' argument to 578.
+#> Found 580 matches. Returning the first 100.
+#> To see them all, rerun the search and set the 'n' argument to 580.
 #> List of B.C. Data Catalogue Records
 #> Number of records: 100
 #> Showing the top 50 results. You can assign the
@@ -175,17 +175,17 @@ try(
 #>  (multiple, wms, kml)
 #>  ID: cff7b8f7-6897-444f-8c53-4bb93c7e9f8b
 #>  Name: forest-tenure-harvesting-authority-polygons
-#> 29: Forest Tenure Communication Site Polygon
-#>  (oracle_sde)
-#>  ID: d8f0798b-e2e3-48e5-b587-d193daced09e
-#>  Name: forest-tenure-communication-site-polygon
-#> 30: Forest Tenure Timber Licence Remaining (multiple)
-#>  ID: edf864e8-bae6-4735-a85b-3e6f276d4a14
-#>  Name: forest-tenure-timber-licence-remaining
-#> 31: Forest Tenure Free Use Permit (multiple, wms,
+#> 29: Forest Tenure Free Use Permit (multiple, wms,
 #>  kml)
 #>  ID: 814e0ed9-95c3-4750-8152-1307795986f1
 #>  Name: forest-tenure-free-use-permit
+#> 30: Forest Tenure Communication Site Polygon
+#>  (oracle_sde)
+#>  ID: d8f0798b-e2e3-48e5-b587-d193daced09e
+#>  Name: forest-tenure-communication-site-polygon
+#> 31: Forest Tenure Timber Licence Remaining (multiple)
+#>  ID: edf864e8-bae6-4735-a85b-3e6f276d4a14
+#>  Name: forest-tenure-timber-licence-remaining
 #> 32: Forest Tenure Road Segment Lines (multiple, wms,
 #>  kml, other)
 #>  ID: 9e5bfa62-2339-445e-bf67-81657180c682
@@ -216,14 +216,14 @@ try(
 #>  multiple, pdf)
 #>  ID: 5fc4e8ce-dd1d-44fd-af17-e0789cf65e4e
 #>  Name: generalized-forest-cover-ownership
-#> 40: Forest Harvesting Restrictions (generalized)
-#>  (fgdb, xlsx)
-#>  ID: 6c0bcb22-49cb-4315-bc9c-c4668495cc45
-#>  Name: forest-harvesting-restrictions-generalized-
-#> 41: Forest Licensee Operating Areas (multiple, wms,
+#> 40: Forest Licensee Operating Areas (multiple, wms,
 #>  kml)
 #>  ID: 5a18c401-7c99-48fe-8a1a-b4597072d8b6
 #>  Name: forest-licensee-operating-areas
+#> 41: Forest Harvesting Restrictions (generalized)
+#>  (fgdb, xlsx)
+#>  ID: 6c0bcb22-49cb-4315-bc9c-c4668495cc45
+#>  Name: forest-harvesting-restrictions-generalized-
 #> 42: Forest Tenure FTA Timber Sale Polygons
 #>  (oracle_sde)
 #>  ID: beb5565d-7cd1-4a51-99c4-2984a0652ef8

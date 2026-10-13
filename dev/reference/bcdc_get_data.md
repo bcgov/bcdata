@@ -89,19 +89,75 @@ try(
 #> #   DESCRIPTION <chr>, PHYSICAL_ADDRESS <chr>, …
 
 try(
-  bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+  bcdc_get_data('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
 )
-#> Error : There are no resources that bcdata can download from this record
+#> Reading the data using the read_csv function from the readr package.
+#> Rows: 18 Columns: 4
+#> ── Column specification ────────────────────────────────────
+#> Delimiter: ","
+#> chr (4): heading, headingdef, element, elementdef
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> # A tibble: 18 × 4
+#>    heading  headingdef                    element elementdef
+#>    <chr>    <chr>                         <chr>   <chr>     
+#>  1 yr       year                          NA      NA        
+#>  2 mo       month                         NA      NA        
+#>  3 prggroup program group                 D       Disabilit…
+#>  4 prggroup program group                 T       Income As…
+#>  5 program  program                       E       Expected …
+#>  6 program  program                       F       Temporari…
+#>  7 program  program                       H       Persons W…
+#>  8 program  program                       I       Persisten…
+#>  9 program  program                       M       Expected …
+#> 10 famtype  family type                   0       Single Men
+#> 11 famtype  family type                   1       Single Wo…
+#> 12 famtype  family type                   2       Couples   
+#> 13 famtype  family type                   3       Two Paren…
+#> 14 famtype  family type                   4       Single Pa…
+#> 15 famtype  family type                   5       Single    
+#> 16 cases    The count of BCEA cases - as… NA      NA        
+#> 17 recips   recipients                    NA      NA        
+#> 18 depchld  dependent child               NA      NA        
 
 # Using a `bcdc_record` object obtained from `bcdc_get_record`:
 try(
-  record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+  record <- bcdc_get_record('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
 )
 
 try(
   bcdc_get_data(record)
 )
-#> Error : There are no resources that bcdata can download from this record
+#> Reading the data using the read_csv function from the readr package.
+#> Rows: 18 Columns: 4
+#> ── Column specification ────────────────────────────────────
+#> Delimiter: ","
+#> chr (4): heading, headingdef, element, elementdef
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> # A tibble: 18 × 4
+#>    heading  headingdef                    element elementdef
+#>    <chr>    <chr>                         <chr>   <chr>     
+#>  1 yr       year                          NA      NA        
+#>  2 mo       month                         NA      NA        
+#>  3 prggroup program group                 D       Disabilit…
+#>  4 prggroup program group                 T       Income As…
+#>  5 program  program                       E       Expected …
+#>  6 program  program                       F       Temporari…
+#>  7 program  program                       H       Persons W…
+#>  8 program  program                       I       Persisten…
+#>  9 program  program                       M       Expected …
+#> 10 famtype  family type                   0       Single Men
+#> 11 famtype  family type                   1       Single Wo…
+#> 12 famtype  family type                   2       Couples   
+#> 13 famtype  family type                   3       Two Paren…
+#> 14 famtype  family type                   4       Single Pa…
+#> 15 famtype  family type                   5       Single    
+#> 16 cases    The count of BCEA cases - as… NA      NA        
+#> 17 recips   recipients                    NA      NA        
+#> 18 depchld  dependent child               NA      NA        
 
 # Using a BCGW name
 try(
@@ -243,7 +299,7 @@ try(
 #>   Error: Sheet 'Regional Districts' not found
 #> 
 #> The file can be found here:
-#>   '/tmp/RtmpMyJczm/bcdata_1d587b898f16/file1d586c4cd556.xlsx'
+#>   '/tmp/RtmpguUfIe/bcdata_1cf715f9568/file1cf73c335fc0.xlsx'
 #> if you would like to try to read it manually.
 #> 
 # }
