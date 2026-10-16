@@ -47,12 +47,12 @@
 #' )
 #'
 #' try(
-#'   bcdc_get_data('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
+#'   bcdc_get_data('2a5d2e5e-36eb-412b-89ff-508dae26a7ff')
 #' )
 #'
 #' # Using a `bcdc_record` object obtained from `bcdc_get_record`:
 #' try(
-#'   record <- bcdc_get_record('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
+#'   record <- bcdc_get_record('2a5d2e5e-36eb-412b-89ff-508dae26a7ff')
 #' )
 #'
 #' try(
@@ -122,7 +122,9 @@
 #' )
 #' @export
 bcdc_get_data <- function(record, resource = NULL, verbose = TRUE, ...) {
-  if (!has_internet()) stop("No access to internet", call. = FALSE) # nocov
+  if (!has_internet()) {
+    stop("No access to internet", call. = FALSE)
+  } # nocov
   UseMethod("bcdc_get_data")
 }
 
@@ -246,12 +248,15 @@ bcdc_get_data.bcdc_record <- function(
   choices <- clean_wfs(resource_df$name)
 
   ## To deal with situations where the resource names are the same
-  if (any(duplicated(choices)))
+  if (any(duplicated(choices))) {
     choices <- glue::glue("{choices} ({resource_df$format})")
+  }
 
   choice_input <- utils::menu(choices, title = "Please choose one option:")
 
-  if (choice_input == 0) stop("No resource selected", call. = FALSE)
+  if (choice_input == 0) {
+    stop("No resource selected", call. = FALSE)
+  }
 
   name_choice <- choices[choice_input]
 
@@ -292,44 +297,44 @@ bcdc_get_data.bcdc_record <- function(
 
 bcdc_read_functions <- function() {
   dplyr::tribble(
-    ~format,
-    ~package,
-    ~fun,
-    "kml",
-    "sf",
-    "read_sf",
-    "geojson",
-    "sf",
-    "read_sf",
-    "gpkg",
-    "sf",
-    "read_sf",
-    "gdb",
-    "sf",
-    "read_sf",
-    "fgdb",
-    "sf",
-    "read_sf",
-    "shp",
-    "sf",
-    "read_sf",
-    "csv",
-    "readr",
-    "read_csv",
-    "txt",
-    "readr",
-    "read_tsv",
-    "tsv",
-    "readr",
-    "read_tsv",
-    "xlsx",
-    "readxl",
-    "read_xlsx",
-    "xls",
-    "readxl",
-    "read_xls",
-    "json",
-    "jsonlite",
+    ~format     ,
+    ~package    ,
+    ~fun        ,
+    "kml"       ,
+    "sf"        ,
+    "read_sf"   ,
+    "geojson"   ,
+    "sf"        ,
+    "read_sf"   ,
+    "gpkg"      ,
+    "sf"        ,
+    "read_sf"   ,
+    "gdb"       ,
+    "sf"        ,
+    "read_sf"   ,
+    "fgdb"      ,
+    "sf"        ,
+    "read_sf"   ,
+    "shp"       ,
+    "sf"        ,
+    "read_sf"   ,
+    "csv"       ,
+    "readr"     ,
+    "read_csv"  ,
+    "txt"       ,
+    "readr"     ,
+    "read_tsv"  ,
+    "tsv"       ,
+    "readr"     ,
+    "read_tsv"  ,
+    "xlsx"      ,
+    "readxl"    ,
+    "read_xlsx" ,
+    "xls"       ,
+    "readxl"    ,
+    "read_xls"  ,
+    "json"      ,
+    "jsonlite"  ,
     "read_json"
   )
 }
