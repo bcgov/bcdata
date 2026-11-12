@@ -128,7 +128,6 @@ interface. Functions that benefit from this are:
 ### Getting Help or Reporting an Issue
 
 
-For catalogue or web mapping support, use the [Data Systems & Services support portal](https://dpdd.atlassian.net/servicedesk/customer/portal/1). Select "Data Requests" for catalogue support or "Web Mapping Requests and Services" for web mapping support.
 
 Experiencing problems with `bcdata`? Check the [B.C. Data Catalogue status page for API service outages, including WMS and WFS](https://catalogue-status.data.gov.bc.ca/).
  
