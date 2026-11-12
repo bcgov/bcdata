@@ -66,7 +66,7 @@ try(
 #> 14 res_format          kmz          kmz    30
 #> 15 res_format          kml          kml   879
 #> 16 res_format         json         json    12
-#> 17 res_format         html         html   113
+#> 17 res_format         html         html   115
 #> 18 res_format         gpkg         gpkg    22
 #> 19 res_format      geojson      geojson    18
 #> 20 res_format         fgdb         fgdb    96

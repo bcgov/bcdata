@@ -5,6 +5,9 @@
 - Fixed YAML front matter in the service documentation vignette that
   newer versions of pandoc fail to parse, and replaced the deprecated
   `.Dim` attribute name with `dim` in a test.
+- Update example bcdc_get_data code to use record with a resource
+  ([\#376](https://github.com/bcgov/bcdata/issues/376)) and use an
+  existing Excel sheet.
 
 ## bcdata 0.5.3
 

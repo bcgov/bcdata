@@ -113,16 +113,16 @@ try(
 #>   transfer-encoding: chunked
 #>   ratelimit-reset: 1
 #>   x-ratelimit-limit-second: 60000
-#>   x-ratelimit-remaining-second: 59980
+#>   x-ratelimit-remaining-second: 59998
 #>   ratelimit-limit: 60000
-#>   ratelimit-remaining: 59980
+#>   ratelimit-remaining: 59998
 #>   vary: Origin
 #>   vary: Access-Control-Request-Method
 #>   vary: Access-Control-Request-Headers
 #>   server: uvicorn
-#>   date: Thu, 12 Nov 2026 19:58:27 GMT
+#>   date: Thu, 12 Nov 2026 23:45:01 GMT
 #>   content-encoding: gzip
-#>   x-kong-upstream-latency: 7
+#>   x-kong-upstream-latency: 8
 #>   x-kong-proxy-latency: 1
 #> 
 
