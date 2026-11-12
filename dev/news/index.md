@@ -2,6 +2,10 @@
 
 ## bcdata (development version)
 
+- Fixed YAML front matter in the service documentation vignette that
+  newer versions of pandoc fail to parse, and replaced the deprecated
+  `.Dim` attribute name with `dim` in a test.
+
 ## bcdata 0.5.3
 
 CRAN release: 2026-07-09

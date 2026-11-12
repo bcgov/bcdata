@@ -66,8 +66,8 @@ A list containing the records that match the search
 try(
   bcdc_search("forest")
 )
-#> Found 580 matches. Returning the first 100.
-#> To see them all, rerun the search and set the 'n' argument to 580.
+#> Found 583 matches. Returning the first 100.
+#> To see them all, rerun the search and set the 'n' argument to 583.
 #> List of B.C. Data Catalogue Records
 #> Number of records: 100
 #> Showing the top 50 results. You can assign the
@@ -175,17 +175,17 @@ try(
 #>  (multiple, wms, kml)
 #>  ID: cff7b8f7-6897-444f-8c53-4bb93c7e9f8b
 #>  Name: forest-tenure-harvesting-authority-polygons
-#> 29: Forest Tenure Free Use Permit (multiple, wms,
-#>  kml)
-#>  ID: 814e0ed9-95c3-4750-8152-1307795986f1
-#>  Name: forest-tenure-free-use-permit
-#> 30: Forest Tenure Communication Site Polygon
+#> 29: Forest Tenure Communication Site Polygon
 #>  (oracle_sde)
 #>  ID: d8f0798b-e2e3-48e5-b587-d193daced09e
 #>  Name: forest-tenure-communication-site-polygon
-#> 31: Forest Tenure Timber Licence Remaining (multiple)
+#> 30: Forest Tenure Timber Licence Remaining (multiple)
 #>  ID: edf864e8-bae6-4735-a85b-3e6f276d4a14
 #>  Name: forest-tenure-timber-licence-remaining
+#> 31: Forest Tenure Free Use Permit (multiple, wms,
+#>  kml)
+#>  ID: 814e0ed9-95c3-4750-8152-1307795986f1
+#>  Name: forest-tenure-free-use-permit
 #> 32: Forest Tenure Road Segment Lines (multiple, wms,
 #>  kml, other)
 #>  ID: 9e5bfa62-2339-445e-bf67-81657180c682
