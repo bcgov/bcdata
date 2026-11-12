@@ -101,7 +101,7 @@
 #' ## we can control what is read in from an excel file
 #' ## using arguments from readxl::read_excel
 #' try(
-#'   bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Regional Districts')
+#'   bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Purpose Built Rental')
 #' )
 #' }
 #'
