@@ -3,9 +3,7 @@ title: "bcdata Service Documentation"
 date: "2021-10-27"
 output: 
   rmarkdown::html_vignette:
-    md_extensions: [ 
-      "-autolink_bare_uris" 
-    ]
+    md_extensions: "-autolink_bare_uris"
 vignette: >
   %\VignetteIndexEntry{bcdata Service Documentation}
   %\VignetteEngine{knitr::rmarkdown}

@@ -77,7 +77,7 @@ test_that("Different combinations of predicates work", {
           745981.738,
           667643.77
         ),
-        .Dim = c(5L, 2L)
+        dim = c(5L, 2L)
       ))
     ),
     crs = 3005
