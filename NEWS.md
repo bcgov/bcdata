@@ -3,6 +3,7 @@
 * Fixed YAML front matter in the service documentation vignette that newer
   versions of pandoc fail to parse, and replaced the deprecated `.Dim`
   attribute name with `dim` in a test.
+* Update example bcdc_get_data code to use record with a resource (#376) and use an existing Excel sheet.
 
 # bcdata 0.5.3
 
@@ -17,11 +18,11 @@
 
 # bcdata 0.5.1
 
-* Fix bugs where `bcdc_search_facets()`, `bcdc_list_group_records()` and 
-  `bcdc_list_organization_records()` were not returning all records after 
-  the upgrade to CKAN 2.9 (#353). Includes adding tests and bcdata-specific 
+* Fix bugs where `bcdc_search_facets()`, `bcdc_list_group_records()` and
+  `bcdc_list_organization_records()` were not returning all records after
+  the upgrade to CKAN 2.9 (#353). Includes adding tests and bcdata-specific
   options for these queries, see `bcdc_options()`.
-* Added examples of partial query using `%like%` and `%in%` in 
+* Added examples of partial query using `%like%` and `%in%` in
   `bcdc_query_geodata()` (#356, thanks @bevingtona).
 
 # bcdata 0.5.0
@@ -111,7 +112,7 @@
 - `bcdc_describe_feature` now joins an object description column to the returned
   object to provide more information about a field directly in R. #241, #259
 - Better documentation and information surrounding the
-  `bcdata.max_geom_pred_size` option. #243, #258 
+  `bcdata.max_geom_pred_size` option. #243, #258
 - Add new function `bcdc_check_geom_size` so users can check prior to submitting
 a WFS request with `filter` to see if the request will require a bounding box
 conversion. #243, #258
@@ -158,7 +159,7 @@ conversion. #243, #258
   corresponding docs and tests (#180).
 
 ### IMPROVEMENTS
-* Add explore-silviculture-data-using-bcdata vignette/article. h/t @hgriesbauer 
+* Add explore-silviculture-data-using-bcdata vignette/article. h/t @hgriesbauer
 * Add `head` and `tail` methods for `bcdc.promise` objects. Thanks to
   @hgriesbauer for the suggestion! (#182, #186)
 * Provide `as_tibble` as an alias for `collect` in line with `dbplyr` behaviour
@@ -192,12 +193,12 @@ by setting a `BCDC_KEY` environment variable with their catalogue API token
 * Add back in querying vignette
 * Using `tidyselect` so that `select.bcdc_promise` behaviour is typical of
   `dplyr::select` ($140, #138)
-* Using GitHub actions for CI. 
+* Using GitHub actions for CI.
 
 ### MINOR BREAKING CHANGES
 * Remove `BEYOND()` and `RELATE()` geometry predicates as they are currently not
   fully supported by geoserver
-                                                        
+
 ### BUG FIXES
 * Now precompiling vignettes so that queries are submitted locally and no
   actually requests are made from CRAN (#151)
@@ -216,7 +217,7 @@ by setting a `BCDC_KEY` environment variable with their catalogue API token
 # bcdata 0.1.1
 
 * Expand and standardize checking w[ms]f features to make package more resistant
-  to slight warehouse API changes. 
+  to slight warehouse API changes.
 * Data retrieval functions now work with BCGW name (#106)
 * Add CITATION file (#104)
 * Increased test coverage (#112)
