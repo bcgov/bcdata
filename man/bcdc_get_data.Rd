@@ -46,12 +46,12 @@ try(
 )
 
 try(
-  bcdc_get_data('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
+  bcdc_get_data('2a5d2e5e-36eb-412b-89ff-508dae26a7ff')
 )
 
 # Using a `bcdc_record` object obtained from `bcdc_get_record`:
 try(
-  record <- bcdc_get_record('ca70a76a-a1a9-455b-a2f4-24ae151e4058')
+  record <- bcdc_get_record('2a5d2e5e-36eb-412b-89ff-508dae26a7ff')
 )
 
 try(
@@ -100,7 +100,7 @@ try(
 ## we can control what is read in from an excel file
 ## using arguments from readxl::read_excel
 try(
-  bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Regional Districts')
+  bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Purpose Built Rental')
 )
 }
 
