@@ -127,7 +127,11 @@ interface. Functions that benefit from this are:
 
 ### Getting Help or Reporting an Issue
 
-To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/bcdata/issues/).
+
+
+Experiencing problems with `bcdata`? Check the [B.C. Data Catalogue status page for API service outages, including WMS and WFS](https://catalogue-status.data.gov.bc.ca/).
+ 
+For bugs, issues, or feature requests for `bcdata` please file an [issue](https://github.com/bcgov/bcdata/issues/).
 
 ### How to Contribute
 
