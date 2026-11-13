@@ -4,11 +4,12 @@ on:
   push:
     branches: [main, master]
   pull_request:
-    branches: [main, master]
   schedule:
     - cron: '30 4 * * 1'
 
-name: R-CMD-check
+name: R-CMD-check.yaml
+
+permissions: read-all
 
 jobs:
   R-CMD-check:
@@ -34,7 +35,7 @@ jobs:
       BCDC_TEST_RECORD: ${{ secrets.BCDC_TEST_RECORD }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -55,7 +56,7 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
