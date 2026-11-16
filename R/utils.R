@@ -358,6 +358,10 @@ pagination_sort_col <- function(cols_df) {
   cols[1]
 }
 
+is_descending_sort <- function(sort_by) {
+  !is.null(sort_by) && grepl(" D$", sort_by)
+}
+
 handle_zip <- function(x) {
   # Just give file back if it's not zipped
   if (!is_filetype(x, "zip")) {
