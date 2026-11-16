@@ -68,7 +68,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Querying Spatial Data with bcdata</h1>
             
-            <h4 data-toc-skip class="date">2026-07-08</h4>
+            <h4 data-toc-skip class="date">2026-11-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/bcgov/bcdata/blob/main/vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd" class="external-link"><code>vignettes/efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></a></small>
       <div class="d-none name"><code>efficiently-query-spatial-data-in-the-bc-data-catalogue.Rmd</code></div>
@@ -295,23 +295,23 @@ geospatial data, which means we can make use of
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></span>
-<span><span class="co">#&gt; • Using collect() on this object will return 9488 features and 19 fields</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 9682 features and 19 fields</span></span>
 <span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 1206937 ymin: 464920.5 xmax: 1210184 ymax: 465931.9</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 20</span></span>
 <span><span class="co">#&gt;   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;       </span></span>
-<span><span class="co">#&gt; 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 1 WHSE_B…                     23 Brighous… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 2 WHSE_B…                     24 Minoru P… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 3 WHSE_B…                     25 Dover Ne… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 4 WHSE_B…                     26 Lang (Sa… Local     Plaza            Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 5 WHSE_B…                     27 Cook Nei… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 6 WHSE_B…                     28 Katsura … Local     Park             Metro Vancouver   Richmond    </span></span>
 <span><span class="co">#&gt; # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID</span></span>
 <span><span class="co">#&gt; # ℹ 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span></span>
@@ -323,23 +323,23 @@ query:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/bcdc_query_geodata.html">bcdc_query_geodata</a></span><span class="op">(</span><span class="st">"6a2fea1b-0cc4-4fc2-8017-eaf755d516da"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/filter.html">filter</a></span><span class="op">(</span><span class="va">PARK_PRIMARY_USE</span> <span class="op">==</span> <span class="st">"Park"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Querying 'local-and-regional-greenspaces' record</span></span>
-<span><span class="co">#&gt; • Using collect() on this object will return 4590 features and 19 fields</span></span>
+<span><span class="co">#&gt; • Using collect() on this object will return 4643 features and 19 fields</span></span>
 <span><span class="co">#&gt; • At most six rows of the record are printed here</span></span>
 <span><span class="co">#&gt; ────────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 19 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 1206937 ymin: 464920.5 xmax: 1210516 ymax: 465931.9</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD83 / BC Albers</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 20</span></span>
 <span><span class="co">#&gt;   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;       </span></span>
-<span><span class="co">#&gt; 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    </span></span>
-<span><span class="co">#&gt; 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 1 WHSE_B…                     23 Brighous… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 2 WHSE_B…                     24 Minoru P… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 3 WHSE_B…                     25 Dover Ne… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 4 WHSE_B…                     27 Cook Nei… Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 5 WHSE_B…                     28 Katsura … Local     Park             Metro Vancouver   Richmond    </span></span>
+<span><span class="co">#&gt; 6 WHSE_B…                     29 Birch Ne… Local     Park             Metro Vancouver   Richmond    </span></span>
 <span><span class="co">#&gt; # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID</span></span>
 <span><span class="co">#&gt; # ℹ 13 more variables: CIVIC_NUMBER &lt;int&gt;, CIVIC_NUMBER_SUFFIX &lt;chr&gt;, STREET_NAME &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;, WHEN_UPDATED &lt;date&gt;, WEBSITE_URL &lt;chr&gt;,</span></span>

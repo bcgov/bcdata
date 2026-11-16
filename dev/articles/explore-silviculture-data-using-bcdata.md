@@ -88,7 +88,7 @@ geospatial data set using
 # Query the data using the permanent ID of the record to guard against name changes
 bcdc_query_geodata("258bb088-4113-47b1-b568-ce20bd64e3e3")
 #> Querying 'results-forest-cover-silviculture' record
-#> • Using collect() on this object will return 984709 features and 159 fields
+#> • Using collect() on this object will return 987695 features and 159 fields
 #> • Accessing this record requires pagination and will make 99 separate requests to the WFS.
 #> • See ?bcdc_options
 #> • At most six rows of the record are printed here
@@ -198,7 +198,7 @@ object we have downloaded from the B.C. Data Catalogue:
 ``` r
 
 dim(trees_dpg)
-#> [1] 259 160
+#> [1] 260 160
 ```
 
 We can see there are several treatment units planted with western larch,
