@@ -38,17 +38,17 @@ try(
 #>  3 NA         NA           40a48d33-5a6c-… Public           
 #>  4 NA         NA           40a48d33-5a6c-… Public           
 #>  5 NA         NA           40a48d33-5a6c-… Public           
-#>  6 NA         NA           b3245224-9d10-… Public           
-#>  7 NA         NA           40a48d33-5a6c-… Public           
-#>  8 9e3e0fab-… NA           9e3e0fab-e268-… Public           
-#>  9 NA         NA           40a48d33-5a6c-… Public           
+#>  6 NA         NA           40a48d33-5a6c-… Public           
+#>  7 NA         NA           b3245224-9d10-… Public           
+#>  8 NA         NA           40a48d33-5a6c-… Public           
+#>  9 9e3e0fab-… NA           9e3e0fab-e268-… Public           
 #> 10 NA         NA           40a48d33-5a6c-… Public           
 #> # ℹ 89 more rows
 #> # ℹ 44 more variables: id <chr>, isopen <lgl>,
 #> #   license_id <chr>, license_title <chr>,
-#> #   license_url <chr>, lineage_statement <chr>,
-#> #   maintainer <lgl>, maintainer_email <lgl>,
-#> #   metadata_created <chr>, metadata_modified <chr>,
-#> #   metadata_visibility <chr>, name <chr>, notes <chr>, …
+#> #   license_url <chr>, maintainer <lgl>,
+#> #   maintainer_email <lgl>, metadata_created <chr>,
+#> #   metadata_modified <chr>, metadata_visibility <chr>,
+#> #   name <chr>, notes <chr>, num_resources <int>, …
 # }
 ```
