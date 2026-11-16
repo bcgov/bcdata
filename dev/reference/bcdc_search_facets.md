@@ -57,7 +57,7 @@ try(
 #> 5  res_format         wmts         wmts     1
 #> 6  res_format          wms          wms   882
 #> 7  res_format          txt          txt    31
-#> 8  res_format          shp          shp    68
+#> 8  res_format          shp          shp    69
 #> 9  res_format          pdf          pdf   202
 #> 10 res_format        other        other   337
 #> 11 res_format   oracle_sde   oracle_sde   461
@@ -69,7 +69,7 @@ try(
 #> 17 res_format         html         html   115
 #> 18 res_format         gpkg         gpkg    22
 #> 19 res_format      geojson      geojson    18
-#> 20 res_format         fgdb         fgdb    96
+#> 20 res_format         fgdb         fgdb    95
 #> 21 res_format          csv          csv   589
 #> 22 res_format  arcgis_rest  arcgis_rest   164
 # }

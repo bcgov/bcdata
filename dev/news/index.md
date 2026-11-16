@@ -5,9 +5,15 @@
 - Fixed YAML front matter in the service documentation vignette that
   newer versions of pandoc fail to parse, and replaced the deprecated
   `.Dim` attribute name with `dim` in a test.
-- Update example bcdc_get_data code to use record with a resource
+  ([\#377](https://github.com/bcgov/bcdata/issues/377))
+- Update example
+  [`bcdc_get_data()`](https://bcgov.github.io/bcdata/dev/reference/bcdc_get_data.md)
+  code to use record with a resource
   ([\#376](https://github.com/bcgov/bcdata/issues/376)) and use an
   existing Excel sheet.
+- Add link to BC Data Catalogue status page to README
+  ([\#340](https://github.com/bcgov/bcdata/issues/340), thanks
+  [@Ehsan-hash](https://github.com/Ehsan-hash))
 
 ## bcdata 0.5.3
 
@@ -72,7 +78,7 @@ CRAN release: 2024-12-12
 CRAN release: 2023-03-18
 
 - Add
-  [`jsonlite::read_json()`](https://jeroen.r-universe.dev/jsonlite/reference/read_json.html)
+  [`jsonlite::read_json()`](https://rdrr.io/pkg/jsonlite/man/read_json.html)
   as a file read method, so users can now download & read `json`
   resources in B.C. Data Catalogue records
 - Change the `download_audience` default from `Public` to `NULL` in

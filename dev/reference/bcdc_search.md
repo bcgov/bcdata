@@ -285,16 +285,16 @@ try(
 #> 3: Cariboo Consolidated Roads (fgdb)
 #>  ID: ef431656-44d2-4a16-9e0e-a14d934bb281
 #>  Name: cariboo-consolidated-roads
-#> 4: Forest Biodiversity - BC Cumulative Effects
-#>  Framework - 2019 Assessment (xlsx, fgdb, other)
-#>  ID: 32ea7e06-f6e1-4822-b89e-38e145113926
-#>  Name:
-#>   forest-biodiversity-bc-cumulative-effects-framework-2019-assessment
-#> 5: Wetland and Riparian Potential – Lower Fraser
+#> 4: Wetland and Riparian Potential – Lower Fraser
 #>  Valley (fgdb, other, pdf)
 #>  ID: 9c06f5a3-816d-4238-877c-f1e1adc30022
 #>  Name:
 #>   wetland-and-riparian-potential-lower-fraser-valley
+#> 5: Forest Biodiversity - BC Cumulative Effects
+#>  Framework - 2019 Assessment (xlsx, fgdb, other)
+#>  ID: 32ea7e06-f6e1-4822-b89e-38e145113926
+#>  Name:
+#>   forest-biodiversity-bc-cumulative-effects-framework-2019-assessment
 #> 6: Old Growth - BC Cumulative Effects Framework -
 #>  2019 Assessment - Robson Valley (fgdb, multiple)
 #>  ID: 502442fe-0d45-43f3-a8e5-f733e5c74d7d

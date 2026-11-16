@@ -41,8 +41,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="bcdata-development-version">bcdata (development version)<a class="anchor" aria-label="anchor" href="#bcdata-development-version"></a></h2>
-<ul><li>Fixed YAML front matter in the service documentation vignette that newer versions of pandoc fail to parse, and replaced the deprecated <code>.Dim</code> attribute name with <code>dim</code> in a test.</li>
-<li>Update example bcdc_get_data code to use record with a resource (<a href="https://github.com/bcgov/bcdata/issues/376" class="external-link">#376</a>) and use an existing Excel sheet.</li>
+<ul><li>Fixed YAML front matter in the service documentation vignette that newer versions of pandoc fail to parse, and replaced the deprecated <code>.Dim</code> attribute name with <code>dim</code> in a test. (<a href="https://github.com/bcgov/bcdata/issues/377" class="external-link">#377</a>)</li>
+<li>Update example <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> code to use record with a resource (<a href="https://github.com/bcgov/bcdata/issues/376" class="external-link">#376</a>) and use an existing Excel sheet.</li>
+<li>Add link to BC Data Catalogue status page to README (<a href="https://github.com/bcgov/bcdata/issues/340" class="external-link">#340</a>, thanks <a href="https://github.com/Ehsan-hash" class="external-link">@Ehsan-hash</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.3" id="bcdata-053">bcdata 0.5.3<a class="anchor" aria-label="anchor" href="#bcdata-053"></a></h2><p class="text-muted">CRAN release: 2026-07-09</p>
@@ -66,7 +67,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="bcdata-041">bcdata 0.4.1<a class="anchor" aria-label="anchor" href="#bcdata-041"></a></h2><p class="text-muted">CRAN release: 2023-03-18</p>
-<ul><li>Add <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/read_json.html" class="external-link">jsonlite::read_json()</a></code> as a file read method, so users can now download &amp; read <code>json</code> resources in B.C. Data Catalogue records</li>
+<ul><li>Add <code><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html" class="external-link">jsonlite::read_json()</a></code> as a file read method, so users can now download &amp; read <code>json</code> resources in B.C. Data Catalogue records</li>
 <li>Change the <code>download_audience</code> default from <code>Public</code> to <code>NULL</code> in <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> (<a href="https://github.com/bcgov/bcdata/issues/315" class="external-link">#315</a>)</li>
 <li>Fix bug where some/all facet values in <code><a href="../reference/bcdc_search.html">bcdc_search()</a></code> need to be quoted to generate a valid API query (<a href="https://github.com/bcgov/bcdata/issues/315" class="external-link">#315</a>)</li>
 <li>Add new functions <code>bcdc_list_organizations</code> and <code>bcdc_list_organization_records</code> as helper functions for finding records <a href="https://github.com/bcgov/bcdata/issues/322" class="external-link">#322</a></li>
