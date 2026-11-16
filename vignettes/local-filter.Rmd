@@ -1,6 +1,6 @@
 ---
 title: "Update to `filter()` behaviour in bcdata v0.4.0"
-date: "2026-07-08"
+date: "2026-11-16"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Update to `filter()` behaviour in bcdata v0.4.0}
@@ -75,17 +75,17 @@ bcdc_query_geodata("local-and-regional-greenspaces") %>%
 ## Simple feature collection with 6 features and 19 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
-## Bounding box:  xmin: 1199043 ymin: 387901.5 xmax: 1199503 ymax: 390352.7
+## Bounding box:  xmin: 1180036 ymin: 404256.3 xmax: 1180710 ymax: 408065
 ## Projected CRS: NAD83 / BC Albers
 ## # A tibble: 6 × 20
 ##   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
 ##   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
-## 1 WHSE_B…                   7806 Beach Ac… Local     Water Access     Capital           District of…
-## 2 WHSE_B…                   8020 Balmacar… Local     Water Access     Capital           District of…
-## 3 WHSE_B…                   7871 Vantreig… Local     Park             Capital           District of…
-## 4 WHSE_B…                   7844 Montague… Local     Park             Capital           District of…
-## 5 WHSE_B…                   7882 Houlihan… Local     Park             Capital           District of…
-## 6 WHSE_B…                   7895 Casa Mar… Local     Green Space      Capital           District of…
+## 1 WHSE_B…                   6515 Gatewhee… Local     Green Space      Cowichan Valley   <NA>        
+## 2 WHSE_B…                   6476 Mill Bay… Local     Green Space      Cowichan Valley   <NA>        
+## 3 WHSE_B…                   6310 Welch Ro… Local     Water Access     Cowichan Valley   <NA>        
+## 4 WHSE_B…                   6318 Memory L… Local     Trail            Cowichan Valley   <NA>        
+## 5 WHSE_B…                   6308 Mill Bay… Local     Water Access     Cowichan Valley   <NA>        
+## 6 WHSE_B…                   6477 Mill Bay… Local     Water Access     Cowichan Valley   <NA>        
 ## # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
 ## # ℹ 13 more variables: CIVIC_NUMBER <chr>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
 ## #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,

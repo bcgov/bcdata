@@ -1,6 +1,6 @@
 ---
 title: "Querying Spatial Data with bcdata"
-date: "2026-07-08"
+date: "2026-11-16"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Querying Spatial Data with bcdata}
@@ -194,23 +194,23 @@ Again we recognize this is [WFS-enabled](https://en.wikipedia.org/wiki/Web_Featu
 ``` r
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da")
 #> Querying 'local-and-regional-greenspaces' record
-#> • Using collect() on this object will return 9488 features and 19 fields
+#> • Using collect() on this object will return 9682 features and 19 fields
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4
+#> Bounding box:  xmin: 1206937 ymin: 464920.5 xmax: 1210184 ymax: 465931.9
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
 #>   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
 #>   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
-#> 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    
-#> 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    
-#> 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    
-#> 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    
-#> 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    
-#> 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    
+#> 1 WHSE_B…                     23 Brighous… Local     Park             Metro Vancouver   Richmond    
+#> 2 WHSE_B…                     24 Minoru P… Local     Park             Metro Vancouver   Richmond    
+#> 3 WHSE_B…                     25 Dover Ne… Local     Park             Metro Vancouver   Richmond    
+#> 4 WHSE_B…                     26 Lang (Sa… Local     Plaza            Metro Vancouver   Richmond    
+#> 5 WHSE_B…                     27 Cook Nei… Local     Park             Metro Vancouver   Richmond    
+#> 6 WHSE_B…                     28 Katsura … Local     Park             Metro Vancouver   Richmond    
 #> # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
 #> # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
 #> #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
@@ -225,23 +225,23 @@ Since we are interested in only "Park" data we can subset our query:
 bcdc_query_geodata("6a2fea1b-0cc4-4fc2-8017-eaf755d516da") %>%
   filter(PARK_PRIMARY_USE == "Park")
 #> Querying 'local-and-regional-greenspaces' record
-#> • Using collect() on this object will return 4590 features and 19 fields
+#> • Using collect() on this object will return 4643 features and 19 fields
 #> • At most six rows of the record are printed here
 #> ────────────────────────────────────────────────────────────────────────────────────────────────────
 #> Simple feature collection with 6 features and 19 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 1205812 ymin: 461894.2 xmax: 1210343 ymax: 463217.4
+#> Bounding box:  xmin: 1206937 ymin: 464920.5 xmax: 1210516 ymax: 465931.9
 #> Projected CRS: NAD83 / BC Albers
 #> # A tibble: 6 × 20
 #>   id      LOCAL_REG_GREENSPACE…¹ PARK_NAME PARK_TYPE PARK_PRIMARY_USE REGIONAL_DISTRICT MUNICIPALITY
 #>   <chr>                    <int> <chr>     <chr>     <chr>            <chr>             <chr>       
-#> 1 WHSE_B…                     40 Wowk Nei… Local     Park             Metro Vancouver   Richmond    
-#> 2 WHSE_B…                     41 Hugh Boy… Local     Park             Metro Vancouver   Richmond    
-#> 3 WHSE_B…                     42 Sandifor… Local     Park             Metro Vancouver   Richmond    
-#> 4 WHSE_B…                     43 Kozier N… Local     Park             Metro Vancouver   Richmond    
-#> 5 WHSE_B…                     44 Maple La… Local     Park             Metro Vancouver   Richmond    
-#> 6 WHSE_B…                     45 South Ar… Local     Park             Metro Vancouver   Richmond    
+#> 1 WHSE_B…                     23 Brighous… Local     Park             Metro Vancouver   Richmond    
+#> 2 WHSE_B…                     24 Minoru P… Local     Park             Metro Vancouver   Richmond    
+#> 3 WHSE_B…                     25 Dover Ne… Local     Park             Metro Vancouver   Richmond    
+#> 4 WHSE_B…                     27 Cook Nei… Local     Park             Metro Vancouver   Richmond    
+#> 5 WHSE_B…                     28 Katsura … Local     Park             Metro Vancouver   Richmond    
+#> 6 WHSE_B…                     29 Birch Ne… Local     Park             Metro Vancouver   Richmond    
 #> # ℹ abbreviated name: ¹​LOCAL_REG_GREENSPACE_ID
 #> # ℹ 13 more variables: CIVIC_NUMBER <int>, CIVIC_NUMBER_SUFFIX <chr>, STREET_NAME <chr>,
 #> #   LATITUDE <dbl>, LONGITUDE <dbl>, WHEN_UPDATED <date>, WEBSITE_URL <chr>,
