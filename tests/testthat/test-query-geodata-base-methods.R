@@ -37,6 +37,15 @@ test_that("tail works", {
     tail(full_airport[order(full_airport[[col]]), ], 3L)[[col]]
   )
 
+  expect_snapshot(
+    withr::with_options(
+      list(pillar.width = Inf),
+      print(tail(select(bcdc_query_geodata(point_record), all_of(col)), n = 3))
+    ),
+    # feature ids, and so column padding, vary between requests
+    transform = function(x) gsub(" +", " ", gsub("fid-\\S+", "fid-<id>", x))
+  )
+
   # Force pagination to check sort order holds across pages
   withr::local_options(bcdata.chunk_limit = 2)
   d3 <- bcdc_query_geodata(point_record) %>%

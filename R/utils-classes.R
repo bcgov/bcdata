@@ -58,7 +58,7 @@ print.bcdc_promise <- function(x, ...) {
     number_of_records <- x$query_list$count
   }
 
-  parsed <- bcdc_read_sf(cc$parse("UTF-8"))
+  parsed <- bcdc_read_sf(cc$parse("UTF-8"), sort_by = query_list$sortBy)
   fields <- ncol(parsed) - 1
 
   # Check if this was called using a whse name directly without going
@@ -574,14 +574,9 @@ collect.bcdc_promise <- function(x, ...) {
   }
 
   txt <- cc$parse("UTF-8")
-  out <- bcdc_read_sf(txt)
-
-  if (is_descending_sort(query_list$sortBy)) {
-    out <- out[rev(seq_len(nrow(out))), ]
-  }
 
   as.bcdc_sf(
-    out,
+    bcdc_read_sf(txt, sort_by = query_list$sortBy),
     query_list = query_list,
     url = url,
     full_url = full_url
