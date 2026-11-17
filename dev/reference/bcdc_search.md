@@ -139,14 +139,14 @@ try(
 #>  kml)
 #>  ID: 243c94a1-f275-41dc-bc37-91d8a2b26e10
 #>  Name: forest-tenure-road-section-lines
-#> 19: Forest Stewardship Plans - Identified Areas
-#>  (multiple, wms, kml, oracle_sde)
-#>  ID: dad55255-0f8f-4a4a-a40f-38d22750d065
-#>  Name: forest-stewardship-plans-identified-areas
-#> 20: Forest Tenure Managed Licenses Polygons
+#> 19: Forest Tenure Managed Licenses Polygons
 #>  (oracle_sde)
 #>  ID: 04fb4da4-8c6e-4166-a4e8-4c8723443980
 #>  Name: forest-tenure-managed-licenses-polygons
+#> 20: Forest Stewardship Plans - Identified Areas
+#>  (multiple, wms, kml, oracle_sde)
+#>  ID: dad55255-0f8f-4a4a-a40f-38d22750d065
+#>  Name: forest-stewardship-plans-identified-areas
 #> 21: Forest Tenure Timber Use Polygons (oracle_sde)
 #>  ID: 4b2afa31-a0b9-488f-8f15-1d6117e0093e
 #>  Name: forest-tenure-timber-use-polygons
@@ -186,14 +186,14 @@ try(
 #>  kml)
 #>  ID: 814e0ed9-95c3-4750-8152-1307795986f1
 #>  Name: forest-tenure-free-use-permit
-#> 32: Forest Tenure Road Segment Lines (multiple, wms,
-#>  kml, other)
-#>  ID: 9e5bfa62-2339-445e-bf67-81657180c682
-#>  Name: forest-tenure-road-segment-lines
-#> 33: Forest Tenure Timber Licence Elimination
+#> 32: Forest Tenure Timber Licence Elimination
 #>  (multiple, wms, kml)
 #>  ID: e15e0543-830f-43b8-b824-ed9a8ed7eeca
 #>  Name: forest-tenure-timber-licence-elimination
+#> 33: Forest Tenure Road Segment Lines (multiple, wms,
+#>  kml, other)
+#>  ID: 9e5bfa62-2339-445e-bf67-81657180c682
+#>  Name: forest-tenure-road-segment-lines
 #> 34: Forest Tenure Road Section Polygon (oracle_sde)
 #>  ID: 6c560de6-f322-491f-965a-f75efae6e6d3
 #>  Name: forest-tenure-road-section-polygon
@@ -285,16 +285,16 @@ try(
 #> 3: Cariboo Consolidated Roads (fgdb)
 #>  ID: ef431656-44d2-4a16-9e0e-a14d934bb281
 #>  Name: cariboo-consolidated-roads
-#> 4: Wetland and Riparian Potential – Lower Fraser
-#>  Valley (fgdb, other, pdf)
-#>  ID: 9c06f5a3-816d-4238-877c-f1e1adc30022
-#>  Name:
-#>   wetland-and-riparian-potential-lower-fraser-valley
-#> 5: Forest Biodiversity - BC Cumulative Effects
+#> 4: Forest Biodiversity - BC Cumulative Effects
 #>  Framework - 2019 Assessment (xlsx, fgdb, other)
 #>  ID: 32ea7e06-f6e1-4822-b89e-38e145113926
 #>  Name:
 #>   forest-biodiversity-bc-cumulative-effects-framework-2019-assessment
+#> 5: Wetland and Riparian Potential – Lower Fraser
+#>  Valley (fgdb, other, pdf)
+#>  ID: 9c06f5a3-816d-4238-877c-f1e1adc30022
+#>  Name:
+#>   wetland-and-riparian-potential-lower-fraser-valley
 #> 6: Old Growth - BC Cumulative Effects Framework -
 #>  2019 Assessment - Robson Valley (fgdb, multiple)
 #>  ID: 502442fe-0d45-43f3-a8e5-f733e5c74d7d

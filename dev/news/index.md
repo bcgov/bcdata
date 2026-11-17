@@ -2,6 +2,9 @@
 
 ## bcdata (development version)
 
+- [`tail()`](https://rdrr.io/r/utils/head.html) on a `bcdc_promise` now
+  requests records in descending order instead of skipping to the end
+  with `startIndex`, which timed out on large layers.
 - Fixed YAML front matter in the service documentation vignette that
   newer versions of pandoc fail to parse, and replaced the deprecated
   `.Dim` attribute name with `dim` in a test.

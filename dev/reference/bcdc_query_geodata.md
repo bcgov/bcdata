@@ -111,19 +111,19 @@ try(
 #>   status: HTTP/1.1 400 Bad Request
 #>   content-type: application/xml
 #>   transfer-encoding: chunked
-#>   x-ratelimit-remaining-second: 59989
 #>   ratelimit-limit: 60000
-#>   ratelimit-remaining: 59989
+#>   ratelimit-remaining: 59996
 #>   ratelimit-reset: 1
 #>   x-ratelimit-limit-second: 60000
+#>   x-ratelimit-remaining-second: 59996
 #>   vary: Origin
 #>   vary: Access-Control-Request-Method
 #>   vary: Access-Control-Request-Headers
 #>   server: uvicorn
-#>   date: Mon, 16 Nov 2026 23:20:05 GMT
+#>   date: Tue, 17 Nov 2026 23:51:48 GMT
 #>   content-encoding: gzip
-#>   x-kong-upstream-latency: 8
-#>   x-kong-proxy-latency: 0
+#>   x-kong-upstream-latency: 6
+#>   x-kong-proxy-latency: 1
 #> 
 
 
