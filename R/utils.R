@@ -87,9 +87,9 @@ specify_geom_name <- function(cols_df, CQL_statement) {
   dbplyr::sql(glue::glue(CQL_statement, geom_name = geom_col))
 }
 
-bcdc_read_sf <- function(x, ...) {
+bcdc_read_sf <- function(x, sort_by = NULL, ...) {
   if (length(x) == 1) {
-    return(sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...))
+    out <- sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)
   } else {
     # tests that cover this are skipped due to large size
     # nocov start
@@ -99,9 +99,15 @@ bcdc_read_sf <- function(x, ...) {
       sf::read_sf(x, stringsAsFactors = FALSE, quiet = TRUE, ...)
     })
 
-    do.call(rbind, sf_responses)
+    out <- do.call(rbind, sf_responses)
     # nocov end
   }
+
+  # tail() requests rows in descending order; flip them back to ascending
+  if (!is.null(sort_by) && grepl(" D$", sort_by)) {
+    out <- out[rev(seq_len(nrow(out))), ]
+  }
+  out
 }
 
 slug_from_url <- function(x) {

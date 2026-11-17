@@ -58,7 +58,7 @@ print.bcdc_promise <- function(x, ...) {
     number_of_records <- x$query_list$count
   }
 
-  parsed <- bcdc_read_sf(cc$parse("UTF-8"))
+  parsed <- bcdc_read_sf(cc$parse("UTF-8"), sort_by = query_list$sortBy)
   fields <- ncol(parsed) - 1
 
   # Check if this was called using a whse name directly without going
@@ -146,7 +146,9 @@ record_print_helper <- function(r, n, print_avail = FALSE) {
   cat_line_wrap(n, ") ", clean_wfs(r$name))
   #cat_line_wrap("    description:", r$description)
   cat_line_wrap("format: ", clean_wfs(formats_from_resource(r)), indent = 3)
-  if (r$format != "wms") cat_line_wrap("url: ", r$url, indent = 3)
+  if (r$format != "wms") {
+    cat_line_wrap("url: ", r$url, indent = 3)
+  }
   cat_line_wrap("resource: ", r$id, indent = 3)
   if (print_avail) {
     cat_line_wrap(
@@ -158,7 +160,7 @@ record_print_helper <- function(r, n, print_avail = FALSE) {
       }
     )
   }
-  if (r$bcdata_available)
+  if (r$bcdata_available) {
     cat_line_wrap(
       "code: ",
       "bcdc_get_data(record = '",
@@ -168,6 +170,7 @@ record_print_helper <- function(r, n, print_avail = FALSE) {
       "')",
       indent = 3
     )
+  }
   cat_line()
 }
 
@@ -321,12 +324,12 @@ print.bcdc_query <- function(x, ...) {
 #' }
 #' @export
 filter.bcdc_promise <- function(.data, ...) {
-  current_cql = cql_translate(
+  current_cql <- cql_translate(
     ...,
     .colnames = .data$cols_df$col_name %||% character(0)
   )
   ## Change CQL query on the fly if geom is not GEOMETRY
-  current_cql = specify_geom_name(.data$cols_df, current_cql)
+  current_cql <- specify_geom_name(.data$cols_df, current_cql)
 
   # Append the new clause to any existing CQL filter.
   .data$query_list$CQL_FILTER <- dbplyr::sql(
@@ -420,13 +423,13 @@ head.bcdc_promise <- function(x, n = 6L, ...) {
 #' @importFrom utils tail
 #' @export
 tail.bcdc_promise <- function(x, n = 6L, ...) {
-  number_of_records <- bcdc_number_wfs_records(x$query_list, x$cli)
   sorting_col <- pagination_sort_col(x$cols_df)
+  # Request the first n rows in descending order - avoids a large startIndex,
+  # which is very slow on large layers. collect() restores ascending order.
   x$query_list <- c(
     x$query_list,
     count = n,
-    sortBy = sorting_col,
-    startIndex = number_of_records - n
+    sortBy = paste(sorting_col, "D")
   )
   x
 }
@@ -539,7 +542,9 @@ collect.bcdc_promise <- function(x, ...) {
     ))
     sorting_col <- pagination_sort_col(x$cols_df)
 
-    query_list <- c(query_list, sortby = sorting_col)
+    if (is.null(query_list$sortBy)) {
+      query_list <- c(query_list, sortby = sorting_col)
+    }
 
     # Create pagination client
     cc <- crul::Paginator$new(
@@ -571,7 +576,7 @@ collect.bcdc_promise <- function(x, ...) {
   txt <- cc$parse("UTF-8")
 
   as.bcdc_sf(
-    bcdc_read_sf(txt),
+    bcdc_read_sf(txt, sort_by = query_list$sortBy),
     query_list = query_list,
     url = url,
     full_url = full_url
@@ -638,7 +643,9 @@ show_query.bcdc_sf <- function(x, ...) {
 
 # collapse vector of cql statements into one
 finalize_cql <- function(x, con = wfs_con) {
-  if (is.null(x) || !length(x)) return(NULL)
+  if (is.null(x) || !length(x)) {
+    return(NULL)
+  }
   dbplyr::sql_vector(x, collapse = " AND ", con = con)
 }
 

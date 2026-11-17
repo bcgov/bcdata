@@ -36,19 +36,38 @@ test_that("tail works", {
     d2[[col]],
     tail(full_airport[order(full_airport[[col]]), ], 3L)[[col]]
   )
+
+  expect_snapshot(
+    withr::with_options(
+      list(pillar.width = Inf),
+      print(tail(select(bcdc_query_geodata(point_record), all_of(col)), n = 3))
+    ),
+    # feature ids, and so column padding, vary between requests
+    transform = function(x) gsub(" +", " ", gsub("fid-\\S+", "fid-<id>", x))
+  )
+
+  # Force pagination to check sort order holds across pages
+  withr::local_options(bcdata.chunk_limit = 2)
+  d3 <- bcdc_query_geodata(point_record) %>%
+    tail(n = 5) %>%
+    collect()
+  expect_equal(
+    d3[[col]],
+    tail(full_airport[order(full_airport[[col]]), ], 5L)[[col]]
+  )
 })
 
 
 test_that("head/tail works with a record that would otherwise require pagination", {
   skip_if_net_down()
   skip_on_cran()
-  dh <- bcdc_query_geodata('2af1388e-d5f7-46dc-a6e2-f85415ddbd1c') %>%
+  dh <- bcdc_query_geodata('43805524-4add-4474-ad53-1a985930f352') %>%
     head(3) %>%
     collect()
 
   expect_equal(nrow(dh), 3L)
 
-  dt <- bcdc_query_geodata('2af1388e-d5f7-46dc-a6e2-f85415ddbd1c') %>%
+  dt <- bcdc_query_geodata('43805524-4add-4474-ad53-1a985930f352') %>%
     tail(3) %>%
     collect()
 
