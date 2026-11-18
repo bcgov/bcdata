@@ -89,19 +89,73 @@ try(
 #> #   DESCRIPTION <chr>, PHYSICAL_ADDRESS <chr>, …
 
 try(
-  bcdc_get_data('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+  bcdc_get_data('2a5d2e5e-36eb-412b-89ff-508dae26a7ff')
 )
-#> Error : There are no resources that bcdata can download from this record
+#> Reading the data using the read_csv function from the readr package.
+#> Rows: 224134 Columns: 11
+#> ── Column specification ────────────────────────────────────
+#> Delimiter: ","
+#> chr  (5): Tag number, Tag type, Confirmed hatchery-relea...
+#> dbl  (4): FishID, Year class, Fork length, Girth
+#> date (2): Capture date, Release date
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> # A tibble: 224,134 × 11
+#>    FishID `Tag number` `Tag type` `Year class`
+#>     <dbl> <chr>        <chr>             <dbl>
+#>  1      1 88           Floy                 NA
+#>  2      1 501F7A3051   PIT                  NA
+#>  3      1 88           Floy                 NA
+#>  4      1 501F7A3051   PIT                  NA
+#>  5      1 501F7A3051   PIT                  NA
+#>  6      1 501F7A3051   PIT                  NA
+#>  7      1 501F7A3051   PIT                  NA
+#>  8      2 78           Floy                 NA
+#>  9      2 7F7D767116   PIT                  NA
+#> 10      3 4525261C66   PIT                  NA
+#> # ℹ 224,124 more rows
+#> # ℹ 7 more variables: `Confirmed hatchery-release?` <chr>,
+#> #   `Capture date` <date>, `Fork length` <dbl>,
+#> #   Girth <dbl>, Waterbody <chr>, `Release date` <date>,
+#> #   RKM_Round <chr>
 
 # Using a `bcdc_record` object obtained from `bcdc_get_record`:
 try(
-  record <- bcdc_get_record('1d21922b-ec4f-42e5-8f6b-bf320a286157')
+  record <- bcdc_get_record('2a5d2e5e-36eb-412b-89ff-508dae26a7ff')
 )
 
 try(
   bcdc_get_data(record)
 )
-#> Error : There are no resources that bcdata can download from this record
+#> Reading the data using the read_csv function from the readr package.
+#> Rows: 224134 Columns: 11
+#> ── Column specification ────────────────────────────────────
+#> Delimiter: ","
+#> chr  (5): Tag number, Tag type, Confirmed hatchery-relea...
+#> dbl  (4): FishID, Year class, Fork length, Girth
+#> date (2): Capture date, Release date
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> # A tibble: 224,134 × 11
+#>    FishID `Tag number` `Tag type` `Year class`
+#>     <dbl> <chr>        <chr>             <dbl>
+#>  1      1 88           Floy                 NA
+#>  2      1 501F7A3051   PIT                  NA
+#>  3      1 88           Floy                 NA
+#>  4      1 501F7A3051   PIT                  NA
+#>  5      1 501F7A3051   PIT                  NA
+#>  6      1 501F7A3051   PIT                  NA
+#>  7      1 501F7A3051   PIT                  NA
+#>  8      2 78           Floy                 NA
+#>  9      2 7F7D767116   PIT                  NA
+#> 10      3 4525261C66   PIT                  NA
+#> # ℹ 224,124 more rows
+#> # ℹ 7 more variables: `Confirmed hatchery-release?` <chr>,
+#> #   `Capture date` <date>, `Fork length` <dbl>,
+#> #   Girth <dbl>, Waterbody <chr>, `Release date` <date>,
+#> #   RKM_Round <chr>
 
 # Using a BCGW name
 try(
@@ -229,7 +283,7 @@ try(
 ## we can control what is read in from an excel file
 ## using arguments from readxl::read_excel
 try(
-  bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Regional Districts')
+  bcdc_get_data('8620ce82-4943-43c4-9932-40730a0255d6', sheet = 'Purpose Built Rental')
 )
 #> Reading the data using the read_xlsx function from the readxl package.
 #> 
@@ -238,14 +292,25 @@ try(
 #>  'Single Detached '
 #>  'Multi Unit Homes'
 #>  'Purpose Built Rental'
-#> Error : Reading the data set failed with the following error message:
-#> 
-#>   Error: Sheet 'Regional Districts' not found
-#> 
-#> The file can be found here:
-#>   '/tmp/RtmpqLqFPx/bcdata_1e251b8fc470/file1e251217c004.xlsx'
-#> if you would like to try to read it manually.
-#> 
+#> New names:
+#> • `` -> `...1`
+#> • `` -> `...11`
+#> # A tibble: 209 × 12
+#>    ...1     `2016` `2017` `2018` `2019` `2020` `2021` `2022`
+#>    <chr>    <chr>  <chr>  <chr>  <chr>  <chr>  <chr>  <chr> 
+#>  1 Alberni… 24     *      35     141    46     49     232   
+#>  2 Port Al… 24     *      20     141    46     *      195   
+#>  3 Tofino   *      *      *      *      *      49     37    
+#>  4 Ucluelet *      *      15     *      *      *      *     
+#>  5 Other c… *      *      *      *      *      *      *     
+#>  6 Bulkley… *      19     *      *      6      96     40    
+#>  7 Burns L… *      *      *      *      *      *      *     
+#>  8 Fort St… *      *      *      *      *      *      36    
+#>  9 Fraser … *      *      *      *      *      *      *     
+#> 10 Granisle *      *      *      *      *      *      *     
+#> # ℹ 199 more rows
+#> # ℹ 4 more variables: `2023` <chr>, `2024` <chr>,
+#> #   ...11 <lgl>, `Notes:` <chr>
 # }
 
 ## Pass an argument through to a read_* function

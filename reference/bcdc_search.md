@@ -66,8 +66,8 @@ A list containing the records that match the search
 try(
   bcdc_search("forest")
 )
-#> Found 578 matches. Returning the first 100.
-#> To see them all, rerun the search and set the 'n' argument to 578.
+#> Found 583 matches. Returning the first 100.
+#> To see them all, rerun the search and set the 'n' argument to 583.
 #> List of B.C. Data Catalogue Records
 #> Number of records: 100
 #> Showing the top 50 results. You can assign the
@@ -139,14 +139,14 @@ try(
 #>  kml)
 #>  ID: 243c94a1-f275-41dc-bc37-91d8a2b26e10
 #>  Name: forest-tenure-road-section-lines
-#> 19: Forest Stewardship Plans - Identified Areas
-#>  (multiple, wms, kml, oracle_sde)
-#>  ID: dad55255-0f8f-4a4a-a40f-38d22750d065
-#>  Name: forest-stewardship-plans-identified-areas
-#> 20: Forest Tenure Managed Licenses Polygons
+#> 19: Forest Tenure Managed Licenses Polygons
 #>  (oracle_sde)
 #>  ID: 04fb4da4-8c6e-4166-a4e8-4c8723443980
 #>  Name: forest-tenure-managed-licenses-polygons
+#> 20: Forest Stewardship Plans - Identified Areas
+#>  (multiple, wms, kml, oracle_sde)
+#>  ID: dad55255-0f8f-4a4a-a40f-38d22750d065
+#>  Name: forest-stewardship-plans-identified-areas
 #> 21: Forest Tenure Timber Use Polygons (oracle_sde)
 #>  ID: 4b2afa31-a0b9-488f-8f15-1d6117e0093e
 #>  Name: forest-tenure-timber-use-polygons
@@ -186,14 +186,14 @@ try(
 #>  kml)
 #>  ID: 814e0ed9-95c3-4750-8152-1307795986f1
 #>  Name: forest-tenure-free-use-permit
-#> 32: Forest Tenure Road Segment Lines (multiple, wms,
-#>  kml, other)
-#>  ID: 9e5bfa62-2339-445e-bf67-81657180c682
-#>  Name: forest-tenure-road-segment-lines
-#> 33: Forest Tenure Timber Licence Elimination
+#> 32: Forest Tenure Timber Licence Elimination
 #>  (multiple, wms, kml)
 #>  ID: e15e0543-830f-43b8-b824-ed9a8ed7eeca
 #>  Name: forest-tenure-timber-licence-elimination
+#> 33: Forest Tenure Road Segment Lines (multiple, wms,
+#>  kml, other)
+#>  ID: 9e5bfa62-2339-445e-bf67-81657180c682
+#>  Name: forest-tenure-road-segment-lines
 #> 34: Forest Tenure Road Section Polygon (oracle_sde)
 #>  ID: 6c560de6-f322-491f-965a-f75efae6e6d3
 #>  Name: forest-tenure-road-section-polygon
@@ -216,14 +216,14 @@ try(
 #>  multiple, pdf)
 #>  ID: 5fc4e8ce-dd1d-44fd-af17-e0789cf65e4e
 #>  Name: generalized-forest-cover-ownership
-#> 40: Forest Harvesting Restrictions (generalized)
-#>  (fgdb, xlsx)
-#>  ID: 6c0bcb22-49cb-4315-bc9c-c4668495cc45
-#>  Name: forest-harvesting-restrictions-generalized-
-#> 41: Forest Licensee Operating Areas (multiple, wms,
+#> 40: Forest Licensee Operating Areas (multiple, wms,
 #>  kml)
 #>  ID: 5a18c401-7c99-48fe-8a1a-b4597072d8b6
 #>  Name: forest-licensee-operating-areas
+#> 41: Forest Harvesting Restrictions (generalized)
+#>  (fgdb, xlsx)
+#>  ID: 6c0bcb22-49cb-4315-bc9c-c4668495cc45
+#>  Name: forest-harvesting-restrictions-generalized-
 #> 42: Forest Tenure FTA Timber Sale Polygons
 #>  (oracle_sde)
 #>  ID: beb5565d-7cd1-4a51-99c4-2984a0652ef8
