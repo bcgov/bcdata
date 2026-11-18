@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">bcdata</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.3.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.5.4.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,13 +41,16 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="bcdata-development-version">bcdata (development version)<a class="anchor" aria-label="anchor" href="#bcdata-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.4" id="bcdata-054">bcdata 0.5.4<a class="anchor" aria-label="anchor" href="#bcdata-054"></a></h2><p class="text-muted">CRAN release: 2026-11-17</p>
 <div class="section level3">
-<h3 id="user-facing-changes-development-version">User-facing changes<a class="anchor" aria-label="anchor" href="#user-facing-changes-development-version"></a></h3>
+<h3 id="user-facing-changes-0-5-4">User-facing changes<a class="anchor" aria-label="anchor" href="#user-facing-changes-0-5-4"></a></h3>
 <ul><li>Update example <code><a href="../reference/bcdc_get_data.html">bcdc_get_data()</a></code> code to use record with a resource (<a href="https://github.com/bcgov/bcdata/issues/376" class="external-link">#376</a>) and use an existing Excel sheet.</li>
 <li>Add link to BC Data Catalogue status page to README (<a href="https://github.com/bcgov/bcdata/issues/340" class="external-link">#340</a>, thanks <a href="https://github.com/Ehsan-hash" class="external-link">@Ehsan-hash</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="internal-changes-development-version">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-development-version"></a></h3>
+<h3 id="internal-changes-0-5-4">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-5-4"></a></h3>
 <ul><li>
 <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code> on a <code>bcdc_promise</code> now requests records in descending order instead of skipping to the end with <code>startIndex</code>, which timed out on large layers.</li>
 <li>Fixed YAML front matter in the service documentation vignette that newer versions of pandoc fail to parse, and replaced the deprecated <code>.Dim</code> attribute name with <code>dim</code> in a test. (<a href="https://github.com/bcgov/bcdata/issues/377" class="external-link">#377</a>)</li>
