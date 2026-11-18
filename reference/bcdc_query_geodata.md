@@ -111,18 +111,18 @@ try(
 #>   content-type: application/xml
 #>   transfer-encoding: chunked
 #>   ratelimit-limit: 60000
-#>   ratelimit-remaining: 59998
+#>   ratelimit-remaining: 59991
 #>   ratelimit-reset: 1
 #>   x-ratelimit-limit-second: 60000
-#>   x-ratelimit-remaining-second: 59998
+#>   x-ratelimit-remaining-second: 59991
 #>   vary: Origin
 #>   vary: Access-Control-Request-Method
 #>   vary: Access-Control-Request-Headers
 #>   server: uvicorn
-#>   date: Wed, 18 Nov 2026 00:20:33 GMT
+#>   date: Wed, 18 Nov 2026 05:07:24 GMT
 #>   content-encoding: gzip
-#>   x-kong-upstream-latency: 7
-#>   x-kong-proxy-latency: 1
+#>   x-kong-upstream-latency: 6
+#>   x-kong-proxy-latency: 0
 #> 
 
 

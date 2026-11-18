@@ -2,6 +2,8 @@
 
 ## bcdata 0.5.4
 
+CRAN release: 2026-11-17
+
 ### User-facing changes
 
 - Update example
