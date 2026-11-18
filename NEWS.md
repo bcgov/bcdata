@@ -1,4 +1,4 @@
-# bcdata (development version)
+# bcdata 0.5.4
 
 ## User-facing changes
 
