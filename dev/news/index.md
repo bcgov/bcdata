@@ -2,13 +2,8 @@
 
 ## bcdata (development version)
 
-- [`tail()`](https://rdrr.io/r/utils/head.html) on a `bcdc_promise` now
-  requests records in descending order instead of skipping to the end
-  with `startIndex`, which timed out on large layers.
-- Fixed YAML front matter in the service documentation vignette that
-  newer versions of pandoc fail to parse, and replaced the deprecated
-  `.Dim` attribute name with `dim` in a test.
-  ([\#377](https://github.com/bcgov/bcdata/issues/377))
+### User-facing changes
+
 - Update example
   [`bcdc_get_data()`](https://bcgov.github.io/bcdata/dev/reference/bcdc_get_data.md)
   code to use record with a resource
@@ -17,6 +12,16 @@
 - Add link to BC Data Catalogue status page to README
   ([\#340](https://github.com/bcgov/bcdata/issues/340), thanks
   [@Ehsan-hash](https://github.com/Ehsan-hash))
+
+### Internal changes
+
+- [`tail()`](https://rdrr.io/r/utils/head.html) on a `bcdc_promise` now
+  requests records in descending order instead of skipping to the end
+  with `startIndex`, which timed out on large layers.
+- Fixed YAML front matter in the service documentation vignette that
+  newer versions of pandoc fail to parse, and replaced the deprecated
+  `.Dim` attribute name with `dim` in a test.
+  ([\#377](https://github.com/bcgov/bcdata/issues/377))
 
 ## bcdata 0.5.3
 
